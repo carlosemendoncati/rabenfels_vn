@@ -1,0 +1,634 @@
+/* ==========================================================================
+   ARQUIVO RABENFELS - css/style.css
+   Apresentacao. Nenhuma regra depende de arquivo de asset existir.
+   ========================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #000;
+  min-height: 100vh;
+  font-family: Georgia, 'Times New Roman', serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---- palco ------------------------------------------------------------- */
+
+#vn {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+}
+
+#bg {
+  position: absolute;
+  inset: 0;
+  transition:
+    opacity .8s,
+    background-image .4s;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Vinheta */
+
+#vn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      transparent 48%,
+      rgba(0, 0, 0, .72) 100%
+    );
+
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ---- sprites ----------------------------------------------------------- */
+
+/*
+  A camada dos sprites fica atras da caixa de texto.
+
+  z-index:
+    vinheta: 5
+    sprites: 10
+    textbox: 20
+*/
+
+#sprites {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sprite {
+  position: absolute;
+
+  /*
+    Antes estava em bottom: 175px, fazendo o personagem flutuar
+    exatamente acima da caixa de texto.
+
+    Agora o personagem termina abaixo do palco e fica parcialmente
+    escondido pelo textbox.
+  */
+  bottom: -35px;
+
+  opacity: 0;
+
+  transition:
+    opacity .5s,
+    transform .5s;
+
+  transform-origin: center bottom;
+  pointer-events: none;
+}
+
+.sprite.show {
+  opacity: 1;
+}
+
+/* Posicionamento horizontal */
+
+.sprite.pos-left {
+  left: 60px;
+  transform: translateX(-18px);
+}
+
+.sprite.pos-left.show {
+  transform: translateX(0);
+}
+
+.sprite.pos-center {
+  left: 50%;
+  transform: translateX(-58%);
+}
+
+.sprite.pos-center.show {
+  transform: translateX(-50%);
+}
+
+.sprite.pos-right {
+  right: 60px;
+  transform: translateX(18px);
+}
+
+.sprite.pos-right.show {
+  transform: translateX(0);
+}
+
+/* Imagem interna do sprite */
+
+.sprite img {
+  display: block;
+
+  width: auto;
+  max-width: none;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  filter:
+    drop-shadow(0 5px 12px rgba(0, 0, 0, .75))
+    drop-shadow(0 0 22px rgba(0, 0, 0, .85));
+}
+
+/*
+  Personagens bust:
+  Serafina, Aldric, Antoniette e outros bustos.
+
+  O tamanho anterior era 340px e ficava muito pequeno.
+*/
+
+.sprite.size-bust img {
+  height: 510px;
+}
+
+/*
+  Personagens full:
+  Matheo, Klara e Liara.
+
+  Matheo esta como size: 'full' no config.js.
+*/
+
+.sprite.size-full img {
+  height: 600px;
+}
+
+/* ---- caixa de texto ---------------------------------------------------- */
+
+#textbox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  height: 200px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 3, 2, 0) 0%,
+      rgba(5, 3, 2, .92) 15%,
+      rgba(5, 3, 2, .97) 100%
+    );
+
+  /*
+    Fica na frente dos personagens.
+  */
+  z-index: 20;
+
+  padding: 20px 60px 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  opacity: 0;
+  transition: opacity .25s;
+
+  pointer-events: none;
+}
+
+#textbox.show {
+  opacity: 1;
+}
+
+.namebox {
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+
+  margin-bottom: 10px;
+  padding: 4px 14px;
+
+  align-self: flex-start;
+
+  border-left: 3px solid currentColor;
+
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.namebox.show {
+  opacity: 1;
+}
+
+.textcontent {
+  color: #e0d4c4;
+  font-size: 18px;
+  line-height: 1.7;
+
+  min-height: 82px;
+
+  white-space: pre-wrap;
+
+  text-shadow:
+    0 1px 2px #000,
+    0 0 5px rgba(0, 0, 0, .9);
+}
+
+.textcontent.inner {
+  color: #9e8070;
+  font-style: italic;
+}
+
+.textcontent.narration {
+  color: #ddd0c2;
+}
+
+.textcontent.speech {
+  color: #e8dccb;
+}
+
+/* Cursor de avanco: nao interfere no texto digitado */
+
+.textcontent.waiting::after {
+  content: ' \25BC';
+  color: #8B0000;
+  font-size: 13px;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---- cartao do Arquivo ------------------------------------------------- */
+
+#archive-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 660px;
+  max-height: 560px;
+
+  overflow-y: auto;
+
+  background: rgba(10, 3, 3, .95);
+
+  border: 1px solid #5C1010;
+  border-left: 5px solid #8B0000;
+
+  padding: 30px 36px;
+
+  z-index: 30;
+
+  opacity: 0;
+  transition: opacity .5s;
+
+  pointer-events: none;
+  scrollbar-width: none;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, .8),
+    inset 0 0 40px rgba(0, 0, 0, .45);
+}
+
+#archive-box::-webkit-scrollbar {
+  display: none;
+}
+
+#archive-box.show {
+  opacity: 1;
+}
+
+#archive-label {
+  color: #8B0000;
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+
+  margin-bottom: 16px;
+
+  border-bottom: 1px solid #3d0000;
+  padding-bottom: 10px;
+}
+
+#archive-lines {
+  color: #c8a878;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+#archive-lines p + p {
+  margin-top: 10px;
+}
+
+/* ---- ultima entrada ---------------------------------------------------- */
+
+#last-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 680px;
+  max-height: 600px;
+
+  overflow-y: auto;
+
+  background: rgba(8, 3, 3, .97);
+
+  border: 2px double #8B0000;
+
+  padding: 34px 40px;
+
+  z-index: 30;
+
+  opacity: 0;
+  transition: opacity .6s;
+
+  pointer-events: none;
+  scrollbar-width: none;
+
+  box-shadow:
+    0 20px 65px rgba(0, 0, 0, .85),
+    inset 0 0 45px rgba(0, 0, 0, .55);
+}
+
+#last-box::-webkit-scrollbar {
+  display: none;
+}
+
+#last-box.show {
+  opacity: 1;
+}
+
+#last-label {
+  color: #8B0000;
+  font-size: 12px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  text-align: center;
+
+  margin-bottom: 20px;
+
+  border-bottom: 1px solid #3d0000;
+  padding-bottom: 12px;
+}
+
+#last-lines {
+  color: #d4b896;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 2.05;
+  white-space: pre-wrap;
+}
+
+/* ---- escolhas ---------------------------------------------------------- */
+
+#choices {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 720px;
+
+  z-index: 40;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .4s;
+
+  text-align: center;
+}
+
+#choices.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#choice-prompt {
+  color: #8B0000;
+  font-size: 14px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+
+  margin-bottom: 24px;
+}
+
+.choice-btn {
+  display: block;
+
+  width: 100%;
+
+  margin: 10px 0;
+  padding: 16px 28px;
+
+  background: rgba(10, 3, 3, .9);
+
+  border: 1px solid #3d0000;
+
+  color: #c8a878;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.45;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background .2s,
+    border-color .2s,
+    color .2s,
+    transform .2s;
+}
+
+.choice-btn:hover,
+.choice-btn:focus {
+  background: rgba(40, 5, 5, .95);
+  border-color: #8B0000;
+  color: #e8d0a8;
+
+  transform: translateX(6px);
+
+  outline: none;
+}
+
+/* ---- cartoes de tela cheia --------------------------------------------- */
+
+#title-screen,
+#chapter-screen,
+#endchap-screen {
+  position: absolute;
+  inset: 0;
+
+  background: #000;
+
+  z-index: 50;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 1s;
+}
+
+#title-screen.show,
+#chapter-screen.show,
+#endchap-screen.show {
+  opacity: 1;
+}
+
+#title-main {
+  color: #ddd0c2;
+  font-size: 52px;
+  font-weight: bold;
+  letter-spacing: .12em;
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+#title-quote {
+  color: #6B3020;
+  font-style: italic;
+  font-size: 18px;
+  text-align: center;
+  line-height: 1.7;
+
+  max-width: 560px;
+
+  margin-bottom: 40px;
+}
+
+#title-time {
+  color: #555;
+  font-size: 16px;
+  letter-spacing: .15em;
+  font-style: italic;
+}
+
+#chap-num {
+  color: #3d1010;
+  font-size: 15px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+
+  margin-bottom: 14px;
+}
+
+#chap-name {
+  color: #c8b8a2;
+  font-size: 58px;
+  letter-spacing: .08em;
+  text-align: center;
+
+  border-bottom: 1px solid #3d1010;
+  padding-bottom: 16px;
+}
+
+#endchap-screen {
+  gap: 12px;
+  transition: opacity .8s;
+}
+
+#endchap-1 {
+  color: #888;
+  font-style: italic;
+  font-size: 22px;
+}
+
+#endchap-2 {
+  color: #444;
+  font-style: italic;
+  font-size: 18px;
+}
+
+/* ---- fade -------------------------------------------------------------- */
+
+#fader {
+  position: absolute;
+  inset: 0;
+
+  background: #000;
+
+  z-index: 60;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .8s;
+}
+
+#fader.out {
+  opacity: 1;
+}
+
+/* ---- dica -------------------------------------------------------------- */
+
+#hint {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+
+  color: #2a1a12;
+
+  font-size: 11px;
+  letter-spacing: .08em;
+
+  z-index: 70;
+
+  pointer-events: none;
+}
+
+/* ---- ajustes para telas menores --------------------------------------- */
+
+@media (max-height: 720px) {
+  .sprite.size-bust img {
+    height: 70vh;
+  }
+
+  .sprite.size-full img {
+    height: 82vh;
+  }
+}

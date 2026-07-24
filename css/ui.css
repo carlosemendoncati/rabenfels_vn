@@ -1,0 +1,863 @@
+/* ==========================================================================
+   ARQUIVO RABENFELS - css/ui.css
+
+   Menus, paineis, saves, ajustes, historico e creditos.
+
+   css/style.css cuida do palco. Este arquivo cuida de tudo que aparece
+   por cima dele. A separacao evita que um ajuste de interface esbarre
+   nas transicoes ja calibradas da cena.
+
+   Camadas (z-index):
+     palco e vinheta       0 a  10
+     caixa de texto             20
+     cartoes de tela cheia      50
+     fader                      60
+     barra de jogo              75
+     tela de titulo             90
+     overlays de interface     100
+   ========================================================================== */
+
+:root {
+  --rbf-ink:        #d8cab8;
+  --rbf-ink-dim:    #8b7d6d;
+  --rbf-ink-faint:  #5d5247;
+  --rbf-blood:      #8B0000;
+  --rbf-blood-dim:  #3d0000;
+  --rbf-panel-bg:   rgba(9, 5, 4, .97);
+  --rbf-line:       #2a1a16;
+  --rbf-text-size:  18px;
+}
+
+/* Aplica o tamanho de texto escolhido nos ajustes. */
+.textcontent {
+  font-size: var(--rbf-text-size);
+}
+
+/* ==========================================================================
+   BARRA DE JOGO
+   ========================================================================== */
+
+#game-bar {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+
+  display: flex;
+  gap: 8px;
+
+  z-index: 75;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s;
+}
+
+#game-bar.show {
+  opacity: .55;
+  pointer-events: auto;
+}
+
+#game-bar:hover {
+  opacity: 1;
+}
+
+.rbf-bar-btn {
+  background: rgba(8, 4, 3, .72);
+  border: 1px solid var(--rbf-line);
+  color: var(--rbf-ink-dim);
+
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: .08em;
+
+  padding: 7px 13px;
+  cursor: pointer;
+
+  transition:
+    color .2s,
+    border-color .2s,
+    background .2s;
+}
+
+.rbf-bar-btn:hover {
+  color: var(--rbf-ink);
+  border-color: var(--rbf-blood);
+  background: rgba(30, 6, 6, .85);
+}
+
+/* ==========================================================================
+   TELA DE TITULO
+   ========================================================================== */
+
+#main-menu {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(ellipse at 50% 42%, #150e0a 0%, #080504 45%, #000 100%);
+
+  z-index: 90;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .9s;
+}
+
+#main-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#main-menu-inner {
+  width: 460px;
+  max-width: 88vw;
+  text-align: center;
+}
+
+#main-menu-title {
+  color: var(--rbf-ink);
+  font-size: 40px;
+  font-weight: normal;
+  letter-spacing: .22em;
+
+  margin-bottom: 14px;
+}
+
+#main-menu-sub {
+  color: #5a3226;
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: .05em;
+
+  padding-bottom: 26px;
+  margin-bottom: 30px;
+
+  border-bottom: 1px solid var(--rbf-blood-dim);
+}
+
+#main-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rbf-title-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+
+  background: none;
+  border: 1px solid transparent;
+
+  color: var(--rbf-ink-dim);
+  font-family: inherit;
+  font-size: 17px;
+  letter-spacing: .16em;
+
+  padding: 13px 10px;
+  cursor: pointer;
+
+  transition:
+    color .25s,
+    letter-spacing .25s,
+    border-color .25s;
+}
+
+.rbf-title-btn:hover,
+.rbf-title-btn:focus {
+  color: var(--rbf-ink);
+  letter-spacing: .24em;
+  border-color: var(--rbf-line);
+  outline: none;
+}
+
+.rbf-title-btn.disabled {
+  color: #3a332c;
+  cursor: default;
+}
+
+.rbf-title-btn.disabled:hover {
+  color: #3a332c;
+  letter-spacing: .16em;
+  border-color: transparent;
+}
+
+.rbf-title-btn-note {
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--rbf-ink-faint);
+  font-style: italic;
+}
+
+#main-menu-version {
+  margin-top: 34px;
+  color: #2f2822;
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+/* ==========================================================================
+   OVERLAYS
+   ========================================================================== */
+
+#ui-root {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.rbf-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, .72);
+
+  opacity: 0;
+  pointer-events: auto;
+  transition: opacity .25s;
+}
+
+.rbf-overlay.show {
+  opacity: 1;
+}
+
+.rbf-overlay-modal {
+  background: rgba(0, 0, 0, .82);
+}
+
+/* ---- painel ------------------------------------------------------------ */
+
+.rbf-panel {
+  width: 560px;
+  max-width: 92vw;
+  max-height: 88vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--rbf-panel-bg);
+  border: 1px solid var(--rbf-line);
+  border-top: 2px solid var(--rbf-blood);
+
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .85);
+}
+
+.rbf-panel-wide {
+  width: 880px;
+}
+
+.rbf-panel-head {
+  padding: 22px 28px 16px;
+  border-bottom: 1px solid var(--rbf-line);
+}
+
+.rbf-panel-title {
+  color: var(--rbf-ink);
+  font-size: 20px;
+  font-weight: normal;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.rbf-panel-sub {
+  margin-top: 7px;
+  color: var(--rbf-ink-faint);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.rbf-panel-body {
+  padding: 20px 28px;
+  overflow-y: auto;
+  flex: 1;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--rbf-blood-dim) transparent;
+}
+
+.rbf-panel-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rbf-panel-body::-webkit-scrollbar-thumb {
+  background: var(--rbf-blood-dim);
+}
+
+.rbf-panel-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  padding: 16px 28px 20px;
+  border-top: 1px solid var(--rbf-line);
+}
+
+/* ---- botoes ------------------------------------------------------------ */
+
+.rbf-btn {
+  background: rgba(14, 7, 6, .9);
+  border: 1px solid var(--rbf-line);
+  color: var(--rbf-ink-dim);
+
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: .06em;
+
+  padding: 10px 20px;
+  cursor: pointer;
+
+  transition:
+    background .2s,
+    border-color .2s,
+    color .2s;
+}
+
+.rbf-btn:hover {
+  color: var(--rbf-ink);
+  border-color: var(--rbf-blood);
+}
+
+.rbf-btn-primary {
+  border-color: var(--rbf-blood-dim);
+  color: var(--rbf-ink);
+}
+
+.rbf-btn-danger:hover {
+  background: rgba(58, 6, 6, .9);
+  border-color: var(--rbf-blood);
+  color: #e5c4b4;
+}
+
+.rbf-btn-ghost {
+  background: none;
+}
+
+.rbf-btn-mini {
+  font-size: 11px;
+  padding: 5px 10px;
+  letter-spacing: .04em;
+}
+
+/* ---- modal ------------------------------------------------------------- */
+
+.rbf-modal {
+  width: 430px;
+  max-width: 90vw;
+
+  background: var(--rbf-panel-bg);
+  border: 1px solid var(--rbf-line);
+  border-top: 2px solid var(--rbf-blood);
+
+  padding: 26px 28px 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .85);
+}
+
+.rbf-modal-title {
+  color: var(--rbf-ink);
+  font-size: 17px;
+  font-weight: normal;
+  letter-spacing: .12em;
+
+  margin-bottom: 12px;
+}
+
+.rbf-modal-msg {
+  color: var(--rbf-ink-dim);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.rbf-modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+/* ---- aviso breve ------------------------------------------------------- */
+
+.rbf-toast {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+
+  background: rgba(10, 5, 4, .95);
+  border: 1px solid var(--rbf-line);
+  border-left: 3px solid var(--rbf-blood);
+
+  color: var(--rbf-ink-dim);
+  font-size: 13px;
+  letter-spacing: .04em;
+
+  padding: 11px 20px;
+  pointer-events: none;
+
+  opacity: 0;
+  transition:
+    opacity .35s,
+    transform .35s;
+}
+
+.rbf-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   MENU DE JOGO
+   ========================================================================== */
+
+.rbf-menu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rbf-menu-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+
+  background: none;
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--rbf-line);
+
+  color: var(--rbf-ink-dim);
+  font-family: inherit;
+  font-size: 15px;
+  text-align: left;
+
+  padding: 13px 12px;
+  cursor: pointer;
+
+  transition:
+    color .2s,
+    background .2s,
+    padding-left .2s;
+}
+
+.rbf-menu-item:hover {
+  color: var(--rbf-ink);
+  background: rgba(30, 8, 8, .5);
+  padding-left: 20px;
+}
+
+.rbf-menu-item-label {
+  letter-spacing: .08em;
+}
+
+.rbf-menu-item-hint {
+  color: var(--rbf-ink-faint);
+  font-size: 11px;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   SAVES
+   ========================================================================== */
+
+.rbf-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.rbf-slot {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 4px 14px;
+
+  background: rgba(14, 8, 7, .8);
+  border: 1px solid var(--rbf-line);
+
+  padding: 10px;
+  cursor: pointer;
+
+  transition:
+    border-color .2s,
+    background .2s;
+}
+
+.rbf-slot:hover {
+  border-color: var(--rbf-blood);
+  background: rgba(28, 10, 9, .85);
+}
+
+.rbf-slot.disabled {
+  cursor: default;
+  opacity: .45;
+}
+
+.rbf-slot.disabled:hover {
+  border-color: var(--rbf-line);
+  background: rgba(14, 8, 7, .8);
+}
+
+.rbf-slot.broken {
+  border-color: #4a2010;
+}
+
+.rbf-thumb {
+  grid-row: 1 / span 2;
+
+  width: 96px;
+  height: 58px;
+
+  border: 1px solid #000;
+}
+
+.rbf-slot-info {
+  min-width: 0;
+}
+
+.rbf-slot-label {
+  color: var(--rbf-ink);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  margin-bottom: 4px;
+}
+
+.rbf-slot-empty {
+  color: var(--rbf-ink-faint);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.rbf-slot-broken {
+  color: #a05a3a;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.rbf-slot-chapter {
+  color: #a08a72;
+  font-size: 12px;
+}
+
+.rbf-slot-excerpt {
+  color: var(--rbf-ink-faint);
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.45;
+
+  margin-top: 3px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rbf-slot-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 5px;
+
+  color: #4d443b;
+  font-size: 10px;
+  letter-spacing: .05em;
+}
+
+.rbf-slot-route {
+  color: #6b3a2a;
+}
+
+.rbf-slot-tools {
+  grid-column: 2;
+
+  display: flex;
+  gap: 6px;
+
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   AJUSTES
+   ========================================================================== */
+
+.rbf-group {
+  color: var(--rbf-blood);
+  font-size: 11px;
+  font-weight: normal;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+
+  margin: 22px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rbf-line);
+}
+
+.rbf-group:first-child {
+  margin-top: 0;
+}
+
+.rbf-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 11px 2px;
+}
+
+.rbf-row + .rbf-row {
+  border-top: 1px solid rgba(42, 26, 22, .5);
+}
+
+.rbf-row-label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.rbf-row-name {
+  color: var(--rbf-ink-dim);
+  font-size: 14px;
+}
+
+.rbf-row-hint {
+  color: var(--rbf-ink-faint);
+  font-size: 11px;
+  font-style: italic;
+}
+
+.rbf-row-control {
+  flex-shrink: 0;
+}
+
+.rbf-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rbf-slider input[type='range'] {
+  width: 170px;
+  accent-color: var(--rbf-blood);
+  cursor: pointer;
+}
+
+.rbf-slider-value {
+  color: var(--rbf-ink-faint);
+  font-size: 11px;
+  min-width: 74px;
+  text-align: right;
+}
+
+.rbf-toggle {
+  background: rgba(14, 7, 6, .9);
+  border: 1px solid var(--rbf-line);
+  color: var(--rbf-ink-faint);
+
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: .08em;
+
+  padding: 7px 16px;
+  min-width: 104px;
+  cursor: pointer;
+
+  transition:
+    color .2s,
+    border-color .2s,
+    background .2s;
+}
+
+.rbf-toggle.on {
+  color: #d0b48c;
+  border-color: var(--rbf-blood);
+  background: rgba(40, 8, 8, .7);
+}
+
+.rbf-segmented {
+  display: flex;
+  gap: 2px;
+}
+
+.rbf-seg {
+  background: rgba(14, 7, 6, .9);
+  border: 1px solid var(--rbf-line);
+  color: var(--rbf-ink-faint);
+
+  font-family: inherit;
+  font-size: 12px;
+
+  padding: 7px 13px;
+  cursor: pointer;
+}
+
+.rbf-seg.on {
+  color: #d0b48c;
+  border-color: var(--rbf-blood);
+}
+
+.rbf-note {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rbf-line);
+
+  color: var(--rbf-ink-faint);
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   HISTORICO
+   ========================================================================== */
+
+.rbf-history {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rbf-hist-line {
+  color: #b3a493;
+  font-size: 14px;
+  line-height: 1.7;
+
+  padding-left: 12px;
+  border-left: 1px solid var(--rbf-line);
+}
+
+.rbf-hist-who {
+  display: block;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+
+  margin-bottom: 3px;
+}
+
+.rbf-hist-text {
+  color: #b3a493;
+  white-space: pre-wrap;
+}
+
+.rbf-hist-inn .rbf-hist-text {
+  color: #8a7264;
+  font-style: italic;
+}
+
+.rbf-hist-arc .rbf-hist-text,
+.rbf-hist-last .rbf-hist-text {
+  color: #b08e5e;
+  font-style: italic;
+}
+
+.rbf-hist-arc,
+.rbf-hist-last {
+  border-left-color: var(--rbf-blood-dim);
+}
+
+/* ==========================================================================
+   CAPITULOS
+   ========================================================================== */
+
+.rbf-chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rbf-chapter {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+
+  background: rgba(14, 8, 7, .8);
+  border: 1px solid var(--rbf-line);
+
+  color: var(--rbf-ink-dim);
+  font-family: inherit;
+  text-align: left;
+
+  padding: 14px 16px;
+  cursor: pointer;
+
+  transition:
+    border-color .2s,
+    background .2s,
+    color .2s;
+}
+
+.rbf-chapter:hover {
+  border-color: var(--rbf-blood);
+  color: var(--rbf-ink);
+}
+
+.rbf-chapter.locked {
+  opacity: .4;
+  cursor: default;
+}
+
+.rbf-chapter.locked:hover {
+  border-color: var(--rbf-line);
+  color: var(--rbf-ink-dim);
+}
+
+.rbf-chapter-label {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--rbf-blood);
+  min-width: 92px;
+}
+
+.rbf-chapter-title {
+  font-size: 15px;
+}
+
+/* ==========================================================================
+   CREDITOS
+   ========================================================================== */
+
+.rbf-credits {
+  line-height: 1.8;
+}
+
+.rbf-credit-line {
+  color: var(--rbf-ink-dim);
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   TELAS MENORES
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .rbf-slots {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rbf-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .rbf-slider input[type='range'] {
+    width: 140px;
+  }
+}

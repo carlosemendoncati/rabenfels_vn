@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arquivo Rabenfels</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/ui.css">
+</head>
+<body>
+
+<div id="vn">
+
+  <!-- palco -->
+  <div id="bg"></div>
+  <div id="sprites"></div>
+
+  <div id="archive-box">
+    <div id="archive-label"></div>
+    <div id="archive-lines"></div>
+  </div>
+
+  <div id="last-box">
+    <div id="last-label"></div>
+    <div id="last-lines"></div>
+  </div>
+
+  <div id="choices"></div>
+
+  <div id="title-screen">
+    <div id="title-main"></div>
+    <div id="title-quote"></div>
+    <div id="title-time"></div>
+  </div>
+
+  <div id="chapter-screen">
+    <div id="chap-num"></div>
+    <div id="chap-name"></div>
+  </div>
+
+  <div id="endchap-screen">
+    <div id="endchap-1"></div>
+    <div id="endchap-2"></div>
+  </div>
+
+  <div id="fader"></div>
+
+  <div id="textbox">
+    <div id="namebox" class="namebox"></div>
+    <div id="textcontent" class="textcontent"></div>
+  </div>
+
+  <div id="hint"></div>
+
+  <!-- barra de jogo: aparece so depois que a partida comeca -->
+  <div id="game-bar">
+    <button type="button" id="btn-history"   class="rbf-bar-btn" title="Hist&oacute;rico (H)">Hist&oacute;rico</button>
+    <button type="button" id="btn-quicksave" class="rbf-bar-btn" title="Save r&aacute;pido (F5)">Save r&aacute;pido</button>
+    <button type="button" id="btn-menu"      class="rbf-bar-btn" title="Menu (Esc)">Menu</button>
+  </div>
+
+  <!-- tela de titulo -->
+  <div id="main-menu">
+    <div id="main-menu-inner">
+      <h1 id="main-menu-title">ARQUIVO RABENFELS</h1>
+      <p id="main-menu-sub">Fragmentos da Linhagem, da Marca e do Pacto</p>
+      <div id="main-menu-actions"></div>
+      <p id="main-menu-version"></p>
+    </div>
+  </div>
+
+  <!-- raiz dos overlays: paineis, confirmacoes e avisos -->
+  <div id="ui-root"></div>
+
+</div>
+
+<!-- Ordem obrigatoria:
+     manifesto -> servicos -> dados -> engine -> interface -> boot -->
+<script src="js/config.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/state.js"></script>
+<script src="js/assets.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/history.js"></script>
+
+<script src="js/data/prologue.js"></script>
+<script src="js/data/chapter1.js"></script>
+<script src="js/data/chapter2.js"></script>
+
+<script src="js/script.js"></script>
+<script src="js/saves.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

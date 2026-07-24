@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arquivo Rabenfels</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="vn">
+  <div id="bg"></div>
+
+  <div id="sprites"></div>
+
+  <div id="archive-box">
+    <div id="archive-label"></div>
+    <div id="archive-lines"></div>
+  </div>
+
+  <div id="last-box">
+    <div id="last-label"></div>
+    <div id="last-lines"></div>
+  </div>
+
+  <div id="choices"></div>
+
+  <div id="title-screen">
+    <div id="title-main"></div>
+    <div id="title-quote"></div>
+    <div id="title-time"></div>
+  </div>
+
+  <div id="chapter-screen">
+    <div id="chap-num"></div>
+    <div id="chap-name"></div>
+  </div>
+
+  <div id="endchap-screen">
+    <div id="endchap-1"></div>
+    <div id="endchap-2"></div>
+  </div>
+
+  <div id="fader"></div>
+
+  <div id="textbox">
+    <div id="namebox" class="namebox"></div>
+    <div id="textcontent" class="textcontent"></div>
+  </div>
+
+  <div id="hint"></div>
+</div>
+
+<!-- Ordem obrigatoria: manifesto -> servicos -> dados -> engine -> boot -->
+<script src="js/config.js"></script>
+<script src="js/assets.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/data/prologue.js"></script>
+<script src="js/data/chapter1.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
