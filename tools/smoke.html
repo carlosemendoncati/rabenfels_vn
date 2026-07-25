@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Arquivo Rabenfels - smoke test</title>
+<!--
+  =======================================================================
+  ARQUIVO RABENFELS - tools/smoke.html
+
+  Harness de execucao. Carrega o jogo inteiro e joga sozinho, do primeiro
+  beat ao ultimo, uma vez por combinacao de escolhas pedida. Serve para o
+  que tools/validate.py nao alcanca: o roteiro rodando de verdade, com
+  engine, estado, save e galeria.
+
+  Existe porque esta maquina nao tem Node, e tools/validate.js precisa de
+  Node. Aqui quem executa e o proprio navegador.
+
+  Uso interativo:
+    abrir tools/smoke.html no navegador
+
+  Uso automatico (o relatorio sai no dump do DOM):
+    msedge --headless=new --virtual-time-budget=60000 --dump-dom tools/smoke.html
+
+  Procure por SMOKE-OK ou SMOKE-FALHA no fim do relatorio.
+  =======================================================================
+-->
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/ui.css">
+<style>
+  #report {
+    position: fixed; inset: 0; z-index: 99999;
+    overflow: auto; padding: 24px;
+    background: #07080c; color: #d9d5c8;
+    font: 13px/1.6 Consolas, monospace; white-space: pre-wrap;
+  }
+  .ok   { color: #7fa6b8; }
+  .fail { color: #b8414f; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- O palco precisa existir com a mesma marcacao do jogo. -->
+<div id="vn">
+  <div id="bg"></div>
+  <div id="sprites"></div>
+  <div id="archive-box"><div id="archive-label"></div><div id="archive-lines"></div></div>
+  <div id="last-box"><div id="last-label"></div><div id="last-lines"></div></div>
+  <div id="choices"></div>
+  <div id="title-screen"><div id="title-main"></div><div id="title-quote"></div><div id="title-time"></div></div>
+  <div id="chapter-screen"><div id="chap-num"></div><div id="chap-name"></div></div>
+  <div id="endchap-screen"><div id="endchap-1"></div><div id="endchap-2"></div></div>
+  <div id="fader"></div>
+  <div id="textbox">
+    <div class="rf-dlg__head">
+      <div id="namebox" class="namebox">
+        <span class="namebox__cap"></span><span class="namebox__name"></span>
+      </div>
+      <div id="line-code" class="rf-dlg__code"></div>
+    </div>
+    <div class="rf-dlg__panel">
+      <span class="rf-dlg__diamond" id="rf-diamond"></span>
+      <div id="textcontent" class="textcontent"></div>
+      <div class="rf-dlg__bar" id="rf-dlg-bar"></div>
+    </div>
+  </div>
+  <div id="hint"></div>
+  <div id="rf-routes"></div>
+  <div id="rf-route-note"></div>
+  <div id="game-bar"><button type="button" id="btn-menu">Menu</button></div>
+  <button type="button" id="rf-show-ui">Mostrar interface</button>
+  <div id="rf-transition"></div>
+  <div id="main-menu">
+    <div id="rf-menu-bg"></div>
+    <span id="rf-access"></span><span id="rf-dossier"></span><span id="rf-volume"></span>
+    <span id="rf-eyebrow"></span><div id="rf-latin"></div><h1 id="rf-title"></h1>
+    <span id="rf-subtitle"></span>
+    <nav id="rf-nav"></nav>
+    <p id="rf-note"></p><span id="rf-version"></span>
+  </div>
+  <div id="rf-gate">
+    <button type="button" id="rf-gate-btn">
+      <span id="rf-gate-label"></span>
+    </button>
+    <span id="rf-gate-hint"></span>
+  </div>
+  <div id="ui-root"></div>
+</div>
+
+<div id="report">carregando...</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/settings.js"></script>
+<script src="../js/state.js"></script>
+<script src="../js/assets.js"></script>
+<script src="../js/audio.js"></script>
+<script src="../js/history.js"></script>
+<script src="../js/routes.js"></script>
+
+<script src="../js/data/prologue.js"></script>
+<script src="../js/data/chapter1.js"></script>
+<script src="../js/data/chapter2.js"></script>
+
+<script src="../js/script.js"></script>
+<script src="../js/saves.js"></script>
+<script src="../js/gallery.js"></script>
+<script src="../js/engine.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/menu.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  var out      = document.getElementById('report');
+  var lines    = [];
+  var failures = [];
+  var checks   = 0;
+
+  var thrown = [];
+  window.addEventListener('error', function (e) {
+    thrown.push(String(e.message) + ' @ ' + e.filename + ':' + e.lineno);
+  });
+
+  function log(text)  { lines.push(text); paint(); }
+  function paint()    { out.textContent = lines.join('\n'); }
+
+  function check(ok, label, detail) {
+    checks += 1;
+    if (!ok) { failures.push(label + (detail ? ' -> ' + detail : '')); }
+    log((ok ? '  PASS  ' : '  FAIL  ') + label + (ok || !detail ? '' : ' :: ' + detail));
+  }
+
+  function tick() { return new Promise(function (r) { setTimeout(r, 0); }); }
+
+  /* O harness nao mede tempo de leitura: zera tudo o que e espera. */
+  function makeInstant() {
+    RBF.CONFIG.text.typeSpeedMs = 0;
+    RBF.CONFIG.text.pauseMs     = 0;
+    RBF.CONFIG.audio.enabled    = false;
+    var t = RBF.CONFIG.timing;
+    t.fadeMs = 0; t.cardMs = 0; t.arcMs = 0; t.lastMs = 0;
+    t.gateMs = 0; t.sweepMs = 0;
+    t.choiceHoldMs = 0; t.choiceHoldRouteMs = 0;
+  }
+
+  /* Joga do inicio ao fim escolhendo sempre a opcao 'pick' (A, B ou C).
+     Devolve um resumo do que aconteceu. */
+  async function playthrough(pick, limit) {
+    var dbg = RBF.Engine._debug;
+
+    RBF.Engine.newGame();
+
+    var seenScenes  = {};
+    var seenChoices = [];
+    var steps       = 0;
+    var stalls      = 0;
+    var lastIndex   = -1;
+
+    while (steps < limit) {
+      steps += 1;
+
+      if (dbg.isFinished()) { break; }
+
+      if (RBF.STATE.scene) { seenScenes[RBF.STATE.scene] = true; }
+
+      if (dbg.isChoice()) {
+        var buttons = dbg.buttons();
+        if (!buttons.length) { break; }
+        var at = { A: 0, B: 1, C: 2 }[pick];
+        if (at >= buttons.length) { at = buttons.length - 1; }
+        seenChoices.push(pick);
+        buttons[at].click();
+        await tick();
+        continue;
+      }
+
+      if (dbg.isTyping()) { dbg.complete(); await tick(); continue; }
+
+      /* Detector de travamento: o indice tem de andar. */
+      if (dbg.index() === lastIndex) {
+        stalls += 1;
+        if (stalls > 40) { break; }
+      } else {
+        stalls = 0;
+        lastIndex = dbg.index();
+      }
+
+      dbg.input();
+      await tick();
+    }
+
+    return {
+      steps:    steps,
+      finished: dbg.isFinished(),
+      index:    dbg.index(),
+      length:   dbg.scriptLength(),
+      scenes:   Object.keys(seenScenes),
+      choices:  seenChoices,
+      flags:    JSON.parse(JSON.stringify(RBF.STATE.flags)),
+      routes:   RBF.Routes.all(),
+      chapter:  RBF.STATE.chapter,
+      history:  RBF.History.all().length
+    };
+  }
+
+  async function run() {
+    lines = [];
+    log('== ARQUIVO RABENFELS - smoke test ==');
+    log('versao ' + RBF.CONFIG.gameVersion +
+        ' | schema de save ' + RBF.CONFIG.saveSchemaVersion);
+    log('');
+
+    RBF.Settings.init();
+    RBF.Engine.prepare();
+    RBF.UI.bind(document.getElementById('ui-root'));
+    makeInstant();
+
+    /* Cada partida comeca de um armazenamento limpo, senao o progresso
+       de uma contamina a checagem de galeria da outra. */
+    RBF.Storage.clearAll();
+
+    var base = RBF.Script.base();
+    log('== ROTEIRO ==');
+    check(base.length > 0, 'roteiro base montado', base.length + ' beats');
+
+    var totalChoices = RBF.Script.choices().length;
+    check(totalChoices > 0, 'roteiro tem escolhas', totalChoices + ' escolhas');
+
+    var results = {};
+
+    for (var i = 0; i < 3; i++) {
+      var pick = ['A', 'B', 'C'][i];
+      log('');
+      log('== PARTIDA COMPLETA, SEMPRE OPCAO ' + pick + ' ==');
+
+      RBF.Storage.clearAll();
+      var r = await playthrough(pick, 4000);
+      results[pick] = r;
+
+      check(r.finished, 'partida ' + pick + ' chegou ao fim do roteiro',
+            'parou em ' + r.index + '/' + r.length + ' apos ' + r.steps + ' passos');
+      check(r.choices.length === totalChoices,
+            'partida ' + pick + ' passou por todas as escolhas',
+            r.choices.length + ' de ' + totalChoices);
+      check(r.chapter === RBF.CHAPTERS[RBF.CHAPTERS.length - 1].id,
+            'partida ' + pick + ' terminou no ultimo capitulo', String(r.chapter));
+      check(r.history > 100,
+            'partida ' + pick + ' registrou o backlog', r.history + ' entradas');
+
+      var reached = RBF.Saves.readProgress().chaptersReached;
+      for (var c = 0; c < RBF.CHAPTERS.length; c++) {
+        check(reached.indexOf(RBF.CHAPTERS[c].id) !== -1,
+              'partida ' + pick + ' alcancou ' + RBF.CHAPTERS[c].id);
+      }
+
+      var done = RBF.Saves.readProgress().finishedChapters;
+      for (var d = 0; d < RBF.CHAPTERS.length; d++) {
+        check(done.indexOf(RBF.CHAPTERS[d].id) !== -1,
+              'partida ' + pick + ' concluiu ' + RBF.CHAPTERS[d].id,
+              'finishedChapters: ' + done.join(', '));
+      }
+
+      log('       cenas: ' + r.scenes.length +
+          ' | rotas: ' + JSON.stringify(r.routes) +
+          ' | flags: ' + Object.keys(r.flags).length);
+    }
+
+    /* As tres partidas nao podem produzir o mesmo estado, senao a
+       escolha e decorativa. */
+    log('');
+    log('== ESCOLHAS TEM CONSEQUENCIA ==');
+    check(JSON.stringify(results.A.routes) !== JSON.stringify(results.B.routes),
+          'A e B terminam com rotas diferentes');
+    check(JSON.stringify(results.B.routes) !== JSON.stringify(results.C.routes),
+          'B e C terminam com rotas diferentes');
+    check(results.C.flags.archive_seed === true,
+          'opcao C grava archive_seed (contrato do Capitulo 2)');
+    check(results.A.flags.archive_seed === false,
+          'opcao A nao grava archive_seed');
+    check(results.A.length !== results.C.length ||
+          results.A.index !== results.C.index,
+          'ramos diferentes produzem roteiros diferentes',
+          results.A.length + ' vs ' + results.C.length);
+
+    /* Save no meio da partida, load, e o indice tem de bater. */
+    log('');
+    log('== SAVE E LOAD ==');
+    RBF.Storage.clearAll();
+    RBF.Engine.newGame();
+
+    /* Parar em um beat de texto, nunca em uma escolha: o engine recusa
+       salvar durante uma escolha de proposito. */
+    var dbg = RBF.Engine._debug;
+    for (var s = 0; s < 200 && !dbg.isFinished(); s++) {
+      if (dbg.isChoice())      { dbg.buttons()[0].click(); await tick(); continue; }
+      if (dbg.isTyping())      { dbg.complete();           await tick(); continue; }
+      if (s > 60 && dbg.isWaiting() && !dbg.isBusy()) { break; }
+      dbg.input();
+      await tick();
+    }
+
+    check(!dbg.isChoice(), 'harness parou fora de uma escolha');
+    check(RBF.Engine.canSave(), 'da para salvar em um beat de texto');
+
+    var snap = RBF.Engine.snapshot();
+    var written = RBF.Saves.saveToSlot('1', snap);
+    check(!!written, 'save gravado no espaco 1');
+    check(RBF.Saves.validate(written) === null, 'save gravado e valido',
+          String(RBF.Saves.validate(written)));
+    check(written.schemaVersion === RBF.CONFIG.saveSchemaVersion,
+          'save carrega a versao de formato atual');
+
+    var beforeIndex   = snap.beatIndex;
+    var beforeChapter = snap.chapterId;
+
+    RBF.Engine.newGame();
+    await tick();
+    RBF.Engine.loadFrom(RBF.Saves.loadSlot('1'));
+    await tick();
+
+    check(dbg.index() === beforeIndex, 'load recolocou o indice',
+          dbg.index() + ' vs ' + beforeIndex);
+    check(RBF.STATE.chapter === beforeChapter, 'load recolocou o capitulo');
+    check(dbg.isWaiting(), 'load termina esperando clique, nao correndo');
+
+    /* Save de formato antigo tem de ser recusado, com motivo. */
+    var stale = JSON.parse(JSON.stringify(written));
+    stale.schemaVersion = RBF.CONFIG.saveSchemaVersion - 1;
+    check(RBF.Saves.validate(stale) !== null, 'save de formato antigo e recusado');
+
+    /* Galeria: nada aberto antes de jogar. */
+    log('');
+    log('== GALERIA ==');
+    RBF.Storage.clearAll();
+    check(RBF.Gallery.counts().unlocked === 0,
+          'galeria comeca fechada em armazenamento limpo',
+          String(RBF.Gallery.counts().unlocked));
+    RBF.Routes.reset();
+
+    await playthrough('C', 4000);
+    var counts = RBF.Gallery.counts();
+    check(counts.unlocked > 0, 'galeria abre com progresso real',
+          counts.unlocked + ' de ' + counts.total);
+    check(counts.unlocked <= counts.total, 'galeria nao passa do total');
+
+    var docs = RBF.Gallery.items('doc');
+    for (var g = 0; g < docs.length; g++) {
+      check(docs[g].unlocked,
+            'documento lido abre na galeria: ' + docs[g].id);
+    }
+
+    /* Erro nao capturado em qualquer ponto invalida tudo o que veio antes. */
+    log('');
+    log('== EXCECOES ==');
+    check(thrown.length === 0, 'nenhum erro de execucao',
+          thrown.join(' | '));
+
+    log('');
+    log('--------------------------------------------------------------');
+    log(checks + ' checagens, ' + failures.length + ' falha(s)');
+    for (var f = 0; f < failures.length; f++) { log('  FALHA  ' + failures[f]); }
+    log(failures.length ? 'SMOKE-FALHA' : 'SMOKE-OK');
+    log('--------------------------------------------------------------');
+    document.title = failures.length ? 'SMOKE-FALHA' : 'SMOKE-OK';
+  }
+
+  run().catch(function (err) {
+    log('');
+    log('SMOKE-FALHA :: excecao no harness: ' + (err && err.stack || err));
+    document.title = 'SMOKE-FALHA';
+  });
+})();
+</script>
+
+</body>
+</html>

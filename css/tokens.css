@@ -73,8 +73,19 @@
   --rbf-label:     max(11px, calc(10px * var(--rbf-ui)));
   --rbf-code:      max(10px, calc(9px  * var(--rbf-ui)));
 
-  /* Tamanho do texto de dialogo. Os ajustes do jogador sobrescrevem. */
-  --rbf-text-size: 19px;
+  /* Tamanho do texto de dialogo.
+
+     Duas partes, de proposito. --rbf-text-base muda por faixa de tela,
+     como todo o resto do cromo. --rbf-text-scale e o unico numero que os
+     Ajustes tocam, e ele multiplica a faixa em vez de substitui-la.
+
+     Antes os Ajustes gravavam um px direto em --rbf-text-size, em estilo
+     inline no :root. Estilo inline vence media query: bastava o jogo
+     carregar para o tamanho responsivo morrer e a tela de 1900px passar a
+     ler no mesmo corpo do telefone. */
+  --rbf-text-base:  19px;
+  --rbf-text-scale: 1;
+  --rbf-text-size:  calc(var(--rbf-text-base) * var(--rbf-text-scale));
 
   /* Altura ocupada pela caixa de dialogo: painel + aba + respiro.
      Os sprites se apoiam nela para nao ficarem cortados pelo texto. */
@@ -258,19 +269,19 @@ button {
 }
 
 @media (min-width: 768px) {
-  :root { --rbf-ui: 1.3; --rbf-text-size: 20px; }
+  :root { --rbf-ui: 1.3; --rbf-text-base: 20px; }
 }
 
 @media (min-width: 1100px) {
-  :root { --rbf-ui: 1.5; --rbf-text-size: 21px; }
+  :root { --rbf-ui: 1.5; --rbf-text-base: 21px; }
 }
 
 @media (min-width: 1500px) {
-  :root { --rbf-ui: 1.7; --rbf-text-size: 22px; }
+  :root { --rbf-ui: 1.7; --rbf-text-base: 22px; }
 }
 
 @media (min-width: 1900px) {
-  :root { --rbf-ui: 1.9; --rbf-text-size: 24px; }
+  :root { --rbf-ui: 1.9; --rbf-text-base: 24px; }
 }
 
 /* Telefone deitado: pouca altura, muita largura. Encolhe o cromo para
@@ -278,7 +289,7 @@ button {
 @media (max-height: 480px) and (orientation: landscape) {
   :root {
     --rbf-ui: 1;
-    --rbf-text-size: 17px;
+    --rbf-text-base: 17px;
     --rbf-dlg-h: calc(clamp(92px, 26vh, 132px) + 46px);
   }
 }

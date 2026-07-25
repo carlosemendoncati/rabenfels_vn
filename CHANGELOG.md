@@ -1,5 +1,115 @@
 # Changelog
 
+## 0.5.0 — Revisão geral: Prólogo e Capítulo 1 reescritos, seis defeitos fechados
+
+Duas frentes nesta versão. A primeira é o roteiro: o Prólogo e o Capítulo 1
+foram reescritos do zero, com estrutura nova. A segunda é o motor, onde a
+execução real encontrou coisas que a leitura de código não tinha achado.
+
+Esta máquina não tem Node, então `tools/validate.js` não roda aqui. Em vez
+de entregar sem verificar, o projeto ganhou duas ferramentas que rodam com
+o que existe: `tools/validate.py` (estático, 1847 checagens) e
+`tools/smoke.html` (o jogo jogando sozinho no navegador, 55 checagens).
+Os dois fecharam em zero falhas. `tools/validate.js` continua no lugar e
+continua sendo o validador mais completo para quem tiver Node.
+
+### Defeitos corrigidos
+
+**Soft-lock ao fechar um painel aberto pelo menu de jogo.** Menu → Ajustes
+→ Fechar deixava o jogador preso: partida pausada, nenhum painel na tela,
+Escape sem efeito e clique sem efeito. O `onClose` do painel filho voltava
+ao estado `paused` e chamava `openGameMenu()`, mas a primeira linha daquela
+função era um guarda de alternância — "se já está pausado, feche" — que
+fechava o menu recém-pedido. Sem painel aberto para fechar, a função saía
+em silêncio. Valia para Ajustes, Save, Load, Galeria, Capítulos, Histórico
+e Créditos. O guarda passou a olhar se o menu está de fato na tela, e a
+reabertura não empilha estado de novo.
+
+**Carregar um save durante uma espera pulava beats.** `advance()` é
+assíncrono e espera de verdade em `pause`, em fade e em cartão de capítulo.
+Abrir o menu nesse intervalo e carregar um save trocava o roteiro sob os
+pés do laço antigo, que acordava depois e continuava avançando sobre o
+array novo. O harness pegou isso na primeira execução: o save gravado no
+beat 271 reabria no 274. Agora o motor tem uma geração de roteiro; todo
+laço confere a sua antes e depois de cada espera e desiste quando ela mudou.
+
+**"Prólogo concluído" e "Capítulo 1 concluído" nunca abriam na galeria.**
+O motor só marcava capítulo concluído em um beat `end_chap` com o campo
+`chapter` preenchido. O Prólogo não tem esse beat e o Capítulo 1 tinha
+esquecido o campo. Terminar o jogo inteiro não abria nenhum dos dois. A
+marcação passou a acontecer na troca de capítulo, em um lugar só.
+
+**O ajuste de tamanho de texto anulava a escala responsiva.** Os Ajustes
+gravavam um px direto em `--rbf-text-size`, em estilo inline no `:root`.
+Estilo inline vence media query: bastava o jogo carregar para o tamanho por
+faixa de tela morrer, e uma tela de 1900 px passava a ler no mesmo corpo do
+telefone. Agora são dois tokens — `--rbf-text-base` muda por faixa,
+`--rbf-text-scale` é o único número que os Ajustes tocam — e o controle
+virou porcentagem.
+
+**Segurar Ctrl ligava e desligava o avanço rápido dezenas de vezes por
+segundo.** Tecla mantida pressionada repete o `keydown`. Faltava o guarda
+de `ev.repeat`.
+
+**A tabela de teclas dos Ajustes estava errada.** Listava Ctrl como
+"esconder interface" quando Ctrl é o avanço rápido, e esconder a interface
+não tinha tecla nenhuma — só o botão da barra. Corrigida, e a tecla `V`
+passou a esconder e mostrar a interface.
+
+### Ajustes menores
+
+- Painel aberto pela barra de leitura volta para a leitura, e o relógio da
+  partida volta a correr. Antes todo painel caía no menu de jogo: quem só
+  queria consultar o histórico durante a leitura fechava duas telas.
+- `pick()` no áudio aceitava só `canplaythrough`, que nem sempre chega sob
+  `file://`; agora aceita `canplay` também, com guarda para não chamar o
+  callback duas vezes.
+- O manifesto listava `bgm_*.ogg` e `sfx_*.mp3` que nunca existiram em
+  disco — uma requisição falha por faixa em toda troca de cena. A lista
+  passou a descrever o que está na pasta.
+- `{ t:'bg' }` não marcava cenário visto na galeria. Só `scene` marcava.
+- `RBF.Saves.addPlaytime` existia e nunca era chamado; o total acumulado
+  ficava em zero para sempre. Agora entra ao voltar para o título.
+- A dica de fim de roteiro trazia "Capítulo 2" escrito à mão no manifesto.
+  Passou a nomear o último capítulo registrado.
+- `main.js` não conferia `RBF.DIALOGUE_CONTROLS` na lista de módulos.
+- Os créditos repetiam o número de versão como texto solto.
+
+### Roteiro
+
+**Prólogo — de seis para onze cenas.** Duas adições mudam o peso do
+capítulo. A primeira é o Compilador: o Prólogo não apresentava a voz das
+notas de rodapé, que é o arco meta-narrativo inteiro. Agora apresenta, e a
+máscara escorrega uma vez, na página cento e quarenta e um, em uma nota que
+nega ter motivo para registrar a idade de uma criança de oito anos. A
+segunda é a escriba de Lervel: o registro dela não foi só perdido, foi
+fechado pela própria Ordem de Matheo, trinta e sete anos atrás. É o que dá
+peso à pergunta que ela deixa para ele.
+
+O Prólogo continua sem escolha nenhuma, de propósito. É o único capítulo em
+que o jogador só assiste, porque tudo ali já aconteceu.
+
+**Capítulo 1 — de seis cenas e uma escolha para nove cenas e duas.** A
+escolha nova, "A Permissão", fica na biblioteca: Aldric proíbe sem proibir,
+e o jogador decide se Antoniette aceita, pressiona ou fica calada. As três
+respostas mostram um Aldric diferente e reconvergem na mesma cena.
+
+Cenas novas: a galeria de retratos, com nove gerações de duas filhas cada e
+uma moldura vazia que alguém limpa; e a medição do quarto, onde três passos
+de parede não têm explicação e não recebem nenhuma. O quarto de Antoniette
+passou a ser escolha declarada de Serafina — "é o de melhor vista para o
+pátio" —, o que transforma a janela que dá para a porta nordeste em
+cortesia ou permissão, sem dizer qual.
+
+O contrato com o Capítulo 2 está intacto: a escolha `cap1_relatorio` e a
+flag `archive_seed` não mudaram de nome, e o harness confirma que a opção C
+ainda grava a flag que aquele capítulo lê.
+
+**Saves antigos são recusados.** O `saveSchemaVersion` subiu para 2. O
+formato não mudou, mas um save antigo aponta para um `beatIndex` que agora
+cai em outra frase. Recusar com aviso é honesto; carregar no lugar errado
+não seria.
+
 ## 0.4.3 — Layout conferido em navegador de verdade
 
 Até aqui eu vinha corrigindo layout às cegas: lendo CSS, raciocinando e

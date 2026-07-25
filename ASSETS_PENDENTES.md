@@ -21,7 +21,7 @@ correspondente de `js/config.js`.
 
 ---
 
-## Backgrounds — 8 pendentes
+## Backgrounds — 9 pendentes
 
 Pasta `assets/backgrounds/` · `.png` · **1280×720**
 Fallback: gradiente CSS calibrado por cena.
@@ -34,6 +34,7 @@ Fallback: gradiente CSS calibrado por cena.
 | `bg_antoniette_room` | `bg_antoniette_room.png` | quarto com mesa e janela para o pátio |
 | `bg_library` | `bg_library.png` | biblioteca de dois andares |
 | `bg_corridor` | `bg_corridor.png` | corredor leste, porta entreaberta |
+| `bg_portrait_hall` | `bg_portrait_hall.png` | corredor de retratos, nove gerações em ordem, moldura vazia no fim da fila |
 | `bg_kitchen` | `bg_kitchen.png` | copa dos empregados, fogo aceso |
 | `bg_library_night` | `bg_library_night.png` | biblioteca à noite, luz de vela |
 
@@ -63,6 +64,13 @@ escrito até aqui. Os arquivos ficam previstos no manifesto para uso futuro.
 
 Todos os IDs de BGM e SFX têm arquivo. Substituir por gravação ou trilha
 definitiva é troca de arquivo, sem mudança de código.
+
+O manifesto lista apenas o que existe em disco: `.mp3` para BGM, `.ogg` e
+`.wav` para SFX. Ele chegou a listar `bgm_*.ogg` e `sfx_*.mp3`, que nunca
+existiram — o resultado era uma requisição falha por faixa a cada troca de
+cena. Ao gerar os `.ogg` de BGM com `ffmpeg`, recoloque-os **antes** do
+`.mp3` na lista `files` da entrada correspondente: vence o primeiro que
+carregar.
 
 Notas de direção, caso sejam refeitos:
 

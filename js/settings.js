@@ -51,7 +51,7 @@ RBF.Settings = (function () {
         }
         if (k === 'typeSpeedMs')   { got = Math.max(0, Math.min(120, got)); }
         if (k === 'autoAdvanceMs') { got = Math.max(400, Math.min(9000, got)); }
-        if (k === 'textSize')      { got = Math.max(14, Math.min(28, got)); }
+        if (k === 'textScale')     { got = Math.max(0.8, Math.min(1.5, got)); }
       }
       base[k] = got;
     }
@@ -131,8 +131,10 @@ RBF.Settings = (function () {
 
     if (typeof document === 'undefined' || !document.documentElement) { return; }
 
+    /* Multiplicador, nunca px. O px por faixa de tela mora em
+       css/tokens.css e continua valendo por baixo desta escala. */
     var root = document.documentElement;
-    root.style.setProperty('--rbf-text-size', v.textSize + 'px');
+    root.style.setProperty('--rbf-text-scale', String(v.textScale));
 
     /* Movimento reduzido pedido pelo jogador. A media query do sistema
        continua valendo por conta propria, em css/tokens.css. */

@@ -28,14 +28,22 @@ diverge — não invente lore para fechar a contradição.
    arquivo compactado, extraia e compare com o que você lembra: o usuário mexe
    no CSS, no `config.js` e nos assets entre uma sessão e outra.
 2. **Faça backup** em `_backup/pre_<tarefa>_<timestamp>/` antes de editar.
-3. **Escreva o roteiro em UTF-8** e converta com `node tools/escape.js <arquivo>`.
-   Os arquivos de `js/data/` são ASCII puro com escapes `\uXXXX`.
-4. **Valide as duas camadas.** `node tools/validate.js` cobre estrutura,
-   estado e roteiro — e **não vê layout**. Para qualquer mudança visual,
-   `node tools/shots.js --open` abre o jogo em Chrome, mede a geometria em
-   oito tamanhos e grava as imagens em `tools/_shots/`. Olhe as imagens.
-   Já aconteceu de passar 442 de 442 com a tela quebrada.
-5. **Releia o transcript.** O validador não pega repetição, frase de efeito nem
+3. **Escreva o roteiro em UTF-8** e converta com `node tools/escape.js <arquivo>`
+   ou `python tools/escape.py <arquivo>`. Os arquivos de `js/data/` são
+   ASCII puro com escapes `\uXXXX`.
+4. **`node tools/validate.js` é o critério de entrega.** Se `node` não
+   responder, confira em disco antes de concluir que falta: terminal
+   aberto antes de um `winget install` fica com o PATH velho. Sem Node
+   mesmo, há `python tools/validate.py` (estático) e `tools/smoke.html`
+   (o jogo jogando sozinho, headless com `--dump-dom`, procure `SMOKE-OK`).
+5. **Valide as duas camadas.** Validador — `validate.js` ou `validate.py` —
+   cobre estrutura, estado e roteiro, e **não vê layout**. Para qualquer
+   mudança visual, `node tools/shots.js --open` abre o jogo em Chrome, mede
+   a geometria em oito tamanhos e grava as imagens em `tools/_shots/`.
+   Sem Node, `msedge --headless=new --screenshot=... --window-size=W,H`
+   resolve. Olhe as imagens: já aconteceu de passar 442 de 442 com a tela
+   quebrada.
+6. **Releia o transcript.** O validador não pega repetição, frase de efeito nem
    beat que explica o que o jogador acabou de ver. Isso só sai relendo.
 
 ## O que quebra com mais frequência

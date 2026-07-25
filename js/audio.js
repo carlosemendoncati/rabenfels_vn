@@ -27,25 +27,58 @@ RBF.Audio = (function () {
     return (typeof Audio !== 'undefined');
   }
 
-  /* Testa os candidatos em ordem. Chama cb(elemento) ou cb(null). */
+  /* Testa os candidatos em ordem. Chama cb(elemento) ou cb(null), uma
+     unica vez.
+
+     Dois cuidados que a versao anterior nao tinha:
+
+     1. 'canplaythrough' nem sempre chega. Sob file://, e em aba sem foco,
+        o navegador pode parar em 'canplay' e nunca prometer o arquivo
+        inteiro. Aceitar os dois eventos e a diferenca entre trilha e
+        silencio; o guarda 'settled' impede que os dois disparem cb.
+
+     2. Um candidato que falha depois de ja ter respondido nao pode
+        reentrar em tryNext e devolver um segundo elemento. */
   function pick(def, folder, id, cb) {
     if (!def || def.available === false || !def.files || !def.files.length) { cb(null); return; }
     if (!hasAudioElement()) { cb(null); return; }
+
+    var settled = false;
+    function done(el) {
+      if (settled) { return; }
+      settled = true;
+      if (!el) { failed[id] = true; }
+      cb(el);
+    }
+
     var i = 0;
     function tryNext() {
-      if (i >= def.files.length) { failed[id] = true; cb(null); return; }
+      if (settled) { return; }
+      if (i >= def.files.length) { done(null); return; }
+
       var url = folder + def.files[i];
       i += 1;
+
       var el = new Audio();
       el.preload = 'auto';
-      el.addEventListener('canplaythrough', function onReady() {
-        el.removeEventListener('canplaythrough', onReady);
-        cb(el);
-      });
-      el.addEventListener('error', function onErr() {
+
+      function ready() {
+        el.removeEventListener('canplaythrough', ready);
+        el.removeEventListener('canplay', ready);
+        el.removeEventListener('error', onErr);
+        done(el);
+      }
+      function onErr() {
+        el.removeEventListener('canplaythrough', ready);
+        el.removeEventListener('canplay', ready);
         el.removeEventListener('error', onErr);
         tryNext();
-      });
+      }
+
+      el.addEventListener('canplaythrough', ready);
+      el.addEventListener('canplay', ready);
+      el.addEventListener('error', onErr);
+
       el.src = url;
       el.load();
     }

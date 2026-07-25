@@ -162,8 +162,9 @@ infere efeito a partir do texto da opção.
    `data`, `label` e `title`.
 3. Incluir a tag `<script>` no `index.html`, antes de `js/script.js`.
 4. Adicionar ao manifesto os assets novos e à galeria os itens novos.
-5. `node tools/escape.js js/data/chapterN.js`
-6. `node tools/validate.js`
+5. `node tools/escape.js js/data/chapterN.js` — ou `python tools/escape.py …`
+6. `node tools/validate.js` — ou `python tools/validate.py`
+7. Abrir `tools/smoke.html` no navegador e conferir `SMOKE-OK`.
 
 `main.js` não muda.
 
@@ -171,14 +172,33 @@ infere efeito a partir do texto da opção.
 
 ## Validação
 
-Duas camadas. A primeira confere estrutura, estado e roteiro. A segunda
-confere o que o navegador realmente desenhou — e existe porque a primeira
-chegou a passar inteira com a interface visivelmente quebrada.
+Quatro ferramentas, duas delas independentes do Node. A escolha depende do
+que a máquina tem instalado — nenhuma exige `npm install`.
 
 ```bash
-node tools/validate.js          # estrutura, estado, roteiro
+# com Node
+node tools/validate.js          # estrutura, estado, roteiro, save, entrada
 node tools/shots.js --open      # geometria em navegador de verdade
+
+# sem Node
+python tools/validate.py        # dados, manifesto, roteiro, galeria
 ```
+
+E o jogo jogando sozinho, que só precisa de um navegador:
+
+```bash
+msedge --headless=new --virtual-time-budget=90000 --dump-dom tools/smoke.html
+```
+
+`tools/smoke.html` carrega o jogo inteiro, joga do primeiro beat ao último
+uma vez por ramo de escolha e confere capítulo alcançado, capítulo
+concluído, divergência entre ramos, save, load e galeria. Aberto no
+navegador, mostra o relatório na tela. Em modo headless, procure por
+`SMOKE-OK` ou `SMOKE-FALHA` no fim do dump. **55 checagens, 0 falhas.**
+
+`tools/validate.py` não executa o jogo: lê os arquivos e confere a camada
+de dados, que é onde um capítulo novo quebra as coisas. Não substitui
+`validate.js`, que é mais completo. **1847 checagens, 0 falhas.**
 
 `shots.js` abre o jogo em Chrome nos oito tamanhos de tela, reprova
 elemento fora do palco, texto cortado e sobreposição, e grava uma imagem de
@@ -225,6 +245,8 @@ verdade em um DOM mínimo próprio (`tools/minidom.js`).
 ```bash
 node tools/escape.js js/data/x.js                    # normaliza para ASCII
 node tools/escape.js js/data/x.js --decode --stdout  # lê com acento
+python tools/escape.py js/data/x.js                  # o mesmo, sem Node
+python tools/escape.py js/data/x.js --decode --stdout
 python3 tools/make_sfx.py                            # regera efeitos e sons de UI
 python3 tools/fix_sprites.py                         # tira fundo opaco de sprite
 python3 tools/check_sprites.py                       # relata alfa dos sprites

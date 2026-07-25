@@ -473,13 +473,23 @@ RBF.Menu = (function () {
      MENU DE JOGO
      ====================================================================== */
 
+  /* Reabre o menu de jogo depois de fechar um painel filho. O estado ja
+     e 'paused' nesse caminho: empilhar de novo deixaria a pilha torta e,
+     antes, o guarda de alternancia fechava o menu que acabava de ser
+     pedido, prendendo o jogador em uma partida pausada sem interface. */
   function openGameMenu() {
     if (!RBF.Engine.hasStarted()) { return; }
-    if (RBF.State.is('paused'))   { closeGameMenu(); return; }
-    if (RBF.State.hasOverlay())   { return; }
 
-    RBF.Engine.pause();
-    RBF.State.push('paused');
+    /* Alternancia: so fecha quando o proprio menu esta na tela. */
+    if (UI.isPanelOpen('gamemenu')) { closeGameMenu(); return; }
+
+    /* Qualquer outro painel por cima tem precedencia. */
+    if (RBF.State.hasOverlay() && !RBF.State.is('paused')) { return; }
+
+    if (!RBF.State.is('paused')) {
+      RBF.Engine.pause();
+      RBF.State.push('paused');
+    }
     RBF.Audio.playUi('ui_page');
 
     var body = UI.el('div', 'rbf-menu-grid');
@@ -508,6 +518,21 @@ RBF.Menu = (function () {
       body:  body,
       onClose: onGameMenuClosed
     });
+  }
+
+  /* Fechamento padrao de painel filho.
+
+     Painel aberto pelo menu de jogo volta para o menu de jogo. Painel
+     aberto pela barra de leitura volta direto para a leitura, e o
+     relogio de partida volta a correr. Antes, todo painel caia no menu
+     de jogo: quem so queria consultar o historico durante a leitura era
+     obrigado a fechar duas telas. */
+  function panelReturn(fromTitle) {
+    return function () {
+      RBF.State.pop(fromTitle ? 'title' : 'playing');
+      if (RBF.State.is('paused'))  { openGameMenu(); return; }
+      if (RBF.State.is('playing')) { RBF.Engine.resume(); }
+    };
   }
 
   function menuItem(label, hint, onClick) {
@@ -582,10 +607,7 @@ RBF.Menu = (function () {
         { label: 'Fechar', className: 'rbf-btn-primary',
           onClick: function () { UI.closePanel(); } }
       ],
-      onClose: function () {
-        RBF.State.pop(fromTitle ? 'title' : 'paused');
-        if (RBF.State.is('paused')) { openGameMenu(); }
-      }
+      onClose: panelReturn(fromTitle)
     });
   }
 
@@ -763,9 +785,10 @@ RBF.Menu = (function () {
       'menor = mais r\u00e1pido'));
 
     body.appendChild(UI.row('Tamanho do texto',
-      UI.slider(s.get('textSize'), 14, 28, 1,
-        function (v) { return v + ' px'; },
-        function (v) { s.set('textSize', v); })));
+      UI.slider(s.get('textScale'), 0.8, 1.5, 0.05,
+        function (v) { return Math.round(v * 100) + '%'; },
+        function (v) { s.set('textScale', v); }),
+      'sobre o tamanho desta tela'));
 
     body.appendChild(UI.row('Avan\u00e7o autom\u00e1tico',
       UI.toggle(s.get('autoAdvance'), function (v) { s.set('autoAdvance', v); })));
@@ -810,14 +833,16 @@ RBF.Menu = (function () {
     /* --- teclas --- */
     body.appendChild(UI.el('h3', 'rbf-group', 'Teclas'));
     var keys = [
-      ['Avan\u00e7ar',          'Espa\u00e7o \u00b7 Enter \u00b7 \u2192'],
-      ['Escolher',              '1 \u00b7 2 \u00b7 3'],
-      ['Menu',                  'Esc'],
-      ['Hist\u00f3rico',        'H'],
-      ['Save r\u00e1pido',      'F5'],
-      ['Load r\u00e1pido',      'F9'],
-      ['Esconder interface',    'Ctrl'],
-      ['Tela cheia',            'F11']
+      ['Avan\u00e7ar',            'Espa\u00e7o \u00b7 Enter \u00b7 \u2192'],
+      ['Escolher',                '1 \u00b7 2 \u00b7 3'],
+      ['Menu',                    'Esc \u00b7 bot\u00e3o direito'],
+      ['Hist\u00f3rico',          'H'],
+      ['Avan\u00e7o autom\u00e1tico', 'A'],
+      ['Avan\u00e7ar r\u00e1pido', 'Ctrl'],
+      ['Esconder interface',      'V'],
+      ['Save r\u00e1pido',        'F5'],
+      ['Load r\u00e1pido',        'F9'],
+      ['Tela cheia',              'F11']
     ];
     for (var i = 0; i < keys.length; i++) {
       var kb = UI.el('div', 'rbf-keybind');
@@ -855,10 +880,7 @@ RBF.Menu = (function () {
         } },
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
-      onClose: function () {
-        RBF.State.pop(fromTitle ? 'title' : 'paused');
-        if (RBF.State.is('paused')) { openGameMenu(); }
-      }
+      onClose: panelReturn(fromTitle)
     });
   }
 
@@ -927,10 +949,7 @@ RBF.Menu = (function () {
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
-      onClose: function () {
-        RBF.State.pop(fromTitle ? 'title' : 'paused');
-        if (RBF.State.is('paused')) { openGameMenu(); }
-      }
+      onClose: panelReturn(fromTitle)
     });
 
     built.body.scrollTop = built.body.scrollHeight;
@@ -989,10 +1008,7 @@ RBF.Menu = (function () {
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
-      onClose: function () {
-        RBF.State.pop(fromTitle ? 'title' : 'paused');
-        if (RBF.State.is('paused')) { openGameMenu(); }
-      }
+      onClose: panelReturn(fromTitle)
     });
   }
 
@@ -1090,10 +1106,7 @@ RBF.Menu = (function () {
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
-      onClose: function () {
-        RBF.State.pop(fromTitle ? 'title' : 'paused');
-        if (RBF.State.is('paused')) { openGameMenu(); }
-      }
+      onClose: panelReturn(fromTitle)
     });
   }
 
@@ -1166,10 +1179,7 @@ RBF.Menu = (function () {
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
-      onClose: function () {
-        RBF.State.pop(fromTitle ? 'title' : 'paused');
-        if (RBF.State.is('paused')) { openGameMenu(); }
-      }
+      onClose: panelReturn(fromTitle)
     });
   }
 
@@ -1238,10 +1248,14 @@ RBF.Menu = (function () {
           RBF.State.is('playing') && RBF.Engine.hasStarted()) {
         ev.preventDefault();
         RBF.Engine.pause();
-        RBF.State.push('paused');
         openHistory();
         return;
       }
+
+      /* Tecla mantida pressionada repete o keydown. Sem este guarda,
+         segurar Ctrl ligava e desligava o avanco rapido dezenas de
+         vezes por segundo. */
+      if (ev.repeat) { return; }
 
       if (ev.key === 'Control' && RBF.State.is('playing')) {
         ev.preventDefault();
@@ -1252,6 +1266,13 @@ RBF.Menu = (function () {
       if ((ev.key === 'a' || ev.key === 'A') && RBF.State.is('playing')) {
         ev.preventDefault();
         RBF.Engine.toggleAuto();
+        return;
+      }
+
+      /* Esconder a interface tinha botao na barra e nenhuma tecla. */
+      if ((ev.key === 'v' || ev.key === 'V') && RBF.State.is('playing')) {
+        ev.preventDefault();
+        RBF.Engine.toggleUI();
       }
     });
 

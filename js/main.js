@@ -25,6 +25,7 @@
       'CONFIG', 'CHARACTERS', 'BACKGROUNDS', 'BGM', 'SFX', 'MUSIC', 'UI_SFX',
       'CHAPTERS', 'STORAGE', 'SETTINGS_DEFAULT', 'UI_TEXT', 'CREDITS',
       'ARCHIVE', 'INTRO', 'MENU_AUDIO', 'MENU_RECORDS', 'WARNING', 'ROUTES',
+      'DIALOGUE_CONTROLS',
       'Assets', 'Audio', 'Storage', 'Settings', 'History', 'Routes',
       'State', 'Script', 'Saves', 'Gallery', 'UI', 'Engine', 'Menu'
     ];

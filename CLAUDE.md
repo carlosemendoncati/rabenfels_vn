@@ -50,7 +50,8 @@ pequenos, nunca por adjetivo dramático.
    sozinho (é assim que Khar'Vel funciona: ausência, nunca explicação).
 8. Releitura final: cortar qualquer frase que sirva só de efeito — se não
    muda cena, informação ou emoção, sai.
-
+9. Perosnalidades dos personagens: Nem todos são iguais e inigmaticos cada 
+   um age de maneira diferente e não necessáriamente é um poço de mistérios cheio de frases feitas .
 Exemplo do alvo (do próprio roteiro):
 > "Noventa e três dias. Ela havia estabelecido noventa. Três dias de
 > diferença. Ele passou os últimos três dias tentando acreditar que aqueles
@@ -115,14 +116,38 @@ ficam em `RBF.CONFIG.timing` e devem acompanhar o CSS.
 ## Fluxo de trabalho
 
 ```bash
-node tools/validate.js              # 406 checagens, sem dependência nenhuma
+node tools/validate.js              # o mais completo; exige Node
 node tools/escape.js js/data/x.js   # normaliza acento para \uXXXX
 python3 tools/make_sfx.py           # regera efeitos e sons de interface
 python3 tools/make_menu_theme.py    # regera a trilha do menu
 ```
 
-Escrever roteiro com acento normalmente e rodar `escape.js` depois. Nunca
-entregar sem `validate.js` fechando em zero falhas.
+Existe uma segunda camada, escrita quando esta máquina ainda não tinha
+Node. Continua valendo: é mais rápida e serve de rede de segurança.
+
+```bash
+python tools/validate.py            # 1847 checagens estáticas
+python tools/escape.py js/data/x.js # mesmo comportamento do escape.js
+
+# o jogo jogando sozinho, só precisa de um navegador
+msedge --headless=new --virtual-time-budget=90000 --dump-dom tools/smoke.html
+```
+
+`tools/smoke.html` roda três partidas completas, uma por ramo de escolha,
+e confere save, load, rotas e galeria. Procure `SMOKE-OK` no fim do dump.
+Foi ele que pegou a corrida entre `advance()` e `loadFrom()`, que nenhum
+validador estático veria.
+
+**Critério de entrega: `node tools/validate.js` fechando em zero falhas.**
+Ele é o mais completo dos três — roda o jogo inteiro num DOM próprio e
+cobre save, entrada, acessibilidade e aviso de conteúdo.
+
+Escrever roteiro com acento normalmente e rodar `escape.js` (ou `.py`)
+depois.
+
+**Armadilha de PATH:** depois de instalar algo por `winget`, o terminal já
+aberto continua com o PATH velho e `node` aparece como "não reconhecido"
+mesmo instalado. Conferir em disco antes de concluir que falta.
 
 Backup antes de mexer: `_backup/pre_<tarefa>_<timestamp>/`.
 

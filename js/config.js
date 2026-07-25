@@ -33,8 +33,15 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.4.3',
-  saveSchemaVersion: 1,
+  gameVersion:       '0.5.0',
+
+  /*
+    Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
+    Prologo e o Capitulo 1 foram reescritos: um save antigo aponta para
+    um beatIndex que agora cai em outra frase. Recusar com aviso e
+    honesto; carregar no lugar errado nao seria.
+  */
+  saveSchemaVersion: 2,
 
   paths: {
     backgrounds:  'assets/backgrounds/',
@@ -348,6 +355,14 @@ RBF.BACKGROUNDS = {
     css: 'linear-gradient(180deg, #030202 0%, #0c0806 50%, #050303 100%)'
   },
 
+  /* Corredor de retratos entre a biblioteca e a ala leste. Nove
+     geracoes penduradas em ordem. Capitulo 1, cena C6. */
+  bg_portrait_hall: {
+    file: 'bg_portrait_hall.png',
+    available: false,
+    css: 'linear-gradient(100deg, #050403 0%, #17110a 42%, #0b0806 72%, #030202 100%)'
+  },
+
   bg_kitchen: {
     file: 'bg_kitchen.png',
     available: false,
@@ -383,40 +398,28 @@ RBF.BACKGROUNDS = {
 
 RBF.BGM = {
   bgm_prologue: {
-    files: [
-      'bgm_prologue.ogg',
-      'bgm_prologue.mp3'
-    ],
+    files: ['bgm_prologue.mp3'],
     available: true,
     loop: true,
     volume: 0.32
   },
 
   bgm_archive: {
-    files: [
-      'bgm_archive.ogg',
-      'bgm_archive.mp3'
-    ],
+    files: ['bgm_archive.mp3'],
     available: true,
     loop: true,
     volume: 0.38
   },
 
   bgm_grey_march: {
-    files: [
-      'bgm_grey_march.ogg',
-      'bgm_grey_march.mp3'
-    ],
+    files: ['bgm_grey_march.mp3'],
     available: true,
     loop: true,
     volume: 0.40
   },
 
   bgm_nidhaus: {
-    files: [
-      'bgm_nidhaus.ogg',
-      'bgm_nidhaus.mp3'
-    ],
+    files: ['bgm_nidhaus.mp3'],
     available: true,
     loop: true,
     volume: 0.36
@@ -449,55 +452,37 @@ RBF.UI_SFX = {
 
 RBF.SFX = {
   sfx_package: {
-    files: [
-      'sfx_package.ogg',
-      'sfx_package.mp3'
-    ],
+    files: ['sfx_package.ogg', 'sfx_package.wav'],
     available: true,
     volume: 0.55
   },
 
   sfx_page_turn: {
-    files: [
-      'sfx_page_turn.ogg',
-      'sfx_page_turn.mp3'
-    ],
+    files: ['sfx_page_turn.ogg', 'sfx_page_turn.wav'],
     available: true,
     volume: 0.45
   },
 
   sfx_candle: {
-    files: [
-      'sfx_candle.ogg',
-      'sfx_candle.mp3'
-    ],
+    files: ['sfx_candle.ogg', 'sfx_candle.wav'],
     available: true,
     volume: 0.60
   },
 
   sfx_door: {
-    files: [
-      'sfx_door.ogg',
-      'sfx_door.mp3'
-    ],
+    files: ['sfx_door.ogg', 'sfx_door.wav'],
     available: true,
     volume: 0.55
   },
 
   sfx_footsteps: {
-    files: [
-      'sfx_footsteps.ogg',
-      'sfx_footsteps.mp3'
-    ],
+    files: ['sfx_footsteps.ogg', 'sfx_footsteps.wav'],
     available: true,
     volume: 0.45
   },
 
   sfx_wind: {
-    files: [
-      'sfx_wind.ogg',
-      'sfx_wind.mp3'
-    ],
+    files: ['sfx_wind.ogg', 'sfx_wind.wav'],
     available: true,
     volume: 0.40
   }
@@ -624,8 +609,10 @@ RBF.SETTINGS_DEFAULT = {
   /* Confirmar antes de sobrescrever save e antes de sair para o titulo. */
   confirmDestructive: true,
 
-  /* Tamanho do texto da caixa de dialogo, em px. */
-  textSize: 18
+  /* Escala do texto da caixa de dialogo. Multiplica o tamanho da faixa
+     de tela atual, definido em css/tokens.css. 1 = tamanho de projeto.
+     Era um px absoluto ate 0.5.0, e o px anulava a escala responsiva. */
+  textScale: 1
 };
 
 /* -------------------------------------------------------------------------
@@ -649,7 +636,8 @@ RBF.UI_TEXT = {
   lastLabel:    '\u2014 \u00daltima Entrada \u2014',
   hintClick:    'CLIQUE OU ESPA\u00c7O',
   hintChoice:   'escolha: clique ou 1 / 2 / 3',
-  hintEnd:      'Fim do Cap\u00edtulo 2 \u2014 Cap\u00edtulo 3 em breve',
+  /* {ultimo} e trocado pelo rotulo do ultimo capitulo registrado. */
+  hintEnd:      'Fim do {ultimo} \u2014 o Arquivo continua',
 
   narrator:     'narra\u00e7\u00e3o',
   inner:        'pensamento',
@@ -871,7 +859,7 @@ RBF.CREDITS = [
     title: 'Arquivo Rabenfels',
     lines: [
       'Visual Novel de horror psicol\u00f3gico e trag\u00e9dia',
-      'Vers\u00e3o ' + '0.4.3'
+      'Vers\u00e3o ' + RBF.CONFIG.gameVersion
     ]
   },
 

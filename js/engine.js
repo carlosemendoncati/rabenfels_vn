@@ -57,6 +57,20 @@ RBF.Engine = (function () {
   var lastTextBeat    = null;
   var started         = false;
 
+  /*
+    Geracao do roteiro em execucao.
+
+    advance() e assincrono: ele espera de verdade em 'pause', em fade e
+    em cartao de capitulo. Enquanto espera, o jogador pode abrir o menu e
+    carregar um save. Sem este contador, o laco antigo acordava depois do
+    load e continuava avancando sobre o roteiro novo: o jogo abria o save
+    e pulava alguns beats sozinho.
+
+    resetRuntime() incrementa a geracao. Todo laco confere a sua propria
+    geracao antes e depois de cada espera, e desiste quando ela mudou.
+  */
+  var epoch = 0;
+
   /* ---- tempo de jogo ---------------------------------------------------- */
 
   var playtimeBase = 0;      /* segundos acumulados                   */
@@ -384,8 +398,7 @@ RBF.Engine = (function () {
         RBF.STATE.scene      = beat.id || RBF.STATE.scene;
         RBF.STATE.sceneTitle = beat.title || RBF.STATE.sceneTitle;
         if (beat.chapter && beat.chapter !== RBF.STATE.chapter) {
-          RBF.STATE.chapter = beat.chapter;
-          RBF.Saves.markChapterReached(beat.chapter);
+          enterChapter(beat.chapter, silent);
         }
         if (beat.bg) {
           applyBackground(beat.bg);
@@ -399,6 +412,7 @@ RBF.Engine = (function () {
 
       case 'bg':
         applyBackground(beat.id);
+        if (!silent) { RBF.Gallery.markSeen('bg', beat.id); }
         return 'go';
 
       case 'bgm':
@@ -516,9 +530,8 @@ RBF.Engine = (function () {
         stopTyping();
         hideOverlays();
         resetText();
-        if (beat.chapter) {
-          RBF.STATE.chapter = beat.chapter;
-          if (!silent) { RBF.Saves.markChapterReached(beat.chapter); }
+        if (beat.chapter && beat.chapter !== RBF.STATE.chapter) {
+          enterChapter(beat.chapter, silent);
         }
         document.getElementById('chap-num').textContent  = beat.num || '';
         document.getElementById('chap-name').textContent = beat.name || '';
@@ -555,6 +568,23 @@ RBF.Engine = (function () {
         }
         return 'go';
     }
+  }
+
+  /* Troca de capitulo em um unico lugar.
+
+     O capitulo que fica para tras e marcado como concluido aqui. Antes,
+     isso dependia de um beat 'end_chap' com o campo 'chapter' preenchido;
+     o Prologo nao tem esse beat e o Capitulo 1 tinha esquecido o campo,
+     entao 'Prologo concluido' e 'Capitulo 1 concluido' nunca abriam na
+     galeria por mais que o jogador terminasse os dois. */
+  function enterChapter(chapterId, silent) {
+    var previous = RBF.STATE.chapter;
+    RBF.STATE.chapter = chapterId;
+    if (silent) { return; }
+    if (previous && previous !== chapterId) {
+      RBF.Saves.markChapterFinished(previous);
+    }
+    RBF.Saves.markChapterReached(chapterId);
   }
 
   function applyBackground(id) {
@@ -653,10 +683,12 @@ RBF.Engine = (function () {
     currentChoice = null;
 
     /* Tempo de ler a marca antes da cena seguir. */
+    var mine = epoch;
     var wait = moved.length
       ? RBF.CONFIG.timing.choiceHoldRouteMs
       : RBF.CONFIG.timing.choiceHoldMs;
     setTimeout(function () {
+      if (mine !== epoch) { return; }   /* carregou um save durante a espera */
       el.choices.classList.remove('show');
       el.choices.textContent = '';
       el.choices.classList.remove('is-resolved');
@@ -746,11 +778,17 @@ RBF.Engine = (function () {
     if (busy || choiceActive || finished) { return; }
     if (!RBF.State.canAdvanceScript()) { return; }
 
+    var mine = epoch;
+
     busy = true;
     awaitingClick = false;
     cancelAuto();
 
     while (true) {
+      /* O roteiro trocou sob os pes deste laco: sair sem tocar em nada.
+         Quem trocou ja deixou o estado como queria. */
+      if (mine !== epoch) { return; }
+
       if (index >= script.length) { endOfScript(); busy = false; return; }
 
       var beat = script[index];
@@ -759,6 +797,8 @@ RBF.Engine = (function () {
       if (!passes(beat)) { continue; }
 
       var result = await exec(beat, false);
+
+      if (mine !== epoch) { return; }
 
       if (result === 'wait') {
         awaitingClick = true;
@@ -782,10 +822,18 @@ RBF.Engine = (function () {
     RBF.Saves.autosave(snapshot());
   }
 
+  /* Fim do material escrito. A dica sai do manifesto: o texto nomeia o
+     ultimo capitulo registrado em vez de trazer um numero fixo que
+     envelhece a cada capitulo novo. */
   function endOfScript() {
     finished = true;
     stopSkip();
-    setHint(RBF.UI_TEXT.hintEnd);
+
+    var last = RBF.CHAPTERS[RBF.CHAPTERS.length - 1];
+    setHint(last
+      ? RBF.UI_TEXT.hintEnd.replace('{ultimo}', last.label)
+      : RBF.UI_TEXT.hintEnd);
+
     if (RBF.STATE.chapter) { RBF.Saves.markChapterFinished(RBF.STATE.chapter); }
   }
 
@@ -917,13 +965,16 @@ RBF.Engine = (function () {
     if (el.hintText) { el.hintText.textContent = text; }
   }
 
+  /* A barra vive dentro do dialogo: o painel que ela abre volta para a
+     leitura, nao para o menu de jogo. Por isso aqui so pausa o relogio;
+     quem empilha o estado e o proprio painel, e RBF.Menu devolve a
+     'playing' ao fechar. */
   function runControl(id) {
     RBF.Audio.playUi('ui_confirm');
 
     switch (id) {
       case 'history':
-        RBF.Engine.pause();
-        RBF.State.push('paused');
+        pause();
         RBF.Menu.openHistory();
         break;
 
@@ -936,20 +987,17 @@ RBF.Engine = (function () {
         break;
 
       case 'save':
-        RBF.Engine.pause();
-        RBF.State.push('paused');
+        pause();
         RBF.Menu.openSaveLoad('save');
         break;
 
       case 'load':
-        RBF.Engine.pause();
-        RBF.State.push('paused');
+        pause();
         RBF.Menu.openSaveLoad('load');
         break;
 
       case 'settings':
-        RBF.Engine.pause();
-        RBF.State.push('paused');
+        pause();
         RBF.Menu.openSettings();
         break;
 
@@ -1106,6 +1154,9 @@ RBF.Engine = (function () {
   }
 
   function resetRuntime() {
+    /* Aposenta qualquer laco de advance() que ainda esteja esperando. */
+    epoch += 1;
+
     stopTyping();
     cancelAuto();
     stopSkip();
@@ -1259,9 +1310,13 @@ RBF.Engine = (function () {
     return false;
   }
 
-  /* Volta ao titulo sem apagar save nenhum. */
+  /* Volta ao titulo sem apagar save nenhum.
+     O tempo desta partida entra no total acumulado antes de zerar. */
   function stop() {
     pause();
+    if (started) { RBF.Saves.addPlaytime(playtimeSeconds()); }
+    playtimeBase = 0;
+    playtimeMark = null;
     stopTyping();
     hideOverlays();
     resetText();

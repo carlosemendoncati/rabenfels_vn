@@ -11,3 +11,6 @@ _backup/
 
 # Imagens de conferência geradas por tools/shots.js
 tools/_shots/
+
+# cache do Python das ferramentas
+__pycache__/

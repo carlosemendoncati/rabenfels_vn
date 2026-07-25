@@ -68,8 +68,9 @@ lugar errado.
    `title`.
 3. Incluir a tag `<script>` no `index.html`, antes de `js/script.js`.
 4. Adicionar backgrounds, personagens e sfx novos ao manifesto.
-5. `node tools/escape.js js/data/chapterN.js`
-6. `node tools/validate.js`
+5. `node tools/escape.js js/data/chapterN.js` — ou `python tools/escape.py …`
+6. `node tools/validate.js` — ou `python tools/validate.py`
+7. `tools/smoke.html` até dar `SMOKE-OK`
 
 O `main.js` não muda.
 
@@ -116,9 +117,16 @@ no catálogo.
 ## Ferramentas
 
 ```bash
-node tools/validate.js                 # 406 checagens, sem dependência
+node tools/validate.js                 # o mais completo; exige Node
 node tools/escape.js js/data/x.js      # normaliza para ASCII puro
 node tools/escape.js js/data/x.js --decode --stdout   # lê com acento
+
+# sem Node — a máquina do projeto às vezes não tem
+python tools/validate.py               # 1847 checagens estáticas
+python tools/escape.py js/data/x.js    # mesmo comportamento do escape.js
+
+# o jogo jogando sozinho: três partidas, save, load, rotas e galeria
+msedge --headless=new --virtual-time-budget=90000 --dump-dom tools/smoke.html
 python3 tools/make_sfx.py              # regera efeitos e sons de interface
 python3 tools/make_menu_theme.py       # regera a trilha do menu
 ```

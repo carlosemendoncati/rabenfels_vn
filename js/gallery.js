@@ -38,6 +38,7 @@ RBF.Gallery = (function () {
     { id: 'bg_library',         cat: 'cg',  name: 'A biblioteca',                  need: 'bg:bg_library' },
     { id: 'bg_library_night',   cat: 'cg',  name: 'A biblioteca \u00e0 noite',      need: 'bg:bg_library_night' },
     { id: 'bg_corridor',        cat: 'cg',  name: 'O corredor leste',              need: 'bg:bg_corridor' },
+    { id: 'bg_portrait_hall',   cat: 'cg',  name: 'A galeria de retratos',         need: 'bg:bg_portrait_hall' },
     { id: 'bg_kitchen',         cat: 'cg',  name: 'A copa',                        need: 'bg:bg_kitchen' },
 
     /* --- fichas de personagem --- */
@@ -60,6 +61,7 @@ RBF.Gallery = (function () {
 
     /* --- documentos: cartoes do Arquivo lidos --- */
     { id: 'doc_arquivo',    cat: 'doc', name: 'Fragmentos do Arquivo',        need: 'arc:arquivo' },
+    { id: 'doc_compilador', cat: 'doc', name: 'Nota do Compilador',           need: 'arc:compilador' },
     { id: 'doc_ultima',     cat: 'doc', name: '\u00daltima entrada',           need: 'arc:ultima' },
     { id: 'doc_caderno',    cat: 'doc', name: 'Caderno operacional',          need: 'arc:caderno' },
     { id: 'doc_sem_ident',  cat: 'doc', name: 'Caderno sem identifica\u00e7\u00e3o', need: 'arc:sem_identificacao' },

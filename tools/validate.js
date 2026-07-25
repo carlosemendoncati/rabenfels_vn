@@ -408,6 +408,8 @@ async function playthrough(optionIndex, useKeyboard) {
     endText:   doc.getElementById('endchap-1').textContent + ' / ' +
                doc.getElementById('endchap-2').textContent,
     missing:   RBF.Assets.report().length,
+    /* Quantas escolhas o roteiro tem, para o teste nao fixar um numero. */
+    choiceCount: RBF.Script.choices().length,
     progress:  RBF.Saves.readProgress(),
     routes:    RBF.Routes.all(),
     gallery:   RBF.Gallery.counts()
@@ -431,8 +433,13 @@ async function playthroughChecks() {
     check(r.chapter === 'capitulo2', 'ramo ' + labels[i] + ': termina no capitulo 2', String(r.chapter));
     check(r.endText.indexOf('A casa come') !== -1,
           'ramo ' + labels[i] + ': cartao final do capitulo 2 renderizado');
-    check(Object.keys(r.choiceLog).length === 2,
-          'ramo ' + labels[i] + ': duas escolhas registradas', JSON.stringify(r.choiceLog));
+    /* Uma partida completa passa por toda escolha do roteiro. O numero
+       vem do proprio roteiro: fixar '2' aqui obrigava a editar o
+       validador a cada escolha nova, e a falha resultante parecia
+       defeito do jogo. */
+    check(Object.keys(r.choiceLog).length === r.choiceCount,
+          'ramo ' + labels[i] + ': registrou todas as escolhas do roteiro',
+          JSON.stringify(r.choiceLog) + ' de ' + r.choiceCount);
     check(r.progress.chaptersReached.length === 3,
           'ramo ' + labels[i] + ': tres capitulos marcados como alcancados');
     console.log('        passos=' + r.steps + ' historico=' + r.history +
@@ -467,23 +474,30 @@ async function saveLoadChecks() {
   const dbg   = RBF.Engine._debug;
   const stage = doc.getElementById('vn');
 
-  /* Avanca ate passar da primeira escolha, escolhendo a opcao C. */
+  /* Avanca escolhendo sempre a opcao C, ate a flag archive_seed existir.
+
+     Antes este laco parava na PRIMEIRA escolha e ja exigia archive_seed,
+     o que so funcionava enquanto a primeira escolha do roteiro fosse a do
+     relatorio. O Capitulo 1 ganhou uma escolha anterior a ela; a condicao
+     de parada passou a ser a flag em si, que e o que o teste quer de
+     verdade e nao depende da ordem das escolhas. */
   let steps = 0;
-  let passedChoice = false;
-  while (steps < 4000) {
+  let chosen = 0;
+  while (steps < 6000) {
     steps += 1;
     if (dbg.isChoice()) {
       dbg.buttons()[2].click();
-      passedChoice = true;
+      chosen += 1;
       await tick(8);
     } else {
       stage.click();
     }
     await tick(0);
-    if (passedChoice && steps > 40 && dbg.isWaiting()) { break; }
+    if (RBF.STATE.flags.archive_seed === true && dbg.isWaiting()) { break; }
   }
-  check(passedChoice, 'chegou a primeira escolha');
-  check(RBF.STATE.flags.archive_seed === true, 'flag da opcao C gravada');
+  check(chosen > 0, 'chegou a alguma escolha');
+  check(RBF.STATE.flags.archive_seed === true,
+        'flag da opcao C gravada', 'escolhas feitas: ' + chosen);
 
   /* Autosave deve ter acontecido em alguma troca de cena. */
   check(RBF.Saves.hasSlot(RBF.Saves.AUTOSAVE), 'autosave gravado automaticamente');
