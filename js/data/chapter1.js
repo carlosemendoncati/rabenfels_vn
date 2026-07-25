@@ -51,7 +51,7 @@ var C1_ESCOLHA_C = [
   { t:'pause' },
   { t:'nar', tx:'Depois tirou do ba\u00fa de ferramentas um caderno em branco.' },
   { t:'nar', tx:'N\u00e3o escreveu data. N\u00e3o escreveu cabe\u00e7alho.' },
-  { t:'arc', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
+  { t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
       'Por que ela n\u00e3o disse nada?'
   ]},
   { t:'inn', tx:'Isto n\u00e3o vai para Lervel.' },
@@ -92,7 +92,7 @@ RBF.CHAPTER1 = [
 { t:'pause' },
 { t:'nar', tx:'N\u00e3o acenou.' },
 
-{ t:'arc', label:'\u2014 Caderno Operacional \u2014', lns:[
+{ t:'arc', key:'caderno', label:'\u2014 Caderno Operacional \u2014', lns:[
     'Aldeia a quatro quil\u00f4metros de Nidhaus.',
     'Rela\u00e7\u00e3o com a fam\u00edlia: a verificar. Comportamento: circunspecto.',
     'A crian\u00e7a n\u00e3o acenou.'
@@ -182,7 +182,7 @@ RBF.CHAPTER1 = [
 { t:'pause' },
 { t:'nar', tx:'Olhou para o p\u00e1tio. A corrente estava im\u00f3vel.' },
 
-{ t:'arc', label:'\u2014 Caderno Operacional \u2014 Entrada 1 \u2014', lns:[
+{ t:'arc', key:'caderno', label:'\u2014 Caderno Operacional \u2014 Entrada 1 \u2014', lns:[
     'Chegada em Velha Nidhaus. Cobertura est\u00e1vel. Recep\u00e7\u00e3o sem incidente.',
     '1. A casa \u00e9 maior por dentro do que a fachada sustenta. Propor\u00e7\u00e3o dif\u00edcil de quantificar.',
     '2. Serafina Rabenfels: controle excepcional. Monitorar.',
@@ -314,14 +314,17 @@ RBF.CHAPTER1 = [
   { id:'A',
     tx:'As duas juntas. Sujeitos de observa\u00e7\u00e3o, comportamento consistente com a linhagem.',
     flags:{ report_style:'A', distance_kept:true, klara_focus:false, archive_seed:false },
+    routes:{ loss: 1 },
     then: C1_ESCOLHA_A },
   { id:'B',
     tx:'Klara em se\u00e7\u00e3o pr\u00f3pria. Abrir monitoramento individual.',
     flags:{ report_style:'B', distance_kept:false, klara_focus:true, archive_seed:false },
+    routes:{ answer: 1, loss: 1 },
     then: C1_ESCOLHA_B },
   { id:'C',
     tx:'O relat\u00f3rio para a Ordem. E um caderno separado, para a pergunta que sobrou.',
     flags:{ report_style:'C', distance_kept:false, klara_focus:true, archive_seed:true },
+    routes:{ answer: 1, hope: 1 },
     then: C1_ESCOLHA_C }
 ]},
 

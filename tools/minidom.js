@@ -222,6 +222,21 @@ Element.prototype.dispatchEvent = function (ev) {
   return !ev.defaultPrevented;
 };
 
+Element.prototype.focus = function () {
+  if (this.ownerDocument) { this.ownerDocument.activeElement = this; }
+};
+
+Element.prototype.blur = function () {
+  if (this.ownerDocument && this.ownerDocument.activeElement === this) {
+    this.ownerDocument.activeElement = null;
+  }
+};
+
+/* Usado para reiniciar animacao (void el.offsetWidth). */
+Object.defineProperty(Element.prototype, 'offsetWidth', {
+  get: function () { return 0; }
+});
+
 Element.prototype.click = function () {
   return this.dispatchEvent(makeEvent('click', { bubbles: true }));
 };
@@ -266,6 +281,10 @@ function Document() {
   this._index = {};
   this.readyState = 'complete';
 
+  this.activeElement = null;
+  this.hidden = false;
+  this.fullscreenElement = null;
+
   this.documentElement = this.createElement('html');
   this.body = this.createElement('body');
   this.appendChild(this.documentElement);
@@ -277,6 +296,19 @@ Document.prototype.constructor = Document;
 
 Document.prototype.createElement = function (tag) {
   return new Element(tag, this);
+};
+
+/* SVG: o projeto cria <svg> e <use> por createElementNS. Para efeito de
+   validacao um elemento comum basta. */
+Document.prototype.createElementNS = function (ns, tag) {
+  return new Element(tag, this);
+};
+
+/* No de texto: um elemento sem tag que so carrega conteudo. */
+Document.prototype.createTextNode = function (text) {
+  var node = new Element('#text', this);
+  node._text = String(text == null ? '' : text);
+  return node;
 };
 
 Document.prototype.getElementById = function (id) {
@@ -374,8 +406,9 @@ function createWindow(ids) {
   FakeAudio.prototype.cloneNode = function () { return new FakeAudio(); };
 
   var win = {
-    document:      document,
-    localStorage:  new MemoryStorage(),
+    document:        document,
+    localStorage:    new MemoryStorage(),
+    sessionStorage:  new MemoryStorage(),
     Image:         FakeImage,
     Audio:         FakeAudio,
     setTimeout:    setTimeout,

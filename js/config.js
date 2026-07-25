@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.3.0',
+  gameVersion:       '0.4.3',
   saveSchemaVersion: 1,
 
   paths: {
@@ -41,6 +41,8 @@ RBF.CONFIG = {
     characters:   'assets/characters/',
     bgm:          'assets/audio/bgm/',
     sfx:          'assets/audio/sfx/',
+    music:        'assets/audio/music/',
+    uiSfx:        'assets/audio/ui/',
     ui:           'assets/ui/',
     placeholders: 'assets/placeholders/'
   },
@@ -69,7 +71,16 @@ RBF.CONFIG = {
     fadeMs: 900,
     cardMs: 1000,
     arcMs:  350,
-    lastMs: 500
+    lastMs: 500,
+
+    /* Portao de abertura saindo de cena.        */
+    gateMs: 520,
+    /* Pagina escura atravessando entre telas.   */
+    sweepMs: 380,
+    /* Tempo de ler a marca na escolha antes de
+       a cena seguir. Maior quando uma rota muda. */
+    choiceHoldMs:      380,
+    choiceHoldRouteMs: 620
   },
 
   stage: {
@@ -412,10 +423,33 @@ RBF.BGM = {
   }
 };
 
+RBF.MUSIC = {
+  menu_theme: {
+    files: [
+      'menu_theme.ogg',
+      'menu_theme.mp3'
+    ],
+    available: true,
+    loop: true,
+    volume: 0.70
+  }
+};
+
+/* Sons de interface. Curtos, discretos. Falha silenciosa: a interface
+   funciona por inteiro sem nenhum deles. */
+RBF.UI_SFX = {
+  ui_hover:        { files: ['ui_hover.ogg'],        available: true, volume: 0.30 },
+  ui_confirm:      { files: ['ui_confirm.ogg'],      available: true, volume: 0.45 },
+  ui_back:         { files: ['ui_back.ogg'],         available: true, volume: 0.40 },
+  ui_page:         { files: ['ui_page.ogg'],         available: true, volume: 0.40 },
+  ui_seal:         { files: ['ui_seal.ogg'],         available: true, volume: 0.50 },
+  ui_archive_open: { files: ['ui_archive_open.ogg'], available: true, volume: 0.60 },
+  ui_route:        { files: ['ui_route.ogg'],        available: true, volume: 0.35 }
+};
+
 RBF.SFX = {
   sfx_package: {
     files: [
-      'sfx_package.wav',
       'sfx_package.ogg',
       'sfx_package.mp3'
     ],
@@ -425,7 +459,6 @@ RBF.SFX = {
 
   sfx_page_turn: {
     files: [
-      'sfx_page_turn.wav',
       'sfx_page_turn.ogg',
       'sfx_page_turn.mp3'
     ],
@@ -435,7 +468,6 @@ RBF.SFX = {
 
   sfx_candle: {
     files: [
-      'sfx_candle.wav',
       'sfx_candle.ogg',
       'sfx_candle.mp3'
     ],
@@ -445,7 +477,6 @@ RBF.SFX = {
 
   sfx_door: {
     files: [
-      'sfx_door.wav',
       'sfx_door.ogg',
       'sfx_door.mp3'
     ],
@@ -455,7 +486,6 @@ RBF.SFX = {
 
   sfx_footsteps: {
     files: [
-      'sfx_footsteps.wav',
       'sfx_footsteps.ogg',
       'sfx_footsteps.mp3'
     ],
@@ -465,7 +495,6 @@ RBF.SFX = {
 
   sfx_wind: {
     files: [
-      'sfx_wind.wav',
       'sfx_wind.ogg',
       'sfx_wind.mp3'
     ],
@@ -495,6 +524,7 @@ RBF.SFX = {
 RBF.CHAPTERS = [
   {
     id:    'prologo',
+    code:  'PRL',
     data:  'PROLOGUE',
     label: 'Pr\u00f3logo',
     title: 'O Arquivo',
@@ -503,6 +533,7 @@ RBF.CHAPTERS = [
 
   {
     id:    'capitulo1',
+    code:  'C-I',
     data:  'CHAPTER1',
     label: 'Cap\u00edtulo 1',
     title: 'A Chegada',
@@ -511,6 +542,7 @@ RBF.CHAPTERS = [
 
   {
     id:    'capitulo2',
+    code:  'C-II',
     data:  'CHAPTER2',
     label: 'Cap\u00edtulo 2',
     title: 'O Invent\u00e1rio',
@@ -555,6 +587,20 @@ RBF.STORAGE = {
    ------------------------------------------------------------------------- */
 
 RBF.SETTINGS_DEFAULT = {
+  /* Volume mestre. Multiplica trilha e efeitos. */
+  masterVolume: 1,
+  muted:        false,
+
+  /* Movimento reduzido pelo jogador. O sistema operacional tambem pode
+     pedir isso; qualquer um dos dois vale. */
+  reducedMotion: false,
+
+  /* HUD de Esperanca, Perda e Resposta durante a leitura. */
+  showRoutes: true,
+
+  /* Tela de aviso antes de um jogo novo. */
+  contentWarning: true,
+
   /* 0 = texto instantaneo. Acima disso, ms por caractere. */
   typeSpeedMs: 18,
 
@@ -567,6 +613,11 @@ RBF.SETTINGS_DEFAULT = {
   /* Avanco automatico depois que o texto termina de ser exibido. */
   autoAdvance:      false,
   autoAdvanceMs:    2200,
+
+  /* Avanco rapido. 'unread' controla se o skip atravessa texto que o
+     jogador ainda nao leu nesta partida. */
+  skipMs:           38,
+  skipUnread:       false,
 
   autosaveEnabled:  true,
 
@@ -581,20 +632,238 @@ RBF.SETTINGS_DEFAULT = {
    8. TEXTOS DE INTERFACE
    ------------------------------------------------------------------------- */
 
+/* Barra de controle dentro da caixa de dialogo.
+   'id' e resolvido em js/engine.js. */
+RBF.DIALOGUE_CONTROLS = [
+  { id: 'history',  label: 'Hist\u00f3rico', icon: 'rf-ic-history',  title: 'Hist\u00f3rico (H)' },
+  { id: 'auto',     label: 'Auto',            icon: 'rf-ic-auto',     title: 'Avan\u00e7o autom\u00e1tico (A)' },
+  { id: 'skip',     label: 'Skip',            icon: 'rf-ic-skip',     title: 'Avan\u00e7ar r\u00e1pido (Ctrl)' },
+  { id: 'save',     label: 'Save',            icon: 'rf-ic-save',     title: 'Salvar (F5 grava r\u00e1pido)' },
+  { id: 'load',     label: 'Load',            icon: 'rf-ic-load',     title: 'Carregar (F9 abre o r\u00e1pido)' },
+  { id: 'settings', label: 'Ajustes',         icon: 'rf-ic-settings', title: 'Ajustes' },
+  { id: 'hide',     label: 'Ocultar',         icon: 'rf-ic-hide',     title: 'Esconder interface' }
+];
+
 RBF.UI_TEXT = {
   archiveLabel: '\u2014 Arquivo Rabenfels \u2014',
   lastLabel:    '\u2014 \u00daltima Entrada \u2014',
-  hintClick:    'clique ou espa\u00e7o para continuar',
+  hintClick:    'CLIQUE OU ESPA\u00c7O',
   hintChoice:   'escolha: clique ou 1 / 2 / 3',
   hintEnd:      'Fim do Cap\u00edtulo 2 \u2014 Cap\u00edtulo 3 em breve',
 
+  narrator:     'narra\u00e7\u00e3o',
+  inner:        'pensamento',
   emptySlot:    'espa\u00e7o vazio',
   autosaveName: 'Autosave',
   quicksaveName:'Save r\u00e1pido'
 };
 
 /* -------------------------------------------------------------------------
-   9. CREDITOS
+   9. IDENTIDADE DO ARQUIVO
+
+   Textos de cromo do menu principal. Ficam aqui para poderem ser
+   traduzidos ou reescritos sem tocar em codigo.
+   ------------------------------------------------------------------------- */
+
+RBF.ARCHIVE = {
+  access:   'ACESSO RESTRITO',
+  dossier:  'RBF-001 / 46 FICHAS',
+  volume:   'VOLUME XVII \u00b7 TESTEMUNHOS SELADOS',
+  eyebrow:  'CODEX INTERDICTUS',
+  latin:    'ARCHIVUM STIRPIS RABENFELS',
+  title:    ['ARQUIVO', 'RABENFELS'],
+  subtitle: 'os que abriram n\u00e3o voltaram a fechar',
+  noteLabel:'NOTA DE MARGEM',
+
+  /* Fundo do menu. Usa um background do manifesto, entao segue a mesma
+     regra de todos: enquanto 'available' for false, so o gradiente. */
+  background: 'bg_archive_closeup',
+
+  /* Numerais romanos dos registros do menu. */
+  numerals: ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+};
+
+/* -------------------------------------------------------------------------
+   10. PORTAO DE ABERTURA
+
+   Primeira tela. Existe por dois motivos: o navegador so libera audio
+   depois de uma interacao, e a entrada no arquivo deve ser um ato do
+   jogador em vez de um carregamento automatico.
+   ------------------------------------------------------------------------- */
+
+RBF.INTRO = {
+  enabled:        true,
+  label:          'CLIQUE PARA ABRIR O ARQUIVO',
+  hint:           'clique, toque, Enter ou Espa\u00e7o',
+  revealMs:       1800,   /* duracao da sequencia completa      */
+  returnRevealMs: 260,    /* volta ao menu na mesma sessao      */
+
+  /* Chave de sessao. Volta a aparecer em nova sessao do navegador. */
+  sessionKey: 'rbf_archive_opened'
+};
+
+/* -------------------------------------------------------------------------
+   11. AUDIO DO MENU
+   ------------------------------------------------------------------------- */
+
+RBF.MENU_AUDIO = {
+  track:         'menu_theme',
+  fadeInMs:      3000,
+  fadeOutMs:     900,
+  /* Reduz o volume quando a aba perde o foco, em vez de cortar. */
+  hiddenFactor:  0.25
+};
+
+/* -------------------------------------------------------------------------
+   12. REGISTROS DO MENU PRINCIPAL
+
+   Cada entrada e uma ficha do codice. 'action' e resolvido em js/menu.js.
+   'note' e a nota de margem exibida ao passar o foco.
+   'needs' controla quando a entrada fica dispon\u00edvel:
+     'save'     exige pelo menos um save valido
+     'chapters' exige mais de um capitulo alcancado
+     'gallery'  exige pelo menos um item de galeria liberado
+   ------------------------------------------------------------------------- */
+
+RBF.MENU_RECORDS = [
+  {
+    id:      'new',
+    label:   'Novo Jogo',
+    chapter: 'O PRIMEIRO TESTEMUNHO',
+    code:    'REG-01',
+    action:  'newGame',
+    note:    'Abra um registro que nunca deveria ter existido.'
+  },
+  {
+    id:      'continue',
+    label:   'Continuar',
+    chapter: 'RETOMAR LEITURA',
+    code:    'REG-02',
+    action:  'continue',
+    needs:   'save',
+    note:    'A p\u00e1gina onde a leitura parou continua marcada.'
+  },
+  {
+    id:      'load',
+    label:   'Carregar',
+    chapter: 'FICHAS ARQUIVADAS',
+    code:    'REG-03',
+    action:  'load',
+    note:    'Todo registro guardado pode ser aberto de novo.'
+  },
+  {
+    id:      'chapters',
+    label:   'Cap\u00edtulos',
+    chapter: 'VOLUMES LIBERADOS',
+    code:    'REG-04',
+    action:  'chapters',
+    needs:   'chapters',
+    note:    'Apenas os volumes que voc\u00ea j\u00e1 alcan\u00e7ou.'
+  },
+  {
+    id:      'gallery',
+    label:   'Galeria / Extras',
+    chapter: 'MATERIAL RECUPERADO',
+    code:    'REG-05',
+    action:  'gallery',
+    note:    'O que foi recuperado do arquivo at\u00e9 agora.'
+  },
+  {
+    id:      'options',
+    label:   'Ajustes',
+    chapter: 'CONTROLE DE LEITURA',
+    code:    'REG-06',
+    action:  'options',
+    note:    'Texto, \u00e1udio, movimento e conte\u00fado sens\u00edvel.'
+  },
+  {
+    id:      'credits',
+    label:   'Cr\u00e9ditos',
+    chapter: 'REGISTRO DE AUTORIA',
+    code:    'REG-07',
+    action:  'credits',
+    note:    'Quem construiu este arquivo.'
+  },
+  {
+    id:      'close',
+    label:   'Fechar o Arquivo',
+    chapter: 'ENCERRAR SESS\u00c3O',
+    code:    'REG-08',
+    action:  'close',
+    note:    'Algumas coisas podem permanecer com voc\u00ea.'
+  }
+];
+
+/* -------------------------------------------------------------------------
+   13. AVISO DE CONTEUDO
+
+   Exibido antes de um jogo novo, a menos que o jogador tenha desligado
+   nos ajustes.
+   ------------------------------------------------------------------------- */
+
+RBF.WARNING = {
+  label: 'AVISO',
+  title: 'LEIA ANTES DE ABRIR O ARQUIVO',
+  body:  'Este registro cont\u00e9m viol\u00eancia, morte e experimenta\u00e7\u00e3o com ' +
+         'menores, al\u00e9m de horror psicol\u00f3gico prolongado. Nada disso \u00e9 ' +
+         'apresentado como espet\u00e1culo, mas tamb\u00e9m n\u00e3o \u00e9 suavizado.',
+  tags:  [
+    'Morte',
+    'Horror psicol\u00f3gico',
+    'Abuso institucional',
+    'Experimenta\u00e7\u00e3o m\u00e9dica',
+    'Dano envolvendo menor'
+  ],
+  footer: 'O aviso pode ser desligado em Ajustes \u00b7 Conte\u00fado.',
+  accept: 'Compreendo',
+  back:   'Voltar'
+};
+
+/* -------------------------------------------------------------------------
+   14. ROTAS
+
+   O documento mestre define tres eixos de escolha: investiga\u00e7\u00e3o,
+   relacionamento e moral. As rotas abaixo sao a leitura desses eixos, e
+   os valores vem exclusivamente das escolhas reais que o jogador fez.
+   Nenhuma rota tem valor decorativo: o delta esta declarado em cada
+   opcao de escolha nos arquivos de js/data/.
+
+   max: quantidade de marcas exibidas no HUD.
+   ------------------------------------------------------------------------- */
+
+RBF.ROUTES = [
+  {
+    id:    'hope',
+    label: 'Esperan\u00e7a',
+    icon:  'rf-icon-hope',
+    max:   5,
+    note:  'Uma possibilidade foi preservada.',
+    /* Proximidade. O documento mestre: momentos de ternura tornam o
+       final mais devastador para quem os viveu. */
+    hint:  'proximidade com quem est\u00e1 nesta casa'
+  },
+  {
+    id:    'loss',
+    label: 'Perda',
+    icon:  'rf-icon-loss',
+    max:   5,
+    note:  'O arquivo registrou mais uma perda.',
+    /* Custo moral: o que ela escolhe nao dizer, nao fazer, nao salvar. */
+    hint:  'o custo do que ela decide n\u00e3o fazer'
+  },
+  {
+    id:    'answer',
+    label: 'Resposta',
+    icon:  'rf-icon-answer',
+    max:   5,
+    note:  'Voc\u00ea chegou mais perto de uma resposta.',
+    /* Investigacao: o que ela descobre e em que ordem. */
+    hint:  'o que ela descobre e em que ordem'
+  }
+];
+
+/* -------------------------------------------------------------------------
+   15. CREDITOS
    ------------------------------------------------------------------------- */
 
 RBF.CREDITS = [
@@ -602,7 +871,7 @@ RBF.CREDITS = [
     title: 'Arquivo Rabenfels',
     lines: [
       'Visual Novel de horror psicol\u00f3gico e trag\u00e9dia',
-      'Vers\u00e3o ' + '0.3.0'
+      'Vers\u00e3o ' + '0.4.3'
     ]
   },
 
@@ -617,9 +886,18 @@ RBF.CREDITS = [
   {
     title: '\u00c1udio',
     lines: [
-      'Efeitos sonoros sintetizados especificamente para o projeto',
+      'Tema do menu: "The Archive Pulls Me Near".',
+      'Efeitos sonoros e sons de interface sintetizados para o projeto',
       'em tools/make_sfx.py. Sem material de terceiros.',
-      'Trilha instrumental: arquivos locais em assets/audio/bgm/.'
+      'Trilha de cena: arquivos locais em assets/audio/bgm/.'
+    ]
+  },
+
+  {
+    title: 'Interface',
+    lines: [
+      'Identidade visual, cursor e composi\u00e7\u00e3o do arquivo',
+      'a partir do prot\u00f3tipo aprovado do projeto.'
     ]
   },
 
@@ -641,7 +919,7 @@ RBF.CREDITS = [
 ];
 
 /* -------------------------------------------------------------------------
-   10. COMPATIBILIDADE COM NODE
+   16. COMPATIBILIDADE COM NODE
    ------------------------------------------------------------------------- */
 
 if (typeof module !== 'undefined' && module.exports) {

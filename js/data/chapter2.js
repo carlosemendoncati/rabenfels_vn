@@ -65,7 +65,7 @@ var C2_ESCOLHA_C = [
   { t:'nar', tx:'Tirou do ba\u00fa de ferramentas um caderno em branco. N\u00e3o escreveu data nem cabe\u00e7alho.',
     if:{ archive_seed:false } },
 
-  { t:'arc', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
+  { t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
       'Livros de conta: intervalo de dois anos ausente.',
       'Numera\u00e7\u00e3o dos volumes: cont\u00ednua.',
       'Quem retirou os livros n\u00e3o quis que a falta aparecesse.'
@@ -156,7 +156,7 @@ RBF.CHAPTER2 = [
 { t:'inn', tx:'Dezessete anos. A casa contratou dois estranhos em seis semanas e ele acha que o incomum \u00e9 o adiantamento.' },
 { t:'spr_hide', ch:'ren' },
 
-{ t:'arc', label:'\u2014 Caderno Operacional \u2014 Entrada 4 \u2014', lns:[
+{ t:'arc', key:'caderno', label:'\u2014 Caderno Operacional \u2014 Entrada 4 \u2014', lns:[
     'Assistente designado: Ren, 17 anos, contratado 5 semanas antes da minha chegada.',
     'Sem v\u00ednculo com a regi\u00e3o. Sem parentes na casa. Sem curiosidade.',
     'A escolha de um assistente sem raiz local n\u00e3o \u00e9 acidente.'
@@ -336,14 +336,17 @@ RBF.CHAPTER2 = [
   { id:'A',
     tx:'Registrar como irregularidade administrativa e seguir o contrato.',
     flags:{ ledger_report:'A', ledger_crossref:false, ledger_copied:false },
+    routes:{ loss: 1 },
     then: C2_ESCOLHA_A },
   { id:'B',
     tx:'Cruzar com o invent\u00e1rio de pessoal e datar exatamente o intervalo.',
     flags:{ ledger_report:'B', ledger_crossref:true, ledger_copied:false },
+    routes:{ answer: 2 },
     then: C2_ESCOLHA_B },
   { id:'C',
     tx:'Copiar a p\u00e1gina inteira \u00e0 m\u00e3o. O que a Ordem receber \u00e9 outro assunto.',
     flags:{ ledger_report:'C', ledger_crossref:false, ledger_copied:true, archive_seed:true },
+    routes:{ answer: 1, hope: 1 },
     then: C2_ESCOLHA_C }
 ]},
 
@@ -369,7 +372,7 @@ RBF.CHAPTER2 = [
 { t:'nar', tx:'Antoniette ficou na janela at\u00e9 o p\u00e1tio esvaziar.' },
 { t:'nar', tx:'Depois abriu o caderno operacional e escreveu uma linha.' },
 
-{ t:'arc', label:'\u2014 Caderno Operacional \u2014 Entrada 9 \u2014', lns:[
+{ t:'arc', key:'caderno', label:'\u2014 Caderno Operacional \u2014 Entrada 9 \u2014', lns:[
     'Duas crian\u00e7as de oito anos nesta casa.',
     'Uma delas sai sozinha \u00e0s duas e vinte da manh\u00e3 e ningu\u00e9m vai atr\u00e1s.',
     'Isso significa que \u00e9 permitido.'

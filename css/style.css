@@ -1,634 +1,693 @@
 /* ==========================================================================
    ARQUIVO RABENFELS - css/style.css
-   Apresentacao. Nenhuma regra depende de arquivo de asset existir.
+
+   O palco: fundo, sprites, caixa de dialogo, cartoes do Arquivo, escolhas
+   e cartoes de tela cheia.
+
+   css/tokens.css carrega as variaveis e o reset. css/ui.css cuida de tudo
+   que aparece por cima do palco. Este arquivo cuida da cena.
+
+   Escrito mobile primeiro. O palco preenche a viewport em vez de manter
+   uma caixa fixa de 1280x720 encaixada com sobras pretas: era isso que
+   deixava o texto no canto e a cena fora de escala no telefone.
    ========================================================================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  background: #000;
-  min-height: 100vh;
-  font-family: Georgia, 'Times New Roman', serif;
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-}
 
 body {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background: #000;
 }
 
-/* ---- palco ------------------------------------------------------------- */
+/* ==========================================================================
+   PALCO
+   ========================================================================== */
 
 #vn {
   position: relative;
-  width: 1280px;
-  height: 720px;
-  max-width: 100vw;
-  max-height: 100vh;
+  width: 100%;
+  height: 100vh;
+  height: var(--rbf-vh);
   overflow: hidden;
-  background: #000;
-  cursor: pointer;
+  background: var(--rbf-void);
+
+  /* A cena aceita clique em qualquer ponto para avancar. */
+  touch-action: manipulation;
+}
+
+/* Em telas muito largas a cena para de crescer e ganha margem lateral,
+   para a linha de texto nao ficar longa demais para ler. */
+@media (min-width: 1900px) {
+  #vn {
+    width: 1800px;
+    box-shadow: 0 0 120px rgba(0, 0, 0, .9);
+  }
 }
 
 #bg {
   position: absolute;
   inset: 0;
-  transition:
-    opacity .8s,
-    background-image .4s;
-
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  transition: opacity var(--rbf-slow), background-image var(--rbf-medium);
 }
 
-/* Vinheta */
-
+/* Vinheta. */
 #vn::after {
   content: '';
   position: absolute;
   inset: 0;
-
-  background:
-    radial-gradient(
-      ellipse at 50% 50%,
-      transparent 48%,
-      rgba(0, 0, 0, .72) 100%
-    );
-
-  pointer-events: none;
   z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, transparent 46%, rgba(0, 0, 0, .74) 100%);
 }
 
-/* ---- sprites ----------------------------------------------------------- */
+/* ==========================================================================
+   SPRITES
 
-/*
-  A camada dos sprites fica atras da caixa de texto.
+   Altura em vh para o personagem acompanhar a tela. O teto em px evita
+   ampliar arte de resolucao baixa: sprite herdado de 320x340 esticado
+   para 420 fica borrado, e era isso que aparecia como bloco no canto.
 
-  z-index:
-    vinheta: 5
-    sprites: 10
-    textbox: 20
-*/
+   A base do sprite fica na borda de cima da caixa de dialogo, nao no
+   fundo do palco, para a figura nao ser cortada pelo texto.
+   ========================================================================== */
 
 #sprites {
   position: absolute;
   inset: 0;
   z-index: 10;
   pointer-events: none;
-  overflow: hidden;
 }
 
 .sprite {
   position: absolute;
 
-  /*
-    Antes estava em bottom: 175px, fazendo o personagem flutuar
-    exatamente acima da caixa de texto.
-
-    Agora o personagem termina abaixo do palco e fica parcialmente
-    escondido pelo textbox.
-  */
-  bottom: -35px;
+  /* Acompanha a altura reservada para a caixa de dialogo. */
+  bottom: var(--rbf-dlg-h, 190px);
 
   opacity: 0;
-
-  transition:
-    opacity .5s,
-    transform .5s;
-
-  transform-origin: center bottom;
-  pointer-events: none;
+  transition: opacity var(--rbf-medium), transform var(--rbf-medium) var(--rbf-ease-ritual);
 }
 
-.sprite.show {
-  opacity: 1;
-}
+.sprite.show { opacity: 1; }
 
-/* Posicionamento horizontal */
-
-.sprite.pos-left {
-  left: 60px;
-  transform: translateX(-18px);
-}
-
-.sprite.pos-left.show {
-  transform: translateX(0);
-}
-
-.sprite.pos-center {
-  left: 50%;
-  transform: translateX(-58%);
-}
-
-.sprite.pos-center.show {
-  transform: translateX(-50%);
-}
-
-.sprite.pos-right {
-  right: 60px;
-  transform: translateX(18px);
-}
-
-.sprite.pos-right.show {
-  transform: translateX(0);
-}
-
-/* Imagem interna do sprite */
+.sprite.pos-left        { left: 6%;   transform: translateX(-14px); }
+.sprite.pos-left.show   { transform: translateX(0); }
+.sprite.pos-center      { left: 50%;  transform: translateX(-52%); }
+.sprite.pos-center.show { transform: translateX(-50%); }
+.sprite.pos-right       { right: 6%;  transform: translateX(14px); }
+.sprite.pos-right.show  { transform: translateX(0); }
 
 .sprite img {
   display: block;
-
   width: auto;
-  max-width: none;
-
+  max-width: 46vw;
   object-fit: contain;
-  object-position: center bottom;
+  object-position: bottom center;
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .9));
 
-  filter:
-    drop-shadow(0 5px 12px rgba(0, 0, 0, .75))
-    drop-shadow(0 0 22px rgba(0, 0, 0, .85));
+  /* A arte preenche o proprio quadro ate a borda de baixo, o que na
+     cena aparecia como um corte reto. A mascara dissolve os ultimos
+     por cento da figura na escuridao. */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 88%, transparent 100%);
 }
 
-/*
-  Personagens bust:
-  Serafina, Aldric, Antoniette e outros bustos.
+/* Busto: enquadramento do peito para cima. */
+.sprite.size-bust img { height: min(42vh, 340px); }
 
-  O tamanho anterior era 340px e ficava muito pequeno.
-*/
+/* Corpo inteiro: mais alto. */
+.sprite.size-full img { height: min(62vh, 520px); }
 
-.sprite.size-bust img {
-  height: 510px;
+/* Arte em alta resolucao aguenta ocupar mais tela. */
+.sprite.res-high.size-bust img { height: min(58vh, 620px); }
+.sprite.res-high.size-full img { height: min(78vh, 900px); }
+
+/* Quem fala ganha destaque; quem escuta recua. */
+.sprite.is-idle img {
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .9)) brightness(.62) saturate(.8);
 }
 
-/*
-  Personagens full:
-  Matheo, Klara e Liara.
-
-  Matheo esta como size: 'full' no config.js.
-*/
-
-.sprite.size-full img {
-  height: 600px;
+@media (max-width: 720px) {
+  .sprite.pos-left  { left: 0; }
+  .sprite.pos-right { right: 0; }
+  .sprite img { max-width: 62vw; }
 }
 
-/* ---- caixa de texto ---------------------------------------------------- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .sprite.size-bust img,
+  .sprite.res-high.size-bust img { height: 42vh; }
+  .sprite.size-full img,
+  .sprite.res-high.size-full img { height: 58vh; }
+}
+
+/* ==========================================================================
+   CAIXA DE DIALOGO
+
+   Registro de arquivo: aba de identificacao, painel com moldura, codigo
+   de transcricao e a barra de leitura por dentro do painel.
+   ========================================================================== */
 
 #textbox {
   position: absolute;
-  bottom: 0;
   left: 0;
   right: 0;
-
-  height: 200px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(5, 3, 2, 0) 0%,
-      rgba(5, 3, 2, .92) 15%,
-      rgba(5, 3, 2, .97) 100%
-    );
-
-  /*
-    Fica na frente dos personagens.
-  */
+  bottom: 0;
   z-index: 20;
-
-  padding: 20px 60px 30px;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+
+  padding:
+    0
+    clamp(12px, 3vw, 48px)
+    max(clamp(12px, 2vh, 24px), env(safe-area-inset-bottom));
 
   opacity: 0;
-  transition: opacity .25s;
-
   pointer-events: none;
+  transition: opacity var(--rbf-fast);
 }
 
-#textbox.show {
-  opacity: 1;
+#textbox.show { opacity: 1; }
+
+/* Em monitor largo o painel para de crescer e fica centrado: uma linha
+   de texto de ponta a ponta da tela e desconfortavel de ler. */
+#textbox > * {
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Os controles precisam receber clique sem que o palco avance a cena. */
+#textbox .rf-dlg__bar,
+#textbox .namebox { pointer-events: auto; }
+
+/* ---- cabecalho: aba de nome e codigo ---------------------------------- */
+
+.rf-dlg__head {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--rbf-gap);
+  padding: 0 calc(10px * var(--rbf-ui));
+}
+
+/* Filete vermelho que sai da aba e corre ate a direita. */
+.rf-dlg__head::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--rbf-red) 0%, rgba(140, 39, 51, .35) 42%, transparent 100%);
 }
 
 .namebox {
-  font-size: 15px;
-  font-weight: bold;
-  letter-spacing: .15em;
-  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
 
-  margin-bottom: 10px;
-  padding: 4px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(9px * var(--rbf-ui));
 
-  align-self: flex-start;
+  padding: calc(8px * var(--rbf-ui)) calc(22px * var(--rbf-ui)) calc(8px * var(--rbf-ui)) calc(13px * var(--rbf-ui));
+  background: linear-gradient(180deg, #171a24 0%, #10121a 100%);
+  border: 1px solid var(--rbf-line);
+  border-bottom: none;
 
-  border-left: 3px solid currentColor;
+  /* Aba: canto superior direito chanfrado, como uma etiqueta colada. */
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 100%, 0 100%);
 
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity var(--rbf-fast);
 }
 
-.namebox.show {
+.namebox.show { opacity: 1; }
+
+/* Cabeca da aba: marca na cor de quem fala. Vermelha na narracao. */
+.namebox__cap {
+  width: calc(7px * var(--rbf-ui));
+  height: calc(17px * var(--rbf-ui));
+  border-radius: calc(4px * var(--rbf-ui));
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+  flex-shrink: 0;
+}
+
+.namebox__name {
+  font-family: var(--rbf-font-display);
+  font-size: calc(13px * var(--rbf-ui));
+  letter-spacing: .12em;
+  color: var(--rbf-paper);
+  white-space: nowrap;
+}
+
+/* Narracao e pensamento usam o rotulo em caixa baixa, sem cor forte. */
+.namebox.is-narration .namebox__name,
+.namebox.is-inner .namebox__name {
+  color: var(--rbf-ink-dim);
+  font-style: italic;
+  letter-spacing: .06em;
+  text-transform: lowercase;
+}
+
+.rf-dlg__code {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .18em;
+  color: var(--rbf-ink-ghost);
+  white-space: nowrap;
+  padding-bottom: calc(7px * var(--rbf-ui));
+}
+
+/* ---- painel ------------------------------------------------------------ */
+
+.rf-dlg__panel {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: calc(10px * var(--rbf-ui));
+
+  min-height: clamp(120px, 21vh, 188px);
+  padding: calc(18px * var(--rbf-ui)) calc(24px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
+
+  background:
+    linear-gradient(180deg, rgba(16, 18, 27, .96) 0%, rgba(10, 11, 17, .97) 100%);
+  border: 1px solid var(--rbf-line);
+  box-shadow: 0 -18px 60px rgba(0, 0, 0, .7);
+}
+
+/* Losango de avanco no canto do painel. */
+.rf-dlg__diamond {
+  position: absolute;
+  top: calc(12px * var(--rbf-ui));
+  right: calc(14px * var(--rbf-ui));
+
+  width: calc(11px * var(--rbf-ui));
+  height: calc(11px * var(--rbf-ui));
+  border: 1px solid var(--rbf-ink-mute);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity var(--rbf-fast);
+}
+
+.rf-dlg__diamond.is-on {
   opacity: 1;
+  animation: rbfBreath 1.9s ease-in-out infinite;
 }
 
 .textcontent {
-  color: #e0d4c4;
-  font-size: 18px;
-  line-height: 1.7;
-
-  min-height: 82px;
-
+  flex: 1;
+  font-family: var(--rbf-font-body);
+  font-size: var(--rbf-text-size);
+  line-height: 1.62;
+  color: var(--rbf-paper);
   white-space: pre-wrap;
 
-  text-shadow:
-    0 1px 2px #000,
-    0 0 5px rgba(0, 0, 0, .9);
+  /* Linha de leitura confortavel mesmo em monitor largo. */
+  max-width: 82ch;
+  padding-right: calc(30px * var(--rbf-ui));
 }
 
-.textcontent.inner {
-  color: #9e8070;
-  font-style: italic;
+.textcontent.narration { color: #cfc7b8; }
+.textcontent.speech    { color: var(--rbf-paper); }
+.textcontent.inner     { color: #93887a; font-style: italic; }
+
+/* ---- barra de leitura, por dentro do painel ---------------------------- */
+
+.rf-dlg__bar {
+  display: flex;
+  align-items: center;
+  gap: calc(2px * var(--rbf-ui));
+  flex-wrap: wrap;
+
+  margin-top: auto;
+  padding-top: calc(8px * var(--rbf-ui));
+  border-top: 1px solid rgba(38, 41, 54, .8);
 }
 
-.textcontent.narration {
-  color: #ddd0c2;
-}
+.rf-ctl {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6px * var(--rbf-ui));
 
-.textcontent.speech {
-  color: #e8dccb;
-}
+  padding: calc(8px * var(--rbf-ui)) calc(12px * var(--rbf-ui));
+  min-height: 40px;
 
-/* Cursor de avanco: nao interfere no texto digitado */
-
-.textcontent.waiting::after {
-  content: ' \25BC';
-  color: #8B0000;
-  font-size: 13px;
-  animation: blink 1.2s infinite;
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-}
-
-/* ---- cartao do Arquivo ------------------------------------------------- */
-
-#archive-box {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-
-  width: 660px;
-  max-height: 560px;
-
-  overflow-y: auto;
-
-  background: rgba(10, 3, 3, .95);
-
-  border: 1px solid #5C1010;
-  border-left: 5px solid #8B0000;
-
-  padding: 30px 36px;
-
-  z-index: 30;
-
-  opacity: 0;
-  transition: opacity .5s;
-
-  pointer-events: none;
-  scrollbar-width: none;
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, .8),
-    inset 0 0 40px rgba(0, 0, 0, .45);
-}
-
-#archive-box::-webkit-scrollbar {
-  display: none;
-}
-
-#archive-box.show {
-  opacity: 1;
-}
-
-#archive-label {
-  color: #8B0000;
-  font-size: 12px;
-  letter-spacing: .2em;
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
   text-transform: uppercase;
+  color: var(--rbf-ink-mute);
 
-  margin-bottom: 16px;
-
-  border-bottom: 1px solid #3d0000;
-  padding-bottom: 10px;
+  transition: color var(--rbf-fast), background var(--rbf-fast);
 }
 
-#archive-lines {
-  color: #c8a878;
-  font-style: italic;
-  font-size: 16px;
-  line-height: 1.9;
+.rf-ctl:hover,
+.rf-ctl:focus-visible { color: var(--rbf-paper); background: rgba(140, 39, 51, .14); }
+
+.rf-ctl.is-on {
+  color: var(--rbf-red-lit);
+  background: rgba(140, 39, 51, .18);
 }
 
-#archive-lines p + p {
-  margin-top: 10px;
+.rf-ctl__icon {
+  width: calc(13px * var(--rbf-ui));
+  height: calc(13px * var(--rbf-ui));
+  flex-shrink: 0;
 }
 
-/* ---- ultima entrada ---------------------------------------------------- */
+/* Dica de avanco, no fim da barra. */
+.rf-dlg__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(7px * var(--rbf-ui));
 
+  margin-left: auto;
+  padding-right: calc(4px * var(--rbf-ui));
+
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-ghost);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.rf-dlg__hint svg {
+  width: calc(12px * var(--rbf-ui));
+  height: calc(12px * var(--rbf-ui));
+  color: var(--rbf-red);
+  animation: rbfQuill 1.9s ease-in-out infinite;
+}
+
+/* Telefone: rotulo some, sobra o icone. A dica sai de cena. */
+@media (max-width: 700px) {
+  .rf-ctl__label { display: none; }
+  .rf-ctl { padding: calc(8px * var(--rbf-ui)); min-width: 38px; justify-content: center; }
+  .rf-dlg__hint { display: none; }
+  .rf-dlg__code { font-size: 8px; }
+}
+
+@media (max-width: 420px) {
+  .rf-dlg__panel { padding-left: calc(13px * var(--rbf-ui)); padding-right: calc(13px * var(--rbf-ui)); }
+  .textcontent { padding-right: calc(16px * var(--rbf-ui)); }
+}
+
+/* ==========================================================================
+   CARTAO DO ARQUIVO
+   ========================================================================== */
+
+#archive-box,
 #last-box {
   position: absolute;
   left: 50%;
   top: 50%;
-
   transform: translate(-50%, -50%);
-
-  width: 680px;
-  max-height: 600px;
-
-  overflow-y: auto;
-
-  background: rgba(8, 3, 3, .97);
-
-  border: 2px double #8B0000;
-
-  padding: 34px 40px;
-
   z-index: 30;
 
+  width: min(92vw, 660px);
+  max-height: min(74vh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  padding: clamp(20px, 4vw, 34px);
+  background: rgba(10, 6, 6, .96);
+  border: 1px solid rgba(140, 39, 51, .55);
+  border-left: 4px solid var(--rbf-red);
+
   opacity: 0;
-  transition: opacity .6s;
-
   pointer-events: none;
-  scrollbar-width: none;
-
-  box-shadow:
-    0 20px 65px rgba(0, 0, 0, .85),
-    inset 0 0 45px rgba(0, 0, 0, .55);
+  transition: opacity var(--rbf-medium);
 }
 
-#last-box::-webkit-scrollbar {
-  display: none;
+#last-box {
+  width: min(94vw, 690px);
+  max-height: min(80vh, 620px);
+  border: 2px double var(--rbf-red);
+  border-left-width: 2px;
 }
 
-#last-box.show {
-  opacity: 1;
-}
+#archive-box.show,
+#last-box.show { opacity: 1; }
 
+#archive-label,
 #last-label {
-  color: #8B0000;
-  font-size: 12px;
-  letter-spacing: .25em;
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-label);
+  letter-spacing: .22em;
   text-transform: uppercase;
-  text-align: center;
+  color: var(--rbf-red);
 
-  margin-bottom: 20px;
-
-  border-bottom: 1px solid #3d0000;
-  padding-bottom: 12px;
+  margin-bottom: calc(15px * var(--rbf-ui));
+  padding-bottom: calc(9px * var(--rbf-ui));
+  border-bottom: 1px solid rgba(140, 39, 51, .35);
 }
+
+#last-label { text-align: center; letter-spacing: .26em; }
+
+#archive-lines,
+#last-lines {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: clamp(14px, 3.6vw, 16px);
+  line-height: 1.9;
+  color: var(--rbf-gold);
+}
+
+#archive-lines p + p { margin-top: calc(9px * var(--rbf-ui)); }
 
 #last-lines {
-  color: #d4b896;
-  font-style: italic;
-  font-size: 15px;
-  line-height: 2.05;
+  font-size: clamp(13px, 3.4vw, 15px);
+  line-height: 2;
+  color: #cdb083;
   white-space: pre-wrap;
 }
 
-/* ---- escolhas ---------------------------------------------------------- */
+/* ==========================================================================
+   ESCOLHAS
+   Fragmentos de testemunho: cada opcao e uma ficha com codigo proprio.
+   ========================================================================== */
 
 #choices {
   position: absolute;
   left: 50%;
   top: 50%;
-
   transform: translate(-50%, -50%);
-
-  width: 720px;
-
   z-index: 40;
+
+  width: min(94vw, 720px);
+  max-height: 88vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px;
 
   opacity: 0;
   pointer-events: none;
-
-  transition: opacity .4s;
-
-  text-align: center;
+  transition: opacity var(--rbf-medium);
 }
 
-#choices.show {
-  opacity: 1;
-  pointer-events: auto;
-}
+#choices.show { opacity: 1; pointer-events: auto; }
 
 #choice-prompt {
-  color: #8B0000;
-  font-size: 14px;
-  letter-spacing: .2em;
+  font-family: var(--rbf-font-display);
+  font-size: calc(12px * var(--rbf-ui));
+  letter-spacing: .24em;
   text-transform: uppercase;
-
-  margin-bottom: 24px;
+  color: var(--rbf-red);
+  text-align: center;
+  margin-bottom: calc(var(--rbf-pad) * 1.1);
 }
 
 .choice-btn {
-  display: block;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: calc(12px * var(--rbf-ui));
 
   width: 100%;
-
-  margin: 10px 0;
-  padding: 16px 28px;
-
-  background: rgba(10, 3, 3, .9);
-
-  border: 1px solid #3d0000;
-
-  color: #c8a878;
-
-  font-family: inherit;
-  font-size: 16px;
-  font-style: italic;
-  line-height: 1.45;
-
+  margin: calc(8px * var(--rbf-ui)) 0;
+  padding: calc(14px * var(--rbf-ui)) calc(18px * var(--rbf-ui));
+  min-height: 52px;
   text-align: left;
 
-  cursor: pointer;
+  background: rgba(10, 6, 6, .9);
+  border: 1px solid rgba(38, 41, 54, .9);
 
-  transition:
-    background .2s,
-    border-color .2s,
-    color .2s,
-    transform .2s;
+  transition: background var(--rbf-fast), border-color var(--rbf-fast),
+              transform var(--rbf-medium) var(--rbf-ease-ritual);
 }
 
 .choice-btn:hover,
-.choice-btn:focus {
-  background: rgba(40, 5, 5, .95);
-  border-color: #8B0000;
-  color: #e8d0a8;
-
+.choice-btn:focus-visible {
+  background: rgba(34, 8, 9, .94);
+  border-color: var(--rbf-red);
   transform: translateX(6px);
-
-  outline: none;
 }
 
-/* ---- cartoes de tela cheia --------------------------------------------- */
+.choice-btn__code {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .16em;
+  color: var(--rbf-ink-ghost);
+}
+
+.choice-btn:hover .choice-btn__code { color: var(--rbf-gold); }
+
+.choice-btn__text {
+  font-family: var(--rbf-font-body);
+  font-size: clamp(14px, 3.7vw, 16px);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--rbf-ink-dim);
+}
+
+.choice-btn:hover .choice-btn__text,
+.choice-btn:focus-visible .choice-btn__text { color: var(--rbf-paper); }
+
+/* Escolha confirmada: recebe a marca e as outras recuam. */
+.choice-btn.is-chosen {
+  border-color: var(--rbf-red);
+  animation: rbfStamp var(--rbf-medium) var(--rbf-ease-ritual) both;
+}
+
+.choice-btn.is-chosen .choice-btn__text { color: var(--rbf-paper); }
+
+#choices.is-resolved .choice-btn:not(.is-chosen) {
+  opacity: .28;
+  transform: none;
+}
+
+/* ==========================================================================
+   CARTOES DE TELA CHEIA
+   ========================================================================== */
 
 #title-screen,
 #chapter-screen,
 #endchap-screen {
   position: absolute;
   inset: 0;
-
-  background: #000;
-
   z-index: 50;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  gap: calc(10px * var(--rbf-ui));
+  padding: clamp(20px, 6vw, 60px);
+  text-align: center;
+
+  background: var(--rbf-void);
 
   opacity: 0;
   pointer-events: none;
-
-  transition: opacity 1s;
+  transition: opacity var(--rbf-slow);
 }
 
 #title-screen.show,
 #chapter-screen.show,
-#endchap-screen.show {
-  opacity: 1;
-}
+#endchap-screen.show { opacity: 1; }
 
 #title-main {
-  color: #ddd0c2;
-  font-size: 52px;
-  font-weight: bold;
-  letter-spacing: .12em;
-  text-align: center;
-
-  margin-bottom: 20px;
+  font-family: var(--rbf-font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rbf-paper);
+  margin-bottom: calc(14px * var(--rbf-ui));
 }
 
 #title-quote {
-  color: #6B3020;
+  font-family: var(--rbf-font-body);
   font-style: italic;
-  font-size: 18px;
-  text-align: center;
-  line-height: 1.7;
-
-  max-width: 560px;
-
-  margin-bottom: 40px;
+  font-size: clamp(13px, 3.6vw, 17px);
+  line-height: 1.75;
+  color: #6b3a2a;
+  max-width: 40ch;
+  margin-bottom: calc(var(--rbf-pad) * 1.6);
 }
 
 #title-time {
-  color: #555;
-  font-size: 16px;
-  letter-spacing: .15em;
-  font-style: italic;
+  font-family: var(--rbf-font-display);
+  font-size: clamp(12px, 3.2vw, 15px);
+  letter-spacing: .18em;
+  color: var(--rbf-ink-mute);
 }
 
 #chap-num {
-  color: #3d1010;
-  font-size: 15px;
-  letter-spacing: .25em;
+  font-family: var(--rbf-font-display);
+  font-size: clamp(10px, 2.8vw, 13px);
+  letter-spacing: .28em;
   text-transform: uppercase;
-
-  margin-bottom: 14px;
+  color: var(--rbf-red);
+  margin-bottom: calc(12px * var(--rbf-ui));
 }
 
 #chap-name {
-  color: #c8b8a2;
-  font-size: 58px;
-  letter-spacing: .08em;
-  text-align: center;
-
-  border-bottom: 1px solid #3d1010;
-  padding-bottom: 16px;
-}
-
-#endchap-screen {
-  gap: 12px;
-  transition: opacity .8s;
+  font-family: var(--rbf-font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 9vw, 3.6rem);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #cbbba4;
+  padding-bottom: calc(15px * var(--rbf-ui));
+  border-bottom: 1px solid rgba(140, 39, 51, .5);
 }
 
 #endchap-1 {
-  color: #888;
+  font-family: var(--rbf-font-body);
   font-style: italic;
-  font-size: 22px;
+  font-size: clamp(16px, 4.6vw, 22px);
+  color: #8b8378;
 }
 
 #endchap-2 {
-  color: #444;
+  font-family: var(--rbf-font-body);
   font-style: italic;
-  font-size: 18px;
+  font-size: clamp(13px, 3.8vw, 18px);
+  color: #4d483f;
 }
 
-/* ---- fade -------------------------------------------------------------- */
+/* ==========================================================================
+   FADER E DICA
+   ========================================================================== */
 
 #fader {
   position: absolute;
   inset: 0;
-
-  background: #000;
-
   z-index: 60;
-
+  background: #000;
   opacity: 0;
   pointer-events: none;
-
-  transition: opacity .8s;
+  transition: opacity var(--rbf-slow);
 }
 
-#fader.out {
-  opacity: 1;
-}
+#fader.out { opacity: 1; }
 
-/* ---- dica -------------------------------------------------------------- */
-
+/* Reserva de compatibilidade: a dica agora vive dentro do painel. */
 #hint {
   position: absolute;
-  bottom: 10px;
-  right: 20px;
+  right: clamp(12px, 4vw, 24px);
+  bottom: calc(6px * var(--rbf-ui));
+  z-index: 21;
+  display: none;
 
-  color: #2a1a12;
-
-  font-size: 11px;
-  letter-spacing: .08em;
-
-  z-index: 70;
-
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .1em;
+  color: #2a2119;
   pointer-events: none;
+  transition: opacity var(--rbf-fast);
 }
 
-/* ---- ajustes para telas menores --------------------------------------- */
-
-@media (max-height: 720px) {
-  .sprite.size-bust img {
-    height: 70vh;
-  }
-
-  .sprite.size-full img {
-    height: 82vh;
-  }
+@media (max-width: 480px) {
+  #hint { display: none; }
 }

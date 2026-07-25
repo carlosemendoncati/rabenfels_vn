@@ -33,7 +33,7 @@ RBF.PROLOGUE = [
 { t:'sfx', id:'sfx_page_turn' },
 { t:'nar', tx:'Dentro, algumas centenas de p\u00e1ginas. Letra densa. T\u00edtulos formais. Notas de rodap\u00e9.' },
 { t:'nar', tx:'No canto da capa, em tinta mais nova que o resto:' },
-{ t:'arc', lns:[
+{ t:'arc', key:'arquivo', lns:[
     '\u2014 ARQUIVO RABENFELS \u2014',
     'Fragmentos da Linhagem, da Marca e do Pacto',
     '[ \u00e0 m\u00e3o ] \u201cPara Matheo. Leia tudo. \u2014 A.V.\u201d'
@@ -46,7 +46,7 @@ RBF.PROLOGUE = [
 { t:'inn', tx:'Relat\u00f3rio de campo. Leia como relat\u00f3rio de campo.' },
 { t:'nar', tx:'Durou duas p\u00e1ginas.' },
 
-{ t:'arc', lns:[
+{ t:'arc', key:'arquivo', lns:[
     '\u201cKhar\u2019Vel n\u00e3o \u00e9 um deus. Deuses recebem ora\u00e7\u00f5es e as ignoram. Ela recebe oferendas e as consome.\u201d',
     '\u201cKhar\u2019Vel n\u00e3o \u00e9 um dem\u00f4nio. Dem\u00f4nios corrompem de fora. Ela cresce de dentro.\u201d',
     '\u201cEla morre e renasce sem parar. Nunca no pr\u00f3prio corpo. Em outros.\u201d'
@@ -57,7 +57,7 @@ RBF.PROLOGUE = [
 
 { t:'sfx', id:'sfx_page_turn' },
 { t:'nar', tx:'Virou a p\u00e1gina.' },
-{ t:'arc', lns:[
+{ t:'arc', key:'arquivo', lns:[
     '\u201cOs registros mais antigos da propriedade chamam o lugar de a c\u00e2mara do casulo.\u201d',
     '\u201c\u00c9 a \u00fanica denomina\u00e7\u00e3o honesta que a fam\u00edlia j\u00e1 produziu para o espa\u00e7o.\u201d'
 ]},
@@ -68,7 +68,7 @@ RBF.PROLOGUE = [
 
 /* --- P3 -- As gemeas -------------------------------------------------- */
 { t:'scene', id:'p3_gemeas', chapter:'prologo', bg:'bg_archive_closeup' },
-{ t:'arc', lns:[
+{ t:'arc', key:'arquivo', lns:[
     '\u201cKlara nasceu segundo.\u201d',
     '\u201cO exame dela demorou mais. Os guardi\u00f5es n\u00e3o procuravam anomalia vis\u00edvel.\u201d',
     '\u201cProcuravam um calor espec\u00edfico no sangue. Um ritmo de batimento que n\u00e3o \u00e9 humano nem vamp\u00edrico.\u201d',
@@ -86,7 +86,7 @@ RBF.PROLOGUE = [
 /* --- P4 -- Os experimentos e o reconhecimento ------------------------- */
 { t:'scene', id:'p4_experimentos', chapter:'prologo', bg:'bg_archive_closeup' },
 { t:'sfx', id:'sfx_page_turn' },
-{ t:'arc', lns:[
+{ t:'arc', key:'arquivo', lns:[
     '\u201cDisseram que era treinamento. Rotina de fam\u00edlia.\u201d',
     '\u201cAs marcas nas dobras dos bra\u00e7os contam outra coisa a quem l\u00ea o tra\u00e7o.\u201d',
     '\u201cAbriram Klara para medir. Quanto de entidade, quanto de menina.\u201d',
@@ -102,7 +102,7 @@ RBF.PROLOGUE = [
 
 /* --- P5 -- O predecessor ---------------------------------------------- */
 { t:'scene', id:'p5_predecessor', chapter:'prologo', bg:'bg_archive_closeup', bgm:'bgm_archive' },
-{ t:'arc', lns:[
+{ t:'arc', key:'arquivo', lns:[
     '\u201cNos registros da fam\u00edlia encontrei algu\u00e9m que passou por Nidhaus antes de mim.\u201d',
     '\u201cTrinta e sete anos atr\u00e1s. Nos registros de pessoal: a escriba de Lervel.\u201d',
     '\u201cSeis meses depois: partiu por motivo de sa\u00fade.\u201d',
@@ -110,7 +110,7 @@ RBF.PROLOGUE = [
 ]},
 { t:'spr', ch:'matheo', ex:'neutral', pos:'center' },
 { t:'nar', tx:'A pr\u00f3xima linha estava separada do resto por dois dedos de papel em branco.' },
-{ t:'arc', lns:[
+{ t:'arc', key:'arquivo', lns:[
     '\u201cMatheo \u2014 se voc\u00ea estiver lendo isto \u2014 preciso de uma resposta que n\u00e3o posso pedir de outro jeito.\u201d',
     '\u201cVoc\u00ea sabia?\u201d'
 ]},
@@ -126,7 +126,7 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'Ele conhecia aquela escrita havia oito anos.' },
 { t:'pause' },
 
-{ t:'last', lns:[
+{ t:'last', key:'ultima', lns:[
     'Para quem encontrar isto.',
     '',
     'N\u00e3o sei seu nome. N\u00e3o sei se voc\u00ea \u00e9 da Ordem ou se chegou aqui por outro caminho.',

@@ -98,6 +98,7 @@ RBF.Saves = (function () {
       unlockedContent: snapshot.unlockedContent || [],
 
       choiceLog: snapshot.choiceLog || {},
+      routes:    snapshot.routes    || {},
       history:   snapshot.history   || [],
 
       presentation: {
@@ -211,14 +212,31 @@ RBF.Saves = (function () {
       excerpt:   (data.preview && data.preview.dialogueExcerpt) || '',
       updatedAt: data.updatedAt || data.createdAt || null,
       playtime:  data.playtimeSeconds || 0,
-      route:     routeLabel(data.flags),
+      route:     routeLabel(data),
       background: (data.presentation && data.presentation.backgroundId) || 'bg_black',
       data:      data
     };
   }
 
-  /* Rotulo neutro. Nao revela nada que o jogador ainda nao saiba. */
-  function routeLabel(flags) {
+  /* Rotulo neutro para a lista de saves. Mostra a rota dominante e nada
+     mais: sem numero, sem antecipar consequencia. */
+  function routeLabel(data) {
+    if (!data) { return ''; }
+
+    var r = data.routes;
+    if (r) {
+      var best = null;
+      var defs = RBF.ROUTES || [];
+      for (var i = 0; i < defs.length; i++) {
+        var v = r[defs[i].id] || 0;
+        if (v <= 0) { continue; }
+        if (!best || v > best.value) { best = { label: defs[i].label, value: v }; }
+      }
+      if (best) { return best.label; }
+    }
+
+    /* Save anterior as rotas: cai para as flags, que sempre existiram. */
+    var flags = data.flags;
     if (!flags) { return ''; }
     if (flags.archive_seed)  { return 'Arquivo'; }
     if (flags.klara_focus)   { return 'Observa\u00e7\u00e3o'; }
@@ -312,6 +330,7 @@ RBF.Saves = (function () {
         variables:       data.variables,
         unlockedContent: data.unlockedContent,
         choiceLog:       data.choiceLog,
+        routes:          data.routes,
         history:         data.history,
         presentation:    data.presentation,
         sceneLabel:      data.preview ? data.preview.sceneLabel : '',

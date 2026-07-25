@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arquivo Rabenfels — conferência de layout</title>
+<style>
+  /* Esta pagina nao faz parte do jogo. Serve para ver o jogo real em
+     varios tamanhos de tela ao mesmo tempo, sem precisar de aparelho
+     para cada faixa.
+
+     Cada quadro e um iframe carregando index.html de verdade: o que
+     aparece aqui e o jogo, nao uma simulacao. */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #14151a;
+    color: #d9d5c8;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 24px;
+  }
+
+  h1 {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #b9975b;
+    margin-bottom: 6px;
+  }
+
+  p.note {
+    font-size: 12px;
+    line-height: 1.7;
+    color: #8e897d;
+    max-width: 74ch;
+    margin-bottom: 22px;
+  }
+
+  p.note b { color: #d9d5c8; font-weight: 500; }
+
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  button {
+    background: none;
+    border: 1px solid #2a2d38;
+    color: #8e897d;
+    font: inherit;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+
+  button:hover, button.on { color: #d9d5c8; border-color: #8c2733; }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    align-items: flex-start;
+  }
+
+  figure { border: 1px solid #2a2d38; background: #000; }
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 10px;
+    border-bottom: 1px solid #2a2d38;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #6b665c;
+    background: #1a1b21;
+  }
+
+  figcaption b { color: #b9975b; font-weight: 500; }
+
+  iframe { display: block; border: 0; background: #07080c; }
+
+  .warn {
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 1px solid #2a2d38;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #6b665c;
+    max-width: 80ch;
+  }
+</style>
+</head>
+<body>
+
+<h1>Conferência de layout</h1>
+
+<p class="note">
+  Cada quadro carrega o <b>index.html</b> de verdade em um tamanho de tela
+  diferente. O que aparece aqui é o jogo, não uma simulação — clique dentro
+  de um quadro e ele responde normalmente.
+  <br>
+  Procure por: texto cortado na borda, elemento sobrepondo outro, controle
+  pequeno demais para o dedo, e a caixa de diálogo em relação ao personagem.
+</p>
+
+<div class="bar" id="bar"></div>
+<div class="grid" id="grid"></div>
+
+<p class="warn">
+  O iframe não reproduz tudo: a barra de endereço do navegador móvel não entra
+  e sai, o cursor customizado não aparece em toque, e a política de autoplay é
+  a da página que hospeda. Para esses três, ainda vale abrir no aparelho.
+</p>
+
+<script>
+(function () {
+  'use strict';
+
+  var SIZES = [
+    { id: 'phone',     label: 'Telefone retrato',   w: 390,  h: 780,  note: '390 × 780' },
+    { id: 'phone-l',   label: 'Telefone paisagem',  w: 780,  h: 390,  note: '780 × 390' },
+    { id: 'phone-sm',  label: 'Telefone estreito',  w: 320,  h: 640,  note: '320 × 640' },
+    { id: 'tablet',    label: 'Tablet retrato',     w: 768,  h: 1024, note: '768 × 1024' },
+    { id: 'tablet-l',  label: 'Tablet paisagem',    w: 1024, h: 768,  note: '1024 × 768' },
+    { id: 'laptop-sm', label: 'Notebook baixo',     w: 1366, h: 640,  note: '1366 × 640' },
+    { id: 'laptop',    label: 'Notebook',           w: 1366, h: 768,  note: '1366 × 768' },
+    { id: 'desktop',   label: 'Monitor',            w: 1920, h: 1080, note: '1920 × 1080' }
+  ];
+
+  var grid = document.getElementById('grid');
+  var bar  = document.getElementById('bar');
+  var zoom = 0.5;
+
+  function build() {
+    grid.textContent = '';
+
+    for (var i = 0; i < SIZES.length; i++) {
+      var s = SIZES[i];
+
+      var fig = document.createElement('figure');
+      fig.style.width = Math.round(s.w * zoom) + 'px';
+
+      var cap = document.createElement('figcaption');
+      var b = document.createElement('b');
+      b.textContent = s.label;
+      cap.appendChild(b);
+      var sp = document.createElement('span');
+      sp.textContent = s.note;
+      cap.appendChild(sp);
+      fig.appendChild(cap);
+
+      var frame = document.createElement('iframe');
+      frame.src = '../index.html';
+      frame.width = s.w;
+      frame.height = s.h;
+      frame.style.width = s.w + 'px';
+      frame.style.height = s.h + 'px';
+      frame.style.transform = 'scale(' + zoom + ')';
+      frame.style.transformOrigin = 'top left';
+      fig.appendChild(frame);
+
+      /* O iframe escalado continua ocupando o tamanho original no fluxo;
+         a moldura precisa acompanhar a altura reduzida. */
+      var holder = document.createElement('div');
+      holder.style.width = Math.round(s.w * zoom) + 'px';
+      holder.style.height = Math.round(s.h * zoom) + 'px';
+      holder.style.overflow = 'hidden';
+      holder.appendChild(frame);
+
+      fig.removeChild(frame);
+      fig.appendChild(holder);
+
+      grid.appendChild(fig);
+    }
+  }
+
+  function buildBar() {
+    var levels = [
+      { z: 0.35, label: '35%' },
+      { z: 0.5,  label: '50%' },
+      { z: 0.75, label: '75%' },
+      { z: 1,    label: '100%' }
+    ];
+
+    for (var i = 0; i < levels.length; i++) {
+      (function (lv) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = lv.label;
+        if (lv.z === zoom) { btn.className = 'on'; }
+        btn.addEventListener('click', function () {
+          zoom = lv.z;
+          var all = bar.querySelectorAll('button');
+          for (var k = 0; k < all.length; k++) { all[k].classList.remove('on'); }
+          btn.classList.add('on');
+          build();
+        });
+        bar.appendChild(btn);
+      })(levels[i]);
+    }
+
+    var reload = document.createElement('button');
+    reload.type = 'button';
+    reload.textContent = 'Recarregar todos';
+    reload.addEventListener('click', build);
+    bar.appendChild(reload);
+  }
+
+  buildBar();
+  build();
+})();
+</script>
+
+</body>
+</html>

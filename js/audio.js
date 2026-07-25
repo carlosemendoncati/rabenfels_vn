@@ -129,6 +129,7 @@ RBF.Audio = (function () {
   /* Reaplica os volumes atuais na faixa que ja esta tocando.
      Chamado por RBF.Settings quando o jogador mexe no controle. */
   function refreshVolume() {
+    if (menuEl && menuActive) { menuFadeTo(menuTarget(), 220); }
     if (!current) { return; }
     var def = RBF.BGM[current.id];
     var target = (def && def.volume != null ? def.volume : 1) * cfg().bgmVolume;
@@ -136,11 +137,161 @@ RBF.Audio = (function () {
     try { current.el.volume = clamp(target); } catch (e) { /* ignora */ }
   }
 
+  /* =====================================================================
+     SONS DE INTERFACE
+
+     Vivem em RBF.UI_SFX e usam a pasta propria. Falham em silencio: a
+     interface funciona por inteiro sem nenhum arquivo de audio.
+     ===================================================================== */
+
+  var uiCache = {};
+
+  function playUi(id) {
+    if (!cfg().enabled || !unlocked) { return; }
+
+    var def = RBF.UI_SFX && RBF.UI_SFX[id];
+    if (!def || failed['ui:' + id]) { return; }
+
+    if (uiCache[id]) {
+      try {
+        var clone = uiCache[id].cloneNode();
+        clone.volume = clamp((def.volume != null ? def.volume : 1) * cfg().sfxVolume);
+        var pc = clone.play();
+        if (pc && pc.catch) { pc.catch(function () {}); }
+      } catch (e) { /* som de interface nunca derruba a interface */ }
+      return;
+    }
+
+    pick(def, paths().uiSfx, 'ui:' + id, function (el) {
+      if (!el) { return; }
+      el.volume = clamp((def.volume != null ? def.volume : 1) * cfg().sfxVolume);
+      uiCache[id] = el;
+      var p = el.play();
+      if (p && p.catch) { p.catch(function () {}); }
+    });
+  }
+
+  /* =====================================================================
+     TRILHA DO MENU
+
+     Adaptador sobre o mesmo mecanismo de BGM, com duas diferencas: ela
+     nao reinicia ao trocar de painel, e desce de volume em vez de parar
+     quando a aba perde o foco.
+     ===================================================================== */
+
+  var menuEl     = null;
+  var menuFade   = null;   /* id do intervalo de fade em andamento */
+  var menuActive = false;
+
+  function menuCfg() { return RBF.MENU_AUDIO; }
+
+  function menuTarget() {
+    var def = RBF.MUSIC[menuCfg().track];
+    var base = (def && def.volume != null) ? def.volume : 1;
+    var factor = documentHidden() ? menuCfg().hiddenFactor : 1;
+    return clamp(base * cfg().bgmVolume * factor);
+  }
+
+  function documentHidden() {
+    return (typeof document !== 'undefined' && document.hidden === true);
+  }
+
+  function cancelMenuFade() {
+    if (menuFade) { clearInterval(menuFade); menuFade = null; }
+  }
+
+  /* Fade cancelavel. Nunca acumula dois ao mesmo tempo. */
+  function menuFadeTo(target, ms, done) {
+    cancelMenuFade();
+    if (!menuEl) { if (done) { done(); } return; }
+
+    var from  = menuEl.volume;
+    var to    = clamp(target);
+    var steps = Math.max(1, Math.round(ms / 50));
+    var step  = 0;
+
+    menuFade = setInterval(function () {
+      step += 1;
+      try {
+        menuEl.volume = clamp(from + (to - from) * (step / steps));
+      } catch (e) { /* ignora */ }
+      if (step >= steps) {
+        cancelMenuFade();
+        if (done) { done(); }
+      }
+    }, 50);
+  }
+
+  /* Entra no ambiente de menu. Chamar de novo enquanto ja esta tocando
+     nao reinicia a faixa: apenas garante o volume correto. */
+  function enterMenu() {
+    if (!cfg().enabled) { return; }
+    menuActive = true;
+
+    if (!unlocked) { return; }        /* dispara no unlock */
+
+    if (menuEl) {
+      try {
+        if (menuEl.paused) { var pr = menuEl.play(); if (pr && pr.catch) { pr.catch(function () {}); } }
+      } catch (e) { /* ignora */ }
+      menuFadeTo(menuTarget(), menuCfg().fadeInMs);
+      return;
+    }
+
+    var id  = menuCfg().track;
+    var def = RBF.MUSIC[id];
+    if (!def || failed['music:' + id]) { return; }
+
+    pick(def, paths().music, 'music:' + id, function (el) {
+      if (!el) { return; }
+      if (!menuActive) { return; }     /* saiu do menu enquanto carregava */
+      if (menuEl) { return; }          /* outra chamada ja resolveu       */
+
+      el.loop = (def.loop !== false);
+      el.volume = 0;
+      menuEl = el;
+
+      var p = el.play();
+      if (p && p.catch) { p.catch(function () { /* bloqueado: segue mudo */ }); }
+      menuFadeTo(menuTarget(), menuCfg().fadeInMs);
+    });
+  }
+
+  /* Sai do ambiente de menu: desce e pausa. Nao destroi o elemento, para
+     que voltar ao titulo nao recarregue o arquivo. */
+  function leaveMenu(done) {
+    menuActive = false;
+    if (!menuEl) { if (done) { done(); } return; }
+
+    menuFadeTo(0, menuCfg().fadeOutMs, function () {
+      try { menuEl.pause(); } catch (e) { /* ignora */ }
+      if (done) { done(); }
+    });
+  }
+
+  function menuPlaying() {
+    return !!(menuEl && !menuEl.paused);
+  }
+
+  /* Aba escondida: a trilha do menu recua, a de cena para. */
+  function bindVisibility() {
+    if (typeof document === 'undefined' || !document.addEventListener) { return; }
+    document.addEventListener('visibilitychange', function () {
+      if (menuActive && menuEl) { menuFadeTo(menuTarget(), 400); }
+      if (current) {
+        var t = documentHidden() ? current.target * menuCfg().hiddenFactor : current.target;
+        fade(current.el, current.el.volume, t, 400);
+      }
+    });
+  }
+
   /* Chamado no primeiro clique/tecla. Idempotente. */
   function unlock() {
     if (unlocked) { return; }
     unlocked = true;
+    bindVisibility();
     if (pending) { startBgm(pending); }
+    if (menuActive) { enterMenu(); }
   }
 
   function setEnabled(v) {
@@ -155,6 +306,10 @@ RBF.Audio = (function () {
     unlock:        unlock,
     setEnabled:    setEnabled,
     refreshVolume: refreshVolume,
+    playUi:        playUi,
+    enterMenu:     enterMenu,
+    leaveMenu:     leaveMenu,
+    menuPlaying:   menuPlaying,
     isUnlocked: function () { return unlocked; },
     currentId:  function () { return current ? current.id : null; }
   };

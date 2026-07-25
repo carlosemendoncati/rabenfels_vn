@@ -1,12 +1,12 @@
 /* ==========================================================================
    ARQUIVO RABENFELS - js/menu.js
 
-   Tela de titulo, menu de jogo e todos os paineis.
+   Portao de abertura, menu principal e todos os paineis.
 
-   Cada painel e montado na abertura e destruido no fechamento, entao
-   nenhum listener sobrevive para ser registrado duas vezes. Os unicos
-   listeners permanentes sao os da tela de titulo e os da barra de jogo,
-   registrados uma unica vez em init().
+   Cada painel e montado ao abrir e destruido ao fechar, entao nenhum
+   ouvinte sobrevive para ser registrado duas vezes. Os unicos ouvintes
+   permanentes sao os do portao, os da navegacao do menu e os da barra de
+   jogo, registrados uma unica vez em init().
    ========================================================================== */
 
 var RBF = (typeof RBF !== 'undefined') ? RBF : {};
@@ -16,109 +16,424 @@ RBF.Menu = (function () {
 
   var UI = null;
   var el = {};
+
   var initialized = false;
+  var gateOpen    = false;   /* trava reentrada durante a abertura */
+  var archiveOpen = false;   /* o portao ja foi aberto nesta sessao */
 
   function grab() {
     UI = RBF.UI;
-    el.title       = document.getElementById('main-menu');
-    el.titleBtns   = document.getElementById('main-menu-actions');
-    el.version     = document.getElementById('main-menu-version');
-    el.gameBar     = document.getElementById('game-bar');
-    el.menuButton  = document.getElementById('btn-menu');
-    el.overlayRoot = document.getElementById('ui-root');
-    el.stage       = document.getElementById('vn');
+
+    el.gate       = document.getElementById('rf-gate');
+    el.gateBtn    = document.getElementById('rf-gate-btn');
+    el.gateLabel  = document.getElementById('rf-gate-label');
+    el.gateHint   = document.getElementById('rf-gate-hint');
+
+    el.menu       = document.getElementById('main-menu');
+    el.nav        = document.getElementById('rf-nav');
+    el.note       = document.getElementById('rf-note');
+    el.version    = document.getElementById('rf-version');
+
+    el.gameBar    = document.getElementById('game-bar');
+    el.overlayRoot= document.getElementById('ui-root');
+    el.stage      = document.getElementById('vn');
+    el.transition = document.getElementById('rf-transition');
   }
 
   /* ======================================================================
-     TELA DE TITULO
+     PORTAO DE ABERTURA
      ====================================================================== */
 
-  function showTitle() {
+  function sessionOpened() {
+    try {
+      return sessionStorage.getItem(RBF.INTRO.sessionKey) === 'true';
+    } catch (e) {
+      return false;   /* sessionStorage bloqueado: o portao aparece */
+    }
+  }
+
+  function markSessionOpened() {
+    try {
+      sessionStorage.setItem(RBF.INTRO.sessionKey, 'true');
+    } catch (e) { /* sem persistencia de sessao: sem problema */ }
+  }
+
+  function showGate() {
+    el.gateLabel.textContent = RBF.INTRO.label;
+    el.gateHint.textContent  = RBF.INTRO.hint;
+
+    el.gate.classList.add('is-open');
+    el.gate.classList.remove('is-leaving');
+    el.menu.classList.remove('show', 'is-revealing', 'is-returning');
+    el.gameBar.classList.remove('show');
+
+    RBF.State.clearStack();
+    RBF.State.set('title');
+
+    /* O foco vai para o botao, entao Enter e Espaco funcionam sem clique. */
+    try { el.gateBtn.focus(); } catch (e) { /* ignora */ }
+  }
+
+  /* Abre o arquivo. Protegida contra clique repetido. */
+  function openArchive() {
+    if (gateOpen) { return; }
+    gateOpen = true;
+
+    /* 1. o audio so pode ser destravado a partir daqui */
+    RBF.Audio.unlock();
+    RBF.Audio.playUi('ui_archive_open');
+
+    /* 2. a trilha comeca em zero e sobe; nao espera o fade terminar */
+    RBF.Audio.enterMenu();
+
+    markSessionOpened();
+    archiveOpen = true;
+
+    /* 3. o selo se completa antes do portao sair */
+    el.gate.classList.add('is-leaving');
+
+    setTimeout(function () {
+      el.gate.classList.remove('is-open');
+      revealMenu(false);
+      gateOpen = false;
+    }, RBF.CONFIG.timing.gateMs);
+  }
+
+  /* ======================================================================
+     MENU PRINCIPAL
+     ====================================================================== */
+
+  function fillArchiveChrome() {
+    var A = RBF.ARCHIVE;
+
+    /* O fundo passa pelo mesmo resolvedor dos cenarios: se o arquivo
+       nao existir, fica o gradiente e nao ha requisicao perdida. */
+    if (A.background) {
+      var bgEl = document.getElementById('rf-menu-bg');
+      if (bgEl) { RBF.Assets.applyBackground(bgEl, A.background); }
+    }
+
+    document.getElementById('rf-access').textContent   = A.access;
+    document.getElementById('rf-dossier').textContent  = A.dossier;
+    document.getElementById('rf-volume').textContent   = A.volume;
+    document.getElementById('rf-eyebrow').textContent  = A.eyebrow;
+    document.getElementById('rf-latin').textContent    = A.latin;
+    document.getElementById('rf-subtitle').textContent = A.subtitle;
+
+    var title = document.getElementById('rf-title');
+    title.textContent = '';
+    for (var i = 0; i < A.title.length; i++) {
+      var mask = document.createElement('span');
+      mask.className = 'rf-title__mask';
+      mask.textContent = A.title[i];
+      title.appendChild(mask);
+    }
+
+    var done = RBF.Saves.readProgress().finishedChapters.length;
+    el.version.textContent =
+      'VERS\u00c3O ' + RBF.CONFIG.gameVersion +
+      ' \u00b7 ' + RBF.CHAPTERS.length + ' CAP\u00cdTULOS REGISTRADOS' +
+      (done ? ' \u00b7 ' + done + ' CONCLU\u00cdDO' + (done > 1 ? 'S' : '') : '') +
+      (RBF.Storage.isPersistent() ? '' : ' \u00b7 SAVES S\u00d3 NESTA SESS\u00c3O');
+  }
+
+  /* returning = volta de dentro do jogo, usa a versao curta da sequencia */
+  function revealMenu(returning) {
     RBF.State.clearStack();
     RBF.State.set('title');
 
     UI.closePanel();
-    el.title.classList.add('show');
+    fillArchiveChrome();
+    renderNav();
+
+    el.menu.classList.remove('is-revealing', 'is-returning');
+    el.menu.classList.add('show');
+
+    /* Reinicia a animacao: sem isso o navegador ignora a classe que
+       acabou de ser removida no mesmo quadro. */
+    void el.menu.offsetWidth;
+    el.menu.classList.add(returning ? 'is-returning' : 'is-revealing');
+
     el.gameBar.classList.remove('show');
 
-    renderTitleButtons();
+    /* O primeiro registro fica marcado como ativo, o que acende a barra
+       viva e a nota de margem. O foco real so se move quando o jogador
+       usa o teclado: focar por codigo acenderia o anel de foco e
+       desenharia uma moldura em volta do item. */
+    var wait = returning ? RBF.INTRO.returnRevealMs : RBF.INTRO.revealMs;
+    setTimeout(function () {
+      if (!RBF.State.is('title') || UI.isPanelOpen()) { return; }
+      var first = el.nav.querySelector('.rf-nav__item:not(.is-locked)');
+      if (!first) { return; }
+      markActive(first);
+      setNote(recordOf(first).note);
+    }, wait);
   }
 
-  function hideTitle() {
-    el.title.classList.remove('show');
+  function hideMenu() {
+    el.menu.classList.remove('show', 'is-revealing', 'is-returning');
     el.gameBar.classList.add('show');
   }
 
-  function renderTitleButtons() {
-    UI.clear(el.titleBtns);
+  /* ---- navegacao em codice ---------------------------------------------- */
 
-    var latest   = RBF.Saves.latest();
-    var hasSave  = latest !== null;
-    var progress = RBF.Saves.readProgress();
-
-    el.titleBtns.appendChild(titleButton('Novo Jogo', function () {
-      if (RBF.Engine.hasStarted() || hasSave) {
-        UI.confirm({
-          title:   'Come\u00e7ar de novo?',
-          message: 'Um novo jogo come\u00e7a do Pr\u00f3logo. Seus saves manuais ' +
-                   'continuam guardados; s\u00f3 o progresso desta sess\u00e3o \u00e9 descartado.',
-          confirmLabel: 'Come\u00e7ar',
-          onConfirm: startNewGame
-        });
-        return;
-      }
-      startNewGame();
-    }));
-
-    var cont = titleButton('Continuar', function () {
-      var save = RBF.Saves.latest();
-      if (!save) { return; }
-      doLoad(save.data);
-    });
-    if (!hasSave) {
-      cont.classList.add('disabled');
-      cont.setAttribute('aria-disabled', 'true');
-      cont.title = 'nenhum save dispon\u00edvel';
-    } else {
-      cont.appendChild(UI.el('span', 'rbf-title-btn-note',
-        latest.chapter + (latest.scene ? ' \u00b7 ' + latest.scene : '')));
-    }
-    el.titleBtns.appendChild(cont);
-
-    el.titleBtns.appendChild(titleButton('Carregar Jogo', function () {
-      openSaveLoad('load');
-    }));
-
-    /* Selecao de capitulo aparece apenas depois que ha mais de um
-       capitulo alcancado. Antes disso a opcao seria vazia. */
-    if (progress.chaptersReached.length > 1) {
-      el.titleBtns.appendChild(titleButton('Cap\u00edtulos', openChapterSelect));
-    }
-
-    el.titleBtns.appendChild(titleButton('Ajustes', openSettings));
-    el.titleBtns.appendChild(titleButton('Cr\u00e9ditos', openCredits));
-
-    el.version.textContent = 'vers\u00e3o ' + RBF.CONFIG.gameVersion +
-      (RBF.Storage.isPersistent() ? '' : ' \u00b7 saves apenas nesta sess\u00e3o');
+  function recordAvailable(rec) {
+    if (rec.needs === 'save')     { return RBF.Saves.hasAnyValid(); }
+    if (rec.needs === 'chapters') { return RBF.Saves.readProgress().chaptersReached.length > 1; }
+    if (rec.needs === 'gallery')  { return RBF.Gallery.hasAny(); }
+    return true;
   }
 
-  function titleButton(label, onClick) {
-    var b = UI.el('button', 'rbf-title-btn');
-    b.type = 'button';
-    b.appendChild(UI.el('span', 'rbf-title-btn-label', label));
-    b.addEventListener('click', function (ev) {
-      ev.stopPropagation();
-      if (b.classList.contains('disabled')) { return; }
-      RBF.Audio.unlock();
-      onClick();
+  function renderNav() {
+    UI.clear(el.nav);
+    setNote('');
+
+    var records = RBF.MENU_RECORDS;
+
+    for (var i = 0; i < records.length; i++) {
+      (function (rec, n) {
+        var open = recordAvailable(rec);
+
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rf-nav__item' + (open ? '' : ' is-locked');
+        btn.setAttribute('data-record', rec.id);
+        if (!open) { btn.setAttribute('aria-disabled', 'true'); }
+
+        var num = document.createElement('span');
+        num.className = 'rbf-num';
+        num.setAttribute('aria-hidden', 'true');
+        num.textContent = RBF.ARCHIVE.numerals[n] || String(n + 1);
+        btn.appendChild(num);
+
+        var body = document.createElement('span');
+        body.className = 'rf-nav__body';
+
+        var chapter = document.createElement('span');
+        chapter.className = 'rf-nav__chapter';
+        chapter.textContent = rec.chapter;
+        body.appendChild(chapter);
+
+        var label = document.createElement('span');
+        label.className = 'rf-nav__label';
+        label.textContent = rec.label;
+        body.appendChild(label);
+
+        btn.appendChild(body);
+
+        var meta = document.createElement('span');
+        meta.className = 'rf-nav__meta';
+
+        var lead = document.createElement('span');
+        lead.className = 'rf-nav__lead';
+        lead.setAttribute('aria-hidden', 'true');
+        meta.appendChild(lead);
+
+        var seal = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        seal.setAttribute('class', 'rf-nav__seal');
+        seal.setAttribute('aria-hidden', 'true');
+        seal.style.color = 'var(--rbf-red)';
+        var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        use.setAttribute('href', '#rf-mark');
+        seal.appendChild(use);
+        meta.appendChild(seal);
+
+        var code = document.createElement('span');
+        code.className = 'rbf-code';
+        code.textContent = rec.code;
+        meta.appendChild(code);
+
+        btn.appendChild(meta);
+
+        /* A nota de margem acompanha ponteiro e teclado. */
+        function focusIn() {
+          setNote(open ? rec.note : 'Este registro ainda n\u00e3o est\u00e1 dispon\u00edvel.');
+          markActive(btn);
+          if (open) { RBF.Audio.playUi('ui_hover'); }
+        }
+
+        btn.addEventListener('mouseenter', focusIn);
+        btn.addEventListener('focus', focusIn);
+
+        btn.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          if (!open) { RBF.Audio.playUi('ui_back'); return; }
+          RBF.Audio.unlock();
+          runRecord(rec);
+        });
+
+        el.nav.appendChild(btn);
+      })(records[i], i);
+    }
+  }
+
+  /* Registro correspondente a um botao da navegacao. */
+  function recordOf(btn) {
+    var id = btn.getAttribute('data-record');
+    for (var i = 0; i < RBF.MENU_RECORDS.length; i++) {
+      if (RBF.MENU_RECORDS[i].id === id) { return RBF.MENU_RECORDS[i]; }
+    }
+    return { note: '' };
+  }
+
+  /* Setas percorrem a lista, Enter abre. O foco real so entra em cena
+     aqui, quando o jogador escolheu usar o teclado. */
+  function moveNav(delta) {
+    var items = el.nav.querySelectorAll('.rf-nav__item:not(.is-locked)');
+    if (!items.length) { return; }
+
+    var at = -1;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].classList.contains('is-active')) { at = i; break; }
+    }
+
+    var next = (at === -1)
+      ? 0
+      : (at + delta + items.length) % items.length;
+
+    var btn = items[next];
+    markActive(btn);
+    setNote(recordOf(btn).note);
+    RBF.Audio.playUi('ui_hover');
+    try { btn.focus({ preventScroll: true }); } catch (e) { btn.focus(); }
+  }
+
+  function activateNav() {
+    var btn = el.nav.querySelector('.rf-nav__item.is-active:not(.is-locked)');
+    if (btn) { btn.click(); }
+  }
+
+  function markActive(btn) {
+    var all = el.nav.querySelectorAll('.rf-nav__item');
+    for (var i = 0; i < all.length; i++) { all[i].classList.remove('is-active'); }
+    btn.classList.add('is-active');
+  }
+
+  var noteTimer = null;
+
+  function setNote(text) {
+    if (!el.note) { return; }
+    if (el.note.textContent === text) { return; }
+
+    el.note.textContent = text;
+    el.note.classList.remove('is-changing');
+    void el.note.offsetWidth;
+    el.note.classList.add('is-changing');
+
+    if (noteTimer) { clearTimeout(noteTimer); }
+    noteTimer = setTimeout(function () {
+      el.note.classList.remove('is-changing');
+      noteTimer = null;
+    }, 500);
+  }
+
+  /* ---- acoes dos registros ---------------------------------------------- */
+
+  function runRecord(rec) {
+    RBF.Audio.playUi('ui_confirm');
+
+    switch (rec.action) {
+      case 'newGame':  requestNewGame();     break;
+      case 'continue': continueLatest();     break;
+      case 'load':     openSaveLoad('load'); break;
+      case 'chapters': openChapterSelect();  break;
+      case 'gallery':  openGallery();        break;
+      case 'options':  openSettings();       break;
+      case 'credits':  openCredits();        break;
+      case 'close':    confirmCloseArchive(); break;
+      default: break;
+    }
+  }
+
+  function requestNewGame() {
+    if (RBF.Saves.hasAnyValid() || RBF.Engine.hasStarted()) {
+      UI.confirm({
+        title:   'Come\u00e7ar de novo?',
+        message: 'Um jogo novo come\u00e7a do Pr\u00f3logo. Seus saves manuais ' +
+                 'continuam guardados; s\u00f3 o progresso desta sess\u00e3o \u00e9 descartado.',
+        confirmLabel: 'Come\u00e7ar',
+        onConfirm: warningGate
+      });
+      return;
+    }
+    warningGate();
+  }
+
+  /* ---- aviso de conteudo -------------------------------------------------
+     Aparece antes de um jogo novo, a menos que o jogador tenha desligado
+     em Ajustes. Nao pode ser dispensado por engano: nao fecha por clique
+     no fundo nem por Escape sem escolher.                              */
+
+  function warningGate() {
+    if (!RBF.Settings.get('contentWarning')) { startNewGame(); return; }
+
+    var W = RBF.WARNING;
+    var body = UI.el('div', 'rbf-warning');
+
+    body.appendChild(UI.el('p', 'rbf-warning__body', W.body));
+
+    var tags = UI.el('div', 'rbf-warning__tags');
+    for (var i = 0; i < W.tags.length; i++) {
+      tags.appendChild(UI.el('span', 'rbf-warning__tag', W.tags[i]));
+    }
+    body.appendChild(tags);
+    body.appendChild(UI.el('p', 'rbf-note', W.footer));
+
+    UI.panel({
+      name:  'warning',
+      title: W.title,
+      subtitle: W.label,
+      body:  body,
+      dismissOnBackdrop: false,
+      lockEscape: true,
+      actions: [
+        { label: W.back, className: 'rbf-btn-ghost', onClick: function () {
+            UI.closePanel();
+        } },
+        { label: W.accept, className: 'rbf-btn-primary', onClick: function () {
+            UI.closePanel();
+            startNewGame();
+        } }
+      ],
+      onClose: function () {
+        RBF.State.pop('title');
+      }
     });
-    return b;
+
+    RBF.State.push('modal');
+    RBF.Audio.playUi('ui_seal');
+  }
+
+  /* ---- transicao de menu para jogo --------------------------------------- */
+
+  function sweep(then) {
+    el.transition.classList.remove('is-sweeping');
+    void el.transition.offsetWidth;
+    el.transition.classList.add('is-sweeping');
+
+    RBF.Audio.playUi('ui_page');
+    RBF.Audio.leaveMenu();
+
+    setTimeout(function () {
+      then();
+      setTimeout(function () {
+        el.transition.classList.remove('is-sweeping');
+      }, 500);
+    }, RBF.CONFIG.timing.sweepMs);
   }
 
   function startNewGame() {
     UI.closePanel();
-    hideTitle();
-    RBF.Engine.newGame();
+    sweep(function () {
+      hideMenu();
+      RBF.Engine.newGame();
+    });
+  }
+
+  function continueLatest() {
+    var save = RBF.Saves.latest();
+    if (!save) { UI.toast('Nenhum save dispon\u00edvel.'); return; }
+    doLoad(save.data);
   }
 
   function doLoad(data) {
@@ -128,9 +443,30 @@ RBF.Menu = (function () {
       return;
     }
     UI.closePanel();
-    hideTitle();
-    RBF.Engine.loadFrom(data);
-    UI.toast('Jogo carregado.');
+    RBF.State.clearStack();
+
+    sweep(function () {
+      hideMenu();
+      RBF.Engine.loadFrom(data);
+      UI.toast('Registro reaberto.');
+    });
+  }
+
+  function confirmCloseArchive() {
+    UI.confirm({
+      title:   'Fechar o registro?',
+      message: 'Algumas coisas podem permanecer com voc\u00ea.\n\n' +
+               'O arquivo volta \u00e0 tela de abertura. Nada \u00e9 apagado.',
+      confirmLabel: 'Fechar',
+      danger:  true,
+      onConfirm: function () {
+        RBF.Audio.leaveMenu();
+        el.menu.classList.remove('show');
+        archiveOpen = false;
+        try { sessionStorage.removeItem(RBF.INTRO.sessionKey); } catch (e) { /* ignora */ }
+        showGate();
+      }
+    });
   }
 
   /* ======================================================================
@@ -139,35 +475,30 @@ RBF.Menu = (function () {
 
   function openGameMenu() {
     if (!RBF.Engine.hasStarted()) { return; }
-    if (RBF.State.is('paused')) { closeGameMenu(); return; }
-    if (RBF.State.hasOverlay()) { return; }
+    if (RBF.State.is('paused'))   { closeGameMenu(); return; }
+    if (RBF.State.hasOverlay())   { return; }
 
     RBF.Engine.pause();
     RBF.State.push('paused');
+    RBF.Audio.playUi('ui_page');
 
     var body = UI.el('div', 'rbf-menu-grid');
 
-    body.appendChild(menuItem('Continuar', 'volta para onde parou', closeGameMenu));
-
-    body.appendChild(menuItem('Salvar', 'escolher um espa\u00e7o', function () {
+    body.appendChild(menuItem('Continuar',    'volta para onde parou',  closeGameMenu));
+    body.appendChild(menuItem('Salvar',       'escolher um espa\u00e7o', function () {
       if (!RBF.Engine.canSave()) {
         UI.notice('Ainda n\u00e3o', 'Espere a fala terminar de aparecer para salvar.');
         return;
       }
       openSaveLoad('save');
     }));
-
-    body.appendChild(menuItem('Carregar', 'voltar a um save', function () {
-      openSaveLoad('load');
-    }));
-
-    body.appendChild(menuItem('Save r\u00e1pido', 'tecla F5', quickSave));
-    body.appendChild(menuItem('Load r\u00e1pido', 'tecla F9', quickLoad));
-
-    body.appendChild(menuItem('Hist\u00f3rico', 'reler o que passou', openHistory));
-    body.appendChild(menuItem('Ajustes', 'texto, \u00e1udio e autosave', openSettings));
-
-    body.appendChild(menuItem('Voltar ao t\u00edtulo', 'sai da partida atual', confirmReturnToTitle));
+    body.appendChild(menuItem('Carregar',     'voltar a um save',       function () { openSaveLoad('load'); }));
+    body.appendChild(menuItem('Save r\u00e1pido', 'F5',                 quickSave));
+    body.appendChild(menuItem('Load r\u00e1pido', 'F9',                 quickLoad));
+    body.appendChild(menuItem('Hist\u00f3rico',   'H',                  openHistory));
+    body.appendChild(menuItem('Galeria',      'material recuperado',    openGallery));
+    body.appendChild(menuItem('Ajustes',      'texto, \u00e1udio, movimento', openSettings));
+    body.appendChild(menuItem('Voltar ao t\u00edtulo', 'sai da partida', confirmReturnToTitle));
 
     UI.panel({
       name:  'gamemenu',
@@ -186,16 +517,14 @@ RBF.Menu = (function () {
     if (hint) { b.appendChild(UI.el('span', 'rbf-menu-item-hint', hint)); }
     b.addEventListener('click', function (ev) {
       ev.stopPropagation();
+      RBF.Audio.playUi('ui_confirm');
       onClick();
     });
     return b;
   }
 
-  function closeGameMenu() {
-    UI.closePanel();
-  }
+  function closeGameMenu() { UI.closePanel(); }
 
-  /* Chamado sempre que um painel fecha estando o jogo pausado. */
   function onGameMenuClosed() {
     if (RBF.State.is('paused')) {
       RBF.State.pop('playing');
@@ -214,7 +543,8 @@ RBF.Menu = (function () {
         UI.closePanel();
         RBF.State.clearStack();
         RBF.Engine.stop();
-        showTitle();
+        RBF.Audio.enterMenu();
+        revealMenu(true);
       }
     });
   }
@@ -228,37 +558,30 @@ RBF.Menu = (function () {
     RBF.State.push(mode === 'save' ? 'save' : 'load');
 
     var body = UI.el('div', 'rbf-savepanel');
-
-    var list = UI.slotList(
+    body.appendChild(UI.slotList(
       mode,
       function (slot) { onSlotPicked(mode, slot); },
       function (slot) { onSlotDelete(mode, slot); },
-      function (slot) { RBF.Saves.exportSlot(slot.id); }
-    );
-    body.appendChild(list);
-
-    var actions = [
-      {
-        label: 'Importar arquivo',
-        className: 'rbf-btn-ghost',
-        onClick: function () { importFlow(mode); }
-      },
-      {
-        label: 'Fechar',
-        className: 'rbf-btn-primary',
-        onClick: function () { UI.closePanel(); }
+      function (slot) {
+        var ok = RBF.Saves.exportSlot(slot.id);
+        UI.toast(ok ? 'Arquivo de save gerado.' : 'N\u00e3o foi poss\u00edvel exportar.');
       }
-    ];
+    ));
 
     UI.panel({
       name:  'saveload',
-      title: mode === 'save' ? 'Salvar jogo' : 'Carregar jogo',
+      title: mode === 'save' ? 'Salvar registro' : 'Abrir registro',
       subtitle: mode === 'save'
         ? 'Escolha um espa\u00e7o. Espa\u00e7o ocupado pede confirma\u00e7\u00e3o.'
-        : 'Escolha um save v\u00e1lido.',
+        : 'Escolha um registro v\u00e1lido.',
       body:  body,
       wide:  true,
-      actions: actions,
+      actions: [
+        { label: 'Importar arquivo', className: 'rbf-btn-ghost',
+          onClick: function () { importFlow(mode); } },
+        { label: 'Fechar', className: 'rbf-btn-primary',
+          onClick: function () { UI.closePanel(); } }
+      ],
       onClose: function () {
         RBF.State.pop(fromTitle ? 'title' : 'paused');
         if (RBF.State.is('paused')) { openGameMenu(); }
@@ -276,7 +599,7 @@ RBF.Menu = (function () {
       if (!slot.empty && RBF.Settings.get('confirmDestructive')) {
         UI.confirm({
           title:   'Sobrescrever?',
-          message: slot.label + ' j\u00e1 tem um save de ' +
+          message: slot.label + ' j\u00e1 tem um registro de ' +
                    RBF.Saves.formatDate(slot.updatedAt) + '.',
           confirmLabel: 'Sobrescrever',
           danger: true,
@@ -288,14 +611,13 @@ RBF.Menu = (function () {
       return;
     }
 
-    /* modo load */
     if (slot.empty || slot.broken) { return; }
 
     if (RBF.Engine.hasStarted() && RBF.Settings.get('confirmDestructive')) {
       UI.confirm({
-        title:   'Carregar este save?',
+        title:   'Abrir este registro?',
         message: 'O progresso n\u00e3o salvo da partida atual ser\u00e1 perdido.',
-        confirmLabel: 'Carregar',
+        confirmLabel: 'Abrir',
         danger: true,
         onConfirm: function () { doLoad(slot.data); }
       });
@@ -316,27 +638,26 @@ RBF.Menu = (function () {
                 'ou modo an\u00f4nimo. Tente exportar o save como arquivo.');
       return;
     }
-    UI.toast('Salvo em ' + slot.label + '.');
+    RBF.Audio.playUi('ui_seal');
+    UI.toast('Registro gravado em ' + slot.label + '.');
     refreshSaveLoad('save');
   }
 
   function onSlotDelete(mode, slot) {
     UI.confirm({
-      title:   'Apagar save?',
+      title:   'Apagar registro?',
       message: slot.label + ' ser\u00e1 apagado. N\u00e3o d\u00e1 para desfazer.',
       confirmLabel: 'Apagar',
       danger: true,
       onConfirm: function () {
         RBF.Saves.deleteSlot(slot.id);
-        UI.toast('Save apagado.');
+        UI.toast('Registro apagado.');
         refreshSaveLoad(mode);
       }
     });
   }
 
-  /* Reabre o painel para refletir a lista atualizada. */
   function refreshSaveLoad(mode) {
-    var reopenTo = RBF.State.depth() ? null : null;
     UI.closePanel();
     openSaveLoad(mode);
   }
@@ -349,11 +670,8 @@ RBF.Menu = (function () {
       return;
     }
     RBF.Saves.importToSlot(free, function (ok, message) {
-      if (!ok) {
-        UI.notice('N\u00e3o foi poss\u00edvel importar', message);
-        return;
-      }
-      UI.toast('Save importado no espa\u00e7o ' + free + '.');
+      if (!ok) { UI.notice('N\u00e3o foi poss\u00edvel importar', message); return; }
+      UI.toast('Registro importado no espa\u00e7o ' + free + '.');
       refreshSaveLoad(mode);
     });
   }
@@ -365,8 +683,6 @@ RBF.Menu = (function () {
     return null;
   }
 
-  /* ---- save e load rapidos ---------------------------------------------- */
-
   function quickSave() {
     if (!RBF.Engine.hasStarted()) { return; }
     if (!RBF.Engine.canSave()) {
@@ -374,20 +690,19 @@ RBF.Menu = (function () {
       return;
     }
     var ok = RBF.Saves.quicksave(RBF.Engine.snapshot());
+    if (ok) { RBF.Audio.playUi('ui_seal'); }
     UI.toast(ok ? 'Save r\u00e1pido gravado.' : 'Falha no save r\u00e1pido.');
   }
 
   function quickLoad() {
     var data = RBF.Saves.loadSlot(RBF.Saves.QUICKSAVE);
-    if (!data) {
-      UI.toast('Nenhum save r\u00e1pido.');
-      return;
-    }
+    if (!data) { UI.toast('Nenhum save r\u00e1pido.'); return; }
+
     if (RBF.Engine.hasStarted() && RBF.Settings.get('confirmDestructive')) {
       UI.confirm({
-        title:   'Carregar save r\u00e1pido?',
+        title:   'Abrir o save r\u00e1pido?',
         message: 'O progresso n\u00e3o salvo ser\u00e1 perdido.',
-        confirmLabel: 'Carregar',
+        confirmLabel: 'Abrir',
         danger: true,
         onConfirm: function () { finishQuickLoad(data); }
       });
@@ -398,7 +713,11 @@ RBF.Menu = (function () {
 
   function finishQuickLoad(data) {
     RBF.State.clearStack();
-    doLoad(data);
+    var problem = RBF.Saves.validate(data);
+    if (problem) { UI.notice('Save inv\u00e1lido', problem); return; }
+    UI.closePanel();
+    RBF.Engine.loadFrom(data);
+    UI.toast('Registro reaberto.');
   }
 
   /* ======================================================================
@@ -412,13 +731,32 @@ RBF.Menu = (function () {
     var body = UI.el('div', 'rbf-settings');
     var s = RBF.Settings;
 
+    /* --- audio --- */
+    body.appendChild(UI.el('h3', 'rbf-group', '\u00c1udio'));
+
+    body.appendChild(UI.row('Volume geral',
+      UI.slider(s.get('masterVolume'), 0, 1, 0.02, pct,
+        function (v) { s.set('masterVolume', v); })));
+
+    body.appendChild(UI.row('Trilha',
+      UI.slider(s.get('bgmVolume'), 0, 1, 0.02, pct,
+        function (v) { s.set('bgmVolume', v); })));
+
+    body.appendChild(UI.row('Efeitos',
+      UI.slider(s.get('sfxVolume'), 0, 1, 0.02, pct,
+        function (v) { s.set('sfxVolume', v); })));
+
+    body.appendChild(UI.row('Silenciar tudo',
+      UI.toggle(s.get('muted'), function (v) { s.set('muted', v); })));
+
+    /* --- texto --- */
     body.appendChild(UI.el('h3', 'rbf-group', 'Texto'));
 
-    body.appendChild(UI.row('Efeito de m\u00e1quina de escrever',
+    body.appendChild(UI.row('M\u00e1quina de escrever',
       UI.toggle(s.get('typewriter'), function (v) { s.set('typewriter', v); }),
       'desligado exibe a frase inteira de uma vez'));
 
-    body.appendChild(UI.row('Velocidade do texto',
+    body.appendChild(UI.row('Velocidade',
       UI.slider(s.get('typeSpeedMs'), 0, 60, 1,
         function (v) { return v === 0 ? 'instant\u00e2neo' : v + ' ms'; },
         function (v) { s.set('typeSpeedMs', v); }),
@@ -429,20 +767,6 @@ RBF.Menu = (function () {
         function (v) { return v + ' px'; },
         function (v) { s.set('textSize', v); })));
 
-    body.appendChild(UI.el('h3', 'rbf-group', '\u00c1udio'));
-
-    body.appendChild(UI.row('Volume da trilha',
-      UI.slider(s.get('bgmVolume'), 0, 1, 0.02,
-        function (v) { return Math.round(v * 100) + '%'; },
-        function (v) { s.set('bgmVolume', v); })));
-
-    body.appendChild(UI.row('Volume dos efeitos',
-      UI.slider(s.get('sfxVolume'), 0, 1, 0.02,
-        function (v) { return Math.round(v * 100) + '%'; },
-        function (v) { s.set('sfxVolume', v); })));
-
-    body.appendChild(UI.el('h3', 'rbf-group', 'Leitura'));
-
     body.appendChild(UI.row('Avan\u00e7o autom\u00e1tico',
       UI.toggle(s.get('autoAdvance'), function (v) { s.set('autoAdvance', v); })));
 
@@ -451,31 +775,72 @@ RBF.Menu = (function () {
         function (v) { return (v / 1000).toFixed(1) + ' s'; },
         function (v) { s.set('autoAdvanceMs', v); })));
 
-    body.appendChild(UI.el('h3', 'rbf-group', 'Jogo'));
+    /* --- apresentacao --- */
+    body.appendChild(UI.el('h3', 'rbf-group', 'Apresenta\u00e7\u00e3o'));
+
+    body.appendChild(UI.row('Movimento reduzido',
+      UI.toggle(s.get('reducedMotion'), function (v) { s.set('reducedMotion', v); }),
+      'encurta transi\u00e7\u00f5es e desliga movimento amplo'));
+
+    body.appendChild(UI.row('HUD de rotas',
+      UI.toggle(s.get('showRoutes'), function (v) {
+        s.set('showRoutes', v);
+        RBF.Engine.renderRoutes();
+      }),
+      'Esperan\u00e7a, Perda e Resposta durante a leitura'));
+
+    body.appendChild(UI.row('Tela cheia',
+      UI.toggle(isFullscreen(), function (v) { toggleFullscreen(v); }),
+      supportsFullscreen() ? '' : 'n\u00e3o dispon\u00edvel neste navegador'));
+
+    /* --- conteudo --- */
+    body.appendChild(UI.el('h3', 'rbf-group', 'Conte\u00fado'));
+
+    body.appendChild(UI.row('Aviso antes de come\u00e7ar',
+      UI.toggle(s.get('contentWarning'), function (v) { s.set('contentWarning', v); }),
+      'tela de aviso ao iniciar um jogo novo'));
 
     body.appendChild(UI.row('Autosave a cada cena',
       UI.toggle(s.get('autosaveEnabled'), function (v) { s.set('autosaveEnabled', v); })));
 
     body.appendChild(UI.row('Confirmar a\u00e7\u00f5es destrutivas',
       UI.toggle(s.get('confirmDestructive'), function (v) { s.set('confirmDestructive', v); }),
-      'sobrescrever save, apagar, voltar ao t\u00edtulo'));
+      'sobrescrever, apagar, voltar ao t\u00edtulo'));
 
-    var note = UI.el('p', 'rbf-note',
+    /* --- teclas --- */
+    body.appendChild(UI.el('h3', 'rbf-group', 'Teclas'));
+    var keys = [
+      ['Avan\u00e7ar',          'Espa\u00e7o \u00b7 Enter \u00b7 \u2192'],
+      ['Escolher',              '1 \u00b7 2 \u00b7 3'],
+      ['Menu',                  'Esc'],
+      ['Hist\u00f3rico',        'H'],
+      ['Save r\u00e1pido',      'F5'],
+      ['Load r\u00e1pido',      'F9'],
+      ['Esconder interface',    'Ctrl'],
+      ['Tela cheia',            'F11']
+    ];
+    for (var i = 0; i < keys.length; i++) {
+      var kb = UI.el('div', 'rbf-keybind');
+      kb.appendChild(UI.el('span', 'rbf-key', keys[i][1]));
+      body.appendChild(UI.row(keys[i][0], kb));
+    }
+
+    body.appendChild(UI.el('p', 'rbf-note',
       RBF.Storage.isPersistent()
-        ? 'Ajustes e saves ficam guardados neste navegador.'
-        : 'Este navegador bloqueou o armazenamento local. Ajustes e saves ' +
-          'valem apenas nesta sess\u00e3o. Use exportar save para n\u00e3o perder progresso.');
-    body.appendChild(note);
+        ? 'Ajustes e registros ficam guardados neste navegador. Mudar de ' +
+          'endere\u00e7o ou de navegador come\u00e7a um arquivo novo; use ' +
+          'exportar para levar um registro junto.'
+        : 'Este navegador bloqueou o armazenamento local. Ajustes e ' +
+          'registros valem apenas nesta sess\u00e3o. Use exportar para n\u00e3o ' +
+          'perder progresso.'));
 
     UI.panel({
       name:  'settings',
       title: 'Ajustes',
+      subtitle: 'CONTROLE DE LEITURA',
       body:  body,
       actions: [
-        {
-          label: 'Restaurar padr\u00f5es',
-          className: 'rbf-btn-ghost',
-          onClick: function () {
+        { label: 'Restaurar padr\u00f5es', className: 'rbf-btn-ghost', onClick: function () {
             UI.confirm({
               title: 'Restaurar padr\u00f5es?',
               message: 'Todos os ajustes voltam ao valor original.',
@@ -487,8 +852,7 @@ RBF.Menu = (function () {
                 UI.toast('Ajustes restaurados.');
               }
             });
-          }
-        },
+        } },
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
       onClose: function () {
@@ -496,6 +860,34 @@ RBF.Menu = (function () {
         if (RBF.State.is('paused')) { openGameMenu(); }
       }
     });
+  }
+
+  function pct(v) { return Math.round(v * 100) + '%'; }
+
+  /* ---- tela cheia --------------------------------------------------------
+     Nem todo navegador expoe a API; em iOS ela nao existe no Safari.
+     O controle so age quando existe suporte e nunca lanca erro.        */
+
+  function supportsFullscreen() {
+    return !!(document.documentElement &&
+              document.documentElement.requestFullscreen);
+  }
+
+  function isFullscreen() {
+    return !!document.fullscreenElement;
+  }
+
+  function toggleFullscreen(want) {
+    if (!supportsFullscreen()) { UI.toast('Tela cheia indispon\u00edvel aqui.'); return; }
+    try {
+      if (want && !isFullscreen()) {
+        var p = document.documentElement.requestFullscreen();
+        if (p && p.catch) { p.catch(function () {}); }
+      } else if (!want && isFullscreen()) {
+        var q = document.exitFullscreen();
+        if (q && q.catch) { q.catch(function () {}); }
+      }
+    } catch (e) { /* nao derruba a interface */ }
   }
 
   /* ======================================================================
@@ -541,12 +933,11 @@ RBF.Menu = (function () {
       }
     });
 
-    /* Abre no fim, que e onde o jogador parou. */
     built.body.scrollTop = built.body.scrollHeight;
   }
 
   /* ======================================================================
-     SELECAO DE CAPITULO
+     CAPITULOS
      ====================================================================== */
 
   function openChapterSelect() {
@@ -563,7 +954,8 @@ RBF.Menu = (function () {
         var card = UI.el('button', 'rbf-chapter' + (reached ? '' : ' locked'));
         card.type = 'button';
         card.appendChild(UI.el('span', 'rbf-chapter-label', ch.label));
-        card.appendChild(UI.el('span', 'rbf-chapter-title', reached ? ch.title : 'ainda n\u00e3o alcan\u00e7ado'));
+        card.appendChild(UI.el('span', 'rbf-chapter-title',
+          reached ? ch.title : 'ainda n\u00e3o alcan\u00e7ado'));
 
         if (reached) {
           card.addEventListener('click', function (ev) {
@@ -571,15 +963,19 @@ RBF.Menu = (function () {
             UI.confirm({
               title: 'Come\u00e7ar em ' + ch.label + '?',
               message: 'A partida come\u00e7a do in\u00edcio do cap\u00edtulo, sem as escolhas ' +
-                       'anteriores. Seus saves continuam guardados.',
+                       'anteriores. Seus registros continuam guardados.',
               confirmLabel: 'Come\u00e7ar',
               onConfirm: function () {
                 UI.closePanel();
-                hideTitle();
-                RBF.Engine.startChapter(ch.id);
+                sweep(function () {
+                  hideMenu();
+                  RBF.Engine.startChapter(ch.id);
+                });
               }
             });
           });
+        } else {
+          card.setAttribute('aria-disabled', 'true');
         }
         body.appendChild(card);
       })(RBF.CHAPTERS[i]);
@@ -588,7 +984,7 @@ RBF.Menu = (function () {
     UI.panel({
       name:  'chapters',
       title: 'Cap\u00edtulos',
-      subtitle: 'Dispon\u00edveis conforme o progresso.',
+      subtitle: 'VOLUMES LIBERADOS',
       body:  body,
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
@@ -597,6 +993,151 @@ RBF.Menu = (function () {
         RBF.State.pop(fromTitle ? 'title' : 'paused');
         if (RBF.State.is('paused')) { openGameMenu(); }
       }
+    });
+  }
+
+  /* ======================================================================
+     GALERIA
+
+     Le RBF.Gallery, que verifica progresso real. Item bloqueado continua
+     bloqueado: nao existe atalho de demonstracao.
+     ====================================================================== */
+
+  var galleryTab = 'cg';
+
+  function openGallery() {
+    var fromTitle = RBF.State.is('title');
+    RBF.State.push('load');
+
+    var body = UI.el('div', 'rbf-gallery');
+    var tabs = UI.el('div', 'rbf-gal-tabs');
+    var grid = UI.el('div', 'rbf-gal-grid');
+
+    var cats = RBF.Gallery.categories();
+
+    function paint() {
+      UI.clear(grid);
+      var items = RBF.Gallery.items(galleryTab);
+
+      for (var i = 0; i < items.length; i++) {
+        (function (item) {
+          var card = UI.el('button', 'rbf-gal-item' + (item.unlocked ? '' : ' locked'));
+          card.type = 'button';
+
+          var thumb = UI.el('div', 'rbf-gal-thumb');
+          if (item.unlocked && item.bg) {
+            var def = RBF.BACKGROUNDS[item.bg];
+            if (def) {
+              thumb.style.background = def.css;
+              thumb.style.backgroundSize = 'cover';
+              thumb.style.backgroundPosition = 'center';
+              if (def.available && def.file) {
+                var url = RBF.CONFIG.paths.backgrounds + def.file;
+                var probe = new Image();
+                probe.onload = function () { thumb.style.backgroundImage = 'url("' + url + '")'; };
+                probe.onerror = function () { /* fica no gradiente */ };
+                probe.src = url;
+              }
+            }
+          }
+          card.appendChild(thumb);
+          card.appendChild(UI.el('span', 'rbf-gal-name',
+            item.unlocked ? item.name : '\u2014'));
+
+          if (item.unlocked) {
+            card.addEventListener('click', function (ev) {
+              ev.stopPropagation();
+              RBF.Audio.playUi('ui_confirm');
+              viewGalleryItem(item);
+            });
+          } else {
+            card.setAttribute('aria-disabled', 'true');
+          }
+          grid.appendChild(card);
+        })(items[i]);
+      }
+    }
+
+    for (var i = 0; i < cats.length; i++) {
+      (function (cat) {
+        var t = UI.el('button', 'rbf-gal-tab' + (cat.id === galleryTab ? ' on' : ''), cat.label);
+        t.type = 'button';
+        t.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          galleryTab = cat.id;
+          var all = tabs.querySelectorAll('.rbf-gal-tab');
+          for (var k = 0; k < all.length; k++) { all[k].classList.remove('on'); }
+          t.classList.add('on');
+          RBF.Audio.playUi('ui_hover');
+          paint();
+        });
+        tabs.appendChild(t);
+      })(cats[i]);
+    }
+
+    body.appendChild(tabs);
+    body.appendChild(grid);
+    paint();
+
+    var counts = RBF.Gallery.counts();
+
+    UI.panel({
+      name:  'gallery',
+      title: 'Material recuperado',
+      subtitle: counts.unlocked + ' de ' + counts.total + ' itens liberados',
+      body:  body,
+      wide:  true,
+      actions: [
+        { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
+      ],
+      onClose: function () {
+        RBF.State.pop(fromTitle ? 'title' : 'paused');
+        if (RBF.State.is('paused')) { openGameMenu(); }
+      }
+    });
+  }
+
+  function viewGalleryItem(item) {
+    var body = UI.el('div', 'rbf-gal-view');
+
+    if (item.bg) {
+      var frame = UI.el('div', 'rbf-gal-view__frame');
+      var def = RBF.BACKGROUNDS[item.bg];
+      if (def) {
+        frame.style.background = def.css;
+        frame.style.backgroundSize = 'contain';
+        frame.style.backgroundRepeat = 'no-repeat';
+        frame.style.backgroundPosition = 'center';
+        if (def.available && def.file) {
+          var url = RBF.CONFIG.paths.backgrounds + def.file;
+          var probe = new Image();
+          probe.onload = function () { frame.style.backgroundImage = 'url("' + url + '")'; };
+          probe.onerror = function () { /* fica no gradiente */ };
+          probe.src = url;
+        }
+      }
+      body.appendChild(frame);
+    }
+
+    if (item.text) {
+      body.appendChild(UI.el('p', 'rbf-gal-view__text', item.text));
+    }
+
+    var prev = RBF.State.get();
+    RBF.State.push('modal');
+
+    UI.panel({
+      name:  'galleryitem',
+      title: item.name,
+      body:  body,
+      wide:  true,
+      actions: [
+        { label: 'Voltar', className: 'rbf-btn-primary', onClick: function () {
+            UI.closePanel();
+            openGallery();
+        } }
+      ],
+      onClose: function () { RBF.State.pop(prev); }
     });
   }
 
@@ -620,7 +1161,7 @@ RBF.Menu = (function () {
 
     UI.panel({
       name:  'credits',
-      title: 'Cr\u00e9ditos',
+      title: 'Registro de autoria',
       body:  body,
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
@@ -633,15 +1174,47 @@ RBF.Menu = (function () {
   }
 
   /* ======================================================================
-     ATALHOS
+     ENTRADA
      ====================================================================== */
+
+  function bindGate() {
+    el.gateBtn.addEventListener('click', function (ev) {
+      ev.stopPropagation();
+      openArchive();
+    });
+
+    /* Enter e Espaco no botao ja disparam click por padrao no HTML;
+       aqui cobrimos a tecla quando o foco esta em outro lugar. */
+    document.addEventListener('keydown', function (ev) {
+      if (!el.gate.classList.contains('is-open')) { return; }
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        openArchive();
+      }
+    });
+  }
 
   function bindShortcuts() {
     document.addEventListener('keydown', function (ev) {
-      /* Escape com painel aberto e tratado em RBF.UI.bind, que roda na
-         fase de captura e interrompe o evento antes de chegar aqui. */
+      if (el.gate.classList.contains('is-open')) { return; }
+
+      /* Navegacao do menu principal por teclado. */
+      if (RBF.State.is('title') && !UI.isPanelOpen() && !UI.isModalOpen()) {
+        if (ev.key === 'ArrowDown' || ev.key === 'ArrowRight') {
+          ev.preventDefault(); moveNav(1); return;
+        }
+        if (ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') {
+          ev.preventDefault(); moveNav(-1); return;
+        }
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault(); activateNav(); return;
+        }
+      }
+
+      /* Escape com painel aberto e tratado em RBF.UI.bind, na fase de
+         captura, e nao chega ate aqui. */
       if (ev.key === 'Escape') {
-        if (RBF.State.is('title')) { return; }
+        if (RBF.State.is('title'))  { return; }
         if (RBF.State.hasOverlay()) { return; }
         ev.preventDefault();
         openGameMenu();
@@ -649,14 +1222,15 @@ RBF.Menu = (function () {
       }
 
       if (ev.key === 'F5') {
-        ev.preventDefault();
-        if (RBF.State.is('playing')) { quickSave(); }
+        if (RBF.State.is('playing')) { ev.preventDefault(); quickSave(); }
         return;
       }
 
       if (ev.key === 'F9') {
-        ev.preventDefault();
-        if (!RBF.State.is('title') && !RBF.State.hasOverlay()) { quickLoad(); }
+        if (!RBF.State.is('title') && !RBF.State.hasOverlay()) {
+          ev.preventDefault();
+          quickLoad();
+        }
         return;
       }
 
@@ -666,33 +1240,40 @@ RBF.Menu = (function () {
         RBF.Engine.pause();
         RBF.State.push('paused');
         openHistory();
+        return;
+      }
+
+      if (ev.key === 'Control' && RBF.State.is('playing')) {
+        ev.preventDefault();
+        RBF.Engine.toggleSkip();
+        return;
+      }
+
+      if ((ev.key === 'a' || ev.key === 'A') && RBF.State.is('playing')) {
+        ev.preventDefault();
+        RBF.Engine.toggleAuto();
       }
     });
 
-    /* Botao direito abre o menu, mas apenas durante o jogo. */
+    /* Botao direito abre o menu, mas so durante o jogo. */
     el.stage.addEventListener('contextmenu', function (ev) {
       if (!RBF.Engine.hasStarted()) { return; }
       if (RBF.State.hasOverlay()) { return; }
+      if (el.gate.classList.contains('is-open')) { return; }
       ev.preventDefault();
       openGameMenu();
     });
 
-    el.menuButton.addEventListener('click', function (ev) {
+    el.gameBar.addEventListener('click', function (ev) { ev.stopPropagation(); });
+
+    document.getElementById('btn-menu').addEventListener('click', function (ev) {
       ev.stopPropagation();
       openGameMenu();
     });
 
-    document.getElementById('btn-history').addEventListener('click', function (ev) {
+    document.getElementById('rf-show-ui').addEventListener('click', function (ev) {
       ev.stopPropagation();
-      if (RBF.State.hasOverlay()) { return; }
-      RBF.Engine.pause();
-      RBF.State.push('paused');
-      openHistory();
-    });
-
-    document.getElementById('btn-quicksave').addEventListener('click', function (ev) {
-      ev.stopPropagation();
-      quickSave();
+      RBF.Engine.toggleUI(false);
     });
   }
 
@@ -706,22 +1287,41 @@ RBF.Menu = (function () {
 
     grab();
     RBF.UI.bind(el.overlayRoot);
+    bindGate();
     bindShortcuts();
-    showTitle();
+
+    fillArchiveChrome();
+
+    /* O portao aparece na primeira carga e depois de um recarregamento
+       completo. Nao aparece ao voltar de um painel. */
+    if (RBF.INTRO.enabled && !sessionOpened()) {
+      showGate();
+    } else {
+      archiveOpen = true;
+      el.gate.classList.remove('is-open');
+      RBF.Audio.enterMenu();
+      revealMenu(true);
+    }
   }
 
   return {
-    init:            init,
-    showTitle:       showTitle,
-    openGameMenu:    openGameMenu,
-    openSaveLoad:    openSaveLoad,
-    openSettings:    openSettings,
-    openHistory:     openHistory,
-    openCredits:     openCredits,
-    quickSave:       quickSave,
-    quickLoad:       quickLoad,
-    startNewGame:    startNewGame,
-    refreshTitle:    renderTitleButtons
+    init:          init,
+    showGate:      showGate,
+    openArchive:   openArchive,
+    revealMenu:    revealMenu,
+    showTitle:     function () { revealMenu(true); },
+    openGameMenu:  openGameMenu,
+    openSaveLoad:  openSaveLoad,
+    openSettings:  openSettings,
+    openHistory:   openHistory,
+    openGallery:   openGallery,
+    openCredits:   openCredits,
+    openChapters:  openChapterSelect,
+    quickSave:     quickSave,
+    quickLoad:     quickLoad,
+    startNewGame:  startNewGame,
+    warningGate:   warningGate,
+    refreshTitle:  renderNav
   };
 })();
 

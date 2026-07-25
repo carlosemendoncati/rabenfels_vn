@@ -62,9 +62,10 @@ Projeto multi-arquivo, JavaScript clássico, sem build, sem npm, sem framework.
 Abre direto do `index.html`, inclusive por `file://`.
 
 ```
-index.html          carrega os scripts em ordem fixa
+index.html          marcação e formas SVG; scripts em ordem fixa
+css/tokens.css      TOKENS — cor, movimento, cursor, keyframes, escala
 css/style.css       palco
-css/ui.css          menus, painéis, saves
+css/ui.css          portão, menu, painéis, saves, galeria
 js/config.js        MANIFESTO — único lugar com caminho de asset
 js/storage.js       localStorage, exportar e importar save
 js/settings.js      ajustes persistidos
@@ -72,17 +73,29 @@ js/state.js         máquina de estados (title, playing, paused, save, ...)
 js/assets.js        resolução de caminho e fallback
 js/audio.js         BGM com crossfade, SFX, desbloqueio de autoplay
 js/history.js       backlog de diálogo
+js/routes.js        Esperança, Perda e Resposta
+js/gallery.js       desbloqueio por progresso real
 js/data/*.js        roteiro — só dados, ASCII puro com escapes \uXXXX
 js/script.js        montagem determinística do roteiro
 js/saves.js         12 espaços manuais, autosave, quicksave
 js/engine.js        renderer
 js/ui.js            componentes reutilizáveis
-js/menu.js          tela de título, menu de jogo, painéis
+js/menu.js          portão de abertura, menu principal, painéis
 js/main.js          boot
 ```
 
-O jogo começa na tela de título, não no roteiro. Isso também resolve a
-política de autoplay do navegador: quando a cena começa, já houve um clique.
+O jogo começa no portão de abertura ("clique para abrir o arquivo"), não
+no roteiro. Isso resolve a política de autoplay do navegador: quando a
+trilha entra, já houve uma interação.
+
+Identidade visual vem do protótipo aprovado. Cor, duração e easing vivem
+em `css/tokens.css` e em nenhum outro lugar. O scaffold Nocturne que
+acompanhava o protótipo não foi importado — carrega fonte por CDN e usa
+paleta que não é a do jogo. Zero dependência externa é requisito, não
+preferência: o validador falha se aparecer um `https://` em HTML ou CSS.
+
+CSS mobile-first: a base atende telefone em retrato e `--rbf-ui` é o
+único número que muda por faixa de tela.
 
 - Backgrounds e sprites: ids lógicos no `config.js`. Enquanto `available` for
   `false`, o engine não faz requisição e usa fallback — gradiente CSS para
@@ -102,9 +115,10 @@ ficam em `RBF.CONFIG.timing` e devem acompanhar o CSS.
 ## Fluxo de trabalho
 
 ```bash
-node tools/validate.js              # 300 checagens, sem dependência nenhuma
+node tools/validate.js              # 406 checagens, sem dependência nenhuma
 node tools/escape.js js/data/x.js   # normaliza acento para \uXXXX
-python3 tools/make_sfx.py           # regera os efeitos sonoros
+python3 tools/make_sfx.py           # regera efeitos e sons de interface
+python3 tools/make_menu_theme.py    # regera a trilha do menu
 ```
 
 Escrever roteiro com acento normalmente e rodar `escape.js` depois. Nunca
@@ -120,4 +134,8 @@ Backup antes de mexer: `_backup/pre_<tarefa>_<timestamp>/`.
   aspas/parênteses) antes de entregar.
 - Não introduzir contradição de lore sem avisar explicitamente qual arquivo
   em `docs/` diverge.
+- Rota (Esperança, Perda, Resposta) só se move pelo campo `routes`
+  declarado na opção de escolha. Nunca inferir efeito do texto.
+- Item de galeria só abre por condição de progresso real. Nada liberado
+  "para demonstrar".
 - Dizer o que não foi testado em vez de afirmar que funciona.

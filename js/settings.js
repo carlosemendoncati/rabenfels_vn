@@ -46,7 +46,7 @@ RBF.Settings = (function () {
 
       if (want === 'number') {
         if (!isFinite(got)) { continue; }
-        if (k === 'bgmVolume' || k === 'sfxVolume') {
+        if (k === 'bgmVolume' || k === 'sfxVolume' || k === 'masterVolume') {
           got = Math.max(0, Math.min(1, got));
         }
         if (k === 'typeSpeedMs')   { got = Math.max(0, Math.min(120, got)); }
@@ -119,15 +119,24 @@ RBF.Settings = (function () {
   function apply() {
     var v = ensure();
 
-    RBF.CONFIG.audio.bgmVolume = v.bgmVolume;
-    RBF.CONFIG.audio.sfxVolume = v.sfxVolume;
+    /* O volume mestre multiplica os dois canais. Silenciar zera ambos
+       sem perder o valor que o jogador tinha escolhido. */
+    var master = v.muted ? 0 : v.masterVolume;
+
+    RBF.CONFIG.audio.bgmVolume  = v.bgmVolume * master;
+    RBF.CONFIG.audio.sfxVolume  = v.sfxVolume * master;
     RBF.CONFIG.text.typeSpeedMs = v.typewriter ? v.typeSpeedMs : 0;
 
     if (RBF.Audio && RBF.Audio.refreshVolume) { RBF.Audio.refreshVolume(); }
 
-    if (typeof document !== 'undefined' && document.documentElement) {
-      document.documentElement.style.setProperty('--rbf-text-size', v.textSize + 'px');
-    }
+    if (typeof document === 'undefined' || !document.documentElement) { return; }
+
+    var root = document.documentElement;
+    root.style.setProperty('--rbf-text-size', v.textSize + 'px');
+
+    /* Movimento reduzido pedido pelo jogador. A media query do sistema
+       continua valendo por conta propria, em css/tokens.css. */
+    root.classList.toggle('rbf-reduced-motion', !!v.reducedMotion);
   }
 
   function notify(key) {

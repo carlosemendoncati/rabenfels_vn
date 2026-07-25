@@ -22,10 +22,11 @@
 
   function missing() {
     var required = [
-      'CONFIG', 'CHARACTERS', 'BACKGROUNDS', 'BGM', 'SFX', 'CHAPTERS',
-      'STORAGE', 'SETTINGS_DEFAULT', 'UI_TEXT', 'CREDITS',
-      'Assets', 'Audio', 'Storage', 'Settings', 'History',
-      'State', 'Script', 'Saves', 'UI', 'Engine', 'Menu'
+      'CONFIG', 'CHARACTERS', 'BACKGROUNDS', 'BGM', 'SFX', 'MUSIC', 'UI_SFX',
+      'CHAPTERS', 'STORAGE', 'SETTINGS_DEFAULT', 'UI_TEXT', 'CREDITS',
+      'ARCHIVE', 'INTRO', 'MENU_AUDIO', 'MENU_RECORDS', 'WARNING', 'ROUTES',
+      'Assets', 'Audio', 'Storage', 'Settings', 'History', 'Routes',
+      'State', 'Script', 'Saves', 'Gallery', 'UI', 'Engine', 'Menu'
     ];
     var out = [];
     for (var i = 0; i < required.length; i++) {

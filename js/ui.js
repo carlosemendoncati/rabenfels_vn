@@ -102,8 +102,14 @@ RBF.UI = (function () {
 
     root.appendChild(overlay);
     requestAnimationFrame(function () { overlay.classList.add('show'); });
+    if (RBF.Audio && RBF.Audio.playUi) { RBF.Audio.playUi('ui_page'); }
 
-    openPanel = { name: opts.name, el: overlay, onClose: opts.onClose || null };
+    openPanel = {
+      name:       opts.name,
+      el:         overlay,
+      onClose:    opts.onClose || null,
+      lockEscape: opts.lockEscape === true
+    };
     return { overlay: overlay, body: body, box: box };
   }
 
@@ -113,6 +119,7 @@ RBF.UI = (function () {
     openPanel = null;
 
     if (p.el && p.el.parentNode) { p.el.parentNode.removeChild(p.el); }
+    if (RBF.Audio && RBF.Audio.playUi) { RBF.Audio.playUi('ui_back'); }
     if (p.onClose) { p.onClose(); }
     return true;
   }
@@ -141,14 +148,24 @@ RBF.UI = (function () {
     var box = el('div', 'rbf-modal');
     box.addEventListener('click', function (ev) { ev.stopPropagation(); });
 
+    var seal = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    seal.setAttribute('class', 'rbf-modal__seal');
+    seal.setAttribute('aria-hidden', 'true');
+    var suse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    suse.setAttribute('href', '#rf-mark');
+    seal.appendChild(suse);
+    box.appendChild(seal);
+
     box.appendChild(el('h3', 'rbf-modal-title', opts.title || 'Confirmar'));
     box.appendChild(el('p', 'rbf-modal-msg', opts.message || ''));
 
     var foot = el('div', 'rbf-modal-foot');
 
-    foot.appendChild(button(opts.cancelLabel || 'Cancelar', 'rbf-btn-ghost', function () {
-      finish(false);
-    }));
+    if (opts.cancelLabel !== null) {
+      foot.appendChild(button(opts.cancelLabel || 'Cancelar', 'rbf-btn-ghost', function () {
+        finish(false);
+      }));
+    }
 
     foot.appendChild(button(
       opts.confirmLabel || 'Confirmar',
@@ -405,6 +422,8 @@ RBF.UI = (function () {
       if (isPanelOpen()) {
         ev.preventDefault();
         ev.stopPropagation();
+        /* O aviso de conteudo exige uma escolha: nao sai por Escape. */
+        if (openPanel && openPanel.lockEscape) { return; }
         closePanel();
       }
     }, true);

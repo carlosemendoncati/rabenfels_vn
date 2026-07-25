@@ -1,69 +1,122 @@
 # Arquivo Rabenfels — Visual Novel
 
 Prólogo, Capítulo 1 e Capítulo 2, jogáveis. Abre direto no navegador, sem
-servidor, sem build, sem framework, sem dependência.
+servidor, sem build, sem framework, sem dependência externa.
 
 ```
 index.html    <- abrir este arquivo
 ```
 
-**Avançar**: clique, `Espaço`, `Enter`, `→` ou `PageDown`.
+**Abrir o arquivo**: clique, toque, Enter ou Espaço na tela inicial.
+**Avançar**: clique, `Espaço`, `Enter`, `→`, `PageDown`.
 **Escolher**: clique ou `1` `2` `3`.
-**Atalhos**: `Esc` menu · `F5` save rápido · `F9` load rápido · `H` histórico ·
-botão direito abre o menu.
+**Atalhos**: `Esc` menu · `H` histórico · `A` auto · `Ctrl` skip ·
+`F5` save rápido · `F9` load rápido · botão direito abre o menu.
+No menu principal, setas percorrem os registros e Enter abre.
 
 ---
 
 ## Estrutura
 
 ```
-index.html          carrega os scripts em ordem fixa
-css/style.css       palco
-css/ui.css          menus, painéis, saves
+index.html          marcação e formas SVG reaproveitadas
+css/tokens.css      TOKENS — cor, movimento, cursor, keyframes, escala
+css/style.css       palco: fundo, sprites, diálogo, escolhas
+css/ui.css          interface: portão, menu, painéis, saves, galeria
 js/config.js        MANIFESTO — único lugar com caminho de asset
-js/storage.js       localStorage, exportar e importar save
+js/storage.js       localStorage, exportar e importar
 js/settings.js      ajustes persistidos
 js/state.js         máquina de estados da aplicação
 js/assets.js        resolução de caminho e fallback
-js/audio.js         BGM com crossfade, SFX, desbloqueio de autoplay
+js/audio.js         BGM, SFX, trilha do menu, sons de interface
 js/history.js       backlog de diálogo
+js/routes.js        Esperança, Perda e Resposta a partir das escolhas
 js/data/*.js        roteiro — só dados
 js/script.js        montagem determinística do roteiro
-js/saves.js         12 espaços manuais, autosave, quicksave
+js/saves.js         12 espaços, autosave, save rápido
+js/gallery.js       desbloqueio por progresso real
 js/engine.js        renderer
 js/ui.js            componentes reutilizáveis
-js/menu.js          tela de título, menu de jogo, painéis
+js/menu.js          portão, menu principal, painéis
 js/main.js          boot
 assets/             arte e som (ver assets/README.md)
 docs/               documentos canônicos
 tools/              validação e utilitários
 .claude/skills/     skill do projeto para assistentes
-_backup/            versões anteriores
 ```
 
-Dados de narrativa, manifesto de asset e renderer não se misturam. Nenhum
-caminho de arquivo aparece no roteiro; nenhum texto de roteiro aparece no
-engine.
+Três camadas que não se misturam: **dados de narrativa** (`js/data/`),
+**manifesto de asset** (`js/config.js`) e **renderer** (`js/engine.js`).
+Nenhum caminho de arquivo aparece no roteiro; nenhum texto de roteiro
+aparece no engine; nenhum valor de cor ou duração aparece fora de
+`css/tokens.css`.
+
+---
+
+## Design
+
+A identidade vem do protótipo aprovado: códice proibido, paleta de cinco
+valores, tipografia de sistema em dois papéis (sans para o cromo, serifa
+para a narrativa), acento como linha e marca, nunca como área chapada.
+
+Todo movimento sai de um vocabulário único — traço, selo, tinta, página,
+cortina, luz de vela — declarado em `css/tokens.css`.
+
+O scaffold Nocturne que acompanhava o protótipo não foi importado: carrega
+fonte por CDN e usa paleta que não é a do jogo. Detalhes no `CHANGELOG.md`.
 
 ---
 
 ## Sistemas
 
-**Tela de título** — Novo Jogo, Continuar, Carregar, Capítulos, Ajustes,
-Créditos. O jogo não começa sozinho.
+**Portão de abertura** — o jogo não começa sozinho. A primeira interação
+libera o áudio do navegador e abre o arquivo.
 
-**Save** — 12 espaços manuais, autosave a cada cena, save rápido. Cada espaço
-mostra capítulo, cena, trecho de diálogo, data em pt-BR, tempo de jogo e uma
-miniatura derivada do background. Exportar e importar como `.json`.
+**Menu principal** — composição assimétrica: barra de classificação,
+lockup com sigilo, navegação em códice com numerais romanos e códigos de
+registro, nota de margem contextual.
 
-**Ajustes** — máquina de escrever, velocidade e tamanho do texto, volume de
-trilha e de efeitos, avanço automático, autosave, confirmação de ações
-destrutivas. Tudo persistido.
+**Save** — 12 espaços manuais, autosave por cena, save rápido. Cada
+espaço mostra capítulo, cena, trecho, data em pt-BR, tempo de jogo, rota
+dominante e miniatura. Exportar e importar `.json`.
 
-**Histórico** — backlog de até 400 entradas, com recorte gravado no save.
+**Rotas** — Esperança, Perda e Resposta. Os valores vêm exclusivamente do
+delta declarado em cada opção de escolha. Entram no save e são
+reconstruídos a partir do registro de escolhas quando faltam.
 
-**Estado** — enquanto um painel está aberto o roteiro não avança, clique no
-palco não passa por baixo e o teclado vai para a interface.
+**Galeria** — 29 itens em quatro categorias, liberados por progresso
+real: cenário visitado, cartão do Arquivo lido, capítulo concluído, rota
+atingida.
+
+**Aviso de conteúdo** — antes de um jogo novo, com escolha obrigatória.
+Desligável em Ajustes.
+
+**Caixa de diálogo** — aba de identificação, painel com moldura, código
+de transcrição posição/total, e a barra de leitura por dentro do painel:
+Histórico, Auto, Skip, Save, Load, Ajustes, Ocultar.
+
+**Ajustes** — volume geral, trilha, efeitos, silenciar, máquina de
+escrever, velocidade, tamanho do texto, avanço automático, movimento
+reduzido, HUD de rotas, tela cheia, aviso de conteúdo, autosave,
+confirmações.
+
+---
+
+## Mobile
+
+Escrito partindo do telefone em retrato. Uma escala única (`--rbf-ui`)
+responde por faixa de tela, então nenhum componente precisa de media
+query própria para crescer.
+
+| Faixa | Menu |
+|---|---|
+| telefone retrato | coluna única, rolagem interna |
+| telefone paisagem | duas colunas, cromo comprimido |
+| ≥ 980 px | composição assimétrica aprovada |
+
+O palco preenche a viewport com altura dinâmica (`100dvh`), respeita a
+área segura do aparelho e mede sprites em `vh`. Alvos de toque de no
+mínimo 40 px.
 
 ---
 
@@ -83,31 +136,32 @@ Documentados no topo de `js/engine.js`.
 | `flag` | grava estado |
 | `cho` | escolha com ramificação |
 
-Campo opcional em qualquer beat: `if:{ flag: valor }`. O beat só executa
-quando as flags conferem — é assim que o Capítulo 2 reage ao que foi escolhido
-no Capítulo 1.
+Campo opcional em qualquer beat: `if:{ flag: valor }`.
 
 ### Escolhas
 
 ```js
-{ t:'cho', id:'cap2_lacuna', prompt:'A LACUNA', opts:[
-  { id:'A', tx:'...', flags:{ ... }, then:[ /* beats */ ] }
+{ t:'cho', id:'cap2_lacuna', code:'DEP', prompt:'A LACUNA', opts:[
+  { id:'A', tx:'...', flags:{ ... }, routes:{ loss: 1 }, then:[ /* beats */ ] }
 ]}
 ```
 
 `then` é injetado logo depois da escolha e o roteiro reconverge no beat
-seguinte. A opção escolhida fica em `RBF.STATE.choiceLog`, e
-`RBF.Script.build(choiceLog)` reconstrói exatamente o mesmo array no load —
-por isso **toda escolha precisa de `id` estável**.
+seguinte. **Toda escolha precisa de `id` estável** — é ele que permite
+reconstruir o mesmo array no load.
+
+`routes` é o único lugar onde uma escolha move uma rota. O sistema nunca
+infere efeito a partir do texto da opção.
 
 ---
 
 ## Adicionar um capítulo
 
 1. Criar `js/data/chapterN.js` definindo `RBF.CHAPTERN` dentro de uma IIFE.
-2. Registrar em `RBF.CHAPTERS` no `js/config.js`.
+2. Registrar em `RBF.CHAPTERS` no `js/config.js`, com `id`, `code`,
+   `data`, `label` e `title`.
 3. Incluir a tag `<script>` no `index.html`, antes de `js/script.js`.
-4. Adicionar ao manifesto os assets novos.
+4. Adicionar ao manifesto os assets novos e à galeria os itens novos.
 5. `node tools/escape.js js/data/chapterN.js`
 6. `node tools/validate.js`
 
@@ -117,37 +171,87 @@ por isso **toda escolha precisa de `id` estável**.
 
 ## Validação
 
+Duas camadas. A primeira confere estrutura, estado e roteiro. A segunda
+confere o que o navegador realmente desenhou — e existe porque a primeira
+chegou a passar inteira com a interface visivelmente quebrada.
+
 ```bash
-node tools/validate.js
+node tools/validate.js          # estrutura, estado, roteiro
+node tools/shots.js --open      # geometria em navegador de verdade
 ```
 
-Sem `npm install`, sem jsdom, sem pacote externo. Roda o projeto de verdade em
-um DOM mínimo próprio (`tools/minidom.js`) e verifica:
+`shots.js` abre o jogo em Chrome nos oito tamanhos de tela, reprova
+elemento fora do palco, texto cortado e sobreposição, e grava uma imagem de
+cada tela em `tools/_shots/`. Sem Chrome ou sem Playwright, avisa e sai sem
+falhar — é conferência, não requisito.
 
-- arquivos e ids referenciados pelo HTML
-- sintaxe e codificação ASCII pura de todos os scripts
-- CSS com chaves balanceadas e sem cor malformada
-- todo id de background, BGM, SFX, personagem e expressão resolvendo no manifesto
-- todo asset marcado como `available` existindo em disco
-- roteiro sem cena duplicada, beat vazio, tipo desconhecido ou escolha sem id
-- typewriter completando no skip em vez de truncar
-- três partidas completas até o fim do Capítulo 2, por clique e por teclado
-- save, load, autosave, quicksave, esquema, recusa de save inválido
-- reconstrução do roteiro pelo registro de escolhas
-- estado da interface: painel aberto bloqueia progressão e teclado
+**48 checagens de geometria, 0 falhas.**
+
+Sem `npm install`, sem jsdom, sem pacote externo. Roda o projeto de
+verdade em um DOM mínimo próprio (`tools/minidom.js`).
+
+**463 checagens estáticas, 0 falhas.** Cobre:
+
+- arquivos, ids, sintaxe e codificação ASCII de todos os scripts
+- CSS balanceado, sem cor malformada, sem asset remoto
+- manifesto completo, com arquivo em disco para tudo marcado `available`
+- roteiro sem cena duplicada, beat vazio ou escolha sem `id`
+- typewriter completando no skip
+- três partidas completas até o fim do Capítulo 2, por clique e teclado
+- save, load, autosave, save rápido, esquema, recusa de save inválido
+- rotas: divergência entre ramos, teto, persistência, reconstrução
+- galeria: libera pelo progresso e mantém o resto bloqueado
+- aviso de conteúdo: aparece, não sai por Escape, respeita o ajuste
+- áudio do menu: não toca antes da interação, não duplica faixa
+- esconder interface e o clique que a devolve sem avançar a cena
+- responsividade: palco sem tamanho fixo, alvo de toque, área segura
+- acessibilidade: botões reais, nome acessível, foco próprio, idioma
+- sprites com fundo transparente e não totalmente vazios
+- barra de leitura montada sem duplicar controle
+- aba de nome preenchida também em narração
+- código de transcrição no formato posição/total
+- skip avançando e parando sozinho na escolha
 - funcionamento com `localStorage` bloqueado
-
-Estado atual: **300 checagens, 0 falhas**.
+- regressões de layout: título sem largura em `ch`, máscara que não corta
+  na horizontal, rótulo de registro em uma linha, linha do lockup que não
+  encolhe abaixo do conteúdo, menu que rola em vez de cortar, arco medido
+  pela altura, sprite com máscara de base, largura de leitura limitada,
+  piso de tamanho no cromo, respiro nas bordas
 
 ---
 
 ## Utilitários
 
 ```bash
-node tools/escape.js js/data/x.js                    # normaliza para ASCII puro
+node tools/escape.js js/data/x.js                    # normaliza para ASCII
 node tools/escape.js js/data/x.js --decode --stdout  # lê com acento
-python3 tools/make_sfx.py                            # regera os efeitos sonoros
+python3 tools/make_sfx.py                            # regera efeitos e sons de UI
+python3 tools/fix_sprites.py                         # tira fundo opaco de sprite
+python3 tools/check_sprites.py                       # relata alfa dos sprites
+python3 tools/make_menu_theme.py                     # trilha sintetizada de reserva
 ```
 
-Os arquivos de roteiro são ASCII puro; acentos são escapes `\uXXXX`. Escreva
-com acento normalmente e rode `escape.js` depois.
+Para olhar o layout sem rodar nada, abra `tools/preview.html`: carrega o
+`index.html` de verdade em oito viewports, com zoom ajustável. Para medir
+em vez de olhar, use `node tools/shots.js --open`.
+
+`fix_sprites.py` é idempotente: arquivo que já tem alfa é ignorado. Rode
+depois de adicionar arte nova que possa ter vindo com fundo chapado.
+
+Os arquivos de roteiro são ASCII puro; acentos são escapes `\uXXXX`.
+Escreva com acento normalmente e rode `escape.js` depois.
+
+Áudio gerado em WAV; comprimir com `ffmpeg` para `.ogg` e `.mp3` antes de
+publicar.
+
+---
+
+## Publicar
+
+É site estático: `git push` e importar no Vercel, Netlify ou GitHub
+Pages, sem build command. Verificado: caminhos relativos, nomes de
+arquivo consistentes em sistema sensível a maiúsculas, nenhuma
+dependência externa.
+
+Os saves ficam presos ao domínio (`localStorage` é por origem). Trocar de
+endereço começa um arquivo novo — por isso existe o exportar.

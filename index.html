@@ -2,30 +2,131 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#07080c">
+<meta name="description" content="Arquivo Rabenfels - visual novel de horror psicologico e tragedia.">
 <title>Arquivo Rabenfels</title>
+<link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ui.css">
 </head>
 <body>
 
+<!-- Formas SVG reaproveitadas. Ficam fora de tela e sao clonadas por
+     <use>, o que evita repetir caminho em cada componente. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <!-- Sigilo Rabenfels: losango alongado, haste central, tres marcas. -->
+    <symbol id="rf-sigil" viewBox="0 0 34 44">
+      <path d="M17 1 L32 12 L32 32 L17 43 L2 32 L2 12 Z"
+            fill="none" stroke="currentColor" stroke-width="1.1" opacity=".55"/>
+      <path d="M17 8 L17 36" stroke="currentColor" stroke-width="1.1" opacity=".8"/>
+      <path d="M9 15 L25 15 M11 22 L23 22 M13 29 L21 29"
+            stroke="currentColor" stroke-width="1" opacity=".5"/>
+      <circle cx="17" cy="22" r="3.4" fill="none" stroke="currentColor" stroke-width="1.1"/>
+    </symbol>
+
+    <!-- Selo circular do portao de abertura. -->
+    <symbol id="rf-seal" viewBox="0 0 84 84">
+      <circle class="rf-sigil-ring" cx="42" cy="42" r="38"
+              fill="none" stroke="currentColor" stroke-width="1" opacity=".45"/>
+      <circle cx="42" cy="42" r="30"
+              fill="none" stroke="currentColor" stroke-width=".8" opacity=".28"/>
+      <path d="M42 12 L66 28 L66 56 L42 72 L18 56 L18 28 Z"
+            fill="none" stroke="currentColor" stroke-width="1.2" opacity=".7"/>
+      <path d="M42 22 L42 62" stroke="currentColor" stroke-width="1" opacity=".6"/>
+      <path d="M30 34 L54 34 M32 42 L52 42 M34 50 L50 50"
+            stroke="currentColor" stroke-width=".9" opacity=".45"/>
+      <circle cx="42" cy="42" r="5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+
+    <!-- Marca de selo pequena, usada nos itens de menu. -->
+    <symbol id="rf-mark" viewBox="0 0 12 12">
+      <path d="M6 .8 L11 4 L11 8 L6 11.2 L1 8 L1 4 Z"
+            fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+
+    <!-- Icones da barra de dialogo. Traco de 1.2, sem preenchimento. -->
+    <symbol id="rf-ic-history" viewBox="0 0 16 16">
+      <path d="M2.6 8 A5.4 5.4 0 1 1 4.4 12" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M2.2 5.2 L2.6 8.4 L5.6 7.4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M8 5.2 L8 8.2 L10.2 9.4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rf-ic-auto" viewBox="0 0 16 16">
+      <path d="M2 4.4 L6.4 8 L2 11.6 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M8 4.4 L12.4 8 L8 11.6 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="rf-ic-skip" viewBox="0 0 16 16">
+      <path d="M2.4 4.4 L8.4 8 L2.4 11.6 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M11.6 4.2 L11.6 11.8" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rf-ic-save" viewBox="0 0 16 16">
+      <path d="M2.6 2.6 L10.4 2.6 L13.4 5.6 L13.4 13.4 L2.6 13.4 Z"
+            fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M5.2 2.6 L5.2 6.4 L10.4 6.4 L10.4 2.6" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M4.6 9.4 L11.4 9.4" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rf-ic-load" viewBox="0 0 16 16">
+      <path d="M1.8 12.6 L1.8 4 L6 4 L7.4 5.8 L14.2 5.8 L14.2 12.6 Z"
+            fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="rf-ic-settings" viewBox="0 0 16 16">
+      <path d="M3.4 2.6 L3.4 13.4 M8 2.6 L8 13.4 M12.6 2.6 L12.6 13.4"
+            stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="3.4" cy="6"  r="1.7" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="8"   cy="10" r="1.7" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="12.6" cy="5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rf-ic-hide" viewBox="0 0 16 16">
+      <path d="M1.6 8 C3.4 4.8 5.6 3.4 8 3.4 C10.4 3.4 12.6 4.8 14.4 8
+               C12.6 11.2 10.4 12.6 8 12.6 C5.6 12.6 3.4 11.2 1.6 8 Z"
+            fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="8" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M2.6 13.4 L13.4 2.6" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rf-ic-quill" viewBox="0 0 16 16">
+      <path d="M2 14 L5.6 10.4 M13.6 2.4 C10 2.8 6.4 5.2 5 9.4 L7.6 12
+               C11.4 10.4 13.4 6.6 13.6 2.4 Z"
+            fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- Icones das tres rotas. -->
+    <symbol id="rf-icon-hope" viewBox="0 0 16 16">
+      <path d="M8 14 C8 14 3 10.4 3 6.8 C3 4.6 4.5 3 6.3 3 C7.2 3 7.8 3.5 8 4
+               C8.2 3.5 8.8 3 9.7 3 C11.5 3 13 4.6 13 6.8 C13 10.4 8 14 8 14 Z"
+            fill="none" stroke="currentColor" stroke-width="1.1"/>
+    </symbol>
+    <symbol id="rf-icon-loss" viewBox="0 0 16 16">
+      <circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.1"/>
+      <path d="M4.4 4.4 L11.6 11.6" stroke="currentColor" stroke-width="1.1"/>
+    </symbol>
+    <symbol id="rf-icon-answer" viewBox="0 0 16 16">
+      <path d="M1.6 8 C3.4 4.8 5.6 3.4 8 3.4 C10.4 3.4 12.6 4.8 14.4 8
+               C12.6 11.2 10.4 12.6 8 12.6 C5.6 12.6 3.4 11.2 1.6 8 Z"
+            fill="none" stroke="currentColor" stroke-width="1.1"/>
+      <circle cx="8" cy="8" r="2.1" fill="none" stroke="currentColor" stroke-width="1.1"/>
+    </symbol>
+  </defs>
+</svg>
+
 <div id="vn">
 
-  <!-- palco -->
+  <!-- ============================ PALCO ============================ -->
   <div id="bg"></div>
   <div id="sprites"></div>
 
-  <div id="archive-box">
+  <div id="archive-box" role="note" aria-live="polite">
     <div id="archive-label"></div>
     <div id="archive-lines"></div>
   </div>
 
-  <div id="last-box">
+  <div id="last-box" role="note">
     <div id="last-label"></div>
     <div id="last-lines"></div>
   </div>
 
-  <div id="choices"></div>
+  <div id="choices" role="group" aria-label="Escolha"></div>
 
   <div id="title-screen">
     <div id="title-main"></div>
@@ -45,37 +146,127 @@
 
   <div id="fader"></div>
 
+  <!-- Caixa de dialogo: placa de nome como aba, painel com moldura,
+       barra de controle por dentro. -->
   <div id="textbox">
-    <div id="namebox" class="namebox"></div>
-    <div id="textcontent" class="textcontent"></div>
+
+    <div class="rf-dlg__head">
+      <div id="namebox" class="namebox">
+        <span class="namebox__cap" aria-hidden="true"></span>
+        <span class="namebox__name"></span>
+      </div>
+      <div id="line-code" class="rf-dlg__code"></div>
+    </div>
+
+    <div class="rf-dlg__panel">
+      <span class="rf-dlg__diamond" id="rf-diamond" aria-hidden="true"></span>
+      <div id="textcontent" class="textcontent" aria-live="polite"></div>
+
+      <div class="rf-dlg__bar" id="rf-dlg-bar" role="toolbar" aria-label="Controles de leitura"></div>
+    </div>
   </div>
 
   <div id="hint"></div>
 
-  <!-- barra de jogo: aparece so depois que a partida comeca -->
-  <div id="game-bar">
-    <button type="button" id="btn-history"   class="rbf-bar-btn" title="Hist&oacute;rico (H)">Hist&oacute;rico</button>
-    <button type="button" id="btn-quicksave" class="rbf-bar-btn" title="Save r&aacute;pido (F5)">Save r&aacute;pido</button>
-    <button type="button" id="btn-menu"      class="rbf-bar-btn" title="Menu (Esc)">Menu</button>
+  <!-- ======================= HUD DE ROTAS ======================= -->
+  <div id="rf-routes" aria-hidden="true"></div>
+  <div id="rf-route-note" role="status" aria-live="polite"></div>
+
+  <!-- Botao de menu solto: a barra de leitura vive dentro do dialogo. -->
+  <div id="game-bar" role="toolbar" aria-label="Menu">
+    <button type="button" id="btn-menu" class="rbf-bar-btn" title="Menu (Esc)" aria-label="Menu">Menu</button>
   </div>
 
-  <!-- tela de titulo -->
-  <div id="main-menu">
-    <div id="main-menu-inner">
-      <h1 id="main-menu-title">ARQUIVO RABENFELS</h1>
-      <p id="main-menu-sub">Fragmentos da Linhagem, da Marca e do Pacto</p>
-      <div id="main-menu-actions"></div>
-      <p id="main-menu-version"></p>
+  <button type="button" id="rf-show-ui" class="rbf-bar-btn">Mostrar interface</button>
+
+  <!-- ==================== CAMADA DE TRANSICAO =================== -->
+  <div id="rf-transition" aria-hidden="true"></div>
+
+  <!-- ======================= MENU PRINCIPAL ===================== -->
+  <div id="main-menu" role="region" aria-label="Menu principal">
+    <div id="rf-menu-bg" aria-hidden="true"></div>
+    <div id="rf-menu-candle" aria-hidden="true"></div>
+
+    <div class="rf-topbar">
+      <div class="rf-topbar__left">
+        <span class="rbf-label rf-access" id="rf-access">ACESSO RESTRITO</span>
+        <span class="rbf-label" id="rf-dossier"></span>
+      </div>
+      <div class="rf-topbar__right">
+        <span class="rbf-label" id="rf-volume"></span>
+      </div>
+    </div>
+
+    <div class="rf-lockup">
+      <svg class="rf-sigil" aria-hidden="true" style="color:var(--rbf-gold)"><use href="#rf-sigil"/></svg>
+      <div>
+        <div class="rf-lockup__eyebrow">
+          <span class="rf-lockup__dash" aria-hidden="true"></span>
+          <span class="rbf-label" id="rf-eyebrow"></span>
+        </div>
+        <div class="rf-lockup__latin" id="rf-latin"></div>
+        <h1 class="rf-title" id="rf-title"></h1>
+        <div class="rf-subtitle">
+          <span class="rf-subtitle__mark" aria-hidden="true"></span>
+          <span class="rf-subtitle__bar" aria-hidden="true"></span>
+          <span class="rf-subtitle__text" id="rf-subtitle"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rf-art rbf-optional" aria-hidden="true">
+      <svg class="rf-art__arch" viewBox="0 0 440 620" fill="none">
+        <path class="rf-arch-line" d="M60 620 L60 210 Q60 40 220 40 Q380 40 380 210 L380 620"
+              stroke="var(--rbf-paper)" stroke-width="1.5" opacity=".62"/>
+        <path class="rf-arch-line" d="M112 620 L112 232 Q112 96 220 96 Q328 96 328 232 L328 620"
+              stroke="var(--rbf-paper)" stroke-width="1.2" opacity=".42"/>
+        <path class="rf-arch-line" d="M220 40 L220 620" stroke="var(--rbf-paper)" stroke-width="1.1" opacity=".34"/>
+        <path class="rf-arch-line" d="M112 350 L328 350" stroke="var(--rbf-paper)" stroke-width="1.1" opacity=".34"/>
+        <path class="rf-arch-line" d="M148 470 L292 470" stroke="var(--rbf-paper)" stroke-width="1.1" opacity=".48"/>
+        <path class="rf-arch-line" d="M156 268 Q220 214 284 268 Q220 322 156 268 Z"
+              stroke="var(--rbf-gold)" stroke-width="1.6" opacity="1"/>
+        <circle cx="220" cy="268" r="15" stroke="var(--rbf-gold)" stroke-width="1.3" opacity=".8"/>
+      </svg>
+
+      <svg class="rf-art__astro" viewBox="0 0 240 240" fill="none">
+        <circle cx="120" cy="120" r="112" stroke="var(--rbf-paper)" stroke-width="1" opacity=".5"/>
+        <circle cx="120" cy="120" r="74"  stroke="var(--rbf-paper)" stroke-width="1" opacity=".45" stroke-dasharray="3 5"/>
+        <circle cx="120" cy="120" r="38"  stroke="var(--rbf-paper)" stroke-width="1" opacity=".5"/>
+        <path d="M120 8 L120 232 M8 120 L232 120 M40 40 L200 200 M200 40 L40 200"
+              stroke="var(--rbf-paper)" stroke-width=".9" opacity=".4"/>
+        <circle cx="120" cy="46" r="4" fill="var(--rbf-gold)" opacity=".7"/>
+      </svg>
+    </div>
+
+    <nav class="rf-nav" id="rf-nav" aria-label="Registros"></nav>
+
+    <div class="rf-menufoot">
+      <div class="rf-note rbf-optional">
+        <span class="rbf-label rf-note__label">Nota de margem</span>
+        <p class="rf-note__text" id="rf-note"></p>
+      </div>
+      <span class="rbf-code rf-menufoot__version" id="rf-version"></span>
     </div>
   </div>
 
-  <!-- raiz dos overlays: paineis, confirmacoes e avisos -->
+  <!-- ==================== PORTAO DE ABERTURA ==================== -->
+  <div id="rf-gate">
+    <div class="rf-gate__dust rbf-optional" aria-hidden="true"></div>
+    <button type="button" class="rf-gate__btn" id="rf-gate-btn">
+      <svg class="rf-gate__sigil" aria-hidden="true" style="color:var(--rbf-gold)"><use href="#rf-seal"/></svg>
+      <span class="rf-gate__mark" aria-hidden="true"></span>
+      <span class="rf-gate__label" id="rf-gate-label"></span>
+    </button>
+    <span class="rbf-code rf-gate__hint" id="rf-gate-hint"></span>
+  </div>
+
+  <!-- ==================== RAIZ DOS OVERLAYS ==================== -->
   <div id="ui-root"></div>
 
 </div>
 
 <!-- Ordem obrigatoria:
-     manifesto -> servicos -> dados -> engine -> interface -> boot -->
+     manifesto -> servicos -> dados -> montagem -> engine -> interface -> boot -->
 <script src="js/config.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/settings.js"></script>
@@ -83,6 +274,7 @@
 <script src="js/assets.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/history.js"></script>
+<script src="js/routes.js"></script>
 
 <script src="js/data/prologue.js"></script>
 <script src="js/data/chapter1.js"></script>
@@ -90,6 +282,7 @@
 
 <script src="js/script.js"></script>
 <script src="js/saves.js"></script>
+<script src="js/gallery.js"></script>
 <script src="js/engine.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/menu.js"></script>

@@ -1,0 +1,13 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Node (apenas se alguem rodar validate.js localmente)
+node_modules/
+
+# Backups locais: histórico de trabalho, não fazem o jogo rodar.
+# Mantidos na pasta, fora do repositório.
+_backup/
+
+# Imagens de conferência geradas por tools/shots.js
+tools/_shots/

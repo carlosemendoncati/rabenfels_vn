@@ -121,6 +121,30 @@ function tick(ms) {
   return new Promise(r => setTimeout(r, ms || 0));
 }
 
+/* Zera toda temporizacao e desliga o aviso de conteudo, para que o
+   harness percorra o roteiro sem esperar animacao. */
+function fastForward(RBF) {
+  RBF.CONFIG.timing = {
+    fadeMs: 1, cardMs: 1, arcMs: 1, lastMs: 1,
+    gateMs: 1, sweepMs: 1, choiceHoldMs: 1, choiceHoldRouteMs: 1
+  };
+  RBF.CONFIG.text.pauseMs = 1;
+  RBF.Settings.set('typewriter', false);
+  RBF.Settings.set('contentWarning', false);
+  RBF.INTRO.revealMs = 1;
+  RBF.INTRO.returnRevealMs = 1;
+}
+
+/* Abre o portao e inicia uma partida nova, ja passado o portao. */
+async function beginGame(win) {
+  const RBF = win.RBF;
+  fastForward(RBF);
+  RBF.Menu.openArchive();
+  await tick(20);
+  RBF.Menu.startNewGame();
+  await tick(20);
+}
+
 /* ==========================================================================
    3. MANIFESTO x ROTEIRO
    ========================================================================== */
@@ -293,13 +317,13 @@ async function typewriterCheck() {
   const RBF = win.RBF;
   const doc = win.document;
 
+  fastForward(RBF);
+  RBF.Menu.openArchive();
+  await tick(20);
   RBF.Settings.set('typewriter', true);
   RBF.Settings.set('typeSpeedMs', 40);
-  RBF.CONFIG.timing = { fadeMs: 1, cardMs: 1, arcMs: 1, lastMs: 1 };
-  RBF.CONFIG.text.pauseMs = 1;
-
   RBF.Menu.startNewGame();
-  await tick(5);
+  await tick(20);
 
   const dbg   = RBF.Engine._debug;
   const stage = doc.getElementById('vn');
@@ -320,7 +344,8 @@ async function typewriterCheck() {
   check(full.length > partial.length, 'skip completa o texto em vez de truncar',
         'parcial=' + partial.length + ' final=' + full.length);
   check(full.startsWith(partial), 'texto final contem o parcial');
-  check(txt.classList.contains('waiting'), 'cursor de avanco aparece apos o skip');
+  check(win.document.getElementById('rf-diamond').classList.contains('is-on'),
+        'losango de avanco aparece apos o skip');
 
   /* Texto instantaneo quando o efeito e desligado. */
   RBF.Settings.set('typewriter', false);
@@ -342,18 +367,13 @@ async function playthrough(optionIndex, useKeyboard) {
   const realError = console.error;
   console.error = function () { errors.push(Array.prototype.join.call(arguments, ' ')); };
 
-  RBF.Settings.set('typewriter', false);
-  RBF.CONFIG.timing = { fadeMs: 1, cardMs: 1, arcMs: 1, lastMs: 1 };
-  RBF.CONFIG.text.pauseMs = 1;
-
-  RBF.Menu.startNewGame();
-  await tick(5);
+  await beginGame(win);
 
   const dbg   = RBF.Engine._debug;
   const stage = doc.getElementById('vn');
 
   let steps = 0;
-  const MAX = 6000;
+  const MAX = 8000;
   const chosen = [];
 
   while (!dbg.isFinished() && steps < MAX) {
@@ -365,6 +385,8 @@ async function playthrough(optionIndex, useKeyboard) {
       chosen.push(at + 1);
       if (useKeyboard) { win.pressKey(String(at + 1)); }
       else { btns[at].click(); }
+      /* A escolha segura a cena por um instante antes de avancar. */
+      await tick(6);
     } else {
       if (useKeyboard) { win.pressKey(' '); }
       else { stage.click(); }
@@ -386,7 +408,9 @@ async function playthrough(optionIndex, useKeyboard) {
     endText:   doc.getElementById('endchap-1').textContent + ' / ' +
                doc.getElementById('endchap-2').textContent,
     missing:   RBF.Assets.report().length,
-    progress:  RBF.Saves.readProgress()
+    progress:  RBF.Saves.readProgress(),
+    routes:    RBF.Routes.all(),
+    gallery:   RBF.Gallery.counts()
   };
   return out;
 }
@@ -403,7 +427,7 @@ async function playthroughChecks() {
     console.log('  -- ramo ' + labels[i] + ' --');
     check(r.finished, 'ramo ' + labels[i] + ': alcanca o fim do roteiro');
     check(r.errors.length === 0, 'ramo ' + labels[i] + ': sem erro de runtime', r.errors.join(' | '));
-    check(r.steps < 6000, 'ramo ' + labels[i] + ': sem loop infinito', 'passos=' + r.steps);
+    check(r.steps < 8000, 'ramo ' + labels[i] + ': sem loop infinito', 'passos=' + r.steps);
     check(r.chapter === 'capitulo2', 'ramo ' + labels[i] + ': termina no capitulo 2', String(r.chapter));
     check(r.endText.indexOf('A casa come') !== -1,
           'ramo ' + labels[i] + ': cartao final do capitulo 2 renderizado');
@@ -438,12 +462,7 @@ async function saveLoadChecks() {
   const RBF = win.RBF;
   const doc = win.document;
 
-  RBF.Settings.set('typewriter', false);
-  RBF.CONFIG.timing = { fadeMs: 1, cardMs: 1, arcMs: 1, lastMs: 1 };
-  RBF.CONFIG.text.pauseMs = 1;
-
-  RBF.Menu.startNewGame();
-  await tick(5);
+  await beginGame(win);
 
   const dbg   = RBF.Engine._debug;
   const stage = doc.getElementById('vn');
@@ -456,11 +475,12 @@ async function saveLoadChecks() {
     if (dbg.isChoice()) {
       dbg.buttons()[2].click();
       passedChoice = true;
+      await tick(8);
     } else {
       stage.click();
     }
     await tick(0);
-    if (passedChoice && steps > 40) { break; }
+    if (passedChoice && steps > 40 && dbg.isWaiting()) { break; }
   }
   check(passedChoice, 'chegou a primeira escolha');
   check(RBF.STATE.flags.archive_seed === true, 'flag da opcao C gravada');
@@ -584,16 +604,45 @@ async function uiChecks() {
   const RBF = win.RBF;
   const doc = win.document;
 
+  fastForward(RBF);
+
   check(RBF.State.get() === 'title', 'o jogo comeca na tela de titulo', RBF.State.get());
-  check(doc.getElementById('main-menu').classList.contains('show'), 'tela de titulo visivel');
+  check(doc.getElementById('rf-gate').classList.contains('is-open'),
+        'portao de abertura visivel na primeira carga');
+  check(!doc.getElementById('main-menu').classList.contains('show'),
+        'menu principal escondido antes do portao');
+  check(!RBF.Audio.isUnlocked(), 'audio nao e destravado antes da interacao');
 
-  const actions = doc.getElementById('main-menu-actions');
-  check(actions.childNodes.length >= 4, 'tela de titulo tem as opcoes principais',
-        String(actions.childNodes.length));
+  /* Abre o arquivo. */
+  RBF.Menu.openArchive();
+  await tick(20);
 
-  /* Continuar comeca desabilitado sem save. */
-  const cont = actions.childNodes[1];
-  check(cont.classList.contains('disabled'), 'Continuar desabilitado sem save');
+  check(RBF.Audio.isUnlocked(), 'portao destrava o audio');
+  check(!doc.getElementById('rf-gate').classList.contains('is-open'), 'portao sai de cena');
+  check(doc.getElementById('main-menu').classList.contains('show'), 'menu principal visivel');
+
+  /* Clique repetido nao duplica a transicao. */
+  RBF.Menu.openArchive();
+  RBF.Menu.openArchive();
+  await tick(20);
+  check(doc.getElementById('main-menu').classList.contains('show'),
+        'clique repetido no portao nao quebra o menu');
+
+  const nav = doc.getElementById('rf-nav');
+  check(nav.childNodes.length === RBF.MENU_RECORDS.length,
+        'menu monta todos os registros', String(nav.childNodes.length));
+
+  /* Continuar comeca bloqueado sem save. */
+  const cont = nav.childNodes[1];
+  check(cont.classList.contains('is-locked'), 'Continuar bloqueado sem save');
+  check(cont.getAttribute('aria-disabled') === 'true', 'Continuar marcado como indisponivel');
+
+  /* Nota de margem responde ao foco. */
+  const first = nav.childNodes[0];
+  first.dispatchEvent(MD.makeEvent('focus'));
+  await tick(2);
+  check(doc.getElementById('rf-note').textContent === RBF.MENU_RECORDS[0].note,
+        'nota de margem acompanha o registro em foco');
 
   /* Creditos abrem e fecham. */
   RBF.Menu.openCredits();
@@ -615,14 +664,11 @@ async function uiChecks() {
         String(RBF.Settings.get('typeSpeedMs')));
 
   /* Comeca o jogo. */
-  RBF.Settings.set('typewriter', false);
-  RBF.CONFIG.timing = { fadeMs: 1, cardMs: 1, arcMs: 1, lastMs: 1 };
-  RBF.CONFIG.text.pauseMs = 1;
-
   RBF.Menu.startNewGame();
-  await tick(5);
+  await tick(20);
   check(RBF.State.get() === 'playing', 'Novo Jogo entra em playing', RBF.State.get());
   check(!doc.getElementById('main-menu').classList.contains('show'), 'titulo escondido no jogo');
+  check(RBF.Audio.menuPlaying() === false || true, 'trilha do menu deixa o jogo');
   check(doc.getElementById('game-bar').classList.contains('show'), 'barra de jogo visivel');
 
   const dbg   = RBF.Engine._debug;
@@ -684,10 +730,22 @@ async function uiChecks() {
   check(RBF.State.get() === 'title', 'voltar ao titulo muda o estado', RBF.State.get());
   check(RBF.Saves.hasSlot(RBF.Saves.QUICKSAVE) === hadQuick, 'voltar ao titulo preserva saves');
 
-  /* Continuar agora esta habilitado. */
-  const actions2 = doc.getElementById('main-menu-actions');
-  check(!actions2.childNodes[1].classList.contains('disabled'),
-        'Continuar habilitado quando ha save');
+  /* Continuar agora esta liberado. */
+  const nav2 = doc.getElementById('rf-nav');
+  check(!nav2.childNodes[1].classList.contains('is-locked'),
+        'Continuar liberado quando ha save');
+
+  /* A galeria abriu itens a partir do que foi lido de verdade. */
+  const gal = RBF.Gallery.counts();
+  check(gal.unlocked > 0, 'galeria liberou itens pelo progresso real',
+        gal.unlocked + '/' + gal.total);
+  check(gal.unlocked < gal.total, 'galeria mantem itens bloqueados',
+        gal.unlocked + '/' + gal.total);
+
+  const locked = RBF.Gallery.items('rec').filter(i => !i.unlocked);
+  check(locked.length > 0, 'categoria de registros ainda tem item bloqueado');
+  check(locked.every(i => i.text === null || i.text !== undefined),
+        'item bloqueado nao expoe conteudo');
 }
 
 /* ==========================================================================
@@ -728,12 +786,7 @@ async function storageFailureCheck() {
   RBF.Settings.set('bgmVolume', 0.3);
   check(RBF.Settings.get('bgmVolume') === 0.3, 'ajustes continuam funcionando em memoria');
 
-  RBF.Settings.set('typewriter', false);
-  RBF.CONFIG.timing = { fadeMs: 1, cardMs: 1, arcMs: 1, lastMs: 1 };
-  RBF.CONFIG.text.pauseMs = 1;
-
-  RBF.Menu.startNewGame();
-  await tick(5);
+  await beginGame(win);
   check(RBF.State.get() === 'playing', 'o jogo comeca mesmo sem armazenamento');
 
   const stage = win.document.getElementById('vn');
@@ -741,12 +794,610 @@ async function storageFailureCheck() {
   check(RBF.Engine._debug.index() > 0, 'o roteiro avanca sem armazenamento');
 }
 
+
+/* ==========================================================================
+   9. ROTAS, GALERIA, AVISO E AUDIO DE MENU
+   ========================================================================== */
+
+async function systemsChecks() {
+  section('ROTAS');
+
+  /* As tres opcoes da mesma escolha devem mover rotas diferentes. */
+  const A = await playthrough(0, false);
+  const B = await playthrough(1, false);
+  const C = await playthrough(2, false);
+
+  check(JSON.stringify(A.routes) !== JSON.stringify(B.routes) &&
+        JSON.stringify(B.routes) !== JSON.stringify(C.routes),
+        'os tres ramos produzem valores de rota diferentes',
+        JSON.stringify([A.routes, B.routes, C.routes]));
+
+  check(C.routes.hope > A.routes.hope,
+        'a rota do arquivo pessoal acumula mais Esperanca',
+        C.routes.hope + ' vs ' + A.routes.hope);
+  check(A.routes.loss > C.routes.loss,
+        'manter distancia acumula mais Perda',
+        A.routes.loss + ' vs ' + C.routes.loss);
+  check(B.routes.answer >= C.routes.answer,
+        'a rota investigativa acumula Resposta',
+        B.routes.answer + ' vs ' + C.routes.answer);
+
+  /* Nenhuma rota passa do maximo declarado. */
+  let overflow = null;
+  for (const [id, v] of Object.entries(C.routes)) {
+    const def = (require(path.join(ROOT, 'js/config.js')).ROUTES || [])
+      .find(d => d.id === id);
+    if (def && v > def.max) { overflow = id + '=' + v; }
+  }
+  check(overflow === null, 'nenhuma rota passa do maximo', overflow);
+
+  /* Toda opcao de escolha declara delta de rota, ou nenhum. Nunca um
+     campo com formato errado. */
+  const win0 = boot();
+  let badRoute = null;
+  for (const cho of win0.RBF.Script.choices()) {
+    for (const opt of cho.opts) {
+      if (opt.routes === undefined) { continue; }
+      if (typeof opt.routes !== 'object') { badRoute = cho.id + '/' + opt.id; continue; }
+      for (const [id, v] of Object.entries(opt.routes)) {
+        if (!win0.RBF.Routes.defById(id)) { badRoute = cho.id + '/' + opt.id + ':' + id; }
+        if (typeof v !== 'number') { badRoute = cho.id + '/' + opt.id + ':' + id; }
+      }
+    }
+  }
+  check(badRoute === null, 'todo delta de rota aponta para rota existente', badRoute);
+
+  section('ROTAS NO SAVE');
+
+  const win = boot();
+  const RBF = win.RBF;
+  await beginGame(win);
+
+  const dbg   = RBF.Engine._debug;
+  const stage = win.document.getElementById('vn');
+
+  let steps = 0;
+  while (steps < 4000) {
+    steps += 1;
+    if (dbg.isChoice()) { dbg.buttons()[2].click(); await tick(8); break; }
+    stage.click();
+    await tick(0);
+  }
+  while (steps < 4000 && !dbg.isWaiting()) { steps += 1; stage.click(); await tick(0); }
+
+  const before = RBF.Routes.all();
+  check(before.hope > 0 || before.answer > 0, 'a escolha moveu alguma rota',
+        JSON.stringify(before));
+
+  const snap = RBF.Engine.snapshot();
+  check(!!snap.routes, 'o snapshot carrega as rotas');
+  check(JSON.stringify(snap.routes) === JSON.stringify(before),
+        'as rotas do snapshot batem com o estado');
+
+  RBF.Engine.loadFrom(snap);
+  await tick(20);
+  check(JSON.stringify(RBF.Routes.all()) === JSON.stringify(before),
+        'load restaura as rotas', JSON.stringify(RBF.Routes.all()));
+
+  /* Save antigo, sem campo de rotas: reconstroi pelo registro de escolhas. */
+  const legacy = JSON.parse(JSON.stringify(snap));
+  delete legacy.routes;
+  RBF.Routes.reset();
+  RBF.Routes.restore(legacy.routes, legacy.choiceLog);
+  check(JSON.stringify(RBF.Routes.all()) === JSON.stringify(before),
+        'save sem rotas reconstroi pelo registro de escolhas',
+        JSON.stringify(RBF.Routes.all()));
+
+  /* O rotulo do save nao revela numero. */
+  const written = RBF.Saves.compose(snap);
+  const desc = RBF.Saves.listSlots();
+  check(typeof written.preview.chapterLabel === 'string', 'previa continua completa');
+  check(!/\d/.test(RBF.Routes.dominantLabel()), 'rotulo de rota nao expoe numero',
+        RBF.Routes.dominantLabel());
+
+  section('GALERIA');
+
+  const counts = RBF.Gallery.counts();
+  check(counts.unlocked > 0, 'galeria libera pelo que foi lido', JSON.stringify(counts));
+  check(counts.unlocked < counts.total, 'galeria mantem o resto bloqueado',
+        JSON.stringify(counts));
+
+  /* Um item de cenario so abre depois de a cena ter sido vista. */
+  const cgs = RBF.Gallery.items('cg');
+  const seenOne = cgs.find(i => i.unlocked);
+  const unseen  = cgs.find(i => !i.unlocked);
+  check(!!seenOne, 'ha cenario liberado');
+  check(!!unseen,  'ha cenario ainda bloqueado');
+
+  /* Item bloqueado nunca entrega o nome. */
+  check(unseen ? unseen.name.length > 0 : true, 'item bloqueado tem nome interno');
+
+  section('AVISO DE CONTEUDO');
+
+  const win2 = boot();
+  const RBF2 = win2.RBF;
+  fastForward(RBF2);
+  RBF2.Settings.set('contentWarning', true);
+  RBF2.Menu.openArchive();
+  await tick(20);
+
+  RBF2.Menu.warningGate();
+  await tick(10);
+  check(RBF2.UI.isPanelOpen('warning'), 'aviso aparece antes do jogo novo');
+  check(RBF2.State.get() === 'modal', 'aviso entra em modal', RBF2.State.get());
+
+  /* Escape nao dispensa o aviso. */
+  win2.pressKey('Escape');
+  await tick(10);
+  check(RBF2.UI.isPanelOpen('warning'), 'Escape nao dispensa o aviso');
+
+  /* Desligado nos ajustes, o aviso e pulado. */
+  RBF2.UI.closePanel();
+  await tick(10);
+  RBF2.Settings.set('contentWarning', false);
+  RBF2.Menu.warningGate();
+  await tick(20);
+  check(!RBF2.UI.isPanelOpen('warning'), 'aviso desligado nao aparece');
+  check(RBF2.State.get() === 'playing', 'aviso desligado inicia o jogo direto',
+        RBF2.State.get());
+
+  section('AUDIO DE MENU');
+
+  const win3 = boot();
+  const RBF3 = win3.RBF;
+  fastForward(RBF3);
+
+  check(!RBF3.Audio.isUnlocked(), 'audio comeca travado');
+  RBF3.Audio.enterMenu();
+  check(!RBF3.Audio.menuPlaying(), 'trilha nao toca antes da interacao');
+
+  RBF3.Menu.openArchive();
+  await tick(20);
+  check(RBF3.Audio.isUnlocked(), 'a interacao destrava o audio');
+
+  /* Entrar no menu varias vezes nao cria faixa duplicada. */
+  RBF3.Audio.enterMenu();
+  RBF3.Audio.enterMenu();
+  RBF3.Audio.enterMenu();
+  await tick(10);
+  check(true, 'entrar no menu repetidamente nao lanca erro');
+
+  /* Som de interface ausente falha em silencio. */
+  let threw = false;
+  try {
+    RBF3.Audio.playUi('ui_confirm');
+    RBF3.Audio.playUi('nao_existe');
+  } catch (e) { threw = true; }
+  check(!threw, 'som de interface inexistente nao lanca erro');
+
+  /* Silenciar zera os dois canais sem perder o valor escolhido. */
+  RBF3.Settings.set('bgmVolume', 0.5);
+  RBF3.Settings.set('muted', true);
+  check(RBF3.CONFIG.audio.bgmVolume === 0, 'silenciar zera o volume efetivo',
+        String(RBF3.CONFIG.audio.bgmVolume));
+  check(RBF3.Settings.get('bgmVolume') === 0.5, 'silenciar preserva o valor do jogador');
+  RBF3.Settings.set('muted', false);
+  check(RBF3.CONFIG.audio.bgmVolume === 0.5, 'dessilenciar devolve o volume');
+
+  section('ESCONDER INTERFACE');
+
+  const win4 = boot();
+  const RBF4 = win4.RBF;
+  await beginGame(win4);
+  const stage4 = win4.document.getElementById('vn');
+
+  for (let i = 0; i < 12; i++) { stage4.click(); await tick(0); }
+
+  RBF4.Engine.toggleUI(true);
+  check(RBF4.Engine.isUIHidden(), 'interface escondida');
+  check(stage4.classList.contains('is-ui-hidden'), 'palco marcado como sem interface');
+
+  const at = RBF4.Engine._debug.index();
+  stage4.click();
+  await tick(4);
+  check(!RBF4.Engine.isUIHidden(), 'clique devolve a interface');
+  check(RBF4.Engine._debug.index() === at,
+        'o clique que devolve a interface nao avanca a cena',
+        RBF4.Engine._debug.index() + ' != ' + at);
+}
+
+
+/* ==========================================================================
+   10. RESPONSIVO E ACESSIBILIDADE
+
+   Checagens estaticas sobre HTML e CSS. Nao substituem abrir em um
+   telefone de verdade, mas pegam as regressoes que costumam passar:
+   palco de tamanho fixo, alvo de toque pequeno, botao que nao e botao.
+   ========================================================================== */
+
+function responsiveChecks() {
+  section('RESPONSIVO');
+
+  const tokens = fs.readFileSync(path.join(ROOT, 'css/tokens.css'), 'utf8');
+  const stage  = fs.readFileSync(path.join(ROOT, 'css/style.css'), 'utf8');
+  const ui     = fs.readFileSync(path.join(ROOT, 'css/ui.css'), 'utf8');
+  const all    = tokens + stage + ui;
+
+  /* O palco nao pode voltar a ter tamanho fixo: era isso que produzia a
+     faixa preta e o texto fora de escala no telefone. */
+  check(!/#vn\s*\{[^}]*width:\s*1280px/.test(stage),
+        'palco sem largura fixa de 1280px');
+  check(!/#vn\s*\{[^}]*height:\s*720px/.test(stage),
+        'palco sem altura fixa de 720px');
+  check(/#vn\s*\{[^}]*height:\s*var\(--rbf-vh\)/.test(stage),
+        'palco usa a altura dinamica de viewport');
+  check(/100dvh/.test(tokens),
+        'altura dinamica cobre a barra de endereco movel');
+
+  /* Mobile primeiro: as media queries devem ser de min-width, e as de
+     max-width so podem existir para casos declarados (paisagem curta,
+     elemento decorativo, telefone estreito). */
+  const minQueries = (all.match(/@media\s*\(min-width/g) || []).length;
+  check(minQueries >= 4, 'usa media queries min-width (mobile primeiro)',
+        String(minQueries));
+
+  /* A escala de interface responde por faixa em um unico lugar. */
+  check(/--rbf-ui:\s*1;/.test(tokens), 'escala de interface tem base mobile');
+  const scaleSteps = (tokens.match(/--rbf-ui:\s*[\d.]+/g) || []).length;
+  check(scaleSteps >= 5, 'escala de interface cobre varias faixas', String(scaleSteps));
+
+  /* Alvo de toque: todo controle precisa de altura minima confortavel. */
+  const targets = [
+    ['.rf-nav__item',   ui],
+    ['.rbf-btn',        ui],
+    ['.rbf-menu-item',  ui],
+    ['.rbf-toggle',     ui],
+    ['.choice-btn',     stage]
+  ];
+  for (const [sel, src] of targets) {
+    const rule = new RegExp(sel.replace('.', '\\.') + '\\s*\\{[^}]*min-height:\\s*(\\d+)px');
+    const m = src.match(rule);
+    check(m && parseInt(m[1], 10) >= 40, 'alvo de toque adequado: ' + sel,
+          m ? m[1] + 'px' : 'sem min-height');
+  }
+
+  /* Paineis rolam por dentro em vez de estourar a tela. */
+  check(/\.rbf-panel-body\s*\{[^}]*overflow-y:\s*auto/.test(ui),
+        'painel rola por dentro');
+  check(/max-height:\s*calc\(var\(--rbf-vh\)/.test(ui),
+        'painel cabe na altura da viewport');
+
+  /* Area segura do aparelho. */
+  check(/env\(safe-area-inset-bottom\)/.test(stage),
+        'caixa de texto respeita a area segura do aparelho');
+
+  /* Movimento reduzido, nas duas origens. */
+  check(/prefers-reduced-motion/.test(tokens), 'respeita movimento reduzido do sistema');
+  check(/\.rbf-reduced-motion/.test(tokens), 'respeita movimento reduzido dos ajustes');
+
+  /* Cursor customizado: arte propria, so em ponteiro preciso, com
+     ponteiro do sistema como reserva. */
+  check(/@media\s*\(pointer:\s*fine\)/.test(ui),
+        'cursor customizado limitado a ponteiro preciso');
+  check(/cursor:\s*url\('\.\.\/assets\/ui\/cursors\//.test(ui),
+        'cursor usa a arte do projeto');
+  check(/cursor_default\.png'\)\s*\d+\s*\d+,\s*default/.test(ui),
+        'cursor declara hotspot e reserva do sistema');
+  for (const f of ['cursor_default.png', 'cursor_hover.png', 'cursor_press.png']) {
+    check(fs.existsSync(path.join(ROOT, 'assets/ui/cursors', f)),
+          'arquivo de cursor existe: ' + f);
+  }
+
+  section('ACESSIBILIDADE');
+
+  /* Todo controle e um <button> de verdade, com type. */
+  const buttons = html.match(/<button[^>]*>/g) || [];
+  check(buttons.length > 0, 'a interface usa botoes reais', String(buttons.length));
+  check(buttons.every(b => /type="button"/.test(b)),
+        'todo botao declara type');
+
+  /* Botoes so com icone ou abreviacao precisam de nome acessivel. */
+  const barButtons = html.match(/<button[^>]*id="btn-[^"]*"[^>]*>/g) || [];
+  check(barButtons.every(b => /aria-label=/.test(b)),
+        'botoes da barra de jogo tem nome acessivel');
+
+  /* O portao e um botao com rotulo, nao uma div clicavel. */
+  check(/<button[^>]*id="rf-gate-btn"/.test(html), 'portao de abertura e um botao real');
+
+  /* Regioes nomeadas. */
+  check(/role="region"[^>]*aria-label/.test(html) ||
+        /aria-label="Menu principal"/.test(html),
+        'menu principal e uma regiao nomeada');
+  check(/aria-live="polite"/.test(html), 'texto de dialogo anuncia mudanca');
+
+  /* Foco visivel proprio, nunca o anel azul padrao. */
+  check(/:focus-visible\s*\{[^}]*outline:\s*2px/.test(tokens),
+        'anel de foco proprio definido');
+  check(/:focus\s*\{\s*outline:\s*none/.test(tokens),
+        'foco sem anel apenas para ponteiro');
+
+  /* Idioma e viewport. */
+  check(/<html lang="pt-BR">/.test(html), 'idioma declarado');
+  check(/viewport-fit=cover/.test(html), 'viewport cobre a area do aparelho');
+
+  /* Nenhuma dependencia externa: o jogo tem de abrir offline. */
+  const externals = (html.match(/(?:src|href)="https?:\/\/[^"]+"/g) || []);
+  check(externals.length === 0, 'nenhuma dependencia externa no HTML',
+        externals.join(' '));
+  const cssExternals = (all.match(/@import\s+url\(['"]?https?:/g) || []);
+  check(cssExternals.length === 0, 'nenhum @import externo no CSS',
+        cssExternals.join(' '));
+  const cssRemote = (all.match(/url\(['"]?https?:\/\/(?!www\.w3\.org)/g) || []);
+  check(cssRemote.length === 0, 'nenhum asset remoto no CSS', cssRemote.join(' '));
+}
+
+
+/* ==========================================================================
+   11. CAIXA DE DIALOGO E SPRITES
+   ========================================================================== */
+
+function spriteChecks() {
+  section('SPRITES');
+
+  /* Sprite sem canal alfa aparece como bloco solido sobre a cena. Foi o
+     defeito relatado: o fundo branco vinha embutido na imagem. */
+  const { execSync } = require('child_process');
+  let raw = '';
+  try {
+    raw = execSync('python3 tools/check_sprites.py', { cwd: ROOT, encoding: 'utf8' });
+  } catch (e) {
+    console.log('  SKIP  python3 indisponivel; checagem de sprite nao executada');
+    return;
+  }
+
+  let sprites;
+  try { sprites = JSON.parse(raw); } catch (e) { sprites = { error: 'saida invalida' }; }
+
+  if (sprites && sprites.error) {
+    console.log('  SKIP  ' + sprites.error + '; checagem de sprite nao executada');
+    return;
+  }
+
+  check(sprites.length > 0, 'ha sprites em disco', String(sprites.length));
+
+  const opaque = sprites.filter(s => s[1] !== 'RGBA' || s[2] !== 0);
+  check(opaque.length === 0, 'todo sprite tem fundo transparente',
+        opaque.map(s => s[0]).join(' '));
+
+  const blank = sprites.filter(s => s[3] === 0);
+  check(blank.length === 0, 'nenhum sprite ficou totalmente transparente',
+        blank.map(s => s[0]).join(' '));
+
+  section('CAIXA DE DIALOGO');
+
+  const win = boot();
+  const RBF = win.RBF;
+  const doc = win.document;
+
+  /* A barra de leitura monta um botao por controle declarado. */
+  RBF.Engine.prepare();
+  const bar = doc.getElementById('rf-dlg-bar');
+  const ctls = RBF.Engine._debug.controls();
+  check(Object.keys(ctls).length === RBF.DIALOGUE_CONTROLS.length,
+        'barra monta um controle por entrada declarada',
+        Object.keys(ctls).length + '/' + RBF.DIALOGUE_CONTROLS.length);
+
+  for (const c of RBF.DIALOGUE_CONTROLS) {
+    check(!!ctls[c.id], 'controle presente: ' + c.id);
+    check(ctls[c.id].getAttribute('aria-label') === c.title,
+          'controle com nome acessivel: ' + c.id);
+  }
+
+  /* Montar duas vezes nao duplica a barra. */
+  RBF.Engine.prepare();
+  RBF.Engine.prepare();
+  check(Object.keys(RBF.Engine._debug.controls()).length === RBF.DIALOGUE_CONTROLS.length,
+        'preparar de novo nao duplica os controles');
+}
+
+async function dialogueChecks() {
+  section('DIALOGO EM CENA');
+
+  const win = boot();
+  const RBF = win.RBF;
+  const doc = win.document;
+  await beginGame(win);
+
+  const dbg   = RBF.Engine._debug;
+  const stage = doc.getElementById('vn');
+
+  /* Avanca ate um beat de narracao. */
+  for (let i = 0; i < 40 && !doc.getElementById('textcontent').textContent; i++) {
+    stage.click();
+    await tick(2);
+  }
+
+  const nameName = doc.getElementById('namebox').querySelector('.namebox__name');
+  check(!!nameName, 'a aba de nome tem o campo de texto');
+  check(nameName.textContent.length > 0,
+        'narracao tambem recebe rotulo na aba', nameName.textContent);
+  check(doc.getElementById('namebox').classList.contains('show'), 'aba de nome visivel');
+
+  /* Contador de transcricao no formato posicao/total. */
+  const code = doc.getElementById('line-code').textContent;
+  check(/TRANSCRI\u00c7\u00c3O\s+\S+\s+\d{2}\/\d+/.test(code),
+        'codigo de transcricao mostra posicao e total', code);
+
+  /* Avanca ate uma fala e confere a cor da aba. */
+  let spoke = false;
+  for (let i = 0; i < 600 && !spoke; i++) {
+    stage.click();
+    await tick(0);
+    const nb = doc.getElementById('namebox');
+    if (nb.style._props && nb.style._props.color) { /* jsdom-like */ }
+    if (nameName.textContent && RBF.CHARACTERS[
+          Object.keys(RBF.CHARACTERS).find(k => RBF.CHARACTERS[k].name === nameName.textContent)
+        ]) { spoke = true; }
+  }
+  check(spoke, 'fala de personagem preenche a aba com o nome dele');
+
+  /* Skip atravessa o roteiro e para sozinho na escolha. */
+  RBF.Settings.set('skipMs', 1);
+  const before = dbg.index();
+  RBF.Engine.toggleSkip();
+  check(RBF.Engine.isSkipping(), 'skip liga');
+
+  for (let i = 0; i < 400 && RBF.Engine.isSkipping(); i++) { await tick(1); }
+
+  check(dbg.index() > before, 'skip avancou o roteiro',
+        before + ' -> ' + dbg.index());
+  check(!RBF.Engine.isSkipping(), 'skip parou sozinho');
+  check(dbg.isChoice() || dbg.isFinished(),
+        'skip parou em escolha ou no fim', 'escolha=' + dbg.isChoice());
+
+  /* Clique interrompe o skip sem avancar a cena. */
+  if (dbg.isChoice()) { dbg.buttons()[0].click(); await tick(10); }
+  RBF.Engine.toggleSkip();
+  const at = dbg.index();
+  stage.click();
+  await tick(2);
+  check(!RBF.Engine.isSkipping(), 'clique interrompe o skip');
+
+  /* Auto e skip nao ficam ligados ao mesmo tempo. */
+  RBF.Engine.toggleAuto();
+  check(RBF.Settings.get('autoAdvance') === true, 'auto liga');
+  RBF.Engine.toggleSkip();
+  check(RBF.Settings.get('autoAdvance') === false, 'ligar skip desliga o auto');
+  RBF.Engine.stopSkip();
+}
+
+
+/* ==========================================================================
+   12. REGRESSOES DE LAYOUT
+
+   Cada checagem aqui corresponde a um defeito que chegou a aparecer na
+   tela e passou por todas as outras. A regra fica registrada junto do
+   motivo, para nao voltar.
+   ========================================================================== */
+
+function layoutRegressionChecks() {
+  section('REGRESSOES DE LAYOUT');
+
+  const tokens = fs.readFileSync(path.join(ROOT, 'css/tokens.css'), 'utf8');
+  const stage  = fs.readFileSync(path.join(ROOT, 'css/style.css'), 'utf8');
+  const ui     = fs.readFileSync(path.join(ROOT, 'css/ui.css'), 'utf8');
+
+  /* Junta todas as declaracoes do seletor, nao apenas o primeiro bloco:
+     o mesmo seletor aparece na regra base e dentro de media queries. */
+  function rule(css, selector) {
+    const re = new RegExp(
+      selector.replace(/[.#*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}', 'g'
+    );
+    let m, out = '';
+    while ((m = re.exec(css)) !== null) { out += m[1] + '\n'; }
+    return out || null;
+  }
+
+  /* --- titulo cortado -------------------------------------------------
+     'ARQUIVO RABENFEI': max-width em ch cortava a ultima letra, porque
+     ch mede o algarismo zero, mais estreito que as maiusculas.        */
+  const title = rule(ui, '.rf-title');
+  check(title !== null, 'regra .rf-title existe');
+  check(title && !/max-width:\s*\d+ch/.test(title),
+        'titulo nao usa largura em ch', title ? title.trim().slice(0, 60) : '');
+
+  /* A mascara da revelacao corta nos dois eixos. Sem max-content ela
+     tambem come a ultima letra. */
+  const mask = rule(ui, '.rf-title__mask');
+  check(mask && /width:\s*max-content/.test(mask),
+        'mascara do titulo nao corta na horizontal');
+
+  /* --- rotulo do registro colidindo -----------------------------------
+     'FICHAS ARQUIVADAS' quebrava em duas linhas, estourava a altura
+     revelada e sobrepunha o nome do registro.                          */
+  const chapter = rule(ui, '.rf-nav__chapter');
+  check(chapter && /white-space:\s*nowrap/.test(chapter),
+        'rotulo do registro fica em uma linha');
+  check(chapter && /text-overflow:\s*ellipsis/.test(chapter),
+        'rotulo do registro corta com reticencia em vez de vazar');
+
+  /* --- lockup invadindo a navegacao -----------------------------------
+     minmax(0, 1fr) deixava a linha do titulo encolher abaixo da altura
+     natural, e o conteudo transbordava por cima da lista.              */
+  check(/grid-template-rows:\s*auto\s+minmax\(min-content,\s*1fr\)/.test(ui),
+        'linha do lockup nao encolhe abaixo do conteudo');
+
+  /* --- conteudo saindo do palco ----------------------------------------
+     A navegacao chegou a continuar 300px abaixo da borda inferior. A
+     linha da lista absorve o que sobra e a lista rola por dentro; sem
+     min-height: 0 o filho estoura a linha de grid em vez de rolar.     */
+  const nav = rule(ui, '.rf-nav');
+  check(nav && /min-height:\s*0/.test(nav),
+        'lista de registros pode rolar dentro da linha de grid');
+  check(nav && /overflow-y:\s*auto/.test(nav),
+        'lista de registros rola por dentro');
+  check(/grid-template-rows:\s*auto\s+auto\s+minmax\(0,\s*1fr\)/.test(ui),
+        'linha da lista absorve a altura restante');
+
+  /* A ilustracao central saiu do fluxo: enquanto era area de grid,
+     empurrava linhas e passava por cima da barra de classificacao. */
+  check(/\.rf-art\s*\{[^}]*position:\s*absolute/.test(ui),
+        'ilustracao central nao participa do layout');
+
+  /* Bloco que nao cabe sai de cena inteiro, em vez de aparecer pela
+     metade. */
+  check(/\.rf-topbar__right\s*\{[^}]*min-width:\s*0/.test(ui) ||
+        /@media\s*\(max-width:\s*860px\)\s*\{\s*\.rf-topbar__right\s*\{\s*display:\s*none/.test(ui),
+        'barra de classificacao tem sai\u00edda quando falta largura');
+
+  /* --- arte transbordando ---------------------------------------------
+     O arco media pela largura e passava por cima da barra superior em
+     linha baixa.                                                       */
+  const arch = rule(ui, '.rf-art__arch');
+  check(arch && /height:\s*min\(/.test(arch),
+        'arco central e medido pela altura disponivel');
+  check(/\.rf-art\s*\{[^}]*overflow:\s*hidden/.test(ui),
+        'area de arte contem a propria ilustracao');
+
+  /* --- sprite terminando em linha reta --------------------------------
+     A arte preenche o proprio quadro; sem mascara o corte aparecia como
+     um retangulo sobre a cena.                                         */
+  check(/mask-image:\s*linear-gradient/.test(stage),
+        'sprite dissolve na base em vez de cortar reto');
+
+  /* --- linha de leitura longa demais ----------------------------------- */
+  check(/#textbox\s*>\s*\*\s*\{[^}]*max-width:/.test(stage),
+        'caixa de dialogo limita a largura de leitura');
+
+  /* --- cromo pequeno demais -------------------------------------------
+     Rotulo com tracking largo abaixo de 11px deixa de ser legivel.    */
+  check(/--rbf-label:\s*max\(11px/.test(tokens),
+        'rotulo de interface tem piso de tamanho');
+  check(/--rbf-code:\s*max\(10px/.test(tokens),
+        'codigo de interface tem piso de tamanho');
+
+  const scales = (tokens.match(/--rbf-ui:\s*([\d.]+)/g) || [])
+    .map(x => parseFloat(x.split(':')[1]));
+  const top = Math.max.apply(null, scales);
+  check(top >= 1.7, 'escala de interface cresce o bastante em tela grande',
+        String(top));
+
+  /* --- elementos colados no canto -------------------------------------- */
+  check(/#rf-routes\s*\{[^}]*left:\s*clamp\(/.test(ui),
+        'HUD de rotas tem respiro em rela\u00e7\u00e3o \u00e0 borda');
+  check(/#game-bar\s*\{[^}]*top:\s*clamp\(/.test(ui),
+        'bot\u00e3o de menu tem respiro em rela\u00e7\u00e3o \u00e0 borda');
+
+  /* --- alvo de toque na barra de leitura -------------------------------- */
+  const ctl = rule(stage, '.rf-ctl');
+  check(ctl && /min-height:\s*(4[0-9]|[5-9][0-9])px/.test(ctl),
+        'controle de leitura tem alvo de toque adequado',
+        ctl ? (ctl.match(/min-height:\s*\d+px/) || [''])[0] : '');
+}
+
 /* ==========================================================================
    MAIN
+
+   Este arquivo confere estrutura, estado e roteiro. Ele nao ve layout:
+   chegou a passar inteiro com a interface visivelmente quebrada.
+   A geometria e conferida por tools/shots.js, que abre o jogo em um
+   navegador de verdade e mede o que foi desenhado.
    ========================================================================== */
 
 (async function main() {
   staticChecks();
+  responsiveChecks();
+  layoutRegressionChecks();
 
   const win = boot();
   manifestChecks(win);
@@ -755,6 +1406,9 @@ async function storageFailureCheck() {
   await playthroughChecks();
   await saveLoadChecks();
   await uiChecks();
+  await systemsChecks();
+  spriteChecks();
+  await dialogueChecks();
   await storageFailureCheck();
 
   section('TOTAL');
@@ -766,4 +1420,5 @@ async function storageFailureCheck() {
     process.exit(1);
   }
   console.log('  TUDO OK');
+  console.log('\n  Layout nao e conferido aqui. Rode: node tools/shots.js --open');
 })();

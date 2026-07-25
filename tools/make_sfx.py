@@ -22,14 +22,16 @@ import wave
 
 SR = 44100
 OUT = os.path.join(os.path.dirname(__file__), '..', 'assets', 'audio', 'sfx')
+OUT_UI = os.path.join(os.path.dirname(__file__), '..', 'assets', 'audio', 'ui')
 
 random.seed(20260724)
 
 
-def write_wav(name, samples):
+def write_wav(name, samples, folder=None):
     """Grava lista de floats -1..1 como WAV mono 16 bits."""
-    os.makedirs(OUT, exist_ok=True)
-    path = os.path.join(OUT, name)
+    target = folder or OUT
+    os.makedirs(target, exist_ok=True)
+    path = os.path.join(target, name)
     peak = max(1e-9, max(abs(s) for s in samples))
     norm = 0.89 / peak
     frames = b''.join(
@@ -200,6 +202,68 @@ def wind():
     return out
 
 
+
+
+# ==========================================================================
+# SONS DE INTERFACE
+# Curtos, discretos, sem tom definido que brigue com a trilha.
+# ==========================================================================
+
+def ui_hover():
+    """Passagem sobre um item de menu. Quase um roçar de papel."""
+    body = env(highpass(lowpass(noise(int(SR * 0.075)), 5200), 1900), 0.004, 0.9, 8.0)
+    return [v * 0.30 for v in body]
+
+
+def ui_confirm():
+    """Confirmacao. Marca seca com uma quinta grave por baixo."""
+    mark = env(highpass(lowpass(noise(int(SR * 0.10)), 3600), 1100), 0.001, 0.9, 9.0)
+    low  = env(mix(sine(196, 0.30, sweep=-58), [v * 0.5 for v in sine(294, 0.30, sweep=-70)]),
+               0.002, 0.7, 5.0)
+    return mix([v * 0.42 for v in mark], [v * 0.40 for v in low])
+
+
+def ui_back():
+    """Retorno. Mesmo gesto do confirmar, invertido e mais grave."""
+    low = env(sine(150, 0.26, sweep=-34), 0.004, 0.8, 5.5)
+    air = env(lowpass(noise(int(SR * 0.16)), 1500), 0.02, 0.9, 4.0)
+    return mix([v * 0.45 for v in low], [v * 0.16 for v in air])
+
+
+def ui_page():
+    """Troca de painel. Folha grossa passando."""
+    body = env(highpass(lowpass(noise(int(SR * 0.42)), 2600), 520), 0.02, 0.55, 2.8)
+    edge = env(highpass(noise(int(SR * 0.05)), 2400), 0.001, 0.9, 9.0)
+    out = [v * 0.55 for v in body]
+    return place(out, [v * 0.22 for v in edge], 0.02)
+
+
+def ui_seal():
+    """Selo rompido. Estalo curto e cauda de cera."""
+    crack = env(highpass(lowpass(noise(int(SR * 0.09)), 6000), 900), 0.0008, 0.95, 13.0)
+    thud  = env(sine(88, 0.34, sweep=-30), 0.002, 0.7, 4.2)
+    tail  = env(lowpass(noise(int(SR * 0.5)), 900), 0.03, 0.85, 3.2)
+    out = mix([v * 0.75 for v in crack], [v * 0.55 for v in thud])
+    return place(out, [v * 0.13 for v in tail], 0.05)
+
+
+def ui_archive_open():
+    """Abertura do arquivo. Gesto de peso: capa cedendo e ar deslocado."""
+    swell = env(lowpass(noise(int(SR * 1.30)), 380), 0.35, 0.5, 1.6)
+    low   = env(sine(58, 1.30, sweep=13), 0.4, 0.55, 1.3)
+    cover = env(lowpass(highpass(noise(int(SR * 0.55)), 420), 2100), 0.05, 0.7, 3.0)
+    out = mix([v * 0.50 for v in swell], [v * 0.55 for v in low])
+    out = place(out, [v * 0.26 for v in cover], 0.30)
+    return out
+
+
+def ui_route():
+    """Alteracao de rota. Marca fina, sem drama."""
+    tone = env(mix(sine(523.25, 0.42, sweep=-40), [v * 0.4 for v in sine(784, 0.42, sweep=-60)]),
+               0.006, 0.8, 4.6)
+    return [v * 0.30 for v in tone]
+
+
 if __name__ == '__main__':
     write_wav('sfx_page_turn.wav', page_turn())
     write_wav('sfx_package.wav', package())
@@ -207,4 +271,12 @@ if __name__ == '__main__':
     write_wav('sfx_door.wav', door())
     write_wav('sfx_footsteps.wav', footsteps())
     write_wav('sfx_wind.wav', wind())
+
+    write_wav('ui_hover.wav',        ui_hover(),        OUT_UI)
+    write_wav('ui_confirm.wav',      ui_confirm(),      OUT_UI)
+    write_wav('ui_back.wav',         ui_back(),         OUT_UI)
+    write_wav('ui_page.wav',         ui_page(),         OUT_UI)
+    write_wav('ui_seal.wav',         ui_seal(),         OUT_UI)
+    write_wav('ui_archive_open.wav', ui_archive_open(), OUT_UI)
+    write_wav('ui_route.wav',        ui_route(),        OUT_UI)
     print('ok')

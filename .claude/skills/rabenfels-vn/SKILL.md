@@ -16,6 +16,7 @@ Eles são curtos e evitam os erros que mais custam retrabalho neste projeto.
 | regras de escrita, voz de cada personagem | `reference/estilo.md` |
 | cronologia, terminologia, o que pode ser revelado quando | `reference/canon.md` |
 | tipos de beat, módulos, como adicionar capítulo | `reference/arquitetura.md` |
+| tokens, animação, mobile-first, componentes | `reference/design.md` |
 
 Fonte canônica: `docs/documento_mestre_rabenfels.docx`. Ele vence qualquer
 briefing. Se um pedido contradisser o canon, siga o canon e diga qual arquivo
@@ -29,8 +30,11 @@ diverge — não invente lore para fechar a contradição.
 2. **Faça backup** em `_backup/pre_<tarefa>_<timestamp>/` antes de editar.
 3. **Escreva o roteiro em UTF-8** e converta com `node tools/escape.js <arquivo>`.
    Os arquivos de `js/data/` são ASCII puro com escapes `\uXXXX`.
-4. **Valide**: `node tools/validate.js`. Sem npm, sem jsdom. Precisa fechar em
-   zero falhas antes de entregar.
+4. **Valide as duas camadas.** `node tools/validate.js` cobre estrutura,
+   estado e roteiro — e **não vê layout**. Para qualquer mudança visual,
+   `node tools/shots.js --open` abre o jogo em Chrome, mede a geometria em
+   oito tamanhos e grava as imagens em `tools/_shots/`. Olhe as imagens.
+   Já aconteceu de passar 442 de 442 com a tela quebrada.
 5. **Releia o transcript.** O validador não pega repetição, frase de efeito nem
    beat que explica o que o jogador acabou de ver. Isso só sai relendo.
 
@@ -47,6 +51,16 @@ diverge — não invente lore para fechar a contradição.
   anterior para "reforçar", ela sai.
 - **Revelação adiantada.** Confira em `reference/canon.md` o que cada capítulo
   pode saber. O Capítulo 2 não pode ter contato real com as gêmeas.
+- **Rota movida por inferência.** Uma escolha só move Esperança, Perda ou
+  Resposta pelo campo `routes` declarado na opção. Nunca deduza efeito do
+  texto.
+- **Item de galeria liberado "para mostrar".** Cada entrada tem condição
+  verificada contra progresso real. Não afrouxe para demonstrar.
+- **Valor bruto no CSS.** Cor, duração e easing vivem em `css/tokens.css`.
+  Um hex solto num componente é regressão.
+- **Media query `max-width` para fazer caber.** O CSS é mobile-first: a base
+  atende telefone e as faixas maiores só crescem. `max-width` existe apenas
+  para paisagem curta e elemento decorativo.
 
 ## Estilo de resposta
 

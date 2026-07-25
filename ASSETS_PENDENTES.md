@@ -13,7 +13,11 @@ correspondente de `js/config.js`.
 | Personagens | `aldric` (6 expressões), `serafina` (5), `matheo` (3), `klara`, `liara` |
 | Backgrounds | `bg_prologue_room`, `bg_archive_closeup` |
 | BGM | `bgm_prologue`, `bgm_archive`, `bgm_grey_march`, `bgm_nidhaus` |
+| Trilha do menu | `menu_theme`, sintetizada em `tools/make_menu_theme.py` |
 | SFX | os 6, sintetizados em `tools/make_sfx.py` |
+| Sons de interface | os 7, sintetizados em `tools/make_sfx.py` |
+| Cursor | SVG embutido em `css/tokens.css`, três estados |
+| Sigilo, selo e arco | SVG embutido em `index.html` |
 
 ---
 
@@ -75,5 +79,13 @@ Notas de direção, caso sejam refeitos:
 
 ## Interface
 
-`assets/ui/` está vazia e sem referência no manifesto. Reservada para moldura
-de textbox, ícones e ponteiro customizado, se vierem a existir.
+`assets/ui/` está vazia e sem referência no manifesto. Cursor, sigilo, selo,
+arco e astrolábio são SVG embutido — não dependem de arquivo. A pasta fica
+reservada para moldura de textbox ou textura de papel, se vierem a existir.
+
+## Fundo do menu principal
+
+`#rf-menu-bg` usa gradiente. Para colocar a fotografia de arquivo da
+composição aprovada, defina `background-image` nessa regra em `css/ui.css`
+e ponha o arquivo em `assets/backgrounds/`. O gradiente continua por baixo
+como reserva.

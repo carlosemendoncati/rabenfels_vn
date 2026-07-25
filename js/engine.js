@@ -52,6 +52,7 @@ RBF.Engine = (function () {
   var typeTarget = null;
 
   var autoTimer       = null;
+  var sceneStart      = 0;    /* indice do beat de cena atual */
   var pendingAutosave = false;
   var lastTextBeat    = null;
   var started         = false;
@@ -103,6 +104,28 @@ RBF.Engine = (function () {
     el.chap     = document.getElementById('chapter-screen');
     el.endChap  = document.getElementById('endchap-screen');
     el.hint     = document.getElementById('hint');
+    el.lineCode = document.getElementById('line-code');
+    el.diamond  = document.getElementById('rf-diamond');
+    el.dlgBar   = document.getElementById('rf-dlg-bar');
+    /* A aba de nome tem duas partes: a marca colorida e o texto. O HTML
+       ja as traz; o engine garante que existam, para nao depender da
+       marcacao continuar identica. */
+    el.nameCap  = el.namebox.querySelector('.namebox__cap');
+    if (!el.nameCap) {
+      el.nameCap = document.createElement('span');
+      el.nameCap.className = 'namebox__cap';
+      el.nameCap.setAttribute('aria-hidden', 'true');
+      el.namebox.appendChild(el.nameCap);
+    }
+
+    el.nameText = el.namebox.querySelector('.namebox__name');
+    if (!el.nameText) {
+      el.nameText = document.createElement('span');
+      el.nameText.className = 'namebox__name';
+      el.namebox.appendChild(el.nameText);
+    }
+    el.routes   = document.getElementById('rf-routes');
+    el.routeNote= document.getElementById('rf-route-note');
   }
 
   function delay(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
@@ -128,8 +151,11 @@ RBF.Engine = (function () {
     var div = spriteNode(charId);
     var img = div.querySelector('img');
 
+    var cdef = RBF.CHARACTERS[charId];
+    var res  = (cdef && cdef.res === 'high') ? ' res-high' : '';
+
     RBF.Assets.applyCharacter(img, charId, expression, function (visible, size) {
-      div.className = 'sprite pos-' + (pos || 'center') + ' size-' + (size || 'bust');
+      div.className = 'sprite pos-' + (pos || 'center') + ' size-' + (size || 'bust') + res;
       if (!visible) { div.classList.remove('show'); return; }
       if (silent) { div.classList.add('show'); return; }
       requestAnimationFrame(function () {
@@ -169,10 +195,11 @@ RBF.Engine = (function () {
   function resetText() {
     el.namebox.className = 'namebox';
     el.namebox.style.color = '';
-    el.namebox.textContent = '';
+    if (el.nameText) { el.nameText.textContent = ''; }
     el.text.className = 'textcontent';
     el.text.textContent = '';
     el.textbox.classList.remove('show');
+    showCursor(false);
   }
 
   /* ---- maquina de escrever ---------------------------------------------- */
@@ -229,7 +256,7 @@ RBF.Engine = (function () {
   }
 
   function showCursor(on) {
-    if (el.text) { el.text.classList.toggle('waiting', !!on); }
+    if (el.diamond) { el.diamond.classList.toggle('is-on', !!on); }
   }
 
   /* ---- avanco automatico ------------------------------------------------ */
@@ -256,19 +283,73 @@ RBF.Engine = (function () {
     resetText();
     el.textbox.classList.add('show');
 
+    /* A aba sempre aparece: com o nome de quem fala, ou com o rotulo do
+       modo quando e narracao ou pensamento. */
     if (speakerId) {
       var def = RBF.CHARACTERS[speakerId];
-      el.namebox.textContent = def ? def.name : speakerId;
-      el.namebox.style.color = def ? def.color : '#c8a878';
-      el.namebox.classList.add('show');
+      el.nameText.textContent = def ? def.name : speakerId;
+      el.namebox.style.color  = def ? def.color : '#c8a878';
+    } else if (mode === 'inner') {
+      el.nameText.textContent = RBF.UI_TEXT.inner;
+      el.namebox.style.color  = '#8c2733';
+      el.namebox.classList.add('is-inner');
+    } else {
+      el.nameText.textContent = RBF.UI_TEXT.narrator;
+      el.namebox.style.color  = '#8c2733';
+      el.namebox.classList.add('is-narration');
     }
+    el.namebox.classList.add('show');
+
+    /* Quem fala fica em destaque; os demais recuam. */
+    highlightSpeaker(speakerId);
 
     pres.textMode = mode;
     el.text.className = 'textcontent ' + mode;
+    updateLineCode();
     typeOut(el.text, text);
 
     if (record) {
       RBF.History.push(recordKind(mode), speakerId, text, RBF.STATE.chapter, RBF.STATE.scene);
+    }
+  }
+
+  /* Codigo de transcricao: posicao da fala dentro da cena atual.
+     Recalculado a cada beat, porque uma escolha pode injetar linhas e
+     mudar o total no meio da cena. */
+  function updateLineCode() {
+    if (!el.lineCode) { return; }
+
+    var ch = RBF.Script.chapterById(RBF.STATE.chapter);
+    var prefix = ch ? ch.code : 'RBF';
+
+    var total = 0;
+    var at    = 0;
+    var cur   = index - 1;   /* index ja apontou para o beat seguinte */
+
+    for (var i = sceneStart; i < script.length; i++) {
+      var b = script[i];
+      if (!b) { continue; }
+      if (b.t === 'scene' && i > sceneStart) { break; }
+      if (!isTextBeat(b)) { continue; }
+      if (!passes(b)) { continue; }
+      total += 1;
+      if (i <= cur) { at = total; }
+    }
+
+    el.lineCode.textContent =
+      'TRANSCRI\u00c7\u00c3O ' + prefix + ' ' +
+      String(Math.max(1, at)).padStart(2, '0') + '/' + String(Math.max(1, total));
+  }
+
+  function isTextBeat(b) {
+    return b.t === 'nar' || b.t === 'inn' || b.t === 'dial' ||
+           b.t === 'arc' || b.t === 'last';
+  }
+
+  function highlightSpeaker(speakerId) {
+    for (var k in spriteNodes) {
+      if (!Object.prototype.hasOwnProperty.call(spriteNodes, k)) { continue; }
+      spriteNodes[k].classList.toggle('is-idle', !!speakerId && k !== speakerId);
     }
   }
 
@@ -299,13 +380,17 @@ RBF.Engine = (function () {
     switch (beat.t) {
 
       case 'scene':
+        sceneStart           = Math.max(0, index - 1);
         RBF.STATE.scene      = beat.id || RBF.STATE.scene;
         RBF.STATE.sceneTitle = beat.title || RBF.STATE.sceneTitle;
         if (beat.chapter && beat.chapter !== RBF.STATE.chapter) {
           RBF.STATE.chapter = beat.chapter;
           RBF.Saves.markChapterReached(beat.chapter);
         }
-        if (beat.bg) { applyBackground(beat.bg); }
+        if (beat.bg) {
+          applyBackground(beat.bg);
+          if (!silent) { RBF.Gallery.markSeen('bg', beat.bg); }
+        }
         if (beat.bgm !== undefined) { applyBgm(beat.bgm); }
         if (beat.sfx && !silent) { RBF.Audio.playSfx(beat.sfx); }
         if (beat.clearSprites) { clearSprites(); }
@@ -390,6 +475,7 @@ RBF.Engine = (function () {
         }
         el.arcBox.classList.add('show');
         if (!silent) {
+          if (beat.key) { RBF.Gallery.markSeen('arc', beat.key); }
           RBF.History.push('arc', null, beat.lns.join('\n'), RBF.STATE.chapter, RBF.STATE.scene);
           await delay(RBF.CONFIG.timing.arcMs);
         }
@@ -406,6 +492,7 @@ RBF.Engine = (function () {
         el.lastBox.classList.add('show');
         el.lastBox.scrollTop = 0;
         if (!silent) {
+          if (beat.key) { RBF.Gallery.markSeen('arc', beat.key); }
           RBF.History.push('last', null, beat.lns.join('\n'), RBF.STATE.chapter, RBF.STATE.scene);
           await delay(RBF.CONFIG.timing.lastMs);
         }
@@ -497,6 +584,7 @@ RBF.Engine = (function () {
     currentChoice = beat;
     choiceButtons = [];
     el.choices.textContent = '';
+    el.choices.classList.remove('is-resolved');
 
     var prompt = document.createElement('div');
     prompt.id = 'choice-prompt';
@@ -508,28 +596,41 @@ RBF.Engine = (function () {
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'choice-btn';
-        btn.textContent = '[ ' + (n + 1) + ' ]  ' + opt.tx;
+
+        var code = document.createElement('span');
+        code.className = 'choice-btn__code';
+        code.textContent = (beat.code || 'DEP') + '-' + String(n + 1).padStart(2, '0');
+        btn.appendChild(code);
+
+        var txt = document.createElement('span');
+        txt.className = 'choice-btn__text';
+        txt.textContent = opt.tx;
+        btn.appendChild(txt);
+
         btn.addEventListener('click', function (ev) {
           ev.stopPropagation();
-          pickChoice(opt);
+          pickChoice(opt, btn);
         });
+
         el.choices.appendChild(btn);
         choiceButtons.push(btn);
       })(beat.opts[i], i);
     }
 
     el.choices.classList.add('show');
-    el.hint.textContent = RBF.UI_TEXT.hintChoice;
+    setHint(RBF.UI_TEXT.hintChoice);
   }
 
-  function pickChoice(opt) {
+  function pickChoice(opt, btn) {
     if (!choiceActive) { return; }
     if (!RBF.State.canAdvanceScript()) { return; }
 
     choiceActive = false;
-    el.choices.classList.remove('show');
-    el.choices.textContent = '';
-    el.hint.textContent = RBF.UI_TEXT.hintClick;
+    RBF.Audio.playUi('ui_confirm');
+
+    /* A opcao escolhida recebe a marca; as outras recuam. */
+    if (btn) { btn.classList.add('is-chosen'); }
+    el.choices.classList.add('is-resolved');
 
     applyFlags(opt.flags);
     RBF.STATE.flags.lastChoice = opt.id;
@@ -538,15 +639,105 @@ RBF.Engine = (function () {
       RBF.STATE.choiceLog[currentChoice.id] = opt.id;
     }
 
+    /* Rotas: o delta vem do roteiro, nunca do texto da opcao. */
+    var moved = RBF.Routes.apply(opt.routes);
+    RBF.Gallery.recordRoutes(RBF.Routes.all());
+    renderRoutes();
+
     RBF.History.push('nar', null, '\u25b8 ' + opt.tx, RBF.STATE.chapter, RBF.STATE.scene);
 
     if (opt.then && opt.then.length) {
       var args = [index, 0].concat(opt.then);
       Array.prototype.splice.apply(script, args);
     }
-
     currentChoice = null;
-    advance();
+
+    /* Tempo de ler a marca antes da cena seguir. */
+    var wait = moved.length
+      ? RBF.CONFIG.timing.choiceHoldRouteMs
+      : RBF.CONFIG.timing.choiceHoldMs;
+    setTimeout(function () {
+      el.choices.classList.remove('show');
+      el.choices.textContent = '';
+      el.choices.classList.remove('is-resolved');
+      setHint(RBF.UI_TEXT.hintClick);
+      announceRoutes(moved);
+      advance();
+    }, wait);
+  }
+
+  /* ---- HUD de rotas ------------------------------------------------------
+     Le RBF.Routes, que por sua vez soma apenas deltas declarados nas
+     escolhas. Nao existe valor visual independente do estado.            */
+
+  function renderRoutes() {
+    if (!el.routes) { return; }
+
+    var defs = RBF.Routes.defs();
+    el.routes.textContent = '';
+
+    var any = false;
+
+    for (var i = 0; i < defs.length; i++) {
+      var def = defs[i];
+      var val = RBF.Routes.get(def.id);
+      if (val > 0) { any = true; }
+
+      var wrap = document.createElement('div');
+      wrap.className = 'rf-route rf-route--' + def.id;
+      wrap.title = def.label + ': ' + def.hint;
+
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'rf-route__icon');
+      var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      use.setAttribute('href', '#' + def.icon);
+      svg.appendChild(use);
+      wrap.appendChild(svg);
+
+      var pips = document.createElement('div');
+      pips.className = 'rf-route__pips';
+      for (var k = 0; k < def.max; k++) {
+        var pip = document.createElement('span');
+        pip.className = 'rf-route__pip' + (k < val ? ' is-on' : '');
+        pips.appendChild(pip);
+      }
+      wrap.appendChild(pips);
+      el.routes.appendChild(wrap);
+    }
+
+    var wanted = any && RBF.Settings.get('showRoutes') !== false;
+    el.routes.classList.toggle('show', wanted);
+  }
+
+  /* Fila de avisos: duas rotas mudando na mesma escolha nao se
+     sobrepoem, aparecem uma depois da outra. */
+  var noteQueue = [];
+  var noteBusy  = false;
+
+  function announceRoutes(moved) {
+    if (!moved || !moved.length || !el.routeNote) { return; }
+    for (var i = 0; i < moved.length; i++) { noteQueue.push(moved[i]); }
+    drainNotes();
+  }
+
+  function drainNotes() {
+    if (noteBusy || !noteQueue.length || !el.routeNote) { return; }
+
+    var item = noteQueue.shift();
+    var def  = RBF.Routes.defById(item.id);
+    if (!def) { drainNotes(); return; }
+
+    noteBusy = true;
+    RBF.Audio.playUi('ui_route');
+
+    el.routeNote.textContent = def.note;
+    el.routeNote.className = 'is-on is-' + def.id;
+
+    setTimeout(function () {
+      el.routeNote.className = '';
+      noteBusy = false;
+      drainNotes();
+    }, 2700);
   }
 
   /* ---- loop principal --------------------------------------------------- */
@@ -593,7 +784,8 @@ RBF.Engine = (function () {
 
   function endOfScript() {
     finished = true;
-    el.hint.textContent = RBF.UI_TEXT.hintEnd;
+    stopSkip();
+    setHint(RBF.UI_TEXT.hintEnd);
     if (RBF.STATE.chapter) { RBF.Saves.markChapterFinished(RBF.STATE.chapter); }
   }
 
@@ -602,6 +794,8 @@ RBF.Engine = (function () {
   function onAdvanceInput() {
     RBF.Audio.unlock();
     if (!RBF.State.canAdvanceScript()) { return; }
+    if (uiHidden) { toggleUI(false); return; }
+    if (skipping()) { stopSkip(); return; }
     if (choiceActive || busy || finished) { return; }
     if (typing) { completeTyping(); return; }
     advance();
@@ -655,11 +849,188 @@ RBF.Engine = (function () {
     return Math.floor(playtimeBase + extra);
   }
 
+  /* ---- barra de leitura ---------------------------------------------------
+     Montada uma unica vez a partir de RBF.DIALOGUE_CONTROLS. As acoes
+     chamam RBF.Menu, que ja e o dono desses paineis: nao existe um
+     segundo caminho para salvar ou abrir ajustes.                      */
+
+  var barBuilt = false;
+  var ctlNodes = {};
+
+  function buildBar() {
+    if (barBuilt || !el.dlgBar) { return; }
+    barBuilt = true;
+
+    var list = RBF.DIALOGUE_CONTROLS;
+
+    for (var i = 0; i < list.length; i++) {
+      (function (ctl) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rf-ctl';
+        btn.title = ctl.title;
+        btn.setAttribute('aria-label', ctl.title);
+
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'rf-ctl__icon');
+        svg.setAttribute('aria-hidden', 'true');
+        var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        use.setAttribute('href', '#' + ctl.icon);
+        svg.appendChild(use);
+        btn.appendChild(svg);
+
+        var label = document.createElement('span');
+        label.className = 'rf-ctl__label';
+        label.textContent = ctl.label;
+        btn.appendChild(label);
+
+        btn.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          runControl(ctl.id);
+        });
+
+        el.dlgBar.appendChild(btn);
+        ctlNodes[ctl.id] = btn;
+      })(list[i]);
+    }
+
+    var hint = document.createElement('span');
+    hint.className = 'rf-dlg__hint';
+    hint.appendChild(document.createTextNode(RBF.UI_TEXT.hintClick));
+
+    var quill = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    quill.setAttribute('aria-hidden', 'true');
+    var quse = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    quse.setAttribute('href', '#rf-ic-quill');
+    quill.appendChild(quse);
+    hint.appendChild(quill);
+
+    el.dlgBar.appendChild(hint);
+    el.hintNode = hint;
+    el.hintText = hint.firstChild;
+  }
+
+  /* A dica vive dentro do painel; #hint continua existindo apenas para
+     nao quebrar quem ainda leia aquele elemento. */
+  function setHint(text) {
+    if (el.hint) { el.hint.textContent = text; }
+    if (el.hintText) { el.hintText.textContent = text; }
+  }
+
+  function runControl(id) {
+    RBF.Audio.playUi('ui_confirm');
+
+    switch (id) {
+      case 'history':
+        RBF.Engine.pause();
+        RBF.State.push('paused');
+        RBF.Menu.openHistory();
+        break;
+
+      case 'auto':
+        toggleAuto();
+        break;
+
+      case 'skip':
+        toggleSkip();
+        break;
+
+      case 'save':
+        RBF.Engine.pause();
+        RBF.State.push('paused');
+        RBF.Menu.openSaveLoad('save');
+        break;
+
+      case 'load':
+        RBF.Engine.pause();
+        RBF.State.push('paused');
+        RBF.Menu.openSaveLoad('load');
+        break;
+
+      case 'settings':
+        RBF.Engine.pause();
+        RBF.State.push('paused');
+        RBF.Menu.openSettings();
+        break;
+
+      case 'hide':
+        toggleUI(true);
+        break;
+
+      default: break;
+    }
+  }
+
+  function markControl(id, on) {
+    if (ctlNodes[id]) { ctlNodes[id].classList.toggle('is-on', !!on); }
+  }
+
+  /* ---- avanco automatico e avanco rapido ---------------------------------
+     Auto respeita a espera configurada. Skip atravessa depressa e para
+     sozinho em escolha, fim de capitulo ou fim de roteiro.             */
+
+  function toggleAuto() {
+    var on = !RBF.Settings.get('autoAdvance');
+    RBF.Settings.set('autoAdvance', on);
+    markControl('auto', on);
+
+    if (on) {
+      stopSkip();
+      if (awaitingClick) { scheduleAuto(); }
+    } else {
+      cancelAuto();
+    }
+  }
+
+  var skipTimer = null;
+
+  function skipping() { return skipTimer !== null; }
+
+  function toggleSkip() { if (skipping()) { stopSkip(); } else { startSkip(); } }
+
+  function startSkip() {
+    if (skipping()) { return; }
+    if (!RBF.State.canAdvanceScript()) { return; }
+
+    RBF.Settings.set('autoAdvance', false);
+    markControl('auto', false);
+    cancelAuto();
+
+    markControl('skip', true);
+
+    skipTimer = setInterval(function () {
+      if (!RBF.State.canAdvanceScript() || finished) { stopSkip(); return; }
+      if (choiceActive) { stopSkip(); return; }   /* escolha interrompe */
+      if (typing) { completeTyping(); return; }
+      if (awaitingClick) { advance(); }
+    }, RBF.Settings.get('skipMs') || 38);
+  }
+
+  function stopSkip() {
+    if (skipTimer) { clearInterval(skipTimer); skipTimer = null; }
+    markControl('skip', false);
+  }
+
+  /* ---- esconder interface ------------------------------------------------
+     O jogador ve a cena sem cromo. Qualquer clique ou tecla devolve a
+     interface, entao nao existe estado do qual nao se saia.            */
+
+  var uiHidden = false;
+
+  function toggleUI(force) {
+    uiHidden = (force === undefined) ? !uiHidden : !!force;
+    el.stage.classList.toggle('is-ui-hidden', uiHidden);
+    return uiHidden;
+  }
+
+  function isUIHidden() { return uiHidden; }
+
   /* ---- pausa e retomada ------------------------------------------------- */
 
   function pause() {
     stopClock();
     cancelAuto();
+    stopSkip();
     if (typing) { completeTyping(); }
   }
 
@@ -692,6 +1063,7 @@ RBF.Engine = (function () {
       variables:       copy(RBF.STATE.variables),
       unlockedContent: RBF.STATE.unlockedContent.slice(),
       choiceLog:       copy(RBF.STATE.choiceLog),
+      routes:          RBF.Routes.serialize(),
       history:         RBF.History.serialize(),
 
       presentation: {
@@ -727,16 +1099,22 @@ RBF.Engine = (function () {
 
   function prepare() {
     grab();
+    buildBar();
     bindInput();
+    markControl('auto', RBF.Settings.get('autoAdvance'));
     RBF.Assets.applyBackground(el.bg, 'bg_black');
   }
 
   function resetRuntime() {
     stopTyping();
     cancelAuto();
+    stopSkip();
+    sceneStart = 0;
     clearSprites();
     hideOverlays();
     resetText();
+
+    toggleUI(false);
 
     script          = [];
     index           = 0;
@@ -765,6 +1143,8 @@ RBF.Engine = (function () {
     RBF.STATE.sceneTitle      = '';
 
     RBF.History.clear();
+    RBF.Routes.reset();
+    renderRoutes();
     RBF.Audio.playBgm(null);
   }
 
@@ -777,7 +1157,7 @@ RBF.Engine = (function () {
     started = true;
 
     el.fader.classList.add('out');
-    el.hint.textContent = RBF.UI_TEXT.hintClick;
+    setHint(RBF.UI_TEXT.hintClick);
 
     RBF.State.set('playing');
     startClock();
@@ -797,7 +1177,7 @@ RBF.Engine = (function () {
     started = true;
 
     el.fader.classList.add('out');
-    el.hint.textContent = RBF.UI_TEXT.hintClick;
+    setHint(RBF.UI_TEXT.hintClick);
 
     RBF.State.set('playing');
     startClock();
@@ -821,6 +1201,9 @@ RBF.Engine = (function () {
     RBF.STATE.sceneTitle      = (data.preview && data.preview.sceneLabel) || '';
 
     RBF.History.restore(data.history || []);
+    RBF.Routes.restore(data.routes, data.choiceLog);
+    RBF.Gallery.recordRoutes(RBF.Routes.all());
+    renderRoutes();
 
     playtimeBase = data.playtimeSeconds || 0;
     playtimeMark = null;
@@ -842,7 +1225,7 @@ RBF.Engine = (function () {
     finished = false;
 
     el.fader.classList.remove('out');
-    el.hint.textContent = RBF.UI_TEXT.hintClick;
+    setHint(RBF.UI_TEXT.hintClick);
 
     RBF.State.set('playing');
     startClock();
@@ -898,6 +1281,14 @@ RBF.Engine = (function () {
     pause:  pause,
     resume: resume,
 
+    toggleUI:     toggleUI,
+    isUIHidden:   isUIHidden,
+    toggleAuto:   toggleAuto,
+    toggleSkip:   toggleSkip,
+    stopSkip:     stopSkip,
+    isSkipping:   skipping,
+    renderRoutes: renderRoutes,
+
     snapshot: snapshot,
     canSave:  canSave,
 
@@ -919,7 +1310,9 @@ RBF.Engine = (function () {
       input:        onAdvanceInput,
       buttons:      function () { return choiceButtons; },
       complete:     completeTyping,
-      presentation: function () { return pres; }
+      presentation: function () { return pres; },
+      controls:     function () { return ctlNodes; },
+      sceneStart:   function () { return sceneStart; }
     }
   };
 })();
