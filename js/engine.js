@@ -605,6 +605,17 @@ RBF.Engine = (function () {
         el.endChap.classList.add('show');
         if (!silent) {
           if (beat.chapter) { RBF.Saves.markChapterFinished(beat.chapter); }
+          /* 'completes' marca o fim da obra, nao o fim de um capitulo.
+             Guarda as flags do run porque o extra "As Quatro Paginas"
+             e montado a partir delas. Declarado no roteiro, para o
+             engine nao precisar saber o id do ultimo capitulo. */
+          if (beat.completes) {
+            RBF.Saves.recordCompletion({
+              ending: RBF.STATE.flags.ending || null,
+              flags:  RBF.STATE.flags,
+              routes: RBF.STATE.routes
+            });
+          }
           await delay(RBF.CONFIG.timing.cardMs);
         }
         return 'wait';

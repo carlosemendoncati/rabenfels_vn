@@ -1,5 +1,100 @@
 # Changelog
 
+## 0.7.0 — A obra fechada: Capítulo 11, Epílogo e As Quatro Páginas
+
+O roteiro está inteiro. Prólogo, onze capítulos e Epílogo, com o extra
+pós-jogo que fecha o único fio que o Prólogo deixa em aberto na primeira
+página.
+
+### Capítulo 11 · Noventa Dias
+
+A última cena é o começo do Prólogo, visto do outro lado: o cordel em
+quatro voltas, o nó cego, o mensageiro da rota de Alsbeck e a instrução do
+prazo. Ele entrega no nonagésimo terceiro dia porque a estrada de Alsbeck
+alaga em novembro.
+
+Carmine entra em cena pela primeira e única vez, e entra **sem corpo** —
+nenhum sprite, nenhuma descrição de rosto. O que a marca no palco é a
+temperatura do ar e uma vela que não oscila. As falas dela saem sob o
+rótulo "A voz" até ela mesma entregar o nome; a caixa de fala é a
+revelação, e nenhum texto anuncia.
+
+**O motivo é ciúme, e a obra nunca diz isso.** Para Carmine todo pacto é
+casamento, e qualquer vínculo importante de fora é traição. Antoniette
+morre porque Klara a escolheu. Antoniette nunca descobre: ela conclui
+"calendário", em pensamento, e Carmine deixa passar sem confirmar nem
+desmentir. É essa conclusão errada que vai para o Arquivo e que Matheo lê
+no Prólogo. O único vestígio que ela registra é uma ausência — *"Ela não
+perguntou nada sobre o plano. Nem uma vez."*
+
+### Epílogo · O Que Ficou
+
+Salto de seis anos, exigido pelo canon: a Academia de Eldoria é ensino
+superior e só aceita depois da maioridade.
+
+Matheo fez tudo certo — protocolou, sustentou, recorreu duas vezes. O
+tribunal indeferiu por *"sem terceiro lesado identificável"*. **As quatro
+páginas que Antoniette arrancou eram exatamente os terceiros.** O último
+ato de proteção dela foi o que matou o processo, e ele morre sem saber.
+
+O alerta que ele deixou no sobrenome dispara seis anos depois e traz a
+coisa mais inofensiva que existe: duas meninas entrando na faculdade. Ele
+lê o regime de residência integral sem entender que está lendo um
+cronograma.
+
+A balada fecha completa, sobre preto.
+
+### Extra · As Quatro Páginas
+
+Desbloqueia com a obra terminada. É **o documento que Matheo nunca
+recebeu**, e o texto é montado a partir das escolhas da partida concluída:
+cada página registra uma vez em que um terceiro pagou pelo método dela.
+Dois jogadores nunca leem o mesmo documento.
+
+A numeração fecha o buraco que o Prólogo abre em P2 — Matheo conta até 287,
+a dela termina em 291.
+
+### Menu selado
+
+Depois de terminar, o cabeçalho passa a saber o que o jogador sabe. Sem
+comemoração: a linha de volume deixa de dizer TESTEMUNHOS SELADOS e passa a
+dizer **291 PÁGINAS**, que só faz sentido para quem chegou lá. O contador
+de capítulos vira contador de leituras, e o portão troca a dica pela regra
+do prazo.
+
+### Correções de canon
+
+- **A Academia é faculdade de magos, não escola.** A fala da Liara no
+  Capítulo 8 tratava como colégio com entrada aos treze. Corrigido, e as
+  duas contagens de dias que dependiam disso foram refeitas.
+- **Klara não sabe que Carmine existe.** Só descobre adulta, na Academia.
+  Até lá é fome e vazio, sem sujeito. A revelação do nome no Capítulo 11
+  foi remontada por causa disso.
+- **Três linhas afirmavam aniversário em agosto** contra oito capítulos que
+  sustentam inverno. Corrigidas, inclusive a idade na última entrada do
+  Prólogo.
+
+### Motor e ferramentas
+
+- `{ t:'end_chap', completes:true }` grava a partida concluída — final,
+  flags e rotas — para o extra sobreviver ao fim da sessão.
+- `RBF.Saves`: `recordCompletion`, `lastRun`, `hasCompleted`, `endingsSeen`.
+- `js/paginas.js` monta o documento; `js/data/quatro_paginas.js` guarda o
+  texto.
+- Os validadores aprenderam que `{ t:'ending' }` grava a flag `ending` —
+  antes acusavam flag órfã no Capítulo 10.
+- `tools/minidom.js` ganhou seletor de atributo, para o teste do menu poder
+  procurar por `data-record` em vez de varrer por classe.
+- 22 checagens novas no `validate.js` cobrindo o extra: trava antes da hora,
+  abre depois, nenhuma página em lacuna, ramos diferentes produzindo
+  documentos diferentes, e o manifesto não sendo mutado pelo estado selado.
+
+**Validado:** 7.636 checagens estáticas, 688 no validador Node, 120 no
+smoke com três partidas completas. Zero falhas nas três camadas.
+
+**Não testado:** nada foi jogado clicando. A verificação é toda por código.
+
+
 ## 0.6.0 — Corpus de referência lido por inteiro, bíblia v3, roteiro revisado
 
 Onze livros em `REF/` lidos e destilados, um por vez, em

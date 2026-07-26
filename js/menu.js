@@ -59,8 +59,12 @@ RBF.Menu = (function () {
   }
 
   function showGate() {
+    var terminou = !!(RBF.Saves.hasCompleted && RBF.Saves.hasCompleted());
+
     el.gateLabel.textContent = RBF.INTRO.label;
-    el.gateHint.textContent  = RBF.INTRO.hint;
+    el.gateHint.textContent  = (terminou && RBF.INTRO.sealedHint)
+      ? RBF.INTRO.sealedHint
+      : RBF.INTRO.hint;
 
     el.gate.classList.add('is-open');
     el.gate.classList.remove('is-leaving');
@@ -106,6 +110,22 @@ RBF.Menu = (function () {
   function fillArchiveChrome() {
     var A = RBF.ARCHIVE;
 
+    /* Obra terminada: o cabecalho passa a saber o que o jogador sabe.
+       Copia rasa para nao mutar o manifesto - sem isto, terminar uma vez
+       deixaria o menu selado ate recarregar a pagina, inclusive depois
+       de apagar o progresso. */
+    var terminou = !!(RBF.Saves.hasCompleted && RBF.Saves.hasCompleted());
+    if (terminou && A.sealed) {
+      var base = A;
+      A = {};
+      for (var k in base) {
+        if (Object.prototype.hasOwnProperty.call(base, k)) { A[k] = base[k]; }
+      }
+      for (var s in base.sealed) {
+        if (Object.prototype.hasOwnProperty.call(base.sealed, s)) { A[s] = base.sealed[s]; }
+      }
+    }
+
     /* O fundo passa pelo mesmo resolvedor dos cenarios: se o arquivo
        nao existir, fica o gradiente e nao ha requisicao perdida. */
     if (A.background) {
@@ -130,10 +150,19 @@ RBF.Menu = (function () {
     }
 
     var done = RBF.Saves.readProgress().finishedChapters.length;
+
+    /* Depois de terminar, a contagem de capitulos da lugar a contagem de
+       leituras: quantos dos finais declarados em RBF.ENDINGS o jogador
+       ja alcancou. E o unico numero do menu que so cresce relendo. */
+    var trecho = ' \u00b7 ' + RBF.CHAPTERS.length + ' CAP\u00cdTULOS REGISTRADOS' +
+                 (done ? ' \u00b7 ' + done + ' CONCLU\u00cdDO' + (done > 1 ? 'S' : '') : '');
+    if (terminou && RBF.Paginas && RBF.Paginas.endingProgress) {
+      var ep = RBF.Paginas.endingProgress();
+      trecho = ' \u00b7 ' + ep.seen + ' DE ' + ep.total + ' LEITURAS REGISTRADAS';
+    }
+
     el.version.textContent =
-      'VERS\u00c3O ' + RBF.CONFIG.gameVersion +
-      ' \u00b7 ' + RBF.CHAPTERS.length + ' CAP\u00cdTULOS REGISTRADOS' +
-      (done ? ' \u00b7 ' + done + ' CONCLU\u00cdDO' + (done > 1 ? 'S' : '') : '') +
+      'VERS\u00c3O ' + RBF.CONFIG.gameVersion + trecho +
       (RBF.Storage.isPersistent() ? '' : ' \u00b7 SAVES S\u00d3 NESTA SESS\u00c3O');
   }
 
@@ -181,6 +210,9 @@ RBF.Menu = (function () {
     if (rec.needs === 'save')     { return RBF.Saves.hasAnyValid(); }
     if (rec.needs === 'chapters') { return RBF.Saves.readProgress().chaptersReached.length > 1; }
     if (rec.needs === 'gallery')  { return RBF.Gallery.hasAny(); }
+    if (rec.needs === 'completed') {
+      return !!(RBF.Paginas && RBF.Paginas.available());
+    }
     return true;
   }
 
@@ -338,6 +370,7 @@ RBF.Menu = (function () {
       case 'load':     openSaveLoad('load'); break;
       case 'chapters': openChapterSelect();  break;
       case 'gallery':  openGallery();        break;
+      case 'pages':    openQuatroPaginas();  break;
       case 'options':  openSettings();       break;
       case 'credits':  openCredits();        break;
       case 'close':    confirmCloseArchive(); break;
@@ -1200,6 +1233,87 @@ RBF.Menu = (function () {
         } }
       ],
       onClose: function () { RBF.State.pop(prev); }
+    });
+  }
+
+  /* ======================================================================
+     AS QUATRO PAGINAS
+
+     Extra pos-jogo. O Prologo planta "Faltam quatro", o Capitulo 11
+     mostra ela arrancando, o Epilogo mostra o tribunal indeferindo por
+     falta exatamente delas. Aqui o jogador le o que Matheo nunca leu.
+
+     O conteudo depende das escolhas da partida concluida, entao dois
+     jogadores nunca leem o mesmo documento. Quem carregou save antigo,
+     sem as flags gravadas, ve a pagina como lacuna em vez de ver texto
+     que nao corresponde ao que jogou.
+     ====================================================================== */
+
+  function openQuatroPaginas() {
+    var doc = RBF.Paginas && RBF.Paginas.build();
+    if (!doc) { return; }
+
+    var fromTitle = RBF.State.is('title');
+    RBF.State.push('pages');
+
+    var body = UI.el('div', 'rbf-quatro');
+
+    var cab = UI.el('div', 'rbf-quatro__cab');
+    for (var c = 0; c < doc.cabecalho.length; c++) {
+      cab.appendChild(UI.el('p', 'rbf-quatro__cabline', doc.cabecalho[c]));
+    }
+    body.appendChild(cab);
+
+    for (var i = 0; i < doc.paginas.length; i++) {
+      var pag = doc.paginas[i];
+      var art = UI.el('article', 'rbf-quatro__pag' + (pag.lacuna ? ' is-lacuna' : ''));
+
+      var head = UI.el('div', 'rbf-quatro__head');
+      head.appendChild(UI.el('span', 'rbf-quatro__num', pag.num));
+      head.appendChild(UI.el('h3', 'rbf-quatro__tit', pag.titulo));
+      art.appendChild(head);
+
+      if (pag.lacuna) {
+        art.appendChild(UI.el('p', 'rbf-quatro__vazio',
+          '[ esta p\u00e1gina n\u00e3o consta do registro desta leitura ]'));
+      } else {
+        var corpo = UI.el('div', 'rbf-quatro__corpo');
+        for (var l = 0; l < pag.lns.length; l++) {
+          corpo.appendChild(UI.el('p', 'rbf-quatro__linha', pag.lns[l] || '\u00a0'));
+        }
+        art.appendChild(corpo);
+
+        if (pag.margem) {
+          art.appendChild(UI.el('p', 'rbf-quatro__margem', pag.margem));
+        }
+        if (pag.mao) {
+          art.appendChild(UI.el('p', 'rbf-quatro__mao', pag.mao));
+        }
+      }
+
+      body.appendChild(art);
+    }
+
+    var fecho = UI.el('div', 'rbf-quatro__fecho');
+    for (var f = 0; f < doc.fecho.length; f++) {
+      fecho.appendChild(UI.el('p', 'rbf-quatro__linha', doc.fecho[f] || '\u00a0'));
+    }
+    body.appendChild(fecho);
+
+    var sub = 'Retiradas do Arquivo antes do despacho';
+    var lab = RBF.Paginas.endingLabel(doc.ending);
+    if (lab) { sub += ' \u2014 leitura: ' + lab; }
+
+    UI.panel({
+      name:     'pages',
+      title:    'As Quatro P\u00e1ginas',
+      subtitle: sub,
+      body:     body,
+      wide:     true,
+      actions: [
+        { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
+      ],
+      onClose: panelReturn(fromTitle)
     });
   }
 

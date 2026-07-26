@@ -119,6 +119,7 @@ RBF.Gallery = (function () {
     { id: 'doc_caderno',    cat: 'doc', name: 'Caderno operacional',          need: 'arc:caderno' },
     { id: 'doc_sem_ident',  cat: 'doc', name: 'Caderno sem identifica\u00e7\u00e3o', need: 'arc:sem_identificacao' },
     { id: 'doc_lervel',     cat: 'doc', name: 'Resposta da Ordem',        need: 'arc:lervel' },
+    { id: 'doc_cadastro',   cat: 'doc', name: 'Registro de matr\u00edcula',    need: 'arc:cadastro' },
     { id: 'doc_caderno_klara', cat: 'doc', name: 'O caderno de K.',       need: 'arc:caderno_klara' },
     { id: 'doc_matheo',     cat: 'doc', name: 'Correspond\u00eancia de campo', need: 'arc:matheo' },
     { id: 'doc_balada',     cat: 'doc', name: 'Cantiga da Marca',          need: 'arc:balada' },
@@ -136,6 +137,7 @@ RBF.Gallery = (function () {
     { id: 'end_cap9',     cat: 'rec', name: 'Cap\u00edtulo 9 conclu\u00eddo',   need: 'done:capitulo9' },
     { id: 'end_cap10',    cat: 'rec', name: 'Cap\u00edtulo 10 conclu\u00eddo',  need: 'done:capitulo10' },
     { id: 'end_cap11',    cat: 'rec', name: 'Cap\u00edtulo 11 conclu\u00eddo',  need: 'done:capitulo11' },
+    { id: 'end_epilogo',  cat: 'rec', name: 'Ep\u00edlogo conclu\u00eddo',      need: 'done:epilogo' },
     { id: 'route_hope',   cat: 'rec', name: 'Registro: Esperan\u00e7a',        need: 'route:hope:6' },
     { id: 'route_loss',   cat: 'rec', name: 'Registro: Perda',                need: 'route:loss:6' },
     { id: 'route_answer', cat: 'rec', name: 'Registro: Resposta',             need: 'route:answer:6' }

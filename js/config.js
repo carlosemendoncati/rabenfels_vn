@@ -774,6 +774,15 @@ RBF.CHAPTERS = [
     label: 'Cap\u00edtulo 11',
     title: 'Noventa Dias',
     selectable: true
+  },
+
+  {
+    id:    'epilogo',
+    code:  'EPL',
+    data:  'EPILOGUE',
+    label: 'Ep\u00edlogo',
+    title: 'O Que Ficou',
+    selectable: true
   }
 ];
 
@@ -910,7 +919,23 @@ RBF.ARCHIVE = {
   background: 'bg_archive_closeup',
 
   /* Numerais romanos dos registros do menu. */
-  numerals: ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+  numerals: ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'],
+
+  /* ---- o menu depois que a obra foi terminada --------------------------
+     Trocas pequenas, nenhuma comemoracao. O jogador que terminou nao
+     ganha uma faixa de parabens: ganha um cabecalho que agora sabe de
+     mais coisa do que sabia na primeira vez.
+
+     'volume' e a mudanca que mais importa. Na primeira leitura diz
+     TESTEMUNHOS SELADOS, porque nada foi aberto ainda. Depois diz o
+     numero que o Prologo passou o capitulo inteiro fazendo o jogador
+     contar: duzentas e noventa e uma, e nao duzentas e oitenta e sete.
+     So faz sentido para quem chegou nas quatro paginas.               */
+  sealed: {
+    access:   'ARQUIVO ENCERRADO',
+    volume:   'VOLUME XVII \u00b7 291 P\u00c1GINAS',
+    subtitle: 'o conhecimento n\u00e3o foi suficiente'
+  }
 };
 
 /* -------------------------------------------------------------------------
@@ -925,6 +950,11 @@ RBF.INTRO = {
   enabled:        true,
   label:          'CLIQUE PARA ABRIR O ARQUIVO',
   hint:           'clique, toque, Enter ou Espa\u00e7o',
+
+  /* Substitui 'hint' depois que a obra foi terminada. O prazo de noventa
+     dias e o mecanismo que abre o Prologo e fecha o Capitulo 11; aqui ele
+     vira a regra do proprio portao. Quem nao terminou nunca ve. */
+  sealedHint:     'noventa dias \u00b7 o prazo recome\u00e7a a cada leitura',
   revealMs:       1800,   /* duracao da sequencia completa      */
   returnRevealMs: 260,    /* volta ao menu na mesma sessao      */
 
@@ -997,6 +1027,18 @@ RBF.MENU_RECORDS = [
     code:    'REG-05',
     action:  'gallery',
     note:    'O que foi recuperado do arquivo at\u00e9 agora.'
+  },
+  /* So aparece com a obra terminada. E o que Matheo nunca recebeu:
+     as quatro paginas que ela arrancou, montadas com as escolhas
+     da partida que o jogador concluiu. */
+  {
+    id:      'pages',
+    label:   'As Quatro P\u00e1ginas',
+    chapter: 'MATERIAL RETIDO',
+    code:    'REG-00',
+    action:  'pages',
+    needs:   'completed',
+    note:    'Faltavam quatro. Elas nunca sa\u00edram de Velha Nidhaus.'
   },
   {
     id:      'options',

@@ -270,6 +270,22 @@ function walk(node, fn) {
 function matches(node, sel) {
   if (!sel) { return false; }
   if (sel.charAt(0) === '.') { return node.classList.contains(sel.slice(1)); }
+
+  /* Seletor de atributo: [nome] e [nome="valor"].
+     Entrou porque o menu identifica cada registro por data-record, e sem
+     isto o unico jeito de achar um item era varrer a lista por classe e
+     comparar o atributo na mao - o teste passava a descrever o passeio
+     pelo DOM em vez de descrever o que estava sendo conferido. */
+  if (sel.charAt(0) === '[' && sel.charAt(sel.length - 1) === ']') {
+    var corpo = sel.slice(1, -1);
+    var eq    = corpo.indexOf('=');
+    if (eq === -1) { return node.getAttribute(corpo) !== null; }
+
+    var nome = corpo.slice(0, eq).trim();
+    var val  = corpo.slice(eq + 1).trim().replace(/^["']|["']$/g, '');
+    return node.getAttribute(nome) === val;
+  }
+
   return node.tagName === sel.toUpperCase();
 }
 

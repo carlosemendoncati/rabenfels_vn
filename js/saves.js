@@ -301,6 +301,55 @@ RBF.Saves = (function () {
     RBF.Storage.write(keys().progress, p);
   }
 
+  /* ---- conclusao da obra -------------------------------------------------
+
+     Gravado uma vez por partida terminada, pelo beat de fim de capitulo
+     que traz 'completes:true' - hoje so o Epilogo.
+
+     Guarda as flags do run porque delas depende o extra "As Quatro
+     Paginas": o texto das paginas e o registro do que ESTE jogador fez,
+     e nao existe versao canonica.
+
+     'runs' guarda as conclusoes em ordem, sem repetir final. O que a
+     galeria e o menu leem e sempre a ultima.                            */
+
+  function recordCompletion(snapshot) {
+    var p = readProgress();
+    if (!p.runs) { p.runs = []; }
+
+    var run = {
+      ending:  (snapshot && snapshot.ending)  || null,
+      flags:   (snapshot && snapshot.flags)   || {},
+      routes:  (snapshot && snapshot.routes)  || {},
+      at:      new Date().toISOString()
+    };
+
+    p.runs.push(run);
+    p.lastRun = run;
+    RBF.Storage.write(keys().progress, p);
+  }
+
+  /* A ultima partida concluida, ou null se a obra nunca foi terminada. */
+  function lastRun() {
+    var p = readProgress();
+    return p.lastRun || null;
+  }
+
+  function hasCompleted() { return lastRun() !== null; }
+
+  /* Finais distintos ja alcancados, para o menu poder mostrar quantos
+     dos declarados em RBF.ENDINGS o jogador viu. */
+  function endingsSeen() {
+    var p = readProgress();
+    var runs = p.runs || [];
+    var vistos = [];
+    for (var i = 0; i < runs.length; i++) {
+      var e = runs[i].ending;
+      if (e && vistos.indexOf(e) === -1) { vistos.push(e); }
+    }
+    return vistos;
+  }
+
   /* ---- exportar e importar ---------------------------------------------- */
 
   function exportSlot(slotId) {
@@ -392,6 +441,11 @@ RBF.Saves = (function () {
     markChapterFinished: markChapterFinished,
     chapterReached:      chapterReached,
     addPlaytime:         addPlaytime,
+
+    recordCompletion: recordCompletion,
+    lastRun:          lastRun,
+    hasCompleted:     hasCompleted,
+    endingsSeen:      endingsSeen,
 
     exportSlot:   exportSlot,
     importToSlot: importToSlot,

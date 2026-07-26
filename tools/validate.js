@@ -444,7 +444,11 @@ async function playthrough(optionId, useKeyboard) {
     chapterCount:  RBF.CHAPTERS.length,
     progress:  RBF.Saves.readProgress(),
     routes:    RBF.Routes.all(),
-    gallery:   RBF.Gallery.counts()
+    gallery:   RBF.Gallery.counts(),
+    /* A janela fica disponivel para quem precisa inspecionar o estado
+       DEPOIS da partida - o extra pos-jogo, por exemplo, que so existe
+       quando o Epilogo terminou. */
+    win
   };
   return out;
 }
@@ -1554,6 +1558,120 @@ function layoutRegressionChecks() {
 }
 
 /* ==========================================================================
+   AS QUATRO PAGINAS - extra pos-jogo
+
+   O extra so pode existir depois do Epilogo, e o texto dele e montado
+   com as flags da partida concluida. Isso da tres coisas para conferir,
+   e as tres ja quebraram em versao anterior de mecanica parecida:
+
+   1. NAO abre antes da hora. Item de menu travado, build() nulo.
+   2. Abre com o Epilogo terminado, com as quatro paginas inteiras -
+      nenhuma caindo em lacuna por flag faltando.
+   3. Ramos diferentes produzem documentos diferentes. Se este teste
+      passar com textos iguais, o extra virou decoracao.
+   ========================================================================== */
+
+function textoDoDocumento(doc) {
+  return doc.paginas.map(p => p.num + '|' + p.lns.join(' ') + '|' + p.mao).join(' // ');
+}
+
+async function quatroPaginasChecks() {
+  section('AS QUATRO PAGINAS');
+
+  /* --- antes de terminar ------------------------------------------------ */
+  const virgem = boot();
+  check(virgem.RBF.Paginas.available() === false,
+        'antes do Epilogo: extra indisponivel');
+  check(virgem.RBF.Paginas.build() === null,
+        'antes do Epilogo: build() devolve nulo');
+
+  const recPages = virgem.RBF.MENU_RECORDS.find(r => r.id === 'pages');
+  check(!!recPages, 'registro de menu "pages" existe no manifesto');
+  check(recPages && recPages.needs === 'completed',
+        'registro "pages" exige a obra terminada', recPages && recPages.needs);
+
+  /* A navegacao so existe depois de revelar o menu; showGate() sozinho
+     nao renderiza registro nenhum. */
+  fastForward(virgem.RBF);
+  virgem.RBF.Menu.init();
+  virgem.RBF.Menu.revealMenu(false);
+  await tick(5);
+  const itemTravado = virgem.document.querySelector('[data-record="pages"]');
+  check(!!itemTravado, 'registro "pages" aparece na navegacao');
+  check(itemTravado && itemTravado.classList.contains('is-locked'),
+        'antes do Epilogo: registro "pages" travado');
+
+  /* --- depois de terminar ---------------------------------------------- */
+  const runA = await playthrough('A', false);
+  const rA   = runA.win.RBF;
+
+  check(rA.Saves.hasCompleted() === true,
+        'depois do Epilogo: conclusao gravada no progresso');
+
+  const ultimo = rA.Saves.lastRun();
+  check(!!ultimo && !!ultimo.ending,
+        'a conclusao gravada guarda o final alcancado',
+        ultimo && String(ultimo.ending));
+  check(!!ultimo && Object.keys(ultimo.flags).length > 0,
+        'a conclusao gravada guarda as flags da partida');
+
+  check(rA.Paginas.available() === true, 'depois do Epilogo: extra disponivel');
+
+  const docA = rA.Paginas.build();
+  check(!!docA, 'build() devolve documento');
+  check(docA && docA.paginas.length === 4, 'o documento tem quatro paginas',
+        docA && String(docA.paginas.length));
+
+  const lacunas = docA ? docA.paginas.filter(p => p.lacuna) : [];
+  check(lacunas.length === 0,
+        'nenhuma pagina cai em lacuna numa partida completa',
+        lacunas.map(p => p.num).join(','));
+
+  const semCorpo = docA ? docA.paginas.filter(p => !p.lns.length || !p.mao) : [];
+  check(semCorpo.length === 0,
+        'toda pagina tem corpo e a linha em que a mascara escorrega',
+        semCorpo.map(p => p.num).join(','));
+
+  /* A numeracao tem de fechar o buraco que o Prologo abre: o maco de
+     Matheo para em 287 e a dela termina em 291. */
+  const nums = docA ? docA.paginas.map(p => p.num).join(',') : '';
+  check(nums === '288,289,290,291',
+        'a numeracao fecha o buraco plantado no Prologo', nums);
+
+  /* --- ramos diferentes, documentos diferentes -------------------------- */
+  const runB = await playthrough('B', false);
+  const docB = runB.win.RBF.Paginas.build();
+  check(!!docB && textoDoDocumento(docA) !== textoDoDocumento(docB),
+        'ramos diferentes produzem quatro paginas diferentes');
+
+  /* --- o menu depois da conclusao --------------------------------------- */
+  const w = runA.win;
+  w.RBF.Menu.showGate();
+  await tick(5);
+  check(w.document.getElementById('rf-gate-hint').textContent === w.RBF.INTRO.sealedHint,
+        'portao selado usa a dica pos-conclusao');
+
+  w.RBF.Menu.revealMenu(true);
+  await tick(5);
+  check(w.document.getElementById('rf-access').textContent === w.RBF.ARCHIVE.sealed.access,
+        'menu selado troca a linha de acesso');
+  check(w.document.getElementById('rf-volume').textContent === w.RBF.ARCHIVE.sealed.volume,
+        'menu selado troca a linha de volume');
+  check(/LEITURAS REGISTRADAS/.test(w.document.getElementById('rf-version').textContent),
+        'menu selado conta as leituras em vez dos capitulos',
+        w.document.getElementById('rf-version').textContent);
+
+  /* O manifesto nao pode ter sido mutado pela troca acima: sem a copia
+     rasa, terminar uma vez selaria o menu para sempre. */
+  check(w.RBF.ARCHIVE.access !== w.RBF.ARCHIVE.sealed.access,
+        'o manifesto nao e mutado pelo estado selado');
+
+  const destravado = w.document.querySelector('[data-record="pages"]');
+  check(destravado && !destravado.classList.contains('is-locked'),
+        'depois do Epilogo: registro "pages" destravado');
+}
+
+/* ==========================================================================
    MAIN
 
    Este arquivo confere estrutura, estado e roteiro. Ele nao ve layout:
@@ -1580,6 +1698,7 @@ function layoutRegressionChecks() {
   spriteChecks();
   await dialogueChecks();
   await storageFailureCheck();
+  await quatroPaginasChecks();
 
   section('TOTAL');
   console.log('  checagens: ' + checks + ' | falhas: ' + failures.length);

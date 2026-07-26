@@ -2012,3 +2012,120 @@
   line-height: 1.75;
   color: var(--rbf-ink-dim);
 }
+
+/* ==========================================================================
+   AS QUATRO PAGINAS
+
+   Extra pos-jogo. Le como documento datilografado e nao como painel de
+   interface: fonte de corpo, entrelinha larga, numero da pagina na
+   margem. A folha e mais clara que o painel de propria, porque e a
+   unica tela da obra em que o jogador segura papel em vez de ler tela.
+
+   Tres registros de voz, tres tratamentos:
+     __linha   o corpo notarial, na cor de papel
+     __margem  a nota do Compilador, menor e recuada, em ouro
+     __mao     a linha em que a mascara escorrega, em vermelho, sem
+               aspas - e o unico lugar da obra em que ela escreve "eu"
+   ========================================================================== */
+
+.rbf-quatro {
+  display: flex;
+  flex-direction: column;
+  gap: calc(26px * var(--rbf-ui));
+}
+
+.rbf-quatro__cab {
+  padding-bottom: calc(14px * var(--rbf-ui));
+  border-bottom: 1px solid var(--rbf-line);
+}
+
+.rbf-quatro__cabline {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .08em;
+  line-height: 1.9;
+  color: var(--rbf-ink-mute);
+}
+
+.rbf-quatro__pag {
+  padding: calc(18px * var(--rbf-ui)) calc(20px * var(--rbf-ui));
+  background: rgba(217, 213, 200, .035);
+  border-left: 3px solid var(--rbf-red);
+}
+
+.rbf-quatro__pag.is-lacuna {
+  border-left-color: var(--rbf-ink-ghost);
+  background: none;
+}
+
+.rbf-quatro__head {
+  display: flex;
+  align-items: baseline;
+  gap: calc(12px * var(--rbf-ui));
+  margin-bottom: calc(14px * var(--rbf-ui));
+  padding-bottom: calc(8px * var(--rbf-ui));
+  border-bottom: 1px solid rgba(140, 39, 51, .28);
+}
+
+.rbf-quatro__num {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .18em;
+  color: var(--rbf-red-lit);
+  flex: none;
+}
+
+.rbf-quatro__tit {
+  font-family: var(--rbf-font-display);
+  font-size: calc(13px * var(--rbf-ui));
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-dim);
+}
+
+.rbf-quatro__corpo { margin-bottom: calc(14px * var(--rbf-ui)); }
+
+.rbf-quatro__linha {
+  font-family: var(--rbf-font-body);
+  font-size: calc(13px * var(--rbf-ui));
+  line-height: 1.95;
+  color: var(--rbf-paper);
+  white-space: pre-wrap;
+}
+
+.rbf-quatro__margem {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: calc(11.5px * var(--rbf-ui));
+  line-height: 1.85;
+  color: var(--rbf-gold);
+  margin-left: calc(18px * var(--rbf-ui));
+  padding-left: calc(12px * var(--rbf-ui));
+  border-left: 1px solid rgba(185, 151, 91, .35);
+}
+
+/* A mascara escorrega. Uma linha por pagina, e a unica em primeira
+   pessoa no documento inteiro. */
+.rbf-quatro__mao {
+  font-family: var(--rbf-font-body);
+  font-size: calc(12.5px * var(--rbf-ui));
+  line-height: 1.9;
+  color: var(--rbf-red-lit);
+  margin-top: calc(14px * var(--rbf-ui));
+  padding-top: calc(10px * var(--rbf-ui));
+  border-top: 1px dashed rgba(140, 39, 51, .3);
+}
+
+.rbf-quatro__vazio {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  color: var(--rbf-ink-ghost);
+}
+
+.rbf-quatro__fecho {
+  padding-top: calc(18px * var(--rbf-ui));
+  border-top: 1px solid var(--rbf-line);
+}
+
+.rbf-quatro__fecho .rbf-quatro__linha { color: var(--rbf-ink-dim); }
