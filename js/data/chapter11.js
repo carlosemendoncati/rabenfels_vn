@@ -209,6 +209,73 @@ RBF.CHAPTER11 = [
 { t:'nar', tx:'A mala continuava fechada ao lado. Ela n\u00e3o abriu.', if:{ ending:'cover_burned' } },
 
 { t:'pause' },
+
+/* ======================================================================
+   C11-1b - A VOLTA
+   SO NA ROTA DA FUGA.
+
+   Sem esta cena o jogo teleportava: a fuga terminava na floresta e o
+   beat seguinte acendia uma vela na biblioteca da casa.
+
+   Nao ha captura e nao ha perseguicao. Klara vira e anda de volta, e
+   nao sabe dizer por que - para ela e a fome e o vazio, que vieram na
+   hora errada. Antoniette segue porque nao ha versao dela que deixe a
+   menina sozinha ali.
+
+   REGRA DO CANON (revelacao 12): ninguem em cena diz o que aconteceu.
+   Se alguem enunciar, o horror vira informacao.
+   ====================================================================== */
+{ t:'scene', id:'c11_volta', chapter:'capitulo11', title:'A volta',
+  bg:'bg_grey_march_road', bgm:null, if:{ ending:'archive' } },
+{ t:'spr', ch:'klara', ex:'blank', pos:'center', if:{ ending:'archive' } },
+
+{ t:'dial', ch:'antoniette', tx:'Klara. O barco \u00e9 \u00e0s seis.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'A menina virou o corpo inteiro, n\u00e3o s\u00f3 a cabe\u00e7a, e olhou para o lado de onde tinham vindo.', if:{ ending:'archive' } },
+{ t:'dial', ch:'klara', tx:'Eu preciso voltar.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'dial', ch:'antoniette', tx:'Por qu\u00ea?', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'Klara abriu a boca e n\u00e3o veio nada. Ficou assim por um tempo, procurando, e desistiu de procurar.', if:{ ending:'archive' } },
+{ t:'dial', ch:'klara', tx:'N\u00e3o sei.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'dial', ch:'klara', tx:'Est\u00e1 com fome de novo. E aquela outra coisa junto.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Foi a explica\u00e7\u00e3o inteira. Ela n\u00e3o tinha outra.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+
+{ t:'nar', tx:'E come\u00e7ou a andar de volta, com a mala ainda na m\u00e3o, no mesmo passo de quem foi.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+
+{ t:'spr', ch:'antoniette', ex:'shaken', pos:'left', if:{ ending:'archive' } },
+{ t:'inn', tx:'Segura o bra\u00e7o dela.', if:{ ending:'archive' } },
+{ t:'inn', tx:'Levanta e carrega. Ela tem doze anos e trinta e oito quilos.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'Antoniette ficou parada na trilha calculando o peso de uma crian\u00e7a e a dist\u00e2ncia at\u00e9 o rio.', if:{ ending:'archive' } },
+{ t:'nar', tx:'A conta fechava. Ela fez a conta duas vezes e fechou nas duas.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'Depois foi atr\u00e1s dela.', if:{ ending:'archive' } },
+
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'Dois quil\u00f4metros de volta, e nenhuma das duas falou.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Passaram a aldeia outra vez. As janelas continuavam fechadas.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'Na altura do port\u00e3o Klara devolveu a mala \u00e0 m\u00e3o dela, do jeito que se devolve uma coisa emprestada.', if:{ ending:'archive' } },
+{ t:'dial', ch:'klara', tx:'Desculpa.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'dial', ch:'antoniette', tx:'N\u00e3o foi voc\u00ea.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Ela disse aquilo sem saber o que estava dizendo, e foi a coisa mais verdadeira da noite.', if:{ ending:'archive' } },
+{ t:'spr_hide', ch:'klara', if:{ ending:'archive' } },
+{ t:'spr_hide', ch:'antoniette', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+
+{ t:'nar', tx:'A guarda do port\u00e3o trocava \u00e0s onze e meia e n\u00e3o trocava mais nada at\u00e9 as seis.', if:{ ending:'archive' } },
+{ t:'nar', tx:'As duas entraram pelo mesmo caminho por onde tinham sa\u00eddo, e ningu\u00e9m na casa soube que elas tinham sa\u00eddo.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'inn', tx:'Ningu\u00e9m vai me punir por isto. N\u00e3o houve isto.', if:{ ending:'archive' } },
+{ t:'inn', tx:'\u00c9 pior.', if:{ ending:'archive' } },
+
+/* ---- reconverge: as quatro rotas voltam a casa aqui ---- */
+{ t:'pause' },
 { t:'nar', tx:'Ela fez o invent\u00e1rio, porque era o que sabia fazer com as m\u00e3os tremendo.' },
 { t:'inn', tx:'Caderno. Chave da biblioteca. Duas velas. Papel para umas quarenta p\u00e1ginas.' },
 { t:'inn', tx:'O bar\u00e3o n\u00e3o vai mandar ningu\u00e9m antes do amanhecer. Ele nunca resolve nada de noite.' },

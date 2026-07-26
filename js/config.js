@@ -1035,7 +1035,7 @@ RBF.MENU_RECORDS = [
     id:      'pages',
     label:   'As Quatro P\u00e1ginas',
     chapter: 'MATERIAL RETIDO',
-    code:    'REG-00',
+    code:    'REG-06',
     action:  'pages',
     needs:   'completed',
     note:    'Faltavam quatro. Elas nunca sa\u00edram de Velha Nidhaus.'
@@ -1047,7 +1047,7 @@ RBF.MENU_RECORDS = [
     id:      'readings',
     label:   'Registro de Leituras',
     chapter: 'LEITURAS DO ARQUIVO',
-    code:    'REG-0X',
+    code:    'REG-07',
     action:  'readings',
     needs:   'completed',
     note:    'Quatro maneiras de chegar ao mesmo agosto.'
@@ -1056,7 +1056,7 @@ RBF.MENU_RECORDS = [
     id:      'options',
     label:   'Ajustes',
     chapter: 'CONTROLE DE LEITURA',
-    code:    'REG-06',
+    code:    'REG-08',
     action:  'options',
     note:    'Texto, \u00e1udio, movimento e conte\u00fado sens\u00edvel.'
   },
@@ -1064,7 +1064,7 @@ RBF.MENU_RECORDS = [
     id:      'credits',
     label:   'Cr\u00e9ditos',
     chapter: 'REGISTRO DE AUTORIA',
-    code:    'REG-07',
+    code:    'REG-09',
     action:  'credits',
     note:    'Quem construiu este arquivo.'
   },
@@ -1072,7 +1072,7 @@ RBF.MENU_RECORDS = [
     id:      'close',
     label:   'Fechar o Arquivo',
     chapter: 'ENCERRAR SESS\u00c3O',
-    code:    'REG-08',
+    code:    'REG-10',
     action:  'close',
     note:    'Algumas coisas podem permanecer com voc\u00ea.'
   }
