@@ -667,11 +667,106 @@ def gallery_checks(arc_keys):
 
 # =========================================================================
 
+# =========================================================================
+# 6. ANTIPADROES DE TEXTO GERADO
+#
+# Tiques que denunciam texto de maquina. A lista completa e o raciocinio
+# estao em .claude/skills/rabenfels-vn/reference/antipadroes-ia.md
+#
+# O campeao e a negacao-contraste ("Nao e X, e Y"). Uma ocorrencia num
+# capitulo passa; tres na mesma cena viram assinatura. Por isso o criterio
+# aqui e por densidade, nao por ocorrencia isolada.
+# =========================================================================
+
+NEGACAO_RE = re.compile(
+    r'N[aã]o (?:é|era|foi|são|eram) [^.!?]{2,60}?[.,;] (?:É|Era|Foi|São|Eram) '
+    r'|N[aã]o (?:apenas|só|somente) [^.!?]{2,60}?, mas '
+    r'|[Mm]enos [^.!?]{2,40}? e mais ',
+    re.UNICODE)
+
+TRIADE_RE = re.compile(
+    r'(?:^|[.:;] )(\w+), (\w+) e (\w+)[.,]', re.UNICODE)
+
+PROFUNDIDADE = [
+    'alguma coisa mudou', 'e foi aí que', 'nada mais seria',
+    'no fim das contas', 'mas aqui está', 'tudo mudou',
+]
+
+HEDGING = [
+    'se pegou pensando', 'se pegou olhando', 'alguma coisa nel',
+    'havia algo de', 'por algum motivo',
+]
+
+SENSORIAL = [
+    'o ar estava pesado', 'o silêncio era denso',
+    'cheiro de poeira', 'um arrepio',
+]
+
+
+def texto_dos_beats(beats):
+    """Narracao, pensamento, fala e texto de escolha.
+
+    Cartao do Arquivo ('arc') e ultima entrada ('last') ficam de fora de
+    proposito: sao a voz da Antoniette dentro da ficcao e trazem linhas
+    canonicas do documento mestre, escritas pelo autor. A definicao de
+    Khar'Vel por negacao ("nao e um deus... nao e um demonio") e dele e
+    fica. O detector existe para policiar o que o assistente escreve."""
+    out = []
+    for beat in walk(beats):
+        t = beat.get('t')
+        if t in ('nar', 'inn', 'dial'):
+            out.append(beat.get('tx') or '')
+        elif t == 'cho':
+            for opt in beat.get('opts') or []:
+                out.append(opt.get('tx') or '')
+    return out
+
+
+def antipadrao_checks():
+    section('ANTIPADROES DE TEXTO GERADO')
+
+    for cid, (rel, prop) in sorted(SCRIPTS.items()):
+        data = load_literals(rel)
+        linhas = texto_dos_beats(data.get(prop) or [])
+        corpo = '\n'.join(linhas)
+
+        negacoes = NEGACAO_RE.findall(corpo)
+        n = len(negacoes)
+        check(n <= 1, 'negacao-contraste sob controle em ' + cid,
+              '%d ocorrencias; o teto e 1 por capitulo' % n)
+
+        triades = TRIADE_RE.findall(corpo)
+        if len(triades) > 2:
+            warn('triade automatica em ' + cid,
+                 '%d listas de tres; conferir se o terceiro item conta'
+                 % len(triades))
+
+        baixo = corpo.lower()
+        for frase in PROFUNDIDADE:
+            check(frase not in baixo,
+                  'sem profundidade nao merecida em ' + cid, frase)
+        for frase in HEDGING:
+            check(frase not in baixo,
+                  'sem hedging de interioridade em ' + cid, frase)
+        for frase in SENSORIAL:
+            check(frase not in baixo,
+                  'sem sensorial de catalogo em ' + cid, frase)
+
+        travessoes = corpo.count('—')
+        cenas = sum(1 for b in walk(data.get(prop) or [])
+                    if b.get('t') == 'scene')
+        teto = max(3, cenas * 2)
+        if travessoes > teto:
+            warn('travessao em excesso em ' + cid,
+                 '%d travessoes para %d cenas' % (travessoes, cenas))
+
+
 def main():
     static_checks()
     manifest_checks()
     arc_keys, _scenes = script_checks()
     gallery_checks(arc_keys)
+    antipadrao_checks()
 
     print('\n' + '-' * 62)
     print('%d checagens, %d falha(s), %d aviso(s)' %

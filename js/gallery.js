@@ -65,6 +65,7 @@ RBF.Gallery = (function () {
     { id: 'doc_ultima',     cat: 'doc', name: '\u00daltima entrada',           need: 'arc:ultima' },
     { id: 'doc_caderno',    cat: 'doc', name: 'Caderno operacional',          need: 'arc:caderno' },
     { id: 'doc_sem_ident',  cat: 'doc', name: 'Caderno sem identifica\u00e7\u00e3o', need: 'arc:sem_identificacao' },
+    { id: 'doc_balada',     cat: 'doc', name: 'Cantiga da Marca',          need: 'arc:balada' },
 
     /* --- registros de volume --- */
     { id: 'end_prologo',  cat: 'rec', name: 'Pr\u00f3logo conclu\u00eddo',      need: 'done:prologo' },

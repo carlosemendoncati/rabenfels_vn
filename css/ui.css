@@ -318,11 +318,18 @@
   position: absolute;
   inset: 0;
   background:
+    /* A queda comecava em 26%, mas a coluna de texto vai ate 38% da
+       largura. Os codigos REG, que sao quase pretos por desenho, caiam
+       em cima dos papeis claros da fotografia e sumiam do terceiro item
+       em diante. O patamar escuro agora cobre a coluna inteira e so
+       depois abre para a imagem, que continua brilhando de 56% adiante,
+       onde estao o pacote e o olho. */
     linear-gradient(
       90deg,
       rgba(7, 8, 12, .94) 0%,
-      rgba(7, 8, 12, .82) 26%,
-      rgba(7, 8, 12, .34) 52%,
+      rgba(7, 8, 12, .86) 30%,
+      rgba(7, 8, 12, .70) 40%,
+      rgba(7, 8, 12, .34) 56%,
       rgba(7, 8, 12, .12) 74%,
       rgba(7, 8, 12, .42) 100%
     ),
@@ -486,11 +493,15 @@
   flex-shrink: 0;
 }
 
+/* A linha condutora cede antes do texto. Ela e gesto; a frase e conteudo.
+   Com largura rigida, a marca e a linha comiam 128 px dos 504 da faixa e a
+   frase quebrava deixando "fechar" sozinho na segunda linha. */
 .rf-subtitle__bar {
   width: clamp(28px, 9vw, 88px);
   height: 1px;
   background: linear-gradient(90deg, var(--rbf-line), transparent);
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .rf-subtitle__text {
@@ -498,6 +509,11 @@
   font-size: calc(11px * var(--rbf-ui));
   letter-spacing: .04em;
   color: var(--rbf-ink-dim);
+
+  /* Uma linha so. Se a tela nao comportar, a linha condutora encolhe
+     primeiro; e so abaixo disso que a frase quebra. */
+  text-wrap: balance;
+  flex-shrink: 0;
 }
 
 /* ---- navegacao em codice ---------------------------------------------- */
@@ -714,8 +730,13 @@
   animation: rbfInk var(--rbf-medium) var(--rbf-ease-ritual);
 }
 
+/* A linha de versao herda .rbf-code, cuja cor e --rbf-ink-ghost. Aquele
+   tom existe para codigo sobre painel escuro e chapado; aqui ele cai em
+   cima da fotografia do menu e some. Um degrau acima resolve sem tirar o
+   cromo do lugar dele na hierarquia. */
 .rf-menufoot__version {
   align-self: flex-end;
+  color: var(--rbf-ink-mute);
 }
 
 /* ---- arte central: arco, olho e astrolabio ----------------------------- */

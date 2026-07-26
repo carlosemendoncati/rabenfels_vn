@@ -31,12 +31,30 @@
   --rbf-cold:     #7fa6b8;   /* rota Resposta, dado frio, codigo          */
   --rbf-paper:    #d9d5c8;   /* texto principal                           */
 
-  /* Fundos, do mais profundo ao mais elevado. */
+  /* Fundos, do mais profundo ao mais elevado. Viés frio: são as
+     superfícies do arquivo — menu, painéis, listas de save. */
   --rbf-void:     #07080c;
   --rbf-ground:   #0b0c12;
   --rbf-panel:    #12131b;
   --rbf-raised:   #191b25;
   --rbf-line:     #262936;
+
+  /* ---- superfície da caixa de diálogo ----------------------------------
+     Mesma luminância dos fundos acima, viés quente em vez de frio.
+
+     Os painéis do arquivo aparecem sobre o próprio arquivo e podem ser
+     frios. A caixa de diálogo aparece sobre a cena, que é iluminada a
+     vela em quase todo capítulo escrito: com o azul-ardósia dos painéis
+     ela lia como adesivo colado por cima da arte. Aqui o cinza tem
+     temperatura de papel, então a caixa assenta na imagem.
+
+     A separação é de propósito. Trocar --rbf-panel esquentaria o menu
+     junto, e o menu deve continuar frio. */
+  --rbf-dlg-top:    rgba(23, 20, 16, .96);
+  --rbf-dlg-bottom: rgba(13, 11, 8, .97);
+  --rbf-dlg-tab:    #1b1812;
+  --rbf-dlg-tab-lo: #131009;
+  --rbf-dlg-line:   #2c2720;
 
   /* Texto derivado do papel, por opacidade percebida. */
   --rbf-ink:      #d9d5c8;

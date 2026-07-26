@@ -257,7 +257,7 @@ RBF.CHAPTER2 = [
 { t:'sfx', id:'sfx_page_turn' },
 { t:'pause' },
 
-{ t:'nar', tx:'N\u00e3o eram contas. Eram registros da pr\u00f3pria fam\u00edlia.' },
+{ t:'nar', tx:'Os volumes daquela estante guardavam os registros da pr\u00f3pria fam\u00edlia.' },
 { t:'nar', tx:'Nascimentos, mortes, casamentos, transfer\u00eancias de propriedade. Duzentos anos.' },
 { t:'inn', tx:'Isto deveria estar no cart\u00f3rio de Marca Cinzenta. N\u00e3o em uma estante virada para a parede.' },
 
@@ -315,7 +315,7 @@ RBF.CHAPTER2 = [
 { t:'pause' },
 { t:'nar', tx:'Na manh\u00e3 seguinte o volume estava de novo trocado com o vizinho, e o marcador na mesma p\u00e1gina.' },
 
-{ t:'inn', tx:'N\u00e3o \u00e9 engano de arruma\u00e7\u00e3o. \u00c9 rotina.' },
+{ t:'inn', tx:'Quem arruma erra uma vez. Isto tem hora marcada.' },
 { t:'inn', tx:'Algu\u00e9m l\u00ea nesta biblioteca de madrugada e devolve o livro quase no lugar certo.' },
 { t:'pause' },
 { t:'inn', tx:'Quase.' },

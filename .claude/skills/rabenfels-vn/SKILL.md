@@ -13,6 +13,8 @@ Eles são curtos e evitam os erros que mais custam retrabalho neste projeto.
 
 | Preciso de | Leia |
 |---|---|
+| **a postura de trabalho deste projeto** | **`reference/persona.md`** — leia primeiro |
+| tiques que denunciam texto de máquina | `reference/antipadroes-ia.md` |
 | regras de escrita, voz de cada personagem | `reference/estilo.md` |
 | cronologia, terminologia, o que pode ser revelado quando | `reference/canon.md` |
 | tipos de beat, módulos, como adicionar capítulo | `reference/arquitetura.md` |

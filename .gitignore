@@ -14,3 +14,6 @@ tools/_shots/
 
 # cache do Python das ferramentas
 __pycache__/
+
+# corpus de estudo: PDFs de referencia e o texto extraido deles
+REF/

@@ -215,8 +215,10 @@ body {
   gap: calc(9px * var(--rbf-ui));
 
   padding: calc(8px * var(--rbf-ui)) calc(22px * var(--rbf-ui)) calc(8px * var(--rbf-ui)) calc(13px * var(--rbf-ui));
-  background: linear-gradient(180deg, #171a24 0%, #10121a 100%);
-  border: 1px solid var(--rbf-line);
+  /* A aba faz parte da caixa de dialogo, entao acompanha a temperatura
+     dela e nao a dos paineis do arquivo. */
+  background: linear-gradient(180deg, var(--rbf-dlg-tab) 0%, var(--rbf-dlg-tab-lo) 100%);
+  border: 1px solid var(--rbf-dlg-line);
   border-bottom: none;
 
   /* Aba: canto superior direito chanfrado, como uma etiqueta colada. */
@@ -277,8 +279,8 @@ body {
   padding: calc(18px * var(--rbf-ui)) calc(24px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
 
   background:
-    linear-gradient(180deg, rgba(16, 18, 27, .96) 0%, rgba(10, 11, 17, .97) 100%);
-  border: 1px solid var(--rbf-line);
+    linear-gradient(180deg, var(--rbf-dlg-top) 0%, var(--rbf-dlg-bottom) 100%);
+  border: 1px solid var(--rbf-dlg-line);
   box-shadow: 0 -18px 60px rgba(0, 0, 0, .7);
 }
 

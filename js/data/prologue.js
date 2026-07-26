@@ -7,24 +7,24 @@
 
    Posicao no arco: Matheo Drell recebe o Arquivo tres dias depois do
    ponto morto combinado e le a noite inteira. O jogador conhece o fim
-   antes de viver o comeco; tudo o que vier depois e leitura de um
-   documento que ja existe.
+   antes de viver o comeco.
 
-   O Prologo nao tem escolha, e isso e proposital. Nada aqui pode ser
-   mudado por quem le. E o unico capitulo em que o jogador so assiste.
+   Sem escolha nenhuma, de proposito. E o unico capitulo em que o jogador
+   so assiste.
 
-   Onze cenas:
-     P1  o pacote
-     P2  as paginas contadas
-     P3  Khar'Vel
-     P4  o Compilador
-     P5  a camara do casulo
-     P6  Klara
-     P7  os experimentos
-     P8  a escriba de Lervel
-     P9  a pergunta
-     P10 a ultima entrada
-     P11 corte para cinco anos antes
+   CANON APLICADO (biblia_revisao_v2.md):
+   - Khar'Vel e o nome que Antoniette deu. Os registros que ela cita sao
+     reais e conferiveis; a convencao e o nome. O jogador nao pode
+     descobrir isso aqui.
+   - As borboletas de agosto aparecem uma vez, sem explicacao.
+   - O casulo nao transforma: o que sai, sai de outro corpo.
+   - Klara nasce vampira, Liara nasce humana. O exame confirma que a
+     entidade pegou; nao procura qual das duas.
+   - Matheo leu a ficha da escriba antes de assinar. Sem alibi.
+
+   Onze cenas: P1 pacote, P2 paginas, P3 Khar'Vel, P4 Compilador,
+   P5 casulo, P6 gemeas, P7 experimentos, P8 escriba, P9 pergunta,
+   P10 ultima entrada, P11 corte.
    ========================================================================== */
 
 var RBF = (typeof RBF !== 'undefined') ? RBF : {};
@@ -33,8 +33,6 @@ RBF.PROLOGUE = [
 
 /* ======================================================================
    P1 - O ESCRITORIO DE MATHEO - FIM DE TARDE
-   Proposito: estabelecer o metodo dele e a conta dos noventa dias.
-   Saida: ele reconhece a letra antes de ler o nome.
    ====================================================================== */
 { t:'scene', id:'p1_pacote', chapter:'prologo', title:'O pacote',
   bg:'bg_prologue_room', bgm:'bgm_prologue' },
@@ -42,8 +40,8 @@ RBF.PROLOGUE = [
 { t:'spr', ch:'matheo', ex:'neutral', pos:'center' },
 
 { t:'nar', tx:'A tarde morria quando o mensageiro bateu.' },
-{ t:'nar', tx:'Matheo Drell n\u00e3o esperava visitas. Por princ\u00edpio, n\u00e3o por isolamento.' },
-{ t:'inn', tx:'Quem trabalha com informa\u00e7\u00e3o aprende cedo. Visita n\u00e3o marcada traz alguma coisa que estraga o resto do dia.' },
+{ t:'nar', tx:'Matheo Drell n\u00e3o esperava visitas. Por princ\u00edpio, nunca esperava.' },
+{ t:'inn', tx:'Quem trabalha com informa\u00e7\u00e3o aprende cedo. Visita n\u00e3o marcada estraga o resto do dia.' },
 
 { t:'sfx', id:'sfx_package' },
 { t:'nar', tx:'O pacote era pequeno. Couro encerado, cordel escuro, sem selo.' },
@@ -57,14 +55,12 @@ RBF.PROLOGUE = [
 { t:'pause' },
 { t:'inn', tx:'N\u00e3o significavam.' },
 
-{ t:'nar', tx:'Ele levou o pacote para a mesa e acendeu a segunda vela.' },
+{ t:'nar', tx:'Levou o pacote para a mesa e acendeu a segunda vela.' },
 { t:'inn', tx:'Relat\u00f3rio de campo. Leia como relat\u00f3rio de campo.' },
 
 /* ======================================================================
    P2 - AS PAGINAS CONTADAS
-   Proposito: o metodo dele, mostrado uma vez, para que a perda tenha
-   medida depois.
-   Saida: a dedicatoria.
+   O metodo dele, mostrado uma vez, para que a perda tenha medida.
    ====================================================================== */
 { t:'scene', id:'p2_paginas', chapter:'prologo', title:'As p\u00e1ginas contadas',
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
@@ -72,12 +68,12 @@ RBF.PROLOGUE = [
 
 { t:'sfx', id:'sfx_page_turn' },
 { t:'nar', tx:'Ele contou as p\u00e1ginas antes de ler a primeira. Duzentas e oitenta e sete.' },
-{ t:'nar', tx:'Era o que ele fazia com qualquer documento novo.' },
+{ t:'nar', tx:'Fazia isso com qualquer documento novo.' },
 { t:'pause' },
 { t:'nar', tx:'Foi a \u00faltima coisa profissional que ele fez naquela noite.' },
 
-{ t:'nar', tx:'Letra densa. T\u00edtulos formais. Notas de rodap\u00e9 numeradas.' },
-{ t:'inn', tx:'Ela numerou tudo. Numerou at\u00e9 o que n\u00e3o precisava.' },
+{ t:'nar', tx:'Letra densa. T\u00edtulos formais. Rodap\u00e9s numerados at\u00e9 o fim.' },
+{ t:'inn', tx:'Ela numerou at\u00e9 o que n\u00e3o precisava.' },
 { t:'nar', tx:'No canto da capa, em tinta mais nova que o resto:' },
 
 { t:'arc', key:'arquivo', lns:[
@@ -87,12 +83,12 @@ RBF.PROLOGUE = [
 ]},
 
 { t:'inn', tx:'Leia tudo.' },
-{ t:'inn', tx:'Em oito anos ela nunca me escreveu uma ordem.' },
+{ t:'inn', tx:'Em oito anos ela nunca me mandou fazer nada.' },
 
 /* ======================================================================
    P3 - KHAR'VEL
-   Proposito: a definicao por negacao, que e a unica honesta.
-   Saida: ele confere a fonte e a fonte existe.
+   As linhas do cartao sao canonicas. O que o jogador nao pode saber
+   aqui: o nome foi ela que deu. Os registros que ela cita existem.
    ====================================================================== */
 { t:'scene', id:'p3_kharvel', chapter:'prologo', title:'Khar\u2019Vel',
   bg:'bg_archive_closeup' },
@@ -100,7 +96,7 @@ RBF.PROLOGUE = [
 { t:'arc', key:'arquivo', lns:[
     '"Khar\u2019Vel n\u00e3o \u00e9 um deus. Deuses recebem ora\u00e7\u00f5es e as ignoram. Ela recebe oferendas e as consome."',
     '"Khar\u2019Vel n\u00e3o \u00e9 um dem\u00f4nio. Dem\u00f4nios corrompem de fora. Ela cresce de dentro."',
-    '"Ela morre e renasce sem parar. Nunca no pr\u00f3prio corpo. Em outros."'
+    '"Morre e renasce sem parar. Nunca no pr\u00f3prio corpo. Em outros."'
 ]},
 
 { t:'inn', tx:'Khar\u2019Vel.' },
@@ -108,15 +104,24 @@ RBF.PROLOGUE = [
 { t:'inn', tx:'Ela achou em quatro.' },
 
 { t:'sfx', id:'sfx_page_turn' },
-{ t:'nar', tx:'Ele desceu ao rodap\u00e9. Ela citava a origem de cada linha.' },
-{ t:'nar', tx:'Ele conhecia duas das fontes. Tinha catalogado uma delas.' },
+{ t:'nar', tx:'Ele desceu ao rodap\u00e9. Ela citava a origem de cada linha, com data e arquivo.' },
+{ t:'nar', tx:'Ele conhecia duas das fontes. Tinha catalogado uma delas com as pr\u00f3prias m\u00e3os, quinze anos antes.' },
 { t:'pause' },
 { t:'inn', tx:'Est\u00e1 tudo confer\u00edvel. Ela sabia que eu ia conferir.' },
 
+/* As borboletas entram aqui, uma vez, e nao voltam. */
+{ t:'arc', key:'arquivo', lns:[
+    '"Todo agosto, nas terras pr\u00f3ximas \u00e0 Marca, aparecem borboletas de asa clara com veias vermelhas."',
+    '"Duram tr\u00eas semanas. As aldeias n\u00e3o as matam e n\u00e3o falam delas."',
+    '"Em trezentos anos de registros, a fam\u00edlia nunca escreveu uma linha sobre o fen\u00f4meno."'
+]},
+
+{ t:'inn', tx:'Ela anotou o sil\u00eancio deles como se fosse um dado.' },
+{ t:'nar', tx:'Ele releu a \u00faltima linha e passou adiante.' },
+
 /* ======================================================================
    P4 - O COMPILADOR
-   Proposito: apresentar a voz das notas de rodape e a mascara.
-   Saida: a mascara escorrega uma vez e ela nao corrige.
+   Apresenta a voz das notas. A mascara escorrega uma vez.
    ====================================================================== */
 { t:'scene', id:'p4_compilador', chapter:'prologo', title:'O Compilador',
   bg:'bg_archive_closeup' },
@@ -127,9 +132,9 @@ RBF.PROLOGUE = [
 { t:'pause' },
 { t:'inn', tx:'\u00c9 o que a Ordem ensina. Ela aprendeu comigo.' },
 
-{ t:'nar', tx:'A voz n\u00e3o falhou uma \u00fanica vez.' },
+{ t:'nar', tx:'A voz se manteve por cento e quarenta p\u00e1ginas.' },
 { t:'sfx', id:'sfx_page_turn' },
-{ t:'nar', tx:'Falhou na p\u00e1gina cento e quarenta e um.' },
+{ t:'nar', tx:'Escorregou na cento e quarenta e um.' },
 
 { t:'arc', key:'compilador', label:'\u2014 nota do Compilador \u2014', lns:[
     '41. O sujeito K. tem oito anos na data desta entrada.',
@@ -144,8 +149,7 @@ RBF.PROLOGUE = [
 
 /* ======================================================================
    P5 - A CAMARA DO CASULO
-   Proposito: o primeiro nome proprio do horror, dado sem explicacao.
-   Saida: a vela apaga e ele nao percebe.
+   Substituicao, nao transformacao.
    ====================================================================== */
 { t:'scene', id:'p5_casulo', chapter:'prologo', title:'A c\u00e2mara do casulo',
   bg:'bg_archive_closeup' },
@@ -159,29 +163,37 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'Ele leu a frase de novo.' },
 { t:'inn', tx:'A c\u00e2mara do casulo.' },
 { t:'pause' },
-{ t:'inn', tx:'Casulo n\u00e3o \u00e9 onde se guarda. \u00c9 onde se transforma.' },
+
+{ t:'inn', tx:'Ele sabia como funciona um casulo. A lagarta se desfaz por dentro e o que sai da casca \u00e9 feito do que ela era.' },
+{ t:'pause' },
+{ t:'inn', tx:'Aqui a casca fica com a menina dentro.' },
+{ t:'inn', tx:'O que sai, sai de outro corpo. Inteiro. Sem ter pago nada.' },
 
 { t:'sfx', id:'sfx_candle' },
 { t:'nar', tx:'A vela da esquerda apagou. Ele continuou com a que restou.' },
 
 /* ======================================================================
-   P6 - KLARA
-   Proposito: o nome e a idade. A conta que o jogador faz sozinho.
-   Saida: ele nao termina a conta.
+   P6 - AS GEMEAS
+   Klara vampira, Liara humana. O exame confirma.
    ====================================================================== */
-{ t:'scene', id:'p6_klara', chapter:'prologo', title:'A escolhida',
+{ t:'scene', id:'p6_gemeas', chapter:'prologo', title:'As g\u00eameas',
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
 
 { t:'arc', key:'arquivo', lns:[
-    '"Klara nasceu segundo. Sete minutos depois da irm\u00e3."',
-    '"O exame dela demorou mais. Os guardi\u00f5es n\u00e3o procuravam anomalia vis\u00edvel."',
-    '"Procuravam um calor espec\u00edfico no sangue. Um ritmo de batimento que n\u00e3o \u00e9 humano nem vamp\u00edrico."',
-    '"Encontraram."',
+    '"Nasceram g\u00eameas, como nasce toda gera\u00e7\u00e3o desta casa. O ritual garante o par."',
+    '"Liara nasceu humana. Klara nasceu vampira. A diferen\u00e7a era vis\u00edvel na primeira hora."',
+    '"Os guardi\u00f5es examinaram Klara mesmo assim. Procuravam um calor espec\u00edfico no sangue."',
+    '"O exame n\u00e3o servia para descobrir qual das duas. Isso j\u00e1 se sabia."',
+    '"Servia para confirmar que a entidade tinha pegado."',
     '"Registro da casa, mesma data: a escolhida foi identificada. O ciclo continua."'
 ]},
 
 { t:'bgm', id:null },
 { t:'pause' },
+{ t:'inn', tx:'Um laudo.' },
+{ t:'inn', tx:'Eles conferiram uma crian\u00e7a de horas como quem confere uma remessa.' },
+{ t:'pause' },
+
 { t:'inn', tx:'Ela tinha oito anos quando Antoniette chegou.' },
 { t:'inn', tx:'Oito.' },
 { t:'pause' },
@@ -190,8 +202,7 @@ RBF.PROLOGUE = [
 
 /* ======================================================================
    P7 - OS EXPERIMENTOS
-   Proposito: o reconhecimento. Ele assinou a autorizacao de campo.
-   Saida: ele lembra o que almocou naquele dia.
+   O reconhecimento vem pelo eco da frase, sem que ninguem o enuncie.
    ====================================================================== */
 { t:'scene', id:'p7_experimentos', chapter:'prologo', title:'O treinamento',
   bg:'bg_archive_closeup' },
@@ -213,13 +224,12 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'A autoriza\u00e7\u00e3o de campo tinha levado quarenta minutos.' },
 { t:'nar', tx:'Ele n\u00e3o releu o dossi\u00ea de Nidhaus antes de assinar. J\u00e1 tinha lido uma vez.' },
 { t:'pause' },
-{ t:'inn', tx:'Eu lembro daquela tarde. Lembro do que almocei.' },
-{ t:'nar', tx:'Recolocou a folha sobre a mesa. Continuou lendo.' },
+{ t:'inn', tx:'Uma vez. O suficiente.' },
+{ t:'nar', tx:'Recolocou a folha sobre a mesa e continuou lendo.' },
 
 /* ======================================================================
    P8 - A ESCRIBA DE LERVEL
-   Proposito: nao foi a primeira, e o registro foi fechado em casa.
-   Saida: a porta que a propria Ordem fechou.
+   Sem alibi. Ele leu a ficha antes de assinar.
    ====================================================================== */
 { t:'scene', id:'p8_escriba', chapter:'prologo', title:'A escriba de Lervel',
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
@@ -234,14 +244,16 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'Nem l\u00e1.' },
 { t:'inn', tx:'L\u00e1 \u00e9 o meu arquivo.' },
 { t:'pause' },
-{ t:'inn', tx:'Algu\u00e9m em Lervel abriu aquela ficha, escreveu motivo de sa\u00fade e fechou.' },
-{ t:'inn', tx:'Trinta e sete anos atr\u00e1s eu tinha nove.' },
-{ t:'nar', tx:'A conclus\u00e3o chegou inteira. Ele a manteve fora das palavras por mais um par\u00e1grafo.' },
+
+{ t:'nar', tx:'Ele tinha aberto aquela ficha uma semana antes de assinar a autoriza\u00e7\u00e3o.' },
+{ t:'nar', tx:'Lembrava do papel. Lembrava da letra do escritur\u00e1rio que escreveu a \u00faltima linha.' },
+{ t:'inn', tx:'Motivo de sa\u00fade.' },
+{ t:'pause' },
+{ t:'inn', tx:'Eu li aquilo e assinei mesmo assim.' },
+{ t:'nar', tx:'Virou a p\u00e1gina com a m\u00e3o firme.' },
 
 /* ======================================================================
    P9 - A PERGUNTA
-   Proposito: o unico momento em que ela fala com ele diretamente.
-   Saida: nao existe linha seguinte.
    ====================================================================== */
 { t:'scene', id:'p9_pergunta', chapter:'prologo', title:'A pergunta',
   bg:'bg_archive_closeup' },
@@ -257,14 +269,13 @@ RBF.PROLOGUE = [
 { t:'pause' },
 { t:'sfx', id:'sfx_page_turn' },
 { t:'nar', tx:'Ele virou a p\u00e1gina procurando a linha seguinte.' },
-{ t:'nar', tx:'N\u00e3o havia linha seguinte. A pergunta ocupava a p\u00e1gina inteira.' },
+{ t:'nar', tx:'A pergunta ocupava a p\u00e1gina inteira e o resto era papel limpo.' },
 { t:'pause' },
 { t:'nar', tx:'Ela deixou o espa\u00e7o da resposta e foi embora antes de poder receb\u00ea-la.' },
 
 /* ======================================================================
    P10 - A ULTIMA ENTRADA
-   Proposito: a mascara cai. Depois o colapso, que e de silencio.
-   Saida: a mao chega ate a pena e para ali.
+   A mascara cai. O colapso e de silencio.
    ====================================================================== */
 { t:'scene', id:'p10_ultima', chapter:'prologo', title:'A \u00faltima entrada',
   bg:'bg_prologue_room' },
@@ -279,24 +290,25 @@ RBF.PROLOGUE = [
     'Para quem encontrar isto.',
     '',
     'N\u00e3o sei seu nome. N\u00e3o sei se voc\u00ea \u00e9 da Ordem ou se chegou',
-    'aqui por outro caminho. N\u00e3o importa.',
+    'aqui por outro caminho. Tanto faz.',
     '',
     'Existe uma menina em Velha Nidhaus chamada Klara Rabenfels.',
     '',
     'Treze anos. L\u00ea mais r\u00e1pido do que qualquer pessoa que eu conheci.',
     'Corrige os outros em voz baixa, para n\u00e3o constranger ningu\u00e9m.',
-    'Protege a irm\u00e3 com uma calma que custa caro.',
+    'Ri de coisas que ningu\u00e9m mais achou gra\u00e7a, e ri depois, quando',
+    'j\u00e1 passou, quando acha que n\u00e3o tem ningu\u00e9m olhando.',
     '',
     'Foi escolhida antes de nascer para morrer de um jeito que a',
     'fam\u00edlia dela chama de tradi\u00e7\u00e3o.',
     '',
     'Tentei tir\u00e1-la daqui.',
-    'Fui cuidadosa. Fui met\u00f3dica. Fui devagar.',
+    'Fui met\u00f3dica. Fui devagar.',
     'Foi o devagar que custou.',
     '',
-    'Est\u00e1 tudo nas p\u00e1ginas anteriores. Datas, nomes, plantas,',
-    'hor\u00e1rios de guarda, o que funciona e o que n\u00e3o funciona.',
-    'Cinco anos de trabalho. Use.',
+    'Est\u00e1 tudo nas p\u00e1ginas anteriores. Datas, plantas, hor\u00e1rios de',
+    'guarda, o que funciona e o que n\u00e3o funciona. Cinco anos de',
+    'trabalho. Use.',
     '',
     'V\u00e1 mais r\u00e1pido do que eu fui.',
     '',
@@ -314,7 +326,6 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'A m\u00e3o chegou at\u00e9 a pena e parou ali.' },
 { t:'pause' },
 
-/* O mundo e retirado uma camada por vez. Nada e afirmado. */
 { t:'sfx', id:'sfx_wind' },
 { t:'nar', tx:'O vento contra o vidro parou.' },
 { t:'nar', tx:'A cera parou de estalar.' },
