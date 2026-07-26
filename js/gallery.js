@@ -118,6 +118,7 @@ RBF.Gallery = (function () {
     { id: 'doc_ultima',     cat: 'doc', name: '\u00daltima entrada',           need: 'arc:ultima' },
     { id: 'doc_caderno',    cat: 'doc', name: 'Caderno operacional',          need: 'arc:caderno' },
     { id: 'doc_sem_ident',  cat: 'doc', name: 'Caderno sem identifica\u00e7\u00e3o', need: 'arc:sem_identificacao' },
+    { id: 'doc_lervel',     cat: 'doc', name: 'Resposta da Ordem',        need: 'arc:lervel' },
     { id: 'doc_balada',     cat: 'doc', name: 'Cantiga da Marca',          need: 'arc:balada' },
 
     /* --- registros de volume --- */
@@ -125,6 +126,8 @@ RBF.Gallery = (function () {
     { id: 'end_cap1',     cat: 'rec', name: 'Cap\u00edtulo 1 conclu\u00eddo',   need: 'done:capitulo1' },
     { id: 'end_cap2',     cat: 'rec', name: 'Cap\u00edtulo 2 conclu\u00eddo',   need: 'done:capitulo2' },
     { id: 'end_cap3',     cat: 'rec', name: 'Cap\u00edtulo 3 conclu\u00eddo',   need: 'done:capitulo3' },
+    { id: 'end_cap4',     cat: 'rec', name: 'Cap\u00edtulo 4 conclu\u00eddo',   need: 'done:capitulo4' },
+    { id: 'end_cap5',     cat: 'rec', name: 'Cap\u00edtulo 5 conclu\u00eddo',   need: 'done:capitulo5' },
     { id: 'route_hope',   cat: 'rec', name: 'Registro: Esperan\u00e7a',        need: 'route:hope:6' },
     { id: 'route_loss',   cat: 'rec', name: 'Registro: Perda',                need: 'route:loss:6' },
     { id: 'route_answer', cat: 'rec', name: 'Registro: Resposta',             need: 'route:answer:6' }
@@ -262,6 +265,15 @@ RBF.Gallery = (function () {
     return out;
   }
 
+  /* Condicao de liberacao de um item, pelo id. O harness usa para
+     casar cartao lido com entrada de galeria. */
+  function needOf(id) {
+    for (var i = 0; i < CATALOG.length; i++) {
+      if (CATALOG[i].id === id) { return CATALOG[i].need || null; }
+    }
+    return null;
+  }
+
   function counts() {
     var total = CATALOG.length;
     var open  = 0;
@@ -277,6 +289,7 @@ RBF.Gallery = (function () {
 
   return {
     categories:   categories,
+    needOf:       needOf,
     items:        items,
     counts:       counts,
     hasAny:       hasAny,

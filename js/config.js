@@ -261,6 +261,56 @@ RBF.CHARACTERS = {
     }
   },
 
+  /* Guardioes do pacto. Entram no Capitulo 4 e sempre em cena de ritual,
+     onde o que importa e a voz do outro lado de uma porta fechada.
+     Elsbeth e Cort ficam ocultos sem arquivo: dar silhueta a eles seria
+     dar corpo a quem a obra so quer como som. Ines aparece em cena e
+     usa placeholder. */
+  elsbeth: {
+    name: 'Elsbeth',
+    color: '#8a8fa0',
+    dir: 'elsbeth',
+    size: 'bust',
+
+    available: false,
+    onMissing: 'hide',
+    fallbackExpression: 'neutral',
+
+    sprites: {
+      neutral: 'elsbeth_neutral.png'
+    }
+  },
+
+  cort: {
+    name: 'Cort',
+    color: '#7d7466',
+    dir: 'cort',
+    size: 'bust',
+
+    available: false,
+    onMissing: 'hide',
+    fallbackExpression: 'neutral',
+
+    sprites: {
+      neutral: 'cort_neutral.png'
+    }
+  },
+
+  ines: {
+    name: 'Ines',
+    color: '#9aa88f',
+    dir: 'ines',
+    size: 'bust',
+
+    available: false,
+    onMissing: 'placeholder',
+    fallbackExpression: 'neutral',
+
+    sprites: {
+      neutral: 'ines_neutral.png'
+    }
+  },
+
   klara: {
     name: 'Klara',
     color: '#9ec4cc',
@@ -540,6 +590,24 @@ RBF.CHAPTERS = [
     data:  'CHAPTER3',
     label: 'Cap\u00edtulo 3',
     title: 'As Duas Klara',
+    selectable: true
+  },
+
+  {
+    id:    'capitulo4',
+    code:  'C-IV',
+    data:  'CHAPTER4',
+    label: 'Cap\u00edtulo 4',
+    title: 'Os Rituais de Outubro',
+    selectable: true
+  },
+
+  {
+    id:    'capitulo5',
+    code:  'C-V',
+    data:  'CHAPTER5',
+    label: 'Cap\u00edtulo 5',
+    title: 'A C\u00e2mara',
     selectable: true
   }
 ];

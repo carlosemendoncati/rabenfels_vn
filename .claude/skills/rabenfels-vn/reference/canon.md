@@ -163,6 +163,35 @@ viveu a liberdade uma vez · se culpa pelo peso do dever.
 imitacao. **A palavra "nobreza" nao aparece na obra** - e o que sobra
 depois, nao o que se diz durante.
 
+### O sentido contrario: o que Klara faz com Antoniette
+
+> **Antoniette se apaixona pela menina num amor materno que nunca sentiu.
+> E o que ela vira, para Klara, e a mae que ela mesma perdeu.**
+
+A mae de Antoniette morreu quando ela tinha seis. Klara tem oito no Cap. 1.
+**Em algum ponto a menina passa dessa idade, e ninguem diz isso em voz
+alta.**
+
+**O dispositivo:** ela repete com Klara gestos que a mae dela fazia, e
+**nao os reconhece como lembranca - reconhece como metodo.**
+
+| O gesto | Como ela classifica |
+|---|---|
+| corrige ao lado, na mesma tinta do acerto | "riscar ensina a esconder o erro" |
+| repara se a menina comeu | "alteracao de apetite e dado" |
+| aprende de que lado da cama ela dorme | "posicao habitual, para notar mudanca" |
+
+Cada frase e verdadeira **e e desculpa**. Mesma tecnica da nota 41 do
+Compilador, aplicada a gesto.
+
+**Tres proibicoes:**
+
+1. As palavras **mae, filha e amor nao aparecem** entre elas. Nunca.
+2. **Antoniette nao percebe que esta fazendo isso.** Ela nomear o proprio
+   sentimento mata o dispositivo.
+3. **Uma vez so alguem de fora quase nomeia** (Fenn ou Dara, Cap. 8). Ela
+   responde com um dado tecnico e encerra. **Nao nega: cataloga.**
+
 **Os dragoes** precisam de semente: um volume da biblioteca que Antoniette
 entrega no Cap. 6, sem explicar por que aquele.
 

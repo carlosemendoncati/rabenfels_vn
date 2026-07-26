@@ -102,6 +102,8 @@
 <script src="../js/data/chapter1.js"></script>
 <script src="../js/data/chapter2.js"></script>
 <script src="../js/data/chapter3.js"></script>
+<script src="../js/data/chapter4.js"></script>
+<script src="../js/data/chapter5.js"></script>
 
 <script src="../js/script.js"></script>
 <script src="../js/saves.js"></script>
@@ -351,11 +353,36 @@
           counts.unlocked + ' de ' + counts.total);
     check(counts.unlocked <= counts.total, 'galeria nao passa do total');
 
+    /* A invariante e a inversa da obvia: nao e "todo documento do
+       catalogo abre", porque ha cartao exclusivo de ramo - a resposta da
+       Ordem so existe se a jogadora relatar o ritual, no ramo A do
+       Capitulo 4. O que nao pode acontecer e um cartao ser LIDO e nao
+       ter entrada correspondente na galeria. */
+    var lidos = (RBF.Saves.readProgress().seen || []).filter(function (t) {
+      return t.indexOf('arc:') === 0;
+    });
     var docs = RBF.Gallery.items('doc');
-    for (var g = 0; g < docs.length; g++) {
-      check(docs[g].unlocked,
-            'documento lido abre na galeria: ' + docs[g].id);
+
+    check(lidos.length > 0, 'a partida leu cartoes do Arquivo',
+          lidos.length + ' chaves');
+
+    for (var g = 0; g < lidos.length; g++) {
+      var chave = lidos[g];
+      var achou = false;
+      for (var h = 0; h < docs.length; h++) {
+        if (docs[h].unlocked && RBF.Gallery.needOf(docs[h].id) === chave) {
+          achou = true; break;
+        }
+      }
+      check(achou, 'cartao lido tem entrada aberta na galeria: ' + chave);
     }
+
+    /* E o contrario, em modo aviso: documento catalogado que nao abriu
+       nesta partida deve ser exclusivo de outro ramo. */
+    var fechados = docs.filter(function (d) { return !d.unlocked; })
+                       .map(function (d) { return d.id; });
+    log('        documentos exclusivos de outro ramo: ' +
+        (fechados.length ? fechados.join(', ') : 'nenhum'));
 
     /* Erro nao capturado em qualquer ponto invalida tudo o que veio antes. */
     log('');
