@@ -532,6 +532,15 @@ RBF.CHAPTERS = [
     label: 'Cap\u00edtulo 2',
     title: 'O Invent\u00e1rio',
     selectable: true
+  },
+
+  {
+    id:    'capitulo3',
+    code:  'C-III',
+    data:  'CHAPTER3',
+    label: 'Cap\u00edtulo 3',
+    title: 'As Duas Klara',
+    selectable: true
   }
 ];
 

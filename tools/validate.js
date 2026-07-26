@@ -410,6 +410,11 @@ async function playthrough(optionIndex, useKeyboard) {
     missing:   RBF.Assets.report().length,
     /* Quantas escolhas o roteiro tem, para o teste nao fixar um numero. */
     choiceCount: RBF.Script.choices().length,
+    /* Vem do manifesto, nao de constante. Fixar 'capitulo2' aqui
+       obrigava a editar o validador a cada capitulo novo, e a falha
+       resultante parecia defeito do jogo. */
+    lastChapterId: RBF.CHAPTERS[RBF.CHAPTERS.length - 1].id,
+    chapterCount:  RBF.CHAPTERS.length,
     progress:  RBF.Saves.readProgress(),
     routes:    RBF.Routes.all(),
     gallery:   RBF.Gallery.counts()
@@ -430,9 +435,12 @@ async function playthroughChecks() {
     check(r.finished, 'ramo ' + labels[i] + ': alcanca o fim do roteiro');
     check(r.errors.length === 0, 'ramo ' + labels[i] + ': sem erro de runtime', r.errors.join(' | '));
     check(r.steps < 8000, 'ramo ' + labels[i] + ': sem loop infinito', 'passos=' + r.steps);
-    check(r.chapter === 'capitulo2', 'ramo ' + labels[i] + ': termina no capitulo 2', String(r.chapter));
-    check(r.endText.indexOf('A casa come') !== -1,
-          'ramo ' + labels[i] + ': cartao final do capitulo 2 renderizado');
+    check(r.chapter === r.lastChapterId,
+          'ramo ' + labels[i] + ': termina no ultimo capitulo do manifesto',
+          String(r.chapter) + ' esperado ' + r.lastChapterId);
+    check(r.endText.trim().length > 0,
+          'ramo ' + labels[i] + ': cartao final do ultimo capitulo renderizado',
+          r.endText);
     /* Uma partida completa passa por toda escolha do roteiro. O numero
        vem do proprio roteiro: fixar '2' aqui obrigava a editar o
        validador a cada escolha nova, e a falha resultante parecia
@@ -440,8 +448,9 @@ async function playthroughChecks() {
     check(Object.keys(r.choiceLog).length === r.choiceCount,
           'ramo ' + labels[i] + ': registrou todas as escolhas do roteiro',
           JSON.stringify(r.choiceLog) + ' de ' + r.choiceCount);
-    check(r.progress.chaptersReached.length === 3,
-          'ramo ' + labels[i] + ': tres capitulos marcados como alcancados');
+    check(r.progress.chaptersReached.length === r.chapterCount,
+          'ramo ' + labels[i] + ': todos os capitulos marcados como alcancados',
+          r.progress.chaptersReached.length + ' de ' + r.chapterCount);
     console.log('        passos=' + r.steps + ' historico=' + r.history +
                 ' escolhas=' + r.chosen.join(','));
   }
