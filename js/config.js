@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.5.0',
+  gameVersion:       '0.6.0',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o

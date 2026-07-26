@@ -6,23 +6,54 @@
 
    QUANDO: Ano 1, abril. Klara e Liara tem oito anos.
 
+   O PENSAMENTO UNICO DESTE CAPITULO (Zinsser, unidade):
+   "Duas meninas iguais, tratadas de modo diferente, e ninguem nesta
+   casa acha isso estranho."
+   Nenhum outro capitulo pode deixar este pensamento.
+
    NOTA DE DIRECAO (documento mestre, obedecida aqui):
    "Onde o Prologo foi escuridao, silencio e peso, o Capitulo 1 deve
    comecar com algo que quase parece normal. A ameaca esta presente desde
    o primeiro frame, mas ainda vestida com as roupas da beleza."
-   Por isso a estrada de abril e bonita. O que esta errado chega depois,
-   pequeno, e nunca e apontado.
+   Cavallaro mostra que isso e tecnica consolidada do genero: em
+   Higurashi, "o visual oscila entre encanto idilico e horror conotativo,
+   e ha algo sinistro na tensao entre a alegria das cores e o rigor
+   glacial dos arranjos formais".
 
-   CANON APLICADO (biblia_revisao_v2.md):
+   CANON APLICADO (docs/biblia_v3.md):
    - Klara nasceu vampira. Liara nasceu humana e SABE que a irma e
      vampira; acha que as duas vivem a mesma vida.
    - So Klara passa por procedimentos. So Klara tem curativo.
    - Klara fala pouco e nao fala bonito. Nada de enigma nem aforismo.
-   - Liara e mimada, criada em outro regime, e fala mais.
-   - Aldric administra. E cortes, nao mente, e nao diz o nome de Klara.
+   - Klara QUER coisas e TENTA consegui-las - por Liara, que e o unico
+     acesso dela ao mundo. E o mecanismo que termina na Academia.
+   - Liara e mimada, criada em outro regime, e fala mais. E o unico
+     registro alto da obra e o unico lugar onde ponto de exclamacao
+     e permitido.
+   - Aldric administra. Cortes, nao mente, nao diz o nome de Klara.
+     Papel tecnico: vilao simpatico.
    - Serafina e mais calorosa com Antoniette do que com as filhas.
    - Antoniette nao e doce. Esta trabalhando.
    - A balada aparece uma vez, na boca da crianca da aldeia.
+
+   OFICIO APLICADO NESTA REVISAO (docs/estudo/00_indice.md):
+   - Topo cortado. A cena abre no gesto. Abril e descrito pelo que faz
+     em quem viajou tres dias, nao pelo ceu. (Zinsser, Kenworthy)
+   - Auditoria sensorial: cheiro, tato, temperatura e som entram em
+     todas as cenas. A versao anterior era quase toda visual.
+   - Contradicao disposicional de Antoniette: metodica ao extremo, e
+     come em pe. Plantada aqui, sem comentario. (Corbett cap. 9)
+   - Fenn ganha detalhe contraditorio (economico com gente, falastrao
+     com os cavalos) e agenda propria. (Faye, Peters, Corbett cap. 21)
+   - Registro por interlocutor: ela fala curto com Fenn, formal com
+     Serafina, precisa com Aldric. (Kristoff, por exemplo)
+   - A decisao de NAO insistir aparece em cena, com o preco a vista.
+     (Frey: o leitor nao pode achar que a detetive e idiota)
+   - Ramos das duas escolhas equilibrados em extensao. (Finley)
+   - Fim de cena: dois socos convertidos em ponte (C6, C7). (Frey)
+   - Beat de uma palavra em C6. (Kristoff)
+   - Uma frase longa em C9, depois do capitulo inteiro em frase curta.
+   - Ela ouve de fora e le quem sai da sala. (Peters)
 
    Contrato com o Capitulo 2: a escolha 'cap1_relatorio' e a flag
    'archive_seed' nao mudam de nome.
@@ -39,6 +70,7 @@ var RBF = (typeof RBF !== 'undefined') ? RBF : {};
 
 /* --------------------------------------------------------------------------
    ESCOLHA 1 - A PERMISSAO
+   Tres ramos de extensao equivalente. Cada um leva um "e se" ate o fim.
    -------------------------------------------------------------------------- */
 
 var C1_ALDRIC_A = [
@@ -49,6 +81,8 @@ var C1_ALDRIC_A = [
   { t:'spr_hide', ch:'aldric' },
   { t:'pause' },
   { t:'inn', tx:'Ele me classificou em quatro palavras e desceu a escada.' },
+  { t:'nar', tx:'Ela esperou a porta fechar antes de voltar \u00e0 estante.' },
+  { t:'inn', tx:'Comprei tr\u00eas meses de sossego pelo pre\u00e7o de virar mob\u00edlia.' },
   { t:'inn', tx:'Vou precisar de mais tempo do que planejei.' }
 ];
 
@@ -89,9 +123,11 @@ var C1_RELATORIO_A = [
   { t:'inn', tx:'Duas crian\u00e7as de oito anos. Comportamento consistente com a linhagem. Sem distin\u00e7\u00e3o operacional relevante.' },
   { t:'nar', tx:'Releu. Estava correto.' },
   { t:'pause' },
-  { t:'nar', tx:'A frase do corredor ficou de fora.' },
-  { t:'nar', tx:'Ela lacrou o envelope.' },
-  { t:'inn', tx:'E continuou com a pergunta.' }
+  { t:'nar', tx:'A frase do corredor ficou de fora. O curativo tamb\u00e9m.' },
+  { t:'nar', tx:'Ela lacrou o envelope e comeu o p\u00e3o que tinha subido, em p\u00e9, junto da janela.' },
+  { t:'pause' },
+  { t:'inn', tx:'Relat\u00f3rio limpo. Ningu\u00e9m em Lervel vai fazer nenhuma pergunta.' },
+  { t:'inn', tx:'E eu continuo com a pergunta.' }
 ];
 
 var C1_RELATORIO_B = [
@@ -102,7 +138,10 @@ var C1_RELATORIO_B = [
   { t:'pause' },
   { t:'nar', tx:'Sobre a irm\u00e3, meia linha.' },
   { t:'inn', tx:'Uma delas virou dado. A outra virou contexto.' },
-  { t:'nar', tx:'Ela lacrou o envelope sem reler a meia linha.' }
+  { t:'nar', tx:'Ela lacrou o envelope sem reler a meia linha.' },
+  { t:'pause' },
+  { t:'inn', tx:'A partir de amanh\u00e3, Lervel vai querer mais sobre a menina.' },
+  { t:'inn', tx:'E eu vou ter de conseguir.' }
 ];
 
 var C1_RELATORIO_C = [
@@ -129,35 +168,34 @@ RBF.CHAPTER1 = [
 
 /* ======================================================================
    C1 - A ESTRADA DA MARCA CINZENTA - ABRIL, FIM DE TARDE
-   Comeca bonito. A ameaca chega vestida de beleza.
-   Saida: a crianca que canta e nao acena.
+   Topo cortado: abre no gesto. Abril e descrito pelo que faz nela.
+   Saida: a crianca que canta e nao acena. (soco)
    ====================================================================== */
 { t:'scene', id:'c1_estrada', chapter:'capitulo1', title:'A estrada',
   bg:'bg_grey_march_road', bgm:'bgm_grey_march' },
 { t:'fade_in' },
 
-{ t:'nar', tx:'Abril na Marca Cinzenta \u00e9 bonito de um jeito que ningu\u00e9m em Lervel acredita.' },
-{ t:'nar', tx:'A n\u00e9voa fica baixa e o sol atravessa por cima dela. A luz chega deitada.' },
-{ t:'nar', tx:'Antoniette Vael abriu a janela da carruagem e deixou aberta por dois quil\u00f4metros.' },
+{ t:'nar', tx:'Antoniette Vael abriu a janela da carruagem no terceiro dia de viagem e deixou aberta.' },
+{ t:'nar', tx:'O ar de abril entrou morno e com cheiro de terra molhada. As m\u00e3os dela, rachadas de r\u00e9dea e de frio, pararam de doer pela primeira vez desde Lervel.' },
 { t:'pause' },
-
-{ t:'nar', tx:'O vale se abriu na curva. Velha Nidhaus apareceu l\u00e1 embaixo, com o telhado molhado pegando o sol.' },
 { t:'inn', tx:'\u00c9 bonito.' },
 { t:'nar', tx:'Ela anotou a impress\u00e3o e a data, do jeito que anotava tudo.' },
 { t:'inn', tx:'Anotar que \u00e9 bonito serve para depois. Impress\u00e3o de chegada muda em tr\u00eas semanas e ningu\u00e9m lembra qual era.' },
 
+{ t:'nar', tx:'O vale se abriu na curva. Velha Nidhaus apareceu l\u00e1 embaixo, com o telhado molhado pegando o sol deitado.' },
 { t:'nar', tx:'Releu o dossi\u00ea de quarenta p\u00e1ginas que tinha decorado em Lervel.' },
 { t:'inn', tx:'Reler n\u00e3o \u00e9 inseguran\u00e7a. \u00c9 confer\u00eancia.' },
 { t:'nar', tx:'Dobrou o dossi\u00ea e guardou na mala menor.' },
 
 { t:'sfx', id:'sfx_wind' },
 { t:'nar', tx:'A estrada entrou na floresta e ficou escura de repente, do jeito que fica quando as copas se tocam.' },
+{ t:'nar', tx:'A temperatura caiu junto. Ela fechou a janela sem pensar e s\u00f3 percebeu que tinha fechado meio quil\u00f4metro depois.' },
 { t:'nar', tx:'Correu assim por tr\u00eas quil\u00f4metros sem abrir uma clareira.' },
 { t:'inn', tx:'O dossi\u00ea dizia densa.' },
 { t:'pause' },
 { t:'inn', tx:'As \u00e1rvores crescem umas em dire\u00e7\u00e3o \u00e0s outras.' },
 
-{ t:'nar', tx:'A aldeia veio depois da floresta. Quinze casas caiadas, um po\u00e7o, roupa no varal.' },
+{ t:'nar', tx:'A aldeia veio depois da floresta. Quinze casas caiadas, um po\u00e7o, roupa no varal e cheiro de fuma\u00e7a de lenha \u00famida.' },
 { t:'nar', tx:'Uma menina de uns seis anos estava sentada na mureta do po\u00e7o, cantando.' },
 { t:'pause' },
 
@@ -182,7 +220,9 @@ RBF.CHAPTER1 = [
 
 /* ======================================================================
    C2 - O PORTAO - ENTARDECER
-   Fenn. Saida: ele responde uma pergunta que ela nao fez.
+   Fenn ganha detalhe contraditorio e agenda.
+   Aqui aparece, pela primeira vez, a decisao de NAO insistir.
+   Saida: ele responde uma pergunta que ela nao fez. (soco)
    ====================================================================== */
 { t:'scene', id:'c2_portao', chapter:'capitulo1', title:'O port\u00e3o',
   bg:'bg_nidhaus_gate', bgm:'bgm_nidhaus' },
@@ -194,6 +234,12 @@ RBF.CHAPTER1 = [
 { t:'pause' },
 { t:'inn', tx:'Concordou comigo e n\u00e3o se mexeu. As duas coisas ao mesmo tempo.' },
 
+{ t:'nar', tx:'Ela abriu a boca para perguntar por qu\u00ea.' },
+{ t:'nar', tx:'Fechou.' },
+{ t:'inn', tx:'Primeira hora. N\u00e3o gasto uma pergunta com um homem que vai embora hoje.' },
+{ t:'pause' },
+{ t:'inn', tx:'Fica anotado que eu n\u00e3o perguntei.' },
+
 { t:'sfx', id:'sfx_door' },
 { t:'nar', tx:'O port\u00e3o abriu sem ranger.' },
 { t:'inn', tx:'Ferro desse peso deveria ranger. Algu\u00e9m engraxa este port\u00e3o toda semana.' },
@@ -201,7 +247,7 @@ RBF.CHAPTER1 = [
 { t:'spr', ch:'fenn', ex:'neutral', pos:'center' },
 { t:'nar', tx:'Um homem de meia-idade veio buscar a bagagem. Uniforme cinzento, sem bordado.' },
 { t:'dial', ch:'fenn', tx:'Senhorita Vael. A fam\u00edlia esperava a senhorita amanh\u00e3.' },
-{ t:'dial', ch:'antoniette', tx:'Sa\u00ed de Lervel um dia antes. Espero n\u00e3o desarrumar a casa.' },
+{ t:'dial', ch:'antoniette', tx:'Sa\u00ed um dia antes.' },
 { t:'dial', ch:'fenn', tx:'A casa n\u00e3o desarruma.' },
 
 { t:'nar', tx:'Ele pegou o ba\u00fa de ferramentas primeiro, sem perguntar qual das malas era qual.' },
@@ -210,7 +256,14 @@ RBF.CHAPTER1 = [
 { t:'inn', tx:'Isso \u00e9 treino.' },
 
 { t:'sfx', id:'sfx_footsteps' },
+{ t:'nar', tx:'No caminho ele passou pela cocheira e disse alguma coisa para dentro, sem parar.' },
+{ t:'dial', ch:'fenn', tx:'J\u00e1 vou, j\u00e1 vou. Voc\u00ea comeu \u00e0s quatro, seu mentiroso.' },
+{ t:'pause' },
+{ t:'nar', tx:'Voltou ao sil\u00eancio no passo seguinte.' },
+{ t:'inn', tx:'Vinte palavras para um cavalo. Nove para mim.' },
+
 { t:'nar', tx:'Atravessaram o p\u00e1tio. As janelas do andar de baixo estavam fechadas apesar do calor de abril.' },
+{ t:'nar', tx:'Cheirava a pedra molhada e a cera. Nenhum cheiro de comida, e j\u00e1 passava da hora do jantar.' },
 { t:'nar', tx:'No canto nordeste havia uma porta sem janela, com uma corrente leve no puxador.' },
 { t:'pause' },
 { t:'nar', tx:'A corrente n\u00e3o tinha cadeado.' },
@@ -224,12 +277,14 @@ RBF.CHAPTER1 = [
 /* ======================================================================
    C3 - O SALAO PRINCIPAL - NOITE
    Serafina. Mais calorosa com Antoniette do que com as filhas.
-   Saida: a ausencia de Aldric registrada como informacao.
+   Antoniette em registro formal - o mais longo que ela usa na obra.
+   Saida: a ausencia de Aldric registrada como informacao. (soco)
    ====================================================================== */
 { t:'scene', id:'c3_salao', chapter:'capitulo1', title:'O sal\u00e3o',
   bg:'bg_main_hall', bgm:'bgm_nidhaus' },
 
 { t:'nar', tx:'O teto do sal\u00e3o era alto demais para a largura da sala.' },
+{ t:'nar', tx:'Fazia dois graus a menos ali do que no p\u00e1tio, e n\u00e3o havia lareira acesa em abril.' },
 { t:'nar', tx:'Retratos nas paredes. Rostos diferentes, olhos iguais.' },
 
 { t:'spr', ch:'serafina', ex:'neutral', pos:'right' },
@@ -238,7 +293,7 @@ RBF.CHAPTER1 = [
 { t:'inn', tx:'Esta aqui construiu a vida dela com material que n\u00e3o era dela.' },
 
 { t:'dial', ch:'serafina', tx:'Senhorita Vael. Bem-vinda a Velha Nidhaus.' },
-{ t:'dial', ch:'antoniette', tx:'Senhora Rabenfels. A cole\u00e7\u00e3o da fam\u00edlia tem reputa\u00e7\u00e3o at\u00e9 em Lervel.' },
+{ t:'dial', ch:'antoniette', tx:'Senhora Rabenfels. A cole\u00e7\u00e3o da fam\u00edlia tem reputa\u00e7\u00e3o at\u00e9 em Lervel, e eu vim disposta a descobrir se ela \u00e9 merecida.' },
 { t:'spr', ch:'serafina', ex:'smirk', pos:'right' },
 { t:'nar', tx:'O sorriso chegou aos olhos no tempo certo e saiu no tempo certo.' },
 { t:'inn', tx:'Sem nenhuma falha t\u00e9cnica.' },
@@ -275,11 +330,13 @@ RBF.CHAPTER1 = [
 /* ======================================================================
    C4 - QUARTO DE ANTONIETTE - NOITE
    Metodo, primeira entrada, o item cinco.
+   Aqui entra a contradicao disposicional: ela come em pe.
    ====================================================================== */
 { t:'scene', id:'c4_quarto', chapter:'capitulo1', title:'O quarto',
   bg:'bg_antoniette_room', bgm:null },
 
 { t:'nar', tx:'Quarto confort\u00e1vel sem ser caloroso. Mesa de trabalho, vela, papel de sobra.' },
+{ t:'nar', tx:'Algu\u00e9m tinha deixado p\u00e3o, queijo e uma jarra na mesa de canto.' },
 { t:'nar', tx:'Ela desfez as malas na ordem de sempre: ferramentas primeiro, nada da Ordem \u00e0 vista.' },
 
 { t:'nar', tx:'Depois mediu o quarto a passo, como media qualquer sala nova.' },
@@ -293,7 +350,8 @@ RBF.CHAPTER1 = [
 { t:'pause' },
 { t:'inn', tx:'Cortesia e permiss\u00e3o custam o mesmo na entrada. S\u00f3 uma cobra depois.' },
 
-{ t:'nar', tx:'Sentou. Abriu o caderno operacional. Escreveu a data.' },
+{ t:'nar', tx:'Comeu o p\u00e3o ali mesmo, de p\u00e9, olhando o p\u00e1tio. N\u00e3o sentou para isso.' },
+{ t:'nar', tx:'Depois sentou. Abriu o caderno operacional. Escreveu a data.' },
 
 { t:'arc', key:'caderno', label:'\u2014 Caderno Operacional \u2014 Entrada 1 \u2014', lns:[
     'Chegada em Velha Nidhaus. Cobertura est\u00e1vel. Recep\u00e7\u00e3o sem incidente.',
@@ -316,7 +374,8 @@ RBF.CHAPTER1 = [
 
 /* ======================================================================
    C5 - A BIBLIOTECA - MANHA SEGUINTE
-   Aldric. Escolha 1.
+   Aldric, o vilao simpatico. Escolha 1.
+   Antoniette em registro preciso: frases curtas, nada oferecido.
    ====================================================================== */
 { t:'scene', id:'c5_biblioteca', chapter:'capitulo1', title:'A biblioteca',
   bg:'bg_library', bgm:'bgm_nidhaus' },
@@ -324,7 +383,8 @@ RBF.CHAPTER1 = [
 
 { t:'nar', tx:'De manh\u00e3 Fenn a deixou na porta da biblioteca e n\u00e3o entrou.' },
 { t:'inn', tx:'Nem olhou para dentro.' },
-{ t:'nar', tx:'Dois andares de estantes. As lombadas mostravam quais se\u00e7\u00f5es a fam\u00edlia usava.' },
+{ t:'nar', tx:'Dois andares de estantes. Cheiro de couro, cola velha e poeira parada.' },
+{ t:'nar', tx:'As lombadas mostravam quais se\u00e7\u00f5es a fam\u00edlia usava.' },
 { t:'nar', tx:'No canto nordeste do segundo andar as estantes estavam viradas para dentro, sem luz direta.' },
 { t:'nar', tx:'Antoniette subiu a escada.' },
 { t:'nar', tx:'Latim. Uma l\u00edngua que ela n\u00e3o reconheceu. Datas de dois s\u00e9culos atr\u00e1s.' },
@@ -341,6 +401,7 @@ RBF.CHAPTER1 = [
 
 { t:'spr', ch:'aldric', ex:'side', pos:'left' },
 { t:'nar', tx:'Subiu, passou por ela no corredor estreito e tirou um rolo de uma caixa sem procurar.' },
+{ t:'nar', tx:'Leu de p\u00e9, com o rolo apoiado na estante. N\u00e3o usou a mesa que estava a dois passos.' },
 
 { t:'dial', ch:'aldric', tx:'A senhorita cataloga por estante ou por assunto?' },
 { t:'dial', ch:'antoniette', tx:'Por estante. Assunto \u00e9 o que se descobre depois.' },
@@ -349,7 +410,7 @@ RBF.CHAPTER1 = [
 { t:'dial', ch:'aldric', tx:'Correto.' },
 { t:'inn', tx:'Ele acabou de corrigir uma prova.' },
 
-{ t:'dial', ch:'antoniette', tx:'A cole\u00e7\u00e3o \u00e9 maior do que o contrato previa. Vou precisar de mais tempo.' },
+{ t:'dial', ch:'antoniette', tx:'A cole\u00e7\u00e3o \u00e9 maior do que o contrato previa.' },
 { t:'dial', ch:'aldric', tx:'Leve o tempo que precisar.' },
 
 { t:'nar', tx:'Desceu. Parou no meio da escada, de costas.' },
@@ -392,6 +453,8 @@ RBF.CHAPTER1 = [
 /* ======================================================================
    C6 - A GALERIA DE RETRATOS - MEIO DA TARDE
    O ciclo, visto por quem ainda nao sabe que existe um ciclo.
+   Beat de uma palavra na contagem das geracoes.
+   Saida convertida em PONTE: a moldura puxa para a frente.
    ====================================================================== */
 { t:'scene', id:'c6_retratos', chapter:'capitulo1', title:'A galeria',
   bg:'bg_portrait_hall', bgm:null },
@@ -401,6 +464,10 @@ RBF.CHAPTER1 = [
 { t:'inn', tx:'Casa que pendura retrato em ordem cronol\u00f3gica quer que algu\u00e9m leia a ordem.' },
 
 { t:'nar', tx:'Ela leu.' },
+{ t:'pause' },
+{ t:'nar', tx:'Duas.' },
+{ t:'nar', tx:'Duas.' },
+{ t:'nar', tx:'Duas.' },
 { t:'pause' },
 { t:'nar', tx:'Cada gera\u00e7\u00e3o tinha duas filhas. Todas as nove.' },
 { t:'inn', tx:'Nove gera\u00e7\u00f5es sem um filho. Estatisticamente improv\u00e1vel.' },
@@ -417,26 +484,29 @@ RBF.CHAPTER1 = [
 { t:'pause' },
 { t:'nar', tx:'O p\u00f3 da parede parava exatamente ali.' },
 { t:'inn', tx:'Algu\u00e9m limpa uma moldura que n\u00e3o tem quadro.' },
-{ t:'nar', tx:'Antoniette seguiu pelo corredor sem escrever nada.' },
+{ t:'pause' },
+{ t:'nar', tx:'A moldura tinha o tamanho dos outros nove.' },
+{ t:'inn', tx:'Est\u00e1 esperando duas meninas.' },
+{ t:'nar', tx:'Ela seguiu pelo corredor contando os passos at\u00e9 a ala leste, para ter o que fazer com a cabe\u00e7a.' },
 
 /* ======================================================================
    C7 - O CORREDOR LESTE - FIM DE TARDE
-   As gemeas, ouvidas e nunca encontradas.
-   Liara sabe que a irma e vampira e acha que vivem a mesma vida.
-   Klara fala pouco e nao fala bonito.
+   As gemeas, ouvidas e nunca encontradas. Ela ouve de fora (Peters).
+   Klara QUER e TENTA - por Liara. E o mecanismo que termina na Academia.
+   Saida convertida em PONTE.
    ====================================================================== */
 { t:'scene', id:'c7_corredor', chapter:'capitulo1', title:'O corredor leste',
   bg:'bg_corridor', bgm:null },
 
 { t:'nar', tx:'Voltando com dois volumes, ela ouviu vozes no corredor leste.' },
-{ t:'nar', tx:'A \u00faltima porta estava entreaberta.' },
+{ t:'nar', tx:'A \u00faltima porta estava entreaberta. Vinha cheiro de leite morno e de papel.' },
 { t:'pause' },
 
 { t:'spr', ch:'liara', ex:'neutral', pos:'right' },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'nar', tx:'Duas meninas id\u00eanticas. Uma deitada sobre um mapa, batendo o p\u00e9 no ar. A outra lendo, com o dedo no texto.' },
 
-{ t:'dial', ch:'liara', tx:'A senhora Elke falou que em Lervel tem uma casa s\u00f3 de livro. Do tamanho da capela.' },
+{ t:'dial', ch:'liara', tx:'A senhora Elke falou que em Lervel tem uma casa s\u00f3 de livro! Do tamanho da capela.' },
 { t:'dial', ch:'klara', tx:'Biblioteca.' },
 { t:'dial', ch:'liara', tx:'\u00c9. Eu quero ir.' },
 { t:'dial', ch:'klara', tx:'Voc\u00ea quer ir em tudo.' },
@@ -453,6 +523,17 @@ RBF.CHAPTER1 = [
 
 { t:'inn', tx:'A menina do mapa vai \u00e0 feira. A outra n\u00e3o.' },
 { t:'inn', tx:'E as duas tratam isso como se fosse o tempo.' },
+
+/* Klara nao aceita e nao reclama: contorna. Por Liara. */
+{ t:'nar', tx:'A que lia virou a p\u00e1gina.' },
+{ t:'dial', ch:'klara', tx:'Conta depois.' },
+{ t:'dial', ch:'liara', tx:'Contar o qu\u00ea?' },
+{ t:'dial', ch:'klara', tx:'A feira. Tudo. Quantas barracas, o que vendem, o cheiro.' },
+{ t:'dial', ch:'liara', tx:'Isso \u00e9 muita coisa.' },
+{ t:'dial', ch:'klara', tx:'Voc\u00ea fala muito. Vai dar.' },
+{ t:'nar', tx:'Liara riu e disse que ia contar at\u00e9 o que ningu\u00e9m perguntou.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ela n\u00e3o pediu para ir. Pediu a feira inteira pela boca da irm\u00e3.' },
 
 { t:'dial', ch:'liara', tx:'Co\u00e7a?' },
 { t:'dial', ch:'klara', tx:'N\u00e3o.' },
@@ -494,6 +575,9 @@ RBF.CHAPTER1 = [
 { t:'pause' },
 { t:'inn', tx:'E n\u00e3o disse nada.' },
 { t:'nar', tx:'Antoniette andou at\u00e9 o fim do corredor antes de anotar. Anotar ali seria barulho.' },
+{ t:'pause' },
+{ t:'inn', tx:'Uma crian\u00e7a de oito anos que sabe quando n\u00e3o vale a pena avisar.' },
+{ t:'inn', tx:'Aprendeu isso com algu\u00e9m.' },
 
 /* ======================================================================
    C8 - QUARTO DE ANTONIETTE - NOITE
@@ -526,6 +610,7 @@ RBF.CHAPTER1 = [
 
 /* ======================================================================
    C9 - MEIA-NOITE
+   A unica frase longa do capitulo. Depois, corte.
    ====================================================================== */
 { t:'scene', id:'c9_meia_noite', chapter:'capitulo1', title:'Meia-noite',
   bg:'bg_antoniette_room' },
@@ -538,6 +623,10 @@ RBF.CHAPTER1 = [
 { t:'nar', tx:'Da janela das g\u00eameas ainda vinha luz.' },
 { t:'inn', tx:'Quatro anos. Talvez cinco. Foi o que a Ordem estimou para um relat\u00f3rio completo do pacto.' },
 { t:'pause' },
+
+{ t:'inn', tx:'Ela ficou olhando aquela luz e pensou no contrato de nove meses, e nos quatro mil volumes que nenhuma pessoa cataloga em nove meses, e na frase da senhora da casa sobre combinado ser o que se escreve antes de conhecer o trabalho, e s\u00f3 ent\u00e3o entendeu que ningu\u00e9m naquela casa tinha esperado que ela fosse embora em nove meses, e que a \u00fanica pessoa surpresa com a dura\u00e7\u00e3o do pr\u00f3prio contrato era ela.' },
+{ t:'pause' },
+
 { t:'inn', tx:'Em quatro anos as duas ter\u00e3o doze.' },
 { t:'nar', tx:'Ela escreveu o n\u00famero na margem e n\u00e3o soube dizer por qu\u00ea.' },
 

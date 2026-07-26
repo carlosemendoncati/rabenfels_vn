@@ -220,3 +220,173 @@ narrador a mais destruiria a premissa.*
 4. **O "e se" levado ao fim desagradável** como critério de escolha: se um
    ramo não chega a uma conclusão lógica e ruim, ele é variação de tom, e
    não escolha.
+
+---
+---
+
+# Segunda passada — prefácio integral e capítulos 2 a 5
+
+**Livro fechado.**
+
+Os capítulos 2 a 5 são estudos de caso de vinte e poucos animes adaptados
+de VN, agrupados por tema: mundos paralelos, retornos ao passado, feitos
+épicos, jornadas de autodescoberta. **A parte de análise de obra que o
+projeto não referencia não transfere** — leio pelos trechos teóricos que
+abrem cada capítulo, e por *Tsukihime*, que é o único vampírico.
+
+---
+
+## 1. O compositor e o intérprete — a melhor formulação do que é um roteiro de VN
+
+Citando Cindy Poremba:
+
+> "O poder do autor no domínio do jogo digital **nunca é absoluto**, porque
+> a agência dele é inevitavelmente **'instanciada pelo jogador'.** Ou seja,
+> a agência do autor existe num estado meramente nocional e abstrato antes
+> de ser concretizada pelos movimentos e decisões do jogador. Nesse
+> aspecto, **'a relação do autor com o texto do jogo é semelhante à do
+> compositor: cria a capacidade de que uma experiência ocorra, e essa
+> experiência é depois executada por um agente secundário.'**"
+
+**A analogia da partitura é a mais útil do livro para o trabalho diário.**
+`js/data/chapter1.js` não é o capítulo. É a partitura do capítulo. O
+capítulo acontece quando alguém toca.
+
+*Consequência prática, e não é abstrata: uma frase que só funciona se lida
+no ritmo que eu imaginei está mal escrita. O intérprete decide a velocidade
+— clica rápido, clica devagar, pula a digitação. A frase tem de sobreviver
+às três.*
+
+---
+
+## 2. "Interatividade superposta" — o nome da arquitetura de Rabenfels
+
+Nicolas Szilas, sobre o que ele chama de drama interativo. Três recursos:
+
+| Recurso | Definição de Szilas |
+|---|---|
+| **ramificação** | "o usuário é posto diante de uma escolha na ação, e a narrativa é diferente conforme a escolha" |
+| **interatividade superposta** | "**durante um percurso global linear** dentro da narrativa, **ocorre uma cena interativa localizada**" |
+| **simulação** | réplicas fictícias mas convincentes de cenários reais, em forma especulativa |
+
+**A segunda é exatamente o que Rabenfels faz, e agora tem nome técnico.**
+Onze capítulos num percurso linear, com duas escolhas localizadas por
+capítulo, e ramos que reconvergem. Cavallaro observa que numa VN a cena
+interativa localizada costuma ser *"um diálogo especialmente pungente ou
+um monólogo interior avaliando os conflitos em jogo"* — que é precisamente
+onde a `cap1_aldric` está.
+
+*Isto encerra uma dúvida de desenho que eu vinha carregando: se a obra
+"ramifica pouco demais". Não ramifica pouco. Ela usa o outro recurso, e o
+usa deliberadamente.*
+
+---
+
+## 3. Os quatro tipos de jogador de Bartle, e o que eles cobram
+
+| Tipo | O que quer | O que Rabenfels oferece |
+|---|---|---|
+| **realizador** | cumprir os objetivos que o jogo põe | chegar ao fim de uma rota |
+| **explorador** | descobrir os mínimos detalhes do mundo | **a galeria, os cartões do Arquivo, o cenário carregado de detalhe** |
+| **socializador** | usar o jogo como arena de convívio | quase nada — obra de jogador único |
+| **matador** | prazer em causar dano | — |
+
+E a observação sobre o matador numa VN, que é a que importa:
+
+> "A modalidade 'matador' entra de forma elíptica quando um jogador, tendo
+> testado alternativas várias vezes, **pode escolher deliberadamente jogar
+> de modo prejudicial ao personagem que está encarnando.**"
+
+**Isso é um requisito de projeto que eu não tinha escrito.** Existe um
+jogador que vai escolher, de propósito, todas as opções piores para
+Antoniette. A obra tem de sobreviver a ele — e, melhor, tem de recompensá-
+lo com alguma coisa verdadeira. O final "O Distanciamento", em que ela
+nunca tenta e sobrevive, já é essa recompensa. Vale desenhá-lo sabendo
+para quem.
+
+Cavallaro acrescenta a divisão de John Kim entre modelo **drama** (o que
+importa é a história), modelo **jogo** (o que importa é o desafio) e modelo
+**simulação** (encarar os conflitos como se fossem reais). Numa VN os três
+convivem: o texto convoca o primeiro, o ponto de decisão convoca o segundo,
+e a disposição de tratar a casa como um lugar real convoca o terceiro.
+
+---
+
+## 4. Retornos ao passado — o capítulo cujo tema é o da obra
+
+O capítulo 3 reúne obras em que *"o retorno das personagens aos mundos e
+experiências do passado é parte integral do enfrentamento e da resolução
+de traumas enterrados."*
+
+E a técnica que ele destaca como a mais eficaz do grupo:
+
+> "Um ardil particularmente eficaz é a **introdução deliberada de situações
+> ambíguas, abertas a leituras alternativas** de variedade realista ou
+> fantástica. (...) Ocorrências que **não podem ser decifradas de forma
+> tranquila nem como totalmente factuais nem como totalmente místicas**,
+> mas participam o tempo todo dos dois planos."
+
+*É a regra de Khar'Vel, dita como técnica de gênero. O que o jogador vê
+pode ser uma entidade agindo ou uma casa doente, e o texto nunca decide.
+Cavallaro mostra que meia dúzia de obras vivem disso.*
+
+O capítulo também nota que essas obras retêm as personagens numa
+*"teia de reconhecimentos errados, pistas falsas e ofuscações
+autoimpostas"* — e a terceira é a que interessa. **A ofuscação autoimposta
+é Antoniette.** Ela sabe cedo e passa cinco anos administrando o que sabe.
+
+---
+
+## 5. *Tsukihime* — o vizinho mais próximo, e o mecanismo dos óculos
+
+Cavallaro descreve a premissa: um rapaz volta à propriedade da família
+depois de oito anos fora; a irmã acaba de assumir a chefia da casa; ele
+começa como *"algo próximo de um interno dentro da mansão"*; e vai
+desenterrando o passado enquanto os esqueletos da família saem do armário.
+
+*Casa fechada, hierarquia interna, forasteiro que volta, segredo de
+linhagem, vampiros. É o vizinho de porta de Rabenfels. Registro a
+proximidade para vigiar coincidência, não para copiar.*
+
+**O que vale mesmo é o mecanismo de percepção:**
+
+> "Shiki vê os arredores de modo **muito diferente conforme esteja ou não
+> usando os óculos especiais**, e as percepções do próprio espectador
+> mudam drasticamente conforme ele veja a realidade de *Tsukihime* como um
+> ambiente comum **ou como um outro-mundo maligno atravessado por uma
+> proliferação intrincada de marcas esotéricas.**"
+
+**Ideia forte e barata para Rabenfels: o mesmo cenário renderizado de dois
+jeitos, conforme o que Antoniette já sabe.** O salão do Capítulo 3 e o
+salão do Capítulo 9 são o mesmo salão, e não deveriam ser a mesma imagem.
+Não é preciso arte nova — basta variação de paleta e um objeto a mais no
+enquadramento. O motor já resolve cenário por id lógico; um sufixo de
+estado é mudança pequena no manifesto.
+
+*Isto casa com a "linguagem de expectativa" do Finley e com o "função +
+associação" dele. Três leituras convergindo na mesma decisão de arte.*
+
+### O que *não* importar
+
+*Tsukihime* tem taxonomia vampírica elaborada — Verdadeiros Ancestrais
+que não precisam de sangue mas o desejam e gastam quase todo o poder
+suprimindo o impulso; Apóstolos Mortos que foram humanos; os Mortos, drones
+sem mente; Senhores Demônios. É bem construído e **não serve aqui.**
+Rabenfels ganha por não explicar o que é vampiro. Cada termo novo de
+taxonomia é um pedaço de yugen que se perde.
+
+---
+
+## Itens de ação da segunda passada
+
+5. **Adotar "interatividade superposta"** como o nome do desenho da obra,
+   na bíblia e na skill. Encerra a dúvida sobre ramificar pouco.
+6. **Escrever para o jogador matador:** desenhar o final em que ela nunca
+   tenta sabendo que existe quem escolha isso de propósito.
+7. **Variante de estado nos cenários** — mesmo lugar, imagem diferente
+   depois que Antoniette sabe. Sufixo de estado no manifesto, não arte
+   nova.
+8. **Toda frase tem de sobreviver a três velocidades de leitura.** A
+   partitura não controla o andamento.
+9. **Nada de taxonomia vampírica.** Cada termo explicado custa
+   ambiguidade.

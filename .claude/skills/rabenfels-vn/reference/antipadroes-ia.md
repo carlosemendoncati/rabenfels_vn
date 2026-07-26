@@ -174,17 +174,146 @@ bonito.
 
 ---
 
+## 12. O substituto físico do medo — a armadilha dentro da regra 3
+
+**Fonte nova: Kenworthy, e é o parágrafo mais útil do corpus sobre isto.**
+
+A regra que todo mundo conhece diz: não escreva "João estava com medo".
+Mostre o corpo. E aí vem o aviso:
+
+> "Melhor mostrar a experiência física do medo: 'João sentiu o coração
+> bater contra as costelas e o estômago liquefazer.' **Isso funciona, mas
+> o problema é que é um clichê de horror.** Então, embora você deva evitar
+> afirmações diretas, **fique atento para não cair no clichê.**"
+
+**São duas proibições, não uma.** A segunda é mais perigosa porque parece
+a correção da primeira.
+
+**Lista proibida:**
+
+- coração disparado / batendo contra as costelas / na garganta
+- estômago afundando, embrulhando, liquefazendo
+- arrepio na nuca, pelos do braço em pé
+- sangue gelando, gelo na espinha
+- ar que não chega, garganta fechando
+- mão que treme sem que a pessoa mande
+
+**O terceiro caminho, que é o que a obra usa nos melhores momentos:** o
+**detalhe errado no ambiente, sem reação declarada.** A moldura vazia. O
+cano da fonte virado para baixo. O curativo num braço só. Antoniette não
+sente nada — ela anota.
+
+---
+
+## 13. Chavão em português — os "mesmeiros"
+
+**Fonte: Squarisi & Salvador.** É a única lista de antipadrões do corpus
+que é **específica do português**, e a mais fácil de automatizar.
+
+> "Certas palavras e expressões foram originais um dia. Depois, de tanto
+> repeti-las, viraram modismos. **Supérfluas, são pobres de valor
+> informativo.** Quando bate o olho na mesmeira, o leitor **sente cheiro
+> de mofo.**"
+
+As que um horror gótico em português corre risco real de usar:
+
+*a duras penas · a olhos vistos · alimentar a esperança · antes de mais
+nada · ao apagar das luzes · baixar a guarda · cair como uma luva ·
+caixinha de surpresas · como se sabe · como todos sabem · cortina de
+fumaça · dar o último adeus · deitar raízes · divisor de águas · em
+compasso de espera · em sã consciência · em última análise · faca de dois
+gumes · fazer das tripas coração · fio condutor · lavar a alma · luz no
+fim do túnel · menina dos olhos · na ordem do dia · no fundo do poço ·
+óbvio ululante · página virada · pomo da discórdia · pôr a casa em ordem ·
+requinte de crueldade · reta final · rota de colisão · sentir na pele ·
+separar o joio do trigo · sorriso amarelo · tecer comentários · trazer à
+tona · via de regra · voltar à estaca zero*
+
+---
+
+## 14. A distinção que evita corrigir um erro criando outro
+
+**`não…mas` é construção legítima do português.** "Não moro em São Paulo,
+mas em Brasília" está certo, e Squarisi lista o par entre os casais fixos
+da língua.
+
+**O proibido é a fórmula retórica** — *"não é X: é Y"* — usada como muleta
+de ritmo e de falsa profundidade. A diferença:
+
+| | |
+|---|---|
+| ✅ par gramatical | "Ela não anotou o nome, mas a hora." |
+| ❌ fórmula retórica | "Não é isolamento aristocrático: é higiene." |
+
+**E há um terceiro caso, que é legítimo e não se toca:** as três linhas de
+Khar'Vel no documento mestre — *"Khar'Vel não é um deus... não é um
+demônio... não é imortal no sentido convencional"*. São **anáfora
+deliberada**: definição por exclusão, porque a coisa não tem categoria
+positiva. É texto canônico do autor e fica como está. No Prólogo, Matheo
+repara na forma, o que converte a figura em caracterização.
+
+---
+
+## 15. Erros de português que o corpus mandou vigiar
+
+Todos de Squarisi & Salvador, todos automatizáveis.
+
+**Paralelismo quebrado.** O atalho de detecção é ótimo:
+
+> "Cuidado com o **'e que'**. A duplinha só tem vez quando houver o
+> primeiro 'quê'. **Na falta dele, tenha uma certeza: o paralelismo foi
+> esnobado.**"
+
+**Cruzamento.** `à medida em que` não existe. É mistura de *à medida que*
+com *na medida em que*.
+
+**Pares partidos.** `seja…ou`, `quer…ou`, `de…à`, `de…às`.
+
+**Gerundismo.** `vou estar anotando` → *anotarei* ou *vou anotar*. E o
+limite fino: `estar + gerúndio` só vale para o **transitório**. "A casa
+está guardando alguma coisa" quer dizer "a casa guarda alguma coisa".
+
+**Plural de parte única do corpo.** "Levantaram **a mão**", não *as mãos*.
+Numa obra cheia de braços, mãos e curativos, este erro vai acontecer.
+
+**Verbo administrativo inventado** — *operacionalizar*, *agudização*,
+*prestigiamento*. **Na boca da família Rabenfels é caracterização. Na
+narração é falha.**
+
+---
+
 ## Teste rápido antes de entregar
 
 1. `python tools/validate.py` — pega 1 a 5 automaticamente.
 2. Buscar `Não é`, `Não era`, `não apenas`, ` — `, `: é ` no texto novo.
-3. Ler em voz alta uma cena inteira. Metrônomo aparece no ouvido.
-4. Cada frase que sobrar: ela muda cena, informação ou emoção? Se não,
+3. Buscar a lista física do item 12 e a lista de chavões do item 13.
+4. Ler em voz alta uma cena inteira. Metrônomo aparece no ouvido.
+5. Cada frase que sobrar: ela muda cena, informação ou emoção? Se não,
    sai.
+
+**E o teste que vale por todos, de Zinsser, 1976:**
+
+> "Ninguém mostrou aos novos escritores de computador que a essência do
+> escrever é reescrever. **O mero fato de eles escreverem fluentemente não
+> significa que escrevam bem.** (...) As frases aparecem tão bem na tela.
+> **Como poderiam não ser perfeitas frases tão bonitas como essas?**"
 
 ---
 
 ## Fontes
+
+**Do corpus de referência** (notas completas em `docs/estudo/`):
+
+- Kenworthy, *Writing SF, Fantasy & Horror* — item 12, o substituto
+  físico do medo. → `09`
+- Squarisi & Salvador, *A Arte de Escrever Bem* — itens 13, 14 e 15.
+  Única fonte de português do corpus. → `04`
+- Zinsser, *Como Escrever Bem* — o anúncio de transição (item 7) com
+  fonte de 1976, e a epígrafe sobre fluência. → `05`
+- Faye, em *How to Write a Mystery* — contra o estilo aplicado
+  uniformemente, que é o item 9 dito por outro caminho. → `08`
+
+**Da pesquisa na rede:**
 
 - [Don't Write Like AI: "It's Not X, it's Y"](https://www.blakestockton.com/dont-write-like-ai-1-101-negation/)
 - [The Field Guide to AI Slop — Charlie Guo](https://www.ignorance.ai/p/the-field-guide-to-ai-slop)

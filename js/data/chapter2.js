@@ -253,6 +253,27 @@ RBF.CHAPTER2 = [
 { t:'inn', tx:'Ele disse para trazer a ele antes de catalogar. N\u00e3o disse para n\u00e3o subir.' },
 
 { t:'nar', tx:'As estantes do canto nordeste estavam viradas para dentro. Entre elas cabia uma pessoa de lado.' },
+
+/* ----------------------------------------------------------------------
+   PAGAMENTO DE aldric_pressed, gravada no Capitulo 1.
+   Ela perguntou a ele o que deveria estar procurando. Ele reparou.
+   Os dois ramos levam o "e se" ate um fim desagradavel diferente.
+   ---------------------------------------------------------------------- */
+{ t:'nar', tx:'Havia um banquinho encostado na estante do meio.', if:{ aldric_pressed:true } },
+{ t:'nar', tx:'Na v\u00e9spera n\u00e3o havia banquinho nenhum naquele canto.', if:{ aldric_pressed:true } },
+{ t:'pause', if:{ aldric_pressed:true } },
+{ t:'inn', tx:'Eu perguntei a ele o que eu deveria estar procurando.', if:{ aldric_pressed:true } },
+{ t:'inn', tx:'Ele mandou trazer o banquinho.', if:{ aldric_pressed:true } },
+{ t:'pause', if:{ aldric_pressed:true } },
+{ t:'inn', tx:'Nada do que eu achar aqui vai ser descoberta minha.', if:{ aldric_pressed:true } },
+
+{ t:'nar', tx:'A poeira do ch\u00e3o estava intacta at\u00e9 a marca do pr\u00f3prio sapato dela.', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'Ningu\u00e9m subiu aqui desde que eu subi na semana passada.', if:{ aldric_pressed:false } },
+{ t:'pause', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'Ele deu a permiss\u00e3o e n\u00e3o veio conferir se eu usei.', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'Ou confia demais, ou o que est\u00e1 aqui n\u00e3o preocupa ningu\u00e9m.', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'As duas hip\u00f3teses s\u00e3o ruins de jeitos diferentes.', if:{ aldric_pressed:false } },
+
 { t:'nar', tx:'Livros de registro. O mesmo couro dos livros de conta do andar de baixo.' },
 { t:'sfx', id:'sfx_page_turn' },
 { t:'pause' },

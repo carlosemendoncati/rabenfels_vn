@@ -345,3 +345,253 @@ Nunca medimos. Vale medir e passar a respeitar como limite de escrita.
 7. **Diferenciar o registro da Antoniette** por interlocutor.
 8. **Modo "???"** no engine para falante ainda não apresentado.
 9. **Medir o limite de caracteres** da caixa de diálogo.
+
+---
+---
+
+# Segunda passada — capítulos 11, 12 e 13
+
+**Livro fechado.** Os treze capítulos lidos.
+
+Aviso de utilidade: o capítulo 11 é sobre trabalhar como freelancer para
+estúdios de VN de celular — Pixelberry, Crazy Maple, Episode. Conteúdo
+premium, microtransação, roupa paga, prazo de duas semanas. **Nada disso
+existe aqui.** Aproveito três coisas dele e passo. Os capítulos 12 e 13,
+esses são para quem faz o próprio jogo, e é o nosso caso.
+
+---
+
+## Cap. 11 — o que se salva de um capítulo sobre outro negócio
+
+**A definição de competência em VN, por Souha Al-Samkari** (Truant Pixel,
+*Akash: Path of the Five*):
+
+> "Para visual novels eu quero alguém que saiba **transmitir muita coisa
+> sem se estender.** VNs costumam ter restrição apertada de quanto texto
+> cabe na tela de uma vez, então quero ver escrita **econômica e ainda
+> assim imersiva.** (...) Muita gente que quer escrever VN subestima a
+> habilidade técnica necessária. Você precisa **fazer muito com pouco**,
+> em texto e em imagem — pode não ter a arte que queria nem espaço para
+> descrever longamente, então tem de **pintar o quadro com menos
+> palavras.**"
+
+*"Fazer muito com pouco, em texto e em imagem" descreve a situação exata
+deste projeto, em que quase nenhum asset existe e o motor desenha
+silhueta.*
+
+**A régua de Will Hiles** (editor de *Moments*, *The Wandering Earth*).
+Vale como checklist de revisão:
+
+- o diálogo soa natural, e **soa bem dito em voz alta**?
+- está mostrando ou contando? *"Contar é passivo. Mostrar é ativo e
+  preferível."*
+- tem exposição demais? *"Exposição demais é sem graça. As pessoas pulam.
+  E exposição é difícil de traduzir para VN."*
+- os ramos são significativos **ou são só perda de tempo**? Voltam à
+  história principal ou alteram a história?
+
+**A terceira coisa é a única regra de asset que vale para nós:** ao
+escolher o cenário de uma cena, escolher pelo **subtexto**, não pela
+descrição. O exemplo dele: o interesse amoroso quer encontrar a
+protagonista num parque sem ser visto — dos três cenários disponíveis
+(trilha, lago, área de piquenique), a trilha é a certa, porque as árvores
+escondem.
+
+---
+
+## Cap. 12 — senso de lugar, e a técnica que dá nome ao que a obra faz
+
+### O cenário trabalha mais rápido que o texto
+
+> "A arte de fundo é a forma imediata de estabelecer o mundo visualmente.
+> **Texto narrativo pode explicar como o mundo é, mas não tão rápido
+> quanto uma imagem que fica na frente do jogador** até ele mudar de
+> lugar. Cenários estabelecem depressa a atmosfera física e psicológica."
+
+E o ganho de segunda leitura:
+
+> "Jogadores podem **não ver tudo na arte de fundo nas primeiras vezes**
+> que vão ao lugar. Imagine a surpresa quando enxergam algo novo."
+
+*Isso é argumento direto para os cenários de Rabenfels serem carregados de
+detalhe fixo — a moldura vazia na galeria de retratos precisa estar
+desenhada lá desde a primeira visita, mesmo que ninguém a mencione até o
+Capítulo 6.*
+
+### Função + associação: o nome técnico do "detalhe errado"
+
+O melhor parágrafo do capítulo. Ela projeta uma biblioteca:
+
+> "A **função** é guardar livros, periódicos e microfilme, permitir
+> pesquisa, estudo, reunião, leitura em silêncio. Mas nesta biblioteca em
+> particular há também uma sociedade secreta de bibliotecários
+> necromantes que protegem tomos antigos (a **associação** do lugar). À
+> primeira vista parece uma biblioteca de campus. Mas se você olhar de
+> perto, **pode ver uma garrafa de água com o logo da sociedade
+> secreta.**"
+
+**A garrafa de água é o cano da fonte virado para baixo.** É a mesma
+técnica, e agora tem procedimento: para cada cenário, escrever a **função**
+(o que se faz ali) e a **associação** (o que se faz ali que ninguém
+declara), e então plantar **um objeto** que só a associação explica.
+
+As perguntas que ela dá, todas aplicáveis:
+
+- **o cenário deve mudar conforme a cena?** (a sala de reunião recebe
+  ponche e biscoito antes do encontro)
+- **que pistas o lugar dá sobre quem o frequenta?** *"Pistas não precisam
+  ser revelações grandes. Pense no espaço onde a personagem mora. Que
+  móveis? Arrumado ou bagunçado? Arte na parede, de que tipo?"*
+- **em que horas do dia a história passa ali?** Cada horário é **um asset
+  diferente** — luz e sombra mudam. *E, no caso da biblioteca dela: "de
+  dia eles não deixam à vista as pilhas de livro de feitiço; depois do
+  expediente, os livros estão empilhados na mesa."*
+
+**Consequência para o manifesto:** o calendário da obra tem cinco anos e
+três agostos. Cenários vão precisar de variantes de hora e de estação, e
+isso é decisão de `config.js`, não detalhe de arte.
+
+### A linguagem de expectativa
+
+> "Uma **linguagem de expectativa** se desenvolve entre a VN e o jogador
+> quando personagens e partes da história ficam associadas a um lugar
+> específico."
+
+*Rabenfels pode usar isso sem esforço: a biblioteca é onde Aldric aparece.
+A galeria de retratos é onde a casa mente. O corredor leste é onde a casa
+está fechada. Depois de três capítulos, entrar num deles já é informação.*
+
+### Estados emocionais e estados físicos
+
+> "Enquanto escrevo o roteiro, **anoto entre parênteses a emoção da
+> personagem** ao dizer a linha. Quando tenho a versão final, volto e faço
+> **a lista de emoções que anotei para cada personagem**, e procuro lugares
+> onde posso acrescentar estado emocional para reações não faladas."
+
+E o que ninguém lembra:
+
+> "**Alguma coisa muda na aparência física** das personagens ao longo do
+> jogo? (...) Se momentos importantes ou mudanças de aparência forem
+> importantes para o enredo, isso talvez precise estar refletido no sprite."
+
+**Isto é uma falha aberta do projeto.** O curativo no braço da Klara é
+enredo — é o detalhe que o Capítulo 1 planta e registra sem conclusão. Hoje
+o manifesto trata expressão como classe extra na imagem, e não existe
+previsão de **estado físico**. Curativo, cabelo trançado pela irmã, roupa
+de viagem: são variantes de sprite, e não de expressão.
+
+**Ação concreta e barata:** varrer `js/data/*.js` pelos beats `spr` e
+produzir a lista real de expressões e estados por personagem. É o método
+dela, e dá para automatizar.
+
+### O erro da referência "mais ou menos"
+
+> "**Aprendi a não escolher referências que sejam 'boas o bastante'.** (...)
+> Dar ao artista referência 'boa o bastante' é um erro, mesmo que você
+> diga 'não é bem isso que eu quero' — porque você já deu a ele algo
+> concreto que ele vai usar, e essa coisa menos satisfatória agora está na
+> cabeça dele como referência."
+
+*Vale para `ASSETS_PENDENTES.md`: descrever o que falta com precisão é
+melhor do que anexar uma imagem parecida.*
+
+### CG em estilo diferente
+
+> "Para muitos jogos, os CGs são **de estilo ou estética diferente** dos
+> personagens e ambientes em cena. Isso aponta que são conteúdo especial,
+> desbloqueado, ou momentos capturados."
+
+*Rabenfels já faz o equivalente tipográfico: o cartão do Arquivo tem
+tratamento próprio, itálico e cor. A regra confirma que a quebra
+deliberada de estilo é sinal, não inconsistência.*
+
+### Os quatro tipos de som que a gente esquece
+
+Ambiente (a brisa, a conversa ao fundo), **efeito de texto de diálogo**
+(o som da máquina de escrever — e o livro nota que alguns jogos dão um
+timbre por personagem, a ponto de o jogador saber quem fala só pelo som),
+emotes, e transição de cena.
+
+*O timbre por personagem é ideia boa e barata para uma obra em que a
+identidade de quem fala é tema. Um falante ainda não apresentado poderia
+ter o próprio som — e o modo `???` ganharia camada.*
+
+---
+
+## Cap. 13 — protótipo, e o método de Michelle Clough
+
+### O protótipo antes do texto
+
+> "Prototipando, você projeta uma ou mais cenas, a história principal
+> inteira, ou rotas, e **joga**. Isso não quer dizer ter toda a narração,
+> o diálogo e as escolhas no lugar — você tem a estrutura no osso de como
+> o jogo vai funcionar. É útil porque **dá para ver se certas rotas estão
+> longas ou curtas demais**, testar se as escolhas são satisfatórias, e
+> **achar erro de continuidade ou lugar onde você não reconectou o ramo à
+> história principal.**"
+
+### O "placeholder Twine" — e o que ele diz sobre o nosso smoke test
+
+Michelle Clough descreve o método, e a parte que interessa:
+
+> "Para cada nó, ou pelo menos cada nó em que uma variável muda, **mostre
+> as variáveis em questão no topo** e indique que estão mudando. (...) Ao
+> fim do roteiro, faça um **resumo de todas as variáveis, escolhas e ramos
+> principais**, para revisar o que aconteceu e por quê, e garantir que
+> todos os estados foram registrados de forma consistente."
+
+**Diagnóstico honesto:** `tools/smoke.html` já joga a obra inteira três
+vezes e confere save, rota e galeria. **O que falta é o traço.** Ele diz
+que passou; não diz **por onde**. Um despejo de "beat → flag ligada → rota
++1 → valor atual" por partida daria exatamente o que ela descreve, e é o
+que pegaria o problema que já sabemos existir: `aldric_pressed` é gravada
+e nunca lida.
+
+*Este é o único item desta leitura que muda ferramenta, e é o mais valioso
+dela.*
+
+### Legibilidade de documento de trabalho
+
+> "Muitos desenvolvedores que conheci **não gostam de ler.** (Não é juízo
+> de valor, é fato.) Parágrafo longo intimida."
+
+Evitar parágrafo longo, usar espaço em branco, usar marcador.
+
+*Anotado contra mim: os documentos deste estudo são densos. Para o autor
+ler, o `00_indice.md` precisa continuar sendo tabela e lista, nunca prosa
+corrida.*
+
+---
+
+## O que NÃO transfere do bloco final
+
+- Todo o capítulo 11: conteúdo premium, moeda de jogo, roupa paga,
+  "hype fee", prazo de duas semanas, formatação em planilha para o
+  programador do estúdio.
+- Lista de engines (Ren'Py, TyranoBuilder, Fungus, Twine, ink, Yarn
+  Spinner). O motor já existe, é JavaScript puro e sem build. Trocar
+  agora custaria mais do que resolve.
+- Bancos de áudio e arte livres de royalties. O projeto gera o próprio
+  áudio por script Python.
+- CG como recompensa de romance.
+
+---
+
+## Itens de ação da segunda passada
+
+10. **Traço de variáveis no smoke test** — despejar, por partida, cada
+    flag ligada e cada movimento de rota, com o beat de origem. É o
+    método de Clough aplicado à ferramenta que já temos.
+11. **Catalogar estados emocionais e físicos** varrendo os beats `spr`,
+    e separar **estado físico** (curativo, roupa, cabelo) de expressão no
+    manifesto. Hoje os dois estão misturados.
+12. **Escrever função + associação para cada cenário**, e plantar um
+    objeto que só a associação explique. A garrafa de água da sociedade
+    secreta é o cano da fonte virado para baixo.
+13. **Variantes de hora e estação** nos cenários, porque o calendário tem
+    cinco anos e três agostos. Decisão de `config.js`.
+14. **Fixar a linguagem de expectativa por lugar** — biblioteca é Aldric,
+    galeria de retratos é onde a casa mente, corredor leste é o que está
+    fechado.
+15. **Timbre de texto por personagem**, e um timbre próprio para o falante
+    não apresentado, casando com o modo `???` do item 8.

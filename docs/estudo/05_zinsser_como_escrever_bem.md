@@ -263,3 +263,305 @@ não é só chato — é um clique cobrado por nada.
 5. **Acrescentar ao `antipadroes-ia.md`:** "escrever fluentemente não
    significa escrever bem" como epígrafe, e o anúncio de transição com
    esta fonte de 1976.
+
+---
+---
+
+# Segunda passada — Partes II, III e IV
+
+**Livro fechado.** Faltavam a Parte II (Métodos), a III (Gêneros) e a IV
+(Atitudes).
+
+A Parte III é sobre entrevista, reportagem de viagem e memória — gêneros
+de não ficção. **Não transfere**, com uma exceção que anoto no fim. As
+Partes II e IV rendem muito, e a Parte II é a mais prática do livro
+inteiro.
+
+---
+
+## 1. Unidade — as seis perguntas antes da primeira frase
+
+> "O elemento crucial da boa escrita é **a unidade.** Então, antes de mais
+> nada, organize cada coisa rigorosamente. A unidade não só impede o
+> leitor de se dispersar, mas **atende a uma necessidade subconsciente que
+> ele tem de ordem** e lhe garante que o leme está em boas mãos."
+
+As perguntas que ele manda fazer:
+
+1. **No papel de quem eu vou me dirigir ao leitor?**
+2. **Qual voz e qual tempo verbal?**
+3. **Qual estilo?** (relatório impessoal, pessoal e formal, pessoal e
+   informal)
+4. **Qual a minha postura em relação ao material?** (envolvimento,
+   distância, opinião, ironia)
+5. **Quanto eu quero abranger?**
+6. **Qual ponto central eu quero enfatizar?**
+
+E a resposta que ele dá para a sexta, que é a régua mais afiada do livro:
+
+> "Todo texto bem-sucedido deveria provocar no leitor **um pensamento que
+> ele nunca teve. Não dois, nem cinco — apenas um.** Portanto, escolha
+> qual questão você quer deixar na cabeça do leitor."
+
+**Aplicação direta e barata: um pensamento por capítulo.** Escrever, no
+alto do arquivo de dados de cada capítulo, a frase única que aquele
+capítulo tem de deixar na cabeça do jogador. Se dois capítulos deixam o
+mesmo pensamento, um dos dois não precisa existir.
+
+*Teste rápido no que existe. Capítulo 1: "a casa está limpa demais para
+uma casa onde moram crianças." Prólogo: "ela contou os dias e a conta não
+fecha." Os dois passam. Capítulo 2 e Capítulo 4 provavelmente colidem, e
+isso é uma auditoria a fazer.*
+
+### Pense pequeno
+
+> "**Ninguém consegue escrever um livro ou um artigo 'sobre' alguma
+> coisa.** Tolstói não podia escrever um livro sobre a guerra e a paz, nem
+> Melville um livro sobre a caça às baleias. Eles tomaram **decisões
+> redutivas** sobre o tempo, o espaço e os personagens — um homem
+> perseguindo uma baleia."
+
+### E o contrapeso ao stepsheet
+
+> "Não reme contra a corrente se sentir que mudar é melhor. **Confie no seu
+> material** se ele o leva para um terreno em que você não pretendia
+> entrar, mas onde as vibrações parecem positivas. (...) **Não fique
+> prisioneiro de um plano preestabelecido. Escrever não é construir com
+> base em uma planta de engenharia.**"
+
+*Frey manda fazer o stepsheet dos cinco anos; Zinsser avisa para não
+obedecê-lo. Os dois têm razão, e Frey até concorda — ele mesmo chama o
+próprio stepsheet de "tentativo". A síntese: o plano existe para dar
+confiança de atravessar o rascunho, e cede quando o material puxa.*
+
+---
+
+## 2. O lide e o final
+
+> "**A frase mais importante de qualquer texto é a primeira.** Se ela não
+> levar o leitor a avançar para a segunda frase, o seu artigo está morto.
+> E, se a segunda não o levar à terceira, também está morto."
+
+> "Cuide especialmente da **última frase de cada parágrafo** — trata-se do
+> trampolim para o seguinte."
+
+*Numa VN, "parágrafo" é beat, e o trampolim é literal: o jogador clica ou
+não clica. Isto é a regra R3 do índice dita por outra fonte.*
+
+### O final, e o som da manivela
+
+O aviso é sobre resumir:
+
+> "Os seus leitores começam a ouvir aquele **tortuoso som da manivela.**
+> Percebem o que você está fazendo e como você mesmo se aborrece com isso.
+> (...) Ou você está fazendo um resumo de tudo por considerar que eles são
+> burros demais para terem captado o ponto central?"
+
+A regra:
+
+> "**Quando você está pronto para parar, pare.** Se você já expôs todos os
+> fatos e enfatizou aquilo que queria enfatizar, procure a saída mais
+> próxima."
+
+> "O melhor final deveria **pegar os leitores de surpresa e ao mesmo tempo
+> parecer perfeito.** Eles não esperavam que o texto acabasse tão cedo ou
+> tão abruptamente. Mas o reconhecem quando o veem. É como a fala final em
+> uma apresentação teatral: estamos no meio de uma cena, quando um dos
+> atores diz alguma coisa mordaz, e **as luzes se apagam.**"
+
+E a técnica que a obra já usa sem saber que tem nome:
+
+> "Uma coisa que costumo fazer é **fechar a história de forma circular** —
+> vibrando no final o eco de uma nota que soou no início."
+
+*O Epílogo é Matheo conferindo uma lista, e o Prólogo é Matheo conferindo
+uma lista. O eco já está montado. O que o capítulo acrescenta é a
+proibição: o Capítulo 11 e o Epílogo **não podem resumir a obra.** Nada de
+manivela. Ele fecha o registro e levanta.*
+
+---
+
+## 3. Miscelânea — o capítulo mais aplicável, e o mais mensurável
+
+### Ponto de exclamação
+
+> "**Não o utilize**, a não ser que precise produzir um efeito determinado.
+> (...) Resista a adotar um ponto de exclamação para alertar o leitor de
+> que você está fazendo uma brincadeira ou sendo irônico. Os leitores se
+> irritam com a lembrança de que se trata de uma frase engraçada. **Eles
+> também perdem o prazer de achar isso engraçado por conta própria.** O
+> humor é mais bem-sucedido se for sugerido, **e não há nenhuma sutileza em
+> um ponto de exclamação.**"
+
+**Isto é mensurável, e é uma checagem que o validador pode fazer.** Numa
+obra de voz notarial, exclamação é quase sempre erro — com exceção de
+Liara, que é criança e fala alto.
+
+### Pequenos qualificativos
+
+> "Suprima as pequenas palavras que qualificam o modo como você sente:
+> 'um pouco', 'meio', 'uma espécie de', 'um tanto', 'bastante', 'muito',
+> 'quase', 'em certo sentido'. **Elas diluem o seu estilo e o seu poder de
+> persuasão.**"
+>
+> "A questão principal diz respeito à **autoridade**. Cada pequeno
+> qualificativo elimina uma fração da confiança do leitor. (...) **Não seja
+> um tanto contundente. Seja contundente.**"
+
+**Antoniette é feita de autoridade.** Um "meio" ou um "de certa forma" na
+voz dela custa mais do que custaria em qualquer outro texto — é a máscara
+rachando no lugar errado.
+
+*Isto também é mensurável. Lista fechada de palavras, varredura nos dados.*
+
+### Advérbio e adjetivo
+
+> "Não diga que o rádio berrou estridentemente; 'berrou' já indica
+> estridência. Não escreva que uma pessoa apertou os dentes firmemente;
+> não há outra forma de apertar os dentes."
+
+> "Esse tipo de texto é permeado de **rochedos escarpados e teias de aranha
+> rendadas**, ou de adjetivos denotando a cor de um objeto cuja cor já é
+> conhecida: narcisos amarelos, excremento marrom. (...) É o
+> **adjetivo-por-hábito** — um hábito que você deveria extinguir."
+
+A regra positiva: *"faça os seus adjetivos cumprirem uma função que seja
+necessária. 'Ele olhou para o céu cinzento e para as nuvens negras e
+decidiu retornar para o porto.' O céu e as nuvens escuras **são o motivo da
+decisão.**"*
+
+### Substantivo abstrato — e o remédio
+
+> "Substantivos que exprimem um conceito são normalmente usados em textos
+> ruins **no lugar de verbos que expressam o que uma pessoa fez.**"
+>
+> "O que torna tão estranhas essas frases é que **elas não contêm nenhuma
+> pessoa.** (...) **Coloque pessoas fazendo coisas.**"
+
+*Risco real e específico da voz de Rabenfels. "A hostilidade da casa era um
+sintoma" é exatamente a doença. "Dara parou de falar quando eu entrei na
+cozinha" é a cura.*
+
+### Credibilidade — e a segunda fonte para a régua do Arquivo
+
+> "**Não infle um incidente para torná-lo mais extraordinário do que ele
+> é.** Se o leitor o flagra, nem que seja em uma única afirmação falsa que
+> você está tentando fazer passar por verdadeira, **tudo o que escrever
+> depois se tornará suspeito.** É um risco grande demais."
+
+**Segunda fonte independente para a calibragem do Arquivo.** Corbett chega
+pelo lado do narrador não confiável — "não é que o texto seja inteiramente
+não confiável, muito pelo contrário". Zinsser chega pelo lado do custo —
+uma mentira flagrada contamina tudo o que vem depois.
+
+**Conclusão firme, agora com duas fontes: o Arquivo erra por omissão e por
+ênfase, jamais por invenção.**
+
+### O remédio mais rápido
+
+> "Um problema difícil de resolver em uma frase pode ser solucionado por
+> **simples descarte.** (...) Observe bem o ponto problemático e pergunte:
+> 'Preciso mesmo disso?'. Provavelmente a resposta será 'não'. **A pecinha
+> estava tentando fazer um trabalho desnecessário o tempo todo — e é por
+> isso que ela o afligia tanto.**"
+
+### Travessão, ponto e vírgula, dois-pontos
+
+Ponto e vírgula tem *"um ranço de século 19"* e freia o texto; usar com
+parcimônia. O travessão é a ferramenta preferida — ou para amplificar a
+segunda metade da frase, ou aos pares, para encaixar um aparte.
+
+*Confere com o que a obra já faz. E vale um alerta contra mim: eu abuso
+do travessão duplo. Ele é bom; não é o único.*
+
+### Alteradores de tom
+
+> "Muitos de nós aprendemos que não se deve começar uma frase com 'mas'.
+> **Se você aprendeu assim, desaprenda — não existe palavra mais forte do
+> que essa para começar.**"
+
+*Numa VN isso é mais forte ainda: o beat que começa com "Mas" avisa ao
+jogador, antes do clique, que o chão mudou.*
+
+### Parágrafo
+
+Curtos, **mas não muito curtos**: *"uma sequência de parágrafos muito
+curtos é tão incômoda quanto um parágrafo longo demais. (...) Na verdade,
+eles acabam dificultando o trabalho do leitor ao **retalhar o encadeamento
+natural das ideias.**"*
+
+**É o problema do metrônomo, dito por outra fonte.** A média de 35
+caracteres por frase do roteiro é a versão em beat desses parágrafos
+nanicos "sem verbos, que jornalistas modernos escrevem para tornar os
+seus textos rápidos e rasteiros". Zinsser chama isso de ar de
+superioridade: *"o repórter parece dizer ao leitor: 'Uau, veja só como eu
+simplifiquei as coisas para você!'"*
+
+---
+
+## 4. Parte IV — as decisões pequenas, dissecadas
+
+O capítulo "Decisões de um escritor" é ele abrindo o próprio artigo sobre
+Timbuktu e explicando cada escolha. O princípio:
+
+> "A escrita é algo **linear e sequencial**, a cola que a sustenta é a
+> lógica (...) **Cada passo deve parecer inevitável.**"
+
+E o exemplo de trabalho: ele passou quase uma hora numa única frase,
+procurando os dois nomes de cidade certos — chegou a "Veneza e Versalhes"
+depois de descartar Londres, Paris, Roma, Cairo, Atenas, Bangcoc, Madri,
+Moscou, Tel Aviv, Tóquio e Viena.
+
+> "**Nenhuma decisão sobre a escrita é ínfima demais para não merecer uma
+> grande quantidade de tempo.**"
+
+*Registro isto contra a minha falha característica. Eu produzo a primeira
+versão fluente e ela soa bem. Zinsser passou uma hora em duas palavras
+próprias. A diferença entre "aparecer" e "vir à tona" é a diferença
+inteira.*
+
+### A tirania do produto final
+
+> "Essa fixação pelo artigo concluído gera muitos problemas, **desviando-os
+> das decisões iniciais básicas** que precisam tomar para definir o seu
+> escopo, sua voz, seu conteúdo."
+
+> "Como editor e escritor, descobri que **a técnica menos falada e mais
+> subestimada é como organizar um texto longo.** Escritores costumam falar
+> sem parar sobre como escrever uma frase clara. Mas peça-lhes que façam
+> alguma coisa mais longa e **as suas frases se espalharão pelo chão como
+> bolas de gude.**"
+
+*Descreve o estado atual do projeto com precisão. As frases estão boas. A
+obra tem onze capítulos, três dos quais escritos, e nenhum stepsheet.*
+
+---
+
+## O que NÃO transfere
+
+- **Parte III inteira** — entrevista, reportagem de viagem, ciência,
+  negócios, esporte, crítica, humor.
+- A única coisa que eu levaria da Parte III é do capítulo de memória, e é
+  a mesma regra da unidade: **estabelecer uma ligação entre quem escreve e
+  o lugar sobre o qual escreve.** Vale para o Arquivo, que é a memória de
+  uma casa escrita por quem morreu dentro dela.
+- O conselho de vender texto para revista.
+
+---
+
+## Itens de ação da segunda passada
+
+6. **Uma frase por capítulo**, no alto do arquivo de dados: o pensamento
+   único que aquele capítulo deixa. Se dois capítulos deixam o mesmo,
+   um sobra.
+7. **Checagens novas no validador**, todas mensuráveis:
+   - ponto de exclamação fora da fala de Liara
+   - qualificativos fracos: "um pouco", "meio", "uma espécie de", "um
+     tanto", "bastante", "quase", "de certa forma"
+   - advérbio em `-mente` que repete o verbo
+8. **Varrer substantivo abstrato** e trocar por gente fazendo coisa.
+9. **Nada de manivela no fim.** O Capítulo 11 e o Epílogo não resumem.
+10. **O Arquivo nunca inventa.** Regra agora com duas fontes — Corbett
+    pelo lado do dispositivo, Zinsser pelo lado do custo.
+11. **Contra o metrônomo:** a média de 35 caracteres é o equivalente em
+    beat do parágrafo nanico. Variar comprimento é obrigação, não gosto.

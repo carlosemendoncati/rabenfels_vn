@@ -1,5 +1,143 @@
 # Changelog
 
+## 0.6.0 — Corpus de referência lido por inteiro, bíblia v3, roteiro revisado
+
+Onze livros em `REF/` lidos e destilados, um por vez, em
+`docs/estudo/` — um arquivo por livro mais um índice consolidado. A partir
+daí, uma bíblia nova e cirurgia no roteiro.
+
+### O estudo
+
+`docs/estudo/00_indice.md` é o ponto de entrada: **dez regras de confiança
+alta** (onde duas ou mais fontes independentes convergem), as duas críticas
+sérias que o corpus faz ao projeto, onde a obra discorda dos livros e por
+quê, e a fila de ação numerada.
+
+Notas por livro: Murphy, Finley, Frey, Squarisi & Salvador, Zinsser,
+Corbett, Cavallaro, MWA, Kenworthy, Kristoff, Peters.
+
+**Descobertas que mudaram categoria:**
+
+- **A obra é thriller no eixo causa→efeito, não whodunnit.** Todorov, via
+  Cavallaro: curiosidade vai de efeito a causa; suspense vai de causa a
+  efeito. O Prólogo entrega a causa.
+- **A arquitetura tem nome: "interatividade superposta"** — percurso linear
+  com cenas interativas localizadas. Encerra a dúvida sobre ramificar
+  pouco.
+- **O Arquivo erra por omissão e por ênfase, nunca por invenção.** Corbett
+  pelo lado do narrador não confiável, Zinsser pelo lado do custo, Peters
+  dá o mecanismo: *"diziam alguns"*.
+- **Contra o metrônomo, cinco fontes independentes.** A média medida do
+  roteiro é 35 caracteres por frase, com zero variação.
+
+### `tools/desgruda.py`
+
+O PDF do Kenworthy foi gerado sem codificar o caractere de espaço:
+`Ifyouwanttobeasciencefictionwriter`. Nenhuma ferramenta de extração
+resolveria. A saída foi montar um dicionário de frequência a partir dos
+outros livros em inglês do próprio corpus — 83.603 palavras distintas — e
+resegmentar por programação dinâmica. Ficou legível.
+
+Também novo: `tools/refslice.py`, para fatiar o corpus sem depender do
+codepage do console.
+
+### `docs/biblia_v3.md`
+
+Substitui a bíblia original e a revisão v2. O canon é o mesmo — foi
+fechado pelo autor. **O que mudou foi a forma.**
+
+- **Elenco por cena, não por ficha.** Corbett: uma lista estática de fatos
+  ajuda a *descrever* e serve de pouco para *dramatizar*. Cada personagem
+  principal ganhou papel dramático com o termo técnico, contradição,
+  detalhe específico e três cenas de esboço — vergonha, conflito fora do
+  enredo, trabalho.
+- **O gráfico de fios da Crombie**, com sete colunas. Substitui o
+  stepsheet como ferramenta principal, porque acomoda cinco anos e várias
+  linhas em paralelo.
+- **Aldric registrado como "vilão simpático"**, com o termo, para que
+  ninguém o transforme em aliado limpo nem em vilão raso.
+- **Carmine construída pelo método Talese** — que escreveu o perfil que
+  fundou um gênero sem nunca entrevistar Sinatra. Regra fechada: nenhuma
+  cena a partir do ponto de vista dela.
+- **Os criados ganharam agenda própria e detalhe contraditório.** Três
+  fontes concordam que não se planta pista falsa: ela nasce de gente com
+  suposições próprias.
+- Saíram duas frases da v2 que usavam a fórmula proibida "não é X — é Y".
+  Estavam justamente no trecho que explicava por que ela é proibida.
+
+### Prólogo
+
+- **O Arquivo virou objeto físico:** peso, cordel em quatro voltas e nó
+  cego, cheiro de cavalo e cera, frio de estrada. E uma **numeração que
+  não fecha** — 287 páginas, numeração até 291. Corte reto e antigo. Nunca
+  explicado.
+- **Auditoria sensorial.** A versão anterior era quase toda visual.
+- **Beat de uma palavra** na contagem das páginas.
+- **As notas do Compilador viraram sistema.** Cada uma se defende de uma
+  acusação que ninguém fez. A nota 17 usa a atribuição vaga de Peters.
+- **As camadas de tempo se contaminam uma vez**, em P9: Antoniette
+  pergunta "Você sabia?" e Matheo responde em voz alta, na sala vazia.
+- **Uma frase longa e desnorteada no clímax**, depois do capítulo inteiro
+  em frase curta.
+- **As borboletas deixaram vestígio físico** — uma asa prensada na dobra
+  da folha — para o Epílogo poder fechar em cima delas.
+- **As três linhas de Khar'Vel não foram alteradas.** São texto canônico
+  do autor e são anáfora deliberada: definição por exclusão, porque a
+  coisa não tem categoria positiva. Matheo repara na forma, o que converte
+  a figura de linguagem em caracterização.
+
+### Capítulo 1
+
+- **Topo cortado.** Abria com quatro beats de paisagem. Agora abre no
+  gesto, e abril é descrito pelo que faz nas mãos de quem viajou três
+  dias.
+- **Antoniette ganhou contradição disposicional:** metódica ao extremo, e
+  **come em pé**. Plantado sem comentário.
+- **Fenn ganhou detalhe contraditório e agenda** — econômico com gente,
+  falastrão com os cavalos.
+- **Registro por interlocutor.** Ela fala curto com Fenn, formal com
+  Serafina, precisa com Aldric.
+- **A decisão de não insistir aparece em cena**, com o preço à vista. Frey:
+  o leitor não pode achar que a detetive é idiota.
+- **Klara quer e tenta.** Não pode ir à feira, então pede a feira inteira
+  pela boca da irmã. É o mecanismo que termina na Academia.
+- Ramos das escolhas equilibrados; dois fins de cena convertidos de soco
+  para ponte; beat de uma palavra em C6; uma frase longa em C9.
+
+### Capítulo 2
+
+- **`aldric_pressed` passou a ser lida.** A flag era gravada no Capítulo 1
+  e nunca consultada em lugar nenhum. Agora paga na seção nordeste, e os
+  dois ramos levam o "e se" a um fim desagradável diferente: ou ele
+  preparou o lugar para ela, ou ninguém subiu ali e as duas explicações
+  possíveis são ruins.
+
+### `antipadroes-ia.md`
+
+Quatro itens novos, todos do corpus:
+
+- **o substituto físico do medo** — coração disparado, arrepio na nuca. É
+  a saída óbvia da regra "não afirme a emoção", e por isso é a saída de
+  todo mundo
+- **chavões em português** — a lista dos "mesmeiros" de Squarisi
+- **a distinção** entre o par gramatical `não…mas` (legítimo) e a fórmula
+  retórica "não é X: é Y" (proibida)
+- **erros de português automatizáveis** — paralelismo com `e que`,
+  `à medida em que`, pares partidos, gerundismo, plural de parte única do
+  corpo
+
+### Verificação
+
+`python tools/validate.py` — 2150 checagens, zero falhas.
+`node tools/validate.js` — 474 checagens, zero falhas.
+`tools/smoke.html` no Edge headless — 56 checagens, zero falhas.
+
+**Não testado:** áudio real, toque em telefone, e o Capítulo 1 jogado do
+começo ao fim clicando beat a beat no motor. Os três validadores conferem
+por código; nenhum deles é o olho de quem joga.
+
+---
+
 ## 0.5.0 — Revisão geral: Prólogo e Capítulo 1 reescritos, seis defeitos fechados
 
 Duas frentes nesta versão. A primeira é o roteiro: o Prólogo e o Capítulo 1

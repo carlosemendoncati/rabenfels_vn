@@ -296,3 +296,273 @@ projeto dita por outro:
    justificativa, já que o livro recomenda o contrário.
 5. **Acrescentar o preceito 3 ao `antipadroes-ia.md`** com esta fonte —
    forma positiva é regra de português, não concessão a antipadrão de IA.
+
+---
+---
+
+# Segunda passada — gêneros e a seção de língua
+
+**Livro fechado.**
+
+A parte de gêneros jornalísticos (notícia, pirâmide invertida, suíte,
+pingue-pongue, editorial) **não transfere** — com duas exceções que valem
+muito: **perfil** e **personagem**. E a seção final, sobre língua, é a
+mais aproveitável do livro inteiro para este projeto, porque é a única
+fonte do corpus que trata de **português** em vez de inglês.
+
+---
+
+## 1. Perfil — o método Talese, e como se escreve alguém que nunca fala
+
+A regra que abre a seção:
+
+> "**Perfis não servem para agradar, mas para revelar.**"
+
+E o caso que fundou o gênero:
+
+> "Foi o jornalista Gay Talese que tornou popular a **reportagem-perfil sem
+> ouvir a vedete do trabalho.** Em 1966 publicou um perfil de Frank Sinatra
+> na *Esquire*. Passou meses tentando falar com ele, mas o astro sempre
+> tinha uma desculpa. **Talese desistiu** e passou a assistir a todos os
+> shows, a persegui-lo em restaurantes e festas, e a **falar com as pessoas
+> a seu redor.**"
+>
+> "As redações perceberam que **bons perfis dependem mais do repórter que
+> do personagem.**"
+
+**Este é o método para Carmine, e agora tem procedente.** Antoniette nunca
+conversa com a entidade. A obra inteira a constrói pelo entorno: o que a
+casa faz por causa dela, o que os criados evitam, o que os registros
+confirmam, o que a mãe de Liara canta sem saber. *Khar'Vel é Sinatra
+recusando a entrevista, e o Arquivo é a matéria que sai assim mesmo.*
+
+Vale ler o começo do texto de Talese, que Squarisi reproduz, porque é
+técnica pura:
+
+> "Frank Sinatra, segurando um copo de Bourbon numa mão e um cigarro na
+> outra, estava num canto escuro do balcão entre duas loiras atraentes,
+> **mas já um tanto passadas**, que esperavam ouvir alguma palavra dele.
+> Mas ele não dizia nada."
+
+E o fecho do parágrafo, que é onde a informação chega:
+
+> "Sinatra estava doente. Padecia de uma doença tão comum que a maioria
+> das pessoas a considerava banal. **Frank Sinatra está resfriado.**"
+
+*Três parágrafos de acumulação e a informação é um resfriado. É horror por
+acumulação aplicado a uma reportagem de celebridade — a mesma técnica, com
+outro alvo.*
+
+### As três regras que ela dá para perfil
+
+> "**Evite adjetivos.** Use descrições minuciosas da pessoa, do local onde
+> vive, das roupas. **O próprio leitor construirá a imagem do personagem
+> mentalmente.**"
+
+> "Prefira linguagem coloquial, o mais próximo possível da maneira de falar
+> do personagem. **Palavras sofisticadas na boca de pessoas humildes soam
+> falso.**"
+
+> "Corrija erros gramaticais, a não ser nos casos em que o texto reproduz
+> a linguagem incorreta dos personagens. **No caso, escolha estruturas
+> muito simples.** Se alguém disser 'nóis vai', não há mal em escrever 'nós
+> vamos'. Mas passar o original para 'nós consideramos ir' é demais."
+
+**A segunda regra é a régua para Fenn e Dara.** Criado de casa grande não
+fala como fidalgo, e a tentação de dar frase bonita a personagem de
+serviço é a mesma tentação de dar frase oracular a Klara.
+
+---
+
+## 2. Personagem — a escolha do exemplo carrega o argumento
+
+> "Personagens de matérias são **exemplos concretos** do que está escrito
+> na reportagem. Incluí-los **humaniza uma descrição fria**, dá nome,
+> endereço e identidade a um acontecimento."
+
+> "Para chegar a bons personagens, é preciso **encontrar muitos e descartar
+> a metade.** Apure os detalhes das histórias de todos como se fossem
+> imprescindíveis. Mas inclua na matéria **só os mais representativos.**"
+
+E a anedota que ela conta sem suavizar: a repórter e o fotógrafo acharam
+num hospital público a família que atendia exatamente aos critérios da
+pauta, e o fotógrafo vetou —
+
+> "– Não dá. É tudo muito feio, o hospital, as roupas, a família. A mãe
+> está com cara de sofrimento. **A revista quer uma coisa pra cima, com
+> gente bonita e feliz.** Vamos procurar em outro lugar."
+
+Foram ao hospital particular e acharam gêmeos de família rica.
+
+> "Pobres não costumam reclamar, não perguntam as razões da foto, não têm
+> noção dos direitos. Por isso, **são usados com frequência pelos
+> jornalistas quando precisam de personagens complicados.**"
+
+*É uma lição de ofício embrulhada numa denúncia: **o exemplo escolhido
+carrega o argumento inteiro**, e quem escolhe decide o que a matéria
+significa antes de escrever uma linha. Vale diretamente para o Arquivo.
+Antoniette escolhe quais fatos vira ficha. A escolha dela é a tese dela.
+E isso é exatamente o erro por ênfase que a régua do Arquivo permite —
+agora com o mecanismo à vista.*
+
+---
+
+## 3. Mesmeiros do texto — a lista de chavões, e o detector que sai dela
+
+> "Certas palavras e expressões foram originais um dia. Depois, de tanto
+> repeti-las, viraram modismos, chavões ou lugares-comuns. **Supérfluas,
+> são pobres de valor informativo.** (...) Hoje, quando bate o olho na
+> mesmeira, o leitor **sente cheiro de mofo.**"
+
+Ela despeja três páginas de lista. As que um texto de horror gótico em
+português corre risco real de usar:
+
+*a duras penas · a olhos vistos · alimentar a esperança · antes de mais
+nada · ao apagar das luzes · baixar a guarda · cair como uma luva ·
+caixinha de surpresas · como se sabe · como todos sabem · cortina de
+fumaça · dar o último adeus · deitar raízes · divisor de águas · em
+compasso de espera · em sã consciência · em última análise · faca de dois
+gumes · fazer das tripas coração · fio condutor · lavar a alma · luz no
+fim do túnel · menina dos olhos · na ordem do dia · no fundo do poço ·
+óbvio ululante · página virada · pomo da discórdia · pôr a casa em ordem ·
+requinte de crueldade · reta final · rota de colisão · sentir na pele ·
+separar o joio do trigo · sorriso amarelo · tecer comentários · trazer à
+tona · via de regra · voltar à estaca zero*
+
+**Isto vira checagem estática imediatamente.** É a primeira lista de
+antipadrões do corpus que é **específica do português**, e é a mais fácil
+de automatizar de todas.
+
+---
+
+## 4. Lição do corpo — paralelismo
+
+A analogia é dela e é boa: *"as partes que exercem função igual têm
+estrutura igual. Um olho é do tamanho e da cor do outro."*
+
+> "Termos e orações com funções iguais ganham estruturas iguais."
+
+O erro:
+
+> ❌ "O presidente negou **interesse** na reeleição **e que** o governo
+> esteja sem rumo."
+>
+> ✅ "O presidente negou **interesse** na reeleição e **falta** de rumo no
+> governo."
+
+**E o atalho de detecção, que é ouro para um validador:**
+
+> "Cuidado com o **'e que'**. A duplinha só tem vez quando houver o
+> primeiro 'quê'. **Na falta dele, tenha uma certeza: o paralelismo foi
+> esnobado.**"
+
+---
+
+## 5. Samba da mistura doida — os pares que não se separam
+
+Os casais fixos da língua:
+
+| Par | Certo | Errado |
+|---|---|---|
+| seja…seja | Seja no inverno, **seja** no verão | Seja no inverno **ou** no verão |
+| ou…ou | No inverno **ou** no verão | — |
+| quer…quer | Quer no inverno, **quer** no verão | Quer no inverno **ou** no verão |
+| de…a | de segunda **a** sexta | de segunda **à** quinta |
+| das…às | **das** 14h **às** 19h | **de** 14h **às** 19h |
+| não…mas | **Não** moro em São Paulo, **mas** em Brasília | — |
+
+E o cruzamento mais comum:
+
+> "**À medida que** = à proporção que. **Na medida em que** = porque, tendo
+> em vista. (...) Volta e meia a gente vê **'à medida em que'**. Esse
+> mostrengo equivale à mistura de guaraná com Coca-Cola. **Fuja dele.**"
+
+**Nota importante sobre o par "não…mas":** ele é construção legítima do
+português e **não** é o tique que o autor mandou eliminar. O que está
+proibido em Rabenfels é a **fórmula retórica** — "não é X: é Y" — usada
+como muleta de ritmo e de falsa profundidade. Distinção que precisa estar
+escrita em `antipadroes-ia.md`, senão a correção de um erro cria outro.
+
+---
+
+## 6. Mistérios do plural — o erro que uma obra cheia de corpos vai cometer
+
+> "As partes do corpo (...) dizemos que os presentes **balançaram a
+> cabeça** (não *as cabeças*), porque cada um só tem uma cabeça."
+
+O exemplo real que ela pega de um jornal:
+
+> ❌ "O grupo avisa a todos que defendem Saddam que irá cortar **seus
+> pescoços**." → *"os advogados são descendentes da Hidra de Lerna, que
+> tinha nove cabeças."*
+>
+> ✅ "…que **lhes** iremos cortar **o pescoço**."
+
+A regra completa:
+
+- parte única → **singular**: levantaram **a mão**, no **coração** dos
+  manifestantes
+- parte que já é par → **plural**: ergueram **os braços**, levantaram
+  **os olhos**
+- se for só um dos dois → **singular**: ergueram **o braço** na votação
+- propriedade comum a vários sujeitos → **singular**: três meninos com
+  **idade** entre 8 e 9 anos; três mil pessoas perderam **o emprego**
+
+*Rabenfels é uma obra de mãos, braços, olhos e curativos. Este erro vai
+acontecer, e é detectável.*
+
+---
+
+## 7. Receita do cruz-credo — gerundismo e verbo inventado
+
+> "O **gerundismo** é outra praga. Chegou tímido, trazido pelas más
+> traduções do inglês. (...) O que quer o intruso? **Quer tomar o lugar do
+> simpático futuro da nossa língua.** 'Vou estar anotando', 'vou estar
+> encaminhando'? (...) Mandam o bom senso e a boa norma dar o recado no
+> futuro simples — *anotarei, encaminharei, lerá*."
+
+E o limite do presente contínuo, que é o erro mais fino:
+
+> "A forma **estar + gerúndio** indica ação em curso, **transitoriedade**.
+> Fora desses limites estreitos, o casadinho não tem vez. *Eu estou
+> sofrendo do coração?* Nem pensar — a doença dura mais que o momento em
+> que se fala: **eu sofro do coração.** *Maria está morando em São Paulo há
+> dez anos?* Sem essa: **Maria mora em São Paulo.**"
+
+*Direto ao ponto para a voz do Arquivo. "A casa está guardando alguma
+coisa" é transitório e provavelmente errado; "a casa guarda alguma coisa"
+é permanente e é o que a frase quer dizer.*
+
+Mais os verbos inventados em *-ilizar* e *-izar*: agudização,
+prestigiamento, obstacularizar, tecnologizar. *Numa obra de vocabulário
+administrativo frio, o risco é real: "operacionalizar o florescimento" é
+exatamente o tipo de coisa que a casa Rabenfels diria — e aí seria acerto,
+não erro. Registrar a distinção: **na boca da família, é caracterização.
+Na narração, é falha.***
+
+---
+
+## O que NÃO transfere
+
+Pirâmide invertida, suíte, notícia factual, entrevista pingue-pongue,
+editorial, coluna, análise, "quente ou fria", a faca dos editores, a
+pressão do fechamento. É oficina de redação.
+
+---
+
+## Itens de ação da segunda passada
+
+6. **Detector de chavão em português** no validador, com a lista dos
+   mesmeiros. É a checagem mais barata e mais específica do corpus.
+7. **Checagens de português** que saem daqui, todas automatizáveis:
+   - `e que` sem o primeiro `que` — paralelismo quebrado
+   - `à medida em que`
+   - pares partidos: `seja…ou`, `quer…ou`, `de…à`, `de…às`
+   - gerundismo: `vou estar`, `vai estar`, `vamos estar` + gerúndio
+   - plural indevido de parte única do corpo
+8. **Método Talese para Carmine:** construir a entidade só pelo entorno.
+   Nunca uma cena a partir do ponto de vista dela.
+9. **Registrar em `antipadroes-ia.md`** a diferença entre o par `não…mas`
+   (português legítimo) e a fórmula "não é X: é Y" (tique proibido).
+10. **Verbo administrativo inventado é caracterização na boca da família e
+    erro na narração.** Regra escrita.

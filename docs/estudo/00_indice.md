@@ -2,215 +2,253 @@
 
 **Leia este arquivo primeiro.** Os outros são o detalhe.
 
-Formato: afirmação · fonte · o que fazer · confiança.
-Confiança **alta** = duas ou mais fontes independentes concordam.
-
 Corpus em `REF/` (fora do git). Texto extraído em `REF/_txt/`.
-Ferramentas: `python tools/refextract.py`, `python tools/refread.py`.
+Ferramentas: `tools/refextract.py`, `tools/refslice.py`, `tools/desgruda.py`.
 
 ---
 
-## Estado da leitura
+## Estado da leitura — **corpus fechado**
 
-| # | Livro | Lido | Falta |
-|---|---|---|---|
-| 01 | Murphy, *The Plot Dot* | **integral** | — |
-| 02 | Finley, *Branching Story* | glossário, cap. 1–10 | cap. 11–13 (produção móvel, assets, engines) |
-| 03 | Frey, *Damn Good Mystery* | cap. 1–11, 16–19 | cap. 12–15 (stepsheet dos atos II–V, clímax, tabus) |
-| 04 | Squarisi & Salvador, *A Arte de Escrever Bem* | os doze preceitos | 2ª metade (gêneros jornalísticos) |
-| 05 | Zinsser, *Como Escrever Bem* | Parte I | Parte II (unidade, lide e final) e III |
-| 06 | Corbett, *The Art of Character* | cap. 4, 5, 7, 8, 10 | cap. 6, 9, 11–16, Parte III |
-| 07 | Cavallaro, *Anime and the VN* | prefácio, cap. 1, *Higurashi* | os outros estudos de caso |
-| 08 | MWA, *How to Write a Mystery* | trechos | **quase tudo** |
-| 09 | Kenworthy, *SF/Fantasy/Horror* | seção de horror | resto — **extração degradada, palavras coladas** |
-| 10 | Kristoff, *Império do Vampiro* | amostras | 945 páginas |
-| 11 | Peters, *Brother Cadfael* | amostras | 4.504 páginas |
+| # | Livro | Situação |
+|---|---|---|
+| 01 | Murphy, *The Plot Dot* | integral |
+| 02 | Finley, *Branching Story, Unlocked Dialogue* | **integral** — cap. 1–13 |
+| 03 | Frey, *How to Write a Damn Good Mystery* | **integral** |
+| 04 | Squarisi & Salvador, *A Arte de Escrever Bem* | **integral** |
+| 05 | Zinsser, *Como Escrever Bem* | **integral** — Partes I–IV |
+| 06 | Corbett, *The Art of Character* | cap. 4,5,7,8,9,10,11,21,23 |
+| 07 | Cavallaro, *Anime and the Visual Novel* | prefácio, cap. 1–5 (teoria) |
+| 08 | MWA, *How to Write a Mystery* | Rules + Craft integrais |
+| 09 | Kenworthy, *Writing SF, Fantasy & Horror* | **integral** |
+| 10 | Kristoff, *Império do Vampiro* | amostragem dirigida — moldura |
+| 11 | Peters, *Brother Cadfael* | amostragem dirigida — comunidade fechada |
+
+Os três últimos foram lidos **por alvo declarado**, não de capa a capa.
+Cavallaro e Corbett têm estudos de caso e exercícios que não transferem.
 
 ---
 
-## As sete regras de confiança alta
+## As dez regras de confiança alta
 
-Onde fontes independentes convergem. **Estas prevalecem sobre gosto.**
+Onde fontes independentes convergem. **Prevalecem sobre gosto.**
 
 ### R1 · Explicar mata
+Corbett (McKee: "quanto mais prende a motivação a causas específicas, mais
+diminui o personagem") · Kenworthy ("melhor sugerir que ser direto") ·
+Cavallaro (*sabi*, a vista parcialmente encoberta) · documento mestre.
+**Fazer:** nunca explicar o motivo de Carmine. → `06` `07` `09`
 
-Corbett (McKee): *"quanto mais o escritor prende a motivação a causas
-específicas, mais ele diminui o personagem"*. Kenworthy: *"sugerir vence
-ser direto"*. Cavallaro (estética japonesa): *sabi*, a vista parcialmente
-encoberta. Documento mestre: *"Khar'Vel nunca deve ser explicada"*.
+### R2 · Pensar antes; começar pelo fim
+Frey · Finley · MWA (Rae Franklin James) · Squarisi · Zinsser.
+**Fazer:** escrever o Epílogo antes de continuar o meio. → `02`–`05` `08`
 
-**Fazer:** nunca explicar o motivo de Carmine. O jogador pode saber *o
-que* ela é; jamais *por quê*. Vale também para Serafina e Aldric — a
-origem informa, não justifica. → `06`, `07`
-
-### R2 · Pensar antes de escrever; começar pelo fim
-
-Frey (stepsheet). Finley ("comece pelos finais"). MWA (Rae Franklin
-James: escreve o último capítulo antes do meio). Squarisi ("gaste tempo
-pensando e só depois sente-se"). Zinsser ("pensamento limpo, texto
-limpo"). **Cinco fontes.**
-
-**Fazer:** escrever o Epílogo antes de continuar o meio da obra.
-→ `02`, `03`, `04`, `05`
-
-### R3 · Toda cena termina em virada, revelação ou mudança
-
-Frey (*endlines*: ponte ou soco). Murphy ("loops abertos").
-
-**Fazer:** numa VN cada *beat* é micro-cena com micro-*endline*. Auditoria
-do Cap. 1: cinco socos contra três pontes — desequilibrado.
-→ `01`, `03`
+### R3 · Toda cena termina em virada
+Frey (*endlines*) · Murphy (loops abertos) · Zinsser (a última frase do
+parágrafo é o trampolim).
+**Fazer:** cada beat é micro-cena. Cap. 1 tem 5 socos contra 3 pontes.
 
 ### R4 · Detalhe sensorial no lugar de adjetivo
-
-Finley ("os sinos estridularam" > "fizeram um som horrível"). Zinsser
-("todo advérbio que repete o verbo"). Squarisi (adjetivo só se
-particulariza; adjetivos-ônibus não informam nada).
-
-**Fazer:** auditoria sensorial do Cap. 1 — som, cheiro, tato,
-temperatura estão quase ausentes. → `02`, `04`, `05`
+Finley · Zinsser (advérbio que repete o verbo) · Squarisi · **Kenworthy,
+que dá exemplo por sentido** e é a melhor fonte disto.
+**Fazer:** auditoria sensorial do Cap. 1. Som, cheiro, tato e temperatura
+estão ausentes. → `09` primeiro
 
 ### R5 · Forma positiva
-
-Squarisi, preceito 3: *"dizer o que é, não o que não é"*. Pesquisa de
-antipadrões: "não é X, é Y" é o tique mais reconhecível de texto gerado.
-
-**Fazer:** já detectado por `tools/validate.py`. Teto de 1 por capítulo.
-→ `04`, `.claude/skills/rabenfels-vn/reference/antipadroes-ia.md`
+Squarisi, preceito 3 · pesquisa de antipadrões.
+**Fazer:** já detectado por `validate.py`. Teto de 1 por capítulo.
+**Cuidado:** o par `não…mas` é português legítimo; o proibido é a fórmula
+"não é X: é Y" como muleta de ritmo. → `04`
 
 ### R6 · Vulnerabilidade vence simpatia
-
-Frey (*"'amável' não está na lista — isso é besteira"*). Corbett
-(*"depende muito menos de ser agradável do que de estar numa luta que
-importa"*).
-
-**Fazer:** Antoniette não é doce e não precisa ser. → `03`, `06`
+Frey ("'amável' não está na lista") · Corbett · Kenworthy ("vítimas dão
+personagens chatos").
+**Fazer:** Antoniette não é doce. Klara não é vítima. → `03` `06` `09`
 
 ### R7 · Nada de atributo cristalizado
+Cavallaro · Corbett (Tirania do Motivo) · regra 9 do `CLAUDE.md`.
+**Fazer:** Klara fala pouco porque é criança que fala pouco.
 
-Cavallaro (o defeito do horror menos analítico). Corbett (Tirania do
-Motivo). O autor, regra 9 do `CLAUDE.md` (*"não necessariamente é um poço
-de mistérios cheio de frases feitas"*).
+### R8 · Contra o metrônomo — **cinco fontes**
+Zinsser (parágrafo nanico "com ar de superioridade") · Squarisi (frase
+harmoniosa) · Kenworthy (sub-escrever: "ela fez isso, depois aquilo") ·
+**Faye ("seja audacioso com o estilo, seja simples com as frases, só não
+faça nenhuma das duas o tempo todo")** · Peters, pelo contraste.
+**Medido:** média de 35 caracteres por frase, máximo 103, zero variação.
+**Fazer:** alternar é obrigação. Uma frase longa e desnorteada no clímax.
 
-**Fazer:** Klara fala pouco porque é criança que fala pouco. Já corrigido
-no Cap. 1; vigiar em todo capítulo novo. → `06`, `07`
+### R9 · O Arquivo erra por omissão e ênfase, **nunca por invenção**
+Corbett, cap. 23 ("não é que o texto seja inteiramente não confiável —
+muito pelo contrário") · Zinsser ("uma única afirmação falsa e tudo o que
+vier depois fica suspeito") · **Peters dá o mecanismo: *diziam alguns*.**
+**Fazer:** atribuição vaga como forma honesta de registrar o não
+confirmado. → `06` `05` `11`
 
----
-
-## Onde eu discordo dos livros
-
-Registrado para não ser "consertado" por sessão futura.
-
-| Livro | Diz | Rabenfels faz | Por quê |
-|---|---|---|---|
-| Frey, Murphy | não abra com prólogo | o Prólogo é a obra | eles falam de prólogo como muleta para abertura fraca; aqui é a moldura, e o horror depende de saber o fim antes |
-| Frey | 5 atos: descoberta, captura, justiça | quebra os atos III–V | a premissa que ele chama de universal — "a razão vence o mal" — é a que a obra nega |
-| Squarisi | "imagine três itens para agrupar" | tríade proibida na narração | buscar o terceiro item porque três soa bem é preenchimento; permitida só no cartão do Arquivo |
-| Zinsser | seja você mesmo, use o "eu" | voz notarial construída | ficção com voz artificial; o que transfere é "nada de peruca" |
-| Cavallaro | multiperspectivalismo | ponto de vista único | o Arquivo é limitado porque ela era limitada |
+### R10 · Red herring não se planta — **encerrado, três fontes**
+Frey ("é quando autores jogam um red herring que os enredos começam a
+feder") · Crombie ("não planejo pistas falsas; elas fluem das suposições
+que as personagens fariam") · minha correção.
+**Fazer:** dar agenda própria a cada criado. O falso rastro nasce. → `03` `08`
 
 ---
 
 ## Descobertas que mudam categoria
 
-**A obra é thriller, não whodunnit.** Todorov, via Cavallaro: curiosidade
-vai de efeito a causa; suspense vai de causa a efeito. O Prólogo entrega
-a causa. O motor da leitura é *"quando isto vai acontecer e eu vou ter de
-assistir"*. → `07`
+**A obra é thriller no eixo causa→efeito, não whodunnit.** Todorov via
+Cavallaro: curiosidade vai de efeito a causa; suspense vai de causa a
+efeito. O Prólogo entrega a causa. Nyren, na MWA, confirma pelo outro
+lado: mistério pergunta "quem fez"; thriller pergunta "o que acontece
+agora". **Rabenfels pergunta "o que acontece agora" sabendo a resposta.**
 
-**Império do Vampiro tem a mesma moldura.** Gabriel conta a Jean-François,
-que registra. Diferença: **o ouvinte interrompe** e a moldura atravessa o
-livro. Em Rabenfels, Matheo some por onze capítulos. → `estudo_referencias.md`
+**A arquitetura tem nome: "interatividade superposta"** (Szilas via
+Cavallaro) — percurso global linear com cenas interativas localizadas.
+Encerra a dúvida sobre ramificar pouco. Não ramifica pouco; usa o outro
+recurso.
 
-**Antoniette é o problema de Zinsser virado personagem.** Ele condena a
-voz impessoal que esconde a pessoa; a obra faz desse esconder o enredo.
-→ `05`
+**O roteiro é partitura, não obra.** Poremba: a agência do autor é
+"instanciada pelo jogador"; a relação é a do compositor com o intérprete.
+Consequência dura: **toda frase precisa sobreviver a três velocidades de
+leitura.**
 
-**A ferida de Aldric já existe e é moral** — a vez que entrou na câmara.
-Corbett: inventar ferida para preencher checklist piora o personagem.
-Corrige recomendação anterior minha. → `06`
+**O método Talese resolve Carmine.** Talese nunca entrevistou Sinatra;
+construiu o perfil pelo entorno. Antoniette nunca fala com a entidade.
+"Bons perfis dependem mais do repórter que do personagem."
+
+**Numa VN, só a voz distingue um secundário.** Craig Johnson: "você só
+descreve uma personagem uma vez, mas ela fala o livro inteiro". Numa VN a
+descrição *é* o sprite. Tudo o mais é voz.
+
+**Antoniette é "a introdução do inocente"** (Johnson) — o ponto de acesso
+do jogador a um ambiente altamente contextualizado. Por isso **ela precisa
+não entender coisas em voz alta.** Competência constante quebra a função.
+
+---
+
+## As duas críticas sérias ao projeto
+
+**1. O risco do peão no tabuleiro — Lee Child.**
+> "Se um autor conduz o protagonista a uma revelação planejada na página
+> 300, ele arrisca tornar as 299 páginas anteriores menos naturais.
+> Personagens podem ficar menos parecidas com gente e mais parecidas com
+> peões num tabuleiro."
+
+Rabenfels tem o fim fixado no canon. **É o modo de falha padrão desta
+estrutura.** Teste prático: **em cada capítulo, alguém tem de tentar algo
+que poderia ter dado certo.**
+
+**2. A obra não tem uma linha de humor — Faye.**
+> "Escritores que levam a própria voz a sério demais, sem aquela pitada de
+> autodepreciação ou crueldade esperta, raramente terminam com um
+> resultado memorável."
+
+Saída provável sem trair o tom: **crueldade esperta na linguagem da casa.**
+"A cozinha fecha às oito porque ninguém tem fome depois das oito" já é
+essa piada. **Pergunta aberta ao autor.**
+
+---
+
+## Onde eu discordo dos livros
+
+| Livro | Diz | Rabenfels faz | Por quê |
+|---|---|---|---|
+| Frey, Murphy | não abra com prólogo | o Prólogo é a obra | falam de prólogo como muleta; aqui é a moldura |
+| Frey | 5 atos, "a razão vence o mal" | quebra os atos III–V | a obra nega essa premissa |
+| Squarisi | use a tríade | proibida na narração | permitida só no cartão do Arquivo |
+| Zinsser | seja você mesmo, use o "eu" | voz notarial construída | o que transfere é "nada de peruca" |
+| Cavallaro | multiperspectivalismo | ponto de vista único | o Arquivo é limitado porque ela era |
+| Kristoff, Peters | ornamento gótico / período longo | frase curta e seca | é o registro-padrão do gênero em português, e a obra ganha por recusá-lo |
 
 ---
 
 ## Defeitos medidos no que já está escrito
 
-| Defeito | Medida | Fonte |
-|---|---|---|
-| favoritismo de ramo | C é sempre o ramo mais longo (11 beats contra 8 e 7) **e é a rota do final verdadeiro** | `02` |
-| `aldric_pressed` | gravada e nunca lida em capítulo nenhum | `02` |
-| endlines desequilibrados | 5 socos, 3 pontes no Cap. 1 | `03` |
-| sensorial | visão em quase todo beat; som, cheiro, tato quase ausentes | `02`, `04` |
-| metrônomo | média de 35 caracteres por frase, máx. 103, teto do livro 150 | `04` |
-| topo de cena genérico | C1 abre com 4 beats de paisagem antes de ação | `05` |
-| linha do tempo dos bastidores | **não existe** | `03` |
-| red herring | nenhum — mas a solução não é plantar, é dar agenda aos servos | `03` |
-| Antoniette não insiste | aceita a primeira recusa de Fenn e de Dara | `03` |
-| registro único | ela fala igual com Fenn, Serafina e Aldric | `02` |
+| Defeito | Medida |
+|---|---|
+| favoritismo de ramo | C é sempre o mais longo (11 beats x 8 x 7) **e é a rota do final verdadeiro** |
+| `aldric_pressed` | gravada, nunca lida |
+| endlines | 5 socos, 3 pontes no Cap. 1 |
+| sensorial | visão em quase todo beat; som, cheiro, tato ausentes |
+| metrônomo | média 35 caracteres, zero variação |
+| topo de cena | C1 abre com 4 beats de paisagem |
+| stepsheet / gráfico de fios | **não existe** |
+| Antoniette não insiste | aceita a primeira recusa — e o recuo não é mostrado como decisão |
+| registro único | fala igual com Fenn, Serafina e Aldric |
+| criados | atmosfera; nenhum faz exigência ou oferece barganha |
+| cena pivô | não existe; Ato III não muda a psicologia dela |
+| humor | zero |
+| beat de uma palavra | nunca usado |
 
 ---
 
-## Fila de ação, por ordem
+## Fila de ação
 
-**Bloqueiam escrita nova**
+### Destrava a escrita nova
+1. **Gráfico de fios da Crombie** — sete colunas (investigação, Antoniette
+   e Klara, Klara e Liara, a casa reagindo, calendário, Matheo, cobertura),
+   topo e fim preenchidos, um marcador por incidente. **Substitui o
+   stepsheet do Frey como ferramenta principal.**
+2. **Escrever o Epílogo.**
+3. **Blocos *offstage* alternados** no formato do Frey: cada bloco reage ao
+   que o jogador acabou de ver.
+4. **Três cenas de esboço por personagem** (Corbett cap. 11): vergonha,
+   conflito fora do enredo, trabalho. Substituem as fichas estáticas da
+   bíblia.
+5. **Fechar as decisões pendentes** da bíblia.
 
-1. Escrever o **Epílogo** — Matheo diante do cadastro. (R2)
-2. Escrever o **stepsheet de duas colunas** dos cinco anos: "o leitor vê"
-   numerado, "offstage" sem numeração. (`03`)
-3. Fechar as **decisões pendentes da bíblia** — nome do Cap. 11, idade de
-   Aldric, Guardiões, calendário, sistema de finais.
+### Correções no que existe
+6. Auditoria sensorial do Cap. 1, pelo método do Kenworthy.
+7. Equilibrar os ramos A/B/C.
+8. Fazer `aldric_pressed` ser lida.
+9. Cortar o topo das cenas até onde a voz entra; **olhar para o lado** —
+   não a estrada, o que a estrada fez com quem viajou nela.
+10. Um detalhe específico e contraditório por criado, em uma frase.
+11. Diferenciar o registro de Antoniette por interlocutor.
+12. Tornar visível a **decisão de não insistir**, com o preço à vista.
+13. Marcar a **cena pivô** (provável Cap. 5) e mudar a personagem depois.
+14. Frase longa e desnorteada no clímax; beat de uma palavra em algum
+    lugar; **fechar nas borboletas** no Epílogo.
+15. Notas do Compilador como **sistema**: Antoniette discutindo com
+    Antoniette, no lugar do ouvinte que a obra não tem.
+16. **"Diziam alguns"** — atribuição vaga no Arquivo.
+17. Antoniette **ouve de fora** pelo menos uma vez por capítulo.
 
-**Correções no que existe**
+### Motor e manifesto
+18. **Traço de variáveis no smoke test** (método Clough): por partida, cada
+    flag ligada e cada movimento de rota, com o beat de origem.
+19. **Estado físico separado de expressão** no manifesto — curativo, roupa,
+    cabelo não são emoções.
+20. **Variante de estado nos cenários** — o mesmo lugar depois que ela
+    sabe. Três fontes pedem isto.
+21. Variantes de hora e estação (cinco anos, três agostos).
+22. Função + associação por cenário, com **um objeto que só a associação
+    explica**.
+23. Modo `???` e timbre de texto por personagem.
 
-4. Equilibrar os ramos A/B/C das duas escolhas do Cap. 1.
-5. Fazer `aldric_pressed` ser lida em algum capítulo.
-6. Auditoria sensorial do Cap. 1.
-7. Converter dois fins de cena de soco para ponte (C6, C7).
-8. Plantar a migalha do Khar'Vel no Prólogo — e que ela revele a
-   ansiedade de Antoniette, não só a lacuna.
-9. Cortar o topo das cenas até onde a voz entra.
-10. Diferenciar o registro de Antoniette por interlocutor.
-11. Dar a ela o **segundo empurrão** nas cenas de investigação.
+### Validador — checagens novas, todas mensuráveis
+24. **Chavões em português** (lista dos "mesmeiros" da Squarisi).
+25. Ponto de exclamação fora da fala de Liara.
+26. Qualificativos fracos: "um pouco", "meio", "uma espécie de", "um
+    tanto", "bastante", "quase", "de certa forma".
+27. Advérbio em `-mente` que repete o verbo.
+28. `e que` sem o primeiro `que`; `à medida em que`; pares partidos
+    (`seja…ou`, `de…à`, `de…às`); gerundismo (`vou estar` + gerúndio).
+29. Plural indevido de parte única do corpo.
+30. **Clichê físico de medo** — coração disparado, arrepio na nuca,
+    estômago afundando. É o substituto óbvio da afirmação direta.
 
-**Experimentos**
-
-12. Cortar uma cena em 50% e comparar (Zinsser).
-13. Ler um capítulo em voz alta procurando eco, rima e cacofonia —
-    **tarefa do autor; Wahl não ouve.**
-
-**Sistema**
-
-14. Decidir se a obra precisa de múltiplos finais ou de um final com
-    variações.
-15. Renomear os "Bad Ends" — o rótulo impõe julgamento, e o final em que
-    ela sobrevive é o que o documento mestre quer ambíguo.
-16. Modo `???` no engine para falante não apresentado.
-17. Medir o limite de caracteres da caixa de diálogo.
+### Experimentos
+31. Cortar uma cena em 50% e comparar (Zinsser).
+32. **Jogar o Cap. 1 no motor, clicando** — nunca foi feito. Olhos
+    diferentes dos de quem lê o arquivo de dados.
+33. Ler em voz alta procurando eco e cacofonia — **tarefa do autor**.
+34. Escandir as frases que precisam ficar.
 
 ---
 
 ## Perguntas abertas ao autor
 
-1. A cena de vergonha de Serafina — a vez em que ela se abriu e recebeu
-   exatamente o que temia. (`06`)
-2. Idade de Aldric: portador atual, ou vampiro de séculos que já viu
-   ciclos anteriores?
-3. Guardiões — entram no Cap. 4 ou saem do canon?
-4. O Cap. 11 muda de nome? "O Florescimento" ficou impreciso.
-
----
-
-## Próximas leituras, por valor
-
-1. **Corbett cap. 9** (contradições) e **11–14** (biografia por cenas) —
-   maior retorno restante.
-2. **Finley cap. 12** — tamanho de sprite, senso de lugar. Serve ao
-   manifesto.
-3. **MWA** — quase inteiro por ler.
-4. **Frey cap. 14** — tabus do gênero.
-5. **Zinsser Parte II** — unidade, o lide e o final.
-6. **Kristoff** — a moldura que atravessa a obra, e prosa gótica em
-   português.
-7. **Peters** — romances inteiros, para a cadeia de sussurro numa
-   comunidade fechada.
-8. **Kenworthy** — precisa de reextração; o PDF veio com as palavras
-   coladas.
+1. **O humor.** A obra não tem nenhum, e a MWA diz que isso custa. Aceita
+   crueldade esperta na linguagem da casa?
+2. A cena de vergonha de Serafina.
+3. Idade de Aldric — portador atual, ou vampiro de séculos?
+4. Guardiões: entram no Cap. 4 ou saem do canon?
+5. O Cap. 11 muda de nome?
