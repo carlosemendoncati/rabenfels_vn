@@ -10,7 +10,7 @@ correspondente de `js/config.js`.
 
 | Tipo | Itens |
 |---|---|
-| Personagens | `aldric` (6 expressões), `serafina` (5), `matheo` (3), `klara`, `liara` |
+| Personagens | `aldric` (6), `antoniette` (6), `serafina` (6), `klara` (6), `liara` (6), `matheo` (3) |
 | Backgrounds | `bg_prologue_room`, `bg_archive_closeup` |
 | BGM | `bgm_prologue`, `bgm_archive`, `bgm_grey_march`, `bgm_nidhaus` |
 | Trilha do menu | `menu_theme`, sintetizada em `tools/make_menu_theme.py` |
@@ -71,7 +71,26 @@ Fallback: gradiente CSS calibrado por cena.
 
 ---
 
-## Personagens — 6 pendentes
+## Personagens — 4 pendentes
+
+**Recortados em 26/07/2026** por `tools/recortar_sprites.py`: quatro folhas
+de expressões 3×2 viraram 24 sprites com alpha. O fundo foi removido por
+**preenchimento a partir da borda**, e não por limiar global de cor —
+Klara e Serafina têm cabelo branco, e limiar global comeria o cabelo
+junto com o fundo.
+
+| Personagem | Expressões |
+|---|---|
+| `antoniette` | neutral · warm · away · soft · shaken · guarded |
+| `klara` | neutral · side · away · lowered · blank · averted |
+| `liara` | neutral · bright · away · sulk · flat · worried |
+| `serafina` | neutral · direct · side · intense · smirk · grave |
+
+> **Antoniette está com `available: true` e `onMissing: 'hide'`.** A arte
+> existe, mas **nenhum beat do roteiro a mostra em cena** — ela é a câmera.
+> Ligar os sprites dela é decisão de direção, não de manifesto.
+
+### Ainda pendentes
 
 Pasta `assets/characters/<personagem>/` · `.png` com alpha
 Ancoragem pela base, sem margem inferior.
@@ -82,12 +101,9 @@ Ancoragem pela base, sem margem inferior.
 | `dara_neutral` | `dara/dara_neutral.png` | 320×340 bust | silhueta SVG |
 | `dara_guarded` | `dara/dara_guarded.png` | 320×340 bust | silhueta SVG |
 | `ren_neutral` | `ren/ren_neutral.png` | 320×340 bust | silhueta SVG |
-| `antoniette_neutral` | `antoniette/antoniette_neutral.png` | 320×340 bust | sprite oculto |
-| `antoniette_observe` | `antoniette/antoniette_observe.png` | 320×340 bust | sprite oculto |
-| `antoniette_guarded` | `antoniette/antoniette_guarded.png` | 320×340 bust | sprite oculto |
 
-Antoniette é o ponto de vista e não tem beat de sprite em nenhum capítulo
-escrito até aqui. Os arquivos ficam previstos no manifesto para uso futuro.
+Fenn, Dara e Ren continuam com silhueta SVG. Os três aparecem em cena com
+frequência — são a próxima prioridade de arte.
 
 ---
 

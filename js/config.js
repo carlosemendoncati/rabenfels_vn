@@ -165,14 +165,17 @@ RBF.CHARACTERS = {
     dir: 'antoniette',
     size: 'bust',
 
-    available: false,
+    available: true,
     onMissing: 'hide',
     fallbackExpression: 'neutral',
 
     sprites: {
-      neutral: 'antoniette_neutral.png',
-      observe: 'antoniette_observe.png',
-      guarded: 'antoniette_guarded.png'
+      neutral:  'antoniette_neutral.png',
+      warm:     'antoniette_warm.png',
+      away:     'antoniette_away.png',
+      soft:     'antoniette_soft.png',
+      shaken:   'antoniette_shaken.png',
+      guarded:  'antoniette_guarded.png'
     }
   },
 
@@ -202,11 +205,12 @@ RBF.CHARACTERS = {
     fallbackExpression: 'neutral',
 
     sprites: {
-      neutral: 'serafina_neutral.png',
-      direct:  'serafina_direct.png',
-      side:    'serafina_side.png',
-      smirk:   'serafina_smirk.png',
-      intense: 'serafina_intense.png'
+      neutral:  'serafina_neutral.png',
+      direct:   'serafina_direct.png',
+      side:     'serafina_side.png',
+      intense:  'serafina_intense.png',
+      smirk:    'serafina_smirk.png',
+      grave:    'serafina_grave.png'
     }
   },
 
@@ -322,7 +326,12 @@ RBF.CHARACTERS = {
     fallbackExpression: 'neutral',
 
     sprites: {
-      neutral: 'klara_neutral.png'
+      neutral:  'klara_neutral.png',
+      side:     'klara_side.png',
+      away:     'klara_away.png',
+      lowered:  'klara_lowered.png',
+      blank:    'klara_blank.png',
+      averted:  'klara_averted.png'
     }
   },
 
@@ -337,7 +346,12 @@ RBF.CHARACTERS = {
     fallbackExpression: 'neutral',
 
     sprites: {
-      neutral: 'liara_neutral.png'
+      neutral:  'liara_neutral.png',
+      bright:   'liara_bright.png',
+      away:     'liara_away.png',
+      sulk:     'liara_sulk.png',
+      flat:     'liara_flat.png',
+      worried:  'liara_worried.png'
     }
   }
 };
