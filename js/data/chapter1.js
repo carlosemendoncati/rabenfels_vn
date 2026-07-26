@@ -262,6 +262,13 @@ RBF.CHAPTER1 = [
 { t:'nar', tx:'Voltou ao sil\u00eancio no passo seguinte.' },
 { t:'inn', tx:'Vinte palavras para um cavalo. Nove para mim.' },
 
+{ t:'nar', tx:'Na porta da cocheira havia um risco a faca na madeira, e outro dois dedos acima, e mais um acima daquele.' },
+{ t:'dial', ch:'antoniette', tx:'Filho?' },
+{ t:'dial', ch:'fenn', tx:'Cresceu quatro dedos este ano e come como tr\u00eas.' },
+{ t:'nar', tx:'Foi a primeira frase que ele disse sem ser perguntado.' },
+{ t:'pause' },
+{ t:'inn', tx:'Anotado. Um homem que responde curto tem um assunto que abre.' },
+
 { t:'nar', tx:'Atravessaram o p\u00e1tio. As janelas do andar de baixo estavam fechadas apesar do calor de abril.' },
 { t:'nar', tx:'Cheirava a pedra molhada e a cera. Nenhum cheiro de comida, e j\u00e1 passava da hora do jantar.' },
 { t:'nar', tx:'No canto nordeste havia uma porta sem janela, com uma corrente leve no puxador.' },
@@ -349,6 +356,7 @@ RBF.CHAPTER1 = [
 { t:'inn', tx:'Serafina escolheu este quarto. Disse que ele tem a melhor vista do p\u00e1tio.' },
 { t:'pause' },
 { t:'inn', tx:'Cortesia e permiss\u00e3o custam o mesmo na entrada. S\u00f3 uma cobra depois.' },
+{ t:'nar', tx:'Ela puxou a cadeira da mesa de trabalho para o lado da janela, e trabalhou de costas para a parede pelos cinco anos seguintes.' },
 
 { t:'nar', tx:'Comeu o p\u00e3o ali mesmo, de p\u00e9, olhando o p\u00e1tio. N\u00e3o sentou para isso.' },
 { t:'nar', tx:'Depois sentou. Abriu o caderno operacional. Escreveu a data.' },
@@ -487,7 +495,9 @@ RBF.CHAPTER1 = [
 { t:'pause' },
 { t:'nar', tx:'A moldura tinha o tamanho dos outros nove.' },
 { t:'inn', tx:'Est\u00e1 esperando duas meninas.' },
-{ t:'nar', tx:'Ela seguiu pelo corredor contando os passos at\u00e9 a ala leste, para ter o que fazer com a cabe\u00e7a.' },
+{ t:'pause' },
+{ t:'nar', tx:'Ela mediu a moldura com a m\u00e3o aberta, duas vezes, e anotou a medida.' },
+{ t:'nar', tx:'Depois seguiu pelo corredor contando os passos at\u00e9 a ala leste, para ter o que fazer com a cabe\u00e7a.' },
 
 /* ======================================================================
    C7 - O CORREDOR LESTE - FIM DE TARDE
@@ -539,6 +549,13 @@ RBF.CHAPTER1 = [
 { t:'dial', ch:'klara', tx:'N\u00e3o.' },
 { t:'dial', ch:'liara', tx:'Ontem co\u00e7ava.' },
 { t:'dial', ch:'klara', tx:'Hoje n\u00e3o.' },
+{ t:'pause' },
+{ t:'dial', ch:'liara', tx:'Voc\u00ea comeu?' },
+{ t:'dial', ch:'klara', tx:'Comi.' },
+{ t:'dial', ch:'liara', tx:'Est\u00e1 com fome de novo?' },
+{ t:'pause' },
+{ t:'dial', ch:'klara', tx:'Um pouco.' },
+{ t:'nar', tx:'Liara aceitou aquilo na hora, do jeito que se aceita o que sempre foi assim.' },
 
 { t:'nar', tx:'Pela fresta, curativo no bra\u00e7o esquerdo da que lia. Dobra do cotovelo, atadura limpa.' },
 { t:'nar', tx:'A outra menina n\u00e3o tinha nenhum.' },

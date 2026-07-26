@@ -90,11 +90,12 @@ RBF.CHAPTER2 = [
 { t:'fade_in' },
 
 { t:'nar', tx:'A copa acordava antes da casa. \u00c0s cinco e meia j\u00e1 havia fogo e p\u00e3o.' },
+{ t:'nar', tx:'Era o \u00fanico c\u00f4modo quente de Velha Nidhaus, e cheirava a fermento, a cinza e a gordura de porco fria.' },
 { t:'nar', tx:'Antoniette desceu \u00e0s seis, na terceira manh\u00e3, com o invent\u00e1rio parcial debaixo do bra\u00e7o.' },
 { t:'inn', tx:'Comer com os servos economiza duas semanas de observa\u00e7\u00e3o.' },
 
 { t:'spr', ch:'dara', ex:'neutral', pos:'center' },
-{ t:'nar', tx:'A cozinheira encheu uma caneca sem perguntar se ela queria.' },
+{ t:'nar', tx:'A cozinheira encheu uma caneca sem perguntar se ela queria. O barro estava quente demais para segurar pela lateral.' },
 { t:'dial', ch:'dara', tx:'Senhorita Vael. A copa \u00e9 dos empregados.' },
 { t:'dial', ch:'antoniette', tx:'Eu sou empregada. Contrato de nove meses, pago por volume catalogado.' },
 { t:'pause' },
@@ -111,6 +112,15 @@ RBF.CHAPTER2 = [
 { t:'inn', tx:'Ela respondeu r\u00e1pido demais para ser uma observa\u00e7\u00e3o.' },
 { t:'inn', tx:'Foi uma regra.' },
 { t:'pause' },
+{ t:'dial', ch:'antoniette', tx:'Ningu\u00e9m tem fome, ou ningu\u00e9m pede?' },
+{ t:'pause' },
+{ t:'nar', tx:'Dara p\u00f4s a caneca dela na mesa e demorou a soltar a al\u00e7a.' },
+{ t:'dial', ch:'dara', tx:'A senhorita pergunta bonito.' },
+{ t:'nar', tx:'E n\u00e3o respondeu nem uma coisa nem outra.' },
+{ t:'pause' },
+{ t:'inn', tx:'Eu n\u00e3o entendi essa resposta.' },
+{ t:'inn', tx:'Anotar assim mesmo. Sem interpretar.' },
+{ t:'pause' },
 
 { t:'nar', tx:'Antoniette abriu o invent\u00e1rio parcial e pousou ao lado da caneca.' },
 { t:'dial', ch:'antoniette', tx:'A biblioteca tem quatro mil e duzentos volumes. Vou levar mais tempo do que o contrato previa.' },
@@ -118,6 +128,10 @@ RBF.CHAPTER2 = [
 { t:'dial', ch:'antoniette', tx:'Fica.' },
 { t:'dial', ch:'dara', tx:'Bom.' },
 
+{ t:'nar', tx:'Dara puxou de baixo do banco uma lata e conferiu o que tinha dentro sem tirar a tampa toda.' },
+{ t:'dial', ch:'dara', tx:'Se a senhorita for a Marca Cinzenta antes de mim, traz cravo. Aqui n\u00e3o vendem.' },
+{ t:'dial', ch:'antoniette', tx:'Cravo.' },
+{ t:'dial', ch:'dara', tx:'Dezenove anos pedindo. J\u00e1 virou passatempo.' },
 { t:'spr_hide', ch:'dara' },
 { t:'nar', tx:'Levantou e voltou para o fogo antes que a conversa pudesse continuar.' },
 { t:'inn', tx:'Eu n\u00e3o perguntei nada sobre o lado norte.' },
@@ -131,6 +145,7 @@ RBF.CHAPTER2 = [
   bg:'bg_library', bgm:'bgm_nidhaus' },
 
 { t:'nar', tx:'O rapaz j\u00e1 estava l\u00e1 quando ela chegou, empilhando volumes por altura.' },
+{ t:'nar', tx:'A biblioteca cheirava a couro e a cola velha, e n\u00e3o cheirava a poeira. Algu\u00e9m limpava aquilo.' },
 { t:'spr', ch:'ren', ex:'neutral', pos:'right' },
 { t:'dial', ch:'ren', tx:'A senhora Rabenfels disse que eu ajudo a senhorita. Sou Ren.' },
 { t:'dial', ch:'antoniette', tx:'H\u00e1 quanto tempo voc\u00ea trabalha aqui?' },
@@ -147,6 +162,8 @@ RBF.CHAPTER2 = [
 
 { t:'nar', tx:'Trabalharam tr\u00eas horas. Ren falava enquanto trabalhava, do jeito de quem nunca precisou aprender a ficar quieto.' },
 { t:'dial', ch:'ren', tx:'Minha m\u00e3e queria que eu fosse para a cidade. Aqui paga melhor.' },
+{ t:'dial', ch:'ren', tx:'Junto tr\u00eas anos e compro uma parelha. A\u00ed eu fa\u00e7o frete e n\u00e3o dependo de casa nenhuma.' },
+{ t:'nar', tx:'Disse aquilo do jeito de quem j\u00e1 disse muitas vezes e ainda acredita.' },
 { t:'dial', ch:'ren', tx:'A senhora Rabenfels pagou seis meses adiantado. Isso \u00e9 normal?' },
 { t:'dial', ch:'antoniette', tx:'N\u00e3o.' },
 { t:'dial', ch:'ren', tx:'Ah.' },
@@ -189,8 +206,12 @@ RBF.CHAPTER2 = [
 { t:'inn', tx:'Se dois volumes tivessem sido perdidos, a numera\u00e7\u00e3o pularia.' },
 { t:'inn', tx:'A numera\u00e7\u00e3o \u00e9 cont\u00ednua porque foi refeita depois.' },
 
-{ t:'nar', tx:'Ela passou o polegar na lombada do doze. O couro estava um tom mais claro que o dos vizinhos.' },
+{ t:'nar', tx:'Ela passou o polegar na lombada do doze. O couro estava um tom mais claro que o dos vizinhos, e liso onde os outros tinham gr\u00e3o.' },
 { t:'inn', tx:'Reencadernado.' },
+{ t:'pause' },
+{ t:'inn', tx:'Reencadernar dois volumes custa mais do que perder dois volumes.' },
+{ t:'inn', tx:'N\u00e3o consigo pensar em nenhum motivo para gastar dinheiro assim.' },
+{ t:'nar', tx:'Ficou com o polegar na lombada por mais tempo do que precisava.' },
 
 { t:'spr', ch:'ren', ex:'neutral', pos:'right' },
 { t:'dial', ch:'ren', tx:'Achou alguma coisa?' },
@@ -212,6 +233,7 @@ RBF.CHAPTER2 = [
 
 { t:'sfx', id:'sfx_wind' },
 { t:'nar', tx:'Ela cruzou o p\u00e1tio \u00e0s seis, quando os empregados atravessam para a cozinha.' },
+{ t:'nar', tx:'A pedra devolvia o frio pelas solas. Cheirava a cavalo do lado da cocheira e a mais nada do outro lado.' },
 { t:'nar', tx:'Contou onze passagens em vinte minutos.' },
 { t:'pause' },
 { t:'nar', tx:'Onze pessoas passaram diante da porta nordeste. Nenhuma virou a cabe\u00e7a.' },
@@ -235,6 +257,10 @@ RBF.CHAPTER2 = [
 { t:'dial', ch:'fenn', tx:'A ceia \u00e9 \u00e0s oito. Depois disso a copa fecha.' },
 { t:'dial', ch:'antoniette', tx:'A senhora Dara j\u00e1 me disse.' },
 { t:'dial', ch:'fenn', tx:'Ent\u00e3o j\u00e1 sabe.' },
+{ t:'pause' },
+{ t:'dial', ch:'antoniette', tx:'Todo mundo aqui me diz a mesma coisa.' },
+{ t:'dial', ch:'fenn', tx:'Casa grande. Sobra parede e falta assunto.' },
+{ t:'nar', tx:'Foi a coisa mais parecida com uma piada que ela ouviu em tr\u00eas dias, e ele n\u00e3o sorriu ao dizer.' },
 { t:'spr_hide', ch:'fenn' },
 
 { t:'nar', tx:'Ele atravessou o p\u00e1tio pelo lado sul, que \u00e9 o caminho mais longo.' },
@@ -285,6 +311,10 @@ RBF.CHAPTER2 = [
 { t:'nar', tx:'Ela procurou o intervalo dos dois anos que faltavam l\u00e1 embaixo.' },
 { t:'pause' },
 { t:'nar', tx:'Estava l\u00e1. Completo. Duas p\u00e1ginas por m\u00eas, letra firme.' },
+{ t:'pause' },
+{ t:'nar', tx:'Ela leu o intervalo duas vezes procurando a raz\u00e3o de algu\u00e9m guardar isto e queimar aquilo, e n\u00e3o achou raz\u00e3o nenhuma, e no fim da segunda leitura j\u00e1 n\u00e3o tinha certeza se estava procurando uma raz\u00e3o ou uma desculpa para continuar lendo os nomes de gente que nasceu e morreu naquela casa antes de ela existir.' },
+{ t:'pause' },
+{ t:'inn', tx:'Isso n\u00e3o \u00e9 trabalho. Voltar ao trabalho.' },
 
 { t:'inn', tx:'Os registros de fam\u00edlia dos dois anos existem.' },
 { t:'inn', tx:'Os livros de conta dos mesmos dois anos foram retirados e a numera\u00e7\u00e3o foi refeita.' },
@@ -297,7 +327,8 @@ RBF.CHAPTER2 = [
 { t:'inn', tx:'Um documento que n\u00e3o explica a aus\u00eancia do outro est\u00e1 fazendo isso de prop\u00f3sito.' },
 
 { t:'sfx', id:'sfx_candle' },
-{ t:'nar', tx:'A vela chegou ao fim. Ela desceu no escuro, que j\u00e1 conhecia.' },
+{ t:'nar', tx:'A vela chegou ao fim e o cheiro de pavio apagado ficou no corredor atr\u00e1s dela.' },
+{ t:'nar', tx:'Desceu no escuro, que j\u00e1 conhecia.' },
 
 { t:'inn', tx:'Ele me deu permiss\u00e3o para subir aqui.' },
 { t:'pause' },
@@ -389,6 +420,11 @@ RBF.CHAPTER2 = [
 { t:'inn', tx:'Passos curtos. Peso de crian\u00e7a.' },
 { t:'pause' },
 { t:'inn', tx:'Ningu\u00e9m acompanhando.' },
+{ t:'pause' },
+{ t:'inn', tx:'A copa fecha \u00e0s oito.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ent\u00e3o ela n\u00e3o est\u00e1 descendo para comer.' },
+{ t:'nar', tx:'Foi a \u00fanica conclus\u00e3o que ela tirou naquela noite, e estava errada.' },
 
 { t:'nar', tx:'Antoniette ficou na janela at\u00e9 o p\u00e1tio esvaziar.' },
 { t:'nar', tx:'Depois abriu o caderno operacional e escreveu uma linha.' },

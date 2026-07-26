@@ -175,6 +175,21 @@ RBF.PROLOGUE = [
 
 { t:'inn', tx:'Ela anotou o sil\u00eancio deles como se fosse um dado.' },
 { t:'pause' },
+
+/* A fome e o vazio. Antoniette registrou o sintoma sem nunca entender
+   que estava registrando alguem do outro lado. O jogador so entende
+   no Capitulo 11, e o Compilador nunca entendeu. NAO EXPLICAR AQUI. */
+{ t:'arc', key:'arquivo', lns:[
+    '"O sujeito K. relata, desde os seis anos, dois estados recorrentes:"',
+    '"fome fora de hora e o que ela chama de um vazio."',
+    '"V\u00eam juntos, duram de uma a tr\u00eas horas, e passam sozinhos."',
+    '"Ela descreve como se descreve dor de cabe\u00e7a. N\u00e3o atribui a nada."'
+]},
+{ t:'nar', tx:'Matheo leu duas vezes e n\u00e3o encontrou a linha seguinte.' },
+{ t:'inn', tx:'Ela larga o assunto aqui.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ela nunca larga assunto nenhum.' },
+{ t:'pause' },
 { t:'nar', tx:'Na dobra da folha seguinte havia uma asa seca, prensada pelo peso das p\u00e1ginas.' },
 { t:'nar', tx:'Clara, com uma veia vermelha atravessando.' },
 { t:'nar', tx:'Ele soprou de leve. A asa n\u00e3o se moveu. Estava colada ao papel havia meses.' },

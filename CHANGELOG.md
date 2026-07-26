@@ -1,5 +1,76 @@
 # Changelog
 
+## 0.7.1 — Revisão medida do Prólogo, Cap. 1 e Cap. 2
+
+Passe editorial nos três primeiros capítulos, agora que o fim existe. Um
+analisador aplica as regras de `docs/estudo/00_indice.md` ao roteiro e
+devolve número, não opinião.
+
+### O que a medição achou
+
+| | Prólogo | Cap. 1 | **Cap. 2** |
+|---|---|---|---|
+| sensorial por 100 beats (R4) | 13,5 | 13,7 | **4,3** |
+| o PDV não entende (R6) | 3 | 4 | **0** |
+| desvio no tamanho de frase (R8) | 41,7 | 28,6 | **21,8** |
+
+O Capítulo 2 era o problema, e por três motivos ao mesmo tempo: **zero
+menções a cheiro** num capítulo que abre numa cozinha com fogo e pão às
+cinco e meia; **Antoniette acerta em todos os beats**, o que quebra a
+função dela de "introdução do inocente" (Johnson, MWA — o ponto de acesso
+do jogador precisa não entender coisas em voz alta); e o ritmo mais
+metronômico da obra, sem uma única frase longa.
+
+### Depois
+
+| | Prólogo | Cap. 1 | Cap. 2 |
+|---|---|---|---|
+| sensorial | 13,1 | **14,2** | **9,5** |
+| não entende | 3 | 4 | **3** |
+| desvio | 41,3 | 29,0 | **28,0** |
+
+### Plantios que só agora eram possíveis
+
+Os três primeiros foram escritos antes do fim existir. O que ganharam:
+
+- **A fome e o vazio.** O Capítulo 11 abre com Klara dizendo *"Está com
+  fome de novo"* e a narração explicando que ela nunca diz quem, porque
+  para ela não há quem. Agora o Arquivo registra o sintoma no Prólogo, em
+  linguagem clínica, e larga o assunto — *"Ela nunca larga assunto
+  nenhum."* No Capítulo 1 a Liara pergunta, e a Klara responde "um pouco".
+- **A dedução errada.** No fim do Cap. 2, Antoniette vê a criança
+  atravessar o pátio às duas e vinte, lembra que a copa fecha às oito e
+  conclui que ela não está descendo para comer. *"Foi a única conclusão
+  que ela tirou naquela noite, e estava errada."*
+- **O filho de Fenn**, pela marca a faca na porta da cocheira — cinco anos
+  antes de o Capítulo 8 cobrar a dívida e de a página 291 registrar quem
+  pagou.
+
+### Outras correções
+
+- **R10, agenda própria:** Dara quer cravo que não vendem na região há
+  dezenove anos; Ren junta para comprar uma parelha e não depender de casa
+  nenhuma. Falas de secundários no Cap. 2: 22 → 27.
+- **Faye, a crítica do humor:** entrou uma linha de crueldade esperta na
+  língua da casa — *"Casa grande. Sobra parede e falta assunto."* — e ele
+  não sorri ao dizer.
+- **R3, endline:** duas cenas do Cap. 1 deixam de fechar em pensamento e
+  passam a fechar em gesto. A do quarto agora fecha num gesto que dura
+  cinco anos.
+
+### Não mexido, de propósito
+
+O corredor leste do Capítulo 1 continua intacto. É a melhor cena da obra e
+não se mexe no que está certo.
+
+**Validado:** 7.752 checagens estáticas, 688 no Node, 120 no smoke. Zero
+falhas.
+
+**Pendente e registrado:** a idade do filho de Fenn não fecha entre o
+Cap. 3 (14 anos, ano 1) e o Cap. 8 (15 anos, ano 4). A fala nova do Cap. 1
+não cita idade, para não aprofundar a divergência.
+
+
 ## 0.7.0 — A obra fechada: Capítulo 11, Epílogo e As Quatro Páginas
 
 O roteiro está inteiro. Prólogo, onze capítulos e Epílogo, com o extra
