@@ -17,3 +17,16 @@ __pycache__/
 
 # corpus de estudo: PDFs de referencia e o texto extraido deles
 REF/
+
+# ==========================================================================
+# MATERIAL AUTORAL - fica na pasta, fora do repositorio.
+#
+# O jogo nao precisa de nada disto para rodar. Sao documentos de trabalho:
+# canon, biblia, estrutura, roteiro em prosa e as notas do estudo das
+# referencias. Publicar junto com o jogo entregaria a obra inteira, os
+# finais e o material de origem.
+#
+# Se um dia o projeto for aberto, basta remover este bloco.
+# ==========================================================================
+docs/
+

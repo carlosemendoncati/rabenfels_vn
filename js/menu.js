@@ -1132,8 +1132,44 @@ RBF.Menu = (function () {
       body.appendChild(frame);
     }
 
+    /* Retrato da ficha. Enquanto o arquivo nao existir, fica a moldura
+       vazia - que e coerente com a obra e nao pede desculpa por isso. */
+    if (item.portrait) {
+      var pf = UI.el('div', 'rbf-gal-view__portrait');
+      var purl = RBF.CONFIG.paths.characters + 'portraits/' + item.portrait;
+      var pimg = new Image();
+      pimg.onload = function () {
+        pf.style.backgroundImage = 'url("' + purl + '")';
+        pf.classList.add('is-loaded');
+      };
+      pimg.onerror = function () { /* fica a moldura */ };
+      pimg.src = purl;
+      body.appendChild(pf);
+    }
+
     if (item.text) {
       body.appendChild(UI.el('p', 'rbf-gal-view__text', item.text));
+    }
+
+    /* Ficha de personagem: entradas em ordem de descoberta. As que ainda
+       nao foram abertas aparecem como lacuna, para o jogador saber que
+       ha mais a encontrar. */
+    if (item.entries && item.entries.length) {
+      var list = UI.el('div', 'rbf-gal-entries');
+      for (var e = 0; e < item.entries.length; e++) {
+        var en = item.entries[e];
+        if (en.unlocked) {
+          list.appendChild(UI.el('p', 'rbf-gal-entry', en.tx));
+        } else {
+          list.appendChild(UI.el('p', 'rbf-gal-entry is-locked',
+            '[ sem entrada at\u00e9 esta data ]'));
+        }
+      }
+      body.appendChild(list);
+
+      var meta = UI.el('p', 'rbf-gal-view__meta',
+        item.entriesOpen + ' de ' + item.entriesTotal + ' entradas');
+      body.appendChild(meta);
     }
 
     var prev = RBF.State.get();

@@ -21,6 +21,37 @@ correspondente de `js/config.js`.
 
 ---
 
+## Retratos de ficha — 8 pendentes
+
+Pasta **`assets/characters/portraits/`** · `.png` · **retrato vertical,
+proporção 4:5** (por exemplo 640×800). Enquadramento de busto, fundo
+escuro, como retrato a óleo.
+
+São **diferentes dos sprites**. O sprite é o corpo em cena, com expressões.
+O retrato é a imagem da ficha na galeria — uma só por personagem, sem
+variação, no enquadramento e no acabamento de um quadro pendurado.
+
+**Fallback ativo:** moldura vazia com gradiente. É deliberado e combina com
+a obra — a galeria de retratos da casa tem uma moldura vazia no fim da
+fila. O jogo não pede desculpa por ainda não ter a arte.
+
+| Ficha | Arquivo esperado |
+|---|---|
+| Antoniette Vael | `antoniette.png` |
+| Matheo Drell | `matheo.png` |
+| Serafina Rabenfels | `serafina.png` |
+| Aldric Rabenfels | `aldric.png` |
+| Klara e Liara | `gemeas.png` |
+| Fenn | `fenn.png` |
+| Dara | `dara.png` |
+| Ren | `ren.png` |
+
+**Não precisa mexer em `config.js`.** O carregamento do retrato é por
+sondagem: se o arquivo existir naquele caminho, ele aparece; se não, fica
+a moldura. Basta soltar o `.png` na pasta com o nome exato.
+
+---
+
 ## Backgrounds — 9 pendentes
 
 Pasta `assets/backgrounds/` · `.png` · **1280×720**

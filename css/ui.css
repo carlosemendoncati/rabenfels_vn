@@ -1875,6 +1875,63 @@
   width: 100%;
 }
 
+/* --- ficha de personagem: retrato ------------------------------------
+   Sem arquivo, fica a moldura vazia. A galeria de retratos da casa tem
+   uma moldura vazia no fim da fila; esta e a mesma ideia. */
+
+.rbf-gal-view__portrait {
+  width: min(232px, 46%);
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--rbf-line);
+  background: linear-gradient(180deg, #14161d 0%, #0c0d12 100%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+.rbf-gal-view__portrait.is-loaded {
+  border-color: var(--rbf-gold-dim, var(--rbf-line));
+}
+
+/* --- ficha de personagem: entradas ------------------------------------ */
+
+.rbf-gal-entries {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--rbf-gap) * 0.7);
+  width: 100%;
+}
+
+.rbf-gal-entry {
+  font-family: var(--rbf-font-body);
+  font-size: calc(13px * var(--rbf-ui));
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--rbf-gold);
+  padding-left: calc(10px * var(--rbf-ui));
+  border-left: 1px solid var(--rbf-line);
+}
+
+.rbf-gal-entry.is-locked {
+  color: var(--rbf-ink-mute);
+  font-style: normal;
+  letter-spacing: .06em;
+  opacity: .55;
+}
+
+.rbf-gal-view__meta {
+  width: 100%;
+  font-family: var(--rbf-font-body);
+  font-size: calc(11px * var(--rbf-ui));
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-mute);
+  text-align: right;
+  border-top: 1px solid var(--rbf-line);
+  padding-top: calc(8px * var(--rbf-ui));
+}
+
 /* ==========================================================================
    CREDITOS
    ========================================================================== */

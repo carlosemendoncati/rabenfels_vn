@@ -399,6 +399,21 @@ RBF.CHAPTER2 = [
     'Isso significa que \u00e9 permitido.'
 ]},
 
+/* ----------------------------------------------------------------------
+   A TROCA DO CAPITULO 2 (docs/estrutura_v1.md, secao 1).
+   Ela ganha a lacuna dos dois anos. Entrega a honestidade operacional.
+   O preco tem de ficar visivel no fim do capitulo, e nao inferido.
+   ---------------------------------------------------------------------- */
+{ t:'pause' },
+{ t:'nar', tx:'Depois releu o relat\u00f3rio lacrado na beira da mesa.' },
+{ t:'nar', tx:'N\u00e3o tinha uma linha falsa dentro dele.' },
+{ t:'pause' },
+{ t:'inn', tx:'E n\u00e3o tem a entrada nove.' },
+{ t:'inn', tx:'Em oito anos de servi\u00e7o eu nunca mandei um relat\u00f3rio sabendo o que tinha ficado de fora.' },
+{ t:'pause' },
+{ t:'nar', tx:'Deixou os dois na mesa, um ao lado do outro, e olhou por um tempo.' },
+{ t:'inn', tx:'Dois meses.' },
+
 { t:'sfx', id:'sfx_candle' },
 { t:'nar', tx:'Apagou a vela.' },
 
