@@ -312,7 +312,10 @@ RBF.CHAPTER2 = [
 { t:'pause' },
 { t:'nar', tx:'Estava l\u00e1. Completo. Duas p\u00e1ginas por m\u00eas, letra firme.' },
 { t:'pause' },
-{ t:'nar', tx:'Ela leu o intervalo duas vezes procurando a raz\u00e3o de algu\u00e9m guardar isto e queimar aquilo, e n\u00e3o achou raz\u00e3o nenhuma, e no fim da segunda leitura j\u00e1 n\u00e3o tinha certeza se estava procurando uma raz\u00e3o ou uma desculpa para continuar lendo os nomes de gente que nasceu e morreu naquela casa antes de ela existir.' },
+{ t:'nar', tx:'Ela leu o intervalo duas vezes procurando a raz\u00e3o de algu\u00e9m guardar isto e queimar aquilo.' },
+{ t:'nar', tx:'N\u00e3o achou raz\u00e3o nenhuma.' },
+{ t:'pause' },
+{ t:'nar', tx:'No fim da segunda leitura j\u00e1 estava s\u00f3 lendo os nomes de gente que nasceu e morreu ali antes de ela existir.' },
 { t:'pause' },
 { t:'inn', tx:'Isso n\u00e3o \u00e9 trabalho. Voltar ao trabalho.' },
 

@@ -69,7 +69,7 @@ var C5_KLARA_C = [
   { t:'nar', tx:'Klara n\u00e3o perguntou por qu\u00ea. N\u00e3o perguntou o que ela viu.' },
   { t:'pause' },
   { t:'dial', ch:'klara', tx:'Eu sei.' },
-  { t:'dial', ch:'antoniette', tx:'Voc\u00ea mentiu para a sua m\u00e3e por minha causa.' },
+  { t:'dial', ch:'antoniette', tx:'Voc\u00ea mentiu para a senhora Rabenfels por minha causa.' },
   { t:'dial', ch:'klara', tx:'Menti.' },
   { t:'pause' },
   { t:'dial', ch:'antoniette', tx:'N\u00e3o fa\u00e7a isso de novo.' },

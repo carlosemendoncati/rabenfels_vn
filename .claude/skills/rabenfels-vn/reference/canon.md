@@ -1,6 +1,6 @@
 # Canon — referência rápida
 
-*Atualizado em 26/07/2026.*
+*Atualizado em 26/07/2026. Revisado contra o codigo em 0.9.0.*
 
 Isto é atalho, não substituto. Hierarquia completa:
 
@@ -80,7 +80,9 @@ explicada custa ambiguidade.
 - Chega a Velha Nidhaus aos 20. Cinco anos na casa. Morre aos 25.
 - A Ordem estimou quatro anos, talvez cinco, para um relatório completo.
 - Ponto morto: noventa dias sem notícia. O pacote chega com noventa e três.
-- Klara e Liara têm oito anos no Capítulo 1, treze no 11.
+- Klara e Liara têm oito anos no Capítulo 1 e **doze** no 11.
+  O aniversário é entre novembro e janeiro, não em agosto — oito capítulos
+  sustentam isso, e as três linhas que diziam agosto foram corrigidas.
 
 ### O calendário
 
@@ -97,8 +99,8 @@ explicada custa ambiguidade.
 | 8 | O Que Ela Não Deveria Saber | Ano 4, outubro | — |
 | 9 | A Decisão | Ano 5, fevereiro | — |
 | 10 | A Fuga | Ano 5, **agosto** | **terceiras** |
-| 11 | *(renomear)* | Ano 5, agosto | terceiras |
-| Epíl. | O Que Ficou | +93 dias | **a última** |
+| 11 | **Noventa Dias** | Ano 5, agosto | terceiras |
+| Epíl. | O Que Ficou | **+6 anos** | **a última** |
 
 **Antoniette corre contra agosto**, e o Capítulo 10 ganha cronômetro sem que
 ninguém explique.
@@ -130,6 +132,15 @@ Liara, Fenn, Dara, Ren, Elke, Elsbeth, Cort, Ines.
 | 10 | Khar'Vel já aflorou em Klara | **Cap. 7 — pivô** |
 | 11 | o cronograma depende do ápice | Cap. 8 |
 | 12 | a fuga é traída por Klara | Cap. 11 |
+
+**A revelação 12 está implementada em `C11-1b · A volta`** (rota `archive`).
+Klara para na floresta, vira e anda de volta, e **não sabe explicar por quê** —
+para ela é a fome e o vazio, na hora errada. Antoniette vai atrás porque não
+existe versão dela que deixe a menina sozinha ali. Sem captura, sem
+perseguição. **Ninguém em cena enuncia o que aconteceu.**
+
+Antes de 0.9.0 a fuga terminava na floresta e o beat seguinte acendia uma vela
+na biblioteca da casa, sem transição.
 
 **Duas regras que não se quebram:**
 
@@ -237,13 +248,45 @@ Escolhidos no fim do Capítulo 9, pelo estado acumulado.
 | Agosto Antecipado | Resposta ≥ 13 e Esperança ≤ 7 |
 | **O Arquivo** | **sem condição - e o padrão** |
 
+**A Cobertura Queimada tem gatilho desde 0.8.0:** `lied_to_order:'A'` **e**
+`third_paid:'B'` — as duas escolhas em que ela é **correta** pelas regras da
+Ordem. Nidhaus lê tudo o que entra e sai, e ela pôs o nome de um empregado
+vivo num envelope que atravessa a casa. Antes disso o final era inalcançável,
+e o validador tinha uma exceção que encobria.
+
 Vive em `RBF.ENDINGS`, avaliado na ordem pelo beat `{ t:'ending' }` no
 fim do Cap. 9. **Limiares recalibrados em 26/07/2026:** os antigos
 tornavam o final verdadeiro inatingivel. O validador confere alcance por
 forca bruta.
 
-**Nenhuma rota altera o destino.** Antoniette morre, Klara é consumida, o ciclo
-continua. Um "final" mede **quanto o jogador entendeu.**
+> ### A MORTE PODE SER FALSA — decisão do autor, 0.9.0
+>
+> **Klara é consumida e o ciclo continua nas quatro.** O destino dela não muda.
+>
+> **O de Antoniette muda.** Em duas das quatro leituras ela sobrevive:
+>
+> | leitura | Antoniette |
+> |---|---|
+> | O Arquivo | **morre** — no prazo que Carmine deu |
+> | Agosto Antecipado | **morre** — sem as quatro horas |
+> | O Distanciamento | **vive** — recolhida do campo, correspondência suspensa |
+> | A Cobertura Queimada | **vive** — demitida com carta de referência correta |
+>
+> O Prólogo continua de pé nas quatro porque **o ponto morto dispara por
+> silêncio, não por morte.** Agente recolhido tem correspondência particular
+> suspensa por prazo indeterminado.
+>
+> **E o tribunal declara "autoria falecida" sobre alguém que respira.** É o
+> dispositivo da obra aplicado ao fato mais básico: o documento erra.
+
+**Como ela morre, quando morre.** Plantado em P8 desde sempre: a ficha da
+escriba de trinta e sete anos antes, na letra do escriturário, última linha
+**"Motivo de saúde."** Matheo leu aquilo uma semana antes de assinar a
+autorização dela. Ela morre da mesma causa, na mesma letra, no mesmo
+formulário. **Não há corpo, não há luta, não há sangue** — a casa nunca
+precisou disso. O que a obra mostra é o formulário.
+
+Um "final" mede **quanto o jogador entendeu.**
 
 ## A balada — três momentos, e só três
 
