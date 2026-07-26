@@ -618,6 +618,15 @@ RBF.CHAPTERS = [
     label: 'Cap\u00edtulo 6',
     title: 'Uma Amizade',
     selectable: true
+  },
+
+  {
+    id:    'capitulo7',
+    code:  'C-VII',
+    data:  'CHAPTER7',
+    label: 'Cap\u00edtulo 7',
+    title: 'Agosto',
+    selectable: true
   }
 ];
 

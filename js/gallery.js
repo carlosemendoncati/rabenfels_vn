@@ -130,6 +130,7 @@ RBF.Gallery = (function () {
     { id: 'end_cap4',     cat: 'rec', name: 'Cap\u00edtulo 4 conclu\u00eddo',   need: 'done:capitulo4' },
     { id: 'end_cap5',     cat: 'rec', name: 'Cap\u00edtulo 5 conclu\u00eddo',   need: 'done:capitulo5' },
     { id: 'end_cap6',     cat: 'rec', name: 'Cap\u00edtulo 6 conclu\u00eddo',   need: 'done:capitulo6' },
+    { id: 'end_cap7',     cat: 'rec', name: 'Cap\u00edtulo 7 conclu\u00eddo',   need: 'done:capitulo7' },
     { id: 'route_hope',   cat: 'rec', name: 'Registro: Esperan\u00e7a',        need: 'route:hope:6' },
     { id: 'route_loss',   cat: 'rec', name: 'Registro: Perda',                need: 'route:loss:6' },
     { id: 'route_answer', cat: 'rec', name: 'Registro: Resposta',             need: 'route:answer:6' }
