@@ -210,7 +210,7 @@ RBF.CHAPTER7 = [
    Prepara sem anunciar. Saida: ponte.
    ====================================================================== */
 { t:'scene', id:'c7_patio', chapter:'capitulo7', title:'Sete e vinte',
-  bg:'bg_nidhaus_gate', bgm:'bgm_grey_march' },
+  bg:'bg_nidhaus_gate', bgm:'bgm_agosto' },
 
 { t:'nar', tx:'No dia dez, o p\u00e1tio \u00e0s sete e vinte estava do jeito que fica em agosto: laranja por baixo e ainda claro por cima.' },
 { t:'nar', tx:'As duas desceram sem pedir licen\u00e7a, porque havia dois anos que ningu\u00e9m pedia.' },

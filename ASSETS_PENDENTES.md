@@ -12,7 +12,7 @@ correspondente de `js/config.js`.
 |---|---|
 | Personagens | `aldric` (6), `antoniette` (6), `serafina` (6), `klara` (6), `liara` (6), `matheo` (3) |
 | Backgrounds | `bg_prologue_room`, `bg_archive_closeup` |
-| BGM | `bgm_prologue`, `bgm_archive`, `bgm_grey_march`, `bgm_nidhaus` |
+| BGM | `bgm_prologue`, `bgm_archive`, `bgm_grey_march`, `bgm_nidhaus`, **`bgm_camara`**, **`bgm_amizade`**, **`bgm_agosto`**, **`bgm_epilogo`** |
 | Trilha do menu | `menu_theme`, sintetizada em `tools/make_menu_theme.py` |
 | SFX | os 6, sintetizados em `tools/make_sfx.py` |
 | Sons de interface | os 7, sintetizados em `tools/make_sfx.py` |
@@ -104,6 +104,25 @@ Ancoragem pela base, sem margem inferior.
 
 Fenn, Dara e Ren continuam com silhueta SVG. Os três aparecem em cena com
 frequência — são a próxima prioridade de arte.
+
+---
+
+## BGM — as quatro novas, e onde tocam
+
+Entregues em 26/07/2026. Volume mais baixo que as quatro primeiras: são
+faixas gravadas, não sintetizadas por script, e chegam mais quentes.
+**Ajustar volume em `RBF.BGM`, nunca no roteiro.**
+
+| Faixa | Onde toca | Loop |
+|---|---|---|
+| `bgm_camara` | Cap. 5, ao abrir a porta da ala norte. Volta no Cap. 11 | sim |
+| `bgm_amizade` | Cap. 6, quando a investigação para. **A única faixa quente da obra** | sim |
+| `bgm_agosto` | Cap. 7, entra no pátio e atravessa o afloramento inteiro | **não** |
+| `bgm_epilogo` | Epílogo, ainda não escrito | **não** |
+
+`bgm_agosto` e `bgm_epilogo` não repetem de propósito: a primeira termina
+em corte seco e a segunda termina sem resolver. Se acabarem antes da
+cena, o silêncio serve.
 
 ---
 

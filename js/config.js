@@ -487,6 +487,47 @@ RBF.BGM = {
     available: true,
     loop: true,
     volume: 0.36
+  },
+
+  /* --- trilhas de 26/07/2026 -----------------------------------------
+     Compostas para os capitulos 5 a 11 e para o Epilogo. Volume mais
+     baixo que as quatro primeiras: sao faixas gravadas, nao sintetizadas
+     por script, e chegam mais quentes. Ajustar aqui, nunca no roteiro. */
+
+  /* A camara. Quase sem melodia, por pedido. O horror da sala e ela ser
+     organizada, entao a trilha nao pode dramatizar. */
+  bgm_camara: {
+    files: ['bgm_camara.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.30
+  },
+
+  /* A unica faixa quente da obra. Nao pode ter press\u00e1gio nenhum: quem
+     escuta nao pode ser avisado. O peso vem de o jogador saber o que
+     vem depois. */
+  bgm_amizade: {
+    files: ['bgm_amizade.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.34
+  },
+
+  /* A cena pivo. Longa de proposito - atravessa o afloramento inteiro
+     sem repetir. Nao entra em loop: se acabar antes, o silencio serve. */
+  bgm_agosto: {
+    files: ['bgm_agosto.mp3'],
+    available: true,
+    loop: false,
+    volume: 0.34
+  },
+
+  /* Epilogo. Termina sem resolver, e por isso nao repete. */
+  bgm_epilogo: {
+    files: ['bgm_epilogo.mp3'],
+    available: true,
+    loop: false,
+    volume: 0.32
   }
 };
 
@@ -640,6 +681,15 @@ RBF.CHAPTERS = [
     data:  'CHAPTER7',
     label: 'Cap\u00edtulo 7',
     title: 'Agosto',
+    selectable: true
+  },
+
+  {
+    id:    'capitulo8',
+    code:  'C-VIII',
+    data:  'CHAPTER8',
+    label: 'Cap\u00edtulo 8',
+    title: 'O Que Ela N\u00e3o Deveria Saber',
     selectable: true
   }
 ];

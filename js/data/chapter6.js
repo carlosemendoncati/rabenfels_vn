@@ -330,7 +330,7 @@ RBF.CHAPTER6 = [
    Dezoito meses comecam a se formar. Saida: ponte.
    ====================================================================== */
 { t:'scene', id:'c6_padrao', chapter:'capitulo6', title:'O padr\u00e3o',
-  bg:'bg_library', bgm:null },
+  bg:'bg_library', bgm:'bgm_amizade' },
 
 { t:'nar', tx:'Em maio j\u00e1 era rotina. As duas de manh\u00e3, na biblioteca, cada uma no seu lado da mesa.' },
 { t:'nar', tx:'Liara aparecia por volta das onze, falava dezessete minutos e ia embora.' },
@@ -400,7 +400,7 @@ RBF.CHAPTER6 = [
    Cena unica lida de tres jeitos. Ponte para o Capitulo 7, que e a pivo.
    ====================================================================== */
 { t:'scene', id:'c6_julho', chapter:'capitulo6', title:'Julho',
-  bg:'bg_corridor', bgm:null },
+  bg:'bg_corridor', bgm:'bgm_amizade' },
 
 { t:'nar', tx:'Em julho do terceiro ano Antoniette completou vinte e sete meses em Velha Nidhaus.' },
 { t:'nar', tx:'O contrato era de nove. Ningu\u00e9m tinha mencionado o contrato havia mais de um ano.' },

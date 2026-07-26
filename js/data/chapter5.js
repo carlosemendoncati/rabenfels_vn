@@ -203,7 +203,7 @@ RBF.CHAPTER5 = [
    Saida: soco.
    ====================================================================== */
 { t:'scene', id:'c5_dentro', chapter:'capitulo5', title:'Dentro',
-  bg:'bg_black', bgm:'bgm_archive' },
+  bg:'bg_black', bgm:'bgm_camara' },
 
 { t:'sfx', id:'sfx_door' },
 { t:'nar', tx:'A corrente saiu do puxador sem ru\u00eddo nenhum, o que ela j\u00e1 esperava.' },
