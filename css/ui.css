@@ -1047,36 +1047,65 @@
 
 #rf-routes.show { opacity: .78; }
 
+/* --- mostrador radial de rota -----------------------------------------
+   Um anel de trilha e um arco que preenche em proporcao ao valor, com o
+   simbolo da rota no centro. Substituiu a fileira de cinco tracinhos:
+   com onze capitulos e ate duas escolhas por capitulo, cinco posicoes
+   saturavam cedo demais e o medidor parava de informar.
+   O teto de cada rota vive em RBF.ROUTES, nao aqui.                    */
+
 .rf-route {
-  display: flex;
-  align-items: center;
-  gap: calc(5px * var(--rbf-ui));
+  position: relative;
+  width:  calc(30px * var(--rbf-ui));
+  height: calc(30px * var(--rbf-ui));
+  display: grid;
+  place-items: center;
+}
+
+.rf-route__dial {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rf-route__track,
+.rf-route__arc {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.rf-route__track {
+  stroke: var(--rbf-ink-ghost);
+  opacity: .5;
+}
+
+.rf-route__arc {
+  /* comeca no topo e cresce no sentido horario */
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset var(--rbf-slow, .9s) var(--rbf-ease-ritual);
 }
 
 .rf-route__icon {
-  width: calc(15px * var(--rbf-ui));
-  height: calc(15px * var(--rbf-ui));
+  position: relative;
+  width:  calc(13px * var(--rbf-ui));
+  height: calc(13px * var(--rbf-ui));
 }
 
-.rf-route__pips {
-  display: flex;
-  gap: 3px;
-}
-
-.rf-route__pip {
-  width: calc(11px * var(--rbf-ui));
-  height: 3px;
-  background: var(--rbf-ink-ghost);
-  transition: background var(--rbf-medium) var(--rbf-ease-ritual);
-}
-
-.rf-route--hope   .rf-route__pip.is-on { background: var(--rbf-gold); }
-.rf-route--loss   .rf-route__pip.is-on { background: var(--rbf-red-lit); }
-.rf-route--answer .rf-route__pip.is-on { background: var(--rbf-cold); }
+.rf-route--hope   .rf-route__arc  { stroke: var(--rbf-gold); }
+.rf-route--loss   .rf-route__arc  { stroke: var(--rbf-red-lit); }
+.rf-route--answer .rf-route__arc  { stroke: var(--rbf-cold); }
 
 .rf-route--hope   .rf-route__icon { color: var(--rbf-gold); }
 .rf-route--loss   .rf-route__icon { color: var(--rbf-red-lit); }
 .rf-route--answer .rf-route__icon { color: var(--rbf-cold); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-route__arc { transition: none; }
+}
 
 /* Aviso de alteracao de rota: sai do proprio simbolo. */
 #rf-route-note {

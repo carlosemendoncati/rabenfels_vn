@@ -21,7 +21,7 @@ correspondente de `js/config.js`.
 
 ---
 
-## Retratos de ficha — 8 pendentes
+## Retratos de ficha — 4 prontos, 4 pendentes
 
 Pasta **`assets/characters/portraits/`** · `.png` · **retrato vertical,
 proporção 4:5** (por exemplo 640×800). Enquadramento de busto, fundo
@@ -35,16 +35,16 @@ variação, no enquadramento e no acabamento de um quadro pendurado.
 a obra — a galeria de retratos da casa tem uma moldura vazia no fim da
 fila. O jogo não pede desculpa por ainda não ter a arte.
 
-| Ficha | Arquivo esperado |
-|---|---|
-| Antoniette Vael | `antoniette.png` |
-| Matheo Drell | `matheo.png` |
-| Serafina Rabenfels | `serafina.png` |
-| Aldric Rabenfels | `aldric.png` |
-| Klara e Liara | `gemeas.png` |
-| Fenn | `fenn.png` |
-| Dara | `dara.png` |
-| Ren | `ren.png` |
+| Ficha | Arquivo | Estado |
+|---|---|---|
+| Antoniette Vael | `antoniette.png` | **pronto** |
+| Matheo Drell | `matheo.png` | **pronto** |
+| Serafina Rabenfels | `serafina.png` | **pronto** |
+| Aldric Rabenfels | `aldric.png` | **pronto** |
+| Klara e Liara | `gemeas.png` | pendente |
+| Fenn | `fenn.png` | pendente |
+| Dara | `dara.png` | pendente |
+| Ren | `ren.png` | pendente |
 
 **Não precisa mexer em `config.js`.** O carregamento do retrato é por
 sondagem: se o arquivo existir naquele caminho, ele aparece; se não, fica
@@ -52,7 +52,7 @@ a moldura. Basta soltar o `.png` na pasta com o nome exato.
 
 ---
 
-## Backgrounds — 9 pendentes
+## Backgrounds — todos prontos
 
 Pasta `assets/backgrounds/` · `.png` · **1280×720**
 Fallback: gradiente CSS calibrado por cena.

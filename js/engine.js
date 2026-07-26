@@ -717,23 +717,51 @@ RBF.Engine = (function () {
 
       var wrap = document.createElement('div');
       wrap.className = 'rf-route rf-route--' + def.id;
-      wrap.title = def.label + ': ' + def.hint;
+      wrap.title = def.label + ' ' + val + '/' + def.max + ' \u2014 ' + def.hint;
+      wrap.setAttribute('role', 'img');
+      wrap.setAttribute('aria-label',
+        def.label + ': ' + val + ' de ' + def.max + '. ' + def.hint);
 
-      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      /* Mostrador radial. Um anel de trilha e um arco que preenche em
+         proporcao ao valor. Substituiu a fileira de tracinhos: com onze
+         capitulos e ate duas escolhas por capitulo, cinco tracinhos
+         saturavam no terceiro capitulo e paravam de informar. */
+      var NS = 'http://www.w3.org/2000/svg';
+      var R  = 13;
+      var C  = 2 * Math.PI * R;
+      var frac = def.max > 0 ? Math.max(0, Math.min(1, val / def.max)) : 0;
+
+      var dial = document.createElementNS(NS, 'svg');
+      dial.setAttribute('class', 'rf-route__dial');
+      dial.setAttribute('viewBox', '0 0 34 34');
+      dial.setAttribute('aria-hidden', 'true');
+
+      var track = document.createElementNS(NS, 'circle');
+      track.setAttribute('class', 'rf-route__track');
+      track.setAttribute('cx', '17');
+      track.setAttribute('cy', '17');
+      track.setAttribute('r', String(R));
+      dial.appendChild(track);
+
+      var arc = document.createElementNS(NS, 'circle');
+      arc.setAttribute('class', 'rf-route__arc');
+      arc.setAttribute('cx', '17');
+      arc.setAttribute('cy', '17');
+      arc.setAttribute('r', String(R));
+      arc.setAttribute('stroke-dasharray', String(C));
+      arc.setAttribute('stroke-dashoffset', String(C * (1 - frac)));
+      dial.appendChild(arc);
+
+      wrap.appendChild(dial);
+
+      var svg = document.createElementNS(NS, 'svg');
       svg.setAttribute('class', 'rf-route__icon');
-      var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      svg.setAttribute('aria-hidden', 'true');
+      var use = document.createElementNS(NS, 'use');
       use.setAttribute('href', '#' + def.icon);
       svg.appendChild(use);
       wrap.appendChild(svg);
 
-      var pips = document.createElement('div');
-      pips.className = 'rf-route__pips';
-      for (var k = 0; k < def.max; k++) {
-        var pip = document.createElement('span');
-        pip.className = 'rf-route__pip' + (k < val ? ' is-on' : '');
-        pips.appendChild(pip);
-      }
-      wrap.appendChild(pips);
       el.routes.appendChild(wrap);
     }
 

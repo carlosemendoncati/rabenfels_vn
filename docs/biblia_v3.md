@@ -624,16 +624,30 @@ Isto é o que corrige.
 **Regra que não muda:** rota só se move pelo campo `routes` declarado na
 opção. Nunca por inferência do texto.
 
-**Teto:** duas escolhas por capítulo, no máximo dois pontos por escolha.
+**Teto: 20 por rota.** Era 5, e 5 estava errado — com onze capítulos e até
+duas escolhas por capítulo, o medidor saturava no terceiro capítulo e
+parava de informar. Duas escolhas por capítulo, no máximo dois pontos por
+escolha, dá um teto teórico de 44 pontos distribuídos entre as três rotas.
+Vinte é folgado o bastante para uma rota perseguida do começo ao fim e
+apertado o bastante para o jogador ter de escolher qual.
+
+O teto vive em `RBF.ROUTES`, no `config.js`, e em nenhum outro lugar.
+
+**A apresentação é um mostrador radial** — anel de trilha, arco que
+preenche, símbolo no centro. Substituiu a fileira de cinco tracinhos.
 
 **O final é escolhido no fim do Capítulo 9, pelo estado acumulado.**
 
 | Final | Condição | O que acontece |
 |---|---|---|
 | **A Cobertura Queimada** | `cover_burned` | Serafina a remove no Cap. 10. Ela vive. O Arquivo fica incompleto, e o jogador vê quais capítulos faltam. |
-| **O Distanciamento** | Esperança ≤ 1 | Ela nunca tenta. Missão cumprida. Ela vive. |
-| **Agosto Antecipado** | Resposta ≥ 4 e Esperança ≤ 3 | Ela entende cedo e age cedo. A fuga é no Cap. 9. Mesmo fim, sem preparo e sem dignidade. |
-| **True End** | Esperança ≥ 4 e Resposta ≥ 4 | Os onze capítulos no ritmo certo. O fim é o mesmo. O peso não é. |
+| **O Distanciamento** | Esperança ≤ 4 | Ela nunca tenta. Missão cumprida. Ela vive. |
+| **Agosto Antecipado** | Resposta ≥ 14 e Esperança ≤ 11 | Ela entende cedo e age cedo. A fuga é no Cap. 9. Mesmo fim, sem preparo e sem dignidade. |
+| **True End** | Esperança ≥ 14 e Resposta ≥ 14 | Os onze capítulos no ritmo certo. O fim é o mesmo. O peso não é. |
+
+**Limiares da galeria, na mesma escala:** registro de rota em 6, a entrada
+de Klara pedindo o mundo pela irmã em `hope:8`, a ferida de Aldric em
+`answer:12`.
 
 **Nenhuma rota altera o destino.** Antoniette morre, Klara é consumida, o
 ciclo continua. Um "final" aqui mede **quanto o jogador entendeu.**

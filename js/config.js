@@ -321,37 +321,37 @@ RBF.BACKGROUNDS = {
 
   bg_grey_march_road: {
     file: 'bg_grey_march_road.png',
-    available: false,
+    available: true,
     css: 'linear-gradient(175deg, #0d1520 0%, #1a2535 30%, #0f1825 60%, #060c12 100%)'
   },
 
   bg_nidhaus_gate: {
     file: 'bg_nidhaus_gate.png',
-    available: false,
+    available: true,
     css: 'radial-gradient(ellipse at 50% 108%, #12100e 0%, #0a0806 40%, #030202 100%)'
   },
 
   bg_main_hall: {
     file: 'bg_main_hall.png',
-    available: false,
+    available: true,
     css: 'radial-gradient(ellipse at 30% 78%, #1a1108 0%, #0d0a06 50%, #030202 100%)'
   },
 
   bg_antoniette_room: {
     file: 'bg_antoniette_room.png',
-    available: false,
+    available: true,
     css: 'radial-gradient(ellipse at 50% 100%, #0a0d15 0%, #060810 50%, #020203 100%)'
   },
 
   bg_library: {
     file: 'bg_library.png',
-    available: false,
+    available: true,
     css: 'radial-gradient(ellipse at 60% 58%, #1c1408 0%, #0e0b05 45%, #030202 100%)'
   },
 
   bg_corridor: {
     file: 'bg_corridor.png',
-    available: false,
+    available: true,
     css: 'linear-gradient(180deg, #030202 0%, #0c0806 50%, #050303 100%)'
   },
 
@@ -359,19 +359,19 @@ RBF.BACKGROUNDS = {
      geracoes penduradas em ordem. Capitulo 1, cena C6. */
   bg_portrait_hall: {
     file: 'bg_portrait_hall.png',
-    available: false,
+    available: true,
     css: 'linear-gradient(100deg, #050403 0%, #17110a 42%, #0b0806 72%, #030202 100%)'
   },
 
   bg_kitchen: {
     file: 'bg_kitchen.png',
-    available: false,
+    available: true,
     css: 'radial-gradient(ellipse at 40% 85%, #241a0e 0%, #120c06 45%, #050302 100%)'
   },
 
   bg_library_night: {
     file: 'bg_library_night.png',
-    available: false,
+    available: true,
     css: 'radial-gradient(ellipse at 62% 62%, #14100a 0%, #0a0805 45%, #020202 100%)'
   },
 
@@ -824,7 +824,7 @@ RBF.ROUTES = [
     id:    'hope',
     label: 'Esperan\u00e7a',
     icon:  'rf-icon-hope',
-    max:   5,
+    max:   20,
     note:  'Uma possibilidade foi preservada.',
     /* Proximidade. O documento mestre: momentos de ternura tornam o
        final mais devastador para quem os viveu. */
@@ -834,7 +834,7 @@ RBF.ROUTES = [
     id:    'loss',
     label: 'Perda',
     icon:  'rf-icon-loss',
-    max:   5,
+    max:   20,
     note:  'O arquivo registrou mais uma perda.',
     /* Custo moral: o que ela escolhe nao dizer, nao fazer, nao salvar. */
     hint:  'o custo do que ela decide n\u00e3o fazer'
@@ -843,7 +843,7 @@ RBF.ROUTES = [
     id:    'answer',
     label: 'Resposta',
     icon:  'rf-icon-answer',
-    max:   5,
+    max:   20,
     note:  'Voc\u00ea chegou mais perto de uma resposta.',
     /* Investigacao: o que ela descobre e em que ordem. */
     hint:  'o que ela descobre e em que ordem'

@@ -30,7 +30,14 @@ ROOT = os.path.join(os.path.dirname(__file__), '..')
 out = []
 pattern = os.path.join(ROOT, 'assets', 'characters', '*', '*.png')
 
+# assets/characters/portraits/ nao sao sprites: sao os retratos das fichas
+# da galeria, enquadrados como quadro a oleo. Fundo opaco ali e correto,
+# entao a pasta fica fora desta checagem.
+IGNORAR = ('portraits',)
+
 for path in sorted(glob.glob(pattern)):
+    if os.path.basename(os.path.dirname(path)) in IGNORAR:
+        continue
     im = Image.open(path)
     if im.mode == 'RGBA':
         lo, hi = im.getchannel('A').getextrema()
