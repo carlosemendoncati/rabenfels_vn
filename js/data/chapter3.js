@@ -66,6 +66,7 @@ var C3_BORBOLETA_A = [
   { t:'pause' },
   { t:'inn', tx:'Ela n\u00e3o insistiu. N\u00e3o fez cara feia. N\u00e3o pediu de outro jeito.' },
   { t:'inn', tx:'Aceitou como se aceita o tempo.' },
+  { t:'spr_hide', ch:'klara' },
   { t:'pause' },
   { t:'nar', tx:'Antoniette esperou no corredor mais um pouco, sem motivo declarado.' },
   { t:'inn', tx:'Ela n\u00e3o vai pedir de novo.' },
@@ -82,6 +83,7 @@ var C3_BORBOLETA_B = [
   { t:'dial', ch:'antoniette', tx:'Papel fino. Bem devagar.' },
   { t:'nar', tx:'Klara repetiu a \u00faltima parte em voz baixa, uma vez, do jeito que se guarda um n\u00famero.' },
   { t:'pause' },
+  { t:'spr_hide', ch:'klara' },
   { t:'inn', tx:'Eu dei a ela um registro no lugar da coisa.' },
   { t:'inn', tx:'E ela guardou o registro como se fosse a coisa.' }
 ];
@@ -330,16 +332,16 @@ RBF.CHAPTER3 = [
 { t:'dial', ch:'klara', tx:'A senhorita pode olhar por mim?' },
 
 { t:'cho', id:'cap3_borboleta', code:'C-III', prompt:'O PEDIDO', opts:[
-  { id:'A',
-    tx:'Recusar. Ela n\u00e3o \u00e9 preceptora, e uma catalogadora contratada n\u00e3o tem esse assunto.',
-    flags:{ klara_asked:'A', kept_apart:true },
-    routes:{ loss: 2 },
-    then: C3_BORBOLETA_A },
   { id:'B',
     tx:'Descrever com precis\u00e3o. Dar a ela o registro exato do que existe l\u00e1 fora.',
     flags:{ klara_asked:'B', kept_apart:false },
     routes:{ answer: 2, hope: 1 },
     then: C3_BORBOLETA_B },
+  { id:'A',
+    tx:'Recusar. Ela n\u00e3o \u00e9 preceptora, e uma catalogadora contratada n\u00e3o tem esse assunto.',
+    flags:{ klara_asked:'A', kept_apart:true },
+    routes:{ loss: 2 },
+    then: C3_BORBOLETA_A },
   { id:'C',
     tx:'Lev\u00e1-la ao p\u00e1tio depois das sete, quando o sol j\u00e1 tiver baixado.',
     flags:{ klara_asked:'C', kept_apart:false },

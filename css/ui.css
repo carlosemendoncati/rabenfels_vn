@@ -1851,6 +1851,18 @@
   overflow: hidden;
 }
 
+/* Ficha de personagem: o retrato e vertical (4:5) dentro de uma
+   miniatura deitada (16:9). Enquadrar pelo topo mantem o rosto. */
+.rbf-gal-thumb.is-portrait {
+  background-size: cover;
+  background-position: center 18%;
+  background-repeat: no-repeat;
+}
+
+.rbf-gal-thumb.is-portrait.is-loaded {
+  border-color: var(--rbf-line);
+}
+
 .rbf-gal-item.locked .rbf-gal-thumb::after {
   content: 'CLASSIFICADO';
   position: absolute;

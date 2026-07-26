@@ -134,3 +134,59 @@ python3 tools/make_menu_theme.py       # regera a trilha do menu
 `tools/minidom.js` é um DOM mínimo escrito à mão para o validador. Não é
 navegador: não faz layout, não carrega imagem, não toca som. Serve para testar
 fluxo, estado, roteiro e integridade.
+
+---
+
+## Escolha: o botao carrega o id da opcao
+
+A ordem de **exibicao** das opcoes e embaralhada entre capitulos de
+proposito. Com a opcao C sempre por ultimo, o jogador aprendia em dois
+capitulos a clicar na ultima e ia direto ao final verdadeiro.
+
+O engine poe `data-option="A|B|C"` em cada botao. **Quem precisa saber qual
+opcao e - `tools/validate.js`, `tools/smoke.html`, e qualquer ferramenta
+futura - le dali, nunca da posicao.**
+
+```js
+var at = botoes.length - 1;
+for (var k = 0; k < botoes.length; k++) {
+  if (botoes[k].getAttribute('data-option') === 'C') { at = k; break; }
+}
+```
+
+## Ficha de personagem com revelacao progressiva
+
+Em `js/gallery.js`, item de `cat: 'char'` usa `entries[]` no lugar de
+`text`. Cada entrada tem condicao propria:
+
+```js
+{ id: 'ch_matheo', cat: 'char', name: 'Matheo Drell',
+  need: 'chapter:prologo', portrait: 'matheo.png', entries: [
+  { need: 'chapter:prologo', tx: '...' },
+  { need: 'arc:ultima',      tx: '...' },
+  { need: 'done:prologo',    tx: '...' }
+]}
+```
+
+- `need` do item decide se a **ficha aparece** na galeria.
+- `need` de cada entrada decide se **aquela linha** aparece.
+- As que faltam sao mostradas como `[ sem entrada ate esta data ]`, com
+  contador no rodape. O jogador sabe que ha mais e volta.
+
+**Armadilha ja corrigida:** `items()` derivava a miniatura de
+`need.indexOf('bg:')`. Como varias fichas destravam por cenario, Serafina
+aparecia como o salao e Aldric como a biblioteca. A condicao agora exige
+`cat === 'cg'`.
+
+**Retrato** vem de `assets/characters/portraits/<nome>.png`, por sondagem:
+existe o arquivo, aparece; nao existe, fica a moldura vazia. **Nao passa
+pelo `config.js`.**
+
+## Medidor de rota
+
+Mostrador radial: anel de trilha, arco com `stroke-dasharray`, simbolo no
+centro. Substituiu a fileira de cinco tracinhos, que saturava no terceiro
+capitulo.
+
+**O teto vive em `RBF.ROUTES` e em nenhum outro lugar.** Hoje 20. Mudar la
+muda o medidor, os limiares da galeria e nada mais.

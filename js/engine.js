@@ -406,7 +406,20 @@ RBF.Engine = (function () {
         }
         if (beat.bgm !== undefined) { applyBgm(beat.bgm); }
         if (beat.sfx && !silent) { RBF.Audio.playSfx(beat.sfx); }
-        if (beat.clearSprites) { clearSprites(); }
+        /*
+          Troca de cena limpa os sprites.
+
+          Era o contrario: so limpava se o beat pedisse 'clearSprites', e
+          nenhum beat pedia. O resultado era uma classe inteira de bug -
+          qualquer ramo de escolha que terminasse sem 'spr_hide' deixava
+          o personagem colado na tela pela cena seguinte. Aconteceu de
+          verdade no Capitulo 3: recusar o pedido de Klara deixava ela
+          plantada em cima do patio ao entardecer.
+
+          Cena nova e lugar novo. Quem precisa carregar um sprite de uma
+          cena para a outra declara 'keepSprites: true' e assume.
+        */
+        if (!beat.keepSprites) { clearSprites(); }
         if (!silent) { pendingAutosave = true; }
         return 'go';
 
@@ -626,6 +639,12 @@ RBF.Engine = (function () {
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'choice-btn';
+        /* O id da opcao fica no proprio botao. A ordem de exibicao das
+           opcoes e embaralhada de propria vontade entre capitulos, para
+           o jogador nao aprender a clicar sempre na ultima. Quem precisa
+           saber QUAL opcao e - o harness de teste, e qualquer ferramenta
+           futura - le daqui, e nao da posicao. */
+        if (opt.id) { btn.setAttribute('data-option', opt.id); }
 
         var code = document.createElement('span');
         code.className = 'choice-btn__code';
@@ -1394,6 +1413,9 @@ RBF.Engine = (function () {
       buttons:      function () { return choiceButtons; },
       complete:     completeTyping,
       presentation: function () { return pres; },
+      /* Executa um beat isolado, para teste de comportamento. Sempre em
+         modo silencioso: sem audio, sem galeria, sem autosave. */
+      exec:         function (beat) { return exec(beat, true); },
       controls:     function () { return ctlNodes; },
       sceneStart:   function () { return sceneStart; }
     }

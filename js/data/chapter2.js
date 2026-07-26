@@ -354,21 +354,21 @@ RBF.CHAPTER2 = [
 { t:'nar', tx:'Ela tinha o invent\u00e1rio parcial, a lacuna dos dois anos e um marcador de papel na mesa.' },
 
 { t:'cho', id:'cap2_lacuna', prompt:'A LACUNA', opts:[
-  { id:'A',
-    tx:'Registrar como irregularidade administrativa e seguir o contrato.',
-    flags:{ ledger_report:'A', ledger_crossref:false, ledger_copied:false },
-    routes:{ loss: 1 },
-    then: C2_ESCOLHA_A },
+  { id:'C',
+    tx:'Copiar a p\u00e1gina inteira \u00e0 m\u00e3o. O que a Ordem receber \u00e9 outro assunto.',
+    flags:{ ledger_report:'C', ledger_crossref:false, ledger_copied:true, archive_seed:true },
+    routes:{ answer: 1, hope: 1 },
+    then: C2_ESCOLHA_C },
   { id:'B',
     tx:'Cruzar com o invent\u00e1rio de pessoal e datar exatamente o intervalo.',
     flags:{ ledger_report:'B', ledger_crossref:true, ledger_copied:false },
     routes:{ answer: 2 },
     then: C2_ESCOLHA_B },
-  { id:'C',
-    tx:'Copiar a p\u00e1gina inteira \u00e0 m\u00e3o. O que a Ordem receber \u00e9 outro assunto.',
-    flags:{ ledger_report:'C', ledger_crossref:false, ledger_copied:true, archive_seed:true },
-    routes:{ answer: 1, hope: 1 },
-    then: C2_ESCOLHA_C }
+  { id:'A',
+    tx:'Registrar como irregularidade administrativa e seguir o contrato.',
+    flags:{ ledger_report:'A', ledger_crossref:false, ledger_copied:false },
+    routes:{ loss: 1 },
+    then: C2_ESCOLHA_A }
 ]},
 
 /* ======================================================================

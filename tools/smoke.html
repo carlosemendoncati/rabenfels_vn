@@ -169,8 +169,13 @@
       if (dbg.isChoice()) {
         var buttons = dbg.buttons();
         if (!buttons.length) { break; }
-        var at = { A: 0, B: 1, C: 2 }[pick];
-        if (at >= buttons.length) { at = buttons.length - 1; }
+        /* Seleciona pelo ID da opcao, nao pela posicao na tela. A ordem
+           de exibicao e embaralhada entre capitulos de proposito, para o
+           jogador nao aprender a clicar sempre na ultima. */
+        var at = buttons.length - 1;
+        for (var b = 0; b < buttons.length; b++) {
+          if (buttons[b].getAttribute('data-option') === pick) { at = b; break; }
+        }
         seenChoices.push(pick);
         buttons[at].click();
         await tick();

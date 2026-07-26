@@ -358,7 +358,17 @@ async function typewriterCheck() {
    5. PARTIDA COMPLETA
    ========================================================================== */
 
-async function playthrough(optionIndex, useKeyboard) {
+/*
+  optionId e o ID da opcao ('A', 'B', 'C'), nao a posicao na tela.
+
+  Antes esta funcao clicava no botao de indice N, o que so equivalia a
+  "sempre a opcao C" enquanto C fosse sempre o ultimo botao. As opcoes
+  foram embaralhadas de proposito - com C sempre por ultimo, o jogador
+  aprendia em dois capitulos a clicar na ultima e ia direto ao final
+  verdadeiro. Selecionar por id mantem o teste estavel qualquer que seja
+  a ordem de exibicao.
+*/
+async function playthrough(optionId, useKeyboard) {
   const win = boot();
   const RBF = win.RBF;
   const doc = win.document;
@@ -381,8 +391,13 @@ async function playthrough(optionIndex, useKeyboard) {
     if (dbg.isChoice()) {
       const btns = dbg.buttons();
       if (!btns.length) { break; }
-      const at = Math.min(optionIndex, btns.length - 1);
-      chosen.push(at + 1);
+      /* Acha a posicao do botao cujo id bate. Se aquela escolha nao tiver
+         esse id, cai no ultimo botao. */
+      let at = btns.length - 1;
+      for (let k = 0; k < btns.length; k++) {
+        if (btns[k].getAttribute('data-option') === optionId) { at = k; break; }
+      }
+      chosen.push(optionId + '@' + (at + 1));
       if (useKeyboard) { win.pressKey(String(at + 1)); }
       else { btns[at].click(); }
       /* A escolha segura a cena por um instante antes de avancar. */
@@ -429,7 +444,7 @@ async function playthroughChecks() {
   const results = [];
 
   for (let i = 0; i < 3; i++) {
-    const r = await playthrough(i, false);
+    const r = await playthrough(labels[i], false);
     results.push(r);
     console.log('  -- ramo ' + labels[i] + ' --');
     check(r.finished, 'ramo ' + labels[i] + ': alcanca o fim do roteiro');
@@ -459,7 +474,7 @@ async function playthroughChecks() {
         'os tres ramos produzem estados diferentes');
 
   section('PARTIDA COMPLETA (teclado)');
-  const kb = await playthrough(2, true);
+  const kb = await playthrough('C', true);
   check(kb.finished, 'teclado: alcanca o fim');
   check(kb.errors.length === 0, 'teclado: sem erro de runtime', kb.errors.join(' | '));
   check(kb.flags.report_style === 'C' && kb.flags.ledger_report === 'C',
@@ -495,7 +510,12 @@ async function saveLoadChecks() {
   while (steps < 6000) {
     steps += 1;
     if (dbg.isChoice()) {
-      dbg.buttons()[2].click();
+      const bs = dbg.buttons();
+      let at = bs.length - 1;
+      for (let k = 0; k < bs.length; k++) {
+        if (bs[k].getAttribute('data-option') === 'C') { at = k; break; }
+      }
+      bs[at].click();
       chosen += 1;
       await tick(8);
     } else {
@@ -826,9 +846,9 @@ async function systemsChecks() {
   section('ROTAS');
 
   /* As tres opcoes da mesma escolha devem mover rotas diferentes. */
-  const A = await playthrough(0, false);
-  const B = await playthrough(1, false);
-  const C = await playthrough(2, false);
+  const A = await playthrough('A', false);
+  const B = await playthrough('B', false);
+  const C = await playthrough('C', false);
 
   check(JSON.stringify(A.routes) !== JSON.stringify(B.routes) &&
         JSON.stringify(B.routes) !== JSON.stringify(C.routes),
@@ -1154,6 +1174,50 @@ function responsiveChecks() {
    11. CAIXA DE DIALOGO E SPRITES
    ========================================================================== */
 
+/* Troca de cena tem de limpar o palco.
+
+   Foi um bug real: 'scene' so limpava se o beat pedisse 'clearSprites', e
+   nenhum beat pedia. Qualquer ramo de escolha que terminasse sem
+   'spr_hide' deixava o personagem colado na tela pela cena seguinte -
+   Klara ficou plantada em cima do patio ao entardecer no Capitulo 3.
+
+   O teste e direto: poe alguem em cena, executa um beat de cena, e
+   confere o palco. Medir isso por amostragem de partida nao funciona,
+   porque nao distingue "herdou o sprite" de "foi reexibido logo depois". */
+async function sceneClearsSpritesCheck() {
+  section('CENA LIMPA O PALCO');
+
+  const win = boot();
+  const RBF = win.RBF;
+  await beginGame(win);
+
+  const dbg = RBF.Engine._debug;
+  const noPalco = () => Object.keys(dbg.presentation().sprites || {});
+
+  await dbg.exec({ t: 'spr', ch: 'matheo', ex: 'neutral', pos: 'center' });
+  check(noPalco().indexOf('matheo') !== -1,
+        'o teste consegue por alguem em cena', noPalco().join(','));
+
+  await dbg.exec({ t: 'scene', id: '__teste__', bg: 'bg_black' });
+  check(noPalco().length === 0,
+        'beat de cena limpa o palco', noPalco().join(','));
+
+  await dbg.exec({ t: 'spr', ch: 'matheo', ex: 'neutral', pos: 'center' });
+  await dbg.exec({ t: 'scene', id: '__teste2__', bg: 'bg_black', keepSprites: true });
+  check(noPalco().indexOf('matheo') !== -1,
+        'keepSprites mantem quem esta em cena', noPalco().join(','));
+
+  /* E o contrato do lado dos dados: nenhuma cena declara keepSprites sem
+     necessidade - se ninguem esta em cena, a licenca e ruido. */
+  let licencas = 0;
+  for (const cap of RBF.CHAPTERS) {
+    for (const beat of (RBF[cap.data] || [])) {
+      if (beat.t === 'scene' && beat.keepSprites) { licencas += 1; }
+    }
+  }
+  check(licencas > 0, 'ha cena declarando keepSprites', 'total: ' + licencas);
+}
+
 function spriteChecks() {
   section('SPRITES');
 
@@ -1427,6 +1491,7 @@ function layoutRegressionChecks() {
 
   await typewriterCheck();
   await playthroughChecks();
+  await sceneClearsSpritesCheck();
   await saveLoadChecks();
   await uiChecks();
   await systemsChecks();

@@ -1055,6 +1055,19 @@ RBF.Menu = (function () {
                 probe.src = url;
               }
             }
+          } else if (item.unlocked && item.portrait) {
+            /* Ficha de personagem: o retrato, enquadrado pelo topo para o
+               rosto nao ser cortado na miniatura. Sem arquivo, fica a
+               moldura escura. */
+            thumb.classList.add('is-portrait');
+            var purl = RBF.CONFIG.paths.characters + 'portraits/' + item.portrait;
+            var pprobe = new Image();
+            pprobe.onload = function () {
+              thumb.style.backgroundImage = 'url("' + purl + '")';
+              thumb.classList.add('is-loaded');
+            };
+            pprobe.onerror = function () { /* fica a moldura */ };
+            pprobe.src = purl;
           }
           card.appendChild(thumb);
           card.appendChild(UI.el('span', 'rbf-gal-name',

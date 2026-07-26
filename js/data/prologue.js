@@ -139,7 +139,7 @@ RBF.PROLOGUE = [
    As linhas do cartao sao canonicas e nao se alteram.
    O que Matheo repara e a FORMA delas.
    ====================================================================== */
-{ t:'scene', id:'p3_kharvel', chapter:'prologo', title:'Khar\u2019Vel',
+{ t:'scene', id:'p3_kharvel', keepSprites:true, chapter:'prologo', title:'Khar\u2019Vel',
   bg:'bg_archive_closeup' },
 
 { t:'arc', key:'arquivo', lns:[
@@ -186,7 +186,7 @@ RBF.PROLOGUE = [
    As notas viram sistema: cada uma se defende de uma acusacao
    que ninguem fez.
    ====================================================================== */
-{ t:'scene', id:'p4_compilador', chapter:'prologo', title:'O Compilador',
+{ t:'scene', id:'p4_compilador', keepSprites:true, chapter:'prologo', title:'O Compilador',
   bg:'bg_archive_closeup' },
 
 { t:'nar', tx:'As notas de rodap\u00e9 eram assinadas por um Compilador.' },
@@ -226,7 +226,7 @@ RBF.PROLOGUE = [
    P5 - A CAMARA DO CASULO
    Substituicao, nao transformacao. Sensorial: temperatura.
    ====================================================================== */
-{ t:'scene', id:'p5_casulo', chapter:'prologo', title:'A c\u00e2mara do casulo',
+{ t:'scene', id:'p5_casulo', keepSprites:true, chapter:'prologo', title:'A c\u00e2mara do casulo',
   bg:'bg_archive_closeup' },
 
 { t:'arc', key:'arquivo', lns:[
@@ -252,7 +252,7 @@ RBF.PROLOGUE = [
    P6 - AS GEMEAS
    Klara vampira, Liara humana. O exame confirma.
    ====================================================================== */
-{ t:'scene', id:'p6_gemeas', chapter:'prologo', title:'As g\u00eameas',
+{ t:'scene', id:'p6_gemeas', keepSprites:true, chapter:'prologo', title:'As g\u00eameas',
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
 
 { t:'arc', key:'arquivo', lns:[
@@ -280,7 +280,7 @@ RBF.PROLOGUE = [
    P7 - O TREINAMENTO
    O reconhecimento vem pelo eco da frase, sem que ninguem o enuncie.
    ====================================================================== */
-{ t:'scene', id:'p7_experimentos', chapter:'prologo', title:'O treinamento',
+{ t:'scene', id:'p7_experimentos', keepSprites:true, chapter:'prologo', title:'O treinamento',
   bg:'bg_archive_closeup' },
 { t:'sfx', id:'sfx_page_turn' },
 
@@ -308,7 +308,7 @@ RBF.PROLOGUE = [
    Sem alibi. Ele leu a ficha antes de assinar.
    O pensamento unico do capitulo mora aqui.
    ====================================================================== */
-{ t:'scene', id:'p8_escriba', chapter:'prologo', title:'A escriba de Lervel',
+{ t:'scene', id:'p8_escriba', keepSprites:true, chapter:'prologo', title:'A escriba de Lervel',
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
 
 { t:'arc', key:'arquivo', lns:[
@@ -333,7 +333,7 @@ RBF.PROLOGUE = [
    P9 - A PERGUNTA
    Aqui, e so aqui, as duas camadas de tempo se contaminam.
    ====================================================================== */
-{ t:'scene', id:'p9_pergunta', chapter:'prologo', title:'A pergunta',
+{ t:'scene', id:'p9_pergunta', keepSprites:true, chapter:'prologo', title:'A pergunta',
   bg:'bg_archive_closeup' },
 
 { t:'nar', tx:'A entrada seguinte estava separada do resto por dois dedos de papel em branco.' },

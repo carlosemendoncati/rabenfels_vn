@@ -249,8 +249,13 @@ RBF.Gallery = (function () {
         entriesOpen:  ent ? open : 0,
         entriesTotal: ent ? ent.length : 0,
         portrait: it.portrait || null,
-        /* Item de cenario mostra o proprio background. */
-        bg:       (it.need.indexOf('bg:') === 0) ? it.need.slice(3) : null,
+        /* Item de cenario mostra o proprio background.
+           A condicao 'cat' e necessaria: varias fichas de personagem
+           destravam por 'bg:<cenario>', e sem ela a ficha herdava a
+           miniatura do cenario que a destravou - Serafina aparecia como
+           o salao, Aldric como a biblioteca. */
+        bg:       (it.cat === 'cg' && it.need.indexOf('bg:') === 0)
+                    ? it.need.slice(3) : null,
         unlocked: unlocked(it)
       });
     }
