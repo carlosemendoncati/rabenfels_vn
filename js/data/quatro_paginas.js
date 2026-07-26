@@ -54,6 +54,57 @@ var RBF = (typeof RBF !== 'undefined') ? RBF : {};
 
 RBF.QUATRO_PAGINAS = {
 
+
+  /* ------------------------------------------------------------------
+     LAUDO DO FINAL ALCANCADO.
+
+     Renderizado no topo do painel das Quatro Paginas, antes do cabecalho
+     do documento. E a unica parte da obra que fala do sentimento dela
+     com todas as letras - e pode, porque nao e cena: e laudo, e quem le
+     ja terminou.
+
+     As palavras mae, filha e amor continuam proibidas, inclusive aqui.
+     ------------------------------------------------------------------ */
+  finais: {
+
+    archive: {
+      titulo: 'O Arquivo',
+      o_que: 'Ela levou os cinco anos inteiros, no ritmo que o metodo pedia, e tentou na noite de nove de agosto do quinto ano. Chegou ate a floresta.',
+      custou: 'A tentativa falhou onde nenhuma preparacao alcancava. Ela voltou, escreveu ate o amanhecer, despachou o pacote e nao houve decimo primeiro dia.',
+      ela_sentiu: 'Alivio, e nao e engano de leitura. As quatro horas depois da floresta foram as unicas cinco anos em que ela nao teve de decidir mais nada. O trabalho estava fechado, o documento estava pronto, e a parte dela tinha acabado. Ela ficou no portao ate o sol subir de todo e nao pensou em nada em particular. Foi a coisa mais parecida com descanso que aconteceu com ela em Velha Nidhaus.',
+      klara: 'Sobreviveu. Seis anos depois entrou na Academia de Eldoria com a irma, mesma turma, e levou junto tudo o que Antoniette ensinou. Inclusive o que a fez valer mais.',
+      nao_soube: 'Que a menina viveu. Que o metodo funcionou em tudo, menos no que importava. E por que ela morreu.'
+    },
+
+    distance: {
+      titulo: 'O Distanciamento',
+      o_que: 'Ela manteve a distancia profissional do primeiro ao ultimo dia. Nao prometeu, nao se aproximou, nao tentou. A mala ficou feita debaixo da cama por onze dias e nunca saiu de la.',
+      custou: 'Nada, no papel. A missao foi cumprida, o relatorio e completo, e a Ordem recebeu exatamente o que pediu. Ela morreu com a ficha limpa.',
+      ela_sentiu: 'Nada que ela deixasse subir. E o unico final em que a disciplina dela nao rachou uma vez, e por isso e o mais frio de ler: uma mulher competente executou um trabalho dificil sem se contaminar, e o resultado foi identico. A porta do quarto das gemeas abriu e fechou naquela madrugada, alguem parou no alto da escada, e ela ficou onde estava. Ficaram as duas paradas por um tempo que ela nao conseguiu medir, e ela tinha cinco anos de registro e uma memoria treinada para duracoes.',
+      klara: 'Sobreviveu do mesmo jeito. Entrou na Academia do mesmo jeito. A diferenca inteira e que atravessou cinco anos sem ninguem, e ninguem reparou que faltava alguma coisa, porque nunca teve.',
+      nao_soube: 'Que a distancia nao a protegeu de nada. A conta era sobre a menina ter escolhido alguem, e a menina escolheu assim mesmo.'
+    },
+
+    early: {
+      titulo: 'Agosto Antecipado',
+      o_que: 'Ela entendeu o cronograma antes da hora e agiu com o que tinha. A casa percebeu o movimento e antecipou o proprio calendario.',
+      custou: 'Tudo, e mais cedo. A porta nordeste ficou aberta e o patio, vazio. Ninguem gritou. Numa casa daquele tamanho, isso significa que ninguem precisou.',
+      ela_sentiu: 'Pressa, e depois a coisa que vem depois da pressa quando ja nao ha o que apressar. Foi o unico final em que ela nao teve as quatro horas: escreveu o Arquivo sabendo que estava documentando uma coisa que ja tinha acontecido, e a mao continuou firme porque a mao dela era assim. Escreveu a ultima entrada para uma menina que ja nao estava naquela casa e nao mudou uma palavra por causa disso.',
+      klara: 'Foi levada em agosto do quinto ano, sem preparo e sem cerimonia, com uma cama a menos no quarto desde as duas e dez. A irma continuou dormindo.',
+      nao_soube: 'Que a propria pressa moveu a data. Ela passou cinco anos sendo a unica pessoa em cinco seculos capaz de mover uma data, e moveu - para o lado errado.'
+    },
+
+    cover_burned: {
+      titulo: 'A Cobertura Queimada',
+      o_que: 'Ela fez tudo o que a Ordem manda fazer: relatou agosto na integra, com testemunha direta, e remeteu a Lervel o nome da antecessora com identificacao da fonte, porque prova sem proveniencia nao vale em materia de foro.',
+      custou: 'A casa le tudo o que entra e sai, e sempre leu. Serafina mandou chama-la as nove da noite do dia oito. Nao houve acusacao, nao houve gritaria: houve um encerramento de contrato, feito com a cortesia de quem ja tinha conferido as referencias no segundo mes.',
+      ela_sentiu: 'Vergonha profissional, primeiro, e e o unico final em que esse e o sentimento de cima. Ela nao foi descoberta por descuido nem por azar: foi descoberta por competencia, por ter feito o procedimento correto dentro de uma casa que ela sabia que lia a correspondencia. Ficou de pe no escuro, com a mala fechada ao lado da cama, esperando uma batida que nao veio, e o que doeu nao foi o medo. Foi saber exatamente qual linha do proprio relatorio a entregou.',
+      klara: 'Ficou. O Arquivo saiu incompleto e mesmo assim saiu, porque ela escreveu a noite inteira com o contrato ja encerrado. Seis anos depois, a Academia.',
+      nao_soube: 'Que o nome que ela remeteu era de um homem vivo que trabalhava naquela casa, e que ele nunca pediu garantia nenhuma antes de dar aquele nome a ela.'
+    }
+
+  },
+
   /* Cabecalho do documento, comum as quatro. */
   cabecalho: [
     'Retiradas do corpo do Arquivo em 10 de agosto, entre as tr\u00eas e trinta e as quatro e dez.',

@@ -1,5 +1,75 @@
 # Changelog
 
+## 0.8.0 — A Cobertura Queimada, o material recuperado e a segunda leitura
+
+### O defeito, consertado
+
+**"A Cobertura Queimada" era inalcançável.** A flag não era gravada em
+lugar nenhum, e a ramificação escrita nos Capítulos 10 e 11 nunca rodou. O
+teste de alcance tinha uma exceção que deixava passar em silêncio.
+
+O gatilho são duas escolhas, e as duas são o jogador sendo **correto** pelas
+regras da Ordem: relatar agosto do ano três na íntegra (`lied_to_order:'A'`)
+e remeter o nome da antecessora com identificação da fonte
+(`third_paid:'B'`), porque prova sem proveniência não vale em matéria de
+foro. Nidhaus lê tudo o que entra e sai. Ela pôs o nome de um empregado
+vivo num envelope que atravessa aquela casa.
+
+**Ser honesta com a Ordem é o que queima a cobertura dela.**
+
+A exceção do validador foi removida: agora todo final declarado tem de ser
+atingido por alguma combinação de escolhas, sem escapatória. Os quatro
+passam.
+
+### O material recuperado
+
+A queixa procedia: 26 itens tinham nome e mais nada. Agora **48 itens e 121
+entradas**.
+
+- **Todo documento e registro ganhou descrição** — o que aquilo é, sem
+  entregar o mistério — e entradas que só abrem com a obra terminada.
+- **Os registros de volume declaram a troca de cada capítulo**: o que ela
+  ganhou e o que entregou. Lidos em sequência, são a espinha da obra.
+- **As fichas ganharam camada pós-jogo**: o tique, o medo, a contradição e
+  o que sobra da pessoa. A Antoniette come em pé porque na Ordem se come em
+  pé, e ela levou o hábito para uma casa onde ninguém tinha pressa.
+- **Fichas novas:** Carmine — que não existe na galeria antes do fim,
+  porque antes do fim não há motivo para o jogador saber que há alguém para
+  ter ficha —, Os Guardiões e O Primeiro.
+
+### O laudo do final
+
+O painel das Quatro Páginas passa a abrir com o laudo da leitura
+alcançada: **o que aconteceu, o que custou, o que ela sentiu, o que foi da
+menina e o que ela não soube.** É a única parte da obra que diz o
+sentimento dela com todas as letras — pode, porque não é cena, é laudo, e
+quem lê já terminou. As palavras mãe, filha e amor continuam proibidas
+inclusive aqui.
+
+### Registro de Leituras
+
+O jogador terminava sem nunca saber qual dos quatro finais tinha pegado: o
+nome aparecia num único lugar do jogo inteiro. Painel novo, em forma de
+índice de arquivo — as alcançadas com o laudo, as que faltam como linha
+lacrada. Sem porcentagem e sem troféu.
+
+### A segunda leitura do Prólogo
+
+Quem terminou recomeça com a flag `relendo` ligada, semeada pelo motor a
+partir do progresso gravado. O Prólogo passa a ter o que não estava lá na
+primeira vez.
+
+**A voz continua sendo a dele.** O Compilador não ganha linha nova —
+Antoniette está morta e o documento é o mesmo objeto físico. O que muda é o
+que Matheo repara, e ele continua sem entender. Ele diz os quatro números
+que faltam em voz alta. Vê a asa e não sabe que vai voltar a essa dobra
+numa tarde de maio, sete anos depois. E o jogador fica sabendo onde as
+quatro páginas estão — no livro-caixa da casa, e ninguém foi buscá-las.
+
+**Validado:** 7.799 checagens estáticas, 689 no Node, 120 no smoke. Zero
+falhas. 3.117 beats.
+
+
 ## 0.7.1 — Revisão medida do Prólogo, Cap. 1 e Cap. 2
 
 Passe editorial nos três primeiros capítulos, agora que o fim existe. Um

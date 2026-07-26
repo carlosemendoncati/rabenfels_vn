@@ -77,6 +77,8 @@ RBF.PROLOGUE = [
 
 { t:'nar', tx:'Couro encerado, cordel escuro, sem selo.' },
 { t:'nar', tx:'Pesava mais do que devia para o tamanho.' },
+{ t:'inn', tx:'Couro encerado. Chuva na estrada arruina papel.', if:{ relendo:true } },
+{ t:'inn', tx:'Ela pensou na chuva.', if:{ relendo:true } },
 { t:'nar', tx:'O cordel estava dado em quatro voltas e um n\u00f3 cego, do jeito que se amarra o que n\u00e3o deve abrir sozinho na estrada.' },
 { t:'pause' },
 
@@ -112,6 +114,9 @@ RBF.PROLOGUE = [
 
 { t:'nar', tx:'A numera\u00e7\u00e3o dela terminava em duzentos e noventa e um.' },
 { t:'inn', tx:'Faltam quatro.' },
+{ t:'pause', if:{ relendo:true } },
+{ t:'inn', tx:'Duzentos e oitenta e oito. Duzentos e oitenta e nove. Duzentos e noventa. Duzentos e noventa e um.', if:{ relendo:true } },
+{ t:'inn', tx:'Quatro n\u00fameros. Ele os diria em voz alta a vida inteira sem saber o que estava dizendo.', if:{ relendo:true } },
 { t:'pause' },
 { t:'nar', tx:'Ele passou o polegar pela dobra interna. O corte era reto e antigo, feito com l\u00e2mina e com tempo.' },
 { t:'inn', tx:'Ou ela tirou, ou tiraram dela.' },
@@ -189,12 +194,18 @@ RBF.PROLOGUE = [
 { t:'inn', tx:'Ela larga o assunto aqui.' },
 { t:'pause' },
 { t:'inn', tx:'Ela nunca larga assunto nenhum.' },
+{ t:'pause', if:{ relendo:true } },
+{ t:'nar', tx:'Ela largou porque n\u00e3o havia mais nada. A menina n\u00e3o atribu\u00eda a nada porque n\u00e3o havia nada a que atribuir, do lado dela.', if:{ relendo:true } },
+{ t:'nar', tx:'Do outro lado havia, e contava.', if:{ relendo:true } },
 { t:'pause' },
 { t:'nar', tx:'Na dobra da folha seguinte havia uma asa seca, prensada pelo peso das p\u00e1ginas.' },
 { t:'nar', tx:'Clara, com uma veia vermelha atravessando.' },
 { t:'nar', tx:'Ele soprou de leve. A asa n\u00e3o se moveu. Estava colada ao papel havia meses.' },
 { t:'pause' },
 { t:'nar', tx:'Ele passou adiante sem escrever nada a respeito.' },
+{ t:'pause', if:{ relendo:true } },
+{ t:'nar', tx:'A asa ficaria ali por mais sete anos, e a veia vermelha n\u00e3o desbotaria.', if:{ relendo:true } },
+{ t:'nar', tx:'Ele voltaria a abrir nessa dobra sem contar as p\u00e1ginas, uma vez, numa tarde de maio.', if:{ relendo:true } },
 
 /* ======================================================================
    P4 - O COMPILADOR
@@ -372,6 +383,9 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'A pergunta ocupava a p\u00e1gina inteira e o resto era papel limpo.' },
 { t:'pause' },
 { t:'nar', tx:'Ela deixou o espa\u00e7o da resposta e foi embora antes de poder receb\u00ea-la.' },
+{ t:'pause', if:{ relendo:true } },
+{ t:'nar', tx:'Ela escreveu essa p\u00e1gina com uma hora e quarenta de prazo, depois de arrumar tudo o que lhe pediram para arrumar.', if:{ relendo:true } },
+{ t:'nar', tx:'Foi a \u00fanica coisa daquela noite que ela escreveu sem calcular se serviria para alguma coisa.', if:{ relendo:true } },
 
 /* ======================================================================
    P10 - A ULTIMA ENTRADA
@@ -423,6 +437,10 @@ RBF.PROLOGUE = [
     'Velha Nidhaus, agosto.'
 ]},
 
+{ t:'pause', if:{ relendo:true } },
+{ t:'nar', tx:'As quatro p\u00e1ginas est\u00e3o no livro-caixa da casa, em Velha Nidhaus, no lugar de quatro folhas em branco.', if:{ relendo:true } },
+{ t:'nar', tx:'Continuam l\u00e1. Ningu\u00e9m foi busc\u00e1-las, e o tribunal indeferiu por falta delas.', if:{ relendo:true } },
+{ t:'pause', if:{ relendo:true } },
 { t:'nar', tx:'Ele ficou com a \u00faltima p\u00e1gina na m\u00e3o.' },
 { t:'pause' },
 
@@ -450,6 +468,9 @@ RBF.PROLOGUE = [
    ====================================================================== */
 { t:'fade_out' },
 { t:'bgm', id:null },
+{ t:'nar', tx:'Cinco anos antes daquela noite, uma mulher de vinte anos abriu a janela de uma carruagem e deixou aberta.', if:{ relendo:true } },
+{ t:'nar', tx:'Ela achou bonito e anotou que tinha achado, porque impress\u00e3o de chegada muda em tr\u00eas semanas e ningu\u00e9m lembra qual era.', if:{ relendo:true } },
+{ t:'pause', if:{ relendo:true } },
 { t:'title',
   main:'ARQUIVO RABENFELS',
   sub:'"O conhecimento n\u00e3o foi suficiente. Mas \u00e9 o que fica."',

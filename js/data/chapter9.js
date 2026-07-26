@@ -364,6 +364,34 @@ RBF.CHAPTER9 = [
 { t:'scene', id:'c9_julho', chapter:'capitulo9', title:'Fim de julho',
   bg:'bg_corridor', bgm:null },
 
+/* ----------------------------------------------------------------------
+   A COBERTURA QUEIMADA - o gatilho.
+
+   O final existia em RBF.ENDINGS desde o inicio e NUNCA disparava: a
+   flag nao era gravada em lugar nenhum, e a ramificacao escrita nos
+   Capitulos 10 e 11 era conteudo morto. O teste de alcance tinha uma
+   excecao que deixava passar em silencio.
+
+   O gatilho sao duas escolhas que o jogador ja fez, e as duas sao o
+   jogador sendo CORRETO pelas regras da Ordem:
+
+     lied_to_order:'A'  relatou agosto do ano tres na integra, com hora,
+                        local e testemunha direta, por correspondencia.
+     third_paid:'B'     comprou o nome da antecessora e remeteu a Lervel
+                        COM identificacao da fonte, porque prova sem
+                        proveniencia nao vale em materia de foro.
+
+   Nidhaus le tudo o que entra e sai - e canon desde o Capitulo 1, e o
+   Capitulo 11 volta a dizer. Ela pos o nome de um empregado vivo dentro
+   de um envelope que atravessa esta casa.
+
+   Serafina ja tinha avisado, no Capitulo 8, que escreveu a Lervel para
+   conferir as referencias dela. Aqui a conta fecha.
+
+   >>> Ser honesta com a Ordem e o que queima a cobertura dela. <<<
+   ---------------------------------------------------------------------- */
+{ t:'flag', set:{ cover_burned:true }, if:{ lied_to_order:'A', third_paid:'B' } },
+
 { t:'ending' },
 
 { t:'nar', tx:'No fim de julho a casa come\u00e7ou a se preparar para agosto do jeito que se prepara todo ano.' },

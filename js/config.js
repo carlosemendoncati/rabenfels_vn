@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.7.1',
+  gameVersion:       '0.8.0',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
@@ -1039,6 +1039,18 @@ RBF.MENU_RECORDS = [
     action:  'pages',
     needs:   'completed',
     note:    'Faltavam quatro. Elas nunca sa\u00edram de Velha Nidhaus.'
+  },
+  /* Tambem so com a obra terminada. Mostra qual das quatro leituras o
+     jogador alcancou - antes disto o nome do final aparecia num unico
+     lugar do jogo inteiro. */
+  {
+    id:      'readings',
+    label:   'Registro de Leituras',
+    chapter: 'LEITURAS DO ARQUIVO',
+    code:    'REG-0X',
+    action:  'readings',
+    needs:   'completed',
+    note:    'Quatro maneiras de chegar ao mesmo agosto.'
   },
   {
     id:      'options',

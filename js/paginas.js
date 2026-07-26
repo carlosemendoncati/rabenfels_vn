@@ -99,6 +99,37 @@ RBF.Paginas = (function () {
     };
   }
 
+  /* O laudo do final alcancado: o que aconteceu, o que custou, o que ela
+     sentiu, o que foi da menina e o que ela morreu sem saber.
+     Devolve null quando o run e de versao anterior ao laudo. */
+  function laudo() {
+    var d = dados();
+    var run = (RBF.Saves && RBF.Saves.lastRun) ? RBF.Saves.lastRun() : null;
+    if (!d || !d.finais || !run || !run.ending) { return null; }
+    return d.finais[run.ending] || null;
+  }
+
+  /* Quadro das quatro leituras: as alcancadas com o laudo, as que faltam
+     como linha lacrada. Le RBF.ENDINGS para nao duplicar nome de final. */
+  function leituras() {
+    var d = dados();
+    var vistos = (RBF.Saves && RBF.Saves.endingsSeen) ? RBF.Saves.endingsSeen() : [];
+    var out = [];
+    var lista = RBF.ENDINGS || [];
+    for (var i = 0; i < lista.length; i++) {
+      var e = lista[i];
+      var visto = vistos.indexOf(e.id) !== -1;
+      out.push({
+        id:      e.id,
+        label:   e.label || e.id,
+        nota:    e.note || '',
+        vista:   visto,
+        laudo:   (visto && d && d.finais) ? (d.finais[e.id] || null) : null
+      });
+    }
+    return out;
+  }
+
   /* Rotulo do final alcancado, para o subtitulo do painel. Le a tabela
      declarada em RBF.ENDINGS para nao duplicar nome de final aqui. */
   function endingLabel(id) {
@@ -119,6 +150,8 @@ RBF.Paginas = (function () {
   return {
     available:       available,
     build:           build,
+    laudo:           laudo,
+    leituras:        leituras,
     endingLabel:     endingLabel,
     endingProgress:  endingProgress
   };

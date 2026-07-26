@@ -470,6 +470,10 @@ def script_checks():
     choice_ids = {}
     arc_keys = set()
     flags_written = set()
+    # Semeadas pelo motor, nao por escolha:
+    #   ending  -> beat { t:'ending' }
+    #   relendo -> startNewGame, quando a obra ja foi terminada
+    flags_written.add('relendo')
     flags_read = {}
     chapters_seen = set()
 

@@ -280,9 +280,12 @@ function manifestChecks(win) {
       for (const k of Object.keys(o.flags || {})) { settable.add(k); }
     }
   }
-  /* Flags gravadas por beat, e nao por escolha. O { t:'ending' } decide o
-     final a partir de RBF.ENDINGS e grava em flags.ending; sem isto, todo
-     'if:{ ending:... }' apareceria como flag orfa. */
+  /* Flags gravadas fora de escolha:
+       ending  -> beat { t:'ending' }, que resolve RBF.ENDINGS
+       relendo -> semeada por startNewGame quando a obra ja foi terminada,
+                  e o que liga a segunda leitura do Prologo
+     Sem isto as duas apareceriam como flag orfa. */
+  settable.add('relendo');
   (function scanSet(beats) {
     for (const b of beats) {
       if (b.t === 'flag') {
@@ -1287,18 +1290,29 @@ function endingsReachableCheck() {
       }
       for (const f in (opt.flags || {})) { flags[f] = opt.flags[f]; }
     }
+    /* Beats 'flag' condicionais tambem gravam. Sem isto a forca bruta nao
+       enxerga o gatilho da Cobertura Queimada, que nasce da combinacao de
+       duas escolhas e nao de uma opcao sozinha. */
+    (function varre(bs) {
+      for (const b of bs) {
+        if (b.t === 'flag' && b.set) {
+          let vale = true;
+          for (const k in (b.if || {})) { if (flags[k] !== b.if[k]) { vale = false; } }
+          if (vale) { for (const k in b.set) { flags[k] = b.set[k]; } }
+        }
+        if (b.t === 'cho') { for (const o of b.opts) { if (o.then) { varre(o.then); } } }
+      }
+    })(RBF.Script.base());
     alcancados.add(resolve(rotas, flags));
   }
 
+  /* Sem excecao. A versao anterior pulava final cuja condicao era uma
+     flag que nenhuma escolha grava, supondo que algum evento de roteiro
+     a gravaria. Nenhum evento gravava, 'cover_burned' ficou inalcancavel
+     por toda a producao, e o SKIP no meio de duzentos PASS nao chamou a
+     atencao de ninguem. Agora todo final declarado tem de ser atingido
+     por alguma combinacao de escolhas, e ponto. */
   for (const e of RBF.ENDINGS) {
-    /* Final com condicao de flag que nenhuma escolha grava nao e
-       alcancavel por escolha - e por evento de roteiro. Nao reprova. */
-    const porFlag = e.when && e.when.flag;
-    if (porFlag && !alcancados.has(e.id)) {
-      console.log('  SKIP  ' + e.id + ' depende da flag ' + e.when.flag +
-                  ', gravada por evento e nao por escolha');
-      continue;
-    }
     check(alcancados.has(e.id), 'final alcancavel: ' + e.id + ' (' + e.label + ')');
   }
 }

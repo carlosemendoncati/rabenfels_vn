@@ -1285,6 +1285,15 @@ RBF.Engine = (function () {
     pres.sprites      = {};
 
     RBF.STATE.flags           = {};
+
+    /* SEGUNDA LEITURA.
+       Quem ja terminou a obra recomeca com esta flag ligada, e o roteiro
+       usa 'if:{ relendo:true }' para mostrar o que nao estava la na
+       primeira vez. E o unico dado que atravessa partidas, e vem do
+       progresso gravado, nao do estado vivo. */
+    if (RBF.Saves.hasCompleted && RBF.Saves.hasCompleted()) {
+      RBF.STATE.flags.relendo = true;
+    }
     RBF.STATE.variables       = {};
     RBF.STATE.unlockedContent = [];
     RBF.STATE.choiceLog       = {};

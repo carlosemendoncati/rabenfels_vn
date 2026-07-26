@@ -371,6 +371,7 @@ RBF.Menu = (function () {
       case 'chapters': openChapterSelect();  break;
       case 'gallery':  openGallery();        break;
       case 'pages':    openQuatroPaginas();  break;
+      case 'readings': openLeituras();       break;
       case 'options':  openSettings();       break;
       case 'credits':  openCredits();        break;
       case 'close':    confirmCloseArchive(); break;
@@ -1258,6 +1259,30 @@ RBF.Menu = (function () {
 
     var body = UI.el('div', 'rbf-quatro');
 
+    /* O laudo do final alcancado vem antes do documento. E a unica parte
+       da obra que diz o sentimento dela com todas as letras - pode,
+       porque nao e cena, e quem le ja terminou. */
+    var lau = RBF.Paginas.laudo();
+    if (lau) {
+      var box = UI.el('div', 'rbf-laudo');
+      box.appendChild(UI.el('h3', 'rbf-laudo__tit', 'Leitura alcancada: ' + lau.titulo));
+      var campos = [
+        ['O que aconteceu',        lau.o_que],
+        ['O que custou',           lau.custou],
+        ['O que ela sentiu',       lau.ela_sentiu],
+        ['O que foi da menina',    lau.klara],
+        ['O que ela nao soube',    lau.nao_soube]
+      ];
+      for (var q = 0; q < campos.length; q++) {
+        if (!campos[q][1]) { continue; }
+        var sec = UI.el('div', 'rbf-laudo__sec');
+        sec.appendChild(UI.el('span', 'rbf-laudo__rot', campos[q][0]));
+        sec.appendChild(UI.el('p', 'rbf-laudo__tx', campos[q][1]));
+        box.appendChild(sec);
+      }
+      body.appendChild(box);
+    }
+
     var cab = UI.el('div', 'rbf-quatro__cab');
     for (var c = 0; c < doc.cabecalho.length; c++) {
       cab.appendChild(UI.el('p', 'rbf-quatro__cabline', doc.cabecalho[c]));
@@ -1308,6 +1333,67 @@ RBF.Menu = (function () {
       name:     'pages',
       title:    'As Quatro P\u00e1ginas',
       subtitle: sub,
+      body:     body,
+      wide:     true,
+      actions: [
+        { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
+      ],
+      onClose: panelReturn(fromTitle)
+    });
+  }
+
+  /* ======================================================================
+     REGISTRO DE LEITURAS
+
+     O jogador terminava a obra sem nunca saber qual dos quatro finais
+     tinha alcancado: o nome do final aparecia em um unico lugar do jogo,
+     o subtitulo do painel das Quatro Paginas.
+
+     Aqui as quatro leituras aparecem em forma de indice de arquivo. As
+     alcancadas com o laudo; as que faltam como linha lacrada, do mesmo
+     jeito que as fichas mostram lacuna em vez de esconder que ha mais.
+     Sem porcentagem e sem trofeu.
+     ====================================================================== */
+
+  function openLeituras() {
+    if (!RBF.Paginas || !RBF.Paginas.available()) { return; }
+    var lista = RBF.Paginas.leituras();
+
+    var fromTitle = RBF.State.is('title');
+    RBF.State.push('leituras');
+
+    var body = UI.el('div', 'rbf-leituras');
+    var vistas = 0;
+
+    for (var i = 0; i < lista.length; i++) {
+      var L = lista[i];
+      if (L.vista) { vistas += 1; }
+
+      var art = UI.el('article', 'rbf-leitura' + (L.vista ? '' : ' is-lacrada'));
+      var head = UI.el('div', 'rbf-leitura__head');
+      head.appendChild(UI.el('span', 'rbf-leitura__num',
+        L.vista ? String(i + 1) : '\u2014'));
+      head.appendChild(UI.el('h3', 'rbf-leitura__tit',
+        L.vista ? L.label : 'leitura nao alcancada'));
+      art.appendChild(head);
+
+      if (L.vista) {
+        if (L.nota) { art.appendChild(UI.el('p', 'rbf-leitura__nota', L.nota)); }
+        if (L.laudo) {
+          art.appendChild(UI.el('p', 'rbf-leitura__tx', L.laudo.o_que));
+          art.appendChild(UI.el('p', 'rbf-leitura__tx', L.laudo.custou));
+        }
+      } else {
+        art.appendChild(UI.el('p', 'rbf-leitura__vazio',
+          '[ nenhum registro desta leitura neste arquivo ]'));
+      }
+      body.appendChild(art);
+    }
+
+    UI.panel({
+      name:     'leituras',
+      title:    'Registro de Leituras',
+      subtitle: vistas + ' de ' + lista.length + ' alcancadas',
       body:     body,
       wide:     true,
       actions: [
