@@ -16,7 +16,7 @@
    Sem escolha nenhuma, de proposito. E o unico capitulo em que o jogador
    so assiste.
 
-   CANON APLICADO (docs/biblia_v3.md):
+   CANON APLICADO (docs/biblia_rabenfels.md):
    - Khar'Vel e o nome que Antoniette deu. Os registros que ela cita sao
      reais e conferiveis; a convencao e o nome. O jogador nao descobre
      isso aqui.

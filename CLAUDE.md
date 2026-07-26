@@ -19,7 +19,10 @@ sem confirmar comigo.
 Arquivos de apoio em `docs/`:
 - `arquivo_rabenfels.docx` — o documento diegético da Antoniette (in-fiction),
   usado como fonte de citação quando uma cena referencia o Arquivo diretamente.
-- `biblia_narrativa_rabenfels.docx`, `roteiro_prologo_cap1.docx`.
+- `biblia_rabenfels.md` — a bíblia de execução. Reescrita do zero em
+  26/07/2026; as três anteriores foram apagadas e estão em `_backup/`.
+- `estrutura_v1.md` — atos, trocas e o gráfico de fios dos onze capítulos.
+- `roteiro_prologo_cap1.docx`.
 
 ## O arco meta-narrativo (não esquecer nunca)
 

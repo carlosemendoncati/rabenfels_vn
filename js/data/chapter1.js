@@ -20,7 +20,7 @@
    e ha algo sinistro na tensao entre a alegria das cores e o rigor
    glacial dos arranjos formais".
 
-   CANON APLICADO (docs/biblia_v3.md):
+   CANON APLICADO (docs/biblia_rabenfels.md):
    - Klara nasceu vampira. Liara nasceu humana e SABE que a irma e
      vampira; acha que as duas vivem a mesma vida.
    - So Klara passa por procedimentos. So Klara tem curativo.
