@@ -293,6 +293,15 @@ RBF.Gallery = (function () {
       { need: 'done:epilogo', tx: 'A casa le tudo o que entra e sai. Foi assim que a cobertura dela pode queimar, no fim, por ela ter feito exatamente o que a Ordem manda.' }
     ]},
 
+    { id: 'doc_ficha', cat: 'doc', name: 'Livro de pessoal',
+      need: 'arc:ficha',
+      text: 'A ficha de admissao e baixa dela, na letra do escriturario da casa. Tres palavras na ultima linha.',
+      entries: [
+      { need: 'arc:ficha',    tx: 'Motivo de saude. E a formula da casa, e a casa usa a mesma desde sempre.' },
+      { need: 'done:epilogo', tx: 'Matheo leu esta linha uma vez antes, numa ficha de trinta e sete anos atras, uma semana antes de assinar a autorizacao de campo dela. E assinou.' },
+      { need: 'done:epilogo', tx: 'Este cartao so existe em duas das quatro leituras. Nas outras duas nao ha baixa nenhuma para pedir, e o tribunal declarou autoria falecida sobre alguem que respira.' }
+    ]},
+
     { id: 'doc_balada', cat: 'doc', name: 'Cantiga da Marca',
       need: 'arc:balada',
       text: 'Cantiga de roda recolhida na aldeia, a quatro quilometros de Nidhaus. Antoniette transcreveu a letra na primeira hora, como curiosidade local.',

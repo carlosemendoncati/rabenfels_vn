@@ -299,6 +299,68 @@ RBF.EPILOGUE = [
    Terceiro e ultimo momento da balada. Sobre preto, sem imagem, sem
    sprite. O verso que faltava fecha as duas irmas na mesma linha.
    ====================================================================== */
+/* ======================================================================
+   E4b - O QUE FICOU DE CADA UMA
+   Quatro fechamentos, um por leitura. Em duas ela esta morta e a ficha
+   diz tres palavras. Em duas ela esta viva, e o tribunal declarou
+   "autoria falecida" sobre alguem que respira.
+   ====================================================================== */
+{ t:'fade_out' },
+{ t:'scene', id:'ep_oque_ficou', chapter:'epilogo', title:'O que ficou',
+  bg:'bg_prologue_room', bgm:null },
+
+/* --- ARCHIVE --------------------------------------------------------- */
+{ t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.', if:{ ending:'archive' } },
+{ t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
+    'VAEL, Antoniette. Baixa: agosto, ano cinco.',
+    '',
+    'Motivo de sa\u00fade.'
+], if:{ ending:'archive' } },
+{ t:'inn', tx:'Eu j\u00e1 li esta linha.', if:{ ending:'archive' } },
+{ t:'inn', tx:'Numa outra ficha, com outro nome, uma semana antes de assinar a dela.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Ele p\u00f4s as duas folhas lado a lado. A caligrafia era a mesma, com trinta e sete anos de diferen\u00e7a.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Depois virou as duas para baixo, uma em cima da outra.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'Ela chegou at\u00e9 a floresta. \u00c9 mais longe do que qualquer outra pessoa chegou em cinco s\u00e9culos, e ningu\u00e9m nunca vai saber disso.', if:{ ending:'archive' } },
+
+/* --- EARLY ----------------------------------------------------------- */
+{ t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, com a baixa em agosto.', if:{ ending:'early' } },
+{ t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
+    'VAEL, Antoniette. Baixa: agosto, ano cinco.',
+    '',
+    'Motivo de sa\u00fade.'
+], if:{ ending:'early' } },
+{ t:'inn', tx:'Eu j\u00e1 li esta linha.', if:{ ending:'early' } },
+{ t:'pause', if:{ ending:'early' } },
+{ t:'nar', tx:'Na mesma remessa veio a baixa de uma das filhas da casa, com a mesma data e a mesma f\u00f3rmula.', if:{ ending:'early' } },
+{ t:'nar', tx:'Ele leu as duas e n\u00e3o juntou as duas. Ningu\u00e9m junta duas fichas de pessoal e uma crian\u00e7a.', if:{ ending:'early' } },
+{ t:'pause', if:{ ending:'early' } },
+{ t:'nar', tx:'O cadastro da Academia, seis anos depois, viria com uma linha s\u00f3.', if:{ ending:'early' } },
+
+/* --- DISTANCE: ela esta viva ---------------------------------------- */
+{ t:'nar', tx:'Ele nunca pediu a ficha de pessoal dela, porque n\u00e3o havia baixa nenhuma para pedir.', if:{ ending:'distance' } },
+{ t:'pause', if:{ ending:'distance' } },
+{ t:'nar', tx:'Antoniette Vael foi recolhida do campo em setembro do ano cinco e reconduzida ao servi\u00e7o interno em Lervel.', if:{ ending:'distance' } },
+{ t:'nar', tx:'Correspond\u00eancia particular suspensa por prazo indeterminado, conforme o protocolo de agente recolhido.', if:{ ending:'distance' } },
+{ t:'pause', if:{ ending:'distance' } },
+{ t:'nar', tx:'O tribunal declarou a mat\u00e9ria de autoria falecida porque foi o que o pacote parecia, e ningu\u00e9m conferiu.', if:{ ending:'distance' } },
+{ t:'pause', if:{ ending:'distance' } },
+{ t:'nar', tx:'Ela trabalhava a tr\u00eas ruas do gabinete dele, e os dois passaram seis anos assim.', if:{ ending:'distance' } },
+{ t:'inn', tx:'Ele achou que ela tinha morrido.', if:{ ending:'distance' } },
+{ t:'inn', tx:'Ela deixou ele achar, porque a alternativa era explicar por que voltou sem a menina.', if:{ ending:'distance' } },
+
+/* --- COVER_BURNED: ela esta viva ------------------------------------ */
+{ t:'nar', tx:'Duzentas e quarenta e uma p\u00e1ginas. Ele contou, como conta tudo, e a numera\u00e7\u00e3o fechava.', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Faltava metade das plantas e todos os hor\u00e1rios de guarda depois de julho, e nada disso estava marcado como falta.', if:{ ending:'cover_burned' } },
+{ t:'pause', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'O tribunal indeferiu em quatro meses, e n\u00e3o precisou nem das quatro p\u00e1ginas.', if:{ ending:'cover_burned' } },
+{ t:'pause', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Antoniette Vael deixou Velha Nidhaus em setembro do ano cinco com carta de refer\u00eancia correta e dois meses de aviso pagos.', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Nunca voltou a Lervel e nunca escreveu a ele.', if:{ ending:'cover_burned' } },
+{ t:'pause', if:{ ending:'cover_burned' } },
+{ t:'inn', tx:'Se ela estivesse viva ela teria escrito.', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Foi a \u00fanica conclus\u00e3o que ele tirou em seis anos, e estava errada.', if:{ ending:'cover_burned' } },
+
 { t:'fade_out' },
 { t:'scene', id:'ep_cantiga', chapter:'epilogo', title:'A cantiga',
   bg:'bg_black', bgm:null },
@@ -322,10 +384,18 @@ RBF.EPILOGUE = [
 { t:'end_chap', line1:'Seis anos depois de Velha Nidhaus.', line2:'Duas matr\u00edculas, mesma turma.',
   chapter:'epilogo', completes:true },
 
-{ t:'title',
-  main:'ARQUIVO RABENFELS',
+{ t:'title', main:'ARQUIVO RABENFELS',
   sub:'"V\u00e1 mais r\u00e1pido do que eu fui."',
-  time:'Fim.' },
+  time:'Fim.', if:{ ending:'archive' } },
+{ t:'title', main:'ARQUIVO RABENFELS',
+  sub:'"O devagar n\u00e3o foi o que custou."',
+  time:'Fim.', if:{ ending:'early' } },
+{ t:'title', main:'ARQUIVO RABENFELS',
+  sub:'"Ela deixou ele achar."',
+  time:'Fim.', if:{ ending:'distance' } },
+{ t:'title', main:'ARQUIVO RABENFELS',
+  sub:'"Ele precisa abrir."',
+  time:'Fim.', if:{ ending:'cover_burned' } },
 { t:'fade_out' }
 
 ];

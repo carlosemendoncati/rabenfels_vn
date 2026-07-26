@@ -1,5 +1,64 @@
 # Changelog
 
+## 0.9.0 — A fuga deixa de teleportar, e a morte pode ser falsa
+
+### O defeito mais grave da obra
+
+Na rota `archive` as duas saíam pelo pátio, passavam a aldeia aos quarenta
+minutos, entravam na floresta — e o beat seguinte acendia uma vela **na
+biblioteca da casa**, sem uma linha de transição. Os beats compartilhados
+(o inventário, "chave da biblioteca", "o barão não vai mandar ninguém antes
+do amanhecer") pressupunham a casa nas quatro rotas, inclusive na fuga.
+
+**Cena nova: C11-1b · A volta.** Sem captura, sem perseguição, sem sonho.
+Klara para, vira e anda de volta, e não sabe explicar por quê — para ela é
+a fome e o vazio, na hora errada. Antoniette fica parada na trilha
+calculando o peso de uma criança e a distância até o rio; a conta fecha nas
+duas vezes; depois vai atrás dela. Dois quilômetros em silêncio. No portão
+Klara devolve a mala *como se devolve uma coisa emprestada* e pede
+desculpa, e ouve *"Não foi você"* de alguém que não sabe o que está dizendo.
+
+É a revelação 12 do canon sem ninguém em cena enunciá-la.
+
+### A morte pode ser falsa — dois dos quatro finais ela vive
+
+`RBF.ENDINGS` sempre disse "ela vive" em duas rotas; era a implementação que
+forçava a morte nas quatro. As notas estavam certas.
+
+| leitura | destino |
+|---|---|
+| **O Arquivo** | morre, no prazo que Carmine deu |
+| **Agosto Antecipado** | morre, sem as quatro horas |
+| **O Distanciamento** | **vive** — recolhida do campo, correspondência suspensa |
+| **A Cobertura Queimada** | **vive** — demitida com carta de referência correta |
+
+O Prólogo continua funcionando nas quatro, porque **o ponto morto dispara
+por silêncio, não por morte.** E o tribunal declara "autoria falecida" sobre
+alguém que, em duas leituras, respira a três ruas do gabinete de Matheo.
+
+### Como ela morre, quando morre
+
+Plantado em P8 desde sempre: a ficha da escriba de trinta e sete anos antes,
+na letra do escriturário, última linha **"Motivo de saúde."** Matheo leu
+aquilo uma semana antes de assinar a autorização dela.
+
+Ela morre da mesma causa, na mesma letra, no mesmo formulário. Não há corpo,
+não há luta, não há sangue — a casa nunca precisou disso.
+
+### Quatro fechamentos de Capítulo 11 e quatro epílogos
+
+`C11-6 · Depois` e `E4b · O que ficou` divergem por rota, com cartão final
+próprio: *"Vá mais rápido do que eu fui"* · *"O devagar não foi o que
+custou"* · *"Ela deixou ele achar"* · *"Ele precisa abrir"*.
+
+### Menu
+
+Códigos fora de sequência (`REG-05, REG-00, REG-0X, REG-06`) renumerados
+para `REG-01` a `REG-10`.
+
+**Validado:** 8.042 estáticas, 689 no Node, 120 no smoke. Zero falhas.
+
+
 ## 0.8.0 — A Cobertura Queimada, o material recuperado e a segunda leitura
 
 ### O defeito, consertado

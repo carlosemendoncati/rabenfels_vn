@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.8.0',
+  gameVersion:       '0.9.0',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
@@ -1176,28 +1176,28 @@ RBF.ENDINGS = [
   {
     id:    'cover_burned',
     label: 'A Cobertura Queimada',
-    note:  'Serafina a remove antes de agosto. Ela vive, e o Arquivo fica incompleto.',
+    note:  'Serafina encerra o contrato antes de agosto. Ela VIVE, o Arquivo sai incompleto, e Klara fica.',
     when:  { flag: 'cover_burned' }
   },
 
   {
     id:    'distance',
     label: 'O Distanciamento',
-    note:  'Ela nunca tenta. Missao cumprida. Ela vive.',
+    note:  'Ela nunca tenta e cumpre a missao. Ela VIVE, e e o pior dos quatro.',
     when:  { max: { hope: 4 } }
   },
 
   {
     id:    'early',
     label: 'Agosto Antecipado',
-    note:  'Entende cedo e age cedo. Mesmo fim, sem preparo e sem dignidade.',
+    note:  'Entende cedo e age cedo. A casa antecipa junto. Ela MORRE sem as quatro horas.',
     when:  { min: { answer: 13 }, max: { hope: 7 } }
   },
 
   {
     id:    'archive',
     label: 'O Arquivo',
-    note:  'Os onze capitulos no ritmo certo. O fim e o mesmo. O peso nao e.'
+    note:  'Chega mais longe do que qualquer outra rota, e volta a pe. Ela MORRE no prazo que Carmine deu.'
     /* sem 'when': e o final padrao */
   }
 ];

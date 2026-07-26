@@ -726,6 +726,76 @@ RBF.CHAPTER11 = [
 { t:'nar', tx:'Ele entregou no nonag\u00e9simo terceiro. Levou tr\u00eas dias a mais porque a estrada de Alsbeck alaga em novembro, e ele n\u00e3o achou que tr\u00eas dias fizessem diferen\u00e7a.' },
 { t:'pause' },
 
+/* ======================================================================
+   C11-6 - O QUE ACONTECEU COM ELA
+   Quatro destinos. Em duas rotas ela morre; em duas ela vive, e o ponto
+   morto dispara por silencio, nao por morte.
+   Nenhuma morte acontece em cena. O que a obra mostra e o formulario.
+   ====================================================================== */
+{ t:'fade_out' },
+{ t:'scene', id:'c11_depois', chapter:'capitulo11', title:'Depois',
+  bg:'bg_black', bgm:null },
+
+/* --- ARCHIVE: morre no prazo que Carmine deu ------------------------- */
+{ t:'nar', tx:'O sol subiu de todo \u00e0s cinco e dez. \u00c0s sete ela abriu a biblioteca, porque \u00e0s sete ela abria a biblioteca.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Ren chegou \u00e0s sete e vinte e encontrou a porta aberta e a sala vazia.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Esperou uma hora antes de perguntar a algu\u00e9m, porque n\u00e3o era da conta dele perguntar.', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'nar', tx:'A casa registrou a baixa no livro de pessoal no dia seguinte, na letra do escritur\u00e1rio.', if:{ ending:'archive' } },
+
+/* --- EARLY: morre sem as quatro horas -------------------------------- */
+{ t:'nar', tx:'O quarto das g\u00eameas ficou com uma cama a menos, e a casa n\u00e3o mudou o hor\u00e1rio da copa.', if:{ ending:'early' } },
+{ t:'nar', tx:'Ela escreveu o Arquivo em quatro noites, documentando uma coisa que j\u00e1 tinha acontecido.', if:{ ending:'early' } },
+{ t:'pause', if:{ ending:'early' } },
+{ t:'nar', tx:'Na quinta noite n\u00e3o escreveu.', if:{ ending:'early' } },
+{ t:'nar', tx:'A casa registrou a baixa no livro de pessoal na mesma semana, na letra do escritur\u00e1rio.', if:{ ending:'early' } },
+
+/* --- as tres palavras, so nas rotas em que ela morre ---------------- */
+{ t:'pause', if:{ ending:'archive' } },
+{ t:'pause', if:{ ending:'early' } },
+{ t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
+    'VAEL, Antoniette. Catalogadora contratada.',
+    'Admiss\u00e3o: abril, ano um. Baixa: agosto, ano cinco.',
+    '',
+    'Motivo de sa\u00fade.'
+], if:{ ending:'archive' } },
+{ t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
+    'VAEL, Antoniette. Catalogadora contratada.',
+    'Admiss\u00e3o: abril, ano um. Baixa: agosto, ano cinco.',
+    '',
+    'Motivo de sa\u00fade.'
+], if:{ ending:'early' } },
+{ t:'nar', tx:'Tr\u00eas palavras, na mesma letra de trinta e sete anos antes.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Tr\u00eas palavras, na mesma letra de trinta e sete anos antes.', if:{ ending:'early' } },
+{ t:'nar', tx:'Matheo tinha lido aquela linha uma semana antes de assinar a autoriza\u00e7\u00e3o dela.', if:{ ending:'archive' } },
+{ t:'nar', tx:'Matheo tinha lido aquela linha uma semana antes de assinar a autoriza\u00e7\u00e3o dela.', if:{ ending:'early' } },
+
+/* --- DISTANCE: ela vive, e e o pior ---------------------------------- */
+{ t:'nar', tx:'O contrato terminou em setembro. Ela desceu com as mesmas duas malas e o mesmo ba\u00fa de ferramentas.', if:{ ending:'distance' } },
+{ t:'nar', tx:'Fenn levou a bagagem at\u00e9 o port\u00e3o e disse nove palavras.', if:{ ending:'distance' } },
+{ t:'pause', if:{ ending:'distance' } },
+{ t:'nar', tx:'A Ordem leu o relat\u00f3rio dela, achou completo, e recolheu o agente do campo.', if:{ ending:'distance' } },
+{ t:'nar', tx:'Recolher um agente inclui suspender a correspond\u00eancia particular dele por prazo indeterminado.', if:{ ending:'distance' } },
+{ t:'pause', if:{ ending:'distance' } },
+{ t:'inn', tx:'Noventa dias sem not\u00edcia minha, e o pacote sai.', if:{ ending:'distance' } },
+{ t:'inn', tx:'Eu montei esse mecanismo. Eu sei exatamente como ele funciona.', if:{ ending:'distance' } },
+{ t:'pause', if:{ ending:'distance' } },
+{ t:'nar', tx:'Ela contou os noventa dias de dentro de Lervel, num alojamento a tr\u00eas ruas do gabinete dele.', if:{ ending:'distance' } },
+{ t:'nar', tx:'No nonag\u00e9simo terceiro sentou na cama e ficou olhando a parede, porque sabia o que estava acontecendo naquela hora.', if:{ ending:'distance' } },
+
+/* --- COVER_BURNED: ela vive, demitida ------------------------------- */
+{ t:'nar', tx:'O contrato foi encerrado com dois meses de aviso pagos e uma carta de refer\u00eancia correta.', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Serafina desejou boa viagem, e desejou de verdade.', if:{ ending:'cover_burned' } },
+{ t:'pause', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Ela escreveu o Arquivo em nove noites, num quarto alugado em Marca Cinzenta, com o que tinha na mem\u00f3ria e no caderno de baixo do forro.', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Duzentas e quarenta e uma p\u00e1ginas. Faltava metade das plantas e todos os hor\u00e1rios de guarda depois de julho.', if:{ ending:'cover_burned' } },
+{ t:'pause', if:{ ending:'cover_burned' } },
+{ t:'nar', tx:'Despachou assim mesmo, com o mesmo prazo de noventa dias, e n\u00e3o escreveu a ningu\u00e9m nesse per\u00edodo.', if:{ ending:'cover_burned' } },
+{ t:'inn', tx:'Se eu escrever, ele vai achar que est\u00e1 tudo bem e n\u00e3o vai abrir.', if:{ ending:'cover_burned' } },
+{ t:'inn', tx:'Ele precisa abrir.', if:{ ending:'cover_burned' } },
+
+{ t:'pause' },
+
 { t:'fade_out' },
 { t:'bgm', id:null },
 { t:'end_chap', line1:'Agosto do quinto ano.', line2:'O pacote foi despachado.',
