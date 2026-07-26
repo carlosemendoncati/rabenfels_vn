@@ -254,20 +254,20 @@ RBF.CHAPTER8 = [
 
 { t:'nar', tx:'No corredor leste, Liara estava deitada de bru\u00e7os no ch\u00e3o com tr\u00eas folhas espalhadas.' },
 { t:'spr', ch:'liara', ex:'bright', pos:'right' },
-{ t:'dial', ch:'liara', tx:'Toni, tem uma escola que aceita menina.' },
+{ t:'dial', ch:'liara', tx:'Toni, tem uma academia que aceita menina.' },
 { t:'pause' },
-{ t:'dial', ch:'antoniette', tx:'Tem v\u00e1rias.' },
-{ t:'dial', ch:'liara', tx:'N\u00e3o, uma de verdade. De mana. Em Eldoria.' },
+{ t:'dial', ch:'antoniette', tx:'Escola tem v\u00e1rias.' },
+{ t:'dial', ch:'liara', tx:'N\u00e3o \u00e9 escola. \u00c9 academia. De mana, em Eldoria.' },
 
 { t:'nar', tx:'Ela empurrou a folha pelo ch\u00e3o com dois dedos.' },
-{ t:'dial', ch:'liara', tx:'A senhora Elke tem uma prima que foi. Aceita aos treze.' },
-{ t:'dial', ch:'liara', tx:'Eu fa\u00e7o treze daqui a dois anos.' },
+{ t:'dial', ch:'liara', tx:'A senhora Elke tem uma prima que foi. S\u00f3 entra depois da maioridade.' },
+{ t:'dial', ch:'liara', tx:'Faltam sete anos para mim. Eu j\u00e1 contei.' },
 { t:'pause' },
 
 { t:'spr', ch:'klara', ex:'side', pos:'center' },
 { t:'nar', tx:'Klara estava sentada na soleira com um livro fechado no colo e n\u00e3o disse nada.' },
 { t:'dial', ch:'liara', tx:'Papai vai dizer que n\u00e3o.' },
-{ t:'dial', ch:'liara', tx:'Mas eu vou pedir todo dia at\u00e9 ele cansar. Eu ganho do papai. Sempre ganho.' },
+{ t:'dial', ch:'liara', tx:'Mas eu tenho sete anos para ele cansar. Eu ganho do papai. Sempre ganho.' },
 
 { t:'nar', tx:'E voltou para as folhas, satisfeita com o pr\u00f3prio plano.' },
 { t:'spr_hide', ch:'liara' },

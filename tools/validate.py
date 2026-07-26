@@ -437,7 +437,7 @@ def manifest_checks():
 BEAT_TYPES = set([
     'scene', 'fade_in', 'fade_out', 'pause', 'bg', 'bgm', 'sfx', 'spr',
     'spr_hide', 'spr_clear', 'nar', 'inn', 'dial', 'arc', 'last', 'title',
-    'chap', 'end_chap', 'flag', 'cho'
+    'chap', 'end_chap', 'flag', 'cho', 'ending'
 ])
 TEXT_BEATS = set(['nar', 'inn', 'dial'])
 POSITIONS = set(['left', 'center', 'right'])
@@ -549,6 +549,12 @@ def script_checks():
         if t == 'flag':
             for k in (beat.get('set') or {}):
                 flags_written.add(k)
+
+        # O beat { t:'ending' } grava flags.ending a partir de RBF.ENDINGS.
+        # Nao passa por 'flag' nem por escolha, entao precisa constar aqui
+        # ou todo 'if:{ ending:... }' apareceria como flag orfa.
+        if t == 'ending':
+            flags_written.add('ending')
 
         if beat.get('if'):
             for k in beat['if']:

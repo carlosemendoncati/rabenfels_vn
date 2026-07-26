@@ -22,6 +22,8 @@
    { t:'chap', num, name, chapter }                 cartao de capitulo
    { t:'end_chap', line1, line2, chapter }          fim de capitulo
    { t:'flag', set:{...} }                          grava estado
+   { t:'ending' }                                   decide o final e grava
+                                                    em flags.ending
    { t:'cho', id, prompt, opts:[ { id, tx, flags, then } ] }
 
    Campo opcional em qualquer beat:
@@ -143,6 +145,35 @@ RBF.Engine = (function () {
   }
 
   function delay(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  /* ---- final ------------------------------------------------------------ */
+
+  function endingMatches(when) {
+    if (!when) { return true; }          /* sem condicao: e o padrao */
+    if (when.flag && !RBF.STATE.flags[when.flag]) { return false; }
+    var id;
+    if (when.min) {
+      for (id in when.min) {
+        if (!Object.prototype.hasOwnProperty.call(when.min, id)) { continue; }
+        if (RBF.Routes.get(id) < when.min[id]) { return false; }
+      }
+    }
+    if (when.max) {
+      for (id in when.max) {
+        if (!Object.prototype.hasOwnProperty.call(when.max, id)) { continue; }
+        if (RBF.Routes.get(id) > when.max[id]) { return false; }
+      }
+    }
+    return true;
+  }
+
+  function resolveEnding() {
+    var list = RBF.ENDINGS || [];
+    for (var i = 0; i < list.length; i++) {
+      if (endingMatches(list[i].when)) { return list[i].id; }
+    }
+    return null;
+  }
 
   /* ---- sprites ---------------------------------------------------------- */
 
@@ -421,6 +452,16 @@ RBF.Engine = (function () {
         */
         if (!beat.keepSprites) { clearSprites(); }
         if (!silent) { pendingAutosave = true; }
+        return 'go';
+
+      /*
+        Avalia RBF.ENDINGS na ordem e grava o primeiro que bater em
+        RBF.STATE.flags.ending. As regras vivem no manifesto; aqui so
+        se executa. Depois disto, capitulos e Epilogo leem o final com
+        um 'if' comum, sem saber como ele foi decidido.
+      */
+      case 'ending':
+        RBF.STATE.flags.ending = resolveEnding();
         return 'go';
 
       case 'bg':
@@ -1416,6 +1457,7 @@ RBF.Engine = (function () {
       /* Executa um beat isolado, para teste de comportamento. Sempre em
          modo silencioso: sem audio, sem galeria, sem autosave. */
       exec:         function (beat) { return exec(beat, true); },
+      resolveEnding: resolveEnding,
       controls:     function () { return ctlNodes; },
       sceneStart:   function () { return sceneStart; }
     }

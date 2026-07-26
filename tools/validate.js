@@ -155,7 +155,7 @@ function manifestChecks(win) {
   const RBF = win.RBF;
   const script = RBF.Script.base();
 
-  const KNOWN = new Set(['scene','bg','bgm','sfx','spr','spr_hide','spr_clear','flag',
+  const KNOWN = new Set(['scene','bg','bgm','sfx','spr','spr_hide','spr_clear','flag','ending',
                          'pause','fade_in','fade_out','nar','inn','dial','arc','last',
                          'title','chap','end_chap','cho']);
 
@@ -280,6 +280,18 @@ function manifestChecks(win) {
       for (const k of Object.keys(o.flags || {})) { settable.add(k); }
     }
   }
+  /* Flags gravadas por beat, e nao por escolha. O { t:'ending' } decide o
+     final a partir de RBF.ENDINGS e grava em flags.ending; sem isto, todo
+     'if:{ ending:... }' apareceria como flag orfa. */
+  (function scanSet(beats) {
+    for (const b of beats) {
+      if (b.t === 'flag') {
+        for (const k of Object.keys(b.set || {})) { settable.add(k); }
+      }
+      if (b.t === 'ending') { settable.add('ending'); }
+      if (b.t === 'cho') { for (const o of b.opts) { if (o.then) { scanSet(o.then); } } }
+    }
+  })(script);
   let badCond = null;
   function scanCond(beats) {
     for (const b of beats) {
@@ -1218,6 +1230,75 @@ async function sceneClearsSpritesCheck() {
   check(licencas > 0, 'ha cena declarando keepSprites', 'total: ' + licencas);
 }
 
+/* Todo final tem de ser alcancavel por alguma combinacao de escolhas.
+
+   Foi um bug real e caro: a biblia pedia True End com Esperanca >= 14 E
+   Resposta >= 14, e o maximo alcancavel de min(Esperanca, Resposta) e 11.
+   O final verdadeiro do jogo estava inatingivel, e nenhum teste via.
+   Forca bruta sobre as escolhas do roteiro: 3^N e pequeno o bastante. */
+function endingsReachableCheck() {
+  section('FINAIS ALCANCAVEIS');
+
+  const win = boot();
+  const RBF = win.RBF;
+  const escolhas = RBF.Script.choices();
+
+  check(escolhas.length > 0, 'ha escolhas no roteiro', String(escolhas.length));
+  check((RBF.ENDINGS || []).length > 0, 'ha finais declarados',
+        String((RBF.ENDINGS || []).length));
+
+  /* Avalia uma condicao contra um estado de rotas e flags. */
+  function bate(when, rotas, flags) {
+    if (!when) { return true; }
+    if (when.flag && !flags[when.flag]) { return false; }
+    for (const id in (when.min || {})) {
+      if ((rotas[id] || 0) < when.min[id]) { return false; }
+    }
+    for (const id in (when.max || {})) {
+      if ((rotas[id] || 0) > when.max[id]) { return false; }
+    }
+    return true;
+  }
+
+  function resolve(rotas, flags) {
+    for (const e of RBF.ENDINGS) {
+      if (bate(e.when, rotas, flags)) { return e.id; }
+    }
+    return null;
+  }
+
+  const alcancados = new Set();
+  const total = Math.pow(3, escolhas.length);
+  const limite = 200000;
+
+  for (let n = 0; n < Math.min(total, limite); n++) {
+    const rotas = {};
+    const flags = {};
+    let k = n;
+    for (const cho of escolhas) {
+      const opt = cho.opts[k % cho.opts.length];
+      k = Math.floor(k / cho.opts.length);
+      for (const id in (opt.routes || {})) {
+        rotas[id] = (rotas[id] || 0) + opt.routes[id];
+      }
+      for (const f in (opt.flags || {})) { flags[f] = opt.flags[f]; }
+    }
+    alcancados.add(resolve(rotas, flags));
+  }
+
+  for (const e of RBF.ENDINGS) {
+    /* Final com condicao de flag que nenhuma escolha grava nao e
+       alcancavel por escolha - e por evento de roteiro. Nao reprova. */
+    const porFlag = e.when && e.when.flag;
+    if (porFlag && !alcancados.has(e.id)) {
+      console.log('  SKIP  ' + e.id + ' depende da flag ' + e.when.flag +
+                  ', gravada por evento e nao por escolha');
+      continue;
+    }
+    check(alcancados.has(e.id), 'final alcancavel: ' + e.id + ' (' + e.label + ')');
+  }
+}
+
 function spriteChecks() {
   section('SPRITES');
 
@@ -1492,6 +1573,7 @@ function layoutRegressionChecks() {
   await typewriterCheck();
   await playthroughChecks();
   await sceneClearsSpritesCheck();
+  endingsReachableCheck();
   await saveLoadChecks();
   await uiChecks();
   await systemsChecks();

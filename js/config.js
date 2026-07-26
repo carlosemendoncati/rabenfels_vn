@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.6.0',
+  gameVersion:       '0.7.0',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
@@ -312,6 +312,62 @@ RBF.CHARACTERS = {
 
     sprites: {
       neutral: 'ines_neutral.png'
+    }
+  },
+
+  /* Carmine. E a entidade, e o nome verdadeiro dela. Nunca ganha sprite:
+     Khar'Vel funciona por ausencia, e dar corpo a ela no Capitulo 11
+     desfaria onze capitulos de ausencia calculada. Fica so o nome na
+     caixa de fala - e o nome so aparece depois que Klara o pronuncia.
+     Antes disso as linhas dela correm como narracao. */
+  /* O rotulo que a entidade usa antes de ter nome. Existe para que a
+     revelacao do Capitulo 11 aconteca na propria caixa de fala: as
+     mesmas linhas passam de 'A voz' para 'Carmine' no instante em que
+     Klara pronuncia o nome. Nunca ganha sprite. */
+  /* O homem da rota de Alsbeck. Tres falas no Capitulo 11 e o gesto que
+     abre o Prologo. Sem nome porque Antoniette nunca perguntou o dele. */
+  mensageiro: {
+    name: 'Mensageiro',
+    color: '#8f8a7e',
+    dir: 'mensageiro',
+    size: 'bust',
+
+    available: false,
+    onMissing: 'hide',
+    fallbackExpression: 'neutral',
+
+    sprites: {
+      neutral: 'mensageiro_neutral.png'
+    }
+  },
+
+  voz: {
+    name: 'A voz',
+    color: '#8a8079',
+    dir: 'voz',
+    size: 'bust',
+
+    available: false,
+    onMissing: 'hide',
+    fallbackExpression: 'neutral',
+
+    sprites: {
+      neutral: 'voz_neutral.png'
+    }
+  },
+
+  carmine: {
+    name: 'Carmine',
+    color: '#b06a6a',
+    dir: 'carmine',
+    size: 'bust',
+
+    available: false,
+    onMissing: 'hide',
+    fallbackExpression: 'neutral',
+
+    sprites: {
+      neutral: 'carmine_neutral.png'
     }
   },
 
@@ -691,6 +747,33 @@ RBF.CHAPTERS = [
     label: 'Cap\u00edtulo 8',
     title: 'O Que Ela N\u00e3o Deveria Saber',
     selectable: true
+  },
+
+  {
+    id:    'capitulo9',
+    code:  'C-IX',
+    data:  'CHAPTER9',
+    label: 'Cap\u00edtulo 9',
+    title: 'A Decis\u00e3o',
+    selectable: true
+  },
+
+  {
+    id:    'capitulo10',
+    code:  'C-X',
+    data:  'CHAPTER10',
+    label: 'Cap\u00edtulo 10',
+    title: 'A Fuga',
+    selectable: true
+  },
+
+  {
+    id:    'capitulo11',
+    code:  'C-XI',
+    data:  'CHAPTER11',
+    label: 'Cap\u00edtulo 11',
+    title: 'Noventa Dias',
+    selectable: true
   }
 ];
 
@@ -1012,6 +1095,58 @@ RBF.ROUTES = [
 /* -------------------------------------------------------------------------
    15. CREDITOS
    ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   FINAIS
+
+   Escolhidos ao fim do Capitulo 9, pelo estado acumulado. O beat
+   { t:'ending' } avalia esta lista NA ORDEM e grava o primeiro que
+   bater em RBF.STATE.flags.ending. O ultimo nao tem condicao: e o que
+   acontece quando nenhum desvio ocorreu.
+
+   Nenhum final altera o destino. Antoniette morre, Klara e consumida, o
+   ciclo continua. O que muda e QUANTO o jogador entendeu.
+
+   Os limiares foram recalibrados em 26/07/2026 contra as escolhas que
+   existem de fato. A biblia pedia Esperanca >= 14 E Resposta >= 14, e o
+   maximo alcancavel de min(Esperanca, Resposta) e 11: o final verdadeiro
+   estava inatingivel. tools/validate.js confere isso a cada mudanca.
+
+   Campos de 'when', todos opcionais e combinados por E:
+     flag   : nome de flag que precisa ser verdadeira
+     min    : { rota: valor minimo }
+     max    : { rota: valor maximo }
+   ------------------------------------------------------------------------- */
+
+RBF.ENDINGS = [
+  {
+    id:    'cover_burned',
+    label: 'A Cobertura Queimada',
+    note:  'Serafina a remove antes de agosto. Ela vive, e o Arquivo fica incompleto.',
+    when:  { flag: 'cover_burned' }
+  },
+
+  {
+    id:    'distance',
+    label: 'O Distanciamento',
+    note:  'Ela nunca tenta. Missao cumprida. Ela vive.',
+    when:  { max: { hope: 4 } }
+  },
+
+  {
+    id:    'early',
+    label: 'Agosto Antecipado',
+    note:  'Entende cedo e age cedo. Mesmo fim, sem preparo e sem dignidade.',
+    when:  { min: { answer: 13 }, max: { hope: 7 } }
+  },
+
+  {
+    id:    'archive',
+    label: 'O Arquivo',
+    note:  'Os onze capitulos no ritmo certo. O fim e o mesmo. O peso nao e.'
+    /* sem 'when': e o final padrao */
+  }
+];
 
 RBF.CREDITS = [
   {

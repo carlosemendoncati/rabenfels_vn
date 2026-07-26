@@ -232,10 +232,15 @@ Escolhidos no fim do Capítulo 9, pelo estado acumulado.
 
 | Final | Condição |
 |---|---|
-| A Cobertura Queimada | `cover_burned` |
+| A Cobertura Queimada | flag `cover_burned` |
 | O Distanciamento | Esperança ≤ 4 |
-| Agosto Antecipado | Resposta ≥ 14 e Esperança ≤ 11 |
-| True End | Esperança ≥ 14 e Resposta ≥ 14 |
+| Agosto Antecipado | Resposta ≥ 13 e Esperança ≤ 7 |
+| **O Arquivo** | **sem condição - e o padrão** |
+
+Vive em `RBF.ENDINGS`, avaliado na ordem pelo beat `{ t:'ending' }` no
+fim do Cap. 9. **Limiares recalibrados em 26/07/2026:** os antigos
+tornavam o final verdadeiro inatingivel. O validador confere alcance por
+forca bruta.
 
 **Nenhuma rota altera o destino.** Antoniette morre, Klara é consumida, o ciclo
 continua. Um "final" mede **quanto o jogador entendeu.**

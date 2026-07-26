@@ -380,7 +380,7 @@ RBF.PROLOGUE = [
     '',
     'Existe uma menina em Velha Nidhaus chamada Klara Rabenfels.',
     '',
-    'Treze anos. L\u00ea mais r\u00e1pido do que qualquer pessoa que eu conheci.',
+    'Doze anos. L\u00ea mais r\u00e1pido do que qualquer pessoa que eu conheci.',
     'Corrige os outros em voz baixa, para n\u00e3o constranger ningu\u00e9m.',
     'Ri de coisas que ningu\u00e9m mais achou gra\u00e7a, e ri depois, quando',
     'j\u00e1 passou, quando acha que n\u00e3o tem ningu\u00e9m olhando.',
