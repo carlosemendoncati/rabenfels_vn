@@ -179,18 +179,25 @@ RBF.CHARACTERS = {
     }
   },
 
+  /* Folha de seis expressoes cortada em 27/07/2026. 'warm' e para o
+     cavalo e para o filho, os dois unicos assuntos que abrem nele. */
   fenn: {
     name: 'Fenn',
     color: '#7e756a',
     dir: 'fenn',
     size: 'bust',
 
-    available: false,
+    available: true,
     onMissing: 'placeholder',
     fallbackExpression: 'neutral',
 
     sprites: {
-      neutral: 'fenn_neutral.png'
+      neutral: 'fenn_neutral.png',
+      guarded: 'fenn_guarded.png',
+      side:    'fenn_side.png',
+      grave:   'fenn_grave.png',
+      warm:    'fenn_warm.png',
+      lowered: 'fenn_lowered.png'
     }
   },
 

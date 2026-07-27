@@ -83,7 +83,7 @@ for k, c in v.most_common():
 print()
 print('== R6 · o PDV nao entende, por capitulo ==')
 for n in ORDEM:
-    c = len(re.findall(r'n[ãa]o entend|n[ãa]o soube|n[ãa]o sabia|n[ãa]o consegui|n[ãa]o achou|'
+    c = len(re.findall(r'n[ãa]o entend|n[ãa]o soub|n[ãa]o sab|n[ãa]o consig|n[ãa]o consegu|n[ãa]o sei|n[ãa]o achou|'
                        r'n[ãa]o tinha resposta|estava errad|e estava errada', CORPO[n], re.I))
     print('%-11s %d' % (n, c))
 

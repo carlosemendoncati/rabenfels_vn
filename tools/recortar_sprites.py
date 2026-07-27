@@ -31,6 +31,23 @@ CHARS = os.path.join(BASE, "assets", "characters")
 # folha -> pasta, e o nome de cada uma das seis celulas em ordem de
 # leitura (esquerda para direita, cima para baixo).
 FOLHAS = [
+    # --- folhas novas, 27/07/2026 -------------------------------------
+    {
+        # Aldric refeito: olhos vermelhos e o emblema da casa. Substitui
+        # os seis anteriores, e os nomes nao mudam para o roteiro nao
+        # precisar de uma linha de alteracao.
+        "dir": "aldric",
+        "arquivo": "ChatGPT Image Jul 26, 2026, 10_25_13 PM.png",
+        "nomes": ["cold", "fangs", "stare", "side", "intense", "back"],
+    },
+    {
+        # Fenn, primeira folha. Ele responde curto e e economico com
+        # gente: a expressao 'warm' e para o cavalo e para o filho, os
+        # dois unicos assuntos que abrem nele.
+        "dir": "fenn",
+        "arquivo": "7cc6836f-9c88-41fb-8c1d-7bc577561a94.png",
+        "nomes": ["neutral", "guarded", "side", "grave", "warm", "lowered"],
+    },
     {
         "dir": "antoniette",
         "arquivo": "ChatGPT Image Jul 26, 2026, 11_26_45 AM.png",
