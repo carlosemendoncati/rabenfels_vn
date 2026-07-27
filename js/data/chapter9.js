@@ -119,6 +119,7 @@ RBF.CHAPTER9 = [
 { t:'fade_in' },
 
 { t:'nar', tx:'Ela catalogou o \u00faltimo volume numa ter\u00e7a de fevereiro, \u00e0s tr\u00eas da tarde.' },
+{ t:'nar', tx:'A biblioteca em fevereiro \u00e9 fria de um jeito que entra pelos p\u00e9s. Os dedos dela estavam duros de segurar pena.' },
 { t:'nar', tx:'Era um tratado de drenagem agr\u00edcola, em mau estado, sem valor nenhum.' },
 { t:'pause' },
 
@@ -183,7 +184,7 @@ RBF.CHAPTER9 = [
 { t:'pause' },
 
 { t:'inn', tx:'Ele n\u00e3o me disse para ir embora.' },
-{ t:'inn', tx:'Disse que a janela existe, e que ele sabe a que horas ela fecha.' },
+{ t:'inn', tx:'Disse que a janela existe. Disse que sabe a que horas ela fecha.' },
 { t:'pause' },
 { t:'inn', tx:'E n\u00e3o disse o nome dela uma vez sequer.' },
 
@@ -270,7 +271,8 @@ RBF.CHAPTER9 = [
    ====================================================================== */
 { t:'pause' },
 { t:'nar', tx:'Antoniette ficou de p\u00e9 junto da janela e n\u00e3o olhou para a menina enquanto pensava.' },
-{ t:'inn', tx:'A marca da parede est\u00e1 a menos de um palmo. N\u00e3o \u00e9 idade, \u00e9 altura.' },
+{ t:'inn', tx:'A marca da parede est\u00e1 a menos de um palmo.' },
+{ t:'inn', tx:'O ciclo mede altura. Est\u00e1 tudo na folha que ela mesma me trouxe.' },
 { t:'inn', tx:'Se eu errar, ela n\u00e3o tem uma segunda vez.' },
 
 { t:'cho', id:'cap9_promessa', code:'C-IX', prompt:'A PROMESSA', opts:[
@@ -330,6 +332,7 @@ RBF.CHAPTER9 = [
   bg:'bg_antoniette_room', bgm:null },
 
 { t:'nar', tx:'De abril a julho ela montou a coisa em papel, e o papel ficou embaixo do forro do ba\u00fa.' },
+{ t:'nar', tx:'Escreveu tanto naqueles tr\u00eas meses que a dobra do dedo m\u00e9dio ficou com um calo que n\u00e3o saiu mais.' },
 
 { t:'nar', tx:'Fenn continuava com a chave e com o filho na cocheira. Ela n\u00e3o pediu nada a ele.', if:{ third_paid:'A' } },
 { t:'inn', tx:'Pedir seria cobrar o obrigado, e o obrigado dele j\u00e1 foi caro demais.', if:{ third_paid:'A' } },

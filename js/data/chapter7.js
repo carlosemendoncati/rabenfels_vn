@@ -148,6 +148,7 @@ RBF.CHAPTER7 = [
 { t:'fade_in' },
 
 { t:'nar', tx:'Na primeira manh\u00e3 de agosto havia duas no vidro da copa antes das cinco e meia.' },
+{ t:'nar', tx:'O calor de agosto entra pela nuca primeiro. \u00c0s seis a pedra do p\u00e1tio j\u00e1 devolvia morno pelas solas.' },
 { t:'nar', tx:'Dara n\u00e3o comentou. Antoniette tamb\u00e9m n\u00e3o.' },
 { t:'pause' },
 
@@ -286,6 +287,7 @@ RBF.CHAPTER7 = [
   bg:'bg_nidhaus_gate', keepSprites:true },
 
 { t:'nar', tx:'Antoniette chegou perto e ajoelhou na altura dela, e n\u00e3o tocou.' },
+{ t:'nar', tx:'A pedra do p\u00e1tio queimava atrav\u00e9s do tecido do joelho. Ela ficou l\u00e1 mesmo assim.' },
 { t:'pause' },
 
 /* --- ramo A: o metodo ------------------------------------------------ */

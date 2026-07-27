@@ -194,7 +194,7 @@ RBF.CHAPTER11 = [
 /* --- rota archive: floresta --- */
 { t:'nar', tx:'Klara estava tr\u00eas passos \u00e0 frente, de costas, com a mala ainda na m\u00e3o.', if:{ ending:'archive' } },
 { t:'nar', tx:'N\u00e3o tinha se movido.', if:{ ending:'archive' } },
-{ t:'nar', tx:'A trilha continuava adiante, larga e vazia, e n\u00e3o havia nada nela.', if:{ ending:'archive' } },
+{ t:'nar', tx:'A trilha continuava adiante e n\u00e3o havia nada nela.', if:{ ending:'archive' } },
 
 /* --- rota distance: corredor --- */
 { t:'nar', tx:'O corredor estava vazio. A porta do quarto das g\u00eameas, fechada.', if:{ ending:'distance' } },
@@ -387,7 +387,7 @@ RBF.CHAPTER11 = [
 { t:'pause' },
 
 { t:'inn', tx:'\u00c9 o calend\u00e1rio.' },
-{ t:'inn', tx:'Dezesseis gera\u00e7\u00f5es sem atraso, e eu tenho datas, plantas e hor\u00e1rio de guarda num caderno.' },
+{ t:'inn', tx:'Dezesseis gera\u00e7\u00f5es sem atraso, e eu tenho num caderno as datas e a planta inteira.' },
 { t:'inn', tx:'Sou a \u00fanica coisa nesta casa que chegou perto de mover uma data.' },
 { t:'pause' },
 { t:'nar', tx:'Ela conferiu o racioc\u00ednio duas vezes, do jeito que conferia tudo, e ele fechou nas duas.' },

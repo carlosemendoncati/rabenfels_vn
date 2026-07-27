@@ -343,7 +343,7 @@ RBF.CHAPTER1 = [
   bg:'bg_antoniette_room', bgm:null },
 
 { t:'nar', tx:'Quarto confort\u00e1vel sem ser caloroso. Mesa de trabalho, vela, papel de sobra.' },
-{ t:'nar', tx:'Algu\u00e9m tinha deixado p\u00e3o, queijo e uma jarra na mesa de canto.' },
+{ t:'nar', tx:'Algu\u00e9m tinha deixado p\u00e3o e uma jarra na mesa de canto.' },
 { t:'nar', tx:'Ela desfez as malas na ordem de sempre: ferramentas primeiro, nada da Ordem \u00e0 vista.' },
 
 { t:'nar', tx:'Depois mediu o quarto a passo, como media qualquer sala nova.' },

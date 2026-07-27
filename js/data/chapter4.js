@@ -159,7 +159,10 @@ RBF.CHAPTER4 = [
 
 { t:'inn', tx:'Ela respondeu duas palavras e errou uma.' },
 { t:'pause' },
-{ t:'inn', tx:'"Da casa" n\u00e3o \u00e9 resposta para "de qu\u00ea". \u00c9 resposta para "de quem".' },
+{ t:'inn', tx:'"Da casa" responde "de quem". Eu perguntei "de qu\u00ea".' },
+{ t:'pause' },
+{ t:'inn', tx:'E n\u00e3o sei se ela ouviu errado ou se respondeu a outra pergunta de prop\u00f3sito.' },
+{ t:'nar', tx:'Antoniette anotou as duas hip\u00f3teses e n\u00e3o riscou nenhuma.' },
 
 /* ======================================================================
    C2 - O PATIO - VESPERA
@@ -205,6 +208,7 @@ RBF.CHAPTER4 = [
 
 { t:'inn', tx:'Eu perguntei por curiosidade e recebi uma decis\u00e3o.' },
 { t:'inn', tx:'Ele j\u00e1 tinha essa frase pronta antes de eu chegar nesta casa.' },
+{ t:'nar', tx:'Ela voltou pelo caminho mais longo, contando as janelas acesas do lado norte. Eram sempre as mesmas quatro.' },
 
 /* ======================================================================
    C3 - O CORREDOR LESTE
@@ -438,6 +442,7 @@ RBF.CHAPTER4 = [
 { t:'inn', tx:'E chamam assim entre eles, quando acham que n\u00e3o tem ningu\u00e9m ouvindo.' },
 { t:'pause' },
 { t:'inn', tx:'Uma palavra que a pessoa usa em particular \u00e9 a palavra em que ela acredita.' },
+{ t:'nar', tx:'Ela escreveu a palavra da casa no caderno, sozinha no meio da folha, e deixou o resto da p\u00e1gina em branco.' },
 
 { t:'fade_out' },
 { t:'bgm', id:null },

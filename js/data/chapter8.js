@@ -138,6 +138,7 @@ RBF.CHAPTER8 = [
 { t:'fade_in' },
 
 { t:'nar', tx:'Outubro do quarto ano veio com chuva atravessada e a casa fechou o p\u00e1tio \u00e0s cinco.' },
+{ t:'nar', tx:'A cocheira cheirava a palha molhada e a couro. Era o \u00fanico lugar da propriedade onde o cheiro n\u00e3o era de cera.' },
 { t:'nar', tx:'Fenn a esperou na porta da cocheira, o que ele nunca tinha feito.' },
 { t:'pause' },
 
@@ -310,7 +311,7 @@ RBF.CHAPTER8 = [
 { t:'inn', tx:'Ela ensaiou.', if:{ taught:'B' } },
 
 /* --- ramo C: o mundo ------------------------------------------------- */
-{ t:'nar', tx:'Ela p\u00f4s sobre a mesa um pano dobrado, e dentro havia moeda mi\u00fada, bot\u00e3o e um anel de prata.', if:{ taught:'C' } },
+{ t:'nar', tx:'Ela p\u00f4s sobre a mesa um pano dobrado, e dentro havia moeda mi\u00fada e um anel de prata.', if:{ taught:'C' } },
 { t:'dial', ch:'klara', tx:'Isso d\u00e1 para tr\u00eas dias de carruagem?', if:{ taught:'C' } },
 { t:'pause', if:{ taught:'C' } },
 { t:'nar', tx:'Antoniette contou sem tocar. Dava para meio dia, e n\u00e3o em carruagem.', if:{ taught:'C' } },
@@ -341,6 +342,7 @@ RBF.CHAPTER8 = [
 
 { t:'spr', ch:'serafina', ex:'direct', pos:'right' },
 { t:'nar', tx:'Serafina a chamou para o ch\u00e1 das quatro pela primeira vez em quatro anos.' },
+{ t:'nar', tx:'A sala do lado sul era a \u00fanica aquecida em outubro, e o ch\u00e1 veio quente demais para beber.' },
 { t:'nar', tx:'Serviu ela mesma, o que significava que n\u00e3o haveria criado na sala.' },
 { t:'pause' },
 
@@ -362,6 +364,16 @@ RBF.CHAPTER8 = [
 { t:'pause' },
 { t:'dial', ch:'serafina', tx:'Responderam em nove dias, com timbre e selo.' },
 { t:'dial', ch:'serafina', tx:'Nove dias \u00e9 r\u00e1pido demais para uma casa que n\u00e3o esperava a pergunta.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ela sabe h\u00e1 quatro anos.' },
+{ t:'inn', tx:'E me chamou para o ch\u00e1.' },
+{ t:'pause' },
+{ t:'inn', tx:'Eu n\u00e3o consigo pensar em nenhum motivo para uma pessoa fazer as duas coisas.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ela sabe h\u00e1 quatro anos.' },
+{ t:'inn', tx:'E me chamou para o ch\u00e1.' },
+{ t:'pause' },
+{ t:'inn', tx:'Eu n\u00e3o consigo pensar em nenhum motivo para uma pessoa fazer as duas coisas.' },
 
 { t:'pause' },
 { t:'inn', tx:'Ela sabe desde o segundo m\u00eas.' },
@@ -383,6 +395,13 @@ RBF.CHAPTER8 = [
   bg:'bg_kitchen', bgm:null },
 { t:'spr', ch:'dara', ex:'neutral', pos:'center' },
 { t:'nar', tx:'Na copa, naquela noite, Dara p\u00f4s a caneca na frente dela sem que ela pedisse.' },
+{ t:'nar', tx:'A copa continuava sendo o \u00fanico c\u00f4modo quente, e continuava cheirando a fermento e a cinza.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ela nunca fez isso antes das oito.' },
+{ t:'inn', tx:'N\u00e3o sei se \u00e9 gentileza ou se \u00e9 aviso, e n\u00e3o sei perguntar sem estragar as duas.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ela nunca fez isso antes das oito.' },
+{ t:'inn', tx:'N\u00e3o sei se \u00e9 gentileza ou se \u00e9 aviso, e n\u00e3o sei perguntar sem estragar as duas.' },
 { t:'dial', ch:'dara', tx:'A senhorita devia comer.' },
 { t:'dial', ch:'antoniette', tx:'Eu como.' },
 { t:'pause' },

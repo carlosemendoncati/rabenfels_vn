@@ -113,13 +113,7 @@ RBF.EPILOGUE = [
 { t:'fade_in' },
 { t:'spr', ch:'matheo', ex:'neutral', pos:'center' },
 
-{ t:'nar', tx:'Ele protocolou o Arquivo em janeiro, dois meses depois de receb\u00ea-lo.' },
-{ t:'nar', tx:'Levou duzentas e oitenta e sete p\u00e1ginas numeradas e uma declara\u00e7\u00e3o de proced\u00eancia assinada por ele.' },
-{ t:'pause' },
-
-{ t:'nar', tx:'A Ordem abriu inqu\u00e9rito em abril. O tribunal da Marca aceitou a mat\u00e9ria em outubro.' },
-{ t:'nar', tx:'Em mar\u00e7o do ano seguinte pediram as quatro p\u00e1ginas que faltavam.' },
-{ t:'pause' },
+{ t:'nar', tx:'Em mar\u00e7o do segundo ano o tribunal da Marca pediu as quatro p\u00e1ginas que faltavam.' },
 { t:'nar', tx:'Ele explicou que n\u00e3o as tinha. Explicou por escrito, tr\u00eas vezes, em tr\u00eas formatos diferentes.' },
 { t:'pause' },
 
@@ -279,7 +273,7 @@ RBF.EPILOGUE = [
 ], if:{ promised:'C' } },
 
 { t:'pause' },
-{ t:'nar', tx:'Assinou, datou e p\u00f4s na bandeja de sa\u00edda.' },
+{ t:'nar', tx:'Assinou, datou, p\u00f4s na bandeja de sa\u00edda.' },
 { t:'pause' },
 
 { t:'nar', tx:'Fechou o Arquivo. Amarrou o cordel em quatro voltas, do jeito que ele tinha vindo.' },

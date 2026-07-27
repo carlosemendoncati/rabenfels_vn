@@ -139,7 +139,7 @@ RBF.CHAPTER3 = [
 
 { t:'nar', tx:'Ela raspou o fundo da panela por um tempo desnecess\u00e1rio.' },
 { t:'dial', ch:'dara', tx:'Uns dizem que \u00e9 do rio. Que sobe do brejo quando a \u00e1gua baixa.' },
-{ t:'dial', ch:'dara', tx:'Outros dizem que vem da floresta ao norte e que sempre veio.' },
+{ t:'dial', ch:'dara', tx:'Outros dizem que vem da floresta ao norte, e que sempre veio.' },
 { t:'dial', ch:'antoniette', tx:'E a senhora, qual acha?' },
 { t:'pause' },
 { t:'dial', ch:'dara', tx:'Eu acho que dura tr\u00eas semanas e passa.' },

@@ -89,9 +89,11 @@ var C6_METODO = [
   { t:'pause' },
   { t:'inn', tx:'Ningu\u00e9m nesta casa nunca pediu a ela para pensar em voz alta.' },
   { t:'inn', tx:'Ela estava com fome disso.' },
+{ t:'nar', tx:'Antoniette cortou mais papel do que precisava para aquela tarde, e guardou o resto na gaveta.' },
 
   { t:'scene', id:'c6a_fonte', chapter:'capitulo6', title:'Fonte \u00fanica' },
   { t:'nar', tx:'No ver\u00e3o do segundo ano, Antoniette ensinou a \u00fanica regra que importa.' },
+{ t:'nar', tx:'Fazia calor de rachar e as duas trabalhavam com as mangas dobradas. O papel colava na palma da m\u00e3o.' },
   { t:'dial', ch:'antoniette', tx:'Uma pessoa disse. Isso n\u00e3o \u00e9 um fato. \u00c9 uma pessoa.' },
   { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
   { t:'dial', ch:'klara', tx:'E se duas dizem?' },
@@ -112,6 +114,7 @@ var C6_METODO = [
   { t:'scene', id:'c6a_caderno', chapter:'capitulo6', title:'O caderno dela',
     bg:'bg_corridor', bgm:null },
   { t:'nar', tx:'Em fevereiro do terceiro ano, Antoniette achou um caderno debaixo do colch\u00e3o da menina.' },
+{ t:'nar', tx:'O quarto delas era o mais frio da casa e cheirava a l\u00e3 guardada.' },
   { t:'nar', tx:'N\u00e3o estava escondido de verdade. Estava guardado do jeito que crian\u00e7a guarda.' },
   { t:'pause' },
 
@@ -333,6 +336,7 @@ RBF.CHAPTER6 = [
   bg:'bg_library', bgm:'bgm_amizade' },
 
 { t:'nar', tx:'Em maio j\u00e1 era rotina. As duas de manh\u00e3, na biblioteca, cada uma no seu lado da mesa.' },
+{ t:'nar', tx:'Klara respirava pela boca quando lia r\u00e1pido. Era o \u00fanico barulho da sala durante horas.' },
 { t:'nar', tx:'Liara aparecia por volta das onze, falava dezessete minutos e ia embora.' },
 { t:'pause' },
 { t:'nar', tx:'Antoniette come\u00e7ou a contar os dezessete minutos e depois parou de contar.' },
@@ -353,6 +357,7 @@ RBF.CHAPTER6 = [
 { t:'pause' },
 { t:'inn', tx:'Eu acabei de prometer uma coisa que eu n\u00e3o controlo.' },
 { t:'inn', tx:'E ela ouviu como promessa.' },
+{ t:'nar', tx:'No dia seguinte havia duas canecas na mesa antes de Klara chegar, e nenhuma das duas comentou.' },
 
 /* ======================================================================
    C3 - A ESCOLHA
