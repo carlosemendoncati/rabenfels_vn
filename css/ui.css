@@ -549,6 +549,9 @@
   /* Alvo de toque confortavel no telefone. */
   min-height: 48px;
 
+  /* O recuo horizontal fica: ele desloca so o conteudo desta linha e
+     nao reflui as vizinhas. Quem causava o pulo era a altura do rotulo
+     de categoria, corrigida abaixo com altura reservada. */
   transition: background var(--rbf-fast) var(--rbf-ease-page),
               padding-left var(--rbf-medium) var(--rbf-ease-ritual);
 }
@@ -614,18 +617,26 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
-  max-height: 0;
+  /* ALTURA RESERVADA SEMPRE.
+
+     A versao anterior animava max-height de 0 para 1.5em no hover. Isso
+     mudava a altura da linha, e como os registros sao um empilhamento
+     vertical, a lista inteira pulava para baixo a cada passagem do
+     ponteiro: o item parecia sair de escala e colidir com o vizinho.
+
+     Agora o rotulo ocupa a linha dele desde sempre e so a opacidade
+     muda. O layout fica parado e o hover continua revelando. */
+  height: 1.5em;
+  line-height: 1.5;
+  margin-bottom: calc(2px * var(--rbf-ui));
+
   opacity: 0;
-  transition: max-height var(--rbf-medium) var(--rbf-ease-ritual),
-              opacity var(--rbf-medium),
-              margin-bottom var(--rbf-medium) var(--rbf-ease-ritual);
+  transition: opacity var(--rbf-medium);
 }
 
 .rf-nav__item:hover .rf-nav__chapter,
 .rf-nav__item:focus-visible .rf-nav__chapter,
 .rf-nav__item.is-active .rf-nav__chapter {
-  max-height: 1.5em;
-  margin-bottom: calc(2px * var(--rbf-ui));
   opacity: 1;
 }
 
