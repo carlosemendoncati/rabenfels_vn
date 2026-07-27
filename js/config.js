@@ -595,9 +595,14 @@ RBF.BGM = {
 };
 
 RBF.MUSIC = {
+  /* "O Arquivo Me Chamou" - trilha final do menu, entregue pelo autor em
+     27/07/2026. Substitui o tema sintetizado por tools/make_menu_theme.py,
+     que ficou guardado em _backup/pre_menu_theme_20260727/.
+
+     O .ogg gerado foi removido de proposito: ele vinha PRIMEIRO na lista
+     e teria vencido a musica de verdade em todo navegador que le ogg. */
   menu_theme: {
     files: [
-      'menu_theme.ogg',
       'menu_theme.mp3'
     ],
     available: true,
@@ -1035,35 +1040,29 @@ RBF.MENU_RECORDS = [
     action:  'gallery',
     note:    'O que foi recuperado do arquivo at\u00e9 agora.'
   },
-  /* So aparece com a obra terminada. E o que Matheo nunca recebeu:
-     as quatro paginas que ela arrancou, montadas com as escolhas
-     da partida que o jogador concluiu. */
+  /* UM registro para os dois extras pos-jogo, com abas por dentro.
+
+     Eram dois itens separados. Com eles o menu passou de oito registros
+     para dez e deixou de caber na tela em telefone e em janela baixa -
+     o jogador tinha de rolar um menu que sempre coube inteiro.
+
+     'A Conta' e o nome certo: a obra inteira e alguem contando. Noventa
+     e tres dias, duzentas e oitenta e sete paginas, faltam quatro, mil
+     novecentos e quarenta e nove dias. */
   {
     id:      'pages',
-    label:   'As Quatro P\u00e1ginas',
-    chapter: 'MATERIAL RETIDO',
+    label:   'A Conta',
+    chapter: 'O QUE FICOU DA LEITURA',
     code:    'REG-06',
     action:  'pages',
     needs:   'completed',
-    note:    'Faltavam quatro. Elas nunca sa\u00edram de Velha Nidhaus.'
-  },
-  /* Tambem so com a obra terminada. Mostra qual das quatro leituras o
-     jogador alcancou - antes disto o nome do final aparecia num unico
-     lugar do jogo inteiro. */
-  {
-    id:      'readings',
-    label:   'Registro de Leituras',
-    chapter: 'LEITURAS DO ARQUIVO',
-    code:    'REG-07',
-    action:  'readings',
-    needs:   'completed',
-    note:    'Quatro maneiras de chegar ao mesmo agosto.'
+    note:    'O que as suas escolhas custaram, e a quem.'
   },
   {
     id:      'options',
     label:   'Ajustes',
     chapter: 'CONTROLE DE LEITURA',
-    code:    'REG-08',
+    code:    'REG-07',
     action:  'options',
     note:    'Texto, \u00e1udio, movimento e conte\u00fado sens\u00edvel.'
   },
@@ -1071,7 +1070,7 @@ RBF.MENU_RECORDS = [
     id:      'credits',
     label:   'Cr\u00e9ditos',
     chapter: 'REGISTRO DE AUTORIA',
-    code:    'REG-09',
+    code:    'REG-08',
     action:  'credits',
     note:    'Quem construiu este arquivo.'
   },
@@ -1079,7 +1078,7 @@ RBF.MENU_RECORDS = [
     id:      'close',
     label:   'Fechar o Arquivo',
     chapter: 'ENCERRAR SESS\u00c3O',
-    code:    'REG-10',
+    code:    'REG-09',
     action:  'close',
     note:    'Algumas coisas podem permanecer com voc\u00ea.'
   }

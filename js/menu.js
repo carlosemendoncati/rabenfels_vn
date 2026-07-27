@@ -370,8 +370,7 @@ RBF.Menu = (function () {
       case 'load':     openSaveLoad('load'); break;
       case 'chapters': openChapterSelect();  break;
       case 'gallery':  openGallery();        break;
-      case 'pages':    openQuatroPaginas();  break;
-      case 'readings': openLeituras();       break;
+      case 'pages':    openConta();          break;
       case 'options':  openSettings();       break;
       case 'credits':  openCredits();        break;
       case 'close':    confirmCloseArchive(); break;
@@ -1250,12 +1249,13 @@ RBF.Menu = (function () {
      que nao corresponde ao que jogou.
      ====================================================================== */
 
-  function openQuatroPaginas() {
-    var doc = RBF.Paginas && RBF.Paginas.build();
-    if (!doc) { return; }
+  /* Aba visivel do painel 'A Conta'. Sobrevive a fechar e reabrir. */
+  var contaAba = 'paginas';
 
-    var fromTitle = RBF.State.is('title');
-    RBF.State.push('pages');
+  /* Corpo da aba das quatro paginas. Devolve o no; nao abre painel. */
+  function corpoQuatroPaginas() {
+    var doc = RBF.Paginas && RBF.Paginas.build();
+    if (!doc) { return UI.el('p', 'rbf-quatro__vazio', '[ sem registro ]'); }
 
     var body = UI.el('div', 'rbf-quatro');
 
@@ -1325,21 +1325,7 @@ RBF.Menu = (function () {
     }
     body.appendChild(fecho);
 
-    var sub = 'Retiradas do Arquivo antes do despacho';
-    var lab = RBF.Paginas.endingLabel(doc.ending);
-    if (lab) { sub += ' \u2014 leitura: ' + lab; }
-
-    UI.panel({
-      name:     'pages',
-      title:    'As Quatro P\u00e1ginas',
-      subtitle: sub,
-      body:     body,
-      wide:     true,
-      actions: [
-        { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
-      ],
-      onClose: panelReturn(fromTitle)
-    });
+    return body;
   }
 
   /* ======================================================================
@@ -1355,13 +1341,9 @@ RBF.Menu = (function () {
      Sem porcentagem e sem trofeu.
      ====================================================================== */
 
-  function openLeituras() {
-    if (!RBF.Paginas || !RBF.Paginas.available()) { return; }
-    var lista = RBF.Paginas.leituras();
-
-    var fromTitle = RBF.State.is('title');
-    RBF.State.push('leituras');
-
+  /* Corpo da aba das leituras. Devolve o no; nao abre painel. */
+  function corpoLeituras() {
+    var lista = (RBF.Paginas && RBF.Paginas.leituras()) || [];
     var body = UI.el('div', 'rbf-leituras');
     var vistas = 0;
 
@@ -1390,17 +1372,77 @@ RBF.Menu = (function () {
       body.appendChild(art);
     }
 
+    return body;
+  }
+
+  /* ======================================================================
+     A CONTA - um painel, duas abas.
+
+     Eram dois registros de menu separados. Somados aos oito que ja
+     existiam, o menu deixou de caber na tela em telefone e em janela
+     baixa: o jogador passou a rolar uma lista que sempre coube inteira.
+
+     O nome e o da obra: tudo aqui e alguem contando. Noventa e tres
+     dias, duzentas e oitenta e sete paginas, faltam quatro.
+     ====================================================================== */
+
+  function openConta() {
+    if (!RBF.Paginas || !RBF.Paginas.available()) { return; }
+
+    var fromTitle = RBF.State.is('title');
+    RBF.State.push('pages');
+
+    var run = (RBF.Saves.lastRun && RBF.Saves.lastRun()) || {};
+    var lab = RBF.Paginas.endingLabel(run.ending) || '';
+    var ep  = RBF.Paginas.endingProgress();
+
     UI.panel({
-      name:     'leituras',
-      title:    'Registro de Leituras',
-      subtitle: vistas + ' de ' + lista.length + ' alcancadas',
-      body:     body,
+      name:     'pages',
+      title:    'A Conta',
+      subtitle: (lab ? 'Leitura alcan\u00e7ada: ' + lab + ' \u00b7 ' : '') +
+                ep.seen + ' de ' + ep.total + ' registradas',
+      body:     UI.el('div', 'rbf-conta'),
       wide:     true,
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
       onClose: panelReturn(fromTitle)
     });
+
+    /* O painel e montado e destruido a cada abertura, entao pegar o no
+       pelo documento e seguro: so existe um. */
+    var alvo = document.querySelector('.rbf-conta');
+    if (!alvo) { return; }
+
+    function pintar() {
+      UI.clear(alvo);
+
+      var abas = UI.el('div', 'rbf-abas');
+      var defs = [
+        { id: 'paginas',  rot: 'As Quatro P\u00e1ginas' },
+        { id: 'leituras', rot: 'As Leituras' }
+      ];
+      for (var i = 0; i < defs.length; i++) {
+        (function (d) {
+          var t = document.createElement('button');
+          t.type = 'button';
+          t.className = 'rbf-aba' + (contaAba === d.id ? ' on' : '');
+          t.textContent = d.rot;
+          t.setAttribute('aria-pressed', contaAba === d.id ? 'true' : 'false');
+          t.addEventListener('click', function () {
+            if (contaAba === d.id) { return; }
+            contaAba = d.id;
+            RBF.Audio.playUi('ui_page');
+            pintar();
+          });
+          abas.appendChild(t);
+        })(defs[i]);
+      }
+      alvo.appendChild(abas);
+      alvo.appendChild(contaAba === 'paginas' ? corpoQuatroPaginas() : corpoLeituras());
+    }
+
+    pintar();
   }
 
   /* ======================================================================

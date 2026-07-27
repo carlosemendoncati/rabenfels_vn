@@ -548,19 +548,13 @@
   border: none;
   border-bottom: 1px solid rgba(38, 41, 54, .45);
 
-  /* ALTURA FIXA, e e ela que conserta o pulo.
+  /* Altura suficiente para absorver o rotulo de categoria que cresce no
+     hover, sem empurrar as linhas vizinhas - e sem os 58px fixos da
+     versao anterior, que somados a dez registros tiravam o menu da tela.
 
-     O rotulo de categoria cresce por dentro no hover. Se a caixa puder
-     crescer junto, toda a lista abaixo desce e volta a cada passagem do
-     ponteiro - foi o defeito relatado.
-
-     Com altura fixa o crescimento e absorvido aqui dentro: o nome sobe
-     um pouco para dar lugar ao rotulo, e nenhuma linha vizinha se move.
-     O valor comporta rotulo (1.5em em --rbf-code) + nome + respiro.
-
-     Continua acima do alvo de toque de 48px exigido no telefone. */
-  height: calc(58px * var(--rbf-ui));
-  min-height: 48px;
+     'em' em vez de px: a caixa acompanha a fonte, e em janela baixa o
+     conjunto encolhe junto em vez de estourar. */
+  min-height: max(48px, 3.4em);
 
   /* O recuo horizontal fica: ele desloca so o conteudo desta linha e
      nao reflui as vizinhas. */
@@ -2257,4 +2251,39 @@
   font-size: var(--rbf-code);
   letter-spacing: .12em;
   color: var(--rbf-ink-ghost);
+}
+
+/* ==========================================================================
+   A CONTA — abas do painel pos-jogo
+   ========================================================================== */
+
+.rbf-abas {
+  display: flex;
+  gap: calc(6px * var(--rbf-ui));
+  margin-bottom: calc(20px * var(--rbf-ui));
+  border-bottom: 1px solid var(--rbf-line);
+}
+
+.rbf-aba {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-mute);
+
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: calc(10px * var(--rbf-ui)) calc(12px * var(--rbf-ui));
+  min-height: 44px;
+  cursor: pointer;
+
+  transition: color var(--rbf-fast), border-color var(--rbf-fast);
+}
+
+.rbf-aba:hover { color: var(--rbf-ink-dim); }
+
+.rbf-aba.on {
+  color: var(--rbf-gold);
+  border-bottom-color: var(--rbf-gold);
 }
