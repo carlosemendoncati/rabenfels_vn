@@ -119,7 +119,9 @@
   .rf-title  { font-size: clamp(1.7rem, 8vw, 2.4rem); }
   .rf-lockup__latin { margin-bottom: calc(6px * var(--rbf-ui)); }
   .rf-subtitle { margin-top: calc(8px * var(--rbf-ui)); }
-  .rf-nav__item { min-height: 44px; padding-top: calc(9px * var(--rbf-ui)); padding-bottom: calc(9px * var(--rbf-ui)); }
+  /* Nesta faixa o rotulo de categoria esta em display:none, entao nao ha
+     crescimento para absorver: a altura volta a ser do conteudo. */
+  .rf-nav__item { height: auto; min-height: 44px; padding-top: calc(9px * var(--rbf-ui)); padding-bottom: calc(9px * var(--rbf-ui)); }
 }
 
 /* Elemento decorativo: some quando nao ha espaco para ele. */
@@ -546,12 +548,22 @@
   border: none;
   border-bottom: 1px solid rgba(38, 41, 54, .45);
 
-  /* Alvo de toque confortavel no telefone. */
+  /* ALTURA FIXA, e e ela que conserta o pulo.
+
+     O rotulo de categoria cresce por dentro no hover. Se a caixa puder
+     crescer junto, toda a lista abaixo desce e volta a cada passagem do
+     ponteiro - foi o defeito relatado.
+
+     Com altura fixa o crescimento e absorvido aqui dentro: o nome sobe
+     um pouco para dar lugar ao rotulo, e nenhuma linha vizinha se move.
+     O valor comporta rotulo (1.5em em --rbf-code) + nome + respiro.
+
+     Continua acima do alvo de toque de 48px exigido no telefone. */
+  height: calc(58px * var(--rbf-ui));
   min-height: 48px;
 
   /* O recuo horizontal fica: ele desloca so o conteudo desta linha e
-     nao reflui as vizinhas. Quem causava o pulo era a altura do rotulo
-     de categoria, corrigida abaixo com altura reservada. */
+     nao reflui as vizinhas. */
   transition: background var(--rbf-fast) var(--rbf-ease-page),
               padding-left var(--rbf-medium) var(--rbf-ease-ritual);
 }
@@ -617,26 +629,25 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
-  /* ALTURA RESERVADA SEMPRE.
+  /* Colapsado em repouso: sem isso sobra um buraco acima de todo nome e
+     o numeral romano desalinha, porque a coluna do meio fica mais alta
+     que as outras duas e o grid recentra por ela.
 
-     A versao anterior animava max-height de 0 para 1.5em no hover. Isso
-     mudava a altura da linha, e como os registros sao um empilhamento
-     vertical, a lista inteira pulava para baixo a cada passagem do
-     ponteiro: o item parecia sair de escala e colidir com o vizinho.
-
-     Agora o rotulo ocupa a linha dele desde sempre e so a opacidade
-     muda. O layout fica parado e o hover continua revelando. */
-  height: 1.5em;
-  line-height: 1.5;
-  margin-bottom: calc(2px * var(--rbf-ui));
-
+     O pulo da lista NAO se conserta aqui - conserta-se dando altura fixa
+     ao proprio registro, para o crescimento ser absorvido por dentro da
+     caixa. Ver .rf-nav__item. */
+  max-height: 0;
   opacity: 0;
-  transition: opacity var(--rbf-medium);
+  transition: max-height var(--rbf-medium) var(--rbf-ease-ritual),
+              opacity var(--rbf-medium),
+              margin-bottom var(--rbf-medium) var(--rbf-ease-ritual);
 }
 
 .rf-nav__item:hover .rf-nav__chapter,
 .rf-nav__item:focus-visible .rf-nav__chapter,
 .rf-nav__item.is-active .rf-nav__chapter {
+  max-height: 1.5em;
+  margin-bottom: calc(2px * var(--rbf-ui));
   opacity: 1;
 }
 
