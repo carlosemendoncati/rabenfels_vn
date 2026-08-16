@@ -192,6 +192,45 @@ RBF.Engine = (function () {
     return div;
   }
 
+  /* Distribui quem esta em cena em faixas iguais do palco.
+
+     Antes cada beat do roteiro mandava um 'pos' solto - left, center,
+     right - e o CSS ancorava nas bordas da TELA. Com um personagem em
+     cena o resultado era alguem encostado no canto; com dois, um deles
+     saia por baixo da caixa de dialogo; e como as bordas eram da tela e
+     a caixa tem largura maxima, ninguem se alinhava com nada.
+
+     Agora o lugar vem da CONTAGEM: um personagem fica no meio, dois
+     dividem o palco ao meio, tres em tercos. O 'pos' do roteiro deixa
+     de mandar na posicao final e vira so a ordem da esquerda para a
+     direita, que e a unica coisa que ele realmente sabia dizer.
+
+     O palco tem a mesma largura maxima da caixa de dialogo (ver
+     #sprites em css/style.css), entao ninguem passa das bordas dela. */
+  function layoutSprites() {
+    var ordem = { left: 0, center: 1, right: 2 };
+    var vivos = [];
+
+    for (var k in spriteNodes) {
+      if (!Object.prototype.hasOwnProperty.call(spriteNodes, k)) { continue; }
+      if (!spriteNodes[k].classList.contains('show')) { continue; }
+      var st = pres.sprites[k];
+      vivos.push({ id: k, node: spriteNodes[k], ord: ordem[st && st.pos] || 1 });
+    }
+
+    vivos.sort(function (a, b) {
+      if (a.ord !== b.ord) { return a.ord - b.ord; }
+      return a.id < b.id ? -1 : 1;      /* empate: ordem estavel por id */
+    });
+
+    el.sprites.setAttribute('data-em-cena', String(vivos.length));
+
+    for (var i = 0; i < vivos.length; i++) {
+      vivos[i].node.style.setProperty('--rbf-vaga', String(i));
+      vivos[i].node.style.setProperty('--rbf-vagas', String(vivos.length));
+    }
+  }
+
   function showSprite(charId, expression, pos, silent) {
     var div = spriteNode(charId);
     var img = div.querySelector('img');
@@ -199,22 +238,37 @@ RBF.Engine = (function () {
     var cdef = RBF.CHARACTERS[charId];
     var res  = (cdef && cdef.res === 'high') ? ' res-high' : '';
 
-    RBF.Assets.applyCharacter(img, charId, expression, function (visible, size) {
-      div.className = 'sprite pos-' + (pos || 'center') + ' size-' + (size || 'bust') + res;
-      if (!visible) { div.classList.remove('show'); return; }
-      if (silent) { div.classList.add('show'); return; }
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { div.classList.add('show'); });
-      });
-    });
+    /* Porte: crianca ocupa menos altura que adulto. Sem isto as gemeas,
+       que sao declaradas size:'full' para aparecer de corpo inteiro,
+       ficavam do tamanho de um adulto de pe ao lado de bustos. */
+    var porte = ' porte-' + ((cdef && cdef.stature) || 'adulto');
 
     pres.sprites[charId] = { ex: expression || null, pos: pos || 'center' };
+
+    RBF.Assets.applyCharacter(img, charId, expression, function (visible, size) {
+      div.className = 'sprite size-' + (size || 'bust') + res + porte;
+      if (!visible) { div.classList.remove('show'); layoutSprites(); return; }
+      if (silent) { div.classList.add('show'); layoutSprites(); return; }
+
+      /* Dois quadros antes de somar 'show': o elemento precisa existir
+         sem a classe por um quadro para a transicao de entrada ter de
+         onde partir. Sem isso o sprite aparece seco na primeira vez.
+         O layout so corre depois, quando 'show' ja esta no lugar - e
+         ele que conta quem esta em cena. */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          div.classList.add('show');
+          layoutSprites();
+        });
+      });
+    });
   }
 
   function hideSprite(charId) {
     var div = spriteNodes[charId];
     if (div) { div.classList.remove('show'); }
     delete pres.sprites[charId];
+    layoutSprites();
   }
 
   function clearSprites() {
@@ -224,6 +278,7 @@ RBF.Engine = (function () {
       }
     }
     pres.sprites = {};
+    layoutSprites();
   }
 
   /* ---- overlays --------------------------------------------------------- */
@@ -391,11 +446,20 @@ RBF.Engine = (function () {
            b.t === 'arc' || b.t === 'last';
   }
 
+  /* Quem fala vem para a frente; quem escuta recua e esmaece.
+
+     'is-speaking' e classe propria e nao apenas 'nao e is-idle': em
+     narracao ninguem fala, e sem a marca positiva o telefone - que
+     mostra so quem fala - nao teria como distinguir "ninguem fala" de
+     "todos falam". */
   function highlightSpeaker(speakerId) {
     for (var k in spriteNodes) {
       if (!Object.prototype.hasOwnProperty.call(spriteNodes, k)) { continue; }
-      spriteNodes[k].classList.toggle('is-idle', !!speakerId && k !== speakerId);
+      var falando = !!speakerId && k === speakerId;
+      spriteNodes[k].classList.toggle('is-idle', !!speakerId && !falando);
+      spriteNodes[k].classList.toggle('is-speaking', falando);
     }
+    el.sprites.classList.toggle('tem-locutor', !!speakerId);
   }
 
   function recordKind(mode) {
@@ -558,7 +622,12 @@ RBF.Engine = (function () {
         el.lastLabel.textContent = beat.label || RBF.UI_TEXT.lastLabel;
         el.lastLines.textContent = beat.lns.join('\n');
         el.lastBox.classList.add('show');
+        /* Quem rola e o bloco de texto, nao a caixa: com a janela de
+           documento a caixa tem tamanho fixo e o texto corre por
+           dentro. Zerar so a caixa deixava o documento aberto no meio
+           quando ele reaparecia. */
         el.lastBox.scrollTop = 0;
+        if (el.lastLines) { el.lastLines.scrollTop = 0; }
         if (!silent) {
           if (beat.key) { RBF.Gallery.markSeen('arc', beat.key); }
           RBF.History.push('last', null, beat.lns.join('\n'), RBF.STATE.chapter, RBF.STATE.scene);
@@ -924,6 +993,8 @@ RBF.Engine = (function () {
   /* Fim do material escrito. A dica sai do manifesto: o texto nomeia o
      ultimo capitulo registrado em vez de trazer um numero fixo que
      envelhece a cada capitulo novo. */
+  var endReturnTimer = null;
+
   function endOfScript() {
     finished = true;
     stopSkip();
@@ -934,6 +1005,39 @@ RBF.Engine = (function () {
       : RBF.UI_TEXT.hintEnd);
 
     if (RBF.STATE.chapter) { RBF.Saves.markChapterFinished(RBF.STATE.chapter); }
+
+    /* O roteiro do Epilogo termina em 'fade_out': a tela fica preta e o
+       #fader fica em opacidade 1. Ate aqui isso estava certo - o que
+       faltava era o passo seguinte.
+
+       endOfScript so marcava 'finished' e escrevia a dica de fim. Mas a
+       dica mora DENTRO do painel de dialogo (#hint esta display:none
+       desde que ela mudou de lugar), e o fade_out acabou de limpar o
+       painel. Resultado: preto permanente, sem texto, sem saida, sem
+       nem o menu de jogo - porque o menu de jogo tambem sai com a
+       interface limpa.
+
+       Agora o arquivo se fecha sozinho depois de uma pausa, e um clique
+       fecha na hora. O menu ja volta sabendo da conclusao: registro 'A
+       Conta' destravado, cabecalho selado, contagem de leituras. */
+    if (endReturnTimer) { clearTimeout(endReturnTimer); }
+    endReturnTimer = setTimeout(closeArchive, RBF.CONFIG.timing.endReturnMs || 2800);
+  }
+
+  /* Volta ao menu depois do fim. Mesma sequencia de 'Voltar ao titulo'
+     em js/menu.js, que ja era o unico caminho testado de partida para
+     menu - nao inventa um segundo. */
+  function closeArchive() {
+    if (endReturnTimer) { clearTimeout(endReturnTimer); endReturnTimer = null; }
+
+    /* Carregou outro save, comecou outra partida, ou a partida ja foi
+       encerrada por outro caminho: nao ha o que fechar. */
+    if (!finished || !started) { return; }
+
+    RBF.State.clearStack();
+    stop();
+    RBF.Audio.enterMenu();
+    if (RBF.Menu && RBF.Menu.revealMenu) { RBF.Menu.revealMenu(true); }
   }
 
   /* ---- entrada ---------------------------------------------------------- */
@@ -943,7 +1047,13 @@ RBF.Engine = (function () {
     if (!RBF.State.canAdvanceScript()) { return; }
     if (uiHidden) { toggleUI(false); return; }
     if (skipping()) { stopSkip(); return; }
-    if (choiceActive || busy || finished) { return; }
+
+    /* Depois do fim, o clique fecha o arquivo em vez de nao fazer nada.
+       Antes caia no 'return' abaixo junto com choiceActive e busy, e o
+       jogador ficava clicando numa tela preta sem resposta. */
+    if (finished) { closeArchive(); return; }
+
+    if (choiceActive || busy) { return; }
     if (typing) { completeTyping(); return; }
     advance();
   }
@@ -1478,6 +1588,10 @@ RBF.Engine = (function () {
          modo silencioso: sem audio, sem galeria, sem autosave. */
       exec:         function (beat) { return exec(beat, true); },
       resolveEnding: resolveEnding,
+      /* Fim de partida: permite conferir que o arquivo se fecha e o
+         menu volta, sem ter de percorrer o roteiro inteiro. */
+      endOfScript:   endOfScript,
+      closeArchive:  closeArchive,
       controls:     function () { return ctlNodes; },
       sceneStart:   function () { return sceneStart; }
     }

@@ -169,6 +169,78 @@ RBF.Assets = (function () {
     probe.src = src.url;
   }
 
+  /* ---------------------------------------------------------------------
+     ARTE DE UI
+     Cromo estatico (moldura de painel, divisor, banner de nome...),
+     compartilhado por varios elementos e estados em vez de um <img> por
+     ocorrencia. Resolve cada entrada de RBF.UI_ART uma vez e escreve o
+     resultado numa custom property --rbf-art-<id> no :root, que os
+     seletores de css/ui.css e css/style.css consomem via var(). Falha
+     ou available:false deixam a variavel em 'none': o componente usa o
+     CSS que ja tinha, sem fundo vazio.
+     --------------------------------------------------------------------- */
+  function applyUiArtVars() {
+    var root = document.documentElement;
+    var id;
+    for (id in RBF.UI_ART) {
+      if (Object.prototype.hasOwnProperty.call(RBF.UI_ART, id)) {
+        resolveUiArt(root, id, RBF.UI_ART[id]);
+      }
+    }
+  }
+
+  function resolveUiArt(root, id, def) {
+    var slug    = id.replace(/_/g, '-');
+    var varName = '--rbf-art-' + slug;
+
+    /* Marca no <html> que ESTA peca carregou de verdade. O CSS usa para
+       trocar o piso pela arte: componentes como o cartao de dossie
+       precisam de uma borda propria enquanto nao ha pintura, e essa
+       borda tem que sumir quando a pintura chega - senao fica um
+       retangulo reto desenhado por cima de uma moldura rasgada.
+       Uma variavel sozinha nao permite esse desvio; a classe permite. */
+    function mark() {
+      if (root && root.classList) { root.classList.add('rbf-has-' + slug); }
+    }
+
+    if (!def.available || !def.file) { return; }
+
+    var url = cfg().paths.ui + def.file;
+    /* url() dentro de uma custom property e resolvido contra a folha de
+       estilo que CONSOME var(), nao contra a pagina - css/ui.css fica em
+       css/, entao um caminho relativo viraria css/assets/ui/... e nunca
+       carregaria. Absolutizar contra o documento evita isso, e continua
+       funcionando aberto por file://.
+
+       tools/minidom.js (o DOM escrito a mao que tools/validate.js usa
+       pra rodar o jogo inteiro sem navegador) nao tem window.URL. Sem
+       navegador real nao existe stylesheet pra resolver contra, entao
+       cair no caminho relativo ali e inofensivo - so importa no
+       navegador de verdade, onde URL sempre existe. */
+    var absoluteUrl = url;
+    if (typeof URL === 'function') {
+      try { absoluteUrl = new URL(url, document.baseURI).href; } catch (e) { absoluteUrl = url; }
+    }
+
+    if (imgCache[url] === 'fail') { return; }
+    if (imgCache[url] === 'ok') {
+      root.style.setProperty(varName, 'url("' + absoluteUrl + '")');
+      mark();
+      return;
+    }
+    var probe = new Image();
+    probe.onload = function () {
+      imgCache[url] = 'ok';
+      root.style.setProperty(varName, 'url("' + absoluteUrl + '")');
+      mark();
+    };
+    probe.onerror = function () {
+      imgCache[url] = 'fail';
+      note('ui:' + id, url);
+    };
+    probe.src = url;
+  }
+
   /* Lista ordenada de ids ausentes. Util no console: RBF.Assets.report() */
   function report() {
     var out = [];
@@ -181,6 +253,7 @@ RBF.Assets = (function () {
   return {
     applyBackground: applyBackground,
     applyCharacter:  applyCharacter,
+    applyUiArtVars:  applyUiArtVars,
     characterSource: characterSource,
     placeholder:     characterPlaceholder,
     missing:         missing,

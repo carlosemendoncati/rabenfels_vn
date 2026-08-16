@@ -80,7 +80,12 @@ RBF.UI = (function () {
     box.appendChild(head);
 
     var body = el('div', 'rbf-panel-body');
-    if (opts.body) { body.appendChild(opts.body); }
+    if (opts.tabs && opts.tabs.length) {
+      body.classList.add('is-tabbed');
+      body.appendChild(tabLayout(opts.tabs, opts.tabStart, opts.onTab));
+    } else if (opts.body) {
+      body.appendChild(opts.body);
+    }
     box.appendChild(body);
 
     if (opts.actions && opts.actions.length) {
@@ -113,12 +118,102 @@ RBF.UI = (function () {
     return { overlay: overlay, body: body, box: box };
   }
 
+  /* ---- painel com trilho de categorias -----------------------------------
+
+     Um painel longo em coluna unica obriga o jogador a rolar procurando
+     onde uma secao acaba e a outra comeca. Com trilho, cada categoria e
+     um lugar - e a troca entre elas ganha um gesto proprio.
+
+     tabs: [{ id, label, build: function () { return no; } }]
+
+     'build' e chamado na primeira vez que a aba aparece e o resultado
+     fica guardado. Assim abrir Ajustes nao monta cinco paginas de
+     controles de uma vez, e o estado de cada pagina (um slider ja
+     mexido, por exemplo) sobrevive a ida e volta entre abas.        */
+
+  function tabLayout(tabs, startId, onTab) {
+    var layout = el('div', 'rbf-tabs-layout');
+    var rail   = el('div', 'rbf-tabrail');
+    var pages  = el('div', 'rbf-tabpages');
+
+    var built   = {};
+    var buttons = [];
+    var current = null;
+
+    function show(tab, btn) {
+      if (current === tab.id) { return; }
+      current = tab.id;
+
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('on');
+        buttons[i].setAttribute('aria-selected', 'false');
+      }
+      btn.classList.add('on');
+      btn.setAttribute('aria-selected', 'true');
+
+      if (!built[tab.id]) {
+        var page = el('div', 'rbf-tabpage');
+        page.appendChild(tab.build());
+        built[tab.id] = page;
+      }
+
+      clear(pages);
+      pages.appendChild(built[tab.id]);
+      pages.scrollTop = 0;
+
+      /* A pagina entra por corte, e nao por opacidade. Passa por
+         RBF.Motion para a classe nunca ficar presa se o jogador
+         trocar de aba no meio da animacao. */
+      RBF.Motion.run(built[tab.id], 'is-cutting', 320);
+
+      /* Quem abriu o painel guarda a aba, para reabrir onde parou. */
+      if (onTab) { onTab(tab.id); }
+    }
+
+    for (var i = 0; i < tabs.length; i++) {
+      (function (tab) {
+        var b = el('button', 'rbf-tab', tab.label);
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          if (RBF.Audio && RBF.Audio.playUi) { RBF.Audio.playUi('ui_hover'); }
+          show(tab, b);
+        });
+        buttons.push(b);
+        rail.appendChild(b);
+      })(tabs[i]);
+    }
+
+    rail.setAttribute('role', 'tablist');
+    layout.appendChild(rail);
+    layout.appendChild(pages);
+
+    /* Abre na aba pedida, ou na primeira. */
+    var at = 0;
+    for (var k = 0; k < tabs.length; k++) {
+      if (tabs[k].id === startId) { at = k; break; }
+    }
+    show(tabs[at], buttons[at]);
+
+    return layout;
+  }
+
   function closePanel() {
     if (!openPanel) { return false; }
     var p = openPanel;
     openPanel = null;
 
-    if (p.el && p.el.parentNode) { p.el.parentNode.removeChild(p.el); }
+    /* A saida tem desenho proprio (.rbf-overlay.is-closing em
+       css/ui.css) e quem cronometra e RBF.Motion: ele espera o
+       'animationend', tem temporizador de seguranca caso o evento nao
+       venha, e remove o no no fim. Antes o prazo estava escrito a mao
+       aqui, em numero copiado do CSS - saia de sincronia na primeira
+       vez que a duracao mudasse. */
+    if (p.el && p.el.parentNode) {
+      p.el.classList.remove('show');
+      RBF.Motion.exit(p.el, 'is-closing', 200);
+    }
     if (RBF.Audio && RBF.Audio.playUi) { RBF.Audio.playUi('ui_back'); }
     if (p.onClose) { p.onClose(); }
     return true;
@@ -207,8 +302,11 @@ RBF.UI = (function () {
 
   function dismissModal() {
     if (!modalEl) { return false; }
-    if (modalEl.parentNode) { modalEl.parentNode.removeChild(modalEl); }
+    var node = modalEl;
     modalEl = null;
+
+    node.classList.remove('show');
+    RBF.Motion.exit(node, 'is-closing', 200);
     return true;
   }
 

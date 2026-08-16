@@ -106,8 +106,12 @@ CSS mobile-first: a base atende telefone em retrato e `--rbf-ui` é o
   cenário, silhueta SVG para personagem, silêncio para áudio.
 - Caixa de texto: máquina de escrever; clique, espaço, enter ou seta avançam;
   clique durante a digitação completa a frase.
-- Fragmentos do Arquivo: `#archive-box`, itálico, cor `#c8a878`, para trechos
-  citados do documento diegético.
+- Fragmentos do Arquivo: `#archive-box`, itálico, sobre a placa de pergaminho
+  (`ui_parchment_plate`), para trechos citados do documento diegético.
+  O itálico continua; a cor deixou de ser `#c8a878` sobre preto e passou a ser
+  tinta escura sobre papel — a superfície mudou, e a cor do texto sai da peça,
+  não do tema. Mesma regra na faixa de seleção do menu, na placa de nome e nas
+  escolhas. Sem a arte carregada, o componente volta ao visual escuro anterior.
 - Roteiro: array de beats por capítulo em `js/data/`. Ao adicionar capítulo,
   seguir o mesmo formato e registrar em `RBF.CHAPTERS`.
 

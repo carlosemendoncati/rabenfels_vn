@@ -82,8 +82,16 @@ RBF.CONFIG = {
 
     /* Portao de abertura saindo de cena.        */
     gateMs: 520,
-    /* Pagina escura atravessando entre telas.   */
+    /* Pagina escura atravessando entre telas. A cena troca aqui, no
+       meio do trajeto, com o veu parado cobrindo a tela.   */
     sweepMs: 380,
+    /* Duracao total do corte de tela, ponta a ponta. Acompanha o token
+       --rbf-sweep de css/tokens.css; e o prazo que RBF.Motion usa para
+       tirar a classe .is-sweeping.                          */
+    sweepAnimMs: 900,
+    /* Pausa no preto depois do ultimo beat, antes de o arquivo se
+       fechar sozinho e voltar ao menu. Um clique encurta.  */
+    endReturnMs: 2800,
     /* Tempo de ler a marca na escolha antes de
        a cena seguir. Maior quando uma rota muda. */
     choiceHoldMs:      380,
@@ -384,6 +392,13 @@ RBF.CHARACTERS = {
     dir: 'klara',
     size: 'full',
 
+    /* As gemeas sao criancas: o proprio jogo diz, nas fichas de
+       galeria ("a menina da casa", "uma crianca que corrige adultos").
+       size:'full' pede o corpo inteiro no enquadramento; 'stature'
+       diz o PORTE. Sem separar os dois, elas apareciam da altura de
+       um adulto de pe ao lado de bustos. */
+    stature: 'crianca',
+
     available: true,
     onMissing: 'placeholder',
     fallbackExpression: 'neutral',
@@ -403,6 +418,13 @@ RBF.CHARACTERS = {
     color: '#7aa7d8',
     dir: 'liara',
     size: 'full',
+
+    /* As gemeas sao criancas: o proprio jogo diz, nas fichas de
+       galeria ("a menina da casa", "uma crianca que corrige adultos").
+       size:'full' pede o corpo inteiro no enquadramento; 'stature'
+       diz o PORTE. Sem separar os dois, elas apareciam da altura de
+       um adulto de pe ao lado de bustos. */
+    stature: 'crianca',
 
     available: true,
     onMissing: 'placeholder',
@@ -500,6 +522,16 @@ RBF.BACKGROUNDS = {
     file: 'bg_library_night.png',
     available: true,
     css: 'radial-gradient(ellipse at 62% 62%, #14100a 0%, #0a0805 45%, #020202 100%)'
+  },
+
+  /* Fundo do menu principal, entregue em 15/08/2026. O gradiente abaixo
+     e o mesmo que #rf-menu-bg usava sozinho antes da foto existir -
+     continua valendo como fallback enquanto a imagem carrega ou se
+     available virar false. */
+  bg_menu_archive: {
+    file: 'bg_menu_archive.png',
+    available: true,
+    css: 'radial-gradient(ellipse at 68% 52%, #241a10 0%, #100c09 42%, #07080c 100%)'
   },
 
   bg_black: {
@@ -926,8 +958,21 @@ RBF.ARCHIVE = {
   subtitle: 'os que abriram n\u00e3o voltaram a fechar',
   noteLabel:'NOTA DE MARGEM',
 
+  /* ---- cartao de estado do arquivo ------------------------------------
+     Rotulos do componente novo do menu principal. Ele le o save mais
+     recente e o progresso persistido; quando nao ha nenhum dos dois, o
+     cartao nao aparece em vez de mostrar zero em tudo. */
+  cardTitle:     'ESTADO DO ARQUIVO',
+  cardFootLabel: 'TEMPO EM LEITURA',
+
   /* Fundo do menu. Usa um background do manifesto, entao segue a mesma
-     regra de todos: enquanto 'available' for false, so o gradiente. */
+     regra de todos: enquanto 'available' for false, so o gradiente.
+
+     E o fundo original da obra, e continua sendo. A troca por
+     bg_menu_archive (o fundo que veio no pacote de UI animada) foi
+     revertida a pedido: a reestruturacao e da interface, nao da cena.
+     bg_menu_archive segue registrado no manifesto e usavel na galeria,
+     mas nao e o menu. */
   background: 'bg_archive_closeup',
 
   /* Numerais romanos dos registros do menu. */
@@ -1261,7 +1306,124 @@ RBF.CREDITS = [
 ];
 
 /* -------------------------------------------------------------------------
-   16. COMPATIBILIDADE COM NODE
+   16. ARTE DE INTERFACE (UI_ART)
+
+   Cromo decorativo por cima de componentes que ja tem visual completo em
+   CSS (gradiente, borda). Diferente de RBF.BACKGROUNDS, nao tem campo
+   'css' de fallback por item: enquanto 'available' for false ou o
+   arquivo falhar ao carregar, a camada de arte simplesmente nao aparece
+   e o CSS do componente continua sozinho, sem gradiente vazio nem erro.
+
+   Resolvido uma unica vez no boot por RBF.Assets.applyUiArtVars(), que
+   escreve cada entrada como 'url(...)' numa custom property --rbf-art-*
+   em css/tokens.css. E cromo estatico compartilhado por varios
+   elementos e estados (:hover, painel aberto), por isso nao passa pelo
+   mesmo caminho de RBF.Assets.applyBackground/applyCharacter, que
+   resolvem por elemento a cada troca de cena.
+   ------------------------------------------------------------------------- */
+
+RBF.UI_ART = {
+  /* Substituida por ui_panel_frame_gothic, que tem canto ornamentado de
+     verdade e miolo usavel. A regra de CSS dela continua escrita como
+     piso, mas com available:false a classe nunca entra e a regra nunca
+     se aplica - o que evita baixar 1,7 MB para nada. Arquivo no disco. */
+  ui_menu_panel:          { file: 'ui_menu_panel.png',          available: false },
+
+  /* ---- caixa de dialogo: duas pecas, uma em uso ------------------------
+     ui_dialogue_frame (entregue em 15/08/2026) e a moldura nova: fio de
+     ouro fino, canto discreto, miolo liso. Substitui ui_dialogue_box na
+     cena porque a peca antiga tem damasco e rosa-dos-ventos pintados no
+     miolo, e miolo com desenho briga com o texto que corre por cima.
+
+     ui_dialogue_box sai de cena e fica inativa - nada mais a consome,
+     e mante-la ativa custaria 1,1 MB de download por nada. O arquivo
+     continua no disco; voltar e trocar uma palavra. */
+  /* Ambas substituidas por ui_dialogue_plate_leather, pelo mesmo motivo
+     de ui_menu_panel: sao pisos que nunca chegam a aparecer. */
+  ui_dialogue_frame:      { file: 'ui_dialogue_frame.png',      available: false },
+  ui_dialogue_box:        { file: 'ui_dialogue_box.png',        available: false },
+
+  /* Selo de cera: placa de nome de quem fala, na cena. Substitui a
+     faixa carmesim SO no dialogo - a faixa continua no titulo dos
+     paineis, onde o formato comprido serve melhor. */
+  ui_name_seal_wax:       { file: 'ui_name_seal_wax.png',       available: true },
+
+  /* Placa de pergaminho com fio de ouro. Vai nos cartoes que citam o
+     Arquivo em cena (#archive-box e #last-box), que ate agora eram um
+     retangulo preto com filete vermelho - o unico componente que ficou
+     no visual antigo depois da reestruturacao.
+
+     E a peca certa para eles pelo motivo mais simples: o que aparece
+     ali e trecho de documento. Documento e papel. */
+  ui_parchment_plate:     { file: 'ui_parchment_plate.png',     available: true },
+
+  /* ---- entregues em 15/08/2026, terceira leva --------------------------
+     ui_panel_frame_gothic (1199x1181) substitui ui_menu_panel nos
+     paineis: tem canto ornamentado de verdade, em vez de borda rasgada,
+     e o miolo e escuro TRANSLUCIDO - com 'fill' ele vira a superficie
+     do painel sem precisar de cor por baixo.
+
+     ui_dialogue_plate_leather (2172x403) substitui ui_dialogue_frame na
+     cena: couro com latao e fio rubro. A proporcao de 5,4:1 e quase a
+     da caixa de dialogo em monitor, entao a peca entra quase sem
+     esticar - foi por isso que ela pode ser mais ornamentada que a
+     anterior sem virar borrao.
+
+     ui_ornament_quill_seal (865x1374) e a pena com o selo de cera. Nao
+     e moldura: e assinatura. Vai no canto dos paineis e devolve a marca
+     que se perdeu quando ui_menu_panel passou a entrar por border-image
+     sem 'fill' - eu tinha registrado essa perda como limitacao, e esta
+     peca resolve melhor do que a marca original resolvia. */
+  ui_panel_frame_gothic:     { file: 'ui_panel_frame_gothic.png',     available: true },
+  ui_dialogue_plate_leather: { file: 'ui_dialogue_plate_leather.png', available: true },
+  ui_ornament_quill_seal:    { file: 'ui_ornament_quill_seal.png',    available: true },
+
+  /* Janela de leitura de documento (1630x896).
+
+     E a unica peca do pacote que NAO pode ser fatiada em nove: ela e
+     assimetrica de proposito - aba de titulo no topo a esquerda, selo
+     de cera com pena no topo a direita, canto chanfrado embaixo a
+     direita, fitas so do lado esquerdo. Esticar qualquer borda destroi
+     um ornamento diferente.
+
+     Entra inteira, em proporcao nativa, e o conteudo rola por dentro. */
+  ui_document_frame:         { file: 'ui_document_frame.png',         available: true },
+  ui_divider_gold:        { file: 'ui_divider_gold.png',        available: true },
+  ui_name_banner_crimson: { file: 'ui_name_banner_crimson.png', available: true },
+  ui_menu_item_selected:  { file: 'ui_menu_item_selected.png',  available: true },
+  fx_ink_slash:           { file: 'fx_ink_slash.png',           available: true },
+
+  /* ui_route_progress_panel (720x1066, retrato) foi dado como sem lugar
+     na primeira integracao, porque nao cabia na faixa de 30px do HUD de
+     rotas em cena. O lugar dele nao era esse: a arte tem exatamente TRES
+     linhas com losango a esquerda, fio no meio e losango a direita, mais
+     uma tarja de rodape. E o desenho de um cartao de tres rotas com um
+     numero embaixo - o cartao de dossie do menu principal, nao o HUD.
+
+     Os tres sigilos (256x256, pintura) ficam nesse cartao a 34px, onde a
+     pintura ainda le. O HUD em cena continua com o <symbol> SVG a 13px:
+     ali a pintura perderia nitidez, e essa decisao nao mudou. */
+  ui_route_progress_panel: { file: 'ui_route_progress_panel.png', available: true },
+  route_hope:               { file: 'route_hope.png',   available: true },
+  /* O id da rota e 'loss' (Perda) e esta gravado em save - nunca muda.
+     O arquivo se chama 'death' porque veio assim nomeado no pacote. */
+  route_loss:                { file: 'route_death.png',  available: true },
+  route_answer:              { file: 'route_answer.png', available: true },
+
+  /* Silhueta feminina de perfil, ja recortada com alfa por
+     tools/pngtrim.js. Chegou sem nome de arquivo e sem destino.
+
+     Fica INATIVA de proposito. A peca e uma personagem especifica - a
+     Antoniette - e nao um enfeite generico: usar como "quem escuta" em
+     qualquer cena poria o rosto dela em cena onde ela nao esta. Onde
+     ela entra e decisao de roteiro, nao de interface, e nao vou
+     escolher isso sozinho. O arquivo esta no lugar e o dia que a
+     decisao vier e so virar para true. */
+  ui_listener_silhouette:    { file: 'ui_listener_silhouette.png', available: false }
+};
+
+/* -------------------------------------------------------------------------
+   17. COMPATIBILIDADE COM NODE
    ------------------------------------------------------------------------- */
 
 if (typeof module !== 'undefined' && module.exports) {

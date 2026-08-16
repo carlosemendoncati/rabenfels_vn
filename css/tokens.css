@@ -31,6 +31,16 @@
   --rbf-cold:     #7fa6b8;   /* rota Resposta, dado frio, codigo          */
   --rbf-paper:    #d9d5c8;   /* texto principal                           */
 
+  /* Ouro sob luz. So para a borda do item selecionado e o fio do
+     cartao de dossie - o ouro normal e linha, este e reflexo. */
+  --rbf-gold-lit: #e0c391;
+
+  /* Tinta sobre pergaminho. A faixa de selecao (ui_menu_item_selected)
+     e papel claro: o texto por cima dela INVERTE, nao clareia. Foi o
+     erro da primeira integracao - texto cor de papel sobre papel. */
+  --rbf-on-paper:     #1a1410;
+  --rbf-on-paper-dim: #4a3a2c;
+
   /* Fundos, do mais profundo ao mais elevado. Viés frio: são as
      superfícies do arquivo — menu, painéis, listas de save. */
   --rbf-void:     #07080c;
@@ -71,13 +81,75 @@
   --rbf-medium: 420ms;
   --rbf-slow:   800ms;
 
+  /* Escala completa, por FUNCAO e nao por tamanho. Cada faixa tem um
+     unico papel; nada no jogo escolhe duracao fora desta lista.
+
+       snap    resposta de selecao      (o item reage ao comando)
+       fast    troca entre itens        (ja existia)
+       panel   abertura de painel
+       medium  troca de secao inteira   (ja existia)
+       slow    ritual, uma vez so       (ja existia)
+       sweep   corte de tela em tinta
+       step    atraso entre pecas de uma mesma entrada
+
+     Os numeros seguem o briefing: selecao 80-160, troca 120-220,
+     painel 220-380, secao 300-550, stagger 25-70. */
+  --rbf-snap:     120ms;
+  /* '-ms' no nome de proposito: --rbf-panel ja e a COR do painel, la em
+     cima. Sem o sufixo, a declaracao de duracao vinha depois e vencia -
+     background-color virava '320ms', valor invalido, e todo painel do
+     jogo ficava transparente com o menu aparecendo por tras. */
+  --rbf-panel-ms: 320ms;
+  --rbf-sweep:    900ms;
+  --rbf-step:      45ms;
+
   --rbf-ease-ritual: cubic-bezier(0.22, 1, 0.36, 1);
   --rbf-ease-page:   cubic-bezier(0.65, 0, 0.35, 1);
 
+  /* Quatro curvas de carater, uma por gesto.
+
+     cut     corte rapido: sai parado, atravessa, para seco. Faixa de
+             tinta, revelacao por mascara.
+     impact  entrada elastica CONTIDA. O material de referencia usa
+             1.4 de overshoot; aqui e 1.28, porque a critica recorrente
+             aos menus do Metaphor e que tudo pulsa ao mesmo tempo -
+             o excesso vira ruido e come a legibilidade.
+     exit    saida brusca: comeca rapido e some. Saida nunca e a
+             entrada ao contrario; o que sai deve sair de vez.
+     settle  assentamento: chega e para sem quicar. Para o que precisa
+             ser lido logo depois de aparecer. */
+  --rbf-ease-cut:    cubic-bezier(0.76, 0, 0.24, 1);
+  --rbf-ease-impact: cubic-bezier(0.22, 1.28, 0.32, 1);
+  --rbf-ease-exit:   cubic-bezier(0.55, 0, 1, 0.45);
+  --rbf-ease-settle: cubic-bezier(0.16, 0.84, 0.28, 1);
+
   /* ---- tipografia ------------------------------------------------------ */
 
-  --rbf-font-display: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
-  --rbf-font-body:    Georgia, 'Times New Roman', serif;
+  /* Sem webfont: o projeto abre por file:// e o validador reprova
+     qualquer https:// em HTML ou CSS. Entao a pilha e toda de fontes
+     que ja existem no sistema, ordenadas da mais desejada para a mais
+     garantida.
+
+     display (cromo: menu, rotulos, codigos, botoes) saiu de
+     Helvetica/Arial. Arial e a fonte de formulario: em caixa alta com
+     tracking largo, que e como quase todo cromo deste jogo aparece,
+     ela le como planilha e nao como documento. Gill Sans e Optima sao
+     humanistas com eixo caligrafico - a mesma familia de desenho que
+     placa gravada e ficha de arquivo usam. Candara e Corbel cobrem o
+     Windows sem Office; Segoe UI e a rede de seguranca.
+
+     body (narrativa) saiu de Georgia para Palatino. Georgia foi
+     desenhada para tela pequena e tem barriga larga; Palatino vem da
+     letra de humanista italiano e e o que mais se parece com pagina
+     impressa - que e o que a obra inteira finge ser. Georgia continua
+     logo atras, porque em Linux e o que costuma existir. */
+  --rbf-font-display:
+    'Gill Sans MT', 'Gill Sans', Optima, Candara, Corbel,
+    'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  --rbf-font-body:
+    'Palatino Linotype', 'Book Antiqua', Palatino, Constantia,
+    Georgia, 'Times New Roman', serif;
 
   /* Escala de interface. As media queries no fim do arquivo ajustam.
      Todo componente mede a partir daqui, o que faz o layout inteiro
@@ -115,6 +187,45 @@
 
   /* Cursor: a arte do projeto vive em css/ui.css, porque depende de
      arquivo em assets/ e este arquivo nao referencia asset. */
+
+  /* ---- arte de UI ------------------------------------------------------
+     Preenchidas em runtime por RBF.Assets.applyUiArtVars(), a partir do
+     manifesto RBF.UI_ART em js/config.js. 'none' ate o arquivo carregar
+     ou enquanto available for false - o componente usa o CSS que ja
+     tinha, sem essas variaveis nunca aparece um fundo vazio. */
+  --rbf-art-ui-menu-panel:          none;
+  --rbf-art-ui-dialogue-box:        none;
+  --rbf-art-ui-divider-gold:        none;
+  --rbf-art-ui-name-banner-crimson: none;
+  --rbf-art-ui-menu-item-selected:  none;
+  --rbf-art-fx-ink-slash:           none;
+  --rbf-art-ui-dialogue-frame:       none;
+  --rbf-art-ui-parchment-plate:      none;
+  --rbf-art-ui-panel-frame-gothic:     none;
+  --rbf-art-ui-dialogue-plate-leather: none;
+  --rbf-art-ui-ornament-quill-seal:    none;
+  --rbf-art-ui-document-frame:         none;
+  --rbf-art-ui-name-seal-wax:        none;
+  --rbf-art-ui-listener-silhouette:  none;
+  --rbf-art-ui-route-progress-panel: none;
+  --rbf-art-route-hope:              none;
+  --rbf-art-route-loss:              none;
+  --rbf-art-route-answer:            none;
+
+  /* ---- camadas ---------------------------------------------------------
+     A ordem de empilhamento estava escrita so em comentario no topo do
+     css/ui.css e repetida em numero solto em cada componente. Aqui ela
+     vira valor: mexer numa camada e mexer em um lugar. */
+  --rbf-z-stage:      0;
+  --rbf-z-dialogue:  20;
+  --rbf-z-card:      50;
+  --rbf-z-fader:     60;
+  --rbf-z-routes:    70;
+  --rbf-z-gamebar:   75;
+  --rbf-z-wipe:      80;
+  --rbf-z-menu:      90;
+  --rbf-z-gate:      95;
+  --rbf-z-overlay:  100;
 }
 
 /* ==========================================================================
@@ -258,6 +369,95 @@ button {
 @keyframes rbfQuill {
   0%, 100% { transform: translateY(0); opacity: .45; }
   50%      { transform: translateY(3px); opacity: 1; }
+}
+
+/* --- corte: entrada por mascara, nunca so por opacidade ------------------
+   Toda entrada desta familia combina clip-path (a peca e DESCOBERTA, como
+   quem separa uma pagina) com um deslocamento curto. O angulo e raso de
+   proposito: diagonal acentuada e a critica mais repetida ao material de
+   referencia - alem de custar legibilidade, cansa em tela pequena.      */
+
+/* Item de navegacao. Entra da esquerda, descoberto por mascara. */
+@keyframes rbfNavCut {
+  0%   { opacity: 0; transform: translateX(-34px) skewX(-3deg); clip-path: inset(0 100% 0 0); }
+  60%  { opacity: 1; transform: translateX(3px)   skewX(0);     clip-path: inset(0 -4% 0 0); }
+  100% { opacity: 1; transform: translateX(0)     skewX(0);     clip-path: inset(0 -4% 0 0); }
+}
+
+/* Lockup do titulo: lamina passando da esquerda para a direita. */
+@keyframes rbfBladeIn {
+  0%   { opacity: 0; transform: translateX(-9%) skewX(-5deg) scaleX(.94); clip-path: inset(0 100% 0 0); }
+  68%  { opacity: 1; transform: translateX(1%)  skewX(1deg)  scaleX(1.01); clip-path: inset(0 -6% 0 0); }
+  100% { opacity: 1; transform: translateX(0)   skewX(0)     scaleX(1);   clip-path: inset(0 -6% 0 0); }
+}
+
+/* Cartao de dossie: entra pela direita e assenta. Espelha o lockup, que
+   entra pela esquerda - a composicao fecha pelas duas pontas. */
+@keyframes rbfCardIn {
+  0%   { opacity: 0; transform: translate(22%, -6%) rotate(2.2deg) scale(.9); }
+  70%  { opacity: 1; transform: translate(-1.5%, .5%) rotate(-.5deg) scale(1.015); }
+  100% { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
+}
+
+/* Barra de rota preenchendo. Termina no valor real da linha, e nao em
+   scaleX(1): o quadro final le a mesma variavel que o estado parado,
+   entao a animacao entrega a barra exatamente onde ela deve ficar. */
+@keyframes rbfBarFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(var(--rbf-fill, 0)); }
+}
+
+/* --- paineis: entrada e saida com desenhos diferentes -------------------
+   A saida NAO e a entrada ao contrario. Entra com impacto e assenta;
+   sai reto e some, porque o que sai ja foi lido.                       */
+
+@keyframes rbfPanelIn {
+  0%   { opacity: 0; transform: translate3d(0, 3%, 0) rotate(.8deg) scale(.94); }
+  62%  { opacity: 1; transform: translate3d(0, -.4%, 0) rotate(-.15deg) scale(1.008); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0) scale(1); }
+}
+
+@keyframes rbfPanelOut {
+  0%   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0, 2.5%, 0) scale(.975); }
+}
+
+/* Troca de pagina dentro de um painel com abas. Descobre pela direita. */
+@keyframes rbfPageCut {
+  0%   { opacity: 0; transform: translateX(7%) skewX(-3deg); clip-path: inset(0 0 0 100%); }
+  100% { opacity: 1; transform: translateX(0)  skewX(0);     clip-path: inset(0); }
+}
+
+/* Faixa carmesim da aba ativa, varrendo da esquerda. */
+@keyframes rbfTabCut {
+  0%   { opacity: 0; transform: translateX(-16%) skewX(-7deg) scaleX(.5); }
+  100% { opacity: 1; transform: translateX(0)    skewX(-4deg) scaleX(1); }
+}
+
+/* --- corte de tela: tres camadas, um gesto -----------------------------
+   veil    a pagina escura atravessa
+   slash   a tinta atravessa junto, meio quadro atras
+   sigil   o selo bate no meio do trajeto e sai
+   As tres somam --rbf-sweep; o jogo troca de cena no meio.            */
+
+@keyframes rbfVeilCut {
+  0%       { transform: translateX(-140%) rotate(-2.4deg); }
+  40%, 62% { transform: translateX(0)     rotate(-2.4deg); }
+  100%     { transform: translateX(140%)  rotate(-2.4deg); }
+}
+
+@keyframes rbfInkCut {
+  0%       { transform: translateX(-130%) rotate(-2deg); opacity: 0; }
+  10%      { opacity: 1; }
+  45%, 60% { transform: translateX(0%)    rotate(-2deg); opacity: 1; }
+  100%     { transform: translateX(130%)  rotate(-2deg); opacity: 0; }
+}
+
+@keyframes rbfSigilCut {
+  0%, 22% { opacity: 0; transform: translate(-50%, -50%) rotate(-80deg) scale(.22); }
+  46%     { opacity: 1; transform: translate(-50%, -50%) rotate(10deg)  scale(1.08); }
+  64%     { opacity: 1; transform: translate(-50%, -50%) rotate(0)      scale(1); }
+  100%    { opacity: 0; transform: translate(-50%, -50%) rotate(38deg)  scale(1.35); }
 }
 
 /* Linha de traco: o gesto que liga titulo, selecao e transicao. */

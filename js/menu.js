@@ -166,6 +166,67 @@ RBF.Menu = (function () {
       (RBF.Storage.isPersistent() ? '' : ' \u00b7 SAVES S\u00d3 NESTA SESS\u00c3O');
   }
 
+  /* ---- cartao de estado do arquivo ---------------------------------------
+
+     Le o save mais recente (rotas) e o progresso persistido (tempo). Se
+     nao houver nem um nem outro, o cartao nao entra na composicao: zero
+     em tres barras nao informa nada e ainda ocupa um quarto da tela.
+
+     As rotas aparecem em barra e NUNCA em numero. E a mesma regra que
+     js/routes.js ja aplica na lista de saves ("nao revela numero nem
+     antecipa consequencia") e que o HUD em cena ja segue, com o
+     mostrador radial. Proporcao o jogador pode ver; contagem, nao. */
+
+  function renderDossier() {
+    var card = document.getElementById('rf-dossier-card');
+    if (!card) { return; }
+
+    var save    = RBF.Saves.latest();
+    var prog    = RBF.Saves.readProgress();
+    var seconds = prog.totalPlaytime || 0;
+
+    if (!save && !seconds) { card.hidden = true; return; }
+
+    var A = RBF.ARCHIVE;
+    document.getElementById('rf-dossier-title').textContent     = A.cardTitle;
+    document.getElementById('rf-dossier-footlabel').textContent = A.cardFootLabel;
+    document.getElementById('rf-dossier-time').textContent      =
+      RBF.Saves.formatPlaytime(seconds);
+
+    var rows  = document.getElementById('rf-dossier-rows');
+    UI.clear(rows);
+
+    var saved = (save && save.data && save.data.routes) || {};
+    var defs  = RBF.Routes.defs();
+
+    for (var i = 0; i < defs.length; i++) {
+      (function (d, n) {
+        var value = (typeof saved[d.id] === 'number') ? saved[d.id] : 0;
+        var top   = d.max || 1;
+        var frac  = Math.max(0, Math.min(1, value / top));
+
+        var row = UI.el('div', 'rf-dossier__row rf-dossier__row--' + d.id);
+
+        row.appendChild(UI.el('span', 'rf-dossier__sigil'));
+
+        var meta = UI.el('div', 'rf-dossier__meta');
+        meta.appendChild(UI.el('span', 'rf-dossier__name', d.label));
+        row.appendChild(meta);
+
+        var track = UI.el('span', 'rf-dossier__track');
+        var fill  = UI.el('i', 'rf-dossier__fill');
+        fill.style.setProperty('--rbf-fill', String(frac));
+        fill.style.setProperty('--rbf-order', String(n));
+        track.appendChild(fill);
+        row.appendChild(track);
+
+        rows.appendChild(row);
+      })(defs[i], i);
+    }
+
+    card.hidden = false;
+  }
+
   /* returning = volta de dentro do jogo, usa a versao curta da sequencia */
   function revealMenu(returning) {
     RBF.State.clearStack();
@@ -174,6 +235,7 @@ RBF.Menu = (function () {
     UI.closePanel();
     fillArchiveChrome();
     renderNav();
+    renderDossier();
 
     el.menu.classList.remove('is-revealing', 'is-returning');
     el.menu.classList.add('show');
@@ -297,6 +359,11 @@ RBF.Menu = (function () {
         el.nav.appendChild(btn);
       })(records[i], i);
     }
+
+    /* Numera os registros para o escalonamento da entrada. Antes os
+       atrasos estavam escritos um a um em :nth-child ate o setimo, e o
+       oitavo registro entrava na frente de todos, sem atraso. */
+    RBF.Motion.stagger(el.nav.querySelectorAll('.rf-nav__item'));
   }
 
   /* Registro correspondente a um botao da navegacao. */
@@ -335,6 +402,18 @@ RBF.Menu = (function () {
     if (btn) { btn.click(); }
   }
 
+  /* Home vai pro primeiro registro disponivel, End pro ultimo. */
+  function moveNavEdge(toEnd) {
+    var items = el.nav.querySelectorAll('.rf-nav__item:not(.is-locked)');
+    if (!items.length) { return; }
+
+    var btn = items[toEnd ? items.length - 1 : 0];
+    markActive(btn);
+    setNote(recordOf(btn).note);
+    RBF.Audio.playUi('ui_hover');
+    try { btn.focus({ preventScroll: true }); } catch (e) { btn.focus(); }
+  }
+
   function markActive(btn) {
     var all = el.nav.querySelectorAll('.rf-nav__item');
     for (var i = 0; i < all.length; i++) { all[i].classList.remove('is-active'); }
@@ -362,6 +441,12 @@ RBF.Menu = (function () {
   /* ---- acoes dos registros ---------------------------------------------- */
 
   function runRecord(rec) {
+    /* Clique duplo, Enter repetido, ou clique junto com tecla abriam a
+       mesma acao duas vezes: dois paineis empilhados, ou dois 'novo
+       jogo' seguidos com o corte de tela pela metade. O portao reabre
+       sozinho por tempo, entao nada trava se a acao morrer no meio. */
+    if (!RBF.Motion.gate('record:' + rec.id, 500)) { return; }
+
     RBF.Audio.playUi('ui_confirm');
 
     switch (rec.action) {
@@ -440,19 +525,21 @@ RBF.Menu = (function () {
   /* ---- transicao de menu para jogo --------------------------------------- */
 
   function sweep(then) {
-    el.transition.classList.remove('is-sweeping');
-    void el.transition.offsetWidth;
-    el.transition.classList.add('is-sweeping');
-
     RBF.Audio.playUi('ui_page');
     RBF.Audio.leaveMenu();
 
-    setTimeout(function () {
-      then();
-      setTimeout(function () {
-        el.transition.classList.remove('is-sweeping');
-      }, 500);
-    }, RBF.CONFIG.timing.sweepMs);
+    /* O ciclo da classe passou a ser de RBF.Motion: ele espera o fim da
+       animacao de verdade e tem temporizador de seguranca se o evento
+       nao vier. Antes o prazo era 'sweepMs + 500' escrito aqui, que ja
+       nao batia com a animacao e cortava o ultimo trecho do corte.
+
+       A troca de cena continua no meio do trajeto - o veu fica parado
+       cobrindo a tela entre 38% e 64% da animacao, e sweepMs cai
+       dentro dessa janela. */
+    RBF.Motion.run(el.transition, 'is-sweeping',
+                   RBF.CONFIG.timing.sweepAnimMs || 900);
+
+    setTimeout(then, RBF.CONFIG.timing.sweepMs);
   }
 
   function startNewGame() {
@@ -779,124 +866,141 @@ RBF.Menu = (function () {
      AJUSTES
      ====================================================================== */
 
+  /* Aba visivel dos Ajustes. Sobrevive a fechar e reabrir o painel. */
+  var settingsAba = 'audio';
+
+  /* Os Ajustes eram uma coluna unica com cinco titulos de secao e vinte
+     e poucos controles: para chegar em 'Teclas' o jogador rolava a
+     tela inteira. As cinco secoes viraram cinco abas, com os MESMOS
+     nomes e os MESMOS controles na mesma ordem - o titulo de secao
+     virou o rotulo da aba, entao nenhum texto se perdeu.
+
+     Cada aba e montada na primeira vez que aparece (ver tabLayout em
+     js/ui.js), e nao todas de uma vez na abertura. */
+
   function openSettings() {
     var fromTitle = RBF.State.is('title');
     RBF.State.push('settings');
 
-    var body = UI.el('div', 'rbf-settings');
     var s = RBF.Settings;
 
-    /* --- audio --- */
-    body.appendChild(UI.el('h3', 'rbf-group', '\u00c1udio'));
+    function grupo() { return UI.el('div', 'rbf-settings'); }
 
-    body.appendChild(UI.row('Volume geral',
-      UI.slider(s.get('masterVolume'), 0, 1, 0.02, pct,
-        function (v) { s.set('masterVolume', v); })));
-
-    body.appendChild(UI.row('Trilha',
-      UI.slider(s.get('bgmVolume'), 0, 1, 0.02, pct,
-        function (v) { s.set('bgmVolume', v); })));
-
-    body.appendChild(UI.row('Efeitos',
-      UI.slider(s.get('sfxVolume'), 0, 1, 0.02, pct,
-        function (v) { s.set('sfxVolume', v); })));
-
-    body.appendChild(UI.row('Silenciar tudo',
-      UI.toggle(s.get('muted'), function (v) { s.set('muted', v); })));
-
-    /* --- texto --- */
-    body.appendChild(UI.el('h3', 'rbf-group', 'Texto'));
-
-    body.appendChild(UI.row('M\u00e1quina de escrever',
-      UI.toggle(s.get('typewriter'), function (v) { s.set('typewriter', v); }),
-      'desligado exibe a frase inteira de uma vez'));
-
-    body.appendChild(UI.row('Velocidade',
-      UI.slider(s.get('typeSpeedMs'), 0, 60, 1,
-        function (v) { return v === 0 ? 'instant\u00e2neo' : v + ' ms'; },
-        function (v) { s.set('typeSpeedMs', v); }),
-      'menor = mais r\u00e1pido'));
-
-    body.appendChild(UI.row('Tamanho do texto',
-      UI.slider(s.get('textScale'), 0.8, 1.5, 0.05,
-        function (v) { return Math.round(v * 100) + '%'; },
-        function (v) { s.set('textScale', v); }),
-      'sobre o tamanho desta tela'));
-
-    body.appendChild(UI.row('Avan\u00e7o autom\u00e1tico',
-      UI.toggle(s.get('autoAdvance'), function (v) { s.set('autoAdvance', v); })));
-
-    body.appendChild(UI.row('Espera do avan\u00e7o',
-      UI.slider(s.get('autoAdvanceMs'), 800, 6000, 100,
-        function (v) { return (v / 1000).toFixed(1) + ' s'; },
-        function (v) { s.set('autoAdvanceMs', v); })));
-
-    /* --- apresentacao --- */
-    body.appendChild(UI.el('h3', 'rbf-group', 'Apresenta\u00e7\u00e3o'));
-
-    body.appendChild(UI.row('Movimento reduzido',
-      UI.toggle(s.get('reducedMotion'), function (v) { s.set('reducedMotion', v); }),
-      'encurta transi\u00e7\u00f5es e desliga movimento amplo'));
-
-    body.appendChild(UI.row('HUD de rotas',
-      UI.toggle(s.get('showRoutes'), function (v) {
-        s.set('showRoutes', v);
-        RBF.Engine.renderRoutes();
-      }),
-      'Esperan\u00e7a, Perda e Resposta durante a leitura'));
-
-    body.appendChild(UI.row('Tela cheia',
-      UI.toggle(isFullscreen(), function (v) { toggleFullscreen(v); }),
-      supportsFullscreen() ? '' : 'n\u00e3o dispon\u00edvel neste navegador'));
-
-    /* --- conteudo --- */
-    body.appendChild(UI.el('h3', 'rbf-group', 'Conte\u00fado'));
-
-    body.appendChild(UI.row('Aviso antes de come\u00e7ar',
-      UI.toggle(s.get('contentWarning'), function (v) { s.set('contentWarning', v); }),
-      'tela de aviso ao iniciar um jogo novo'));
-
-    body.appendChild(UI.row('Autosave a cada cena',
-      UI.toggle(s.get('autosaveEnabled'), function (v) { s.set('autosaveEnabled', v); })));
-
-    body.appendChild(UI.row('Confirmar a\u00e7\u00f5es destrutivas',
-      UI.toggle(s.get('confirmDestructive'), function (v) { s.set('confirmDestructive', v); }),
-      'sobrescrever, apagar, voltar ao t\u00edtulo'));
-
-    /* --- teclas --- */
-    body.appendChild(UI.el('h3', 'rbf-group', 'Teclas'));
-    var keys = [
-      ['Avan\u00e7ar',            'Espa\u00e7o \u00b7 Enter \u00b7 \u2192'],
-      ['Escolher',                '1 \u00b7 2 \u00b7 3'],
-      ['Menu',                    'Esc \u00b7 bot\u00e3o direito'],
-      ['Hist\u00f3rico',          'H'],
-      ['Avan\u00e7o autom\u00e1tico', 'A'],
-      ['Avan\u00e7ar r\u00e1pido', 'Ctrl'],
-      ['Esconder interface',      'V'],
-      ['Save r\u00e1pido',        'F5'],
-      ['Load r\u00e1pido',        'F9'],
-      ['Tela cheia',              'F11']
-    ];
-    for (var i = 0; i < keys.length; i++) {
-      var kb = UI.el('div', 'rbf-keybind');
-      kb.appendChild(UI.el('span', 'rbf-key', keys[i][1]));
-      body.appendChild(UI.row(keys[i][0], kb));
+    function abaAudio() {
+      var b = grupo();
+      b.appendChild(UI.row('Volume geral',
+        UI.slider(s.get('masterVolume'), 0, 1, 0.02, pct,
+          function (v) { s.set('masterVolume', v); })));
+      b.appendChild(UI.row('Trilha',
+        UI.slider(s.get('bgmVolume'), 0, 1, 0.02, pct,
+          function (v) { s.set('bgmVolume', v); })));
+      b.appendChild(UI.row('Efeitos',
+        UI.slider(s.get('sfxVolume'), 0, 1, 0.02, pct,
+          function (v) { s.set('sfxVolume', v); })));
+      b.appendChild(UI.row('Silenciar tudo',
+        UI.toggle(s.get('muted'), function (v) { s.set('muted', v); })));
+      return b;
     }
 
-    body.appendChild(UI.el('p', 'rbf-note',
-      RBF.Storage.isPersistent()
-        ? 'Ajustes e registros ficam guardados neste navegador. Mudar de ' +
-          'endere\u00e7o ou de navegador come\u00e7a um arquivo novo; use ' +
-          'exportar para levar um registro junto.'
-        : 'Este navegador bloqueou o armazenamento local. Ajustes e ' +
-          'registros valem apenas nesta sess\u00e3o. Use exportar para n\u00e3o ' +
-          'perder progresso.'));
+    function abaTexto() {
+      var b = grupo();
+      b.appendChild(UI.row('M\u00e1quina de escrever',
+        UI.toggle(s.get('typewriter'), function (v) { s.set('typewriter', v); }),
+        'desligado exibe a frase inteira de uma vez'));
+      b.appendChild(UI.row('Velocidade',
+        UI.slider(s.get('typeSpeedMs'), 0, 60, 1,
+          function (v) { return v === 0 ? 'instant\u00e2neo' : v + ' ms'; },
+          function (v) { s.set('typeSpeedMs', v); }),
+        'menor = mais r\u00e1pido'));
+      b.appendChild(UI.row('Tamanho do texto',
+        UI.slider(s.get('textScale'), 0.8, 1.5, 0.05,
+          function (v) { return Math.round(v * 100) + '%'; },
+          function (v) { s.set('textScale', v); }),
+        'sobre o tamanho desta tela'));
+      b.appendChild(UI.row('Avan\u00e7o autom\u00e1tico',
+        UI.toggle(s.get('autoAdvance'), function (v) { s.set('autoAdvance', v); })));
+      b.appendChild(UI.row('Espera do avan\u00e7o',
+        UI.slider(s.get('autoAdvanceMs'), 800, 6000, 100,
+          function (v) { return (v / 1000).toFixed(1) + ' s'; },
+          function (v) { s.set('autoAdvanceMs', v); })));
+      return b;
+    }
+
+    function abaApresentacao() {
+      var b = grupo();
+      b.appendChild(UI.row('Movimento reduzido',
+        UI.toggle(s.get('reducedMotion'), function (v) { s.set('reducedMotion', v); }),
+        'encurta transi\u00e7\u00f5es e desliga movimento amplo'));
+      b.appendChild(UI.row('HUD de rotas',
+        UI.toggle(s.get('showRoutes'), function (v) {
+          s.set('showRoutes', v);
+          RBF.Engine.renderRoutes();
+        }),
+        'Esperan\u00e7a, Perda e Resposta durante a leitura'));
+      b.appendChild(UI.row('Tela cheia',
+        UI.toggle(isFullscreen(), function (v) { toggleFullscreen(v); }),
+        supportsFullscreen() ? '' : 'n\u00e3o dispon\u00edvel neste navegador'));
+      return b;
+    }
+
+    function abaConteudo() {
+      var b = grupo();
+      b.appendChild(UI.row('Aviso antes de come\u00e7ar',
+        UI.toggle(s.get('contentWarning'), function (v) { s.set('contentWarning', v); }),
+        'tela de aviso ao iniciar um jogo novo'));
+      b.appendChild(UI.row('Autosave a cada cena',
+        UI.toggle(s.get('autosaveEnabled'), function (v) { s.set('autosaveEnabled', v); })));
+      b.appendChild(UI.row('Confirmar a\u00e7\u00f5es destrutivas',
+        UI.toggle(s.get('confirmDestructive'), function (v) { s.set('confirmDestructive', v); }),
+        'sobrescrever, apagar, voltar ao t\u00edtulo'));
+
+      b.appendChild(UI.el('p', 'rbf-note',
+        RBF.Storage.isPersistent()
+          ? 'Ajustes e registros ficam guardados neste navegador. Mudar de ' +
+            'endere\u00e7o ou de navegador come\u00e7a um arquivo novo; use ' +
+            'exportar para levar um registro junto.'
+          : 'Este navegador bloqueou o armazenamento local. Ajustes e ' +
+            'registros valem apenas nesta sess\u00e3o. Use exportar para n\u00e3o ' +
+            'perder progresso.'));
+      return b;
+    }
+
+    function abaTeclas() {
+      var b = grupo();
+      var keys = [
+        ['Avan\u00e7ar',            'Espa\u00e7o \u00b7 Enter \u00b7 \u2192'],
+        ['Escolher',                '1 \u00b7 2 \u00b7 3'],
+        ['Menu',                    'Esc \u00b7 bot\u00e3o direito'],
+        ['Hist\u00f3rico',          'H'],
+        ['Avan\u00e7o autom\u00e1tico', 'A'],
+        ['Avan\u00e7ar r\u00e1pido', 'Ctrl'],
+        ['Esconder interface',      'V'],
+        ['Save r\u00e1pido',        'F5'],
+        ['Load r\u00e1pido',        'F9'],
+        ['Tela cheia',              'F11']
+      ];
+      for (var i = 0; i < keys.length; i++) {
+        var kb = UI.el('div', 'rbf-keybind');
+        kb.appendChild(UI.el('span', 'rbf-key', keys[i][1]));
+        b.appendChild(UI.row(keys[i][0], kb));
+      }
+      return b;
+    }
 
     UI.panel({
       name:  'settings',
       title: 'Ajustes',
       subtitle: 'CONTROLE DE LEITURA',
-      body:  body,
+      wide:  true,
+      tabs: [
+        { id: 'audio',        label: '\u00c1udio',           build: abaAudio },
+        { id: 'texto',        label: 'Texto',                build: abaTexto },
+        { id: 'apresentacao', label: 'Apresenta\u00e7\u00e3o', build: abaApresentacao },
+        { id: 'conteudo',     label: 'Conte\u00fado',        build: abaConteudo },
+        { id: 'teclas',       label: 'Teclas',               build: abaTeclas }
+      ],
+      tabStart: settingsAba,
+      onTab: function (id) { settingsAba = id; },
       actions: [
         { label: 'Restaurar padr\u00f5es', className: 'rbf-btn-ghost', onClick: function () {
             UI.confirm({
@@ -1510,6 +1614,12 @@ RBF.Menu = (function () {
         if (ev.key === 'Enter' || ev.key === ' ') {
           ev.preventDefault(); activateNav(); return;
         }
+        if (ev.key === 'Home') {
+          ev.preventDefault(); moveNavEdge(false); return;
+        }
+        if (ev.key === 'End') {
+          ev.preventDefault(); moveNavEdge(true); return;
+        }
       }
 
       /* Escape com painel aberto e tratado em RBF.UI.bind, na fase de
@@ -1602,6 +1712,7 @@ RBF.Menu = (function () {
     bindGate();
     bindShortcuts();
 
+    RBF.Assets.applyUiArtVars();
     fillArchiveChrome();
 
     /* O portao aparece na primeira carga e depois de um recarregamento

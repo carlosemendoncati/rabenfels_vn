@@ -179,8 +179,15 @@
 
   <button type="button" id="rf-show-ui" class="rbf-bar-btn">Mostrar interface</button>
 
-  <!-- ==================== CAMADA DE TRANSICAO =================== -->
-  <div id="rf-transition" aria-hidden="true"></div>
+  <!-- ==================== CAMADA DE TRANSICAO ===================
+       Tres pecas, um gesto: a pagina escura atravessa, a tinta
+       atravessa meio quadro atras dela, e o selo bate no meio do
+       trajeto. Antes era um retangulo em gradiente deslizando. -->
+  <div id="rf-transition" aria-hidden="true">
+    <span class="rf-wipe__veil"></span>
+    <span class="rf-wipe__slash"></span>
+    <svg class="rf-wipe__sigil" viewBox="0 0 12 12"><use href="#rf-mark"/></svg>
+  </div>
 
   <!-- ======================= MENU PRINCIPAL ===================== -->
   <div id="main-menu" role="region" aria-label="Menu principal">
@@ -238,6 +245,19 @@
       </svg>
     </div>
 
+    <!-- Cartao de estado do arquivo. So aparece quando existe registro
+         gravado para ler: sem save, nao ha o que mostrar e ele nao
+         entra na composicao. Nada aqui e inventado - rotas, capitulos
+         e tempo saem do save mais recente e do progresso persistido. -->
+    <aside class="rf-dossier" id="rf-dossier-card" hidden>
+      <span class="rbf-label rf-dossier__title" id="rf-dossier-title"></span>
+      <div class="rf-dossier__rows" id="rf-dossier-rows"></div>
+      <div class="rf-dossier__foot">
+        <span class="rbf-label" id="rf-dossier-footlabel"></span>
+        <span class="rf-dossier__time" id="rf-dossier-time"></span>
+      </div>
+    </aside>
+
     <nav class="rf-nav" id="rf-nav" aria-label="Registros"></nav>
 
     <div class="rf-menufoot">
@@ -271,6 +291,7 @@
 <script src="js/storage.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/state.js"></script>
+<script src="js/motion.js"></script>
 <script src="js/assets.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/history.js"></script>

@@ -73,31 +73,59 @@ body {
    fundo do palco, para a figura nao ser cortada pelo texto.
    ========================================================================== */
 
+/* ==========================================================================
+   PALCO DOS PERSONAGENS
+
+   O palco tem a MESMA largura maxima da caixa de dialogo e e centrado
+   junto com ela. Antes ele era a tela inteira e as posicoes ancoravam
+   nas bordas da tela: em monitor largo o personagem ficava encostado no
+   canto, longe da caixa, e nao se alinhava com nada.
+   ========================================================================== */
+
 #sprites {
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   pointer-events: none;
+
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
 }
 
 .sprite {
   position: absolute;
 
-  /* Acompanha a altura reservada para a caixa de dialogo. */
+  /* Acompanha a altura reservada para a caixa de dialogo, entao
+     ninguem entra por baixo dela. */
   bottom: var(--rbf-dlg-h, 190px);
 
+  /* Centro da vaga. Uma vaga -> 50%. Duas -> 25% e 75%. Tres -> 1/6,
+     3/6, 5/6. A mesma conta serve para qualquer quantidade, e quem
+     preenche --rbf-vaga/--rbf-vagas e layoutSprites() em js/engine.js.
+
+     E por isso que um personagem sozinho fica no meio e dois ficam lado
+     a lado sem que o roteiro precise saber de nada. */
+  left: calc((var(--rbf-vaga, 0) + .5) / var(--rbf-vagas, 1) * 100%);
+
+  /* Nunca mais largo que a propria vaga: dois personagens nao se
+     sobrepoem, e nenhum passa da borda da caixa de texto. */
+  max-width: calc(100% / var(--rbf-vagas, 1) - 12px);
+
   opacity: 0;
-  transition: opacity var(--rbf-medium), transform var(--rbf-medium) var(--rbf-ease-ritual);
+  transform: translate3d(-50%, 10px, 0) scale(.985);
+  transition: opacity var(--rbf-medium),
+              transform var(--rbf-medium) var(--rbf-ease-ritual),
+              filter var(--rbf-medium);
 }
 
-.sprite.show { opacity: 1; }
-
-.sprite.pos-left        { left: 6%;   transform: translateX(-14px); }
-.sprite.pos-left.show   { transform: translateX(0); }
-.sprite.pos-center      { left: 50%;  transform: translateX(-52%); }
-.sprite.pos-center.show { transform: translateX(-50%); }
-.sprite.pos-right       { right: 6%;  transform: translateX(14px); }
-.sprite.pos-right.show  { transform: translateX(0); }
+.sprite.show {
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0) scale(1);
+}
 
 .sprite img {
   display: block;
@@ -107,32 +135,79 @@ body {
   object-position: bottom center;
   filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .9));
 
-  /* A arte preenche o proprio quadro ate a borda de baixo, o que na
-     cena aparecia como um corte reto. A mascara dissolve os ultimos
-     por cento da figura na escuridao. */
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 88%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 88%, transparent 100%);
+  /* A arte dos sprites tem um bloco escuro chapado ocupando a metade
+     de baixo do quadro, de ponta a ponta - nao e o personagem, e base
+     pintada junto. A mascara antiga so dissolvia os ultimos 12% da
+     ALTURA, entao as laterais desse bloco continuavam com corte reto e
+     a cena mostrava um retangulo em volta da figura.
+
+     Duas mascaras cruzadas resolvem: uma dissolve o pe, a outra
+     dissolve as duas laterais, e 'intersect' aplica as duas ao mesmo
+     tempo. O personagem fica no meio, onde as duas sao opacas, e as
+     quatro bordas do quadro somem na escuridao da cena.
+
+     source-in e o nome antigo da mesma operacao no prefixo -webkit-;
+     os dois ficam porque o WebKit ainda nao aceita a palavra nova. */
+  -webkit-mask-image:
+    linear-gradient(180deg, #000 0%, #000 74%, transparent 100%),
+    radial-gradient(ellipse 74% 78% at 50% 44%,
+                    #000 50%, rgba(0, 0, 0, .40) 80%, transparent 100%);
+  mask-image:
+    linear-gradient(180deg, #000 0%, #000 74%, transparent 100%),
+    radial-gradient(ellipse 74% 78% at 50% 44%,
+                    #000 50%, rgba(0, 0, 0, .40) 80%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
-/* Busto: enquadramento do peito para cima. */
-.sprite.size-bust img { height: min(42vh, 340px); }
+/* ---- porte -------------------------------------------------------------
+   Duas medidas decidem a altura: o ENQUADRAMENTO (busto ou corpo
+   inteiro, que o roteiro escolhe) e o PORTE (adulto ou crianca, que a
+   pessoa e). Antes so existia o enquadramento, e havia ainda um bonus
+   de 'res-high' que chegava a 900px - o resultado era um elenco em que
+   cada um aparecia de um tamanho, e as gemeas, declaradas corpo
+   inteiro, ficavam da altura de um adulto.
 
-/* Corpo inteiro: mais alto. */
-.sprite.size-full img { height: min(62vh, 520px); }
+   A escada agora e uma so, e crianca fica em torno de 78% do adulto. */
 
-/* Arte em alta resolucao aguenta ocupar mais tela. */
-.sprite.res-high.size-bust img { height: min(58vh, 620px); }
-.sprite.res-high.size-full img { height: min(78vh, 900px); }
+.sprite.porte-adulto.size-bust  img { height: min(46vh, 400px); }
+.sprite.porte-adulto.size-full  img { height: min(58vh, 520px); }
+.sprite.porte-crianca.size-bust img { height: min(36vh, 312px); }
+.sprite.porte-crianca.size-full img { height: min(45vh, 406px); }
 
-/* Quem fala ganha destaque; quem escuta recua. */
+/* res-high continua marcando arte de resolucao maior, mas nao manda
+   mais no tamanho em cena: era ele que produzia os gigantes. */
+
+/* ---- quem fala vem para a frente ---------------------------------------
+   Vem DEPOIS de .sprite.show de proposito: mesma especificidade, quem
+   vem por ultimo vence, e o estado de escuta precisa poder sobrescrever
+   a transformacao de entrada. */
+
+.sprite.is-speaking { z-index: 2; }
+
+.sprite.is-idle {
+  z-index: 1;
+  transform: translate3d(-50%, 6px, 0) scale(.93);
+}
+
 .sprite.is-idle img {
-  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .9)) brightness(.62) saturate(.8);
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .9)) brightness(.44) saturate(.4);
+  opacity: .66;
 }
 
+/* ---- telefone -----------------------------------------------------------
+   Nao ha largura para dois. Quem escuta sai de cena enquanto houver
+   alguem falando, e quem fala assume o palco inteiro - inclusive a
+   vaga, para nao ficar deslocado no lugar de uma dupla. */
 @media (max-width: 720px) {
-  .sprite.pos-left  { left: 0; }
-  .sprite.pos-right { right: 0; }
-  .sprite img { max-width: 62vw; }
+  #sprites.tem-locutor .sprite.is-idle { opacity: 0; }
+
+  #sprites.tem-locutor .sprite.is-speaking {
+    left: 50%;
+    max-width: calc(100% - 16px);
+  }
+
+  .sprite img { max-width: 68vw; }
 }
 
 @media (max-height: 480px) and (orientation: landscape) {
@@ -215,9 +290,18 @@ body {
   gap: calc(9px * var(--rbf-ui));
 
   padding: calc(8px * var(--rbf-ui)) calc(22px * var(--rbf-ui)) calc(8px * var(--rbf-ui)) calc(13px * var(--rbf-ui));
+
+  /* Piso de largura: o banner tem selo proprio em cada ponta, e um nome
+     curto ('Ren') espremeria os dois selos junto com o texto sem isso. */
+  min-width: calc(140px * var(--rbf-ui));
+
   /* A aba faz parte da caixa de dialogo, entao acompanha a temperatura
      dela e nao a dos paineis do arquivo. */
-  background: linear-gradient(180deg, var(--rbf-dlg-tab) 0%, var(--rbf-dlg-tab-lo) 100%);
+  background-color: var(--rbf-dlg-tab-lo);
+  background-image: linear-gradient(180deg, var(--rbf-dlg-tab) 0%, var(--rbf-dlg-tab-lo) 100%);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 1px solid var(--rbf-dlg-line);
   border-bottom: none;
 
@@ -226,6 +310,195 @@ body {
 
   opacity: 0;
   transition: opacity var(--rbf-fast);
+}
+
+/* ---- placa de nome: selo de cera ---------------------------------------
+   A peca (1536x1024) e um selo de cera oval com cordoes saindo dos dois
+   lados. Ela vira a placa de quem fala, encavalada na borda de cima da
+   caixa - selo lacra documento, e a fala e o documento.
+
+   Medidas tiradas do arquivo: o corpo opaco vai de 14,3% a 86,1% na
+   horizontal (cordoes inclusos) e o oval liso onde cabe texto fica
+   entre 28% e 76% na horizontal, com centro a 48% da altura. O padding
+   abaixo poe o nome exatamente nesse oval em vez de no centro
+   geometrico da imagem, que cairia sobre o relevo da borda. */
+.rbf-has-ui-name-seal-wax .namebox {
+  /* Bem menor do que a primeira tentativa (232px). Naquela medida o
+     selo virava o objeto mais pesado da tela: um nome curto como
+     'Fenn' deixava dois tercos de cera vermelha vazia, e a placa
+     competia com o personagem em vez de etiquetar a fala.
+
+     O selo e etiqueta. Etiqueta e pequena - mas 158px deixou o nome
+     ilegivel, entao o meio-termo: grande o bastante para o nome se ler
+     de longe, pequeno o bastante para nao disputar com o personagem. */
+  width: clamp(132px, 13vw, 196px);
+  aspect-ratio: 1536 / 1024;
+  min-width: 0;
+
+  /* Sem padding em porcentagem: porcentagem de padding resolve contra a
+     LARGURA DO CONTAINER, e nao contra o proprio elemento. Dentro do
+     cabecalho (1360px) os 52% de padding viravam 707px, estouravam a
+     largura declarada de 232px e esmagavam o nome ate zero. O nome vai
+     por posicao absoluta, onde a porcentagem resolve contra o selo. */
+  display: block;
+  position: relative;
+  padding: 0;
+
+  background-color: transparent;
+  background-image: var(--rbf-art-ui-name-seal-wax);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: none;
+  clip-path: none;
+
+  /* Desce para encavalar a caixa. O cordao do selo fica na altura do
+     fio de ouro da moldura, que e o que amarra as duas pecas. */
+  margin-bottom: calc(-19px * var(--rbf-ui));
+  position: relative;
+  z-index: 2;
+
+  /* A cera veio em vermelho de saturacao cheia. Na cena, iluminada a
+     vela e com tudo o mais em marrom e carvao, esse vermelho era o
+     ponto mais claro da tela - o olho ia na etiqueta antes de ir no
+     personagem. Escurecer e dessaturar um pouco poe a peca DENTRO da
+     luz da cena em vez de por cima dela. A cor da arte nao muda; muda
+     a luz que bate nela. */
+  filter: brightness(.76) saturate(.82)
+          drop-shadow(0 6px 12px rgba(0, 0, 0, .75));
+}
+
+/* O tique colorido some: o selo ja diz de quem e a fala, e um retangulo
+   aceso em cima da cera vira sujeira. */
+.rbf-has-ui-name-seal-wax .namebox__cap { display: none; }
+
+/* O filete vermelho do cabecalho sai quando o selo entra: os cordoes do
+   proprio selo ja atravessam a linha, e dois tracos no mesmo lugar
+   viram risco por cima da cera. Na narracao, que fica com a aba
+   discreta, o filete continua. */
+.rbf-has-ui-name-seal-wax .rf-dlg__head::after { opacity: 0; }
+
+/* So a narracao mantem o filete: ela e a unica que ficou com a aba
+   discreta. O pensamento ganhou a faixa carmesim e nao precisa de um
+   segundo traco saindo dela. */
+.rbf-has-ui-name-seal-wax .rf-dlg__head:has(.namebox.is-narration)::after { opacity: 1; }
+
+/* O oval liso da peca vai de 28% a 76% na horizontal e tem centro a 48%
+   da altura - medido no arquivo. O nome ocupa exatamente essa janela;
+   fora dela cairia sobre o relevo da cera. */
+.rbf-has-ui-name-seal-wax .namebox__name {
+  position: absolute;
+  /* Janela um pouco mais larga que o oval liso medido (28%-76%): o
+     relevo da borda tolera a invasao e um nome longo como
+     'Antoniette' passa a caber sem reticencia. */
+  left: 24%;
+  right: 20%;
+  top: 48%;
+  transform: translateY(-50%);
+
+  /* Claro o bastante para vencer o escurecimento aplicado na cera. */
+  color: #fff4e6;
+  font-size: clamp(11px, calc(11.5px * var(--rbf-ui)), 17px);
+  letter-spacing: .04em;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Volta ao fluxo normal na aba discreta da narracao. */
+.rbf-has-ui-name-seal-wax .namebox.is-narration .namebox__name,
+.rbf-has-ui-name-seal-wax .namebox.is-inner .namebox__name {
+  position: static;
+  transform: none;
+  font-size: calc(13px * var(--rbf-ui));
+  letter-spacing: .06em;
+}
+
+/* Narracao e pensamento NAO ganham o selo. Selo e assinatura: quem
+   fala assina, a narracao nao e ninguem. Um lacre de cera anunciando
+   'narracao' inverteria a hierarquia da cena - o rotulo mais discreto
+   da caixa viraria o mais gritante dela. Os dois voltam para a aba
+   original, discreta. */
+.rbf-has-ui-name-seal-wax .namebox.is-narration,
+.rbf-has-ui-name-seal-wax .namebox.is-inner {
+  width: auto;
+  aspect-ratio: auto;
+  min-width: calc(140px * var(--rbf-ui));
+
+  display: inline-flex;
+  place-items: initial;
+  align-items: center;
+
+  background-color: var(--rbf-dlg-tab-lo);
+  background-image: linear-gradient(180deg, var(--rbf-dlg-tab) 0%, var(--rbf-dlg-tab-lo) 100%);
+  background-size: 100% 100%;
+  background-position: center;
+
+  border: 1px solid var(--rbf-dlg-line);
+  border-bottom: none;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 100%, 0 100%);
+
+  padding: calc(8px * var(--rbf-ui)) calc(22px * var(--rbf-ui))
+           calc(8px * var(--rbf-ui)) calc(13px * var(--rbf-ui));
+  margin-bottom: 0;
+  filter: none;
+}
+
+.rbf-has-ui-name-seal-wax .namebox.is-narration .namebox__cap,
+.rbf-has-ui-name-seal-wax .namebox.is-inner .namebox__cap { display: block; }
+
+.rbf-has-ui-name-seal-wax .namebox.is-narration .namebox__name,
+.rbf-has-ui-name-seal-wax .namebox.is-inner .namebox__name {
+  color: var(--rbf-ink-dim);
+  text-align: left;
+  text-shadow: none;
+}
+
+/* ---- pensamento: a faixa carmesim -------------------------------------
+   O pensamento fica entre os dois extremos, e por isso ganha a peca do
+   meio.
+
+   O selo de cera e assinatura: so quem FALA assina, porque a fala sai
+   da pessoa e vai para o mundo. A narracao nao e ninguem e fica com a
+   aba discreta. Mas o pensamento TEM dono - e alguem pensando, mesmo
+   que ninguem ouca. Entao ele merece placa, so que uma placa que nao
+   foi lacrada: a faixa, e nao o selo.
+
+   Vem depois das regras do selo para vencer por ordem: as duas tem a
+   mesma especificidade. */
+.rbf-has-ui-name-banner-crimson .namebox.is-inner {
+  width: auto;
+  aspect-ratio: auto;
+  min-width: calc(126px * var(--rbf-ui));
+
+  background-color: transparent;
+  background-image: var(--rbf-art-ui-name-banner-crimson);
+  background-size: 100% 205%;
+  background-position: left 45%;
+  background-repeat: no-repeat;
+
+  border: none;
+  clip-path: none;
+  padding: calc(10px * var(--rbf-ui)) calc(28px * var(--rbf-ui));
+  margin-bottom: 0;
+
+  filter: drop-shadow(0 5px 11px rgba(0, 0, 0, .68));
+}
+
+/* O tique colorido sai: a faixa ja e a marca. */
+.rbf-has-ui-name-banner-crimson .namebox.is-inner .namebox__cap { display: none; }
+
+.rbf-has-ui-name-banner-crimson .namebox.is-inner .namebox__name {
+  position: static;
+  transform: none;
+  color: #ffeadd;
+  text-align: center;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, .8);
+  font-size: calc(12px * var(--rbf-ui));
+  letter-spacing: .07em;
 }
 
 .namebox.show { opacity: 1; }
@@ -278,10 +551,77 @@ body {
   min-height: clamp(120px, 21vh, 188px);
   padding: calc(18px * var(--rbf-ui)) calc(24px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
 
-  background:
-    linear-gradient(180deg, var(--rbf-dlg-top) 0%, var(--rbf-dlg-bottom) 100%);
+  background-color: var(--rbf-dlg-bottom);
+  background-image: linear-gradient(180deg, var(--rbf-dlg-top) 0%, var(--rbf-dlg-bottom) 100%);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 1px solid var(--rbf-dlg-line);
   box-shadow: 0 -18px 60px rgba(0, 0, 0, .7);
+}
+
+/* Moldura nova da caixa de dialogo (ui_dialogue_frame).
+
+   Entra por border-image pelo mesmo motivo de sempre: a peca tem
+   1788x661 (2,7:1) e a caixa em cena fica perto de 5,8:1. Esticada,
+   o fio de ouro do canto vira risco borrado. Assim os cantos ficam em
+   escala fixa e so os trechos retos esticam.
+
+   AQUI vai 'fill', ao contrario do painel de menu: o miolo desta peca
+   e textura lisa, sem desenho. Textura lisa esticada e invisivel, e o
+   miolo entrega o papel escuro em que o texto assenta. A peca antiga
+   (ui_dialogue_box) tinha damasco e rosa-dos-ventos pintados no meio -
+   por isso ela nunca pode usar fill, e por isso saiu da cena. */
+.rbf-has-ui-dialogue-frame .rf-dlg__panel {
+  border-style: solid;
+  border-width: clamp(11px, calc(13px * var(--rbf-ui)), 24px);
+  border-image-source: var(--rbf-art-ui-dialogue-frame);
+  border-image-slice: 30 26 fill;
+  border-image-repeat: stretch;
+
+  /* O fill entrega o fundo; o gradiente sai para nao somar duas
+     superficies uma em cima da outra. */
+  background-image: none;
+  background-color: transparent;
+
+  /* A sombra antiga era box-shadow de 60px de desfoque deslocada 18px
+     PARA CIMA. Com o painel opaco de antes isso lia como profundidade.
+     Com a moldura nova, que tem borda propria e nao preenche a caixa
+     toda, a mesma sombra passou a desenhar um retangulo escuro maior
+     que a moldura, pairando atras dela - parecia a interface velha
+     aparecendo por baixo da nova.
+
+     drop-shadow no lugar de box-shadow: o filtro segue o alfa do que
+     foi realmente pintado, entao a sombra abraca a moldura em vez de
+     abracar a caixa. Curta e para baixo, que e de onde vem a luz. */
+  box-shadow: none;
+  filter: drop-shadow(0 7px 20px rgba(0, 0, 0, .72));
+}
+
+/* ---- placa de couro e latao: a caixa de dialogo definitiva -------------
+   Vem depois de ui_dialogue_frame e vence por ordem; aquela fica como
+   piso se esta nao carregar.
+
+   A peca tem 2172x403 (5,4:1) e a caixa em monitor fica perto de 6,5:1 -
+   20% de estiramento, que nesta arte nao se nota. Foi essa proximidade
+   de proporcao que permitiu usar uma peca MAIS ornamentada que a
+   anterior sem virar borrao: o losango do meio do fio de cima continua
+   losango.
+
+   As fatias laterais sao largas (200) porque as pontas tem florao; as
+   de cima e de baixo sao finas (95), so os fios de ouro e o rubro. */
+.rbf-has-ui-dialogue-plate-leather .rf-dlg__panel {
+  border-style: solid;
+  border-width: clamp(12px, calc(15px * var(--rbf-ui)), 28px)
+                clamp(20px, calc(26px * var(--rbf-ui)), 48px);
+  border-image-source: var(--rbf-art-ui-dialogue-plate-leather);
+  border-image-slice: 95 200 fill;
+  border-image-repeat: stretch;
+
+  background-image: none;
+  background-color: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 7px 20px rgba(0, 0, 0, .72));
 }
 
 /* Losango de avanco no canto do painel. */
@@ -439,6 +779,17 @@ body {
 #archive-box.show,
 #last-box.show { opacity: 1; }
 
+/* A caixa e pointer-events:none para o clique atravessar e avancar a
+   cena. So que isso tambem bloqueava a RODA DO MOUSE: um documento mais
+   alto que a janela nao tinha como ser rolado, e o texto simplesmente
+   acabava cortado.
+
+   Reabilitar o ponteiro no BLOCO DE TEXTO devolve a rolagem sem custar
+   nada: o clique continua subindo para o palco e avancando a cena,
+   porque ninguem para a propagacao aqui. */
+#archive-lines,
+#last-lines { pointer-events: auto; }
+
 #archive-label,
 #last-label {
   font-family: var(--rbf-font-display);
@@ -472,6 +823,196 @@ body {
   white-space: pre-wrap;
 }
 
+/* ---- os cartoes do Arquivo em pergaminho -------------------------------
+   Eram os ultimos componentes no visual antigo: retangulo preto com um
+   filete vermelho na esquerda, herdado de antes da reestruturacao.
+
+   A peca (1946x366, fio de ouro a 14px da borda, miolo creme opaco)
+   entra por border-image com 'fill' - o miolo e textura de papel, e
+   textura lisa esticada e invisivel. Os fios das laterais sao retas de
+   ouro: esticar reta nao deforma nada. E a peca ideal para 9 fatias.
+
+   O TEXTO INVERTE. Este e o mesmo raciocinio da faixa do menu e da
+   placa de nome: a cor sai da peca, nao do tema. Sobre papel claro o
+   fragmento passa a ser tinta, e nao ouro sobre preto.
+
+   Nota de continuidade: o CLAUDE.md registra o fragmento do Arquivo
+   como "italico, cor #c8a878". O italico fica; a cor muda, porque a
+   superficie mudou. Se preferir manter o ouro, e so nao aplicar a
+   peca aqui - digo isso porque a regra estava escrita. */
+
+.rbf-has-ui-parchment-plate #archive-box,
+.rbf-has-ui-parchment-plate #last-box {
+  background: none;
+  border-style: solid;
+  border-width: clamp(13px, calc(15px * var(--rbf-ui)), 28px);
+  border-image-source: var(--rbf-art-ui-parchment-plate);
+  border-image-slice: 26 fill;
+  border-image-repeat: stretch;
+
+  /* drop-shadow segue o alfa pintado; box-shadow desenharia a caixa. */
+  box-shadow: none;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, .82));
+}
+
+.rbf-has-ui-parchment-plate #archive-lines,
+.rbf-has-ui-parchment-plate #last-lines {
+  color: #3b2c1d;
+}
+
+.rbf-has-ui-parchment-plate #archive-label,
+.rbf-has-ui-parchment-plate #last-label {
+  color: #8c2733;
+  border-bottom-color: rgba(140, 39, 51, .38);
+}
+
+/* ==========================================================================
+   JANELA DE LEITURA DE DOCUMENTO  (#last-box)
+
+   A placa de pergaminho serve para o #archive-box, que cita duas ou tres
+   linhas: e uma tarja larga, e a citacao e larga e baixa.
+
+   O #last-box e outra coisa. E um documento longo - a ultima entrada,
+   varios paragrafos. Esticada nessa altura, a tarja de 5,3:1 desmanchava:
+   os cantos queimados viravam listras verticais descendo pelas laterais e
+   o texto passava por baixo da borda de baixo. Era o que estava feio.
+
+   ui_document_frame resolve por ser outro tipo de peca. Ela e ASSIMETRICA
+   (aba de titulo em cima a esquerda, selo com pena em cima a direita,
+   canto chanfrado embaixo a direita) e por isso NAO pode ser fatiada em
+   nove: cada borda esticada arruina um ornamento diferente. Entao entra
+   inteira, em proporcao nativa 1630x896, e vira uma janela de tamanho
+   fixo onde o texto rola por dentro.
+
+   Todas as porcentagens abaixo saem de medicao no arquivo: fios de ouro
+   internos em 9% e 86,5% na horizontal, 24,5% e 88% na vertical; aba de
+   titulo entre 4% e 32% no topo.
+   ========================================================================== */
+
+.rbf-has-ui-document-frame #last-box {
+  /* A largura cede ao que for menor: tela, teto proprio, ou a altura
+     disponivel convertida pela proporcao. Assim a janela nunca estoura
+     nem na horizontal nem na vertical, e a proporcao nunca muda - que e
+     a condicao para os ornamentos nao deformarem. */
+  /* Teto maior que a primeira tentativa (960px): a janela e de leitura,
+     e cada pixel de largura tira uma rolagem do jogador. */
+  width: min(95vw, 1180px, calc(88vh * 1.819));
+  aspect-ratio: 1630 / 896;
+  max-height: none;
+  height: auto;
+
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+
+  background-image: var(--rbf-art-ui-document-frame);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: visible;
+  filter: drop-shadow(0 22px 46px rgba(0, 0, 0, .85));
+}
+
+/* O rotulo vai para dentro da aba desenhada no topo a esquerda. */
+.rbf-has-ui-document-frame #last-label {
+  position: absolute;
+  left: 5%;
+  top: 4.5%;
+  width: 27%;
+  height: 11%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: var(--rbf-gold);
+  font-size: clamp(9px, 1.05vw, 14px);
+  letter-spacing: .18em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* O texto rola dentro da area util, longe do chanfro de baixo. */
+.rbf-has-ui-document-frame #last-lines {
+  position: absolute;
+  left: 10%;
+  right: 15.5%;
+  top: 26.5%;
+  bottom: 13.5%;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: #cdb083;
+
+  /* Barra VISIVEL, em ouro. Escondi na primeira versao por achar que
+     barra de navegador denunciava a caixa de HTML - mas num documento
+     que nao cabe na janela ela e a unica coisa que diz ao jogador que
+     ha mais para ler. Escondida, o texto so acabava no meio da frase.
+     Pintada de ouro fino ela deixa de ser cromo de navegador e vira
+     marcador de margem. */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(185, 151, 91, .42) transparent;
+
+  padding-right: calc(10px * var(--rbf-ui));
+}
+
+/* Fina e discreta. Na primeira versao ela tinha 7px e um degrade de
+   ouro cheio: num documento que rola pouco, o polegar ocupava quase
+   todo o trilho e a barra lia como mais um fio ornamental da moldura,
+   nao como controle. Estreita e apagada ela volta a ser o que e. */
+.rbf-has-ui-document-frame #last-lines::-webkit-scrollbar {
+  width: calc(4px * var(--rbf-ui));
+}
+
+.rbf-has-ui-document-frame #last-lines::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, .28);
+}
+
+.rbf-has-ui-document-frame #last-lines::-webkit-scrollbar-thumb {
+  background: rgba(185, 151, 91, .48);
+  border-radius: 0;
+}
+
+.rbf-has-ui-document-frame #last-lines:hover::-webkit-scrollbar-thumb {
+  background: rgba(185, 151, 91, .8);
+}
+
+/* A linha cortada pelo fim da janela dissolve em vez de terminar seca.
+   Sem isto o ultimo verso visivel aparecia partido ao meio bem em cima
+   do floreio do canto, e lia como defeito de desenho.
+
+   Elemento proprio, e nao mask no bloco de texto: mask apagaria a barra
+   de rolagem junto. Nao recebe ponteiro, entao nao atrapalha a leitura. */
+.rbf-has-ui-document-frame #last-box::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 15.5%;
+  bottom: 13.5%;
+  height: 7%;
+
+  background: linear-gradient(180deg, rgba(18, 16, 19, 0), rgba(18, 16, 19, .97));
+  pointer-events: none;
+}
+
+/* A barra de rolagem interna some: barra cinza de navegador em cima de
+   papel envelhecido denuncia que aquilo e uma caixa de HTML. */
+.rbf-has-ui-parchment-plate #archive-box,
+.rbf-has-ui-parchment-plate #last-box {
+  scrollbar-width: none;
+}
+
+.rbf-has-ui-parchment-plate #archive-box::-webkit-scrollbar,
+.rbf-has-ui-parchment-plate #last-box::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 /* ==========================================================================
    ESCOLHAS
    Fragmentos de testemunho: cada opcao e uma ficha com codigo proprio.
@@ -487,8 +1028,19 @@ body {
   width: min(94vw, 720px);
   max-height: 88vh;
   overflow-y: auto;
+
+  /* Declarar overflow-y sozinho faz o navegador promover overflow-x de
+     'visible' para 'auto'. No hover a folha desliza para a direita e
+     gira um pouco: ela passava da caixa, e o navegador desenhava uma
+     BARRA DE ROLAGEM HORIZONTAL embaixo das escolhas - a listra azul
+     que aparecia so quando o ponteiro entrava numa opcao.
+     A folha pode transbordar; a barra, nao. */
+  overflow-x: hidden;
+
   overscroll-behavior: contain;
-  padding: 4px;
+
+  /* Respiro para o deslocamento e a inclinacao caberem sem cortar. */
+  padding: 4px calc(10px * var(--rbf-ui));
 
   opacity: 0;
   pointer-events: none;
@@ -502,9 +1054,18 @@ body {
   font-size: calc(12px * var(--rbf-ui));
   letter-spacing: .24em;
   text-transform: uppercase;
-  color: var(--rbf-red);
+  color: var(--rbf-red-lit);
   text-align: center;
   margin-bottom: calc(var(--rbf-pad) * 1.1);
+
+  /* O rotulo flutua sobre a cena, sem caixa. Cai onde calhar - e nesta
+     mesma tela ele caiu em cima do cabelo do personagem e sumiu. A
+     sombra e o halo escuro dao a ele um fundo proprio sem precisar
+     desenhar uma caixa que apareceria em toda escolha. */
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, .95),
+    0 0 18px rgba(0, 0, 0, .85),
+    0 0 34px rgba(0, 0, 0, .6);
 }
 
 .choice-btn {
@@ -566,6 +1127,64 @@ body {
   opacity: .28;
   transform: none;
 }
+
+/* ---- escolhas em pergaminho --------------------------------------------
+   As escolhas eram tres retangulos escuros com borda - o mesmo desenho
+   de um botao de formulario. E o unico momento da obra em que o jogador
+   decide alguma coisa, e nao parecia diferente de nada.
+
+   Agora sao tres folhas postas sobre a mesa. Escolher vira pegar um
+   papel: a folha esta levemente torta em repouso, e ENDIREITA quando o
+   ponteiro chega nela. E a unica irregularidade proposital da
+   interface, e ela existe porque some no momento da escolha - o gesto
+   de alinhar o documento antes de assinar.
+
+   Tinta sobre pergaminho outra vez: a cor do texto sai da peca. */
+
+.rbf-has-ui-parchment-plate .choice-btn {
+  background: none;
+  border-style: solid;
+  border-width: clamp(11px, calc(12px * var(--rbf-ui)), 22px);
+  border-image-source: var(--rbf-art-ui-parchment-plate);
+  border-image-slice: 26 fill;
+  border-image-repeat: stretch;
+
+  /* Em repouso o papel fica um passo abaixo da luz cheia: tres folhas
+     claras em brilho maximo tomariam a cena inteira. */
+  filter: brightness(.82) saturate(.92) drop-shadow(0 6px 14px rgba(0, 0, 0, .6));
+  transform: rotate(var(--rbf-tombo, -.4deg));
+
+  transition: filter var(--rbf-fast),
+              transform var(--rbf-fast) var(--rbf-ease-settle);
+}
+
+/* Tortas para lados alternados, senao viram uma pilha inclinada. */
+.rbf-has-ui-parchment-plate .choice-btn:nth-of-type(even) { --rbf-tombo: .35deg; }
+
+.rbf-has-ui-parchment-plate .choice-btn:hover,
+.rbf-has-ui-parchment-plate .choice-btn:focus-visible {
+  background: none;
+  border-color: transparent;
+  filter: brightness(1) saturate(1) drop-shadow(0 11px 22px rgba(0, 0, 0, .72));
+  transform: rotate(0deg) translateX(calc(6px * var(--rbf-ui)));
+}
+
+.rbf-has-ui-parchment-plate .choice-btn__text  { color: #33261a; }
+.rbf-has-ui-parchment-plate .choice-btn__code  { color: #8a6a3f; }
+
+.rbf-has-ui-parchment-plate .choice-btn:hover .choice-btn__text,
+.rbf-has-ui-parchment-plate .choice-btn:focus-visible .choice-btn__text { color: #17100a; }
+
+.rbf-has-ui-parchment-plate .choice-btn:hover .choice-btn__code,
+.rbf-has-ui-parchment-plate .choice-btn:focus-visible .choice-btn__code { color: #8c2733; }
+
+/* A escolhida fica reta e acesa; o carimbo (rbfStamp) continua. */
+.rbf-has-ui-parchment-plate .choice-btn.is-chosen {
+  border-color: transparent;
+  filter: brightness(1.05) drop-shadow(0 11px 24px rgba(0, 0, 0, .72));
+}
+
+.rbf-has-ui-parchment-plate .choice-btn.is-chosen .choice-btn__text { color: #17100a; }
 
 /* ==========================================================================
    CARTOES DE TELA CHEIA

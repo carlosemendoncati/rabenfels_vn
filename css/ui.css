@@ -130,9 +130,14 @@
 }
 
 /* Telefone estreito: o rotulo do capitulo sai inteiro. Mostrar
-   'O PRIMEIRO TESTEMU...' nao informa nada. */
+   'O PRIMEIRO TESTEMU...' nao informa nada.
+
+   O seletor leva #main-menu na frente de proposito. Esta faixa fica no
+   topo do arquivo, antes do componente; com a mesma especificidade, o
+   'display: block' de .rf-nav__chapter, escrito mais abaixo, vencia por
+   ordem e a regra nunca teve efeito. */
 @media (max-width: 400px) {
-  .rf-nav__chapter { display: none; }
+  #main-menu .rf-nav__chapter { display: none; }
   .rf-nav__meta .rbf-code { font-size: 9px; }
 }
 
@@ -281,13 +286,16 @@
   pointer-events: none;
   transition: opacity var(--rbf-medium) var(--rbf-ease-page);
 
-  /* --- MOBILE: coluna unica, rolagem interna se faltar altura --- */
+  /* --- MOBILE: coluna unica, rolagem interna se faltar altura ---
+     O cartao de estado entra DEPOIS da lista: em telefone o jogador
+     quer o comando primeiro e o resumo depois, nao o contrario. */
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto auto;
   grid-template-areas:
     'bar'
     'lock'
     'nav'
+    'card'
     'foot';
 
   padding: 0;
@@ -312,30 +320,27 @@
   background-position: center;
 }
 
-/* A cortina escurece o lado do texto e libera o lado da fotografia. Na
-   medida anterior a imagem chegava a 25 de 255 de brilho medio: estava
-   tecnicamente carregada e visualmente ausente. */
+/* A cortina escurece so a coluna de texto (0-40% da largura, onde ficam
+   topbar/lockup/nav) e abre pra transparencia total dali em diante - a
+   foto e a cena, nao um papel de parede atras de um painel escuro. Sem
+   o segundo patamar escuro no fim (a versao anterior voltava a .42 aos
+   100%): o vitral e a lanterna, que sao o centro da composicao de
+   bg_menu_archive, ficam visiveis na intensidade real da foto. */
 #rf-menu-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    /* A queda comecava em 26%, mas a coluna de texto vai ate 38% da
-       largura. Os codigos REG, que sao quase pretos por desenho, caiam
-       em cima dos papeis claros da fotografia e sumiam do terceiro item
-       em diante. O patamar escuro agora cobre a coluna inteira e so
-       depois abre para a imagem, que continua brilhando de 56% adiante,
-       onde estao o pacote e o olho. */
     linear-gradient(
       90deg,
-      rgba(7, 8, 12, .94) 0%,
-      rgba(7, 8, 12, .86) 30%,
-      rgba(7, 8, 12, .70) 40%,
-      rgba(7, 8, 12, .34) 56%,
-      rgba(7, 8, 12, .12) 74%,
-      rgba(7, 8, 12, .42) 100%
+      rgba(7, 8, 12, .95) 0%,
+      rgba(7, 8, 12, .88) 28%,
+      rgba(7, 8, 12, .55) 40%,
+      rgba(7, 8, 12, .18) 52%,
+      rgba(7, 8, 12, 0)   62%,
+      rgba(7, 8, 12, 0)   100%
     ),
-    radial-gradient(ellipse at 62% 50%, transparent 46%, rgba(0, 0, 0, .62) 100%);
+    radial-gradient(ellipse at 62% 50%, transparent 55%, rgba(0, 0, 0, .38) 100%);
 }
 
 /* Luz de vela sobre o fundo. */
@@ -534,6 +539,9 @@
 
 .rf-nav__item {
   position: relative;
+  /* Contem o z-index negativo do ::after de arte a esta linha - sem
+     isolar, ele escaparia para o empilhamento do nav inteiro. */
+  isolation: isolate;
   display: grid;
   /* O numeral mede pelo conteudo: 'VIII' nao cabia em largura fixa.
      A coluna do meio leva o nome e nunca cede primeiro. */
@@ -542,11 +550,22 @@
   gap: calc(10px * var(--rbf-ui));
 
   width: 100%;
-  padding: calc(12px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
+  padding: calc(8px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
+  /* Margem no lugar da borda de baixo: o registro flutua sobre a foto
+     como peca isolada, nao como linha de uma lista dentro de caixa. */
+  margin-bottom: calc(3px * var(--rbf-ui));
   text-align: left;
 
+  /* .rf-nav e uma coluna flex. Sem isto os registros ENCOLHEM quando a
+     lista nao cabe na altura disponivel - e encolhem a caixa, nao o
+     conteudo: o nome do registro vazava 7px por baixo da propria linha
+     e caia fora da faixa de pergaminho, em texto escuro sobre foto
+     escura. Era esse o motivo real do nome ilegivel no item ativo.
+     Com flex-shrink:0 a lista prefere rolar (ja tem overflow-y:auto) a
+     espremer o item. */
+  flex-shrink: 0;
+
   border: none;
-  border-bottom: 1px solid rgba(38, 41, 54, .45);
 
   /* Altura suficiente para absorver o rotulo de categoria que cresce no
      hover, sem empurrar as linhas vizinhas - e sem os 58px fixos da
@@ -556,54 +575,141 @@
      conjunto encolhe junto em vez de estourar. */
   min-height: max(48px, 3.4em);
 
-  /* O recuo horizontal fica: ele desloca so o conteudo desta linha e
-     nao reflui as vizinhas. */
-  transition: background var(--rbf-fast) var(--rbf-ease-page),
-              padding-left var(--rbf-medium) var(--rbf-ease-ritual);
+  /* Deslocamento por transform, nao por padding: padding refaz o layout
+     da linha a cada quadro e o texto treme. transform e composto. */
+  transform: translateX(0);
+  transition: transform var(--rbf-fast) var(--rbf-ease-settle),
+              filter var(--rbf-snap) linear;
 }
 
-/* Linha viva na borda esquerda: o traco que liga selecao e titulo. */
+/* Fio de catalogo sob o nome. E o que da espinha a lista em repouso -
+   sem ele os registros ficam soltos no meio da fotografia. Recolhe
+   quando a faixa de pergaminho cobre a linha: dois tracos no mesmo
+   lugar seria ruido. */
 .rf-nav__item::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--rbf-red);
-  transform: scaleY(0);
-  transform-origin: center;
-  transition: transform var(--rbf-medium) var(--rbf-ease-ritual);
+  left: calc(34px * var(--rbf-ui));
+  right: calc(10px * var(--rbf-ui));
+  bottom: calc(7px * var(--rbf-ui));
+  height: 1px;
+  background: linear-gradient(90deg, var(--rbf-gold), transparent 86%);
+  opacity: .3;
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform var(--rbf-fast) var(--rbf-ease-cut),
+              opacity var(--rbf-snap) linear;
 }
 
 .rf-nav__item:focus-visible {
   outline-offset: -2px;
 }
 
+/* ---- estado selecionado ------------------------------------------------
+   A faixa de pergaminho (ui_menu_item_selected) e o estado selecionado
+   inteiro, e nao um enfeite por cima dele. Duas consequencias que a
+   primeira integracao errou:
+
+   1. Ela entra em opacidade CHEIA. Rebaixada a 30% virava sujeira
+      cinza no meio da lista - o efeito de "PNG mal colado".
+   2. O texto INVERTE. A arte e papel claro; rotulo cor de papel em
+      cima de papel nao se le. Sobre a faixa o registro passa a ser
+      tinta sobre pergaminho, que e o que a peca desenha.
+
+   A faixa nao entra por opacidade: ela e DESENHADA da esquerda para a
+   direita (scaleX com origem na esquerda), como quem passa a regua. */
+.rf-nav__item::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+
+  /* A estrela dourada da peca fica nos primeiros 8,5% do arquivo. Com a
+     faixa comecando na borda do registro, ela caia exatamente em cima
+     do numeral romano e o apagava. Puxando a arte 6% para a esquerda a
+     estrela sai quase toda para fora da caixa e o numeral reaparece -
+     e a estrela ainda cumpre o papel de marcar o inicio da linha. */
+  inset: 0 -2% 0 -6%;
+
+  opacity: 0;
+  background-image: var(--rbf-art-ui-menu-item-selected);
+
+  /* A peca tem 1100x374, mas o pergaminho ocupa so a faixa central:
+     y de 27,5% a 66,8%, ou seja 39,6% da altura do arquivo. O resto e
+     transparente. Com 'background-size: 100% 100%' o pergaminho cobria
+     39,6% da linha e o nome do registro caia FORA dele - texto escuro
+     sobre fotografia escura, ilegivel. Era esse o defeito.
+
+     252% de altura faz a faixa cobrir a linha inteira (0,396 x 2,52) e
+     45% de posicao vertical centra. Os dois numeros saem da medida do
+     arquivo, nao de tentativa.
+
+     A primeira tentativa usou 235%, que deixava a faixa em 93% da
+     linha: sobrava uma tira de 3,5% em cima, e era exatamente onde
+     caia o rotulo de capitulo - texto marrom escuro em cima da borda
+     chamuscada da peca, ilegivel em tablet. Cobrir a linha inteira
+     corta de leve os fios de ouro das pontas e devolve o rotulo para
+     cima do pergaminho liso. */
+  background-size: 100% 252%;
+  background-position: left 45%;
+  background-repeat: no-repeat;
+
+  transform: scaleX(.42) skewX(-6deg);
+  transform-origin: left center;
+  transition: opacity var(--rbf-snap) linear,
+              transform var(--rbf-fast) var(--rbf-ease-impact);
+}
+
 .rf-nav__item:hover,
 .rf-nav__item:focus-visible,
 .rf-nav__item.is-active {
-  background: linear-gradient(90deg, rgba(140, 39, 51, .13), transparent 72%);
-  padding-left: calc(16px * var(--rbf-ui));
+  transform: translateX(calc(7px * var(--rbf-ui)));
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .55));
+}
+
+.rf-nav__item:hover::after,
+.rf-nav__item:focus-visible::after,
+.rf-nav__item.is-active::after {
+  opacity: 1;
+  transform: scaleX(1) skewX(0);
 }
 
 .rf-nav__item:hover::before,
 .rf-nav__item:focus-visible::before,
 .rf-nav__item.is-active::before {
-  transform: scaleY(1);
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+/* Sem a arte (available:false, arquivo ausente, ou antes de carregar) a
+   variavel fica em 'none' e o ::after nao pinta nada. Este fundo e o
+   piso: continua havendo um estado selecionado legivel, so sem a peca.
+   Ele fica ATRAS do ::after, entao quando a arte carrega ela vence. */
+.rf-nav__item:hover,
+.rf-nav__item:focus-visible,
+.rf-nav__item.is-active {
+  background: linear-gradient(90deg, rgba(140, 39, 51, .16), transparent 74%);
 }
 
 .rf-nav__item.is-locked {
   opacity: .34;
 }
 
-.rf-nav__item.is-locked:hover {
+.rf-nav__item.is-locked:hover,
+.rf-nav__item.is-locked:focus-visible {
   background: none;
-  padding-left: calc(8px * var(--rbf-ui));
+  transform: translateX(0);
+  filter: none;
+}
+
+.rf-nav__item.is-locked:hover::after,
+.rf-nav__item.is-locked:focus-visible::after {
+  opacity: 0;
+  transform: scaleX(.42) skewX(-6deg);
 }
 
 .rf-nav__item.is-locked:hover::before {
-  transform: scaleY(0);
+  opacity: .3;
+  transform: scaleX(1);
 }
 
 .rf-nav__body { min-width: 0; }
@@ -648,7 +754,11 @@
 .rf-nav__label {
   display: block;
   font-family: var(--rbf-font-display);
-  font-size: calc(16px * var(--rbf-ui));
+  /* Teto proprio: a escala de interface chega a 1,9 em monitor, e
+     16x1,9 = 30px por registro nao cabia com nove registros na
+     coluna. O nome continua sendo o maior texto da lista, so para de
+     crescer antes de tirar a lista da tela. */
+  font-size: clamp(15px, calc(15px * var(--rbf-ui)), 25px);
   font-weight: 400;
   letter-spacing: .03em;
   color: var(--rbf-ink-dim);
@@ -658,11 +768,69 @@
   transition: color var(--rbf-fast);
 }
 
+/* Tinta sobre pergaminho. Ver a nota em .rf-nav__item::after: sobre a
+   faixa clara o registro inteiro inverte, e nao so clareia. */
 .rf-nav__item:hover .rf-nav__label,
 .rf-nav__item:focus-visible .rf-nav__label,
 .rf-nav__item.is-active .rf-nav__label {
-  color: var(--rbf-paper);
+  color: var(--rbf-on-paper);
+  letter-spacing: .05em;
 }
+
+.rf-nav__item:hover .rf-nav__chapter,
+.rf-nav__item:focus-visible .rf-nav__chapter,
+.rf-nav__item.is-active .rf-nav__chapter {
+  color: var(--rbf-on-paper-dim);
+}
+
+.rf-nav__item:hover .rbf-num,
+.rf-nav__item:focus-visible .rbf-num,
+.rf-nav__item.is-active .rbf-num,
+.rf-nav__item:hover .rbf-code,
+.rf-nav__item:focus-visible .rbf-code,
+.rf-nav__item.is-active .rbf-code {
+  color: var(--rbf-on-paper-dim);
+}
+
+/* O numeral anda um pouco para dentro do pergaminho, para nao ficar
+   encostado na estrela. Por transform, que nao reflui a linha. */
+.rf-nav__item:hover .rbf-num,
+.rf-nav__item:focus-visible .rbf-num,
+.rf-nav__item.is-active .rbf-num {
+  transform: translateX(calc(5px * var(--rbf-ui)));
+}
+
+.rbf-num {
+  transform: translateX(0);
+  transition: transform var(--rbf-fast) var(--rbf-ease-settle),
+              color var(--rbf-snap) linear;
+}
+
+/* Item travado nao ganha faixa, entao tambem nao inverte. Sem esta
+   regra o rotulo de um registro indisponivel ficava preto sobre a
+   fotografia escura, ilegivel. */
+.rf-nav__item.is-locked:hover .rf-nav__label,
+.rf-nav__item.is-locked:focus-visible .rf-nav__label {
+  color: var(--rbf-ink-dim);
+}
+
+.rf-nav__item.is-locked:hover .rbf-num,
+.rf-nav__item.is-locked:focus-visible .rbf-num,
+.rf-nav__item.is-locked:hover .rbf-code,
+.rf-nav__item.is-locked:focus-visible .rbf-code {
+  color: var(--rbf-ink-ghost);
+}
+
+.rf-nav__item.is-locked:hover .rf-nav__chapter,
+.rf-nav__item.is-locked:focus-visible .rf-nav__chapter {
+  color: var(--rbf-gold);
+}
+
+/* O codigo do registro herda .rbf-code, cuja cor foi feita para painel
+   escuro e chapado. Aqui ele cai em cima da fotografia e sumia. Um
+   degrau acima resolve sem tirar o cromo do lugar dele - a mesma
+   correcao que a linha de versao ja tinha recebido. */
+.rf-nav__meta .rbf-code { color: var(--rbf-ink-mute); }
 
 .rf-nav__meta {
   display: flex;
@@ -688,6 +856,12 @@
 .rf-nav__item:hover .rf-nav__lead,
 .rf-nav__item.is-active .rf-nav__lead {
   width: clamp(0px, 3vw, 44px);
+  /* Sobre o pergaminho a linha precisa ser tinta, nao cinza-de-painel. */
+  background: linear-gradient(90deg, transparent, var(--rbf-on-paper-dim));
+}
+
+.rf-nav__item.is-locked:hover .rf-nav__lead {
+  width: 0;
 }
 
 .rf-nav__seal {
@@ -703,6 +877,327 @@
 .rf-nav__item.is-active .rf-nav__seal {
   opacity: 1;
   transform: rotate(0) scale(1);
+}
+
+/* ==========================================================================
+   CARTAO DE ESTADO DO ARQUIVO
+
+   Componente novo. Ocupa o vazio da direita do menu em tela larga e da
+   ao jogador, antes de entrar, a unica informacao que ele nao tem como
+   deduzir: onde a leitura dele esta.
+
+   A arte (ui_route_progress_panel) tem tres linhas desenhadas com
+   losango-fio-losango e uma tarja de rodape. O conteudo foi montado
+   PARA esse desenho: tres rotas e um numero embaixo. Por isso a caixa
+   mantem a proporcao nativa 720x1066 em vez de esticar - arte esticada
+   e a diferenca entre moldura e mancha.
+
+   Sem dados gravados o cartao nao aparece (atributo hidden, posto por
+   js/menu.js). Zero em tudo nao e informacao, e decoracao.
+   ========================================================================== */
+
+.rf-dossier {
+  grid-area: card;
+  position: relative;
+  z-index: 3;
+
+  justify-self: end;
+  align-self: start;
+  margin: calc(var(--rbf-pad) * .3) var(--rbf-pad) 0 0;
+
+  width: clamp(206px, 19vw, 322px);
+  aspect-ratio: 720 / 1066;
+
+  /* Corpo do texto do cartao. Nao usa --rbf-code: aquele token cresce
+     ate 17px em monitor, e 17px numa caixa de 320px de largura estoura
+     o nome da rota. Aqui a medida acompanha a caixa, nao a tela. */
+  --rbf-card-fs: clamp(9px, .72vw, 13px);
+
+  background-image: var(--rbf-art-ui-route-progress-panel);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, .7));
+}
+
+.rf-dossier[hidden] { display: none; }
+
+/* ---- alinhamento com a arte -------------------------------------------
+   A peca tem fios de ouro pintados em posicoes fixas. Medidos no
+   arquivo (720x1066): os tres fios de linha ficam em 21,2%, 44,5% e
+   67,8% da altura, e o fio do rodape em 80,4%.
+
+   O conteudo e ancorado NESSES numeros, e nao distribuido por
+   space-around. E a diferenca entre a barra correr em cima do fio
+   desenhado e a barra correr um pouco acima dele - que e exatamente o
+   defeito que faz uma peca boa parecer colada por cima.
+
+   Como a caixa tem proporcao fixa, porcentagem aqui e exata em
+   qualquer tamanho de tela. */
+
+.rf-dossier__title {
+  position: absolute;
+  top: 8.5%;
+  left: 10%;
+  right: 10%;
+
+  text-align: center;
+  color: var(--rbf-gold);
+  font-size: var(--rbf-card-fs);
+  letter-spacing: .12em;
+  line-height: 1.35;
+}
+
+.rf-dossier__rows { display: block; }
+
+/* Altura zero: a linha e uma ANCORA no fio pintado, e o conteudo se
+   pendura nela - nome acima, barra em cima. */
+.rf-dossier__row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--rbf-rule);
+  height: 0;
+}
+
+.rf-dossier__row--hope   { --rbf-rule: 21.2%; }
+.rf-dossier__row--loss   { --rbf-rule: 44.5%; }
+.rf-dossier__row--answer { --rbf-rule: 67.8%; }
+
+/* Piso enquanto a arte nao existe: uma caixa sobria, com fio de ouro.
+   A classe .rbf-has-* e posta por RBF.Assets quando o arquivo carrega
+   de verdade, e so entao o piso sai de cena - sem isso a borda reta
+   ficaria desenhada por cima da borda rasgada da pintura. */
+.rf-dossier {
+  background-color: rgba(9, 10, 14, .74);
+  border: 1px solid rgba(185, 151, 91, .22);
+}
+
+.rbf-has-ui-route-progress-panel .rf-dossier {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.rf-dossier__title {
+  color: var(--rbf-gold);
+  text-align: center;
+  letter-spacing: .18em;
+}
+
+.rf-dossier__rows {
+  display: grid;
+  align-content: space-around;
+  min-height: 0;
+}
+
+/* Cada rota tem cor propria, a mesma do HUD em cena. Uma variavel local
+   por linha evita repetir a cor em quatro lugares. */
+.rf-dossier__row--hope   { --rbf-route-tint: var(--rbf-gold); }
+.rf-dossier__row--loss   { --rbf-route-tint: var(--rbf-red-lit); }
+.rf-dossier__row--answer { --rbf-route-tint: var(--rbf-cold); }
+
+/* O sigilo entra no losango ornamentado que a peca ja tem a esquerda,
+   nao ao lado dele. A pintura 256x256 le bem neste tamanho; e o mesmo
+   motivo pelo qual ela NAO substitui o SVG de 13px do HUD em cena. */
+.rf-dossier__sigil {
+  position: absolute;
+  left: 12.5%;
+  width: 16.5%;
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rf-dossier__row--hope   .rf-dossier__sigil { background-image: var(--rbf-art-route-hope); }
+.rf-dossier__row--loss   .rf-dossier__sigil { background-image: var(--rbf-art-route-loss); }
+.rf-dossier__row--answer .rf-dossier__sigil { background-image: var(--rbf-art-route-answer); }
+
+/* Sem a pintura, um losango de ouro no lugar. A linha nao fica torta. */
+.rf-dossier__sigil::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--rbf-route-tint);
+  opacity: .55;
+  clip-path: polygon(50% 6%, 88% 50%, 50% 94%, 12% 50%);
+}
+
+.rbf-has-route-hope   .rf-dossier__row--hope   .rf-dossier__sigil::after,
+.rbf-has-route-loss   .rf-dossier__row--loss   .rf-dossier__sigil::after,
+.rbf-has-route-answer .rf-dossier__row--answer .rf-dossier__sigil::after {
+  display: none;
+}
+
+/* Nome logo acima do fio pintado, na largura exata do fio. */
+.rf-dossier__meta {
+  position: absolute;
+  left: 33%;
+  right: 26%;
+  bottom: calc(3px * var(--rbf-ui));
+  min-width: 0;
+}
+
+.rf-dossier__name {
+  display: block;
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-card-fs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-route-tint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* O trilho nao e desenhado: o fio de ouro pintado na peca JA e o
+   trilho. Esta caixa so existe para recortar a barra que corre em
+   cima dele. Desenhar um segundo trilho por cima do primeiro era
+   exatamente o tipo de camada duplicada que suja a arte. */
+.rf-dossier__track {
+  position: absolute;
+  left: 33%;
+  right: 26%;
+  top: calc(-1.5px * var(--rbf-ui));
+  height: calc(3px * var(--rbf-ui));
+  overflow: hidden;
+}
+
+.rf-dossier__fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--rbf-route-tint);
+  transform: scaleX(var(--rbf-fill, 0));
+  transform-origin: left center;
+  transition: transform var(--rbf-slow) var(--rbf-ease-settle);
+}
+
+/* Tarja de rodape: o fio pintado esta em 80,4%. */
+.rf-dossier__foot {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 83.5%;
+
+  display: grid;
+  gap: calc(2px * var(--rbf-ui));
+  text-align: center;
+}
+
+.rf-dossier__foot .rbf-label {
+  color: var(--rbf-gold);
+  font-size: var(--rbf-card-fs);
+  letter-spacing: .14em;
+}
+
+.rf-dossier__time {
+  font-family: var(--rbf-font-display);
+  font-size: calc(var(--rbf-card-fs) * 1.5);
+  letter-spacing: .06em;
+  color: var(--rbf-paper);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Telefone: o cartao deita. Em coluna unica a proporcao retrato comeria
+   meia tela de rolagem, entao a arte sai e ficam os dados em faixa.
+   Preferi tirar a moldura a espremer a pintura numa caixa deitada. */
+@media (max-width: 979px) {
+  .rf-dossier {
+    justify-self: stretch;
+    align-self: auto;
+    margin: 0 var(--rbf-pad) calc(var(--rbf-pad) * .6);
+
+    width: auto;
+    aspect-ratio: auto;
+    padding: calc(12px * var(--rbf-ui)) calc(14px * var(--rbf-ui));
+
+    --rbf-card-fs: max(9px, calc(9px * var(--rbf-ui)));
+
+    background-image: none;
+    background-color: rgba(9, 10, 14, .7);
+    border: 1px solid rgba(185, 151, 91, .22);
+    border-left: 2px solid var(--rbf-gold);
+    filter: none;
+  }
+
+  .rbf-has-ui-route-progress-panel .rf-dossier {
+    background-color: rgba(9, 10, 14, .7);
+    border-color: rgba(185, 151, 91, .22);
+    border-left-color: var(--rbf-gold);
+  }
+
+  /* Tudo volta ao fluxo: sem a peca pintada nao ha fio pintado com que
+     alinhar, e a ancoragem por porcentagem perde o sentido. */
+  .rf-dossier__title {
+    position: static;
+    text-align: left;
+  }
+
+  .rf-dossier__rows {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(12px * var(--rbf-ui));
+    margin: calc(9px * var(--rbf-ui)) 0;
+  }
+
+  .rf-dossier__row {
+    position: relative;
+    top: auto;
+    height: auto;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: calc(7px * var(--rbf-ui));
+  }
+
+  .rf-dossier__sigil {
+    position: relative;
+    left: auto;
+    width: calc(22px * var(--rbf-ui));
+    transform: none;
+  }
+
+  .rf-dossier__meta {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  .rf-dossier__track {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    grid-column: 1 / -1;
+
+    margin-top: calc(4px * var(--rbf-ui));
+    height: 2px;
+    background: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 0 1px rgba(185, 151, 91, .2);
+  }
+
+  .rf-dossier__foot {
+    position: static;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    text-align: left;
+    padding-top: calc(8px * var(--rbf-ui));
+    border-top: 1px solid rgba(185, 151, 91, .2);
+  }
+}
+
+/* Telefone deitado: nao ha altura. O cartao sai inteiro. */
+@media (max-height: 560px) and (orientation: landscape) {
+  .rf-dossier { display: none; }
 }
 
 /* ---- rodape do menu ---------------------------------------------------- */
@@ -804,24 +1299,37 @@
    interacao ja e possivel bem antes disso, porque nada aqui bloqueia
    ponteiro nem teclado.                                                  */
 
-#main-menu.is-revealing .rf-topbar        { animation: rbfWipe   var(--rbf-medium) var(--rbf-ease-ritual) both; animation-delay: 60ms; }
-#main-menu.is-revealing .rf-sigil         { animation: rbfSealIn var(--rbf-slow)   var(--rbf-ease-ritual) both; animation-delay: 180ms; }
+#main-menu.is-revealing .rf-topbar        { animation: rbfWipe    var(--rbf-medium) var(--rbf-ease-cut)    both; animation-delay: 60ms; }
+#main-menu.is-revealing .rf-sigil         { animation: rbfSealIn  var(--rbf-slow)   var(--rbf-ease-ritual) both; animation-delay: 180ms; }
 #main-menu.is-revealing .rf-lockup__eyebrow,
-#main-menu.is-revealing .rf-lockup__latin { animation: rbfRise   var(--rbf-medium) var(--rbf-ease-ritual) both; animation-delay: 300ms; }
-#main-menu.is-revealing .rf-title__mask   { animation: rbfWipeUp var(--rbf-slow)   var(--rbf-ease-ritual) both; animation-delay: 420ms; }
-#main-menu.is-revealing .rf-title__mask + .rf-title__mask { animation-delay: 520ms; }
-#main-menu.is-revealing .rf-subtitle      { animation: rbfSlip   var(--rbf-medium) var(--rbf-ease-ritual) both; animation-delay: 700ms; }
-#main-menu.is-revealing .rf-art__arch     { animation: rbfInk    var(--rbf-slow)   var(--rbf-ease-ritual) both; animation-delay: 260ms; }
+#main-menu.is-revealing .rf-lockup__latin { animation: rbfRise    var(--rbf-medium) var(--rbf-ease-settle) both; animation-delay: 300ms; }
+
+/* O titulo passa a entrar por lamina em vez de subir: e o gesto de
+   marca da tela, e o unico lugar onde o corte diagonal aparece em
+   tamanho grande. Cada palavra tem a sua passada. */
+#main-menu.is-revealing .rf-title__mask   { animation: rbfBladeIn var(--rbf-slow)   var(--rbf-ease-impact) both; animation-delay: 420ms; }
+#main-menu.is-revealing .rf-title__mask + .rf-title__mask { animation-delay: 540ms; }
+
+#main-menu.is-revealing .rf-subtitle      { animation: rbfSlip    var(--rbf-medium) var(--rbf-ease-settle) both; animation-delay: 720ms; }
+#main-menu.is-revealing .rf-art__arch     { animation: rbfInk     var(--rbf-slow)   var(--rbf-ease-ritual) both; animation-delay: 260ms; }
 #main-menu.is-revealing .rf-art__arch .rf-arch-line { animation: rbfDraw 1600ms var(--rbf-ease-ritual) both; animation-delay: 320ms; }
-#main-menu.is-revealing .rf-nav__item     { animation: rbfRise   var(--rbf-medium) var(--rbf-ease-ritual) both; }
-#main-menu.is-revealing .rf-nav__item:nth-child(1) { animation-delay: 820ms; }
-#main-menu.is-revealing .rf-nav__item:nth-child(2) { animation-delay: 880ms; }
-#main-menu.is-revealing .rf-nav__item:nth-child(3) { animation-delay: 940ms; }
-#main-menu.is-revealing .rf-nav__item:nth-child(4) { animation-delay: 1000ms; }
-#main-menu.is-revealing .rf-nav__item:nth-child(5) { animation-delay: 1060ms; }
-#main-menu.is-revealing .rf-nav__item:nth-child(6) { animation-delay: 1120ms; }
-#main-menu.is-revealing .rf-nav__item:nth-child(7) { animation-delay: 1180ms; }
-#main-menu.is-revealing .rf-menufoot      { animation: rbfInk    var(--rbf-medium) var(--rbf-ease-ritual) both; animation-delay: 1240ms; }
+
+/* O cartao entra pela direita enquanto o titulo ainda esta se abrindo a
+   esquerda. As duas pontas da composicao se fecham ao mesmo tempo. */
+#main-menu.is-revealing .rf-dossier       { animation: rbfCardIn  var(--rbf-slow)   var(--rbf-ease-impact) both; animation-delay: 520ms; }
+#main-menu.is-revealing .rf-dossier__fill { animation: rbfBarFill var(--rbf-slow)   var(--rbf-ease-settle) both;
+                                            animation-delay: calc(960ms + var(--rbf-order, 0) * 110ms); }
+
+/* Escalonamento por variavel, nao por :nth-child. A regra antiga parava
+   no setimo item e o oitavo registro do menu ('Fechar o arquivo')
+   entrava sem atraso nenhum, na frente dos outros. Agora a lista pode
+   ter qualquer tamanho: RBF.Motion.stagger() numera, o CSS multiplica. */
+#main-menu.is-revealing .rf-nav__item {
+  animation: rbfNavCut var(--rbf-panel-ms) var(--rbf-ease-impact) both;
+  animation-delay: calc(780ms + var(--rbf-order, 0) * var(--rbf-step));
+}
+
+#main-menu.is-revealing .rf-menufoot      { animation: rbfInk     var(--rbf-medium) var(--rbf-ease-settle) both; animation-delay: 1200ms; }
 
 /* Volta ao menu dentro da mesma sessao: versao curta, sem cerimonia. */
 #main-menu.is-returning,
@@ -841,9 +1349,13 @@
        navegacao continuava 300px abaixo da borda inferior. */
     grid-template-rows: auto auto minmax(0, 1fr);
 
+    /* O buraco da direita virou o cartao de estado. A composicao passa a
+       ter dois pesos em diagonal - lockup em cima a esquerda, cartao em
+       cima a direita, lista embaixo a esquerda, nota embaixo a direita -
+       em vez de uma coluna de texto com metade da tela vazia. */
     grid-template-areas:
       'bar  bar'
-      'lock .'
+      'lock card'
       'nav  foot';
 
     overflow: hidden;
@@ -857,7 +1369,14 @@
 
   .rf-nav {
     align-self: stretch;
-    justify-content: flex-end;
+
+    /* Encostada embaixo por margem automatica no primeiro registro, e
+       nao por justify-content:flex-end. Sao equivalentes enquanto a
+       lista cabe; quando ela nao cabe, flex-end empurra o excesso para
+       FORA do inicio da area rolavel e os primeiros registros ficam
+       inalcancaveis - era por isso que a lista comecava no terceiro
+       item em monitor. Margem automatica vira zero ao transbordar. */
+    justify-content: flex-start;
 
     padding-bottom: calc(var(--rbf-pad) * 1.2);
     padding-right: calc(var(--rbf-pad) * 1.2);
@@ -869,7 +1388,36 @@
     overscroll-behavior: contain;
   }
 
-  .rf-art { display: flex; }
+  .rf-nav__item:first-child { margin-top: auto; }
+
+  /* Fora do calculo das faixas do grid. O cartao tem proporcao fixa e
+     fica alto (uma caixa de 300px de largura passa de 440px de altura);
+     como celula normal ele inflava a faixa do lockup e roubava da
+     lista, que passava a nao caber. Item posicionado por absolute ainda
+     obedece a area 'card' para SE COLOCAR, mas nao entra na medida das
+     faixas - que e exatamente o que se quer de um cartao encostado no
+     canto. */
+  .rf-dossier { position: absolute; }
+
+  /* A ilustracao cede a faixa da direita ao cartao de estado, e desce
+     de intensidade. Em tela larga ela deixou de ser o unico peso da
+     metade direita: agora divide o espaco com um elemento que carrega
+     informacao, e informacao vem antes de ornamento. */
+  .rf-art {
+    display: flex;
+    left: 34%;
+    right: 15%;
+  }
+
+  .rf-art__arch  { opacity: .5; }
+
+  .rf-art__astro {
+    right: 2%;
+    top: auto;
+    bottom: 6%;
+    width: min(13vw, 168px);
+    opacity: .3;
+  }
 
   .rf-menufoot {
     flex-direction: column;
@@ -884,11 +1432,33 @@
   .rf-title { font-size: clamp(1.9rem, 2.7vw, 3.2rem); }
 }
 
-/* Altura curta em tela larga: o lockup encolhe para a lista caber. */
-@media (min-width: 980px) and (max-height: 780px) {
+/* Altura curta em tela larga: o lockup encolhe para a lista caber.
+   Em 1366x768 e 1024x768 os nove registros somavam mais que a faixa
+   disponivel e a lista abria barra de rolagem, com o ultimo registro
+   pela metade. Aqui a linha inteira aperta - respiro, margem e corpo -
+   em vez de deixar o menu rolar. */
+@media (min-width: 980px) and (max-height: 800px) {
   .rf-lockup { padding-top: var(--rbf-pad); }
   .rf-title  { font-size: clamp(1.7rem, 2.3vw, 2.6rem); }
-  .rf-nav__item { padding-top: calc(9px * var(--rbf-ui)); padding-bottom: calc(9px * var(--rbf-ui)); }
+
+  .rf-nav__item {
+    padding-top: calc(6px * var(--rbf-ui));
+    padding-bottom: calc(6px * var(--rbf-ui));
+    margin-bottom: calc(1px * var(--rbf-ui));
+    min-height: 44px;
+  }
+
+  .rf-nav__label { font-size: clamp(14px, calc(13px * var(--rbf-ui)), 20px); }
+  .rf-nav { padding-bottom: calc(var(--rbf-pad) * .6); }
+}
+
+/* Tablet em retrato: a coluna tem 768px de largura e a faixa de
+   pergaminho, esticada nessa medida, vira uma fita de 12:1 com o nome
+   perdido numa ponta. A lista ganha teto de largura - o registro
+   continua sendo uma linha de leitura, nao uma regua. */
+@media (min-width: 560px) and (max-width: 979px) {
+  .rf-nav,
+  .rf-dossier { max-width: 580px; }
 }
 
 /* Telefone deitado: o titulo divide a linha com a navegacao. */
@@ -936,20 +1506,80 @@
    Uma pagina escura atravessa a tela entre menu e jogo.
    ========================================================================== */
 
+/* Tres pecas viajando juntas, e nao um retangulo em gradiente
+   deslizando. Empilhadas da mais atras para a mais a frente:
+
+     veil    a pagina escura, cortada em diagonal rasa. E ela que
+             realmente cobre a tela - a troca de cena acontece com ela
+             por cima (sweepMs=380ms cai dentro da janela em que o veu
+             esta parado no meio, entre 40% e 62% de --rbf-sweep).
+     slash   a tinta, meio quadro atras. E o gesto; nao precisa cobrir.
+     sigil   o selo bate no meio do trajeto e sai girando.
+
+   O container recorta: sem overflow:hidden as pecas rodadas criam
+   rolagem lateral no telefone. */
+
 #rf-transition {
   position: absolute;
   inset: 0;
-  z-index: 80;
+  z-index: var(--rbf-z-wipe);
   pointer-events: none;
-  opacity: 0;
-  background:
-    linear-gradient(104deg, transparent 0%, var(--rbf-void) 18%, var(--rbf-void) 82%, transparent 100%);
-  transform: translateX(-120%);
+  overflow: hidden;
+
+  /* visibility em vez de opacity: a camada some do teste de pintura
+     entre um corte e outro, em vez de ficar composta em zero. */
+  visibility: hidden;
 }
 
-#rf-transition.is-sweeping {
-  animation: rbfShadowPass 900ms var(--rbf-ease-page) both;
+#rf-transition.is-sweeping { visibility: visible; }
+
+.rf-wipe__veil,
+.rf-wipe__slash,
+.rf-wipe__sigil {
+  position: absolute;
+  display: block;
+  pointer-events: none;
 }
+
+.rf-wipe__veil {
+  inset: -25%;
+  background: var(--rbf-void);
+
+  /* Diagonal rasa, de proposito. Angulo acentuado e a critica mais
+     repetida ao material de referencia: cansa e come legibilidade. */
+  clip-path: polygon(0 38%, 100% 2%, 100% 64%, 0 100%);
+  transform: translateX(-140%) rotate(-2.4deg);
+}
+
+.rf-wipe__slash {
+  top: 50%;
+  left: 50%;
+  width: 172vw;
+  height: 62vh;
+  margin: -31vh 0 0 -86vw;
+
+  background-image: var(--rbf-art-fx-ink-slash);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  transform: translateX(-130%) rotate(-2deg);
+}
+
+.rf-wipe__sigil {
+  top: 50%;
+  left: 50%;
+  width:  calc(58px * var(--rbf-ui));
+  height: calc(58px * var(--rbf-ui));
+  color: var(--rbf-red-lit);
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-80deg) scale(.22);
+}
+
+#rf-transition.is-sweeping .rf-wipe__veil  { animation: rbfVeilCut  var(--rbf-sweep) var(--rbf-ease-cut)    both; }
+#rf-transition.is-sweeping .rf-wipe__slash { animation: rbfInkCut   var(--rbf-sweep) var(--rbf-ease-cut)    both; }
+#rf-transition.is-sweeping .rf-wipe__sigil { animation: rbfSigilCut var(--rbf-sweep) var(--rbf-ease-impact) both; }
 
 /* ==========================================================================
    BARRA DE JOGO
@@ -1194,27 +1824,140 @@
 
 /* ---- painel ------------------------------------------------------------ */
 
+/* ---- moldura -----------------------------------------------------------
+   ui_menu_panel.png e uma moldura de 9 fatias: canto rasgado em ouro,
+   fio nas laterais, textura escura no meio. Entra por border-image e
+   nao por background-size:100% 100%.
+
+   O motivo e concreto. A arte tem proporcao 1400x1006 (1,39:1); os
+   paineis do jogo vao de 560x1060 (Ajustes em monitor alto) a 900x400
+   (Historico curto). Esticada, a mesma peca apareceria ora achatada
+   ora estirada quatro vezes - e canto rasgado deformado nao le como
+   canto rasgado, le como mancha. Com border-image os cantos ficam em
+   escala fixa e so os trechos retos das bordas esticam, que e
+   exatamente o que trecho reto aguenta.
+
+   Sem 'fill': o miolo da arte fica de fora e a superficie continua
+   sendo --rbf-panel. Isso custa a marca do corvo, que mora no miolo,
+   e paga com a moldura intacta em qualquer proporcao. Foi a troca
+   escolhida; o arquivo continua inteiro no disco. */
+
 .rbf-panel {
   position: relative;
+  isolation: isolate;
   width: 100%;
-  max-width: 560px;
+  max-width: 640px;
   max-height: calc(var(--rbf-vh) - 20px);
 
   display: flex;
   flex-direction: column;
 
-  background: var(--rbf-panel);
+  background-color: var(--rbf-panel);
   border: 1px solid var(--rbf-line);
   box-shadow: 0 30px 80px rgba(0, 0, 0, .85);
 
-  animation: rbfPageIn var(--rbf-medium) var(--rbf-ease-ritual) both;
+  animation: rbfPanelIn var(--rbf-panel-ms) var(--rbf-ease-impact) both;
 }
 
-/* Linha de ouro no topo, tracada na abertura. */
+/* Espessura da moldura num lugar so. Tem teto: a escala de interface
+   chega a 1,9 em monitor, e uma moldura de 49px comia quase 100px da
+   largura util do painel - o rotulo de cada ajuste quebrava em duas
+   linhas por falta de espaco que a moldura tinha tomado. */
+:root { --rbf-frame: clamp(14px, calc(17px * var(--rbf-ui)), 30px); }
+
+.rbf-has-ui-menu-panel .rbf-panel {
+  border-style: solid;
+  border-width: var(--rbf-frame);
+  border-image-source: var(--rbf-art-ui-menu-panel);
+  border-image-slice: 108;
+  border-image-repeat: stretch;
+  box-shadow: none;
+  filter: drop-shadow(0 26px 58px rgba(0, 0, 0, .8));
+}
+
+/* ---- moldura gotica: a peca definitiva do painel -----------------------
+   Vem depois da regra acima e vence por ordem, entao ui_menu_panel fica
+   como piso caso esta nao carregue.
+
+   Aqui o 'fill' entra: o miolo da peca e escuro TRANSLUCIDO (alpha 223),
+   entao ele proprio e a superficie do painel - com o fundo solido por
+   baixo garantindo que nada da tela atravesse. A moldura anterior nao
+   podia usar fill porque o miolo dela tinha corvo e astrolabio
+   desenhados, e desenho no miolo briga com o texto por cima.
+
+   O canto ornamentado e o ganho real: a peca antiga tinha borda rasgada,
+   que em painel pequeno lia como sujeira. */
+.rbf-has-ui-panel-frame-gothic .rbf-panel {
+  border-style: solid;
+  border-width: clamp(16px, calc(19px * var(--rbf-ui)), 34px);
+  border-image-source: var(--rbf-art-ui-panel-frame-gothic);
+  border-image-slice: 140 fill;
+  border-image-repeat: stretch;
+
+  background-color: rgba(9, 8, 12, .96);
+  box-shadow: none;
+  filter: drop-shadow(0 26px 58px rgba(0, 0, 0, .82));
+}
+
+/* ---- a pena e o selo: assinatura do painel -----------------------------
+   Nao e moldura, e marca. Fica no canto de baixo a direita, atras do
+   conteudo, em opacidade baixa - do jeito que marca d'agua de papel
+   timbrado aparece: voce so repara nela quando procura.
+
+   z-index negativo contido pelo isolation que .rbf-panel ja tem. */
+.rbf-has-ui-ornament-quill-seal .rbf-panel::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+
+  /* Canto de BAIXO A ESQUERDA, e nao a direita: o rodape do painel
+     alinha os botoes a direita, e a pena caia bem atras do 'Fechar' -
+     marca d'agua atras de botao nao le como marca, le como sujeira.
+     A esquerda do rodape esta sempre vazia. */
+  left: calc(-8px * var(--rbf-ui));
+  bottom: calc(-6px * var(--rbf-ui));
+
+  width: clamp(84px, 13%, 168px);
+  aspect-ratio: 865 / 1374;
+
+  background-image: var(--rbf-art-ui-ornament-quill-seal);
+  background-size: contain;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+
+  /* Espelhada: a pena aponta para cima e para a direita no arquivo, o
+     que so fecha a composicao no canto direito. Virada, ela aponta
+     para dentro do painel. */
+  transform: scaleX(-1);
+
+  opacity: .26;
+  pointer-events: none;
+}
+
+/* Saida propria. Nao e a entrada ao contrario: some reto, sem quicar.
+   Uma classe so, no overlay, comanda as duas camadas - o fundo escuro
+   e a folha. Ver RBF.UI.closePanel, que a aplica por RBF.Motion. */
+.rbf-overlay.is-closing {
+  /* Deixa de receber clique no ato. Sem isto o painel que esta saindo
+     continua invisivel POR CIMA do que esta entrando por 180ms, e o
+     primeiro clique do jogador some. */
+  pointer-events: none;
+  animation: rbfCurtain var(--rbf-fast) var(--rbf-ease-exit) both;
+}
+
+.rbf-overlay.is-closing .rbf-panel,
+.rbf-overlay.is-closing .rbf-modal {
+  animation: rbfPanelOut var(--rbf-fast) var(--rbf-ease-exit) both;
+}
+
+/* Divisor de ouro sob o cabecalho. Antes ele era espremido numa faixa
+   de 7px de altura: a estrela central da peca virava um borrao. Agora
+   tem altura para a estrela existir e a arte entra por 'contain', que
+   preserva a proporcao. O gradiente continua por baixo como piso. */
 .rbf-panel::before {
   content: '';
   position: absolute;
-  top: -1px;
+  top: calc(-2px * var(--rbf-ui));
   left: 0;
   right: 0;
   height: 1px;
@@ -1224,26 +1967,93 @@
   animation-delay: 120ms;
 }
 
-.rbf-panel-wide { max-width: 900px; }
+.rbf-has-ui-menu-panel .rbf-panel::before { display: none; }
+
+.rbf-panel-wide { max-width: 940px; }
 
 .rbf-panel-head {
+  position: relative;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: var(--rbf-gap);
   flex-wrap: wrap;
 
-  padding: calc(var(--rbf-pad) * .9) var(--rbf-pad) calc(var(--rbf-pad) * .6);
+  padding: calc(var(--rbf-pad) * .9) var(--rbf-pad) calc(var(--rbf-pad) * .8);
   border-bottom: 1px solid var(--rbf-line);
 }
 
+/* Divisor de ouro no lugar da linha reta do cabecalho. 'contain'
+   preserva a proporcao da peca (1400x293), entao a estrela do centro
+   fica redonda; o que sobra nas laterais e transparente e deixa ver a
+   linha fina que continua por baixo, como piso. */
+.rbf-has-ui-divider-gold .rbf-panel-head {
+  border-bottom-color: transparent;
+}
+
+.rbf-has-ui-divider-gold .rbf-panel-head::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--rbf-pad) * .5);
+  right: calc(var(--rbf-pad) * .5);
+  bottom: calc(-9px * var(--rbf-ui));
+  height: calc(18px * var(--rbf-ui));
+
+  background-image: var(--rbf-art-ui-divider-gold);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform-origin: left center;
+  animation: rbfTrace var(--rbf-slow) var(--rbf-ease-ritual) both;
+  animation-delay: 140ms;
+  pointer-events: none;
+}
+
+/* ---- titulo em faixa carmesim ------------------------------------------
+   ui_name_banner_crimson e uma faixa rasgada com fio de ouro. Serve de
+   placa de nome na cena E de titulo de painel: e o mesmo objeto - uma
+   etiqueta colada no documento. Repetir a peca nos dois lugares e o que
+   amarra o cromo da cena ao cromo do menu.
+
+   O texto e claro porque a faixa e escura e saturada. E o inverso do
+   que acontece na faixa de pergaminho do menu, e pelo mesmo motivo:
+   a cor do texto sai da peca, nao do tema. */
 .rbf-panel-title {
+  position: relative;
+  align-self: flex-start;
+
   font-family: var(--rbf-font-display);
   font-size: calc(15px * var(--rbf-ui));
   font-weight: 400;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--rbf-paper);
+}
+
+.rbf-has-ui-name-banner-crimson .rbf-panel-title {
+  padding: calc(12px * var(--rbf-ui)) calc(30px * var(--rbf-ui));
+  margin: calc(-6px * var(--rbf-ui)) 0 0 calc(-14px * var(--rbf-ui));
+  color: #fff1e0;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, .75);
+}
+
+.rbf-has-ui-name-banner-crimson .rbf-panel-title::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  background-image: var(--rbf-art-ui-name-banner-crimson);
+
+  /* Mesma correcao do pergaminho do menu: a faixa carmesim ocupa 45,3%
+     da altura do arquivo (1000x333, y de 24,9% a 70%). 205% de altura
+     poe a faixa em 93% da caixa; 45% centra. */
+  background-size: 100% 205%;
+  background-position: left 45%;
+  background-repeat: no-repeat;
+
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, .6));
 }
 
 .rbf-panel-sub {
@@ -1272,6 +2082,151 @@
 
   padding: calc(var(--rbf-pad) * .7) var(--rbf-pad);
   border-top: 1px solid var(--rbf-line);
+}
+
+/* ==========================================================================
+   PAINEL COM TRILHO DE CATEGORIAS
+
+   Trilho a esquerda, pagina a direita. Substitui a coluna unica com
+   titulos de secao em que o jogador rolava a tela inteira para chegar
+   na ultima secao.
+
+   A aba ativa e marcada por uma faixa carmesim que VARRE da esquerda,
+   nao por uma borda que acende. E o mesmo gesto do pergaminho no menu
+   principal, na escala menor que uma aba pede.
+   ========================================================================== */
+
+.rbf-panel-body.is-tabbed {
+  display: flex;
+  padding: 0;
+
+  /* Quem rola e a pagina, nao o painel: o trilho fica parado. */
+  overflow: hidden;
+}
+
+.rbf-tabs-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 27%) minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.rbf-tabrail {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2px * var(--rbf-ui));
+
+  padding: var(--rbf-pad) calc(var(--rbf-gap) * .7) var(--rbf-pad) 0;
+  border-right: 1px solid rgba(185, 151, 91, .28);
+
+  min-height: 0;
+  overflow-y: auto;
+
+  /* Sem isto o rotulo mais longo ('APRESENTACAO') abre uma barra de
+     rolagem horizontal dentro do trilho e aparece cortado ao meio. */
+  overflow-x: hidden;
+}
+
+.rbf-tab {
+  position: relative;
+  isolation: isolate;
+
+  padding: calc(11px * var(--rbf-ui)) calc(12px * var(--rbf-ui))
+           calc(11px * var(--rbf-ui)) calc(16px * var(--rbf-ui));
+  min-height: 44px;
+  text-align: left;
+  flex-shrink: 0;
+
+  font-family: var(--rbf-font-display);
+  /* Teto proprio: em monitor a escala chega a 1,9 e 12x1,9 = 22,8px
+     nao cabia na coluna do trilho. */
+  font-size: clamp(11px, calc(11px * var(--rbf-ui)), 15px);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-dim);
+  overflow-wrap: break-word;
+
+  transition: color var(--rbf-snap) linear,
+              transform var(--rbf-fast) var(--rbf-ease-settle);
+}
+
+.rbf-tab::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(-1 * var(--rbf-gap) * .7) 0 0;
+
+  background: linear-gradient(90deg,
+    var(--rbf-red) 0%, rgba(140, 39, 51, .78) 72%, transparent 100%);
+
+  opacity: 0;
+  transform: translateX(-14%) skewX(-7deg) scaleX(.55);
+  transform-origin: left center;
+  transition: opacity var(--rbf-snap) linear,
+              transform var(--rbf-fast) var(--rbf-ease-impact);
+}
+
+.rbf-tab:hover,
+.rbf-tab:focus-visible,
+.rbf-tab.on {
+  color: var(--rbf-paper);
+  transform: translateX(calc(3px * var(--rbf-ui)));
+}
+
+.rbf-tab.on::after {
+  opacity: 1;
+  transform: translateX(0) skewX(-4deg) scaleX(1);
+}
+
+.rbf-tab:hover::after,
+.rbf-tab:focus-visible::after {
+  opacity: .45;
+  transform: translateX(0) skewX(-4deg) scaleX(1);
+}
+
+.rbf-tabpages {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--rbf-pad) 0 var(--rbf-pad) var(--rbf-pad);
+}
+
+.rbf-tabpage.is-cutting {
+  animation: rbfPageCut var(--rbf-panel-ms) var(--rbf-ease-impact) both;
+}
+
+/* Telefone: o trilho deita e vira uma faixa rolavel no topo. Uma
+   coluna de abas de 27% num aparelho de 360px sobra 260px para o
+   controle - nao da. */
+@media (max-width: 620px) {
+  .rbf-tabs-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rbf-tabrail {
+    flex-direction: row;
+    gap: calc(4px * var(--rbf-ui));
+
+    padding: calc(var(--rbf-pad) * .7) var(--rbf-pad) 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(185, 151, 91, .28);
+
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .rbf-tab {
+    padding: calc(9px * var(--rbf-ui)) calc(11px * var(--rbf-ui));
+    white-space: nowrap;
+    font-size: calc(10px * var(--rbf-ui));
+  }
+
+  .rbf-tab::after { inset: 0; }
+
+  .rbf-tabpages { padding: var(--rbf-pad); }
 }
 
 /* ---- botoes ------------------------------------------------------------ */
@@ -1326,19 +2281,49 @@
 
 /* ---- modal ------------------------------------------------------------- */
 
+/* O modal continua mais quieto que um painel, de proposito: e uma
+   pergunta, nao uma sala. Ganha a lombada carmesim e o rasgo de tinta
+   atras do selo, e nao a moldura inteira - se tivesse a moldura,
+   deixaria de se distinguir do painel de conteudo. */
 .rbf-modal {
+  position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
   max-height: calc(var(--rbf-vh) - 20px);
   overflow-y: auto;
 
   background: var(--rbf-panel);
   border: 1px solid var(--rbf-line);
+  border-left: 2px solid var(--rbf-red);
   padding: calc(var(--rbf-pad) * 1.2);
 
   animation: rbfSealIn var(--rbf-medium) var(--rbf-ease-ritual) both;
   box-shadow: 0 24px 70px rgba(0, 0, 0, .85);
 }
+
+/* Risco de tinta atras do selo, no canto superior. Recortado pelo
+   proprio modal; so a ponta do gesto aparece. */
+.rbf-modal::before {
+  content: '';
+  position: absolute;
+  top: calc(-14px * var(--rbf-ui));
+  left: 0;
+  width: 62%;
+  height: calc(74px * var(--rbf-ui));
+
+  background-image: var(--rbf-art-fx-ink-slash);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: .5;
+  pointer-events: none;
+}
+
+.rbf-modal-title,
+.rbf-modal-msg,
+.rbf-modal-foot,
+.rbf-modal__seal { position: relative; }
 
 .rbf-modal__seal {
   width: calc(30px * var(--rbf-ui));
@@ -1416,26 +2401,54 @@
   flex-direction: column;
 }
 
+/* O menu de jogo passa a falar a mesma lingua do menu principal: faixa
+   carmesim que varre da esquerda e a linha inteira anda um pouco. Antes
+   era um gradiente que aparecia com o padding crescendo - a linha
+   reflui a cada quadro e o texto treme. */
 .rbf-menu-item {
+  position: relative;
+  isolation: isolate;
+
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
   gap: calc(12px * var(--rbf-ui));
 
   width: 100%;
-  padding: calc(13px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
+  padding: calc(13px * var(--rbf-ui)) calc(12px * var(--rbf-ui));
   min-height: 48px;
   text-align: left;
 
   border-bottom: 1px solid rgba(38, 41, 54, .6);
 
-  transition: background var(--rbf-fast), padding-left var(--rbf-medium) var(--rbf-ease-ritual);
+  transition: transform var(--rbf-fast) var(--rbf-ease-settle);
+}
+
+.rbf-menu-item::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  background: linear-gradient(90deg,
+    rgba(140, 39, 51, .55) 0%, rgba(140, 39, 51, .16) 58%, transparent 100%);
+
+  opacity: 0;
+  transform: translateX(-10%) skewX(-6deg) scaleX(.6);
+  transform-origin: left center;
+  transition: opacity var(--rbf-snap) linear,
+              transform var(--rbf-fast) var(--rbf-ease-impact);
 }
 
 .rbf-menu-item:hover,
 .rbf-menu-item:focus-visible {
-  background: linear-gradient(90deg, rgba(140, 39, 51, .14), transparent 70%);
-  padding-left: calc(18px * var(--rbf-ui));
+  transform: translateX(calc(6px * var(--rbf-ui)));
+}
+
+.rbf-menu-item:hover::after,
+.rbf-menu-item:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0) skewX(-3deg) scaleX(1);
 }
 
 .rbf-menu-item-label {
@@ -1460,56 +2473,82 @@
    SAVES
    ========================================================================== */
 
-.rbf-slots {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: calc(8px * var(--rbf-ui));
-}
+/* ---- folhas de registro ------------------------------------------------
+   Os espacos de save eram dois cartoes retangulares por linha, com a
+   miniatura em cima do texto e os botoes embaixo: espaco ocupado ficava
+   tres vezes mais alto que espaco vazio, e a grade saia serrilhada.
 
-@media (min-width: 620px) {
-  .rbf-slots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+   Agora e uma folha por linha, com a mesma altura em todos os estados -
+   miniatura, dados, ferramentas, na horizontal, como linha de um livro
+   de tombo. Cheio ou vazio, a folha ocupa o mesmo lugar na pilha.     */
+
+.rbf-slots {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--rbf-ui));
 }
 
 .rbf-slot {
+  position: relative;
   display: grid;
-  grid-template-columns: calc(78px * var(--rbf-ui)) minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  gap: calc(4px * var(--rbf-ui)) calc(12px * var(--rbf-ui));
+  grid-template-columns: calc(84px * var(--rbf-ui)) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: calc(14px * var(--rbf-ui));
 
-  padding: calc(9px * var(--rbf-ui));
-  background: var(--rbf-raised);
+  padding: calc(9px * var(--rbf-ui)) calc(12px * var(--rbf-ui));
+  background: linear-gradient(90deg, rgba(25, 27, 37, .9), rgba(18, 19, 27, .62));
   border: 1px solid var(--rbf-line);
-  text-align: left;
-  min-height: 72px;
 
-  transition: border-color var(--rbf-fast), background var(--rbf-fast);
+  /* A borda esquerda e a lombada da ficha: vermelha quando ha registro,
+     apagada quando o espaco esta vazio. */
+  border-left: 2px solid var(--rbf-red);
+  text-align: left;
+  min-height: calc(64px * var(--rbf-ui));
+
+  transition: border-color var(--rbf-fast),
+              background var(--rbf-fast),
+              transform var(--rbf-fast) var(--rbf-ease-settle);
 }
+
+.rbf-slot.empty { border-left-color: var(--rbf-ink-ghost); }
 
 .rbf-slot:hover {
   border-color: var(--rbf-gold);
-  background: #1d1f2a;
+  border-left-color: var(--rbf-red-lit);
+  background: linear-gradient(90deg, rgba(38, 32, 28, .95), rgba(22, 20, 22, .7));
+  transform: translateX(calc(4px * var(--rbf-ui)));
 }
 
 .rbf-slot.disabled { opacity: .4; }
-.rbf-slot.disabled:hover { border-color: var(--rbf-line); background: var(--rbf-raised); }
-.rbf-slot.broken { border-color: #4a2418; }
+
+.rbf-slot.disabled:hover {
+  border-color: var(--rbf-line);
+  border-left-color: var(--rbf-ink-ghost);
+  background: linear-gradient(90deg, rgba(25, 27, 37, .9), rgba(18, 19, 27, .62));
+  transform: none;
+}
+
+.rbf-slot.broken { border-left-color: #a0603a; }
 
 .rbf-thumb {
-  grid-row: 1 / span 2;
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 1px solid #000;
   position: relative;
   overflow: hidden;
+  filter: saturate(.75) brightness(.85);
+  transition: filter var(--rbf-fast);
 }
 
-/* Selo de classificado sobre a miniatura vazia. */
+.rbf-slot:hover .rbf-thumb { filter: saturate(1) brightness(1); }
+
+/* Espaco vazio: um retangulo lacrado, nao uma imagem que faltou. */
 .rbf-slot.empty .rbf-thumb::after {
   content: '';
   position: absolute;
-  inset: 30% 22%;
-  border: 1px solid var(--rbf-ink-ghost);
-  opacity: .5;
+  inset: 26% 18%;
+  border: 1px dashed var(--rbf-ink-ghost);
+  opacity: .55;
 }
 
 .rbf-slot-info { min-width: 0; }
@@ -1547,9 +2586,11 @@
   color: var(--rbf-ink-mute);
   margin-top: calc(3px * var(--rbf-ui));
 
+  /* Uma linha: a folha tem altura fixa e o trecho e a informacao menos
+     essencial dela. Duas linhas empurravam a data para fora da caixa. */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1569,10 +2610,47 @@
 .rbf-slot-route { color: var(--rbf-red); }
 
 .rbf-slot-tools {
-  grid-column: 2;
   display: flex;
   gap: calc(6px * var(--rbf-ui));
   flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: calc(120px * var(--rbf-ui));
+}
+
+/* A ficha inteira e o alvo de abrir/gravar. As ferramentas so aparecem
+   quando o ponteiro esta na linha - assim a lista fica limpa e nao
+   parece um painel de administracao com dois botoes por registro. */
+.rbf-slot-tools .rbf-btn {
+  opacity: 0;
+  transition: opacity var(--rbf-fast);
+}
+
+.rbf-slot:hover .rbf-slot-tools .rbf-btn,
+.rbf-slot:focus-within .rbf-slot-tools .rbf-btn {
+  opacity: 1;
+}
+
+/* Sem ponteiro (toque) nao existe hover: os botoes ficam sempre
+   visiveis, senao viram funcao inalcancavel no telefone. */
+@media (hover: none) {
+  .rbf-slot-tools .rbf-btn { opacity: 1; }
+}
+
+/* Telefone: a folha empilha em duas linhas, mas continua uniforme. */
+@media (max-width: 560px) {
+  .rbf-slot {
+    grid-template-columns: calc(64px * var(--rbf-ui)) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: calc(6px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
+  }
+
+  .rbf-thumb { grid-row: 1 / span 2; }
+
+  .rbf-slot-tools {
+    grid-column: 2;
+    justify-content: flex-start;
+    max-width: none;
+  }
 }
 
 /* ==========================================================================
@@ -1814,24 +2892,52 @@
   margin-bottom: var(--rbf-pad);
 }
 
+/* Mesma linguagem das abas de painel: faixa carmesim que varre, e nao
+   uma borda que acende. Sao o mesmo objeto em escalas diferentes. */
 .rbf-gal-tab {
+  position: relative;
+  isolation: isolate;
+
   font-family: var(--rbf-font-display);
-  font-size: var(--rbf-code);
-  letter-spacing: .16em;
+  font-size: clamp(9px, calc(9px * var(--rbf-ui)), 12px);
+  letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--rbf-ink-ghost);
+  color: var(--rbf-ink-dim);
 
-  padding: calc(8px * var(--rbf-ui)) calc(13px * var(--rbf-ui));
-  min-height: 38px;
-  border: 1px solid var(--rbf-line);
+  padding: calc(9px * var(--rbf-ui)) calc(14px * var(--rbf-ui));
+  min-height: 40px;
+  border: 1px solid transparent;
+  border-bottom-color: var(--rbf-line);
 
-  transition: color var(--rbf-fast), border-color var(--rbf-fast);
+  transition: color var(--rbf-snap) linear;
 }
+
+.rbf-gal-tab::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  background: linear-gradient(160deg,
+    var(--rbf-red) 0%, rgba(140, 39, 51, .72) 76%, transparent 100%);
+
+  opacity: 0;
+  transform: skewX(-7deg) scaleX(.55);
+  transform-origin: left center;
+  transition: opacity var(--rbf-snap) linear,
+              transform var(--rbf-fast) var(--rbf-ease-impact);
+}
+
+.rbf-gal-tab:hover { color: var(--rbf-paper); }
+
+.rbf-gal-tab:hover::after { opacity: .4; transform: skewX(-4deg) scaleX(1); }
 
 .rbf-gal-tab.on {
   color: var(--rbf-paper);
-  border-color: var(--rbf-gold);
+  border-bottom-color: var(--rbf-gold);
 }
+
+.rbf-gal-tab.on::after { opacity: 1; transform: skewX(-4deg) scaleX(1); }
 
 .rbf-gal-grid {
   display: grid;
@@ -1850,13 +2956,29 @@
   border: 1px solid var(--rbf-line);
   text-align: left;
 
-  transition: border-color var(--rbf-fast);
+  transition: border-color var(--rbf-fast),
+              transform var(--rbf-fast) var(--rbf-ease-impact),
+              box-shadow var(--rbf-fast);
 }
 
-.rbf-gal-item:hover { border-color: var(--rbf-gold); }
+/* Ficha liberada levanta um pouco e torce; ficha bloqueada nao reage.
+   A diferenca entre 'ha algo aqui' e 'nao ha' e o movimento, e nao um
+   cadeado desenhado. */
+.rbf-gal-item:hover,
+.rbf-gal-item:focus-visible {
+  border-color: var(--rbf-gold);
+  transform: translateY(calc(-3px * var(--rbf-ui))) rotate(-.5deg);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, .6);
+}
 
 .rbf-gal-item.locked { opacity: .5; }
-.rbf-gal-item.locked:hover { border-color: var(--rbf-line); }
+
+.rbf-gal-item.locked:hover,
+.rbf-gal-item.locked:focus-visible {
+  border-color: var(--rbf-line);
+  transform: none;
+  box-shadow: none;
+}
 
 .rbf-gal-thumb {
   width: 100%;
@@ -1879,6 +3001,11 @@
   border-color: var(--rbf-line);
 }
 
+/* O selo de conteudo bloqueado aparecia como 'LASSIFICAD...': a palavra
+   e longa, --rbf-code chega a 17px em monitor e o tracking de .2em
+   somava mais 12 caracteres de folga - tudo isso dentro de uma
+   miniatura de 140px, que cortava as duas pontas. Corpo com teto,
+   tracking menor e quebra permitida resolvem em qualquer largura. */
 .rbf-gal-item.locked .rbf-gal-thumb::after {
   content: 'CLASSIFICADO';
   position: absolute;
@@ -1886,12 +3013,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 calc(4px * var(--rbf-ui));
 
   font-family: var(--rbf-font-display);
-  font-size: var(--rbf-code);
-  letter-spacing: .2em;
-  color: var(--rbf-red);
-  background: rgba(7, 8, 12, .82);
+  font-size: clamp(8px, calc(8px * var(--rbf-ui)), 11px);
+  letter-spacing: .12em;
+  text-align: center;
+  overflow-wrap: anywhere;
+  color: var(--rbf-red-lit);
+  background: rgba(7, 8, 12, .84);
 }
 
 .rbf-gal-name {
