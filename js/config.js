@@ -1770,6 +1770,8 @@ RBF.COBERTURA = {
      cima: o personagem colide pelos pes, nao pelo corpo inteiro, senao
      a cabeca bate na parede antes de o corpo chegar nela. */
   chars: {
+    /* Com a vela na mao. O percurso inteiro e iluminado por ela e a
+       folha anterior tinha as duas maos vazias. */
     antoniette: {
       file: 'antoniette.png', available: true,
       fw: 98, fh: 150, pes: 28, cor: '#6b1f28'

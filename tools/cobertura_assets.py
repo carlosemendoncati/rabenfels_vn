@@ -553,7 +553,10 @@ A = "ChatGPT Image Aug 24, 2026, "
 # 28 pixels da arte das salas. Adulto de pe = 150. Menina de oito anos =
 # 1,25m = 115. Ver o cabecalho de tools/cobertura_assets.py.
 ANDAR = [
-    (A + "11_08_10 PM.png",              "chars/antoniette.png",  98, 150),
+    # Com a vela na mao. Substituiu a folha de maos vazias, que o autor
+    # apagou da pasta bruta em 25/08 - o percurso inteiro e iluminado
+    # por essa vela e a personagem estava sem ela.
+    ("antoniette_com_vela_3x4(1).png",   "chars/antoniette.png",  98, 150),
     ("4660d5ff-6e2b-466c-a8f4-c6c26df09eb5.png",
                                           "chars/klara.png",       76, 116),
     (A + "10_38_10 PM.png",              "chars/klara_casulo.png", 76, 116),
@@ -681,7 +684,11 @@ def main():
         garante(destino)
         if LISTAR:
             continue
-        t, nota = fatia_andar(os.path.join(ORIG, origem), destino, w, h, rel)
+        fonte = os.path.join(ORIG, origem)
+        if not os.path.isfile(fonte):
+            registra(rel, destino, None, "origem ausente: " + origem)
+            continue
+        t, nota = fatia_andar(fonte, destino, w, h, rel)
         registra(rel, destino, t, nota)
 
     print("\nicones")
@@ -690,7 +697,11 @@ def main():
         garante(destino)
         if LISTAR:
             continue
-        t, nota = fatia_icones(os.path.join(ORIG, origem), destino, lado, c, l)
+        fonte = os.path.join(ORIG, origem)
+        if not os.path.isfile(fonte):
+            registra(rel, destino, None, "origem ausente: " + origem)
+            continue
+        t, nota = fatia_icones(fonte, destino, lado, c, l)
         registra(rel, destino, t, nota)
 
     print("\npecas")
@@ -699,7 +710,11 @@ def main():
         garante(destino)
         if LISTAR:
             continue
-        t, nota = peca(os.path.join(ORIG, origem), destino, lh, lw)
+        fonte = os.path.join(ORIG, origem)
+        if not os.path.isfile(fonte):
+            registra(rel, destino, None, "origem ausente: " + origem)
+            continue
+        t, nota = peca(fonte, destino, lh, lw)
         registra(rel, destino, t, nota)
 
     print("\nmapas")
@@ -708,7 +723,11 @@ def main():
         garante(destino)
         if LISTAR:
             continue
-        t, nota = mapa(os.path.join(ORIG, origem), destino)
+        fonte = os.path.join(ORIG, origem)
+        if not os.path.isfile(fonte):
+            registra(rel, destino, None, "origem ausente: " + origem)
+            continue
+        t, nota = mapa(fonte, destino)
         registra(rel, destino, t, nota)
 
     print("\naudio")
@@ -741,7 +760,11 @@ def main():
         garante(destino)
         if LISTAR:
             continue
-        im = Image.open(os.path.join(ORIG, origem)).convert("RGBA")
+        fonte = os.path.join(ORIG, origem)
+        if not os.path.isfile(fonte):
+            registra(rel, destino, None, "origem ausente: " + origem)
+            continue
+        im = Image.open(fonte).convert("RGBA")
         im.save(destino)
         registra(rel, destino, im.size, "copia direta")
 
