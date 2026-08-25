@@ -119,7 +119,13 @@ async function main() {
   const srv = await servidor();
   const URL = 'http://127.0.0.1:' + srv.address().port + '/index.html';
 
-  const browser = await chromium.launch({ executablePath: exe });
+  /* --autoplay-policy: sem isto o Chrome recusa `play()` sem gesto do
+     usuario, nenhuma faixa comeca, e a conferencia de trilha passa por
+     nao haver o que conferir. */
+  const browser = await chromium.launch({
+    executablePath: exe,
+    args: ['--autoplay-policy=no-user-gesture-required']
+  });
   const telefone = view.w <= 600;
   const page = await browser.newPage({
     viewport: { width: view.w, height: view.h },
@@ -786,6 +792,86 @@ async function main() {
     return !j.fala;
   });
   check(retratoFechou, 'a fala do retrato fecha pelo controle normal');
+
+  /* ---- trilha na troca de sala -------------------------------------------
+
+     Relato do autor: "ao andar pelas salas mudando de mapa o audio buga e
+     o antigo nao sai nem pausa".
+
+     A contagem e de ELEMENTOS TOCANDO no documento, e nao do estado
+     interno do modulo - era o estado interno que mentia: `current`
+     apontava para uma faixa enquanto outra seguia soando sem dono.     */
+
+  /* Guarda onde a partida estava: esta secao anda pela casa de proposito
+     e as checagens seguintes contam com a personagem no salao. */
+  const antesDoAudio = await page.evaluate(() => {
+    const j = RBF.Rpg._debug.estado();
+    return { sala: j.sala, x: j.p.x, y: j.p.y, dir: j.p.dir, fase: j.fase };
+  });
+
+  /* Lido do modulo, e nao do documento: `new Audio()` nao entra no DOM,
+     e a primeira versao desta funcao contava sempre zero - passava com o
+     defeito reposto de proposito. */
+  async function tocando() {
+    return page.evaluate(() => {
+      const v = RBF.Audio._debug.vivos().filter(e => e.tocando);
+      return {
+        n: v.length,
+        orfas: RBF.Audio._debug.orfas(),
+        srcs: v.map(e => e.src + (e.dono ? '' : e.saindo ? ' (saindo)' : ' (ORFA)'))
+      };
+    });
+  }
+
+  /* Cinco trocas seguidas, mais rapidas que o fade de 900ms. E o pior
+     caso: a personagem atravessando salas sem parar. */
+  const rota = [
+    ['quarto',     420, 760],
+    ['corredor',   690, 330],
+    ['escritorio', 700, 700],
+    ['corredor',   690, 330],
+    ['quarto',     420, 760]
+  ];
+
+  for (const [sala, x, y] of rota) {
+    await page.evaluate(([s, px, py]) => {
+      const j = RBF.Rpg._debug.estado();
+      j.fala = null;
+      RBF.Rpg._debug.vaiPara(s, px, py, 'baixo');
+    }, [sala, x, y]);
+    await page.waitForTimeout(260);
+  }
+
+  /* Depois das trocas, tempo de sobra para todo fade terminar. */
+  await page.waitForTimeout(2600);
+
+  const som = await tocando();
+  check(som.n <= 1, 'uma trilha por vez depois de cinco trocas seguidas',
+        som.n + ' tocando: ' + som.srcs.join(', '));
+
+  check(som.orfas === 0, 'nao sobra faixa tocando sem dono',
+        som.orfas + ' orfa(s): ' + som.srcs.join(', '));
+
+  /* A conferencia so vale se alguma faixa chegou a tocar. Sem isto ela
+     passaria num navegador que bloqueia audio, sem conferir nada. */
+  const houveSom = await page.evaluate(() => RBF.Audio._debug.vivos().length);
+  check(houveSom > 0, 'a trilha chegou a tocar (senao a checagem e vazia)',
+        houveSom + ' elemento(s) criado(s)');
+
+  /* Silencio pedido tem de ser silencio de verdade. */
+  await page.evaluate(() => RBF.Audio.playBgm(null));
+  await page.waitForTimeout(1500);
+  const mudo = await tocando();
+  check(mudo.n === 0, 'playBgm(null) cala tudo',
+        mudo.n + ' ainda tocando: ' + mudo.srcs.join(', '));
+
+  /* Devolve a partida exatamente onde ela estava, e a trilha junto. */
+  await page.evaluate((e) => {
+    const j = RBF.Rpg._debug.estado();
+    j.sala = e.sala; j.p.x = e.x; j.p.y = e.y; j.p.dir = e.dir;
+    j.fase = e.fase; j.fala = null; j.bgm = null;
+  }, antesDoAudio);
+  await page.waitForTimeout(700);
 
   /* ---- save e volta ----------------------------------------------------- */
 

@@ -1832,6 +1832,7 @@ RBF.COBERTURA = {
 
   /* Retratos. Entram na faixa de fala do percurso, do lado do nome. */
   faces: {
+    antoniette:   { file: 'antoniette.png',   available: true },
     klara:        { file: 'klara.png',        available: true },
     klara_casulo: { file: 'klara_casulo.png', available: true },
     vulto:        { file: 'vulto.png',        available: true },

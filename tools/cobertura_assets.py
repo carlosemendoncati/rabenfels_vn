@@ -573,6 +573,9 @@ ANDAR = [
 ICONES = [(A + "09_47_49 PM.png", "icons/itens.png", 64, 4, 4)]
 
 PECAS = [
+    # O retrato dela. A caixa de fala do percurso passa a mostrar quem
+    # fala, como a caixa da VN faz, e ela e quem mais fala.
+    (E + "antoniette_retrato_pixel.png", "faces/antoniette.png",  340, 340),
     (A + "11_06_38 PM (1).png",  "faces/klara.png",           320, 320),
     (A + "11_06_38 PM (2).png",  "faces/klara_casulo.png",    320, 320),
     (A + "11_06_38 PM (3).png",  "faces/vulto.png",           360, 360),

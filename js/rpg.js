@@ -1352,7 +1352,12 @@ RBF.Rpg = (function () {
   function pintaFala() {
     if (!fala) { return; }
     var f = jogo.fala;
-    if (palco) { palco.classList.toggle('tem-fala', !!f); }
+    if (palco) {
+      palco.classList.toggle('tem-fala', !!f);
+      /* A caixa acompanha o ato: a arte da VN na fase 0, e a moldura
+         crua depois da virada. */
+      palco.classList.toggle('fase-1', jogo.fase >= 1);
+    }
     if (!f) { fala.classList.remove('is-on'); return; }
 
     var nome = fala.querySelector('.rf-perc__nome');
@@ -1364,7 +1369,10 @@ RBF.Rpg = (function () {
     nome.style.display = quem ? '' : 'none';
     txt.textContent = f.escrito;
 
-    var fim = imgFace(f.ch);
+    /* Sem `ch` declarado, quem observa e ela. O retrato padrao e o dela,
+       do mesmo jeito que na VN a narracao em primeira pessoa continua
+       sendo a voz da Antoniette. */
+    var fim = imgFace(f.ch || 'antoniette');
     if (fim) {
       cara.style.backgroundImage = 'url("' + fim.src + '")';
       cara.classList.add('is-on');

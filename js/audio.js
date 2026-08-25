@@ -129,9 +129,11 @@ RBF.Audio = (function () {
       if (minha !== geracao) {
         cancelaFade(el);
         try { el.pause(); el.currentTime = 0; } catch (e) { /* ignora */ }
+        descarta(el);
         return;
       }
       if (pending && pending !== id) { return; }  /* outra faixa foi pedida */
+      registra(el);
       el.loop = (def.loop !== false);
       var target = (def.volume != null ? def.volume : 1) * cfg().bgmVolume;
       el.volume = 0;
@@ -181,6 +183,25 @@ RBF.Audio = (function () {
      dono. */
   var saindo = [];
 
+  /* Todo elemento de trilha que este modulo criou.
+
+     `new Audio()` nao entra no documento, entao `querySelectorAll('audio')`
+     nao ve nada: de fora, a trilha era invisivel. Sem este registro nao ha
+     como conferir o defeito que motivou tudo isto - faixa tocando sem
+     ninguem apontando para ela.
+
+     Cresce so quando uma faixa comeca, e o que morre e removido. */
+  var criados = [];
+
+  function registra(el) {
+    if (el && criados.indexOf(el) === -1) { criados.push(el); }
+  }
+
+  function descarta(el) {
+    var i = criados.indexOf(el);
+    if (i !== -1) { criados.splice(i, 1); }
+  }
+
   function esquece(el) {
     for (var i = saindo.length - 1; i >= 0; i--) {
       if (saindo[i] === el) { saindo.splice(i, 1); }
@@ -194,6 +215,7 @@ RBF.Audio = (function () {
       var el = saindo[i];
       cancelaFade(el);
       try { el.pause(); el.currentTime = 0; } catch (e) { /* ignora */ }
+      descarta(el);
     }
     saindo.length = 0;
   }
@@ -207,6 +229,7 @@ RBF.Audio = (function () {
     fade(el, el.volume, 0, cfg().fadeMs, function () {
       try { el.pause(); el.currentTime = 0; } catch (e) { /* ignora */ }
       esquece(el);
+      descarta(el);
       if (done) { done(); }
     });
   }
@@ -416,7 +439,48 @@ RBF.Audio = (function () {
     leaveMenu:     leaveMenu,
     menuPlaying:   menuPlaying,
     isUnlocked: function () { return unlocked; },
-    currentId:  function () { return current ? current.id : null; }
+    currentId:  function () { return current ? current.id : null; },
+
+    /* Exposto para conferencia, como RBF.Engine._debug.
+
+       `vivos` e a unica janela para o defeito que motivou isto: faixa
+       que continua soando sem ninguem apontando para ela. Contar
+       elementos do documento nao serve, porque `new Audio()` nao entra
+       nele. */
+    _debug: {
+      vivos: function () {
+        var out = [];
+        for (var i = 0; i < criados.length; i++) {
+          var el = criados[i];
+          out.push({
+            src:    (el.currentSrc || el.src || '').split('/').pop(),
+            tocando: !el.paused && !el.ended,
+            volume: Math.round(el.volume * 100) / 100,
+            dono:   !!(current && current.el === el),
+            saindo: saindo.indexOf(el) !== -1
+          });
+        }
+        return out;
+      },
+      tocando: function () {
+        var n = 0;
+        for (var i = 0; i < criados.length; i++) {
+          if (!criados[i].paused && !criados[i].ended) { n += 1; }
+        }
+        return n;
+      },
+      orfas: function () {
+        var n = 0;
+        for (var i = 0; i < criados.length; i++) {
+          var el = criados[i];
+          if (el.paused || el.ended) { continue; }
+          if (current && current.el === el) { continue; }
+          if (saindo.indexOf(el) !== -1) { continue; }
+          n += 1;
+        }
+        return n;
+      }
+    }
   };
 })();
 

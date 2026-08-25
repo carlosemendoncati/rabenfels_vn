@@ -251,38 +251,70 @@
 
   display: flex;
   align-items: flex-end;
-  gap: calc(var(--rbf-ui) * 12px);
+  gap: calc(var(--rbf-ui) * 14px);
 
-  width: min(92%, calc(var(--rbf-ui) * 720px));
-  padding: calc(var(--rbf-ui) * 14px) calc(var(--rbf-ui) * 18px);
+  width: min(94%, calc(var(--rbf-ui) * 760px));
+  padding: calc(var(--rbf-ui) * 18px) calc(var(--rbf-ui) * 22px);
 
+  /* Piso: o que aparece sem a arte, e o que sobra na fase 1. */
   background:
-    linear-gradient(180deg,
-      rgba(9, 8, 11, .90) 0%,
-      rgba(9, 8, 11, .96) 100%);
-  border: 1px solid var(--rbf-line);
+    linear-gradient(180deg, var(--rbf-dlg-top) 0%, var(--rbf-dlg-bottom) 100%);
+  border: 1px solid var(--rbf-dlg-line);
   border-radius: 2px;
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity .28s ease, transform .28s ease;
+  transition: opacity .28s ease, transform .28s ease,
+              border-color var(--rbf-medium) var(--rbf-ease-settle);
 }
 
-.rf-perc__fala.is-on {
-  opacity: 1;
-  transform: translateX(-50%);
+/*
+  O ANTES.
+
+  A mesma placa de couro da caixa de dialogo da VN. Entra por
+  `border-image` com `fill`, como em css/ui.css: a peca tem 5,4:1 e a
+  caixa do percurso tem proporcao parecida, entao ela assenta quase sem
+  esticar.
+
+  A classe `rbf-has-ui-dialogue-plate-leather` e posta no <html> por
+  RBF.Assets quando a arte carrega de verdade. Sem ela, fica o piso
+  acima - que e exatamente o comportamento declarado no projeto.
+*/
+.rbf-has-ui-dialogue-plate-leather .rf-perc__palco:not(.fase-1) .rf-perc__fala {
+  background: none;
+  border: 0;
+  border-image: var(--rbf-art-ui-dialogue-plate-leather) 44 62 44 62 fill stretch;
+  border-image-width: calc(var(--rbf-ui) * 22px) calc(var(--rbf-ui) * 30px);
+  border-image-outset: 0;
+  padding: calc(var(--rbf-ui) * 20px) calc(var(--rbf-ui) * 30px);
+}
+
+/*
+  O DEPOIS.
+
+  A casa deixou de ser administrativa e a caixa deixa de ser a caixa do
+  livro. O couro sai, o fio de ouro vira fio rubro, e nada anuncia a
+  troca - e a mesma degradacao da casa, aplicada ao unico elemento que o
+  jogador olha o tempo todo.
+*/
+.rf-perc__palco.fase-1 .rf-perc__fala {
+  border-color: var(--rbf-red);
+  box-shadow: inset 0 0 0 1px rgba(140, 39, 51, .22);
 }
 
 .rf-perc__face {
   flex: 0 0 auto;
   display: none;
-  width: calc(var(--rbf-ui) * 72px);
-  height: calc(var(--rbf-ui) * 72px);
+  width: calc(var(--rbf-ui) * 92px);
+  height: calc(var(--rbf-ui) * 92px);
   background-size: cover;
   background-position: top center;
-  border: 1px solid var(--rbf-line);
+  border: 1px solid var(--rbf-gold);
   image-rendering: pixelated;
+  transition: border-color var(--rbf-medium) var(--rbf-ease-settle);
 }
+
+.rf-perc__palco.fase-1 .rf-perc__face { border-color: var(--rbf-red); }
 
 .rf-perc__face.is-on { display: block; }
 
@@ -290,11 +322,26 @@
 
 .rf-perc__nome {
   display: block;
-  margin-bottom: calc(var(--rbf-ui) * 4px);
+  margin-bottom: calc(var(--rbf-ui) * 6px);
+  padding: calc(var(--rbf-ui) * 3px) calc(var(--rbf-ui) * 10px);
   font-size: calc(var(--rbf-ui) * 12px);
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--rbf-gold);
+}
+
+/* Placa de nome com o selo de cera, a mesma da caixa da VN. Sobre papel
+   a tinta INVERTE - foi o erro da primeira integracao do selo em
+   css/ui.css e nao se repete aqui. */
+.rbf-has-ui-name-seal-wax .rf-perc__palco:not(.fase-1) .rf-perc__nome {
+  border-image: var(--rbf-art-ui-name-seal-wax) 30 40 30 40 fill stretch;
+  border-image-width: calc(var(--rbf-ui) * 12px) calc(var(--rbf-ui) * 18px);
+  color: var(--rbf-on-paper);
+}
+
+/* Na fase 1 o selo some e sobra o nome. */
+.rf-perc__palco.fase-1 .rf-perc__nome {
+  color: var(--rbf-red-lit);
 }
 
 .rf-perc__txt {
