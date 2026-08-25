@@ -61,9 +61,9 @@ RBF.Gallery = (function () {
       { need: 'done:capitulo6',    tx: 'Trabalha de costas para a parede. Puxou a cadeira para o lado da janela na primeira noite e nunca mais mudou.' },
       { need: 'arc:ultima',        tx: 'Velha Nidhaus, agosto.' },
       { need: 'done:epilogo',      tx: 'O tique: come em p\u00e9 porque na Ordem se come em p\u00e9, e na Ordem se come em p\u00e9 porque quem senta demora. Ela levou o h\u00e1bito para uma casa onde ningu\u00e9m tinha pressa e nunca reparou que era o \u00fanico gesto dela que n\u00e3o servia para nada ali.' },
-      { need: 'done:epilogo',      tx: 'O medo: n\u00e3o \u00e9 morrer. \u00c9 que o registro dela seja lido e n\u00e3o sirva. Ela morreu sem saber que ia acontecer exatamente isso, e que a causa seria uma decis\u00e3o dela.' },
+      { need: 'done:epilogo',      tx: 'O medo: n\u00e3o \u00e9 morrer. \u00c9 que o registro seja lido e n\u00e3o sirva. Nas quatro leituras, \u00e9 o que acontece. Em uma delas, ela vive para ler o parecer.' },
       { need: 'done:epilogo',      tx: 'A contradi\u00e7\u00e3o: m\u00e9todo extremo e a \u00fanica coisa que ela n\u00e3o conseguiu classificar foi o que sentia por uma crian\u00e7a. Registrou como "sem valor operacional" e deixou na p\u00e1gina.' },
-      { need: 'done:epilogo',      tx: 'O que sobra dela: duzentas e oitenta e sete p\u00e1ginas numeradas, uma asa prensada na dobra e uma pergunta de duas palavras com o resto da p\u00e1gina em branco.' }
+      { need: 'done:epilogo',      tx: 'O que sobra dela: um Arquivo cuja extens\u00e3o muda com a leitura, uma asa prensada na dobra e tudo o que a numera\u00e7\u00e3o n\u00e3o consegue contar.' }
     ]},
 
     { id: 'ch_matheo', cat: 'char', name: 'Matheo Drell',
@@ -75,8 +75,8 @@ RBF.Gallery = (function () {
       { need: 'arc:ultima',        tx: 'Assinou a autoriza\u00e7\u00e3o de campo em quarenta minutos e n\u00e3o releu o dossi\u00ea.' },
       { need: 'done:prologo',      tx: 'Tinha aberto a ficha da escriba de Lervel uma semana antes de assinar.' },
       { need: 'done:epilogo',      tx: 'O tique: conta as p\u00e1ginas de qualquer documento novo antes de ler a primeira. Faz isso desde os vinte anos e n\u00e3o sabe explicar por qu\u00ea.' },
-      { need: 'done:epilogo',      tx: 'O medo: ser o tipo de homem que assina. Ele leu a ficha da escriba anterior, entendeu o que ela significava, e assinou mesmo assim \u2014 e a \u00fanica pessoa que podia perguntar isso a ele morreu deixando o espa\u00e7o da resposta em branco.' },
-      { need: 'done:epilogo',      tx: 'O que ele fez depois: protocolou, sustentou, recorreu duas vezes. Fez tudo certo. Foi indeferido por falta das quatro p\u00e1ginas que ela arrancou para proteger a menina.' },
+      { need: 'done:epilogo',      tx: 'O medo: ser o tipo de homem que assina. Ele leu a ficha da escriba anterior, entendeu o que ela significava e assinou mesmo assim.' },
+      { need: 'done:epilogo',      tx: 'O que ele fez depois: levou ao tribunal o material que cada leitura deixou. Em duas recorreu. Em uma aceitou o enquadramento. Na Cobertura, n\u00e3o havia trabalho suficiente para sustentar.' },
       { need: 'done:epilogo',      tx: 'O que sobra dele: um alerta permanente num cadastro, que levou seis anos para disparar e trouxe duas matr\u00edculas de faculdade.' }
     ]},
 
@@ -136,10 +136,10 @@ RBF.Gallery = (function () {
       { need: 'done:epilogo',      tx: 'Para ela todo pacto \u00e9 casamento \u2014 uni\u00e3o de sangue. Quem pactua com ela pertence a ela, e qualquer v\u00ednculo importante de fora \u00e9 lido como trai\u00e7\u00e3o. N\u00e3o como concorr\u00eancia. Como adult\u00e9rio.' },
       { need: 'done:epilogo',      tx: 'Abomina casamentos, amizades profundas, familiares muito pr\u00f3ximos, outros patronos e divindades. Todas contam igual.' },
       { need: 'done:epilogo',      tx: 'O que ela quer \u00e9 a entrega inteira, e Klara \u00e9 capaz disso \u2014 a nobreza, a lealdade, a promessa de prote\u00e7\u00e3o mesmo quando \u00e9 imposs\u00edvel cumprir. \u00c9 a esposa perfeita. E Klara aponta tudo isso para outra pessoa.' },
-      { need: 'done:epilogo',      tx: '\u00c9 por isso que Antoniette morre. N\u00e3o pelo cronograma, n\u00e3o porque sabia demais, n\u00e3o porque quase moveu uma data. Porque a menina a escolheu.' },
-      { need: 'done:epilogo',      tx: 'Antoniette nunca descobriu. Concluiu "calend\u00e1rio", escreveu isso, e \u00e9 isso que est\u00e1 no Arquivo que Matheo leu. O documento que o jogador leu primeiro est\u00e1 errado no motivo.' },
+      { need: 'done:epilogo',      tx: 'Em Esperan\u00e7a e Perda, Carmine cobra o v\u00ednculo que Klara formou. Na Cobertura, espera diante da porta depois que a identidade de Antoniette \u00e9 exposta. Na Resposta, confere e vai embora.' },
+      { need: 'done:epilogo',      tx: 'Antoniette nunca registra Carmine como causa. Escreve calend\u00e1rio, m\u00e9todo ou conta. Na Cobertura, encontra a linha que a entregou e ainda n\u00e3o sabe quem est\u00e1 diante da porta.' },
       { need: 'done:epilogo',      tx: 'O tique: ela conta. Contou quantas vezes Klara procurou Antoniette sem precisar de nada. Klara n\u00e3o sabe que est\u00e1 sendo contada, e nunca soube que existe algu\u00e9m do outro lado.' },
-      { need: 'done:epilogo',      tx: 'Nenhuma cena da obra \u00e9 do ponto de vista dela. Nunca ganha sprite, nunca \u00e9 descrita, nunca explica. O corpo dela em cena \u00e9 a temperatura do ar e uma vela que n\u00e3o oscila.' }
+      { need: 'done:epilogo',      tx: 'Nenhuma cena \u00e9 do ponto de vista dela. Na Cobertura, o corpo aparece apenas de cima e por tr\u00eas quadros. Nas outras rotas, ela continua sendo temperatura do ar e uma vela que n\u00e3o oscila.' }
     ]},
 
     { id: 'ch_fenn', cat: 'char', name: 'Fenn',
@@ -153,7 +153,7 @@ RBF.Gallery = (function () {
       { need: 'done:capitulo8',     tx: 'O pai dele trabalhou nesta casa. Ele tinha nove anos quando entrou.' },
       { need: 'done:epilogo',       tx: 'O tique: fala com os animais em frase inteira e com as pessoas em frase cortada. N\u00e3o \u00e9 timidez. \u00c9 que com o cavalo n\u00e3o h\u00e1 nada que ele precise deixar de dizer.' },
       { need: 'done:epilogo',       tx: 'O medo: que o filho fique. Ele passou a vida numa casa que n\u00e3o se pode deixar e a \u00fanica coisa que quis foi que o menino sa\u00edsse antes de aprender a n\u00e3o olhar para a porta nordeste.' },
-      { need: 'done:epilogo',       tx: '\u00c9 o terceiro que paga. A p\u00e1gina 291 do Arquivo \u00e9 sobre ele, e \u00e9 uma das quatro que Antoniette arrancou. Sem ela, o tribunal n\u00e3o encontrou terceiro lesado e o caso morreu.' },
+      { need: 'done:epilogo',       tx: '\u00c9 o terceiro que paga. A entrada prevista para a p\u00e1gina 291 \u00e9 sobre ele. Em duas leituras Antoniette a retira, em uma a mant\u00e9m sem nome e, na Cobertura, nunca chega a compil\u00e1-la.' },
       { need: 'done:epilogo',       tx: 'Ele nunca pediu garantia nenhuma. Vinte e nove anos naquela casa e acreditou nela porque ela perguntou do jeito certo \u2014 e o jeito certo foi ele que ensinou, no primeiro dia, no port\u00e3o.' }
     ]},
 
@@ -212,12 +212,12 @@ RBF.Gallery = (function () {
 
     { id: 'doc_arquivo', cat: 'doc', name: 'Fragmentos do Arquivo',
       need: 'arc:arquivo',
-      text: 'Trechos citados diretamente do documento que Antoniette deixou. Duzentas e oitenta e sete paginas, com a numeracao dela terminando em duzentos e noventa e uma.',
+      text: 'Trechos citados do documento de Antoniette. A extensao muda com a leitura; no pacote do Prologo ha 287 folhas e a numeracao termina em 291.',
       entries: [
       { need: 'arc:arquivo',  tx: 'Voz do Compilador: terceira pessoa do comeco ao fim, nunca "eu". E o que a Ordem ensina, e foi Matheo quem ensinou a ela.' },
       { need: 'arc:arquivo',  tx: 'Tudo o que ele afirma e conferivel. Ela sabia que alguem ia conferir.' },
-      { need: 'done:epilogo', tx: 'O Arquivo erra por omissao e por enfase, nunca por invencao. Um documento com uma afirmacao falsa contamina tudo o que vem depois, e ela sabia disso melhor do que qualquer pessoa.' },
-      { need: 'done:epilogo', tx: 'E erra numa coisa, uma so, e e a que importa: o motivo. Ela morreu convencida de que a mataram pelo cronograma. Esta escrito assim, e Matheo leu assim.' }
+      { need: 'done:epilogo', tx: 'O Arquivo erra por omissao e por enfase. O tribunal acrescenta outro erro: em O Livro-Razao, declara falecida uma autora que trabalha dois andares abaixo.' },
+      { need: 'done:epilogo', tx: 'Nas tres leituras em que Antoniette morre, ela registra calendario, metodo ou conta. Nenhuma delas registra Carmine diante da porta.' }
     ]},
 
     { id: 'doc_compilador', cat: 'doc', name: 'Nota do Compilador',
@@ -254,7 +254,19 @@ RBF.Gallery = (function () {
       entries: [
       { need: 'arc:sem_identificacao', tx: 'Comeca com uma pergunta que nao cabia em formulario nenhum.' },
       { need: 'done:epilogo', tx: 'Um segundo caderno e o comeco de uma segunda pessoa. Ela escreveu isso na primeira noite em que abriu um, e estava certa.' },
-      { need: 'done:epilogo', tx: 'E deste caderno que saem as quatro paginas. Nao do oficial.' }
+      { need: 'done:epilogo', tx: 'Este caderno fornece o que o relatorio oficial nao comporta. Parte desse material volta nas quatro entradas finais.' }
+    ]},
+
+    { id: 'doc_cobertura', cat: 'doc', name: 'Conferencias da Cobertura',
+      need: 'arc:cob_linha',
+      text: 'A pagina 241 do caderno sem identificacao e as notas que Antoniette conseguiu conferir antes de chegar a porta.',
+      entries: [
+      { need: 'arc:cob_linha',   tx: 'A remessa do terceiro agosto, o nome da antecessora e a fonte constam no livro de saida. O visto na margem traz a data do dia seguinte.' },
+      { need: 'arc:cob_maio',    tx: 'Em maio do ultimo ano, Serafina consultou Lervel sobre as referencias do Compilador e informou o procedimento na mesma tarde.' },
+      { need: 'arc:cob_manual',  tx: 'O manual recusa prova sem procedencia. A anotacao abaixo registra que o procedimento foi cumprido.' },
+      { need: 'arc:cob_camara',  tx: 'Uma nota sem data localiza a camara sob a copa, descreve o cilindro de vidro e nomeia Klara.' },
+      { need: 'arc:cob_laudo',   tx: 'Os formularios de baixa ja estavam impressos. A terceira opcao era motivo de saude.' },
+      { need: 'arc:cob_retrato', tx: 'O retrato mostra uma governanta sem nome. A legenda conserva apenas as datas de entrada e saida.' }
     ]},
 
     { id: 'doc_lervel', cat: 'doc', name: 'Resposta da Ordem',
@@ -263,7 +275,7 @@ RBF.Gallery = (function () {
       entries: [
       { need: 'arc:lervel',   tx: 'A Ordem dos Olhos Cinzentos arquiva. E o que ela faz, e faz bem.' },
       { need: 'done:epilogo', tx: 'Ela mandou tudo o que viu em agosto do ano tres e a instrucao foi manter a posicao e continuar observando. Cumpriu por dois anos.' },
-      { need: 'done:epilogo', tx: 'O parecer final do tribunal da Marca tem duas linhas: relato singular, de autoria falecida, sem terceiro lesado identificavel.' }
+      { need: 'done:epilogo', tx: 'Os pareceres mudam com o material recebido. Todos chegam a mesma expressao: sem terceiro lesado identificavel.' }
     ]},
 
     { id: 'doc_cadastro', cat: 'doc', name: 'Registro de matricula',
@@ -271,7 +283,7 @@ RBF.Gallery = (function () {
       text: 'Copia de registro da Academia de Eldoria. Chega a Lervel por um alerta permanente deixado num sobrenome seis anos antes.',
       entries: [
       { need: 'arc:cadastro', tx: 'Uma familia que nao registra nada em tres seculos acabou de registrar as filhas.' },
-      { need: 'done:epilogo', tx: 'O curso de Klara e o que Antoniette ensinou a ela. Esta numa ficha administrativa, seis anos depois da morte dela, e ninguem que le aquela linha sabe o que esta lendo.' },
+      { need: 'done:epilogo', tx: 'O curso de Klara e o que Antoniette ensinou a ela. A ficha chega seis anos depois de Nidhaus; em O Livro-Razao, Antoniette recebe uma copia por dever de oficio.' },
       { need: 'done:epilogo', tx: 'Residencia obrigatoria durante o ciclo integral. A Academia responde pelo desenvolvimento do aluno ate a titulacao. Matheo leu a clausula inteira sem entender que estava lendo um cronograma.' }
     ]},
 
@@ -289,7 +301,7 @@ RBF.Gallery = (function () {
       text: 'As cartas entre Antoniette e Matheo. Passam pelas maos da casa na ida e na volta, e as duas partes sabem disso.',
       entries: [
       { need: 'arc:matheo',   tx: 'Nenhum agente escreve o nome verdadeiro de um alvo num documento que terceiros podem ler. Dai Khar\u2019Vel.' },
-      { need: 'done:epilogo', tx: 'Em nove anos ele nunca deixou de perguntar. A carta mais curta que ela escreveu foi a de abril do ultimo ano, e ele nao perguntou nada sobre ela.' },
+      { need: 'done:epilogo', tx: 'Em oito anos ele nunca deixou de perguntar. A carta mais curta que ela escreveu foi a de abril do ultimo ano, e ele nao perguntou nada sobre ela.' },
       { need: 'done:epilogo', tx: 'A casa le tudo o que entra e sai. Foi assim que a cobertura dela pode queimar, no fim, por ela ter feito exatamente o que a Ordem manda.' }
     ]},
 
@@ -299,7 +311,7 @@ RBF.Gallery = (function () {
       entries: [
       { need: 'arc:ficha',    tx: 'Motivo de saude. E a formula da casa, e a casa usa a mesma desde sempre.' },
       { need: 'done:epilogo', tx: 'Matheo leu esta linha uma vez antes, numa ficha de trinta e sete anos atras, uma semana antes de assinar a autorizacao de campo dela. E assinou.' },
-      { need: 'done:epilogo', tx: 'Este cartao so existe em duas das quatro leituras. Nas outras duas nao ha baixa nenhuma para pedir, e o tribunal declarou autoria falecida sobre alguem que respira.' }
+      { need: 'done:epilogo', tx: 'Este cartao existe em tres das quatro leituras. Na outra nao ha baixa para pedir, e o tribunal declarou autoria falecida sobre alguem que respira.' }
     ]},
 
     { id: 'doc_balada', cat: 'doc', name: 'Cantiga da Marca',
@@ -333,22 +345,45 @@ RBF.Gallery = (function () {
     { id: 'end_cap7', cat: 'rec', name: 'VII \u00b7 Agosto', need: 'done:capitulo7',
       text: 'Ganha ver o fenomeno com os proprios olhos. Entrega a missao: a partir daqui ela nao esta mais trabalhando para Lervel.' },
     { id: 'end_cap8', cat: 'rec', name: 'VIII \u00b7 O Que Ela Nao Deveria Saber', need: 'done:capitulo8',
-      text: 'Ganha o cronograma da casa. Entrega um terceiro: alguem paga no lugar dela, e a pagina que registra isso e uma das quatro arrancadas.' },
+      text: 'Ganha o cronograma da casa. Entrega um terceiro: alguem paga no lugar dela, e o registro desse pagamento chega a uma das quatro entradas finais.' },
     { id: 'end_cap9', cat: 'rec', name: 'IX \u00b7 A Decisao', need: 'done:capitulo9',
-      text: 'Ganha o plano e a promessa. Entrega a Ordem, e deixa de ser agente. E aqui que o final da obra fica decidido.' },
-    { id: 'end_cap10', cat: 'rec', name: 'X \u00b7 A Fuga', need: 'done:capitulo10',
-      text: 'Agosto do quinto ano. Sem escolha, de proposito. Termina com quatro horas no relogio e o ar esquentando.' },
-    { id: 'end_cap11', cat: 'rec', name: 'XI \u00b7 Noventa Dias', need: 'done:capitulo11',
-      text: 'Ganha o despacho. Nao resta nada para trocar depois. A ultima cena e o comeco do Prologo, visto do outro lado.' },
+      text: 'Ganha o plano e a promessa. Aqui a soma das escolhas fecha e a obra entra em uma das quatro rotas.' },
+
+    { id: 'end_esp10', cat: 'rec', name: 'Esperanca X \u00b7 A Fuga', need: 'done:esp10',
+      text: 'Antoniette tenta. Klara para antes da ponte e volta sem conseguir dizer por que.' },
+    { id: 'end_esp11', cat: 'rec', name: 'Esperanca XI \u00b7 Noventa Dias', need: 'done:esp11',
+      text: 'Quatro paginas ficam no livro-caixa. Carmine cumpre o prazo, e o pacote sai no nonagesimo terceiro dia.' },
+
+    { id: 'end_res10', cat: 'rec', name: 'Resposta X \u00b7 O Registro', need: 'done:res10',
+      text: 'Antoniette confere a probabilidade e nao desce. A entrada 214 e escrita enquanto o processo acontece.' },
+    { id: 'end_res11', cat: 'rec', name: 'Resposta XI \u00b7 A Entrada 214', need: 'done:res11',
+      text: 'Carmine vem conferir. Corrige a idade de Klara e vai embora sem dar prazo.' },
+    { id: 'end_res12', cat: 'rec', name: 'Resposta XII \u00b7 O Corredor', need: 'done:res12',
+      text: 'O Arquivo chega inteiro. O tribunal o recusa, a Ordem o transforma em apostila e Antoniette continua no corredor.' },
+
+    { id: 'end_per10', cat: 'rec', name: 'Perda X \u00b7 A Conta', need: 'done:per10',
+      text: 'A fuga comeca com tudo o que ela economizou e tudo o que decidiu nao pagar.' },
+    { id: 'end_per11', cat: 'rec', name: 'Perda XI \u00b7 As Tres Moedas', need: 'done:per11',
+      text: 'A porta da copa esta trancada. A volta custa onze minutos, e os onze minutos nao sao o motivo.' },
+    { id: 'end_per12', cat: 'rec', name: 'Perda XII \u00b7 A Volta', need: 'done:per12',
+      text: 'Klara devolve a mala. Antoniette soma tres moedas, onze minutos e cinquenta e dois meses.' },
+    { id: 'end_per13', cat: 'rec', name: 'Perda XIII \u00b7 O Que Ela Anotou', need: 'done:per13',
+      text: 'A conta fecha. Carmine diz que a conta nao e o motivo, e Antoniette registra a frase com interrogacao.' },
+
+    { id: 'end_cob10', cat: 'rec', name: 'Cobertura X \u00b7 A Porta', need: 'done:cob10',
+      text: 'Serafina encerra o contrato. Antoniette percorre a casa e encontra a linha que a entregou.' },
+    { id: 'end_cob11', cat: 'rec', name: 'Cobertura XI \u00b7 A Baixa', need: 'done:cob11',
+      text: 'Carmine ocupa a porta do patio. Antoniette nao alcanca a carruagem.' },
+
     { id: 'end_epilogo', cat: 'rec', name: 'Epilogo \u00b7 O Que Ficou', need: 'done:epilogo',
-      text: 'Seis anos depois. Ele conseguiu o documento e o documento nao serviu, pelas quatro paginas que ela arrancou para proteger a menina.' },
+      text: 'Seis anos depois. O cadastro traz as duas irmas. O documento de cada rota falhou por um caminho diferente.' },
 
     { id: 'route_hope', cat: 'rec', name: 'Registro: Esperanca', need: 'route:hope:6',
       text: 'Proximidade com quem esta nesta casa. O documento mestre e claro sobre o preco disto: momentos de ternura tornam o final mais devastador para quem os viveu.' },
     { id: 'route_loss', cat: 'rec', name: 'Registro: Perda', need: 'route:loss:6',
       text: 'O custo do que ela decide nao fazer. Cada ponto e uma omissao que pareceu razoavel na hora.' },
     { id: 'route_answer', cat: 'rec', name: 'Registro: Resposta', need: 'route:answer:6',
-      text: 'O que ela descobre e em que ordem. E o unico medidor que pode mata-la mais depressa.' }
+      text: 'O que ela descobre e em que ordem. No limite, produz a rota em que ela vive porque Carmine conclui que nao houve vinculo a cobrar.' }
   ];
 
   var CATEGORIES = [

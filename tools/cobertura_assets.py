@@ -35,6 +35,7 @@ except ImportError:                                    # pragma: no cover
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIG = os.path.join(RAIZ, "assets", "A Cobertura")
 DEST = os.path.join(RAIZ, "assets", "cobertura")
+CRU = os.path.join(DEST, "_sem_pixel")
 
 # O audio sai de assets/cobertura/ de proposito - os caminhos comecam com
 # "../". RBF.BGM e RBF.SFX resolvem por RBF.CONFIG.paths.bgm e .sfx, que
@@ -548,6 +549,7 @@ def mapa(origem, saida, escala=1.0):
 # ---------------------------------------------------------------------------
 
 A = "ChatGPT Image Aug 24, 2026, "
+E = "entrega_25ago_pronta/"
 
 # A regua do projeto: 1,07 pixel por centimetro, tirada do ladrilho de
 # 28 pixels da arte das salas. Adulto de pe = 150. Menina de oito anos =
@@ -556,12 +558,14 @@ ANDAR = [
     # Com a vela na mao. Substituiu a folha de maos vazias, que o autor
     # apagou da pasta bruta em 25/08 - o percurso inteiro e iluminado
     # por essa vela e a personagem estava sem ela.
-    ("antoniette_com_vela_3x4(1).png",   "chars/antoniette.png",  98, 150),
+    (E + "antoniette_vela_spritesheet.png", "chars/antoniette.png", 98, 150),
+    (E + "fenn_spritesheet_3x4.png",        "chars/fenn.png",        90, 150),
+    (E + "dara_spritesheet_3x4.png",        "chars/dara.png",        90, 150),
     ("4660d5ff-6e2b-466c-a8f4-c6c26df09eb5.png",
                                           "chars/klara.png",       76, 116),
     (A + "10_38_10 PM.png",              "chars/klara_casulo.png", 76, 116),
     (A + "10_11_45 PM.png",              "chars/vulto.png",       108, 162),
-    (A + "10_46_36 PM.png",              "chars/carmine.png",     116, 172),
+    (E + "carmine_novo_design_348x688.png", "chars/carmine.png",   116, 172),
 ]
 
 ICONES = [(A + "09_47_49 PM.png", "icons/itens.png", 64, 4, 4)]
@@ -587,7 +591,21 @@ PECAS = [
     (A + "10_29_42 PM (11).png", "props/pia.png",             None, 138),
     (A + "10_29_42 PM (12).png", "props/cilindro.png",        None, 300),
     (A + "10_29_43 PM (13).png", "props/arquivo_gavetas.png", None, 140),
-    (A + "10_29_43 PM (14).png", "props/bau.png",             None,  72),
+    # Versao fechada entregue ja na escala do percurso. Substitui o
+    # recorte antigo, que era pequeno demais ao lado das malas.
+    ("bau_fechado_140x100.png",      "props/bau.png",              140, 100),
+
+    # Entrega complementar de 25/08. So entram aqui as pecas com uso
+    # documentado no percurso; relogio ficou de fora porque a arte marca
+    # 10:00 e o texto canonico exige 11:40.
+    (E + "malas_bau_ferramentas.png",       "props/malas_bau.png",              120,  90),
+    (E + "gancho_chaves.png",               "props/gancho_chaves.png",           90,  70),
+    ("gancho_vazio_90x70.png",               "props/gancho_vazio.png",            90,  70),
+    (E + "moldura_vazia.png",                "props/moldura_vazia.png",           120, 150),
+    ("moldura_ocupada_120x150.png",          "props/moldura_ocupada.png",         120, 150),
+    (E + "prataria_empilhada.png",          "props/prataria_empilhada.png",     140,  60),
+    (E + "retrato_governanta_virado.png",   "props/retrato_governanta_virado.png",   110, 90),
+    (E + "retrato_governanta_revelado.png", "props/retrato_governanta_revelado.png", 110, 90),
 ]
 
 MAPAS = [
@@ -601,6 +619,14 @@ MAPAS = [
 ]
 
 TILES = [("Inside_C.png", "tiles/interior.png")]
+
+# Folhas que ja chegaram no tamanho de quadro do motor. Nao passam por
+# `peca`, porque cortar a margem externa mudaria 348x172 e quebraria as
+# tres celulas de 116x172.
+EXATAS = [
+    (E + "carmine_ataque_3_frames_348x172.png",
+                                      "chars/carmine_ataque.png"),
+]
 
 
 # ---------------------------------------------------------------------------
@@ -675,6 +701,14 @@ def main():
             falhas.append("%-26s %s" % (rotulo, nota))
             print("  FALHA  %-26s %s" % (rotulo, nota))
             return
+        # A etapa de pixelizacao sempre parte desta copia. Atualiza-la no
+        # proprio recorte impede que uma versao antiga volte por cima de uma
+        # entrega nova (como aconteceu com o bau fechado de 25/08).
+        if destino.lower().endswith(".png"):
+            rel = os.path.relpath(destino, DEST)
+            copia = os.path.join(CRU, rel)
+            garante(copia)
+            Image.open(destino).save(copia)
         total += 1
         print("  ok     %-26s %-14s %s" % (rotulo, "%dx%d" % tamanho, nota))
 
@@ -716,6 +750,20 @@ def main():
             continue
         t, nota = peca(fonte, destino, lh, lw)
         registra(rel, destino, t, nota)
+
+    print("\nfolhas exatas")
+    for origem, rel in EXATAS:
+        destino = os.path.join(DEST, rel)
+        garante(destino)
+        if LISTAR:
+            continue
+        fonte = os.path.join(ORIG, origem)
+        if not os.path.isfile(fonte):
+            registra(rel, destino, None, "origem ausente: " + origem)
+            continue
+        im = normaliza(Image.open(fonte))
+        im.save(destino)
+        registra(rel, destino, im.size, "folha exata")
 
     print("\nmapas")
     for origem, rel in MAPAS:

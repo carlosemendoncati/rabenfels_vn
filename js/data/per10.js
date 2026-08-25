@@ -63,8 +63,8 @@ RBF.PER10 = [
   bg:'bg_kitchen', bgm:'bgm_nidhaus', if:R },
 { t:'fade_in', if:R },
 
-{ t:'nar', tx:'Vieram no dia tr\u00eas, dois dias antes do padr\u00e3o dos quatro anos anteriores.', if:R },
-{ t:'nar', tx:'Antoniette anotou a antecipa\u00e7\u00e3o e olhou o n\u00famero por mais tempo do que precisava.', if:R },
+{ t:'nar', tx:'A tabela de agosto abriu no dia tr\u00eas. O padr\u00e3o dos quatro anos anteriores come\u00e7ava dois dias depois.', if:R },
+{ t:'nar', tx:'Antoniette escreveu a diferen\u00e7a na margem: menos dois.', if:R },
 { t:'pause', if:R },
 
 { t:'spr', ch:'dara', ex:'guarded', pos:'center', if:R },
@@ -73,7 +73,7 @@ RBF.PER10 = [
 { t:'dial', ch:'dara', tx:'Ordem da senhora.', if:R },
 { t:'spr_hide', ch:'dara', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'A casa est\u00e1 fechando mais cedo do que fecha.', if:R },
+{ t:'inn', tx:'Seis em vez de oito. Menos duas.', if:R },
 
 { t:'pause', if:R },
 { t:'nar', tx:'Ela abriu o caderno de despesas e conferiu o que sobrava do trimestre.', if:R },
@@ -97,7 +97,7 @@ RBF.PER10 = [
 { t:'pause', if:R },
 { t:'dial', ch:'fenn', tx:'N\u00e3o \u00e9 pela tranca.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ele n\u00e3o explicou pelo que era, e ela n\u00e3o perguntou, e ele parou exatamente onde a verdade dele acabava.', if:R },
+{ t:'nar', tx:'Fenn voltou a escovar o cavalo. Antoniette n\u00e3o perguntou o que as tr\u00eas moedas compravam al\u00e9m da tranca.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'Eu penso.', if:R },
 { t:'dial', ch:'fenn', tx:'Pensa.', if:R },
@@ -120,13 +120,13 @@ RBF.PER10 = [
 { t:'scene', id:'per10_ultimo_dia', chapter:'per10', title:'O \u00faltimo dia',
   bg:'bg_corridor', bgm:null, if:R },
 
-{ t:'nar', tx:'No dia nove, \u00e0 tarde, as duas estavam no degrau do corredor leste.', if:R },
+{ t:'nar', tx:'Na tarde do dia nove, Liara e Klara dividiam o degrau do corredor leste.', if:R },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center', if:R },
 { t:'spr', ch:'liara', ex:'bright', pos:'right', if:R },
 
 { t:'dial', ch:'liara', tx:'Mil novecentos e trinta e dois.', if:R },
-{ t:'dial', ch:'klara', tx:'Confirmei.', if:R },
 { t:'nar', tx:'Liara olhou para a irm\u00e3, porque a irm\u00e3 nunca concordava com a conta de primeira.', if:R },
+{ t:'dial', ch:'klara', tx:'Confirmei.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Depois Klara pediu para Liara tran\u00e7ar o cabelo dela, o que ela nunca pedia.', if:R },
 { t:'nar', tx:'Liara tran\u00e7ou mal, desmanchou e recome\u00e7ou tr\u00eas vezes, e a irm\u00e3 deixou.', if:R },

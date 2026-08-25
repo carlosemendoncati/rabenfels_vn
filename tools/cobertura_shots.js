@@ -29,7 +29,7 @@ const fs   = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const OUT  = path.join(__dirname, '_shots', 'cobertura');
+const OUT_ROOT = path.join(__dirname, '_shots', 'cobertura');
 
 /*
   Servidor de arquivo, e nao file://.
@@ -112,14 +112,20 @@ async function main() {
     return 0;
   }
 
+  const view = tela();
+  const OUT = path.join(OUT_ROOT, view.w + 'x' + view.h);
   fs.mkdirSync(OUT, { recursive: true });
 
   const srv = await servidor();
   const URL = 'http://127.0.0.1:' + srv.address().port + '/index.html';
 
-  const view = tela();
   const browser = await chromium.launch({ executablePath: exe });
-  const page = await browser.newPage({ viewport: { width: view.w, height: view.h } });
+  const telefone = view.w <= 600;
+  const page = await browser.newPage({
+    viewport: { width: view.w, height: view.h },
+    isMobile: telefone,
+    hasTouch: telefone
+  });
 
   const erros = [];
   page.on('pageerror', e => erros.push(String(e)));
@@ -199,6 +205,62 @@ async function main() {
   });
   check(capa.on, 'camada visivel');
   check(capa.w > 0 && capa.h > 0, 'camada com area', JSON.stringify(capa));
+
+  /* ---- menu no percurso ------------------------------------------------
+
+     Este e o caminho que falhava no telefone: o menu pausava o canvas,
+     mas o fechamento so retomava o estado `playing`. O percurso vive em
+     `percurso`, entao Antoniette permanecia parada depois de fechar. */
+  const menuAbriu = await page.evaluate(() => {
+    const b = document.querySelector('.rf-perc__menu');
+    const r = b && b.getBoundingClientRect();
+    if (b) { b.click(); }
+    return { estado: RBF.State.get(), botao: !!(r && r.width >= 40 && r.height >= 40) };
+  });
+  await page.waitForTimeout(180);
+  check(menuAbriu.botao, 'o percurso tem botao de menu com alvo de toque');
+  check(await page.evaluate(() => RBF.State.get() === 'paused'),
+        'abrir o menu pausa o percurso');
+  check(!(await page.evaluate(() => RBF.Rpg.ativo())),
+        'o canvas para enquanto o menu esta aberto');
+
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(260);
+  check(await page.evaluate(() => RBF.State.get() === 'percurso'),
+        'fechar o menu devolve o estado percurso');
+  check(await page.evaluate(() => RBF.Rpg.ativo()),
+        'Antoniette volta a andar depois de fechar o menu');
+
+  /* ---- um toque, uma caminhada -----------------------------------------
+
+     Dispara down e up uma unica vez e espera. Se o destino fosse apagado
+     quando o dedo sobe, o segundo intervalo ficaria praticamente zerado. */
+  const toque = await page.evaluate(async () => {
+    const j = RBF.Rpg._debug.estado();
+    j.p.x = 420; j.p.y = 760; j.p.dir = 'direita'; j.toque = null;
+    const inicio = { x: j.p.x, y: j.p.y };
+    const cv = document.getElementById('rf-perc-canvas');
+    const r = cv.getBoundingClientRect();
+    const opts = {
+      bubbles: true, cancelable: true, pointerId: 7, pointerType: 'touch',
+      clientX: r.left + r.width * 0.86,
+      clientY: r.top + r.height * 0.50
+    };
+    cv.dispatchEvent(new PointerEvent('pointerdown', opts));
+    cv.dispatchEvent(new PointerEvent('pointerup', opts));
+    await new Promise(ok => setTimeout(ok, 180));
+    const meio = { x: j.p.x, y: j.p.y };
+    await new Promise(ok => setTimeout(ok, 650));
+    const fim = { x: j.p.x, y: j.p.y };
+    const d1 = Math.hypot(meio.x - inicio.x, meio.y - inicio.y);
+    const d2 = Math.hypot(fim.x - meio.x, fim.y - meio.y);
+    const persistiu = !!j.toque || Math.hypot(fim.x - inicio.x, fim.y - inicio.y) > 90;
+    j.toque = null;
+    return { primeiro: Math.round(d1), depois: Math.round(d2), persistiu: persistiu };
+  });
+  check(toque.primeiro > 8, 'um toque inicia a caminhada', JSON.stringify(toque));
+  check(toque.depois > 24 && toque.persistiu,
+        'a caminhada continua depois que o dedo sobe', JSON.stringify(toque));
 
   /* ---- o canvas desenhou ---------------------------------------------- */
 
@@ -541,25 +603,71 @@ async function main() {
 
   const salao = await page.evaluate(async () => {
     const j = RBF.Rpg._debug.estado();
-    j.fala = null;
+    /* Fecha a fala da camara pelo caminho normal, para a captura seguinte
+       nao conservar no DOM uma caixa que o estado ja descartou. */
+    for (let i = 0; i < 10 && j.fala; i++) {
+      j.fala.pronto = true;
+      j.fala.escrito = j.fala.linhas[j.fala.i] || '';
+      RBF.Rpg._debug.usa();
+    }
     RBF.Rpg._debug.vaiPara('salao', 700, 640, 'baixo');
     await new Promise(r => setTimeout(r, 900));
-    const st = RBF.Rpg._debug.estado();
-    st.p.x = 700; st.p.y = 640; st.p.dir = 'baixo';
-    RBF.Rpg._debug.usa();
-    const f = RBF.Rpg._debug.estado().fala;
-    return { sala: st.sala, linha: f ? f.linhas[0] : null };
+    const mapa = RBF.COB_MAPAS.salao;
+    return {
+      sala: RBF.Rpg._debug.estado().sala,
+      carmine: (mapa.gente || []).some(g => g.ch === 'carmine' && g.parado),
+      patio: (mapa.saidas || []).some(s => s.para === 'patio')
+    };
   });
   check(salao.sala === 'salao', 'o salao carrega');
-  check(!!salao.linha && salao.linha.indexOf('mulher') !== -1,
-        'ela esta entre a porta e a saida', 'veio: ' + salao.linha);
+  check(salao.carmine, 'Carmine esta parada entre Antoniette e a porta');
+  check(!salao.patio, 'nao existe saida jogavel para o patio');
 
   await page.waitForTimeout(1400);
   await page.screenshot({ path: path.join(OUT, '10_salao.png') });
 
+  /* O retrato usa a mesma marca do ponto para trocar a arte. Confere a
+     mudanca pelo id logico; comparar pixels seria fragil sob a vela. */
+  const retrato = await page.evaluate(async () => {
+    const st = RBF.Rpg._debug.estado();
+    st.fala = null;
+    const movel = RBF.COB_MAPAS.salao.moveis.find(m => m.marca === 'cob_retrato');
+    const antes = RBF.Rpg._debug.tipoMovel(movel);
+    RBF.Rpg._debug.vaiPara('salao', 1060, 520, 'cima');
+    await new Promise(r => setTimeout(r, 500));
+    const j = RBF.Rpg._debug.estado();
+    j.p.x = 1060; j.p.y = 520; j.p.dir = 'cima';
+    RBF.Rpg._debug.usa();
+    const depois = RBF.Rpg._debug.tipoMovel(movel);
+    return { antes: antes, depois: depois,
+             marca: !!j.marcas.cob_retrato,
+             linha: j.fala && j.fala.linhas ? j.fala.linhas[0] : null };
+  });
+  check(retrato.antes === 'retrato_governanta_virado',
+        'o retrato comeca virado', JSON.stringify(retrato));
+  check(retrato.marca && retrato.depois === 'retrato_governanta_revelado',
+        'conferir o retrato revela a frente', JSON.stringify(retrato));
+  check(!!retrato.linha && retrato.linha.indexOf('retrato') !== -1,
+        'o retrato responde com o texto correto', JSON.stringify(retrato));
+  await page.waitForTimeout(600);
+  await page.screenshot({ path: path.join(OUT, '11_retrato.png') });
+
+  const retratoFechou = await page.evaluate(() => {
+    const j = RBF.Rpg._debug.estado();
+    for (let i = 0; i < 10 && j.fala; i++) {
+      j.fala.pronto = true;
+      j.fala.escrito = j.fala.linhas[j.fala.i] || '';
+      RBF.Rpg._debug.usa();
+    }
+    return !j.fala;
+  });
+  check(retratoFechou, 'a fala do retrato fecha pelo controle normal');
+
   /* ---- save e volta ----------------------------------------------------- */
 
   const gravado = await page.evaluate(() => RBF.Rpg.serializa());
+  check(await page.evaluate(() => RBF.Rpg.podeSalvar()),
+        'o percurso permite salvar fora de uma fala');
   check(!!gravado && gravado.sala === 'salao', 'serializa o estado do percurso',
         JSON.stringify(gravado && { sala: gravado.sala, x: gravado.x, y: gravado.y }));
   check(gravado && gravado.fase === 1, 'o save leva a fase junto',
@@ -567,11 +675,38 @@ async function main() {
   check(gravado && Object.keys(gravado.itens).length >= 1,
         'o save leva a bolsa junto');
 
-  /* ---- saida ------------------------------------------------------------ */
+  /* ---- Carmine encerra antes da porta ----------------------------------
 
-  await page.evaluate(() => { RBF.Rpg._debug.estado().fala = null;
-                              RBF.Rpg.encerra('patio'); });
-  await page.waitForTimeout(1800);
+     Nao chama encerra() pelo harness. O teste percorre as cinco linhas,
+     deixa a animacao de tres quadros fechar a tela e confere a saida que
+     o proprio ponto de Carmine devolve ao roteiro. */
+  const encontro = await page.evaluate(() => {
+    const j = RBF.Rpg._debug.estado();
+    j.p.x = 700; j.p.y = 640; j.p.dir = 'baixo';
+    RBF.Rpg._debug.usa();
+    return j.fala && j.fala.linhas ? j.fala.linhas[0] : null;
+  });
+  check(!!encontro && encontro.indexOf('mulher') !== -1,
+        'conferir a porta encontra Carmine', 'veio: ' + encontro);
+
+  const armou = await page.evaluate(async () => {
+    const j = RBF.Rpg._debug.estado();
+    for (let i = 0; i < 10 && j.fala; i++) {
+      j.fala.pronto = true;
+      j.fala.escrito = j.fala.linhas[j.fala.i] || '';
+      RBF.Rpg._debug.usa();
+      await new Promise(r => setTimeout(r, 45));
+    }
+    return j.desfecho && j.desfecho.id;
+  });
+  check(armou === 'carmine', 'a interacao inicia o desfecho de Carmine',
+        'desfecho=' + armou);
+  await page.waitForTimeout(310);
+  check(await page.evaluate(() => document.getElementById('rf-percurso')
+                                      .classList.contains('is-desfecho')),
+        'o controle some durante a execucao');
+  await page.screenshot({ path: path.join(OUT, '12_carmine.png') });
+  await page.waitForTimeout(2400);
 
   check(!(await page.evaluate(() => RBF.Rpg.ativo())), 'o percurso encerra');
   check(await page.evaluate(() => RBF.State.get() === 'playing'),
@@ -586,7 +721,7 @@ async function main() {
     moldura:  RBF.STATE.flags.cob_moldura,
     degrau:   RBF.STATE.flags.cob_degrau
   }));
-  check(flags.saida === 'patio', 'a saida chega ao roteiro como flag',
+  check(flags.saida === 'carmine', 'Carmine chega ao roteiro como unica saida',
         JSON.stringify(flags));
   check(flags.conferiu === true, '`sets` do beat foi aplicado');
   check(typeof flags.apurou === 'number', 'a contagem de marcas entra como numero',

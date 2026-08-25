@@ -35,8 +35,8 @@
    memoria. Ela sabe o que isso vale.
 
    >>> A IDADE NA ENTRADA 214 ESTA ERRADA DE PROPOSITO. <<<
-   Klara fez doze em marco e a entrada diz onze. Nada em cena marca o
-   erro. Carmine corrige no capitulo seguinte e Antoniette classifica a
+   Klara ja tem doze e a entrada diz onze. Nada em cena marca o erro.
+   Carmine corrige no capitulo seguinte e Antoniette classifica a
    correcao como dentro da margem. NAO CONSERTAR.
 
    Cinco cenas: C1 agosto chega, C2 o ultimo dia, C3 a decisao de nao
@@ -63,7 +63,7 @@ RBF.RES10 = [
   bg:'bg_kitchen', bgm:'bgm_nidhaus', if:R },
 { t:'fade_in', if:R },
 
-{ t:'nar', tx:'Vieram no dia tr\u00eas, dois dias antes do padr\u00e3o dos quatro anos anteriores.', if:R },
+{ t:'nar', tx:'A primeira linha da tabela do quinto agosto recebeu a data tr\u00eas. Era dois dias antes da faixa anterior.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette abriu o caderno na tabela de agosto e acrescentou uma coluna.', if:R },
 { t:'nar', tx:'A tabela tinha quatro linhas e passou a ter cinco, e a quinta era a primeira que n\u00e3o batia.', if:R },
@@ -157,9 +157,9 @@ RBF.RES10 = [
 { t:'pause', if:R },
 { t:'inn', tx:'O documento serve a algu\u00e9m depois.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela conferiu o racioc\u00ednio duas vezes, do jeito que conferia tudo, e ele fechou nas duas.', if:R },
+{ t:'nar', tx:'Escreveu a conclus\u00e3o duas vezes, uma embaixo da outra. As duas ficaram iguais.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Foi o \u00fanico racioc\u00ednio correto da obra inteira que custou uma pessoa.', if:R },
+{ t:'nar', tx:'O racioc\u00ednio estava correto. O custo tinha nome e ficou fora da folha.', if:R },
 
 /* ======================================================================
    C4 - A ENTRADA 214
@@ -172,7 +172,7 @@ RBF.RES10 = [
 { t:'nar', tx:'Ela abriu a entrada daquela noite antes de a noite acabar, coisa que nunca tinha feito.', if:R },
 { t:'pause', if:R },
 
-/* A idade esta ERRADA de proposito. Klara fez doze em marco.
+/* A idade esta ERRADA de proposito. Klara ja tem doze.
    Carmine corrige no capitulo seguinte. NAO CONSERTAR. */
 { t:'arc', key:'caderno', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
     'Entrada 214. Sujeito feminino, onze anos, segunda linha.',
@@ -215,7 +215,7 @@ RBF.RES10 = [
 { t:'nar', tx:'O ar do escrit\u00f3rio esquentou. Ela anotou isso tamb\u00e9m.', if:R },
 
 { t:'pause', if:R },
-{ t:'nar', tx:'E Antoniette, que tinha cinco anos de registro e uma mem\u00f3ria treinada para dura\u00e7\u00f5es, n\u00e3o conseguiu dizer quanto tempo aquilo levou.', if:R },
+{ t:'nar', tx:'O rel\u00f3gio continuou sobre a mesa. Ela n\u00e3o olhou para ele enquanto o ar ficava quente.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Ela deixou o campo da dura\u00e7\u00e3o em branco e voltou a ele de manh\u00e3.', if:R },
 

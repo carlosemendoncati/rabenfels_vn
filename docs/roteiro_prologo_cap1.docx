@@ -234,7 +234,7 @@ No topo da última página, sem título de capítulo, sem número de seção:
 
 *Existe uma menina em Velha Nidhaus chamada Klara Rabenfels.*
 
-*Ela tem treze anos. É brilhante. Lê mais rápido do que qualquer pessoa que já conheci. Tem um senso de humor que só aparece quando ela acha que ninguém está prestando atenção. Protege a irmã com uma calma que custa mais do que parece.*
+*Ela tem doze anos. É brilhante. Lê mais rápido do que qualquer pessoa que já conheci. Tem um senso de humor que só aparece quando ela acha que ninguém está prestando atenção. Protege a irmã com uma calma que custa mais do que parece.*
 
 *E foi escolhida desde antes de nascer para morrer de uma forma que a família em que nasceu chama de tradição.*
 
@@ -700,7 +700,7 @@ Naquela noite, ao escrever o relatório operacional para enviar a Matheo, Antoni
 
 **[ C ] **Escrever o relatório operacional e depois, num caderno separado que não vai para a Ordem, anotar a pergunta que ficou: "Por que ela não disse nada?"
 
-*NOTA DE DESIGN: Cada escolha representa uma postura operacional diferente. A escolhe o distanciamento. B escolhe o foco profissional crescente. C — a opção que leva ao True End — mostra Antoniette pela primeira vez fazendo uma distinção entre o que reporta e o que sente. O caderno separado é o embrião do Arquivo.*
+*NOTA DE DESIGN: Cada escolha representa uma postura operacional diferente. A escolhe o distanciamento. B escolhe o foco profissional crescente. C mostra Antoniette pela primeira vez fazendo uma distinção entre o que reporta e o que sente. O efeito de rota é declarado nos dados da escolha. O caderno separado é o embrião do Arquivo.*
 
 — ✦ —
 

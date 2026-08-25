@@ -1,7 +1,7 @@
 /* ==========================================================================
    ARQUIVO RABENFELS - js/data/arvore.js
 
-   A ARVORE - texto anotado das dez escolhas e dos nove finais.
+   A ARVORE - texto anotado das dez escolhas e das quatro leituras.
 
    Somente dados. Quem monta e js/arvore.js; quem desenha e js/menu.js.
 
@@ -127,7 +127,7 @@ RBF.ARVORE = {
     cap4_ritual: {
       decide: 'O que Lervel fica sabendo de outubro do primeiro ano.',
       opts: {
-        C: { curto: 'Nada', efeito: 'A omiss\u00e3o \u00e9 integral e \u00e9 dela. Vira a p\u00e1gina 288, a primeira das quatro que ela arranca no Cap\u00edtulo 11.' },
+        C: { curto: 'Nada', efeito: 'A omiss\u00e3o \u00e9 integral e \u00e9 dela. Vira a p\u00e1gina 288. Em Esperan\u00e7a e Perda ela arranca a folha; em Resposta ela a mant\u00e9m; na Cobertura n\u00e3o chega a compil\u00e1-la.' },
         B: { curto: 'Termo e data', efeito: 'Vai o termo e o calend\u00e1rio, e a Ordem arquiva sem responder. Conta como omiss\u00e3o do mesmo jeito, e a p\u00e1gina 288 registra isso.' },
         A: { curto: 'Tudo', efeito: 'Lervel recebe outubro inteiro e arquiva sem responder. A p\u00e1gina 288 existe assim mesmo, com o outro texto: o que ela mandou, e o que ningu\u00e9m fez com o que ela mandou.' }
       }
@@ -180,17 +180,15 @@ RBF.ARVORE = {
 
   },
 
-  /* ---- os nove finais -------------------------------------------------
+  /* ---- as quatro leituras ---------------------------------------------
      'eixos' aparece sempre, inclusive na leitura que ainda nao foi
      alcancada, e traz a DIRECAO de cada eixo - alta ou baixa.
 
-     A direcao entrou depois da primeira montagem da tela. Sem ela, oito
-     dos nove cartoes diziam "leitura nao alcancada" e mais nada, e a
+     A direcao entrou depois da primeira montagem da tela. Sem ela, os
+     cartoes fechados diziam "leitura nao alcancada" e mais nada, e a
      grade virava uma parede: o jogador nao tinha como distinguir um do
-     outro nem como saber para onde empurrar. Com ela, A Testemunha
-     (Esperanca alta, Resposta alta) e A Vigilia (Esperanca alta,
-     Resposta baixa) passam a ser dois destinos legiveis, e nenhum dos
-     dois entrega o que acontece la.
+     outro nem como saber para onde empurrar. Com ela, A Perda e A
+     Resposta se tornam destinos legiveis sem entregar o que acontece.
 
      E o limite: DIRECAO de rota, nunca conteudo. 'condicao' e 'porta'
      continuam presos a leitura ja alcancada.                          */

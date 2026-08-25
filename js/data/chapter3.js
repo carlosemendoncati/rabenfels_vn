@@ -65,7 +65,7 @@ var C3_BORBOLETA_A = [
   { t:'nar', tx:'Voltou para o livro e virou a p\u00e1gina no ritmo de antes.' },
   { t:'pause' },
   { t:'inn', tx:'Ela n\u00e3o insistiu. N\u00e3o fez cara feia. N\u00e3o pediu de outro jeito.' },
-  { t:'inn', tx:'Aceitou como se aceita o tempo.' },
+  { t:'inn', tx:'Aceitou sem protestar. Nem perguntou quando aquilo mudaria.' },
   { t:'spr_hide', ch:'klara' },
   { t:'pause' },
   { t:'nar', tx:'Antoniette esperou no corredor mais um pouco, sem motivo declarado.' },
@@ -81,11 +81,11 @@ var C3_BORBOLETA_B = [
   { t:'pause' },
   { t:'dial', ch:'klara', tx:'Que barulho?' },
   { t:'dial', ch:'antoniette', tx:'Papel fino. Bem devagar.' },
-  { t:'nar', tx:'Klara repetiu a \u00faltima parte em voz baixa, uma vez, do jeito que se guarda um n\u00famero.' },
+  { t:'nar', tx:'Klara repetiu a \u00faltima parte em voz baixa e contou nos dedos.' },
   { t:'pause' },
   { t:'spr_hide', ch:'klara' },
   { t:'inn', tx:'Eu dei a ela um registro no lugar da coisa.' },
-  { t:'inn', tx:'E ela guardou o registro como se fosse a coisa.' }
+  { t:'inn', tx:'Guardou o registro porque era o \u00fanico peda\u00e7o que podia levar.' }
 ];
 
 var C3_BORBOLETA_C = [
@@ -99,7 +99,7 @@ var C3_BORBOLETA_C = [
   { t:'inn', tx:'Ela j\u00e1 tinha pensado no hor\u00e1rio.' },
   { t:'inn', tx:'Sabia a que horas o sol baixa, e nunca precisou saber disso para nada.' },
   { t:'pause' },
-  { t:'nar', tx:'Antoniette desceu para o p\u00e1tio e ficou olhando o rel\u00f3gio da cozinha por mais tempo do que precisava.' }
+  { t:'nar', tx:'Antoniette desceu para o p\u00e1tio. O ponteiro avan\u00e7ou duas marcas antes de ela sair.' }
 ];
 
 RBF.CHAPTER3 = [
@@ -137,7 +137,7 @@ RBF.CHAPTER3 = [
 { t:'pause' },
 { t:'dial', ch:'dara', tx:'Aqui dentro n\u00e3o se chama de nada.' },
 
-{ t:'nar', tx:'Ela raspou o fundo da panela por um tempo desnecess\u00e1rio.' },
+{ t:'nar', tx:'Dara raspou a panela at\u00e9 n\u00e3o haver mais nada preso. Passou a colher outras tr\u00eas vezes.' },
 { t:'dial', ch:'dara', tx:'Uns dizem que \u00e9 do rio. Que sobe do brejo quando a \u00e1gua baixa.' },
 { t:'dial', ch:'dara', tx:'Outros dizem que vem da floresta ao norte, e que sempre veio.' },
 { t:'dial', ch:'antoniette', tx:'E a senhora, qual acha?' },
@@ -167,7 +167,7 @@ RBF.CHAPTER3 = [
 { t:'pause' },
 
 { t:'nar', tx:'A luz passava pela asa e sa\u00eda do outro lado. As veias vermelhas ficavam acesas por dentro.' },
-{ t:'nar', tx:'Antoniette parou no meio do p\u00e1tio com a caneca na m\u00e3o e ficou parada mais tempo do que pretendia.' },
+{ t:'nar', tx:'Antoniette parou no meio do p\u00e1tio. O caf\u00e9 esfriou na caneca antes de ela voltar a andar.' },
 { t:'inn', tx:'\u00c9 bonito.' },
 { t:'pause' },
 { t:'inn', tx:'Anotar que \u00e9 bonito serve para depois.' },
@@ -182,7 +182,7 @@ RBF.CHAPTER3 = [
 { t:'pause' },
 { t:'dial', ch:'fenn', tx:'Nunca reparei.' },
 
-{ t:'nar', tx:'Ele pousou os baldes e ficou olhando as pr\u00f3prias m\u00e3os por um instante, do jeito de quem conta alguma coisa de cabe\u00e7a.' },
+{ t:'nar', tx:'Ele pousou os baldes e passou o polegar pelas juntas, uma a uma.' },
 { t:'dial', ch:'fenn', tx:'Meu filho gostava. Quando era pequeno, corria atr\u00e1s.' },
 { t:'dial', ch:'antoniette', tx:'E agora?' },
 { t:'dial', ch:'fenn', tx:'Agora tem catorze anos e quer ir embora daqui.' },
@@ -238,7 +238,7 @@ RBF.CHAPTER3 = [
 ]},
 
 { t:'inn', tx:'A aus\u00eancia \u00e9 o dado.' },
-{ t:'nar', tx:'Ela devolveu os volumes na ordem em que os tinha tirado, o que levou mais tempo do que tir\u00e1-los.' },
+{ t:'nar', tx:'Ela devolveu os volumes pela numera\u00e7\u00e3o. Conferiu a sequ\u00eancia duas vezes.' },
 
 /* ======================================================================
    C4 - A JANELA - FIM DA MANHA
@@ -313,7 +313,7 @@ RBF.CHAPTER3 = [
 { t:'dial', ch:'klara', tx:'Quantas?' },
 { t:'dial', ch:'antoniette', tx:'N\u00e3o contei.' },
 { t:'pause' },
-{ t:'nar', tx:'A menina recebeu a resposta sem comentar, do jeito que se recebe uma resposta ruim de algu\u00e9m que costuma dar respostas boas.' },
+{ t:'nar', tx:'Klara baixou os olhos para o livro. O dedo permaneceu na mesma linha.' },
 
 { t:'dial', ch:'klara', tx:'Eu n\u00e3o posso sair de dia.' },
 { t:'dial', ch:'antoniette', tx:'Eu sei.' },
@@ -325,7 +325,7 @@ RBF.CHAPTER3 = [
 
 { t:'dial', ch:'antoniette', tx:'Me disseram que \u00e9 o sol.' },
 { t:'dial', ch:'klara', tx:'\u00c9 o sol.' },
-{ t:'nar', tx:'Ela disse isso do jeito que se confirma um hor\u00e1rio de trem.' },
+{ t:'nar', tx:'A resposta saiu pronta, sem altera\u00e7\u00e3o de voz.' },
 { t:'pause' },
 
 { t:'nar', tx:'Depois fechou o livro no dedo, o que n\u00e3o tinha feito nenhuma vez at\u00e9 ali.' },
@@ -351,7 +351,7 @@ RBF.CHAPTER3 = [
 
 { t:'nar', tx:'Ela desceu a escada de servi\u00e7o, que era mais curta e menos usada.' },
 { t:'pause' },
-{ t:'inn', tx:'Quatro meses nesta casa e essa foi a primeira vez que uma delas falou comigo.' },
+{ t:'inn', tx:'Em quatro meses, nenhuma das duas tinha dirigido uma pergunta a mim.' },
 { t:'inn', tx:'E fui eu que respondi. N\u00e3o a preceptora, n\u00e3o a governanta.' },
 { t:'pause' },
 { t:'inn', tx:'Isso vai ter de entrar no relat\u00f3rio de alguma forma.' },
@@ -469,7 +469,7 @@ RBF.CHAPTER3 = [
 ]},
 
 { t:'sfx', id:'sfx_candle' },
-{ t:'nar', tx:'Apagou a vela e ficou olhando o p\u00e1tio no escuro por um tempo.' },
+{ t:'nar', tx:'Apagou a vela e permaneceu junto \u00e0 janela at\u00e9 os olhos se ajustarem.' },
 { t:'pause' },
 
 { t:'inn', tx:'Setembro. Depois outubro.' },

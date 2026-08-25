@@ -24,7 +24,7 @@
    A AGENDA DE FENN COBRA AQUI.
    Plantada no Capitulo 1 ("vinte palavras para um cavalo, nove para mim")
    e declarada no Capitulo 4 ("meu filho tem catorze anos e quer ir
-   embora daqui"). Agora ele tem quinze e Fenn precisa de dinheiro.
+   embora daqui"). Agora ele tem dezessete e Fenn precisa de dinheiro.
 
    "TONI" - o apelido aparece UMA VEZ na obra inteira, e e aqui.
    Liara diz de passagem, dentro da fala em que menciona a Academia pela
@@ -74,7 +74,7 @@ var C8_PROTEGE_B = [
   { t:'nar', tx:'N\u00e3o foi demitido. N\u00e3o houve conversa. O uniforme dele passou a ser outro.' },
   { t:'pause' },
   { t:'nar', tx:'Ele deixou de entrar na casa. Deixou de ter chave. Deixou de responder pela casa.' },
-  { t:'inn', tx:'Nove anos de servi\u00e7o e a palavra dele valia mais que a de qualquer criado daqui.' },
+  { t:'inn', tx:'Vinte e nove anos de servi\u00e7o e a palavra dele valia mais que a de qualquer criado daqui.' },
   { t:'inn', tx:'Ningu\u00e9m precisou dizer por qu\u00ea.' },
   { t:'pause' },
   { t:'nar', tx:'Ela cruzou com ele no p\u00e1tio tr\u00eas vezes naquele m\u00eas, e nas tr\u00eas ele cumprimentou.' },
@@ -89,7 +89,7 @@ var C8_PROTEGE_A = [
   { t:'dial', ch:'antoniette', tx:'Est\u00e1.' },
   { t:'pause' },
   { t:'dial', ch:'serafina', tx:'Ent\u00e3o a senhorita esteve no meu escrit\u00f3rio.' },
-  { t:'nar', tx:'E deixou a frase no ar, como quem oferece a sa\u00edda e observa se a outra aceita.' },
+  { t:'nar', tx:'Serafina deixou a frase entre as duas. Antoniette n\u00e3o pediu uma sa\u00edda.' },
   { t:'dial', ch:'antoniette', tx:'Estive.' },
   { t:'spr_hide', ch:'serafina' },
 
@@ -97,7 +97,7 @@ var C8_PROTEGE_A = [
   { t:'nar', tx:'Fenn manteve a chave e o uniforme. Ningu\u00e9m falou nada com ele.' },
   { t:'nar', tx:'Na semana seguinte o filho dele foi contratado para a cocheira.' },
   { t:'pause' },
-  { t:'inn', tx:'Quinze anos.' },
+  { t:'inn', tx:'Dezessete anos.' },
   { t:'inn', tx:'Entrou de vez.' },
   { t:'pause' },
   { t:'nar', tx:'Fenn a agradeceu numa manh\u00e3 de novembro, no p\u00e1tio, de cabe\u00e7a baixa e em cinco palavras.' },
@@ -106,7 +106,7 @@ var C8_PROTEGE_A = [
 
 var C8_PROTEGE_C = [
   { t:'dial', ch:'antoniette', tx:'Manda ele hoje. Antes que algu\u00e9m decida.' },
-  { t:'nar', tx:'Fenn olhou para ela por um tempo e n\u00e3o perguntou por qu\u00ea.' },
+  { t:'nar', tx:'Fenn fechou a m\u00e3o no pano e n\u00e3o perguntou por qu\u00ea.' },
   { t:'dial', ch:'fenn', tx:'Hoje \u00e9 quarta. A carro\u00e7a do sal passa \u00e0s onze.' },
   { t:'dial', ch:'antoniette', tx:'Ent\u00e3o \u00e0s onze.' },
   { t:'pause' },
@@ -154,16 +154,16 @@ RBF.CHAPTER8 = [
 { t:'pause' },
 { t:'dial', ch:'fenn', tx:'Empregada n\u00e3o mede casa. Empregada trabalha na casa que tem.' },
 
-{ t:'nar', tx:'Ele disse aquilo sem amea\u00e7a, do mesmo jeito com que dizia o hor\u00e1rio do jantar.' },
-{ t:'inn', tx:'Quatro anos e meio.' },
-{ t:'inn', tx:'Ele sabe h\u00e1 quatro anos e meio e n\u00e3o disse a ningu\u00e9m.' },
+{ t:'nar', tx:'Usou o mesmo tom com que anunciava o jantar. N\u00e3o havia amea\u00e7a nele.' },
+{ t:'inn', tx:'Tr\u00eas anos e meio.' },
+{ t:'inn', tx:'Ele sabe h\u00e1 tr\u00eas anos e meio e n\u00e3o disse a ningu\u00e9m.' },
 { t:'pause' },
 
 { t:'dial', ch:'antoniette', tx:'O que o senhor quer?' },
 { t:'dial', ch:'fenn', tx:'Dois trimestres. Em moeda.' },
 { t:'dial', ch:'antoniette', tx:'Para qu\u00ea?' },
 { t:'pause' },
-{ t:'dial', ch:'fenn', tx:'Meu filho fez quinze em agosto.' },
+{ t:'dial', ch:'fenn', tx:'Meu filho fez dezessete em agosto.' },
 { t:'spr_hide', ch:'fenn' },
 { t:'nar', tx:'E entrou na cocheira, porque tinha o que fazer.' },
 
@@ -198,7 +198,7 @@ RBF.CHAPTER8 = [
 
 { t:'pause' },
 { t:'inn', tx:'Ele guardou isso a vida inteira e escolheu vender agora.' },
-{ t:'inn', tx:'N\u00e3o porque o pre\u00e7o subiu. Porque o filho fez quinze.' },
+{ t:'inn', tx:'N\u00e3o porque o pre\u00e7o subiu. Porque o filho fez dezessete.' },
 
 /* ======================================================================
    C3 - O CRONOGRAMA
@@ -222,7 +222,7 @@ RBF.CHAPTER8 = [
 { t:'pause' },
 
 { t:'inn', tx:'N\u00e3o bate. N\u00e3o tem idade nenhuma em comum.' },
-{ t:'nar', tx:'Ela olhou a folha por um tempo longo e ent\u00e3o virou a r\u00e9gua de lado.' },
+{ t:'nar', tx:'A tinta dos quatro n\u00fameros secou antes de ela virar a r\u00e9gua de lado.' },
 { t:'pause' },
 
 { t:'nar', tx:'Alinhou pela altura em vez da idade.' },
@@ -303,7 +303,7 @@ RBF.CHAPTER8 = [
 /* --- ramo B: a forma ------------------------------------------------- */
 { t:'dial', ch:'klara', tx:'Eu preciso pedir uma coisa e n\u00e3o sei o jeito certo.', if:{ taught:'B' } },
 { t:'dial', ch:'antoniette', tx:'N\u00e3o tem jeito certo. Tem o pedido.', if:{ taught:'B' } },
-{ t:'nar', tx:'A menina endireitou os ombros, do jeito que tinha aprendido, e esperou at\u00e9 estar pronta.', if:{ taught:'B' } },
+{ t:'nar', tx:'A menina endireitou os ombros, contou uma respira\u00e7\u00e3o e levantou os olhos.', if:{ taught:'B' } },
 { t:'pause', if:{ taught:'B' } },
 { t:'dial', ch:'klara', tx:'Quando a senhorita for embora daqui, eu queria ir junto.', if:{ taught:'B' } },
 { t:'nar', tx:'Disse aquilo com a postura inteira, sem tremer a voz, olhando no olho pelo tempo exato.', if:{ taught:'B' } },
@@ -349,11 +349,11 @@ RBF.CHAPTER8 = [
 { t:'dial', ch:'serafina', tx:'A biblioteca fecha quando?' },
 { t:'dial', ch:'antoniette', tx:'Fevereiro.' },
 { t:'dial', ch:'serafina', tx:'Fevereiro.' },
-{ t:'nar', tx:'Ela repetiu a palavra como quem confere contra uma anota\u00e7\u00e3o pr\u00f3pria.' },
+{ t:'nar', tx:'Serafina repetiu a palavra sem interrog\u00e1-la e pousou a colher.' },
 { t:'pause' },
 
 { t:'spr', ch:'serafina', ex:'smirk', pos:'right' },
-{ t:'dial', ch:'serafina', tx:'A senhorita chegou com um contrato de nove meses e ficou quatro anos e meio.' },
+{ t:'dial', ch:'serafina', tx:'A senhorita chegou com um contrato de nove meses e ficou tr\u00eas anos e meio.' },
 { t:'dial', ch:'antoniette', tx:'A cole\u00e7\u00e3o era maior do que o contrato previa.' },
 { t:'pause' },
 { t:'dial', ch:'serafina', tx:'Era.' },
@@ -365,23 +365,23 @@ RBF.CHAPTER8 = [
 { t:'dial', ch:'serafina', tx:'Responderam em nove dias, com timbre e selo.' },
 { t:'dial', ch:'serafina', tx:'Nove dias \u00e9 r\u00e1pido demais para uma casa que n\u00e3o esperava a pergunta.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela sabe h\u00e1 quatro anos.' },
-{ t:'inn', tx:'E me chamou para o ch\u00e1.' },
+{ t:'inn', tx:'Ela sabe desde o segundo m\u00eas.' },
+{ t:'inn', tx:'E nunca apertou a corrente.' },
 { t:'pause' },
-{ t:'inn', tx:'Eu n\u00e3o consigo pensar em nenhum motivo para uma pessoa fazer as duas coisas.' },
+{ t:'inn', tx:'Deixou-me entrar na c\u00e2mara.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela sabe h\u00e1 quatro anos.' },
-{ t:'inn', tx:'E me chamou para o ch\u00e1.' },
+{ t:'inn', tx:'Deixou a menina ocupar a cadeira diante da minha.' },
+{ t:'inn', tx:'E agora serve o ch\u00e1.' },
 { t:'pause' },
-{ t:'inn', tx:'Eu n\u00e3o consigo pensar em nenhum motivo para uma pessoa fazer as duas coisas.' },
+{ t:'inn', tx:'Nada disso foi toler\u00e2ncia.' },
 
 { t:'pause' },
-{ t:'inn', tx:'Ela sabe desde o segundo m\u00eas.' },
-{ t:'inn', tx:'Quatro anos e quatro meses.' },
+{ t:'inn', tx:'Foi uso.' },
+{ t:'inn', tx:'Tr\u00eas anos e quatro meses de uso.' },
 { t:'pause' },
 
 { t:'dial', ch:'antoniette', tx:'Por que a senhora n\u00e3o me removeu?' },
-{ t:'nar', tx:'Serafina considerou a pergunta com a aten\u00e7\u00e3o que dava a tudo.' },
+{ t:'nar', tx:'Serafina girou a x\u00edcara at\u00e9 a asa ficar \u00e0 direita. S\u00f3 ent\u00e3o respondeu.' },
 { t:'spr', ch:'serafina', ex:'neutral', pos:'right' },
 { t:'dial', ch:'serafina', tx:'A senhorita \u00e9 boa com a menina.' },
 { t:'spr_hide', ch:'serafina' },
@@ -397,11 +397,11 @@ RBF.CHAPTER8 = [
 { t:'nar', tx:'Na copa, naquela noite, Dara p\u00f4s a caneca na frente dela sem que ela pedisse.' },
 { t:'nar', tx:'A copa continuava sendo o \u00fanico c\u00f4modo quente, e continuava cheirando a fermento e a cinza.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela nunca fez isso antes das oito.' },
-{ t:'inn', tx:'N\u00e3o sei se \u00e9 gentileza ou se \u00e9 aviso, e n\u00e3o sei perguntar sem estragar as duas.' },
+{ t:'inn', tx:'Dara nunca p\u00f4s uma caneca aqui antes das oito.' },
+{ t:'inn', tx:'Agora n\u00e3o tira os olhos do fogo.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela nunca fez isso antes das oito.' },
-{ t:'inn', tx:'N\u00e3o sei se \u00e9 gentileza ou se \u00e9 aviso, e n\u00e3o sei perguntar sem estragar as duas.' },
+{ t:'inn', tx:'A al\u00e7a est\u00e1 virada para a minha m\u00e3o direita.' },
+{ t:'inn', tx:'Ela lembra com qual m\u00e3o eu escrevo.' },
 { t:'dial', ch:'dara', tx:'A senhorita devia comer.' },
 { t:'dial', ch:'antoniette', tx:'Eu como.' },
 { t:'pause' },
@@ -423,7 +423,7 @@ RBF.CHAPTER8 = [
   bg:'bg_antoniette_room', bgm:null },
 
 { t:'nar', tx:'A moeda de dois trimestres estava na gaveta, contada, embrulhada em pano.' },
-{ t:'nar', tx:'Ela ficou olhando o embrulho por um tempo antes de decidir o que fazer com ele.' },
+{ t:'nar', tx:'Manteve o embrulho na palma at\u00e9 a marca do cordel ficar na pele.' },
 { t:'pause' },
 
 { t:'inn', tx:'Se eu comprar o nome, eu tenho a antecessora e um caso que Lervel n\u00e3o pode ignorar.' },

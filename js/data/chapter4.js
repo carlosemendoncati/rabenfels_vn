@@ -93,7 +93,7 @@ var C4_RITUAL_B = [
   { t:'inn', tx:'O que eu ouvi n\u00e3o \u00e9 dado. \u00c9 impress\u00e3o.' },
   { t:'nar', tx:'Releu a frase e a manteve, sabendo o que ela era.' },
   { t:'pause' },
-  { t:'nar', tx:'Lacrou o envelope e ficou com a m\u00e3o em cima dele por um tempo.' },
+  { t:'nar', tx:'Lacrou o envelope. A cera endureceu sob a palma antes que ela recolhesse a m\u00e3o.' },
   { t:'inn', tx:'Um relat\u00f3rio com termo t\u00e9cnico e sem testemunha \u00e9 um relat\u00f3rio que n\u00e3o pede nada.' },
   { t:'inn', tx:'Foi o que eu quis.' }
 ];
@@ -316,7 +316,7 @@ RBF.CHAPTER4 = [
 { t:'pause' },
 
 { t:'spr', ch:'ines', ex:'neutral', pos:'right' },
-{ t:'nar', tx:'A terceira saiu por \u00faltimo e parou no corredor, como quem esqueceu para onde ia.' },
+{ t:'nar', tx:'A terceira saiu por \u00faltimo e parou no corredor. Ficou com a m\u00e3o no puxador e os olhos no piso.' },
 { t:'nar', tx:'Ficou ali uns cinco segundos, com a m\u00e3o ainda no puxador.' },
 { t:'pause' },
 
@@ -336,7 +336,7 @@ RBF.CHAPTER4 = [
 { t:'inn', tx:'"Deve ser bom."' },
 { t:'inn', tx:'Ningu\u00e9m diz isso de um trabalho. Diz de uma vida.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela tem a minha idade e faz isto h\u00e1 tempo suficiente para achar que a alternativa \u00e9 boa.' },
+{ t:'inn', tx:'Ela tem a minha idade. Quando disse "deve ser bom", olhou para a porta que acabara de fechar.' },
 
 { t:'nar', tx:'A porta do fim do corredor ficou aberta por mais um tempo, e n\u00e3o saiu mais ningu\u00e9m.' },
 { t:'nar', tx:'Klara desceu sozinha, \u00e0s seis, pela escada de servi\u00e7o.' },

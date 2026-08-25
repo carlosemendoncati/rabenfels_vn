@@ -78,7 +78,7 @@ RBF.PER13 = [
 { t:'pause', if:R },
 
 { t:'nar', tx:'A p\u00e1gina de Fenn.', if:R },
-{ t:'nar', tx:'Ela leu tr\u00eas vezes antes de arrancar, e nas outras leituras ela l\u00ea duas.', if:R },
+{ t:'nar', tx:'Ela leu tr\u00eas vezes antes de arrancar. Na terceira, dobrou o canto.', if:R },
 { t:'nar', tx:'Um homem foi \u00fatil a ela e ela negaria a fonte se perguntassem. Isso n\u00e3o cabia em coluna nenhuma.', if:{ rota:'perda', third_paid:'A' } },
 { t:'nar', tx:'Ela comprou o nome para levar a Lervel, e o nome era de um homem vivo. Isso n\u00e3o cabia em coluna nenhuma.', if:{ rota:'perda', third_paid:'B' } },
 { t:'nar', tx:'Ela recusou o nome e mandou o rapaz embora no mesmo dia. Ficou sem a prova e nunca soube se o menino chegou.', if:{ rota:'perda', third_paid:'C' } },
@@ -119,7 +119,7 @@ RBF.PER13 = [
 ], if:R },
 { t:'pause', if:R },
 
-{ t:'inn', tx:'Escreve o que serve. Ningu\u00e9m l\u00ea lamento.', if:R },
+{ t:'inn', tx:'Se eu deixar uma frase que s\u00f3 me alivia, Matheo vai ter de atravessar ela.', if:R },
 { t:'nar', tx:'Ela escreveu a idade, a velocidade de leitura e o jeito de corrigir os outros em voz baixa.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Parou.', if:R },
@@ -191,7 +191,7 @@ RBF.PER13 = [
 { t:'pause', if:R },
 { t:'nar', tx:'Ela conferiu a subtra\u00e7\u00e3o e a subtra\u00e7\u00e3o estava certa.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Depois escreveu a \u00faltima linha do Arquivo Rabenfels, e \u00e9 a \u00fanica linha do documento inteiro em que ela julga alguma coisa.', if:R },
+{ t:'nar', tx:'Depois escreveu a \u00faltima linha. N\u00e3o havia outra passagem do Arquivo com a palavra erro.', if:R },
 { t:'pause', if:R },
 
 { t:'arc', key:'arquivo', lns:[
@@ -234,7 +234,7 @@ RBF.PER13 = [
 { t:'sfx', id:'sfx_footsteps', if:R },
 { t:'nar', tx:'O cavalo saiu andando e ela n\u00e3o esperou recibo.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela ficou no port\u00e3o at\u00e9 o sol subir de todo, e n\u00e3o pensou em nada em particular.', if:R },
+{ t:'nar', tx:'Ela ficou no port\u00e3o at\u00e9 a luz alcan\u00e7ar o ferrolho de cima.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Depois voltou para dentro, porque \u00e0s sete ela abria a biblioteca.', if:R },
 { t:'spr_hide', ch:'antoniette', if:R },

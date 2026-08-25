@@ -52,7 +52,8 @@ humana, e morto-vivo não dá à luz. Por isso o padrão da casa é transformá-
 foi identificada. O ciclo continua."* confirma que a entidade pegou.
 
 **Klara sobrevive à VN.** Só vira casulo no ápice da própria mana, e é para
-isso que serve a Academia de Eldoria. **Antoniette morre; Klara não.**
+isso que serve a Academia de Eldoria. **Antoniette morre em três leituras e
+vive em O Livro-Razão; Klara não morre em nenhuma.**
 
 ## Os nomes da entidade
 
@@ -77,7 +78,8 @@ explicada custa ambiguidade.
 ## Cronologia
 
 - Antoniette é recrutada aos 17. Oito anos de relação com Matheo.
-- Chega a Velha Nidhaus aos 20. Cinco anos na casa. Morre aos 25.
+- Chega a Velha Nidhaus aos 20. Passa cinco anos na casa. Morre aos 25 em
+  três leituras e sobrevive em O Livro-Razão.
 - A Ordem estimou quatro anos, talvez cinco, para um relatório completo.
 - Ponto morto: noventa dias sem notícia. O pacote chega com noventa e três.
 - Klara e Liara têm oito anos no Capítulo 1 e **doze** no 11.
@@ -251,7 +253,7 @@ cento do mesmo texto.
 
 | rota | condição | capítulos | desfecho | Antoniette |
 |---|---|---|---|---|
-| A Cobertura | flag `cover_burned` | 10, 11 | A Cobertura Queimada | vive |
+| A Cobertura | flag `cover_burned` | 10, 11 | A Cobertura Queimada | morre |
 | A Perda | Perda ≥ 11 | 10, 11, 12, 13 | A Dívida | morre |
 | A Resposta | Resposta ≥ 12 | 10, 11, 12 | O Livro-Razão | vive |
 | **A Esperança** | **sem condição — é o padrão** | 10, 11 | O Arquivo | morre |
@@ -294,7 +296,9 @@ parábola, e Steiner reprova.
 
 **A Cobertura** — o sentimento de cima é vergonha profissional, não medo.
 Ela foi descoberta por competência. Serafina não acusa, não diz a palavra
-Ordem e não dá motivo: dá horário.
+Ordem e não dá motivo: dá horário. A cortesia não é salvo-conduto. Carmine
+espera diante da porta do pátio e mata Antoniette antes da fuga. Não há
+combate, desvio nem continuação em que ela chega à carruagem.
 
 **A Esperança** — Klara para de andar e não sabe dizer por quê. Ninguém em
 cena enuncia o que aconteceu.
@@ -321,21 +325,22 @@ forca bruta.
 >
 > **Klara é consumida e o ciclo continua nas quatro.** O destino dela não muda.
 >
-> **O de Antoniette muda.** Em duas das quatro leituras ela sobrevive:
+> **O de Antoniette muda.** Em uma das quatro leituras ela sobrevive:
 >
 > | leitura | Antoniette |
 > |---|---|
 > | O Arquivo | **morre** — no prazo que Carmine deu |
-> | Agosto Antecipado | **morre** — sem as quatro horas |
-> | O Distanciamento | **vive** — recolhida do campo, correspondência suspensa |
-> | A Cobertura Queimada | **vive** — demitida com carta de referência correta |
+> | A Dívida | **morre** — depois da tentativa de fuga |
+> | O Livro-Razão | **vive** — não valeu a pena matar |
+> | A Cobertura Queimada | **morre** — Carmine a mata diante da porta do pátio |
 >
 > O Prólogo continua de pé nas quatro porque **o ponto morto dispara por
 > silêncio, não por morte.** Agente recolhido tem correspondência particular
 > suspensa por prazo indeterminado.
 >
-> **E o tribunal declara "autoria falecida" sobre alguém que respira.** É o
-> dispositivo da obra aplicado ao fato mais básico: o documento erra.
+> **No Livro-Razão, o tribunal declara "autoria falecida" sobre alguém que
+> respira.** É o dispositivo da obra aplicado ao fato mais básico: o
+> documento erra.
 
 **Como ela morre, quando morre.** Plantado em P8 desde sempre: a ficha da
 escriba de trinta e sete anos antes, na letra do escriturário, última linha

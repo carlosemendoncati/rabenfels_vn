@@ -13,13 +13,16 @@
    oitenta e sete, com a numeracao dela terminando em duzentos e
    noventa e um. "Faltam quatro."
 
-   O Capitulo 11 mostra ela arrancando as quatro, contando para baixo,
-   e guardando dentro do livro-caixa da casa.
+   Em Esperanca e Perda, o ultimo capitulo mostra ela arrancando as
+   quatro, contando para baixo, e guardando dentro do livro-caixa.
 
-   O Epilogo cobra: o tribunal indefere por "sem terceiro lesado
-   identificavel". As quatro paginas eram exatamente os terceiros - um
-   por pagina. O ultimo ato de protecao dela foi o que matou o
-   processo, e Matheo morre sem saber disso.
+   Em Resposta, as quatro permanecem no corpo do Livro-Razao. Em
+   Cobertura, o Arquivo termina na pagina 241 e elas nunca chegam a ser
+   compiladas. O extra precisa dizer qual destes tres objetos o jogador
+   esta lendo; nao pode fingir que todas as rotas produziram o mesmo.
+
+   O Epilogo cobra "sem terceiro lesado" nas quatro leituras. O motivo
+   muda: paginas retiradas, nomes suprimidos ou trabalho interrompido.
 
    >>> ESTE EXTRA E O QUE MATHEO NUNCA RECEBEU. <<<
 
@@ -97,19 +100,33 @@ RBF.QUATRO_PAGINAS = {
     cover_burned: {
       titulo: 'A Cobertura Queimada',
       o_que: 'Fez tudo o que a Ordem manda: relatou agosto na \u00edntegra, com testemunha direta, e remeteu a Lervel o nome da antecessora com identifica\u00e7\u00e3o da fonte, porque prova sem proced\u00eancia n\u00e3o vale em mat\u00e9ria de foro.',
-      custou: 'A casa l\u00ea tudo o que entra e sai, e sempre leu. N\u00e3o houve acusa\u00e7\u00e3o nem gritaria: houve encerramento de contrato, com dois meses de aviso pagos e uma carta de refer\u00eancia correta.',
+      custou: 'A casa l\u00ea tudo o que entra e sai, e sempre leu. Serafina encerrou o contrato com os dois meses de aviso pagos. Carmine esperou entre Antoniette e a porta do p\u00e1tio e a matou antes da carruagem.',
       ela_sentiu: 'Vergonha profissional, e \u00e9 o \u00fanico final em que esse \u00e9 o sentimento de cima. N\u00e3o foi descoberta por descuido nem por azar: foi descoberta por compet\u00eancia. Levou quarenta minutos procurando a linha que a entregou, achou, e a linha estava correta.',
-      klara: 'Ficou. O Arquivo saiu incompleto e saiu mesmo assim, escrito em nove noites num quarto alugado acima de uma selaria. Seis anos depois, a Academia.',
-      nao_soube: 'Que ele concluiria que ela estava morta. Ela deixou de escrever de prop\u00f3sito, porque o pacote s\u00f3 sai com noventa dias de sil\u00eancio, e passou onze anos copiando escritura a duzentos e trinta quil\u00f4metros dali.'
+      klara: 'Ficou. O Arquivo saiu incompleto no nonag\u00e9simo terceiro dia. Antoniette n\u00e3o saiu da casa.',
+      nao_soube: 'Que o caderno cairia aberto na p\u00e1gina duzentos e quarenta e um. Que chegaria a Matheo depois dela.'
     }
 
   },
 
-  /* Cabecalho do documento, comum a oito das nove leituras. */
+  /* Esperanca e Perda: as folhas foram retiradas. */
   cabecalho: [
     'Retiradas do corpo do Arquivo em 10 de agosto, entre as tr\u00eas e trinta e as quatro e dez.',
     'Repostas no livro-caixa da casa, no lugar das quatro folhas em branco do fim.',
     'Numera\u00e7\u00e3o original mantida.'
+  ],
+
+  /* Resposta: o Livro-Razao chega inteiro a Lervel. */
+  cabecalho_registro: [
+    'P\u00e1ginas 288 a 291 do Arquivo entregue em Lervel em dezembro do ano cinco.',
+    'Nenhuma folha retirada. Numera\u00e7\u00e3o original fechada em 291.',
+    'Transcri\u00e7\u00e3o do exemplar de consulta do arquivo central.'
+  ],
+
+  /* Cobertura: o trabalho para na pagina 241. */
+  cabecalho_cobertura: [
+    'Reconstru\u00e7\u00e3o das entradas previstas para as p\u00e1ginas 288 a 291.',
+    'O Arquivo remetido a Lervel termina na p\u00e1gina 241.',
+    'Estas quatro entradas nunca chegaram ao corpo principal.'
   ],
 
   /* A Vigilia nao tem corpo de Arquivo de onde retirar: o documento
@@ -298,7 +315,7 @@ RBF.QUATRO_PAGINAS = {
           'O Compilador declarou a F. que negaria a fonte caso interrogado.',
           'F. concordou com a condi\u00e7\u00e3o e n\u00e3o pediu garantia.'
         ],
-        margem: 'Nota: F. tem um filho de quinze anos e a d\u00edvida era do filho. ' +
+        margem: 'Nota: F. tem um filho de dezessete anos e a d\u00edvida era do filho. ' +
                 'Isto n\u00e3o altera a natureza da transa\u00e7\u00e3o. Consta porque \u00e9 verdade.',
         mao: 'Ele n\u00e3o pediu garantia nenhuma. Vinte e nove anos nesta casa e ele acreditou em mim ' +
              'porque eu perguntei do jeito certo, e o jeito certo foi ele que me ensinou.'
@@ -340,7 +357,7 @@ RBF.QUATRO_PAGINAS = {
 
   ],
 
-  /* Fecho do documento. Comum as quatro combinacoes. */
+  /* Esperanca e Perda: fecho escrito antes de esconder as folhas. */
   fecho: [
     'Estas quatro entradas foram retiradas do corpo principal porque, lidas em conjunto,',
     'estabelecem terceiro lesado e tornam a mat\u00e9ria acion\u00e1vel fora do foro dom\u00e9stico',
@@ -355,6 +372,26 @@ RBF.QUATRO_PAGINAS = {
     'contra ela.',
     '',
     '\u2014 A.V.'
+  ],
+
+  /* Resposta: o texto inteiro chega ao tribunal, mas nao leva nomes. */
+  fecho_registro: [
+    'Estas quatro entradas permaneceram no corpo principal.',
+    'Registram data, ato e terceiro. Os terceiros aparecem como sujeito, fonte',
+    'ou fun\u00e7\u00e3o. Nenhuma identifica\u00e7\u00e3o nominal foi mantida onde n\u00e3o era',
+    'necess\u00e1ria \u00e0 confer\u00eancia t\u00e9cnica.',
+    '',
+    'O documento est\u00e1 completo.',
+    '',
+    '\u2014 A.V.'
+  ],
+
+  /* Cobertura: nao houve pagina final nem decisao de retirar. */
+  fecho_cobertura: [
+    'O contrato foi encerrado antes da compila\u00e7\u00e3o destas entradas.',
+    'N\u00e3o houve retirada. N\u00e3o houve fecho.',
+    '',
+    'A numera\u00e7\u00e3o entregue termina em 241.'
   ]
 
 };

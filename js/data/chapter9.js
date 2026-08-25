@@ -14,8 +14,8 @@
    Entrega A ORDEM. Deixa de ser agente.
 
    ESTE E O CAPITULO ONDE O FINAL E DECIDIDO.
-   O beat { t:'ending' } avalia RBF.ENDINGS pelo acumulado e grava
-   RBF.STATE.flags.ending. Capitulos 10, 11 e Epilogo leem com 'if'.
+   O beat { t:'ending' } avalia RBF.ROTAS pelo acumulado e grava
+   RBF.STATE.flags.rota. Os capitulos de rota e o Epilogo leem com 'if'.
 
    ALDRIC AVISA SEM AVISAR.
    A ferida dele - a vez em que entrou na camara - aparece aqui de
@@ -70,7 +70,7 @@ var C9_PROMESSA_C = [
   { t:'spr_hide', ch:'klara' },
   { t:'pause' },
   { t:'inn', tx:'Eu dei a ela um n\u00famero.' },
-  { t:'inn', tx:'N\u00famero \u00e9 a \u00fanica coisa que crian\u00e7a nenhuma esquece.' },
+  { t:'inn', tx:'Ela n\u00e3o repetiu a data. N\u00e3o precisava.' },
   { t:'pause' },
   { t:'inn', tx:'De hoje at\u00e9 agosto s\u00e3o cento e setenta e dois dias.' },
   { t:'nar', tx:'Ela contou os dias antes de contar o que ia precisar.' }
@@ -84,10 +84,10 @@ var C9_PROMESSA_B = [
   { t:'dial', ch:'klara', tx:'Obrigada.' },
   { t:'spr_hide', ch:'klara' },
   { t:'pause' },
-  { t:'inn', tx:'Ela agradeceu a promessa como se agradece um presente j\u00e1 entregue.' },
+  { t:'inn', tx:'Ela agradeceu antes de perguntar qualquer coisa. N\u00e3o perguntou.' },
   { t:'pause' },
   { t:'inn', tx:'Eu n\u00e3o sei se consigo. Sei que era a \u00fanica coisa que dava para dizer.' },
-  { t:'inn', tx:'E disse com todas as letras, porque meia promessa \u00e9 pior que nenhuma.' }
+  { t:'inn', tx:'Se eu dissesse "talvez", ela apagaria a palavra e guardaria o resto.' }
 ];
 
 var C9_PROMESSA_A = [
@@ -126,9 +126,9 @@ RBF.CHAPTER9 = [
 { t:'nar', tx:'Escreveu a ficha, alinhou com a borda da mesa e ficou olhando a pilha vazia.' },
 { t:'inn', tx:'Quatro mil e duzentos.' },
 { t:'pause' },
-{ t:'inn', tx:'Contrato de nove meses. Cinquenta e oito meses.' },
+{ t:'inn', tx:'Contrato de nove meses. Quarenta e seis meses.' },
 
-{ t:'nar', tx:'Ela levou a \u00faltima ficha ao fich\u00e1rio e n\u00e3o conseguiu soltar a m\u00e3o dela por um tempo.' },
+{ t:'nar', tx:'Ela levou a \u00faltima ficha ao fich\u00e1rio. Os dedos ficaram na aba at\u00e9 a junta perder cor.' },
 { t:'pause' },
 { t:'inn', tx:'A partir de agora eu sou uma mulher que mora nesta casa sem motivo.' },
 { t:'inn', tx:'Toda casa acaba perguntando por qu\u00ea.' },
@@ -172,7 +172,7 @@ RBF.CHAPTER9 = [
 { t:'pause' },
 { t:'dial', ch:'aldric', tx:'Depois disso eu tive trinta anos para fazer alguma coisa a respeito, e n\u00e3o fiz.' },
 
-{ t:'nar', tx:'Ele fechou o volume e o recolocou exatamente no lugar de onde tinha tirado.' },
+{ t:'nar', tx:'Ele fechou o volume, encaixou-o entre os vizinhos e alinhou a lombada com o polegar.' },
 { t:'dial', ch:'aldric', tx:'N\u00e3o \u00e9 remorso. Remorso \u00e9 para quem hesitou.' },
 { t:'pause' },
 { t:'dial', ch:'aldric', tx:'Eu n\u00e3o hesitei. Eu fiz a conta uma vez e nunca mais refiz.' },
@@ -204,7 +204,7 @@ RBF.CHAPTER9 = [
 { t:'dial', ch:'antoniette', tx:'As duas?' },
 { t:'dial', ch:'liara', tx:'Eu falei que n\u00e3o ia sem ela. A\u00ed ele deixou.' },
 
-{ t:'nar', tx:'Ela disse aquilo como quem conta uma vit\u00f3ria de teimosia, porque era exatamente isso.' },
+{ t:'nar', tx:'Contou sorrindo, com o papel da Academia apertado contra o peito.' },
 { t:'spr_hide', ch:'liara' },
 { t:'nar', tx:'E saiu correndo contar para mais algu\u00e9m.' },
 { t:'pause' },
@@ -224,7 +224,7 @@ RBF.CHAPTER9 = [
 { t:'scene', id:'c9_pedido', chapter:'capitulo9', title:'O que ela pede',
   bg:'bg_antoniette_room', bgm:null },
 
-{ t:'nar', tx:'Klara bateu na porta do quarto leste \u00e0s nove da noite, o que ela nunca tinha feito em cinco anos.' },
+{ t:'nar', tx:'Klara bateu na porta do quarto leste \u00e0s nove. Tr\u00eas toques iguais. Em cinco anos, nunca fora ali \u00e0quela hora.' },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'nar', tx:'Entrou, fechou a porta e ficou de costas para ela.' },
 { t:'pause' },
@@ -301,7 +301,7 @@ RBF.CHAPTER9 = [
 { t:'scene', id:'c9_ponto_morto', chapter:'capitulo9', title:'Noventa dias',
   bg:'bg_antoniette_room', bgm:'bgm_archive' },
 
-{ t:'nar', tx:'Ela escreveu a Matheo em abril, e foi a carta mais curta em nove anos de correspond\u00eancia.' },
+{ t:'nar', tx:'Ela escreveu a Matheo em abril. Foi a carta mais curta de toda a correspond\u00eancia.' },
 
 { t:'arc', key:'matheo', label:'\u2014 correspond\u00eancia de campo \u2014', lns:[
     'M. \u2014 solicito ponto morto em noventa dias, a contar desta data,',
@@ -319,7 +319,7 @@ RBF.CHAPTER9 = [
 
 { t:'pause' },
 { t:'inn', tx:'Ele n\u00e3o perguntou.' },
-{ t:'inn', tx:'Em nove anos ele nunca deixou de perguntar uma coisa dessas.' },
+{ t:'inn', tx:'Dois anos antes, uma pergunta dessas teria recebido tr\u00eas p\u00e1ginas.' },
 { t:'pause' },
 { t:'inn', tx:'Ou ele confia, ou j\u00e1 entendeu, ou n\u00e3o quer ter escrito a pergunta.' },
 { t:'nar', tx:'Ela guardou as duas cartas juntas, dobradas na mesma dobra.' },
@@ -360,8 +360,8 @@ RBF.CHAPTER9 = [
 { t:'inn', tx:'Se eu escrever outra coisa, eu estou preparando a desculpa em vez do plano.' },
 
 /* ======================================================================
-   C8 - O FINAL E DECIDIDO
-   O beat { t:'ending' } avalia RBF.ENDINGS pelo acumulado.
+   C8 - A ROTA E DECIDIDA
+   O beat { t:'ending' } avalia RBF.ROTAS pelo acumulado.
    Saida: ponte para o Capitulo 10.
    ====================================================================== */
 { t:'scene', id:'c9_julho', chapter:'capitulo9', title:'Fim de julho',
@@ -370,7 +370,7 @@ RBF.CHAPTER9 = [
 /* ----------------------------------------------------------------------
    A COBERTURA QUEIMADA - o gatilho.
 
-   O final existia em RBF.ENDINGS desde o inicio e NUNCA disparava: a
+   A rota existia em RBF.ROTAS desde o inicio e NUNCA disparava: a
    flag nao era gravada em lugar nenhum, e a ramificacao escrita nos
    Capitulos 10 e 11 era conteudo morto. O teste de alcance tinha uma
    excecao que deixava passar em silencio.
@@ -397,7 +397,7 @@ RBF.CHAPTER9 = [
 
 { t:'ending' },
 
-{ t:'nar', tx:'No fim de julho a casa come\u00e7ou a se preparar para agosto do jeito que se prepara todo ano.' },
+{ t:'nar', tx:'No fim de julho come\u00e7aram os preparativos de agosto.' },
 { t:'nar', tx:'Ningu\u00e9m disse a palavra. Trocaram o hor\u00e1rio da copa e fecharam duas janelas do lado leste.' },
 { t:'pause' },
 
@@ -426,7 +426,7 @@ RBF.CHAPTER9 = [
 
 { t:'fade_out' },
 { t:'bgm', id:null },
-{ t:'end_chap', line1:'Cinco anos em Velha Nidhaus.', line2:'Faltam trinta e um dias.',
+{ t:'end_chap', line1:'Cinco anos em Velha Nidhaus.', line2:'Faltam dez dias.',
   chapter:'capitulo9' },
 { t:'fade_out' }
 

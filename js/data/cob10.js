@@ -1,10 +1,10 @@
 /* ==========================================================================
    ARQUIVO RABENFELS - js/data/cob10.js
-   ROTA COBERTURA - CAPITULO 10: "A Carruagem"
+   ROTA COBERTURA - CAPITULO 10: "A Porta"
 
    Somente dados. TODO BEAT CARREGA if:{ rota:'cobertura' }.
 
-   QUANDO: Ano 5, agosto, dias oito e nove. Ela sai antes do dia dez.
+   QUANDO: Ano 5, agosto, dias oito e nove. Carmine a mata antes da fuga.
 
    O PENSAMENTO UNICO (Zinsser, unidade):
    "Ninguem acusou nada."
@@ -33,14 +33,11 @@
    ------------------------------------------------------------------
    Serafina NAO acusa, NAO diz a palavra Ordem e NAO da motivo. Ela da
    horario. Toda fala dela tem segunda camada legivel so na releitura,
-   e a cortesia e integral: a carta de referencia e correta e o aviso e
-   pago. A casa nao briga. A casa encerra.
+   e a cortesia e integral: a carta de referencia seria correta e o aviso
+   e pago. A casa nao briga. A casa encerra. Carmine encerra o resto.
 
-   NAO PODE VAZAR: o que acontece na noite do dia nove. Ela esta na
-   estrada e nao ve. O jogador tambem nao.
-
-   Cinco cenas: C1 agosto chega, C2 as nove da noite, C3 as malas,
-   C4 o patio as cinco e meia, C5 a farpa.
+   Tres cenas e o percurso: agosto chega, Serafina da o horario, ela acha
+   a linha e Carmine a mata diante da porta do patio. Nao ha combate.
    ========================================================================== */
 
 var RBF = (typeof RBF !== 'undefined') ? RBF : {};
@@ -52,7 +49,7 @@ var R = { rota: 'cobertura' };
 
 RBF.COB10 = [
 
-{ t:'chap', num:'CAP\u00cdTULO 10', name:'A CARRUAGEM', chapter:'cob10', if:R },
+{ t:'chap', num:'CAP\u00cdTULO 10', name:'A PORTA', chapter:'cob10', if:R },
 { t:'fade_out', if:R },
 
 /* ======================================================================
@@ -63,8 +60,8 @@ RBF.COB10 = [
   bg:'bg_kitchen', bgm:'bgm_nidhaus', if:R },
 { t:'fade_in', if:R },
 
-{ t:'nar', tx:'Vieram no dia tr\u00eas, dois dias antes do padr\u00e3o dos quatro anos anteriores.', if:R },
-{ t:'nar', tx:'Antoniette anotou a antecipa\u00e7\u00e3o e olhou o n\u00famero por mais tempo do que precisava.', if:R },
+{ t:'nar', tx:'Vieram no dia tr\u00eas. A margem do caderno guardava quatro datas anteriores; nenhuma era t\u00e3o cedo.', if:R },
+{ t:'nar', tx:'A tinta do n\u00famero tr\u00eas secou com a pena ainda suspensa.', if:R },
 { t:'pause', if:R },
 
 { t:'spr', ch:'dara', ex:'guarded', pos:'center', if:R },
@@ -80,7 +77,7 @@ RBF.COB10 = [
 
 { t:'inn', tx:'Ela conta a prataria toda noite e nunca deu a volta na mesa em cinco anos.', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'A casa est\u00e1 fechando mais cedo do que fecha.', if:R },
+{ t:'inn', tx:'A cozinha fecha primeiro. Depois fecham o resto.', if:R },
 
 /* ======================================================================
    C2 - AS NOVE DA NOITE
@@ -113,10 +110,10 @@ RBF.COB10 = [
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'A senhora quer me dizer alguma coisa?', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Serafina levou tempo, e o tempo foi a resposta.', if:R },
+{ t:'nar', tx:'Serafina deixou passar uma respira\u00e7\u00e3o antes de responder.', if:R },
 { t:'dial', ch:'serafina', tx:'Quero desejar boa viagem.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Desejou de verdade. Foi o pior da conversa inteira.', if:R },
+{ t:'nar', tx:'A voz n\u00e3o tinha ironia. Antoniette procurou e n\u00e3o encontrou.', if:R },
 { t:'spr_hide', ch:'serafina', if:R },
 
 { t:'pause', if:R },
@@ -135,10 +132,10 @@ RBF.COB10 = [
 { t:'nar', tx:'O caderno sem identifica\u00e7\u00e3o foi no forro, onde tinha ficado quatro anos.', if:R },
 { t:'pause', if:R },
 
-{ t:'inn', tx:'Faltavam trinta e uma horas.', if:R },
+{ t:'inn', tx:'Faltavam nove horas.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Depois ela sentou na beira da cama e refez o caminho de tr\u00e1s para frente, do jeito que se confere um invent\u00e1rio.', if:R },
+{ t:'nar', tx:'Depois sentou na beira da cama e refez o caminho de tr\u00e1s para a frente, item por item.', if:R },
 { t:'pause', if:R },
 
 /*
@@ -146,7 +143,7 @@ RBF.COB10 = [
 
   Aqui a obra troca de registro e o jogador refaz o caminho com ela.
   A frase de cima e o briefing inteiro: "refez o caminho de tras para
-  frente, do jeito que se confere um inventario". O percurso e essa
+  a frente, item por item". O percurso e essa
   frase jogada, e nao um acontecimento novo.
 
   O que ele apura entra como flag e volta nos beats abaixo. O que ele
@@ -159,100 +156,28 @@ RBF.COB10 = [
 */
 { t:'percurso', id:'cob10_inventario', chapter:'cob10',
   campo:'cob_saida', conta:'cob_apurou',
-  sets:{ cob_conferiu:true }, padrao:'linha', if:R },
+  sets:{ cob_conferiu:true }, naoConta:['cob_vista'],
+  padrao:'carmine', if:R },
 
-{ t:'scene', id:'cob10_malas_fim', chapter:'cob10', title:'De volta ao quarto',
-  bg:'bg_antoniette_room', bgm:'bgm_archive', if:R },
+/* O canvas fecha em preto depois dos tres quadros de Carmine. A VN volta
+   apenas para registrar o que aconteceu; Antoniette nao volta a narrar. */
+{ t:'scene', id:'cob10_terceira', chapter:'cob10', title:'A terceira contagem',
+  bg:'bg_black', bgm:null, if:R },
 { t:'fade_in', if:R },
-{ t:'spr', ch:'antoniette', ex:'shaken', pos:'center', if:R },
 
-{ t:'inn', tx:'Serafina escreveu a Lervel em maio para conferir as minhas refer\u00eancias. Ela me disse isso na cara.', if:{ rota:'cobertura', cob_maio:true } },
-{ t:'inn', tx:'Eu anotei e segui.', if:{ rota:'cobertura', cob_maio:true } },
-{ t:'pause', if:{ rota:'cobertura', cob_maio:true } },
-
-{ t:'inn', tx:'O relat\u00f3rio de agosto do ano tr\u00eas saiu daqui num envelope que atravessa esta casa.', if:{ rota:'cobertura', cob_agosto:true } },
-{ t:'inn', tx:'O nome da antecessora saiu daqui no mesmo caminho, com a fonte identificada.', if:{ rota:'cobertura', cob_fonte:true } },
-{ t:'pause', if:{ rota:'cobertura', cob_agosto:true } },
-
-{ t:'inn', tx:'Prova sem proced\u00eancia n\u00e3o vale em mat\u00e9ria de foro. Est\u00e1 no manual, p\u00e1gina onze.', if:{ rota:'cobertura', cob_manual:true } },
-{ t:'pause', if:{ rota:'cobertura', cob_manual:true } },
-
-/* Quem atravessou o percurso sem abrir gaveta nenhuma nao le a lista
-   acima. Le esta, que diz a mesma coisa sem nomear as pecas. Nao e
-   punicao - e o mesmo fato com menos detalhe, que e exatamente o que
-   sobra de quem conferiu depressa. */
-{ t:'inn', tx:'Tudo o que saiu daqui saiu por dentro desta casa. E tudo o que sai daqui e lido antes de sair.', if:{ rota:'cobertura', cob_livro:false } },
-{ t:'pause', if:{ rota:'cobertura', cob_livro:false } },
-
-{ t:'nar', tx:'Ela achou a linha. Levou quarenta minutos e achou a linha, e a linha estava correta.', if:R },
+{ t:'nar', tx:'A vela bateu no piso primeiro. O vidro n\u00e3o quebrou.', if:R },
 { t:'pause', if:R },
-{ t:'spr', ch:'antoniette', ex:'away', pos:'center', if:R },
-{ t:'inn', tx:'Eu fiz o procedimento certo.', if:R },
+{ t:'nar', tx:'O caderno caiu aberto na p\u00e1gina duzentos e quarenta e um.', if:R },
+{ t:'nar', tx:'Carmine p\u00f4s o p\u00e9 sobre a m\u00e3o que ainda segurava a capa.', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'Foi o procedimento certo que me tirou daqui.', if:R },
-
-{ t:'pause', if:R },
-{ t:'nar', tx:'N\u00e3o escreveu nada naquela noite. Foi a \u00fanica noite em cinco anos em que ela n\u00e3o escreveu nada.', if:R },
-{ t:'spr_hide', ch:'antoniette', if:R },
-
-/* ======================================================================
-   C4 - O PATIO AS CINCO E MEIA
-   Ninguem desce. Liara desce. Klara nao. Saida: soco.
-   ====================================================================== */
-{ t:'scene', id:'cob10_patio', chapter:'cob10', title:'Cinco e meia',
-  bg:'bg_nidhaus_gate', bgm:null, if:R },
-
-{ t:'nar', tx:'A carruagem estava no p\u00e1tio \u00e0s cinco e meia, com o cocheiro j\u00e1 sentado.', if:R },
-{ t:'nar', tx:'Fenn levou as malas e n\u00e3o disse nada al\u00e9m de bom dia.', if:R },
-{ t:'pause', if:R },
-{ t:'nar', tx:'P\u00f4s o ba\u00fa de ferramentas por \u00faltimo, de p\u00e9, do jeito que ela sempre pedia, e ela nunca tinha pedido a ele.', if:R },
+{ t:'nar', tx:'O primeiro estalo veio do indicador. Os dedos soltaram no segundo.', if:R },
 { t:'pause', if:R },
 
-{ t:'spr', ch:'liara', ex:'bright', pos:'right', if:R },
-{ t:'nar', tx:'Liara desceu de camisola, com o cabelo por tran\u00e7ar, e ningu\u00e9m tinha avisado Liara.', if:R },
-{ t:'dial', ch:'liara', tx:'A senhorita volta em setembro?', if:R },
-{ t:'pause', if:R },
-{ t:'dial', ch:'antoniette', tx:'N\u00e3o.', if:R },
-{ t:'pause', if:R },
-{ t:'nar', tx:'Liara ficou parada processando aquilo, e foi a \u00fanica vez em cinco anos em que ela n\u00e3o achou o que dizer.', if:R },
-{ t:'dial', ch:'liara', tx:'Ent\u00e3o t\u00e1.', if:R },
-{ t:'nar', tx:'Depois abra\u00e7ou, do jeito que ela abra\u00e7ava, sem perguntar se podia.', if:R },
-{ t:'spr_hide', ch:'liara', if:R },
-{ t:'pause', if:R },
-
-{ t:'nar', tx:'A janela do quarto das g\u00eameas dava para o p\u00e1tio. A cortina estava aberta.', if:R },
-{ t:'nar', tx:'Antoniette olhou uma vez e n\u00e3o olhou de novo.', if:R },
-{ t:'pause', if:R },
-{ t:'inn', tx:'Se ela estiver ali, eu vou ter de acenar.', if:R },
-{ t:'inn', tx:'E acenar \u00e9 uma despedida, e despedida \u00e9 uma informa\u00e7\u00e3o.', if:R },
-{ t:'pause', if:R },
-{ t:'nar', tx:'Ela subiu na carruagem de costas para a casa e sentou do lado que n\u00e3o tinha janela.', if:R },
-
-/* ======================================================================
-   C5 - A FARPA
-   Ela nao ve. O jogador tambem nao. NAO EXPLICAR.
-   ====================================================================== */
-{ t:'scene', id:'cob10_farpa', chapter:'cob10', title:'Quatro horas',
-  bg:'bg_grey_march_road', bgm:null, if:R },
-
-{ t:'nar', tx:'A estrada de Velha Nidhaus at\u00e9 a Marca Cinzenta leva onze horas de carruagem.', if:R },
-{ t:'nar', tx:'Ela dormiu duas, o que era mais do que dormia em casa.', if:R },
-{ t:'pause', if:R },
-
-{ t:'nar', tx:'Na segunda parada, num p\u00e1tio de posta a quatro horas dali, ela pediu papel e n\u00e3o escreveu.', if:R },
-{ t:'pause', if:R },
-{ t:'nar', tx:'Faltavam quatro horas para a Marca Cinzenta.', if:R },
-{ t:'pause', if:R },
-
-{ t:'nar', tx:'No mesmo intervalo, a duzentos e trinta quil\u00f4metros dali, o ar de um quarto esquentou.', if:R },
-{ t:'nar', tx:'N\u00e3o h\u00e1 registro disso em documento nenhum, porque a \u00fanica pessoa daquela casa que registrava estava numa estrada.', if:R },
-
-{ t:'pause', if:R },
-{ t:'nar', tx:'E Antoniette, que tinha cinco anos de registro e uma mem\u00f3ria treinada para dura\u00e7\u00f5es, n\u00e3o soube dizer, depois, o que estava fazendo naquela hora.', if:R },
+{ t:'nar', tx:'A porta do p\u00e1tio estava a quatro passos.', if:R },
+{ t:'nar', tx:'Antoniette alcan\u00e7ou a primeira t\u00e1bua. Carmine puxou pelo tornozelo antes da segunda. O joelho bateu na soleira. Depois o rosto. Na segunda tentativa de puxar ar, n\u00e3o saiu som.', if:R },
 
 { t:'fade_out', if:R },
-{ t:'bgm', id:null, if:R },
-{ t:'end_chap', line1:'Agosto do quinto ano.', line2:'Ela saiu no dia nove, \u00e0s seis.',
+{ t:'end_chap', line1:'A carruagem saiu \u00e0s seis.', line2:'Antoniette n\u00e3o chegou ao p\u00e1tio.',
   chapter:'cob10', if:R },
 { t:'fade_out', if:R }
 

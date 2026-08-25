@@ -486,9 +486,10 @@ def script_checks():
     arc_keys = set()
     flags_written = set()
     # Semeadas pelo motor, nao por escolha:
+    #   rota    -> resolucao do beat { t:'route' }
     #   ending  -> beat { t:'ending' }
     #   relendo -> startNewGame, quando a obra ja foi terminada
-    flags_written.add('relendo')
+    flags_written.update(('rota', 'relendo'))
     flags_read = {}
     chapters_seen = set()
 
@@ -694,8 +695,13 @@ def gallery_checks(arc_keys):
 
     used_bg = set(p['need'].split(':')[1] for p in catalog
                   if p['need'].startswith('bg:'))
+    gallery_needs = set()
+    for item in catalog:
+        gallery_needs.add(item.get('need') or '')
+        for entry in item.get('entries') or []:
+            gallery_needs.add(entry.get('need') or '')
     for key in sorted(arc_keys):
-        check(any(it['need'] == 'arc:' + key for it in catalog),
+        check('arc:' + key in gallery_needs,
               'cartao do Arquivo tem item de galeria', 'arc:' + key)
     for bg in sorted(CONFIG['BACKGROUNDS']):
         if bg == 'bg_black':

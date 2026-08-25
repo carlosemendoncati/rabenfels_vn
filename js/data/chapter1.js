@@ -83,7 +83,7 @@ var C1_ALDRIC_A = [
   { t:'inn', tx:'Ele me classificou em quatro palavras e desceu a escada.' },
   { t:'nar', tx:'Ela esperou a porta fechar antes de voltar \u00e0 estante.' },
   { t:'inn', tx:'Comprei tr\u00eas meses de sossego pelo pre\u00e7o de virar mob\u00edlia.' },
-  { t:'inn', tx:'Vou precisar de mais tempo do que planejei.' }
+  { t:'inn', tx:'Nove meses n\u00e3o v\u00e3o bastar.' }
 ];
 
 var C1_ALDRIC_B = [
@@ -95,14 +95,14 @@ var C1_ALDRIC_B = [
   { t:'spr_hide', ch:'aldric' },
   { t:'pause' },
   { t:'inn', tx:'Ele corrigiu o verbo duas vezes na mesma frase.' },
-  { t:'inn', tx:'Homem nenhum corrige verbo por acaso.' },
+  { t:'inn', tx:'Ele queria que eu guardasse o "se".' },
   { t:'nar', tx:'Ela anotou a hora junto com a frase.' }
 ];
 
 var C1_ALDRIC_C = [
   { t:'nar', tx:'Antoniette n\u00e3o respondeu.' },
   { t:'spr', ch:'aldric', ex:'stare', pos:'left' },
-  { t:'nar', tx:'A pausa durou o suficiente para virar uma pergunta.' },
+  { t:'nar', tx:'No terceiro segundo, Aldric ergueu o queixo.' },
   { t:'dial', ch:'aldric', tx:'Minha mulher acha que a senhorita vai gostar desta casa.' },
   { t:'pause' },
   { t:'dial', ch:'aldric', tx:'Eu acho que a casa vai gostar da senhorita.' },
@@ -110,7 +110,7 @@ var C1_ALDRIC_C = [
   { t:'nar', tx:'Desceu sem esperar resposta desta vez.' },
   { t:'pause' },
   { t:'inn', tx:'Ele preencheu o sil\u00eancio. Eu n\u00e3o precisei.' },
-  { t:'inn', tx:'Quem preenche sil\u00eancio est\u00e1 administrando alguma coisa.' }
+  { t:'inn', tx:'Ele precisava saber o que eu faria com a frase.' }
 ];
 
 /* --------------------------------------------------------------------------
@@ -158,7 +158,7 @@ var C1_RELATORIO_C = [
   { t:'inn', tx:'Isto n\u00e3o vai para Lervel.' },
   { t:'nar', tx:'Guardou o caderno debaixo do forro do ba\u00fa.' },
   { t:'pause' },
-  { t:'inn', tx:'Um segundo caderno \u00e9 o come\u00e7o de uma segunda pessoa.' }
+  { t:'inn', tx:'Agora tenho um caderno para Lervel e outro que Lervel n\u00e3o pode ver.' }
 ];
 
 RBF.CHAPTER1 = [
@@ -176,10 +176,10 @@ RBF.CHAPTER1 = [
 { t:'fade_in' },
 
 { t:'nar', tx:'Antoniette Vael abriu a janela da carruagem no terceiro dia de viagem e deixou aberta.' },
-{ t:'nar', tx:'O ar de abril entrou morno e com cheiro de terra molhada. As m\u00e3os dela, rachadas de r\u00e9dea e de frio, pararam de doer pela primeira vez desde Lervel.' },
+{ t:'nar', tx:'O ar de abril entrou morno e com cheiro de terra molhada. O calor devolveu movimento \u00e0s m\u00e3os rachadas pela r\u00e9dea.' },
 { t:'pause' },
 { t:'inn', tx:'\u00c9 bonito.' },
-{ t:'nar', tx:'Ela anotou a impress\u00e3o e a data, do jeito que anotava tudo.' },
+{ t:'nar', tx:'Ela anotou a impress\u00e3o abaixo da data.' },
 { t:'inn', tx:'Anotar que \u00e9 bonito serve para depois. Impress\u00e3o de chegada muda em tr\u00eas semanas e ningu\u00e9m lembra qual era.' },
 
 { t:'nar', tx:'O vale se abriu na curva. Velha Nidhaus apareceu l\u00e1 embaixo, com o telhado molhado pegando o sol deitado.' },
@@ -188,7 +188,7 @@ RBF.CHAPTER1 = [
 { t:'nar', tx:'Dobrou o dossi\u00ea e guardou na mala menor.' },
 
 { t:'sfx', id:'sfx_wind' },
-{ t:'nar', tx:'A estrada entrou na floresta e ficou escura de repente, do jeito que fica quando as copas se tocam.' },
+{ t:'nar', tx:'A estrada entrou na floresta. Quando as copas se tocaram, o interior da carruagem escureceu.' },
 { t:'nar', tx:'A temperatura caiu junto. Ela fechou a janela sem pensar e s\u00f3 percebeu que tinha fechado meio quil\u00f4metro depois.' },
 { t:'nar', tx:'Correu assim por tr\u00eas quil\u00f4metros sem abrir uma clareira.' },
 { t:'inn', tx:'O dossi\u00ea dizia densa.' },
@@ -327,7 +327,7 @@ RBF.CHAPTER1 = [
 { t:'dial', ch:'serafina', tx:'Mandei preparar o quarto do lado leste para a senhorita. \u00c9 o de melhor vista para o p\u00e1tio.' },
 { t:'dial', ch:'antoniette', tx:'Obrigada.' },
 { t:'dial', ch:'serafina', tx:'Fenn a leva. A copa fica aberta at\u00e9 meia-noite.' },
-{ t:'nar', tx:'Ela se afastou tendo dito exatamente o que planejou dizer.' },
+{ t:'nar', tx:'Serafina se afastou. N\u00e3o corrigiu uma palavra nem acrescentou outra.' },
 { t:'spr_hide', ch:'serafina' },
 
 { t:'pause' },
@@ -403,7 +403,7 @@ RBF.CHAPTER1 = [
 { t:'spr', ch:'aldric', ex:'cold', pos:'left' },
 { t:'nar', tx:'Ele viu Antoniette no segundo andar sem demonstrar surpresa.' },
 { t:'dial', ch:'aldric', tx:'Senhorita Vael.' },
-{ t:'nar', tx:'Disse o nome dela como quem confere uma lista.' },
+{ t:'nar', tx:'Pronunciou "Vael" sem mudar o ritmo da passada.' },
 { t:'dial', ch:'antoniette', tx:'Senhor Rabenfels. N\u00e3o sabia que era esperada aqui.' },
 { t:'dial', ch:'aldric', tx:'N\u00e3o era. Vim buscar um documento.' },
 
@@ -490,7 +490,7 @@ RBF.CHAPTER1 = [
 { t:'nar', tx:'No fim da fila havia uma moldura vazia.' },
 { t:'nar', tx:'Ela passou o dedo na borda de baixo. Saiu limpo.' },
 { t:'pause' },
-{ t:'nar', tx:'O p\u00f3 da parede parava exatamente ali.' },
+{ t:'nar', tx:'A parede tinha p\u00f3 at\u00e9 a borda externa. Dentro do contorno, n\u00e3o.' },
 { t:'inn', tx:'Algu\u00e9m limpa uma moldura que n\u00e3o tem quadro.' },
 { t:'pause' },
 { t:'nar', tx:'A moldura tinha o tamanho dos outros nove.' },
@@ -532,7 +532,7 @@ RBF.CHAPTER1 = [
 { t:'dial', ch:'klara', tx:'Ent\u00e3o n\u00e3o posso.' },
 
 { t:'inn', tx:'A menina do mapa vai \u00e0 feira. A outra n\u00e3o.' },
-{ t:'inn', tx:'E as duas tratam isso como se fosse o tempo.' },
+{ t:'inn', tx:'Para as duas, a diferen\u00e7a n\u00e3o exige explica\u00e7\u00e3o.' },
 
 /* Klara nao aceita e nao reclama: contorna. Por Liara. */
 { t:'nar', tx:'A que lia virou a p\u00e1gina.' },
@@ -555,7 +555,7 @@ RBF.CHAPTER1 = [
 { t:'dial', ch:'liara', tx:'Est\u00e1 com fome de novo?' },
 { t:'pause' },
 { t:'dial', ch:'klara', tx:'Um pouco.' },
-{ t:'nar', tx:'Liara aceitou aquilo na hora, do jeito que se aceita o que sempre foi assim.' },
+{ t:'nar', tx:'Liara apenas mudou de assunto. Aquilo j\u00e1 pertencia \u00e0 rotina.' },
 
 { t:'nar', tx:'Pela fresta, curativo no bra\u00e7o esquerdo da que lia. Dobra do cotovelo, atadura limpa.' },
 { t:'nar', tx:'A outra menina n\u00e3o tinha nenhum.' },

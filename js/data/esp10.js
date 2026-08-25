@@ -62,8 +62,8 @@ RBF.ESP10 = [
   bg:'bg_kitchen', bgm:'bgm_nidhaus', if:R },
 { t:'fade_in', if:R },
 
-{ t:'nar', tx:'Vieram no dia tr\u00eas, dois dias antes do padr\u00e3o dos quatro anos anteriores.', if:R },
-{ t:'nar', tx:'Antoniette anotou a antecipa\u00e7\u00e3o e olhou o n\u00famero por mais tempo do que precisava.', if:R },
+{ t:'nar', tx:'Vieram no dia tr\u00eas. Nos quatro anos anteriores, o come\u00e7o nunca tinha ca\u00eddo t\u00e3o cedo.', if:R },
+{ t:'nar', tx:'Antoniette cercou o tr\u00eas. A ponta da pena atravessou o papel.', if:R },
 { t:'pause', if:R },
 
 { t:'inn', tx:'Dois dias antes.', if:R },
@@ -84,7 +84,7 @@ RBF.ESP10 = [
 { t:'inn', tx:'Oito, sempre. Cinco anos de oito.', if:R },
 { t:'inn', tx:'Ningu\u00e9m muda o hor\u00e1rio da copa por causa de bicho.', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'A casa est\u00e1 fechando mais cedo do que fecha.', if:R },
+{ t:'inn', tx:'Duas horas a menos. O plano perdeu duas horas antes de come\u00e7ar.', if:R },
 
 /* ======================================================================
    C2 - O ULTIMO DIA
@@ -169,7 +169,7 @@ RBF.ESP10 = [
 
 { t:'dial', ch:'klara', tx:'Eu devia ter agradecido antes de sair.', if:{ rota:'esperanca', taught:'B' } },
 { t:'dial', ch:'antoniette', tx:'Agradece depois.', if:{ rota:'esperanca', taught:'B' } },
-{ t:'dial', ch:'klara', tx:'Depois \u00e9 tarde para a forma.', if:{ rota:'esperanca', taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Depois n\u00e3o vale. Eu tinha de dizer antes.', if:{ rota:'esperanca', taught:'B' } },
 
 { t:'dial', ch:'klara', tx:'O rio fica de que lado do sol?', if:{ rota:'esperanca', taught:'C' } },
 { t:'dial', ch:'antoniette', tx:'Esquerda, de manh\u00e3.', if:{ rota:'esperanca', taught:'C' } },
@@ -200,7 +200,7 @@ RBF.ESP10 = [
 { t:'scene', id:'esp10_floresta', chapter:'esp10', title:'O que sobrou',
   bg:'bg_grey_march_road', bgm:null, if:R },
 
-{ t:'nar', tx:'Depois da aldeia a estrada entra na floresta e fica escura de repente, do jeito que fica quando as copas se tocam.', if:R },
+{ t:'nar', tx:'Depois da aldeia, as copas fecharam a lua e a pedra clara desapareceu sob os p\u00e9s.', if:R },
 { t:'nar', tx:'Antoniette conhecia aquele trecho. Tinha atravessado ele em abril, cinco anos antes, com a janela aberta.', if:R },
 { t:'pause', if:R },
 
@@ -227,14 +227,14 @@ RBF.ESP10 = [
 
 { t:'spr', ch:'klara', ex:'blank', pos:'center', if:R },
 { t:'nar', tx:'No meio da floresta, Klara parou de andar.', if:R },
-{ t:'nar', tx:'N\u00e3o trope\u00e7ou. N\u00e3o olhou para tr\u00e1s. Parou como quem chegou onde ia.', if:R },
+{ t:'nar', tx:'N\u00e3o trope\u00e7ou. Os dois p\u00e9s ficaram alinhados sobre a mesma pedra. Ela n\u00e3o tornou a levant\u00e1-los.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'Klara.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'O ar da floresta esquentou.', if:R },
 
 { t:'pause', if:R },
-{ t:'nar', tx:'E Antoniette, que tinha cinco anos de registro e uma mem\u00f3ria treinada para dura\u00e7\u00f5es, n\u00e3o conseguiu dizer quanto tempo aquilo levou.', if:R },
+{ t:'nar', tx:'Antoniette come\u00e7ou a contar. Depois n\u00e3o conseguiu fixar qual tinha sido o primeiro n\u00famero.', if:R },
 
 { t:'fade_out', if:R },
 { t:'bgm', id:null, if:R },

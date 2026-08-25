@@ -24,8 +24,8 @@
    ------------------------------------------------------------------
    O ERRO DE IDADE
    ------------------------------------------------------------------
-   Carmine corrige a entrada 214: Klara fez doze em marco, e o caderno
-   diz onze. Antoniette confere, acha o erro, corrige com a mesma pena
+   Carmine corrige a entrada 214: Klara ja tem doze, e o caderno diz
+   onze. Antoniette confere, acha o erro, corrige com a mesma pena
    e classifica: "Um erro em duzentas e catorze entradas. Esta dentro
    da margem."
 
@@ -86,7 +86,7 @@ RBF.RES11 = [
 { t:'dial', ch:'antoniette', tx:'Vou.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'voz', tx:'Ent\u00e3o sente. Fica melhor sentada.', if:R },
-{ t:'nar', tx:'Ela sentou. Foi a \u00fanica das quatro leituras em que ela sentou.', if:R },
+{ t:'nar', tx:'Ela sentou e puxou o caderno para o centro da mesa.', if:R },
 
 /* ======================================================================
    C2 - A CONFERENCIA
@@ -133,7 +133,7 @@ RBF.RES11 = [
 { t:'pause', if:R },
 { t:'dial', ch:'voz', tx:'Eu sei.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Foi dito devagar, e nas outras leituras essa mesma resposta vem depressa demais.', if:R },
+{ t:'nar', tx:'A resposta veio depois de uma pausa. Todo o resto tinha vindo sem pausa.', if:R },
 
 /* ======================================================================
    C3 - A IDADE
@@ -149,7 +149,7 @@ RBF.RES11 = [
 { t:'nar', tx:'Antoniette anotou "leu o caderno" e depois riscou, porque o caderno estava na m\u00e3o dela.', if:R },
 { t:'pause', if:R },
 
-{ t:'dial', ch:'voz', tx:'A idade est\u00e1 errada na 214. Ela fez doze em mar\u00e7o.', if:R },
+{ t:'dial', ch:'voz', tx:'A idade est\u00e1 errada na 214. Ela j\u00e1 tinha doze.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette abriu na 214 ali mesmo, com a vela em cima do papel, e conferiu.', if:R },
 { t:'pause', if:R },
@@ -238,7 +238,7 @@ RBF.RES11 = [
 { t:'spr_hide', ch:'liara', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Klara desceu \u00e0s oito e vinte, p\u00e1lida do jeito que ela ficava depois, e comeu.', if:R },
+{ t:'nar', tx:'Klara desceu \u00e0s oito e vinte, com os l\u00e1bios sem cor e as m\u00e3os firmes na mesa, e comeu.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette anotou a hora da descida e o estado, e a anota\u00e7\u00e3o est\u00e1 na entrada 215.', if:R },
 

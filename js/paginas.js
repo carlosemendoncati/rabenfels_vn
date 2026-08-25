@@ -15,9 +15,9 @@
    'end_chap' com completes:true, que hoje so o Epilogo tem.
 
    O jogador que nao terminou nao ve o item no menu. O jogador que
-   terminou ve as quatro paginas DELE - as escolhas que ele fez,
-   escritas na voz do Compilador, que e o documento que teria sustentado
-   o processo e que Antoniette arrancou de proposito.
+   terminou ve as quatro entradas DELE - as escolhas que fez, escritas
+   na voz do Compilador. Em Esperanca e Perda elas foram arrancadas; em
+   Resposta ficaram no documento; em Cobertura nunca foram compiladas.
 
    ------------------------------------------------------------------
    POR QUE LER DO PROGRESSO E NAO DO ESTADO VIVO
@@ -91,22 +91,32 @@ RBF.Paginas = (function () {
       });
     }
 
-    /* A Vigilia tem cabecalho proprio: nesta leitura o Arquivo nunca
-       foi montado, e as quatro folhas saem do caderno de trabalho. */
+    /* O objeto muda com o final: folhas retiradas, paginas mantidas ou
+       entradas que o encerramento do contrato impediu de compilar. A
+       Vigilia fica como compatibilidade para saves da estrutura antiga. */
     var ending = (run && run.ending) || null;
-    var cab = (ending === 'vigil' && d.cabecalho_vigil)
-                ? d.cabecalho_vigil : d.cabecalho;
+    var cab = d.cabecalho;
+    var fecho = d.fecho;
+    if (ending === 'registro' && d.cabecalho_registro) {
+      cab = d.cabecalho_registro;
+      fecho = d.fecho_registro || fecho;
+    } else if (ending === 'cover_burned' && d.cabecalho_cobertura) {
+      cab = d.cabecalho_cobertura;
+      fecho = d.fecho_cobertura || fecho;
+    } else if (ending === 'vigil' && d.cabecalho_vigil) {
+      cab = d.cabecalho_vigil;
+    }
 
     return {
       cabecalho: cab.slice(),
-      fecho:     d.fecho.slice(),
+      fecho:     fecho.slice(),
       ending:    ending,
       paginas:   out
     };
   }
 
   /* O laudo do final alcancado: o que aconteceu, o que custou, o que ela
-     sentiu, o que foi da menina e o que ela morreu sem saber.
+     sentiu, o que foi da menina e o que ela nao soube.
      Devolve null quando o run e de versao anterior ao laudo. */
   function laudo() {
     var d = dados();

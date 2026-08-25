@@ -162,6 +162,30 @@
   gap: calc(var(--rbf-ui) * 8px);
 }
 
+/* O menu da VN fica fora da camada do percurso e podia desaparecer em
+   telefone. Este botao pertence ao HUD do canvas e continua alcançavel
+   sem transformar o resto do HUD em superficie de clique. */
+.rf-perc__menu {
+  position: absolute;
+  top: calc(var(--rbf-ui) * 66px);
+  right: calc(var(--rbf-ui) * 20px);
+  min-width: 44px;
+  min-height: 44px;
+  pointer-events: auto;
+  opacity: .58;
+}
+
+/* A execucao tira a interface junto com o controle. O quadro continua
+   visivel ate o preto fechar; nenhum botao compete com a animacao. */
+#rf-percurso.is-desfecho .rf-perc__hud,
+#rf-percurso.is-desfecho .rf-perc__ajuda {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rf-perc__menu:hover,
+.rf-perc__menu:focus-visible { opacity: 1; }
+
 .rf-perc__item {
   display: block;
   width: calc(var(--rbf-ui) * 34px);
@@ -190,6 +214,13 @@
   color: var(--rbf-ink);
   opacity: .34;
   transition: opacity var(--rbf-fast) var(--rbf-ease-settle);
+}
+
+.rf-perc__ajuda--toque { display: none; }
+
+@media (pointer: coarse) {
+  .rf-perc__ajuda--teclado { display: none; }
+  .rf-perc__ajuda--toque { display: block; }
 }
 
 /* Enquanto ha fala, a ajuda sai: os dois ocupam o mesmo rodape e a

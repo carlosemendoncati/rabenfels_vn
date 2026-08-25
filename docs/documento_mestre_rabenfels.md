@@ -179,7 +179,7 @@ Ao longo de três séculos, o pacto transformou a biologia dos Rabenfels. As pri
 
 ## ***A Escolhida / O Casulo***
 
-Klara tem oito anos quando a história começa e treze quando termina. Esse arco de cinco anos é a coluna vertebral emocional da obra.
+Klara tem oito anos quando a história começa e doze quando as rotas se fecham. O calendário cobre cinquenta e dois meses, de abril do ano um a agosto do ano cinco.
 
 Ela é brilhante de uma forma que sua família nunca soube para que usar — a inteligência de Klara não é valorizada porque não é necessária para a função que ela desempenha. Isso cria uma solidão específica: a de ser vista e não ser vista ao mesmo tempo.
 
@@ -309,7 +309,7 @@ Fase 2 (Anos 2-3): Klara começa a aparecer na biblioteca com regularidade. Anto
 
 Fase 3 (Anos 4-5): Não existe um momento exato em que decide que Klara é mais importante que a missão. É uma série de decisões pequenas. O momento que ela marca retrospectivamente: Klara tem doze anos e diz, de forma completamente casual enquanto leem juntas, que não tem medo de morrer. Antoniette fecha o livro. Naquela noite, começa a planejar a fuga.
 
-Fase 4 (Fim): A entidade compreende o plano antes que aconteça. Age através de Klara — não com crueldade deliberada, mas com a indiferença de algo que está protegendo seu processo. Antoniette morre na tentativa. A morte não é heroica no sentido cinematográfico. É o tipo de morte que acontece quando planos encontram realidades que os planos não contavam.
+Fase 4 (Fim): a obra se divide. Em **A Esperança** e **A Perda**, Antoniette tenta a fuga e morre depois dela. Em **A Cobertura**, Carmine a mata diante da porta do pátio, antes da carruagem. Em **A Resposta**, Antoniette não desce, não cria o vínculo que Carmine viria cobrar e sobrevive. Nenhuma leitura salva Klara nem interrompe o ciclo.
 
 *A última coisa que Antoniette escreve no Arquivo é endereçada a quem encontrar o documento. Não a Klara — Klara não pode receber isso. Ao desconhecido que vier depois. Ela pede apenas uma coisa: que alguém tente onde ela falhou.*
 
@@ -373,7 +373,7 @@ A VN é estruturada em torno de um dispositivo de moldura: começamos com o fim 
 
 Matheo recebe o pacote póstumo. Lê fragmentos do Arquivo. O título aparece. Flashback.
 
-Função: estabelecer que Antoniette está morta antes de a conhecermos. O jogador desenvolverá afeto por um personagem sabendo do início que ela morre. Isso muda completamente a natureza emocional de cada momento de alegria na história.
+Função: estabelecer que Matheo recebe um documento tratado como póstumo e acredita que Antoniette morreu. Em três leituras ele está certo. Em **O Livro-Razão**, o ponto morto foi disparado pelo silêncio administrativo de uma agente recolhida, e o tribunal chama de falecida uma autora que respira.
 
 ### **Capítulo 1: ****"****A Chegada****"**
 
@@ -417,7 +417,7 @@ Antoniette executa o plano. O jogador acompanha com a tensão de saber — desde
 
 ### **Capítulo 11: ****"****O Florescimento****"**
 
-A entidade age através de Klara. Antoniette morre. A cena é restrita, sem espetáculo. O horror é que Klara está presente mas não completamente no controle. Tom: devastação quieta.
+Na rota **A Esperança**, a entidade age através de Klara e Antoniette morre. A cena é restrita, sem espetáculo. O horror é que Klara está presente mas não completamente no controle. As demais rotas têm capítulos finais próprios. Tom: devastação quieta.
 
 ### **Epílogo: ****"****O Que Ficou****"**
 
@@ -427,7 +427,18 @@ Retorno à moldura. Matheo com o Arquivo. Um fragmento final que não estava no 
 
 # **Rotas e Escolhas**
 
-A VN não possui ramificações que alterem o destino final — Antoniette morre, Klara sobrevive como casulo, o ciclo continua. O que as escolhas alteram é a profundidade e a perspectiva com que o jogador experimenta esses eventos.
+> **Revisão de 25/08/2026.** A estrutura atual possui quatro rotas com capítulos próprios a partir do fim do Capítulo 9. A tabela de execução vive em `RBF.ROTAS`, em `js/config.js`.
+
+Klara sobrevive como casulo e o ciclo continua nas quatro leituras. O destino de Antoniette muda: ela morre em três e vive em **O Livro-Razão**. Sobreviver não é prêmio; nessa leitura, o documento completo é transformado em prova da competência do sistema que recusou o caso.
+
+| Rota | Condição | Desfecho | Antoniette | Arquivo |
+|---|---|---|---|---|
+| A Cobertura | `cover_burned` | A Cobertura Queimada | morre diante da porta do pátio | incompleto, 241 páginas |
+| A Perda | Perda ≥ 11 | A Dívida | morre depois da tentativa | lista de omissões |
+| A Resposta | Resposta ≥ 12 | O Livro-Razão | vive | completo, frio, 291 páginas |
+| A Esperança | padrão | O Arquivo | morre no prazo de Carmine | 287 folhas, quatro páginas ausentes |
+
+As condições são avaliadas nessa ordem. O número do capítulo se repete de propósito: cada rota possui seu próprio Capítulo 10.
 
 ### **Tipos de Escolha**
 
@@ -435,19 +446,9 @@ Escolhas de investigação: onde Antoniette concentra sua pesquisa. Determina qu
 
 Escolhas de relacionamento: como Antoniette responde a cada personagem. Alguns momentos de ternura entre ela e Klara são opcionais e fazem o final mais devastador para quem os experimentou.
 
-Escolhas morais: o que registrar, o que reportar a Matheo, o que esconder. Não mudam o final mas mudam o que o jogador sabe e quando.
+Escolhas morais: o que registrar, o que reportar a Matheo, o que esconder. Além de mudar o que o jogador sabe, duas delas podem queimar a cobertura: relatar agosto integralmente e identificar a fonte viva no envelope que atravessa a casa.
 
-### **Bad Ends**
-
-Bad End 1 — "A Cobertura Queimada": Antoniette expõe sua identidade prematuramente. Serafina a remove. O documento é incompleto. Ela sobrevive — apresentado como a pior versão do fracasso.
-
-Bad End 2 — "O Distanciamento": Antoniette mantém distanciamento até o fim. Documenta tudo. Nunca tenta salvar Klara. A missão conclui com sucesso técnico. Ela vive. E o jogador precisa decidir o que isso significa.
-
-Bad End 3 — "Agosto Antecipado": A fuga acontece cedo demais. A entidade age com mais violência. O final é o mesmo mas sem a dignidade da preparação.
-
-### **True End**
-
-A rota que acessa todos os capítulos no ritmo correto, com a profundidade máxima de relacionamento entre Antoniette e Klara. O final é o mesmo — mas o peso é completamente diferente.
+Os rótulos “Bad End” e “True End” foram aposentados. A obra chama os quatro resultados de leituras. Nenhuma leitura invalida a partida do jogador.
 
 — ✦ —
 
@@ -455,7 +456,7 @@ A rota que acessa todos os capítulos no ritmo correto, com a profundidade máxi
 
 ### **Revelação 1 — O Arquivo como Documento Póstumo**
 
-Prólogo. O jogador descobre no início que Antoniette está morta. Cada momento subsequente de alegria carrega o peso desta informação.
+Prólogo. Matheo recebe um Arquivo tratado como documento póstumo. O jogador começa acreditando que Antoniette morreu. Em três leituras isso se confirma; em **O Livro-Razão**, o documento e o tribunal erram sobre o fato mais básico.
 
 ### **Revelação 2 — A Natureza Real dos ****"****Experimentos****"**
 
@@ -663,7 +664,7 @@ As últimas páginas eram diferentes. A letra ligeiramente menos controlada — 
 
 *Existe uma menina em Velha Nidhaus chamada Klara Rabenfels.*
 
-*Ela tem treze anos. É brilhante. Lê mais rápido do que qualquer pessoa que já conheci. Tem um senso de humor que só aparece quando ela acha que ninguém está prestando atenção. Protege a irmã com uma calma que custa mais do que parece.*
+*Ela tem doze anos. É brilhante. Lê mais rápido do que qualquer pessoa que já conheci. Tem um senso de humor que só aparece quando ela acha que ninguém está prestando atenção. Protege a irmã com uma calma que custa mais do que parece.*
 
 *E foi escolhida desde antes de nascer para morrer de uma forma que a família em que nasceu chama de tradição.*
 
@@ -975,7 +976,7 @@ Antoniette ficou parada no corredor por um momento. A menina que lia tinha a qua
 
 [ C ]  Escrever o relatório operacional e depois, num caderno separado que não vai para a Ordem, anotar a pergunta que ficou: "Por que ela não disse nada?" — O caderno separado é o embrião do Arquivo.
 
-*NOTA DE DESIGN: Cada escolha representa uma postura operacional diferente. A escolhe o distanciamento. B escolhe o foco profissional crescente. C — a opção que leva ao True End — mostra Antoniette pela primeira vez fazendo uma distinção entre o que reporta e o que sente.*
+*NOTA DE DESIGN: Cada escolha representa uma postura operacional diferente. A escolhe o distanciamento. B escolhe o foco profissional crescente. C mostra Antoniette pela primeira vez fazendo uma distinção entre o que reporta e o que sente. O efeito de rota é declarado nos dados da escolha, não inferido pelo rótulo.*
 
 **Cena Final — Quarto de Antoniette — Meia-Noite**
 

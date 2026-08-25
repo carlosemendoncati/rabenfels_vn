@@ -38,12 +38,15 @@ Uso:
     python tools/cobertura_pixel.py --bloco 3  degrau mais grosso
     python tools/cobertura_pixel.py --bloco 1  so a paleta, sem degrau
 
-Trabalha SEMPRE sobre a saida de tools/cobertura_assets.py, e nunca
-sobre o kit bruto: a ordem e recortar, depois pixelar. Rodar duas vezes
-sobre o mesmo arquivo empilha degrau em cima de degrau.
+Trabalha SEMPRE sobre a copia limpa atualizada por
+tools/cobertura_assets.py, e nunca sobre o kit bruto: a ordem e recortar,
+depois pixelar. Rodar este script outra vez e seguro porque ele volta a
+essa copia antes de aplicar o degrau.
 """
 
+import json
 import os
+import shutil
 import sys
 
 try:
@@ -55,6 +58,18 @@ except ImportError:                                    # pragma: no cover
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = os.path.join(RAIZ, "assets", "cobertura")
 CRU  = os.path.join(BASE, "_sem_pixel")
+
+
+def opcao(nome):
+    if nome in sys.argv:
+        i = sys.argv.index(nome)
+        if i + 1 < len(sys.argv):
+            return sys.argv[i + 1]
+    return None
+
+
+PASTA = opcao("--pasta")
+SAIDA_PASTA = opcao("--saida")
 
 
 def arg(nome, padrao):
@@ -136,6 +151,7 @@ PROPRIAS = {
     "chars/klara_casulo.png": 14,
     "chars/vulto.png":        10,
     "chars/carmine.png":      14,
+    "chars/carmine_ataque.png": 14,
     "faces/klara.png":        16,
     "faces/klara_casulo.png": 18,
     "faces/vulto.png":        12,
@@ -242,11 +258,11 @@ def lista(pasta):
 
 
 def guarda_cru(rel):
-    """Guarda o recorte antes do degrau, uma vez.
+    """Devolve o recorte limpo guardado pela etapa de assets.
 
     Pixelar duas vezes empilha degrau em cima de degrau e a imagem vira
-    papelao. Com a copia crua no lugar, rodar de novo sempre parte do
-    mesmo ponto.
+    papelao. A copia e criada aqui apenas como compatibilidade com kits
+    antigos; nas entregas novas, cobertura_assets.py sempre a atualiza.
     """
     origem = os.path.join(BASE, rel)
     copia  = os.path.join(CRU, rel)
@@ -270,7 +286,92 @@ def trata(rel, paleta, bloco):
     return im.size, len(paleta)
 
 
+def personagem_da_entrega(nome):
+    """Classifica apenas figuras; retratos de parede continuam no mundo."""
+    n = nome.lower()
+    if n == "4c9a58a1-f2ea-45c8-bb2b-19eb383f14f9.png":
+        return True
+    if n == "chatgpt image aug 25, 2026, 03_07_09 am.png":
+        return True
+    return any(ch in n for ch in ("antoniette", "fenn", "dara", "carmine"))
+
+
+def trata_pasta(pasta):
+    """Pixeliza uma entrega inteira sem tocar na origem."""
+    origem = pasta if os.path.isabs(pasta) else os.path.join(RAIZ, pasta)
+    origem = os.path.normpath(origem)
+    if not os.path.isdir(origem):
+        sys.stderr.write("pasta ausente: " + origem + "\n")
+        return 2
+
+    if SAIDA_PASTA:
+        saida = SAIDA_PASTA if os.path.isabs(SAIDA_PASTA) else os.path.join(RAIZ, SAIDA_PASTA)
+        saida = os.path.normpath(saida)
+    else:
+        saida = origem.rstrip("\\/") + "_pixel"
+    er = os.path.normcase(os.path.realpath(origem))
+    sr = os.path.normcase(os.path.realpath(saida))
+    if sr == er or sr.startswith(er + os.sep):
+        sys.stderr.write("a saida deve ficar fora da pasta de origem\n")
+        return 2
+    if os.path.exists(saida):
+        sys.stderr.write("saida ja existe; escolha outro --saida: " + saida + "\n")
+        return 2
+
+    os.makedirs(saida)
+    for nome in sorted(os.listdir(origem)):
+        src = os.path.join(origem, nome)
+        if os.path.isfile(src) and not nome.lower().endswith(".png"):
+            shutil.copy2(src, os.path.join(saida, nome))
+
+    nomes = sorted(n for n in os.listdir(origem)
+                   if n.lower().endswith(".png") and not n.startswith("AUDITORIA_"))
+    relatorio = []
+    print("\npixelit seguro - bloco de %d" % BLOCO)
+    print("origem: " + origem)
+    print("saida:  " + saida + "\n")
+
+    for nome in nomes:
+        im = Image.open(os.path.join(origem, nome)).convert("RGBA")
+        if personagem_da_entrega(nome):
+            propria = paleta_da_imagem(im, 16)
+            paleta = BASE_PERSONAGEM + propria
+            familia = "personagem"
+        else:
+            paleta = PALETA_MUNDO
+            familia = "mundo"
+
+        out = pixelate(im, BLOCO)
+        out = degraus_de_alfa(out)
+        out = aplica_paleta(out, paleta)
+        out.save(os.path.join(saida, nome))
+        relatorio.append({
+            "arquivo": nome,
+            "familia": familia,
+            "tamanho": [out.width, out.height],
+            "cores_paleta": len(paleta),
+            "bloco": BLOCO,
+        })
+        print("  ok  %-46s %-10s %2d cores" %
+              (nome[:46], familia, len(paleta)))
+
+    with open(os.path.join(saida, "RELATORIO_PIXEL.json"), "w",
+              encoding="utf-8") as f:
+        json.dump({
+            "origem": origem,
+            "saida": saida,
+            "bloco": BLOCO,
+            "arquivos": relatorio,
+        }, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    print("\n%d arquivos; a origem permaneceu intacta" % len(nomes))
+    return 0
+
+
 def main():
+    if PASTA:
+        return trata_pasta(PASTA)
+
     if not os.path.isdir(BASE):
         sys.stderr.write("rode tools/cobertura_assets.py primeiro\n")
         return 2

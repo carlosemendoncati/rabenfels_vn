@@ -211,7 +211,7 @@ RBF.CHAPTER2 = [
 { t:'pause' },
 { t:'inn', tx:'Reencadernar dois volumes custa mais do que perder dois volumes.' },
 { t:'inn', tx:'N\u00e3o consigo pensar em nenhum motivo para gastar dinheiro assim.' },
-{ t:'nar', tx:'Ficou com o polegar na lombada por mais tempo do que precisava.' },
+{ t:'nar', tx:'O polegar dela continuou sobre o couro claro at\u00e9 Ren falar.' },
 
 { t:'spr', ch:'ren', ex:'neutral', pos:'right' },
 { t:'dial', ch:'ren', tx:'Achou alguma coisa?' },
@@ -251,7 +251,7 @@ RBF.CHAPTER2 = [
 { t:'dial', ch:'fenn', tx:'N\u00e3o que eu tenha visto.' },
 
 { t:'inn', tx:'Ele respondeu \u00e0 pergunta que eu fiz e s\u00f3 a ela.' },
-{ t:'inn', tx:'Ningu\u00e9m nesta casa mente. Eles apenas param exatamente onde a verdade acaba.' },
+{ t:'inn', tx:'Fenn respondeu at\u00e9 "n\u00e3o que eu tenha visto". O resto ficou com ele.' },
 
 { t:'nar', tx:'Fenn acendeu a lanterna. Ainda havia luz suficiente para n\u00e3o precisar.' },
 { t:'dial', ch:'fenn', tx:'A ceia \u00e9 \u00e0s oito. Depois disso a copa fecha.' },
@@ -394,7 +394,7 @@ RBF.CHAPTER2 = [
     routes:{ answer: 1, hope: 1 },
     then: C2_ESCOLHA_C },
   { id:'B',
-    tx:'Cruzar com o invent\u00e1rio de pessoal e datar exatamente o intervalo.',
+    tx:'Cruzar com o invent\u00e1rio de pessoal e datar o intervalo.',
     flags:{ ledger_report:'B', ledger_crossref:true, ledger_copied:false },
     routes:{ answer: 2 },
     then: C2_ESCOLHA_B },
@@ -450,7 +450,7 @@ RBF.CHAPTER2 = [
 { t:'inn', tx:'E n\u00e3o tem a entrada nove.' },
 { t:'inn', tx:'Em oito anos de servi\u00e7o eu nunca mandei um relat\u00f3rio sabendo o que tinha ficado de fora.' },
 { t:'pause' },
-{ t:'nar', tx:'Deixou os dois na mesa, um ao lado do outro, e olhou por um tempo.' },
+{ t:'nar', tx:'Deixou os dois na mesa, alinhou as lombadas e n\u00e3o abriu nenhum.' },
 { t:'inn', tx:'Dois meses.' },
 
 { t:'sfx', id:'sfx_candle' },

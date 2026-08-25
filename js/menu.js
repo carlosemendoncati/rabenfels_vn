@@ -674,7 +674,12 @@ RBF.Menu = (function () {
   function onGameMenuClosed() {
     if (RBF.State.is('paused')) {
       RBF.State.pop('playing');
-      if (RBF.State.is('playing')) { RBF.Engine.resume(); }
+      /* O menu tambem abre por cima do percurso. Nesse caso a pilha
+         devolve `percurso`, nao `playing`; limitar a retomada ao segundo
+         deixava o canvas pausado para sempre depois de fechar o menu. */
+      if (RBF.State.is('playing') || RBF.State.is('percurso')) {
+        RBF.Engine.resume();
+      }
     }
   }
 
@@ -1452,9 +1457,9 @@ RBF.Menu = (function () {
   /* ======================================================================
      AS QUATRO PAGINAS
 
-     Extra pos-jogo. O Prologo planta "Faltam quatro", o Capitulo 11
-     mostra ela arrancando, o Epilogo mostra o tribunal indeferindo por
-     falta exatamente delas. Aqui o jogador le o que Matheo nunca leu.
+     Extra pos-jogo. O Prologo planta "Faltam quatro". Esperanca e Perda
+     mostram as folhas retiradas; Resposta conserva as 291; Cobertura
+     para na 241. Aqui o jogador le o destino das mesmas quatro entradas.
 
      O conteudo depende das escolhas da partida concluida, entao dois
      jogadores nunca leem o mesmo documento. Quem carregou save antigo,
@@ -1595,7 +1600,7 @@ RBF.Menu = (function () {
      na cena - onde, de proposito, nada e explicado.
 
      Aqui as dez decisoes aparecem inteiras, com os tres ramos de cada uma
-     e o delta de rota LIDO DA PROPRIA OPCAO, e os nove finais aparecem na
+     e o delta de rota LIDO DA PROPRIA OPCAO, e as quatro leituras aparecem na
      ordem em que o jogo os avalia.
 
      A regra de liberacao e a mesma do resto do extra e nao afrouxa aqui:
@@ -1646,7 +1651,7 @@ RBF.Menu = (function () {
       class:   'rbf-arv__svg',
       role:    'img',
       'aria-label':
-        'Mapa das dez decisoes e das nove leituras. A lista completa vem logo abaixo.'
+        'Mapa das dez decisoes e das quatro leituras. A lista completa vem logo abaixo.'
     });
 
     /* Arestas antes dos nos, para a caixa cobrir a ponta da linha. */
@@ -1781,7 +1786,7 @@ RBF.Menu = (function () {
       body.appendChild(UI.el('p', 'rbf-arv__legenda',
         'Clique num ramo ou numa leitura para ir ao registro dela. ' +
         'A linha tracejada e a unica coisa que o texto nao diz: a leitura ' +
-        'e decidida no fim do Cap\u00edtulo 9 e s\u00f3 aparece tr\u00eas cap\u00edtulos depois.'));
+        'e decidida no fim do Cap\u00edtulo 9 e s\u00f3 aparece depois que a rota termina.'));
     }
 
     var lista = UI.el('ol', 'rbf-arv__lista');
@@ -1851,7 +1856,7 @@ RBF.Menu = (function () {
     }
     body.appendChild(lista);
 
-    /* ---- os nove finais ---- */
+    /* ---- as quatro leituras ---- */
     var fins = RBF.Arvore.finais() || [];
     if (fins.length) {
       body.appendChild(UI.el('h3', 'rbf-arv__sec', 'Para onde as dez decis\u00f5es levam'));
@@ -1876,8 +1881,8 @@ RBF.Menu = (function () {
 
         /* Os eixos, com direcao, aparecem mesmo na leitura que falta:
            e o bastante para o jogador saber para onde empurrar, e nao
-           entrega nada do que acontece la. Sem isso, oito dos nove
-           cartoes ficavam identicos e a grade virava uma parede. */
+           entrega nada do que acontece la. Sem isso, os cartoes fechados
+           ficavam identicos e a grade virava uma parede. */
         var ex = UI.el('p', 'rbf-arv__finalEixos',
           F.eixos.length
             ? 'responde a ' + F.eixos.join(' e ')
@@ -1929,7 +1934,7 @@ RBF.Menu = (function () {
 
   var CONTA_SECOES = [
     { id: 'paginas',  rot: 'As Quatro P\u00e1ginas',
-      nota: 'O que o tribunal precisava e n\u00e3o recebeu.' },
+      nota: 'Quatro entradas. O destino delas muda com a leitura.' },
     { id: 'leituras', rot: 'As Leituras',
       nota: 'Os quatro desfechos, e qual deles voc\u00ea alcan\u00e7ou.' },
     { id: 'arvore',   rot: 'A \u00c1rvore',

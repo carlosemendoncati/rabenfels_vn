@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.12.0',
+  gameVersion:       '0.14.0',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
@@ -46,8 +46,17 @@ RBF.CONFIG = {
     simplesmente nao tem, e o load segue pelo caminho de sempre. O que
     quebra e o Capitulo 10 da rota Cobertura, que ganhou beats no meio:
     quem tinha save ali reabriria em outra frase.
+
+    Subiu para 4 em 0.13.0. O desfecho da Cobertura foi reescrito e os
+    indices dos Capitulos 10 e 11 mudaram. Um save antigo dentro deles
+    voltaria para uma cena de continuidade que deixou de existir.
+
+    Subiu para 5 em 0.14.0. A revisao narrativa tornou o Epilogo
+    especifico por rota e acrescentou a leitura falsa de "autoria
+    falecida" em Resposta. Como o roteiro e um vetor unico, esses beats
+    deslocam saves das rotas seguintes mesmo quando sao condicionais.
   */
-  saveSchemaVersion: 3,
+  saveSchemaVersion: 5,
 
   paths: {
     backgrounds:  'assets/backgrounds/',
@@ -1021,14 +1030,14 @@ RBF.CHAPTERS = [
     selectable: true
   },
 
-  /* --- COBERTURA: Serafina a remove antes de agosto. --- */
+  /* --- COBERTURA: Serafina encerra; Carmine impede a fuga. --- */
   {
     id:    'cob10',
     code:  'C-X',
     data:  'COB10',
     rota:  'cobertura',
     label: 'Cap\u00edtulo 10',
-    title: 'A Carruagem',
+    title: 'A Porta',
     selectable: true
   },
   {
@@ -1037,7 +1046,7 @@ RBF.CHAPTERS = [
     data:  'COB11',
     rota:  'cobertura',
     label: 'Cap\u00edtulo 11',
-    title: 'Marca Cinzenta',
+    title: 'A Baixa',
     selectable: true
   },
 
@@ -1468,7 +1477,7 @@ RBF.ROTAS = [
        identificacao da fonte. Nidhaus le tudo o que entra e sai. */
     when:   { flag: 'cover_burned' },
     chapters: ['cob10', 'cob11'],
-    nota:   'Ela sai viva, antes de agosto, e sem entender que foi a compet\u00eancia dela que a entregou.'
+    nota:   'Ela acha a linha que a entregou. Carmine espera diante da porta e a mata antes da carruagem.'
   },
 
   {
@@ -1508,8 +1517,8 @@ RBF.ROTAS = [
    Um por rota. O beat { t:'rota' } grava RBF.STATE.flags.rota e, junto,
    RBF.STATE.flags.ending com o campo 'ending' da rota escolhida.
 
-   Nenhum final altera o destino da menina. Antoniette morre em duas das
-   quatro leituras e vive nas outras duas, e o que muda nao e isso: e
+   Nenhum final altera o destino da menina. Antoniette morre em tres das
+   quatro leituras e vive em uma, e o que muda nao e isso: e
    QUANTO o jogador entendeu, e quanto custou entender.
 
    Steiner, no corpus: a tragedia nao admite compensos. Nenhum destes
@@ -1522,7 +1531,7 @@ RBF.ENDINGS = [
     id:    'cover_burned',
     rota:  'cobertura',
     label: 'A Cobertura Queimada',
-    note:  'Serafina encerra o contrato antes de agosto. Ela VIVE, o Arquivo sai incompleto, e Klara fica.'
+    note:  'Serafina encerra o contrato. Carmine mata Antoniette antes da fuga; o Arquivo sai incompleto, e Klara fica.'
   },
   {
     id:    'divida',
@@ -1776,6 +1785,14 @@ RBF.COBERTURA = {
       file: 'antoniette.png', available: true,
       fw: 98, fh: 150, pes: 28, cor: '#6b1f28'
     },
+    fenn: {
+      file: 'fenn.png', available: true,
+      fw: 90, fh: 150, pes: 28, cor: '#4f4540'
+    },
+    dara: {
+      file: 'dara.png', available: true,
+      fw: 90, fh: 150, pes: 28, cor: '#59483e'
+    },
     klara: {
       file: 'klara.png', available: true,
       fw: 76, fh: 116, pes: 22, cor: '#8f8a84'
@@ -1791,6 +1808,12 @@ RBF.COBERTURA = {
     carmine: {
       file: 'carmine.png', available: true,
       fw: 116, fh: 172, pes: 28, cor: '#7a1420'
+    },
+    /* Tres quadros para cima. E uma execucao narrativa, nunca um estado
+       de combate nem uma acao disponivel ao jogador. */
+    carmine_ataque: {
+      file: 'carmine_ataque.png', available: true,
+      fw: 116, fh: 172, pes: 28, cor: '#7a1420', cols: 3, rows: 1
     }
   },
 
@@ -1819,6 +1842,18 @@ RBF.COBERTURA = {
     estante_b:       { file: 'estante_b.png',       available: true, base: 0.28, frente: true },
     mesa_contencao:  { file: 'mesa_contencao.png',  available: true, base: 0.60 },
     mesa_longa:      { file: 'mesa_longa.png',      available: true, base: 0.72 },
+    malas_bau:       { file: 'malas_bau.png',       available: true, base: 0.42 },
+    gancho_chaves:   { file: 'gancho_chaves.png',   available: true, base: 0.00 },
+    gancho_vazio:    { file: 'gancho_vazio.png',    available: true, base: 0.00 },
+    moldura_vazia:   { file: 'moldura_vazia.png',   available: true, base: 0.00 },
+    moldura_ocupada: { file: 'moldura_ocupada.png', available: true, base: 0.00 },
+    prataria_empilhada: { file: 'prataria_empilhada.png', available: true, base: 0.00 },
+    retrato_governanta_virado: {
+      file: 'retrato_governanta_virado.png', available: true, base: 0.00
+    },
+    retrato_governanta_revelado: {
+      file: 'retrato_governanta_revelado.png', available: true, base: 0.00
+    },
     pia:             { file: 'pia.png',             available: true, base: 0.46 },
     poltrona:        { file: 'poltrona.png',        available: true, base: 0.42 }
   },

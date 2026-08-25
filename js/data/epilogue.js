@@ -5,7 +5,7 @@
    Somente dados. Nenhum caminho de asset, nenhuma logica de render.
    Tipos de beat documentados em js/engine.js.
 
-   QUANDO: seis anos depois do pacote chegar. Lervel.
+   QUANDO: seis anos depois de Velha Nidhaus. Lervel.
    As gemeas fazem dezoito. Matheo esta velho de um jeito que ele nao
    registra.
 
@@ -22,10 +22,10 @@
    tragedia leva para virar papel.
 
    ------------------------------------------------------------------
-   O QUE ELE FEZ COM O ARQUIVO, E POR QUE NAO BASTOU
+   O QUE O TRIBUNAL FEZ COM O ARQUIVO
    ------------------------------------------------------------------
-   Ele fez tudo certo. Protocolou, sustentou, levou a tribunal.
-   O tribunal pediu as quatro paginas que faltavam.
+   Em Esperanca e Perda, Matheo fez tudo certo. Protocolou, sustentou,
+   levou a tribunal. O tribunal pediu as quatro paginas que faltavam.
 
    >>> AS QUATRO PAGINAS QUE ELA ARRANCOU ERAM O CASO. <<<
 
@@ -39,13 +39,18 @@
    ate elas, vai entender por que. Se nao chegar, melhor."
    Ele nao chegou. Melhor, entao.
 
+   Cobertura chega truncada antes desse problema: faltam plantas,
+   horarios e o fim do trabalho. Resposta chega com as 291 paginas.
+   Ali nao falta prova nem folha. Faltam nomes. O tribunal chama a
+   autoria de falecida enquanto Antoniette trabalha dois andares abaixo.
+
    ------------------------------------------------------------------
    A ARMADILHA DE PAPEL
    ------------------------------------------------------------------
    A familia nao registra nada - tres seculos quase sem rastro fora de
    Velha Nidhaus (biblia, "A bolha e a anomalia"). Matheo, que e
    arquivista antes de qualquer outra coisa, deixou o sobrenome em
-   alerta permanente na Ordem no ano em que recebeu o pacote.
+   alerta permanente na Ordem no ano em que o material entrou no arquivo.
 
    A armadilha demorou seis anos para disparar, e quando disparou
    trouxe a coisa mais inofensiva que existe: duas meninas entrando
@@ -60,16 +65,15 @@
    ------------------------------------------------------------------
    O QUE RAMIFICA
    ------------------------------------------------------------------
-   Uma divergencia real e duas texturas, e nada mais. (Compor, nao
-   multiplicar.)
+   Quatro fechos sobre a mesma matricula. (Compor, nao multiplicar.)
 
-   1. QUANTOS NOMES. Na rota 'early' Klara foi levada em agosto do ano
-      cinco: o cadastro tem UM nome. Nas outras tres tem dois.
+   1. O PARECER. Cada rota entrega ao tribunal um documento diferente.
    2. O CURSO DE KLARA, lido de 'taught'. Seis anos depois, numa ficha
       administrativa, aparece o que Antoniette ensinou. Em 'taught:A'
       Matheo reconhece a disciplina, porque e a dele - foi ele que
       ensinou aquilo a Antoniette. O circulo se fecha num formulario.
    3. O QUE ELE ANOTA no fim, lido de 'promised'.
+   4. O QUE FICOU DE ANTONIETTE, lido de 'rota'.
 
    ------------------------------------------------------------------
    REGRAS QUE VALEM ATE A ULTIMA LINHA
@@ -104,38 +108,76 @@ RBF.EPILOGUE = [
 { t:'fade_out' },
 
 /* ======================================================================
-   E1 - SEIS ANOS
-   O que ele fez, em ordem, sem lamento. O tribunal pediu as quatro
-   paginas. Ele nao tinha as quatro paginas.
+   E1 - O PARECER
+   O documento que cada rota produziu encontra a mesma formula por um
+   motivo diferente.
    ====================================================================== */
-{ t:'scene', id:'ep_seis_anos', chapter:'epilogo', title:'Seis anos',
+{ t:'scene', id:'ep_seis_anos', chapter:'epilogo', title:'O parecer',
   bg:'bg_prologue_room', bgm:'bgm_epilogo' },
 { t:'fade_in' },
 { t:'spr', ch:'matheo', ex:'neutral', pos:'center' },
 
-{ t:'nar', tx:'Em mar\u00e7o do segundo ano o tribunal da Marca pediu as quatro p\u00e1ginas que faltavam.' },
-{ t:'nar', tx:'Ele explicou que n\u00e3o as tinha. Explicou por escrito, tr\u00eas vezes, em tr\u00eas formatos diferentes.' },
-{ t:'pause' },
-
-{ t:'nar', tx:'O parecer veio em duas linhas e ele decorou as duas sem querer.' },
+/* Esperanca: 287 paginas. */
+{ t:'nar', tx:'Em mar\u00e7o do segundo ano o tribunal da Marca pediu as quatro p\u00e1ginas que faltavam.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ele explicou que n\u00e3o as tinha. Explicou por escrito, tr\u00eas vezes, em tr\u00eas formatos diferentes.', if:{ rota:'esperanca' } },
+{ t:'pause', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'O parecer veio em duas linhas. Ele decorou as duas sem querer.', if:{ rota:'esperanca' } },
 { t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u2014', lns:[
     '"Relato singular, de autoria falecida, sem terceiro lesado identific\u00e1vel."',
     '"Sem elemento externo, a mat\u00e9ria pertence ao foro dom\u00e9stico da casa."'
-]},
-{ t:'pause' },
+], if:{ rota:'esperanca' } },
+{ t:'pause', if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'As quatro p\u00e1ginas davam nome aos terceiros. Ele n\u00e3o sabia o que havia nelas.', if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Ela escreveu que, se eu chegasse at\u00e9 elas, entenderia.', if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Eu n\u00e3o cheguei.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ele recorreu duas vezes. A segunda foi indeferida no ano quatro.', if:{ rota:'esperanca' } },
 
-{ t:'inn', tx:'Sem terceiro lesado.' },
-{ t:'pause' },
-{ t:'nar', tx:'Ele leu aquilo como f\u00f3rmula de cart\u00f3rio, que era o que era.' },
-{ t:'nar', tx:'N\u00e3o tinha como saber que as quatro p\u00e1ginas eram exatamente os terceiros, um por p\u00e1gina, contados por ela em voz alta enquanto arrancava.' },
-{ t:'pause' },
+/* Perda: as mesmas quatro folhas, e uma ultima pagina que fecha a conta. */
+{ t:'nar', tx:'Em mar\u00e7o do segundo ano o tribunal da Marca pediu as quatro p\u00e1ginas que faltavam.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Ele explicou que n\u00e3o as tinha. Explicou por escrito, tr\u00eas vezes, em tr\u00eas formatos diferentes.', if:{ rota:'perda' } },
+{ t:'pause', if:{ rota:'perda' } },
+{ t:'nar', tx:'O parecer veio em duas linhas. Ele decorou as duas sem querer.', if:{ rota:'perda' } },
+{ t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u2014', lns:[
+    '"Relato singular, de autoria falecida, sem terceiro lesado identific\u00e1vel."',
+    '"Sem elemento externo, a mat\u00e9ria pertence ao foro dom\u00e9stico da casa."'
+], if:{ rota:'perda' } },
+{ t:'pause', if:{ rota:'perda' } },
+{ t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'perda' } },
+{ t:'nar', tx:'As quatro p\u00e1ginas davam nome aos terceiros. Ele n\u00e3o sabia o que havia nelas.', if:{ rota:'perda' } },
+{ t:'inn', tx:'Ela escreveu que, se eu chegasse at\u00e9 elas, entenderia.', if:{ rota:'perda' } },
+{ t:'inn', tx:'Eu n\u00e3o cheguei.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Ele recorreu duas vezes. A segunda foi indeferida no ano quatro.', if:{ rota:'perda' } },
 
-{ t:'inn', tx:'Ela escreveu que se eu chegasse at\u00e9 elas eu ia entender por qu\u00ea.' },
-{ t:'inn', tx:'Eu n\u00e3o cheguei.' },
-{ t:'pause' },
-{ t:'nar', tx:'Ele recorreu duas vezes. A segunda foi indeferida no ano quatro.' },
+/* Resposta: 291 paginas. A ausencia esta dentro do texto. */
+{ t:'nar', tx:'O material entrou no tribunal em quatro meses e saiu em nove.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Tinha duzentas e noventa e uma p\u00e1ginas. A numera\u00e7\u00e3o fechava.', if:{ rota:'resposta' } },
+{ t:'pause', if:{ rota:'resposta' } },
+{ t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u00b7 decis\u00e3o \u2014', lns:[
+    '"Relato singular, de autoria falecida, completo e de proced\u00eancia verificada."',
+    '"Julga-se improcedente por aus\u00eancia de terceiro lesado."'
+], if:{ rota:'resposta' } },
+{ t:'pause', if:{ rota:'resposta' } },
+{ t:'inn', tx:'Autoria falecida.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'A autora trabalhava dois andares abaixo. O parecer ficou como veio.', if:{ rota:'resposta' } },
+{ t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Todos estavam nas p\u00e1ginas. Sujeito. Fonte. Empregado. Nenhum nome.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Matheo n\u00e3o recorreu. O enquadramento estava correto.', if:{ rota:'resposta' } },
+
+/* Cobertura: o trabalho termina antes de fechar. */
+{ t:'nar', tx:'O material chegou com duzentas e quarenta e uma p\u00e1ginas.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Faltavam plantas, hor\u00e1rios e tudo o que viria depois de julho. A numera\u00e7\u00e3o fechava mesmo assim.', if:{ rota:'cobertura' } },
+{ t:'pause', if:{ rota:'cobertura' } },
+{ t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u2014', lns:[
+    '"Relato singular, de autoria falecida, sem terceiro lesado identific\u00e1vel."',
+    '"Material insuficiente para instru\u00e7\u00e3o."'
+], if:{ rota:'cobertura' } },
+{ t:'pause', if:{ rota:'cobertura' } },
+{ t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'O tribunal n\u00e3o pediu as quatro p\u00e1ginas. N\u00e3o chegou a precisar delas.', if:{ rota:'cobertura' } },
+
 { t:'spr', ch:'matheo', ex:'hollow', pos:'center' },
-{ t:'nar', tx:'Depois disso ele parou de recorrer e continuou trabalhando, porque era o que havia para fazer com o dia.' },
+{ t:'nar', tx:'Depois do parecer ele continuou trabalhando. Era o que havia para fazer com o dia.' },
 
 /* ======================================================================
    E2 - O ALERTA
@@ -145,14 +187,14 @@ RBF.EPILOGUE = [
   bg:'bg_prologue_room' },
 { t:'spr', ch:'matheo', ex:'read', pos:'center' },
 
-{ t:'nar', tx:'No m\u00eas em que recebeu o pacote ele fez uma coisa pequena e administrativa.' },
+{ t:'nar', tx:'No m\u00eas em que o material de Nidhaus entrou no arquivo central, ele fez uma coisa pequena e administrativa.' },
 { t:'nar', tx:'Deixou o sobrenome em alerta permanente no cadastro geral da Ordem.' },
 { t:'pause' },
 { t:'inn', tx:'Uma fam\u00edlia que n\u00e3o registra nada em tr\u00eas s\u00e9culos.' },
 { t:'inn', tx:'Se aparecer em papel algum dia, eu quero saber no mesmo dia.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Depois esqueceu, do jeito que se esquece um prego numa parede.' },
+{ t:'nar', tx:'Depois esqueceu. O alerta ficou no cadastro, sem prazo de expira\u00e7\u00e3o.' },
 { t:'pause' },
 { t:'sfx', id:'sfx_package' },
 { t:'nar', tx:'O alerta disparou numa ter\u00e7a de maio, seis anos depois, \u00e0s quatro e vinte da tarde.' },
@@ -173,8 +215,8 @@ RBF.EPILOGUE = [
 { t:'pause' },
 
 /* Klara sobrevive nas quatro rotas. O cadastro traz duas linhas em
-   todas elas, e a diferenca entre as leituras nao esta aqui - esta no
-   que Matheo faz com a folha, e em quem esta viva para nao ver. */
+   todas elas. A diferenca esta em quem continua viva para receber a
+   mesma folha. */
 { t:'nar', tx:'Duas linhas, mesmo sobrenome, mesma casa de origem, mesma turma.' },
 { t:'pause' },
 
@@ -184,7 +226,7 @@ RBF.EPILOGUE = [
 ]},
 { t:'pause' },
 
-{ t:'nar', tx:'Ele parou na express\u00e3o "primeira coloca\u00e7\u00e3o" e n\u00e3o soube por que aquilo apertou.' },
+{ t:'nar', tx:'Ele parou na express\u00e3o "primeira coloca\u00e7\u00e3o". A unha do polegar marcou a margem.' },
 { t:'pause' },
 
 /* --- a segunda linha, e nela a digital de Antoniette --- */
@@ -231,7 +273,10 @@ RBF.EPILOGUE = [
   bg:'bg_prologue_room' },
 { t:'spr', ch:'matheo', ex:'read', pos:'center' },
 
-{ t:'nar', tx:'Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.' },
+{ t:'nar', tx:'Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Ele pediu ao arquivo central a c\u00f3pia de consulta do Livro-Raz\u00e3o. A ficha de empr\u00e9stimo veio presa \u00e0 contracapa.', if:{ rota:'resposta' } },
 { t:'nar', tx:'O couro tinha perdido o cheiro de cavalo. Continuava pesando mais do que devia.' },
 { t:'pause' },
 
@@ -247,7 +292,7 @@ RBF.EPILOGUE = [
 { t:'pause' },
 { t:'inn', tx:'Ela n\u00e3o prensava nada de prop\u00f3sito. Ela transcrevia.' },
 { t:'pause' },
-{ t:'nar', tx:'Ficou um tempo com a p\u00e1gina aberta e n\u00e3o chegou a lugar nenhum, porque n\u00e3o havia lugar nenhum para chegar com uma asa.' },
+{ t:'nar', tx:'A luz atravessou a p\u00e1gina at\u00e9 tocar a asa. Ele continuava com o dedo ao lado dela.' },
 
 { t:'pause' },
 { t:'nar', tx:'Depois voltou \u00e0 folha de aviso e escreveu a resposta que a Ordem esperava.' },
@@ -270,8 +315,13 @@ RBF.EPILOGUE = [
 { t:'nar', tx:'Assinou, datou, p\u00f4s na bandeja de sa\u00edda.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Fechou o Arquivo. Amarrou o cordel em quatro voltas, do jeito que ele tinha vindo.' },
-{ t:'nar', tx:'Guardou na terceira gaveta.' },
+{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o n\u00f3.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Guardou na terceira gaveta.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o n\u00f3.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Guardou na terceira gaveta.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o n\u00f3.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Guardou na terceira gaveta.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Fechou o Livro-Raz\u00e3o, assinou a devolu\u00e7\u00e3o e deixou o volume na bandeja do arquivo central.', if:{ rota:'resposta' } },
 { t:'pause' },
 { t:'nar', tx:'Levantou.' },
 { t:'pause' },
@@ -289,8 +339,8 @@ RBF.EPILOGUE = [
    ====================================================================== */
 /* ======================================================================
    E4b - O QUE FICOU DE CADA UMA
-   Quatro fechamentos, um por leitura. Em duas ela esta morta e a ficha
-   diz tres palavras. Em duas ela esta viva, e o tribunal declarou
+   Quatro fechamentos, um por leitura. Em tres ela esta morta e a ficha
+   diz tres palavras. Em uma ela esta viva, e o tribunal declarou
    "autoria falecida" sobre alguem que respira.
    ====================================================================== */
 { t:'fade_out' },
@@ -342,17 +392,17 @@ RBF.EPILOGUE = [
 { t:'pause', if:{ rota:'perda' } },
 { t:'nar', tx:'Seis anos depois, o cadastro trouxe duas linhas, e ele n\u00e3o voltou \u00e0 p\u00e1gina duzentos e oitenta e sete para conferir de novo.', if:{ rota:'perda' } },
 
-/* --- COBERTURA: ela vive, e ele conclui errado por seis anos --------- */
+/* --- COBERTURA: Carmine a mata antes da porta ------------------------ */
 { t:'nar', tx:'Duzentas e quarenta e uma p\u00e1ginas. Ele contou, como conta tudo, e a numera\u00e7\u00e3o fechava.', if:{ rota:'cobertura' } },
 { t:'nar', tx:'Faltava metade das plantas e todos os hor\u00e1rios de guarda depois de julho, e nada disso estava marcado como falta.', if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
 { t:'nar', tx:'O tribunal indeferiu em quatro meses, e n\u00e3o precisou nem das quatro p\u00e1ginas.', if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'Antoniette Vael deixou Velha Nidhaus em agosto do ano cinco com carta de refer\u00eancia correta e dois meses de aviso pagos.', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'Copiou escritura num cart\u00f3rio de pra\u00e7a da Marca Cinzenta por onze anos, e nunca escreveu a ele.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'A p\u00e1gina duzentos e quarenta e um terminava com a data escrita na margem do livro de sa\u00edda.', if:{ rota:'cobertura' } },
+{ t:'inn', tx:'Ela achou a linha antes de morrer.', if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
-{ t:'inn', tx:'Se ela estivesse viva ela teria escrito.', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'Foi a \u00fanica conclus\u00e3o que ele tirou em seis anos, e estava errada.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'A ficha de pessoal e o caderno davam a mesma data.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Nenhum dos dois dizia que Carmine estava diante da porta.', if:{ rota:'cobertura' } },
 
 { t:'fade_out' },
 { t:'scene', id:'ep_cantiga', chapter:'epilogo', title:'A cantiga',
@@ -387,7 +437,7 @@ RBF.EPILOGUE = [
   sub:'"O erro \u00e9 do Compilador e a data dele \u00e9 maio."',
   time:'Fim.', if:{ rota:'perda' } },
 { t:'title', main:'ARQUIVO RABENFELS',
-  sub:'"Ele precisa abrir."',
+  sub:'"A linha estava correta."',
   time:'Fim.', if:{ rota:'cobertura' } },
 { t:'fade_out' }
 

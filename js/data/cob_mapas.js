@@ -8,9 +8,10 @@
    ------------------------------------------------------------------
    O QUE E ESTA ROTA - decisao do autor, 25/08/2026
    ------------------------------------------------------------------
-   "A rota onde a Antoniette investiga demais e todos comecam a caca-la
-    por chegar fundo demais. Cada rota e totalmente diferente, entao
-    pode quebrar o canon a vontade trazendo outras perspectivas."
+   A rota em que Antoniette investiga demais e a casa passa a caca-la.
+   Ela pode mostrar o que as outras rotas escondem, mas continua presa a
+   propria cronologia: Carmine ocupa a porta do patio e mata Antoniette
+   antes da fuga. O percurso encerra ali.
 
    O percurso tem dois atos e a virada e o meio dele.
 
@@ -35,10 +36,9 @@
    3. A casa age abertamente, em vez de encerrar por horario.
    4. Antoniette corre perigo fisico dentro da casa.
 
-   O QUE NAO MUDA: ela sai viva e antes das seis da manha. A carruagem
-   do C4 continua sendo o desfecho e o Capitulo 11 nao muda uma linha.
-   A caca e a noite; a cortesia de Serafina e o que deu a ela ate as
-   cinco e meia.
+   O QUE NAO MUDA: ela acha a linha que a entregou. O que muda nesta
+   leitura e que a cortesia de Serafina nao e salvo-conduto. Carmine
+   espera no ultimo vao e Antoniette nao chega a carruagem.
 
    ------------------------------------------------------------------
    TRES REGRAS QUE NAO SE QUEBRAM
@@ -46,10 +46,10 @@
 
    1. ELA ACHA A LINHA. Sempre. O que varia e quanto mais ela apura.
 
-   2. NAO HA LUTA E NAO HA MORTE. Ser alcancada custa informacao, nunca
-      tempo de leitura: ela recua ao quarto e leva a marca de ter sido
-      vista. Um percurso desta obra com tela de "voce morreu" pediria
-      para reler vinte minutos, e o preco certo aqui e outro.
+   2. NAO HA LUTA. Ser alcancada pelos vultos apaga o que ela apurou
+      desde que encontrou a linha. Carmine e diferente: nao persegue,
+      nao tem barra de vida e nao pode ser enfrentada. Ela executa o
+      desfecho inevitavel diante da porta.
 
    3. NINGUEM EXPLICA. Nem a virada, nem o que esta no cilindro, nem por
       que a porta do quarto dela passou a dar em outro lugar.
@@ -100,7 +100,8 @@ quarto: {
     { tipo: 'escrivaninha', x: 250,  y: 420 },
     { tipo: 'cadeira',      x: 400,  y: 440 },
     { tipo: 'estante_a',    x: 980,  y: 380 },
-    { tipo: 'poltrona',     x: 1090, y: 800 }
+    { tipo: 'poltrona',     x: 1090, y: 800 },
+    { tipo: 'malas_bau',    x: 520,  y: 940 }
   ],
 
   saidas: [
@@ -146,8 +147,8 @@ quarto: {
 
     { id: 'malas', x: 520, y: 940, alto: 40, uma: true,
       tx: ['Duas malas fechadas e o ba\u00fa de ferramentas.',
-           'Trinta e uma horas.'],
-      depois: ['Trinta e uma horas.'] }
+           'Nove horas.'],
+      depois: ['Nove horas.'] }
   ]
 },
 
@@ -165,7 +166,11 @@ corredor: {
 
   moveis: [
     { tipo: 'bancada', x: 980,  y: 210 },
-    { tipo: 'cadeira', x: 1500, y: 250 }
+    { tipo: 'cadeira', x: 1500, y: 250 },
+    { tipo: 'gancho_chaves', x: 980, y: 210, fase: 0, atravessa: true },
+    { tipo: 'gancho_vazio',  x: 980, y: 210, fase: 1, atravessa: true },
+    { tipo: 'moldura_vazia', x: 480, y: 250, fase: 0, atravessa: true },
+    { tipo: 'moldura_ocupada', x: 480, y: 250, fase: 1, atravessa: true }
   ],
 
   saidas: [
@@ -404,6 +409,7 @@ copa: {
 
   moveis: [
     { tipo: 'mesa_longa', x: 700,  y: 520 },
+    { tipo: 'prataria_empilhada', x: 700, y: 520, atravessa: true },
     { tipo: 'cadeira',    x: 540,  y: 640 },
     { tipo: 'cadeira',    x: 880,  y: 640 },
     { tipo: 'pia',        x: 1180, y: 400 },
@@ -500,7 +506,8 @@ camara: {
     { id: 'cilindro', x: 620, y: 580, alto: 190, raio: 96, uma: true,
       marca: 'cob_camara', sfx: 'sfx_cob_notada',
       tx: ['O cilindro tem dois metros e quarenta e est\u00e1 cheio at\u00e9 a marca de cima.',
-           'Dentro dele h\u00e1 uma menina de doze anos, e Klara tem oito.',
+           'Dentro dele h\u00e1 uma menina de doze anos.',
+           '\u00c9 Klara.',
            'A menina abriu os olhos e n\u00e3o olhou para Antoniette.',
            'Olhou para a porta por onde Antoniette tinha entrado, e Antoniette n\u00e3o virou.'],
       depois: ['Ela n\u00e3o virou.'] },
@@ -528,8 +535,9 @@ camara: {
 
 /* --------------------------------------------------------------------------
    O SALAO
-   O ultimo trecho. Ela sai por baixo, e o que esta entre ela e a porta
-   nao se mexe.
+   O ultimo trecho. A porta existe, mas Carmine ocupa o unico acesso.
+   Nao ha combate nem desvio: o jogador confere quem esta ali e o
+   percurso termina.
    -------------------------------------------------------------------------- */
 salao: {
   id:   'salao',
@@ -541,39 +549,37 @@ salao: {
   moveis: [
     { tipo: 'poltrona',   x: 260,  y: 720 },
     { tipo: 'mesa_longa', x: 1060, y: 440 },
+    { tipo: 'retrato_governanta_virado',
+      tipoDepois: 'retrato_governanta_revelado', marca: 'cob_retrato',
+      x: 1060, y: 440, atravessa: true },
     { tipo: 'cadeira',    x: 1060, y: 580 }
   ],
 
   gente: [
-    /* Parada. Nao persegue, nao alcanca, nao fala. Esta no caminho e
-       depois nao esta. */
-    { ch: 'carmine', x: 700, y: 790, dir: 'cima', parado: true }
+    /* Parada. Nao persegue e nao e inimiga de combate. Ocupa o vao ate
+       o desfecho automatico. */
+    { ch: 'carmine', x: 700, y: 790, dir: 'cima', parado: true,
+      bloqueia: { w: 116, h: 34 } }
   ],
 
   saidas: [
     { x: 20,  y: 408, w: 60, h: 130, para: 'escada',
       px: 440, py: 1280, dir: 'cima' },
 
-    /* O patio. Encerra o percurso. */
-    { x: 650, y: 810, w: 100, h: 70, exige: 'caderno',
-      recusa: 'Ela n\u00e3o vai atravessar aquela porta sem o caderno.',
-      encerra: 'patio' }
+    /* Nao existe saida para o patio nesta leitura. Carmine bloqueia o
+       vao e o ponto abaixo encerra o percurso antes da fuga. */
   ],
 
   pontos: [
     { id: 'carmine', x: 700, y: 740, alto: 200, raio: 110, uma: true,
-      marca: 'cob_carmine',
+      marca: 'cob_carmine', marcaAoFim: true,
+      desfecho: 'carmine', ataque: 'carmine_ataque',
+      ataqueX: 700, ataqueY: 790,
       tx: ['H\u00e1 uma mulher entre ela e a porta do p\u00e1tio.',
            'A mulher est\u00e1 de costas para a porta e de frente para Antoniette, e n\u00e3o se mexe.',
            'Antoniette contou at\u00e9 dez, do jeito que contou na sala de Serafina.',
            'Na segunda vez que olhou, a mulher estava tr\u00eas passos mais perto e continuava sem se mexer.',
-           'Na terceira, n\u00e3o estava.'],
-      /* A fala da porta era um ponto separado, a quarenta pixels
-         deste, e os dois disputavam a mesma mao. Vira o `depois`:
-         olhar duas vezes para o mesmo lugar e o gesto certo aqui de
-         qualquer jeito. */
-      depois: ['A porta do p\u00e1tio est\u00e1 destrancada.',
-               'Esteve trancada por dentro todas as noites dos \u00faltimos cinco anos.'] },
+           'Antoniette come\u00e7ou a terceira contagem.'] },
 
     { id: 'retrato', x: 1060, y: 440, alto: 122, raio: 84, uma: true,
       marca: 'cob_retrato',

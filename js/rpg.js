@@ -66,6 +66,7 @@ RBF.Rpg = (function () {
   var palco = null;     /* quadro com a medida exata do canvas          */
   var hud   = null;
   var fala  = null;
+  var menuBtn = null;
 
   var rodando = false;
   var quadro  = null;   /* id do requestAnimationFrame */
@@ -94,6 +95,16 @@ RBF.Rpg = (function () {
   function charDef(id)  { return (C().chars || {})[id]  || null; }
   function propDef(id)  { return (C().props || {})[id]  || null; }
   function faceDef(id)  { return (C().faces || {})[id]  || null; }
+
+  /* Um objeto pode trocar de arte quando o ponto correspondente foi
+     conferido. Serve para estados concretos (retrato virado/revelado), sem
+     criar uma segunda maquina de flags fora das marcas do percurso. */
+  function tipoMovel(m) {
+    if (m && m.tipoDepois && m.marca && jogo && jogo.marcas && jogo.marcas[m.marca]) {
+      return m.tipoDepois;
+    }
+    return m ? m.tipo : null;
+  }
 
   function sala(id) {
     var lista = RBF.COB_MAPAS || {};
@@ -137,8 +148,15 @@ RBF.Rpg = (function () {
     imgMapa(s.mapa);
     var i;
     var mv = daFase(s.moveis), gt = daFase(s.gente), sd = daFase(s.saidas);
-    for (i = 0; i < mv.length; i++) { imgProp(mv[i].tipo); }
+    var pt = daFase(s.pontos);
+    for (i = 0; i < mv.length; i++) {
+      imgProp(mv[i].tipo);
+      if (mv[i].tipoDepois) { imgProp(mv[i].tipoDepois); }
+    }
     for (i = 0; i < gt.length; i++) { imgChar(gt[i].ch); }
+    for (i = 0; i < pt.length; i++) {
+      if (pt[i].ataque) { imgChar(pt[i].ataque); }
+    }
     for (i = 0; i < sd.length; i++) {
       var d = sala(sd[i].para);
       if (d) { imgMapa(d.mapa); }
@@ -235,6 +253,24 @@ RBF.Rpg = (function () {
       out.push(caixaMovel(m));
     }
 
+    /* Personagem de cena so bloqueia quando declara isso. Vultos em ronda
+       continuam usando a propria regra de alcance; Carmine, parada diante
+       da porta, ocupa o espaco que o sprite mostra. */
+    var gente = daFase(s.gente);
+    for (i = 0; i < gente.length; i++) {
+      var g = gente[i];
+      if (!g.bloqueia) { continue; }
+      var v = estadoGente(s.id, indiceDe(s.gente, g), g);
+      if (typeof g.bloqueia === 'object') {
+        var bw = g.bloqueia.w || 80;
+        var bh = g.bloqueia.h || 28;
+        out.push({ x: v.x - bw / 2 + (g.bloqueia.dx || 0),
+                   y: v.y - bh + (g.bloqueia.dy || 0), w: bw, h: bh });
+      } else {
+        out.push(caixaPes(v.x, v.y, charDef(g.ch)));
+      }
+    }
+
     for (i = 0; i < (s.portas || []).length; i++) {
       var d = s.portas[i];
       if (jogo.abertas[chaveDeSala(s.id, d.id)]) { continue; }
@@ -247,8 +283,9 @@ RBF.Rpg = (function () {
      manifesto: uma estante barra inteira, uma escrivaninha nao barra a
      tampa. Sem imagem, o motor usa a medida declarada no mapa. */
   function caixaMovel(m) {
-    var def = propDef(m.tipo);
-    var im  = imgProp(m.tipo);
+    var tipo = tipoMovel(m);
+    var def = propDef(tipo);
+    var im  = imgProp(tipo);
     var w = (im && im.naturalWidth)  ? im.naturalWidth  : (m.w || 96);
     var h = (im && im.naturalHeight) ? im.naturalHeight : (m.h || 96);
     var base = def ? def.base : 1;
@@ -337,6 +374,7 @@ RBF.Rpg = (function () {
     jogo.tempo += dt;
 
     if (jogo.fala) { passoFala(dt); return; }
+    if (jogo.desfecho) { passoDesfecho(dt); return; }
     if (jogo.saindo) { return; }
 
     passoJogador(dt);
@@ -350,11 +388,27 @@ RBF.Rpg = (function () {
 
   function passoJogador(dt) {
     var dx = 0, dy = 0;
+    var porToque = false;
 
     if (teclas.esquerda) { dx -= 1; }
     if (teclas.direita)  { dx += 1; }
     if (teclas.cima)     { dy -= 1; }
     if (teclas.baixo)    { dy += 1; }
+
+    /* No telefone, um toque e um destino, nao um passo de 220 ms. O
+       teclado sempre tem precedencia e cancela o destino em aoBaixar(). */
+    if (!dx && !dy && jogo.toque) {
+      var tx = jogo.toque.x - jogo.p.x;
+      var ty = jogo.toque.y - jogo.p.y;
+      var td = Math.sqrt(tx * tx + ty * ty);
+      if (td <= 10) {
+        jogo.toque = null;
+      } else {
+        dx = tx / td;
+        dy = ty / td;
+        porToque = true;
+      }
+    }
 
     var quieto = !!teclas.silencio;
     var vel = quieto ? C().passoSilencioso : C().passo;
@@ -377,7 +431,19 @@ RBF.Rpg = (function () {
       } else {
         jogo.p.dir = dy < 0 ? 'cima' : 'baixo';
       }
+      var antesX = jogo.p.x, antesY = jogo.p.y;
       move(jogo.p, dx * vel * dt, dy * vel * dt, charDef(jogo.p.ch));
+
+      /* Destino dentro de parede ou movel: para depois de alguns quadros,
+         em vez de fazer a personagem caminhar no lugar indefinidamente. */
+      if (porToque) {
+        if (jogo.p.x === antesX && jogo.p.y === antesY) {
+          jogo.toque.bloqueado = (jogo.toque.bloqueado || 0) + dt;
+          if (jogo.toque.bloqueado > 0.18) { jogo.toque = null; }
+        } else {
+          jogo.toque.bloqueado = 0;
+        }
+      }
       jogo.p.anim += dt * (quieto ? 3.4 : 6.2);
     } else {
       jogo.p.anim = 0;
@@ -463,11 +529,10 @@ RBF.Rpg = (function () {
 
       /* Encostou.
 
-         Nao ha luta e nao ha morte. O padrao e RECUAR: ela volta ao
-         refugio do segmento e leva a marca de ter sido vista. Morrer
-         num percurso desta obra seria pedir para repetir vinte minutos
-         de leitura, e o preco certo aqui e de informacao, nao de
-         tempo. Uma peca que queira encerrar mesmo declara `aoTocar`. */
+         Nao ha luta. O padrao dos perseguidores em ronda e RECUAR: ela
+         volta ao refugio do segmento e leva a marca de ter sido vista.
+         O desfecho de Carmine nao passa por esta regra: ela esta parada,
+         declarada como ponto narrativo no salao. */
       if (d < (g.toque || 30) && !jogo.saindo && !jogo.recuando) {
         if (g.aoTocar) { encerra(g.aoTocar); return; }
         recua(g);
@@ -483,11 +548,15 @@ RBF.Rpg = (function () {
      perde e o proveito da noite. */
   function recua(g) {
     jogo.recuando = true;
-    jogo.marcas.cob_vista = true;
     RBF.Audio.playSfx('sfx_cob_notada');
 
     var r = (segmento && segmento.refugio) || null;
     diz(g.aoRecuar || ['Ela nao viu o que era. Viu que estava perto.'], g, function () {
+      /* Tudo que foi apurado depois da virada volta ao estado em que a
+         linha foi encontrada. O caderno e a linha ficam; as descobertas
+         feitas durante a caca precisam ser refeitas. */
+      restauraCheckpoint();
+      jogo.marcas.cob_vista = true;
       if (r) { vaiPara(r.sala, r.x, r.y, r.dir); }
       for (var k in jogo.atores) {
         if (Object.prototype.hasOwnProperty.call(jogo.atores, k)) {
@@ -496,8 +565,28 @@ RBF.Rpg = (function () {
         }
       }
       jogo.ruido = 0;
+      jogo.toque = null;
       jogo.recuando = false;
+      pintaHud();
     });
+  }
+
+  function criaCheckpoint() {
+    jogo.checkpoint = {
+      itens:   copia(jogo.itens),
+      marcas:  copia(jogo.marcas),
+      usados:  copia(jogo.usados),
+      abertas: copia(jogo.abertas)
+    };
+  }
+
+  function restauraCheckpoint() {
+    var c = jogo && jogo.checkpoint;
+    if (!c) { return; }
+    jogo.itens   = copia(c.itens   || {});
+    jogo.marcas  = copia(c.marcas  || {});
+    jogo.usados  = copia(c.usados  || {});
+    jogo.abertas = copia(c.abertas || {});
   }
 
   function proximaRonda(g, v) {
@@ -553,6 +642,10 @@ RBF.Rpg = (function () {
                       w: sa.w + folga * 2, h: sa.h + folga * 2 })) { continue; }
       if (sa.exige && !jogo.itens[sa.exige]) {
         aviso(sa.recusa || 'Trancada.');
+        return;
+      }
+      if (sa.exigeMarca && !jogo.marcas[sa.exigeMarca]) {
+        aviso(sa.recusaMarca || sa.recusa || 'Nao passa.');
         return;
       }
       if (sa.encerra) { encerra(sa.encerra); return; }
@@ -642,6 +735,21 @@ RBF.Rpg = (function () {
     }
     jogo.usados[chave] = true;
 
+    var marcaPendente = !!(pt.marca && pt.marcaAoFim);
+
+    function aplicaMarca() {
+      if (!pt.marca) { return; }
+      jogo.marcas[pt.marca] = true;
+      RBF.Audio.playSfx('sfx_cob_marca');
+    }
+
+    function conclui(depois) {
+      return function () {
+        if (marcaPendente) { aplicaMarca(); }
+        if (depois) { depois(); }
+      };
+    }
+
     if (pt.item) {
       jogo.itens[pt.item] = true;
       RBF.Audio.playSfx('sfx_cob_achado');
@@ -651,21 +759,53 @@ RBF.Rpg = (function () {
       jogo.abertas[chaveDeSala(pt.abreSala || jogo.sala, pt.abre)] = true;
       RBF.Audio.playSfx('sfx_cob_destranca');
     }
-    if (pt.marca) {
-      jogo.marcas[pt.marca] = true;
-      RBF.Audio.playSfx('sfx_cob_marca');
-    }
+    if (pt.marca && !marcaPendente) { aplicaMarca(); }
     if (pt.sfx) { RBF.Audio.playSfx(pt.sfx); }
 
     /* Vira o ato DEPOIS da fala, e nao antes: o texto que descreve a
        virada tem de ser lido com a casa ainda como era. */
     if (pt.viraFase) {
-      diz(pt.tx, pt, function () { viraFase(pt.viraFase, pt.viraBgm); });
+      diz(pt.tx, pt, conclui(function () { viraFase(pt.viraFase, pt.viraBgm); }));
       return;
     }
-    if (pt.encerra) { diz(pt.tx, pt, function () { encerra(pt.encerra); }); return; }
+    if (pt.desfecho) {
+      diz(pt.tx, pt, conclui(function () { iniciaDesfecho(pt); }));
+      return;
+    }
+    if (pt.encerra) { diz(pt.tx, pt, conclui(function () { encerra(pt.encerra); })); return; }
 
-    diz(pt.tx, pt);
+    diz(pt.tx, pt, marcaPendente ? conclui(null) : null);
+  }
+
+  /* Carmine nao abre uma luta. A interacao tira o controle, toca os tres
+     quadros entregues e encerra a leitura antes da porta do patio. */
+  function iniciaDesfecho(pt) {
+    if (!jogo || jogo.desfecho || jogo.saindo) { return; }
+    soltaTudo();
+    jogo.toque = null;
+    jogo.p.andando = false;
+    jogo.desfecho = {
+      id: pt.desfecho,
+      ataque: pt.ataque || null,
+      oculta: 'carmine',
+      x: pt.ataqueX === undefined ? pt.x : pt.ataqueX,
+      y: pt.ataqueY === undefined ? pt.y : pt.ataqueY,
+      tempo: 0,
+      fechou: false
+    };
+    if (capa) { capa.classList.add('is-desfecho'); }
+    RBF.Audio.playSfx('sfx_cob_notada');
+    RBF.Audio.playBgm('cob_ultima');
+  }
+
+  function passoDesfecho(dt) {
+    var d = jogo && jogo.desfecho;
+    if (!d || d.fechou) { return; }
+    d.tempo += dt;
+    if (d.tempo >= 1.35) {
+      d.fechou = true;
+      encerra(d.id || 'carmine');
+    }
   }
 
   /* ---- fala --------------------------------------------------------------- */
@@ -786,10 +926,16 @@ RBF.Rpg = (function () {
 
     /* Sem tela auxiliar - navegador que nao criou o segundo contexto -
        a cena ja esta no quadro e o que resta e escurecer as bordas. */
-    if (!cenaCtx || !maskCtx) { desenhaEscuro(cam); desenhaMarca(s); return; }
+    if (!cenaCtx || !maskCtx) {
+      desenhaEscuro(cam);
+      desenhaMarca(s);
+      desenhaDesfecho(cam);
+      return;
+    }
 
     compoe(cam, s);
     desenhaMarca(s);
+    desenhaDesfecho(cam);
   }
 
   /* Desenha a cena inteira, sem luz, no contexto informado. */
@@ -808,6 +954,7 @@ RBF.Rpg = (function () {
     }
     var gt = daFase(s.gente);
     for (i = 0; i < gt.length; i++) {
+      if (jogo.desfecho && gt[i].ch === jogo.desfecho.oculta) { continue; }
       var v = estadoGente(s.id, indiceDe(s.gente, gt[i]), gt[i]);
       fila.push({ y: v.y, tipo: 'ator', dado: { ch: gt[i].ch, st: v, def: gt[i] } });
     }
@@ -947,7 +1094,7 @@ RBF.Rpg = (function () {
   }
 
   function desenhaMovel(c, m, cam) {
-    var im = imgProp(m.tipo);
+    var im = imgProp(tipoMovel(m));
     if (im) {
       c.drawImage(im,
         Math.round(m.x - im.naturalWidth / 2 - cam.x),
@@ -1009,6 +1156,39 @@ RBF.Rpg = (function () {
     var lin = LADOS[st.dir] === undefined ? 0 : LADOS[st.dir];
 
     c.drawImage(im, col * fw, lin * fh, fw, fh, px, py, fw, fh);
+  }
+
+  /* Tres quadros, uma vez. A tela fecha antes que a falta de uma folha
+     de queda obrigue o motor a improvisar um corpo com outra pose. */
+  function desenhaDesfecho(cam) {
+    if (!ctx || !jogo || !jogo.desfecho) { return; }
+    var d = jogo.desfecho;
+    var t = d.tempo;
+    var def = charDef(d.ataque);
+    var im = imgChar(d.ataque);
+
+    if (t < 0.72) {
+      if (im && def) {
+        var quadroAtaque = t < 0.16 ? 0 : (t < 0.32 ? 1 : 2);
+        ctx.drawImage(im,
+          quadroAtaque * def.fw, 0, def.fw, def.fh,
+          Math.round(d.x - def.fw / 2 - cam.x),
+          Math.round(d.y - def.fh - cam.y), def.fw, def.fh);
+      } else {
+        desenhaAtor(ctx, 'carmine',
+          { x:d.x, y:d.y, dir:'cima', anim:0, andando:false }, cam, null);
+      }
+    }
+
+    if (t >= 0.28 && t < 0.48) {
+      ctx.fillStyle = 'rgba(105,0,15,' + (0.44 - Math.abs(0.38 - t) * 2.2) + ')';
+      ctx.fillRect(0, 0, largura(), altura());
+    }
+    if (t >= 0.42) {
+      var preto = Math.min(1, (t - 0.42) / 0.58);
+      ctx.fillStyle = 'rgba(0,0,0,' + preto + ')';
+      ctx.fillRect(0, 0, largura(), altura());
+    }
   }
 
   /* Marca do ponto de interacao: um losango pequeno, so quando esta ao
@@ -1195,9 +1375,15 @@ RBF.Rpg = (function () {
 
   function aoBaixar(e) {
     if (!rodando) { return; }
+    if (jogo && jogo.desfecho) { e.preventDefault(); return; }
 
     var t = MAPA_TECLA[e.key];
-    if (t) { teclas[t] = true; e.preventDefault(); return; }
+    if (t) {
+      teclas[t] = true;
+      if (jogo) { jogo.toque = null; }
+      e.preventDefault();
+      return;
+    }
 
     if (e.key === ' ' || e.key === 'Enter' || e.key === 'e' || e.key === 'E') {
       e.preventDefault();
@@ -1207,7 +1393,7 @@ RBF.Rpg = (function () {
     }
     if (e.key === 'Escape') {
       e.preventDefault();
-      if (RBF.Menu && RBF.Menu.openPause) { RBF.Menu.openPause(); }
+      if (RBF.Menu && RBF.Menu.openGameMenu) { RBF.Menu.openGameMenu(); }
     }
   }
 
@@ -1216,11 +1402,13 @@ RBF.Rpg = (function () {
     if (t) { teclas[t] = false; }
   }
 
-  /* Toque e clique: anda para onde tocou, e usa quando toca no que esta
-     a frente. Um alvo por toque, sem manche na tela - o palco e pequeno
-     em telefone e um manche cobriria a sala. */
+  /* Toque e clique: anda ate onde tocou, e usa quando toca no que ja esta
+     a frente. O destino continua ativo depois que o dedo sobe; no telefone
+     um toque nao pode exigir uma sequencia de pequenos passos. */
   function aoTocar(e) {
     if (!rodando) { return; }
+    if (jogo && jogo.desfecho) { if (e.cancelable) { e.preventDefault(); } return; }
+    if (e.cancelable) { e.preventDefault(); }
     RBF.Audio.unlock();
     if (jogo.fala) { avancaFala(); return; }
 
@@ -1230,36 +1418,33 @@ RBF.Rpg = (function () {
     var y = (ponto.clientY - r.top) / r.height * altura();
     var cam = camera();
 
-    jogo.toque = { x: x + cam.x, y: y + cam.y, t: jogo.tempo };
+    var toque = { x: x + cam.x, y: y + cam.y, t: jogo.tempo, bloqueado: 0 };
 
     /* Tocar no que ja esta a frente age em vez de andar. */
     var pt = alvo();
     if (pt) {
-      var d = Math.sqrt((pt.x - jogo.toque.x) * (pt.x - jogo.toque.x) +
-                        (pt.y - jogo.toque.y) * (pt.y - jogo.toque.y));
-      if (d < (pt.raio || 72)) { usa(); return; }
+      var d = Math.sqrt((pt.x - toque.x) * (pt.x - toque.x) +
+                        (pt.y - toque.y) * (pt.y - toque.y));
+      if (d < (pt.raio || 72)) { jogo.toque = null; usa(); return; }
     }
-    andaPara(jogo.toque);
+    andaPara(toque);
   }
 
-  /* Passo unico na direcao do toque. Sem busca de caminho: a sala e uma
-     caixa com moveis, e um passo por toque ja permite atravessar. */
+  /* Destino continuo. Sem busca de caminho: ao encontrar obstaculo o laco
+     para, e outro toque escolhe por onde contornar. */
   function andaPara(p) {
-    var dx = p.x - jogo.p.x;
-    var dy = p.y - jogo.p.y;
-    if (Math.abs(dx) < 8 && Math.abs(dy) < 8) { return; }
-    if (Math.abs(dx) > Math.abs(dy)) {
-      teclas.esquerda = dx < 0; teclas.direita = dx > 0;
-      teclas.cima = false; teclas.baixo = false;
-    } else {
-      teclas.cima = dy < 0; teclas.baixo = dy > 0;
-      teclas.esquerda = false; teclas.direita = false;
-    }
-    setTimeout(soltaTudo, 220);
+    if (!jogo || !p) { return; }
+    jogo.toque = { x: p.x, y: p.y, t: jogo.tempo, bloqueado: 0 };
   }
 
   function soltaTudo() {
     teclas.esquerda = teclas.direita = teclas.cima = teclas.baixo = false;
+  }
+
+  function abreMenu(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    if (!rodando || (jogo && jogo.desfecho)) { return; }
+    if (RBF.Menu && RBF.Menu.openGameMenu) { RBF.Menu.openGameMenu(); }
   }
 
   /* ==========================================================================
@@ -1281,6 +1466,9 @@ RBF.Rpg = (function () {
      ABRIR no primeiro ato e TRANCAR no segundo sem escrever a sala duas
      vezes. */
   function naFase(p) {
+    if (p && p.someComMarca && jogo && jogo.marcas[p.someComMarca]) {
+      return false;
+    }
     if (!p || p.fase === undefined || p.fase === null) { return true; }
     if (p.fase === 0) { return jogo.fase === 0; }
     return jogo.fase >= p.fase;
@@ -1302,6 +1490,7 @@ RBF.Rpg = (function () {
     if (jogo.fase >= n) { return; }
     jogo.fase = n;
     jogo.ruido = 0;
+    criaCheckpoint();
     if (bgm) { jogo.bgm = bgm; RBF.Audio.playBgm(bgm); }
     else { jogo.bgm = null; }
     preCarrega(jogo.sala);
@@ -1328,9 +1517,11 @@ RBF.Rpg = (function () {
       perto:     false,
       bgm:       null,
       fala:      null,
+      desfecho:  null,
       saindo:    false,
       recuando:  false,
-      toque:     null
+      toque:     null,
+      checkpoint:null
     };
   }
 
@@ -1376,6 +1567,10 @@ RBF.Rpg = (function () {
     jogo.usados    = dados.usados    || {};
     jogo.abertas   = dados.abertas   || {};
     jogo.visitadas = dados.visitadas || {};
+    jogo.checkpoint = copiaCheckpoint(dados.checkpoint);
+    /* Save antigo, anterior ao custo da caca: o proprio estado carregado
+       vira a base segura. Nao apaga descoberta feita antes da atualizacao. */
+    if (jogo.fase >= 1 && !jogo.checkpoint) { criaCheckpoint(); }
 
     monta();
     preCarrega(jogo.sala);
@@ -1391,8 +1586,7 @@ RBF.Rpg = (function () {
 
     document.addEventListener('keydown', aoBaixar);
     document.addEventListener('keyup',   aoSoltar);
-    cv.addEventListener('mousedown', aoTocar);
-    cv.addEventListener('touchstart', aoTocar, { passive: true });
+    cv.addEventListener('pointerdown', aoTocar);
 
     pintaHud();
     capa.classList.add('is-on');
@@ -1411,10 +1605,9 @@ RBF.Rpg = (function () {
     document.removeEventListener('keydown', aoBaixar);
     document.removeEventListener('keyup',   aoSoltar);
     if (cv) {
-      cv.removeEventListener('mousedown', aoTocar);
-      cv.removeEventListener('touchstart', aoTocar);
+      cv.removeEventListener('pointerdown', aoTocar);
     }
-    if (capa) { capa.classList.remove('is-on'); }
+    if (capa) { capa.classList.remove('is-on', 'is-desfecho'); }
   }
 
   /* Sai. `saida` e o id que o roteiro vai ler. */
@@ -1439,6 +1632,8 @@ RBF.Rpg = (function () {
     palco = capa.querySelector('.rf-perc__palco');
     hud   = capa.querySelector('.rf-perc__hud');
     fala  = capa.querySelector('.rf-perc__fala');
+    menuBtn = capa.querySelector('.rf-perc__menu');
+    if (menuBtn) { menuBtn.onclick = abreMenu; }
 
     if (!cv) { return; }
 
@@ -1477,7 +1672,8 @@ RBF.Rpg = (function () {
       marcas:    copia(jogo.marcas),
       usados:    copia(jogo.usados),
       abertas:   copia(jogo.abertas),
-      visitadas: copia(jogo.visitadas)
+      visitadas: copia(jogo.visitadas),
+      checkpoint:copiaCheckpoint(jogo.checkpoint)
     };
   }
 
@@ -1489,9 +1685,21 @@ RBF.Rpg = (function () {
     return out;
   }
 
+  function copiaCheckpoint(c) {
+    if (!c) { return null; }
+    return {
+      itens:   copia(c.itens   || {}),
+      marcas:  copia(c.marcas  || {}),
+      usados:  copia(c.usados  || {}),
+      abertas: copia(c.abertas || {})
+    };
+  }
+
   /* Salvar so fora de fala: um save no meio de uma linha voltaria com a
      linha pela metade e sem quem a estava dizendo. */
-  function podeSalvar() { return rodando && jogo && !jogo.fala && !jogo.saindo; }
+  function podeSalvar() {
+    return !!(jogo && !jogo.fala && !jogo.desfecho && !jogo.saindo);
+  }
 
   function ativo() { return rodando; }
 
@@ -1528,10 +1736,16 @@ RBF.Rpg = (function () {
   }
   function itens()  { return jogo ? copia(jogo.itens)  : {}; }
 
-  function pausa() { rodando = false; }
+  function pausa() {
+    if (!rodando) { return; }
+    rodando = false;
+    if (quadro) { cancelAnimationFrame(quadro); quadro = null; }
+    soltaTudo();
+    if (jogo) { jogo.toque = null; }
+  }
 
   function volta() {
-    if (!jogo || jogo.saindo) { return; }
+    if (rodando || !jogo || jogo.saindo) { return; }
     rodando = true;
     ultimo  = 0;
     quadro  = requestAnimationFrame(laco);
@@ -1553,8 +1767,15 @@ RBF.Rpg = (function () {
     _debug: {
       estado:     function () { return jogo; },
       segmento:   function () { return segmento; },
+      tipoMovel:  tipoMovel,
       usa:        usa,
+      andaPara:   andaPara,
+      passoJogador: passoJogador,
       vaiPara:    vaiPara,
+      livre:      function (id, x, y) {
+        var s = sala(id);
+        return !!(s && jogo && livre(s, x, y, charDef(jogo.p.ch)));
+      },
       podeDesenhar: podeDesenhar
     }
   };

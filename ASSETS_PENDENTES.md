@@ -18,6 +18,37 @@ correspondente de `js/config.js`.
 | Sons de interface | os 7, sintetizados em `tools/make_sfx.py` |
 | Cursor | SVG embutido em `css/tokens.css`, três estados |
 | Sigilo, selo e arco | SVG embutido em `index.html` |
+| Cobertura | baú fechado, gancho com chaves/vazio, moldura vazia/ocupada, portas, cama, rastros, retrato da governanta, personagens e mapas |
+
+---
+
+## A Cobertura — 2 peças ainda pendentes
+
+### Armário aberto
+
+- Uso: escritório de serviço, fase 1, depois de Antoniette encontrar a linha.
+- Aparência: o mesmo armário de duas portas de `armario_selado.png`, com o
+  lacre rompido, portas abertas, três pastas no chão e a marca limpa de uma
+  quarta pasta ausente.
+- Perspectiva: frontal levemente elevada, igual à peça fechada.
+- Dimensão: até **180×280 px**, preservando base e escala.
+- Formato: **PNG RGBA**, com fundo transparente real.
+- Animação: nenhuma.
+- Direções/variações: uma imagem, nome sugerido `armario_aberto.png`.
+
+### Relógio de serviço marcando 11:40
+
+- Uso: corredor de serviço, nos dois atos, junto da interação do relógio.
+- Aparência: igual ao relógio já entregue, mudando somente os ponteiros. A
+  versão disponível marca 10:00, enquanto a cena registra 11:40.
+- Perspectiva: frontal, para parede.
+- Dimensão: **100×140 px**.
+- Formato: **PNG RGBA**, com fundo transparente real.
+- Animação: nenhuma.
+- Direções/variações: uma imagem.
+
+Essas ausências não bloqueiam o percurso: os estados atuais continuam com
+fallback. Não foi criada arte genérica para fingir que as peças existem.
 
 ---
 
@@ -118,7 +149,7 @@ faixas gravadas, não sintetizadas por script, e chegam mais quentes.
 | `bgm_camara` | Cap. 5, ao abrir a porta da ala norte. Volta no Cap. 11 | sim |
 | `bgm_amizade` | Cap. 6, quando a investigação para. **A única faixa quente da obra** | sim |
 | `bgm_agosto` | Cap. 7, entra no pátio e atravessa o afloramento inteiro | **não** |
-| `bgm_epilogo` | Epílogo, ainda não escrito | **não** |
+| `bgm_epilogo` | Epílogo | **não** |
 
 `bgm_agosto` e `bgm_epilogo` não repetem de propósito: a primeira termina
 em corte seco e a segunda termina sem resolver. Se acabarem antes da

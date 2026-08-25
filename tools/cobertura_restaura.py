@@ -2,59 +2,81 @@
 """
 tools/cobertura_restaura.py
 
-Desfaz o estrago que tools/cobertura_fundo.py --pasta fez em 25/08/2026.
+Recupera, sem sobrescrever a origem, o alfa apagado pelo antigo modo
+``cobertura_fundo.py --pasta`` em 25/08/2026.
 
-------------------------------------------------------------------
-O QUE ACONTECEU
-------------------------------------------------------------------
-O modo --pasta foi rodado sobre a entrega original do autor, em cima dos
-arquivos, sem copia. Duas coisas deram errado ao mesmo tempo:
+O backgroundremover preservou o RGB dos pixels que tornou transparentes.
+Isso permite devolver os pixels coloridos. Cinco folhas da Carmine ainda
+possuem uma copia intacta no diretorio pai; nelas o alfa e restaurado de
+forma exata. Nas demais imagens, pixels quase pretos continuam ambiguos e
+nao sao inventados.
 
-1. Ele trata cada arquivo como UMA peca. Metade da entrega e folha 3x4 -
-   doze figuras por imagem - e U2Net e deteccao de objeto saliente. O
-   mesmo defeito que ja estava documentado no cabecalho do proprio
-   arquivo, e que eu evitei no modo normal fatiando antes. No modo de
-   pasta eu nao fatiei.
+Uso:
 
-2. A trava de cor, que deveria impedir a rede de apagar arte, se
-   sustenta em `cores_de_fundo` - as cores dos pixels que ja estavam
-   transparentes. Num PNG com alfa de verdade esses pixels sao pretos.
-   Entao a trava aprendeu "preto e fundo", e a arte desta obra e quase
-   toda preta. A trava autorizou exatamente o que deveria barrar.
+    python tools/cobertura_restaura.py \
+        --pasta "assets/A Cobertura/entrega_25ago"
 
-------------------------------------------------------------------
-POR QUE DA PARA RESTAURAR
-------------------------------------------------------------------
-A operacao so zerou ALFA. O RGB continua no arquivo, debaixo do alfa
-zero, porque o PNG guarda os quatro canais e o Pillow nao descarta cor
-de pixel transparente ao salvar.
-
-Entao: pixel transparente com RGB que nao e preto era arte, e volta.
-
-O que NAO volta e o pixel de arte que era preto puro, porque ali a cor
-nao distingue mais figura de fundo. Sobra pontilhado nas sombras mais
-fechadas do cabelo e da saia. Esta medido por arquivo na saida.
-
-    python tools/cobertura_restaura.py --pasta "assets/A Cobertura/entrega_25ago"
-    python tools/cobertura_restaura.py --pasta ... --seco    so mede
+Por padrao, a saida fica ao lado da origem, com o sufixo ``_restaurada``.
+Use ``--saida`` para escolher outro diretorio e ``--seco`` para apenas
+medir. O programa recusa gravar dentro da pasta de origem.
 """
 
+import hashlib
+import json
 import os
+import shutil
 import sys
 
 try:
-    from PIL import Image
+    from PIL import Image, ImageDraw, ImageFont
 except ImportError:                                    # pragma: no cover
     sys.stderr.write("Pillow ausente. pip install pillow\n")
     raise SystemExit(2)
 
+
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECO = "--seco" in sys.argv
-
-# Soma de R+G+B acima da qual o pixel e considerado arte. Dezoito e
-# baixo de proposito: qualquer coisa que nao seja preto quase puro volta.
-# Subir isto perde sombra; baixar traz ruido de compressao.
 PISO = 18
+
+# Arquivos cujo mtime mudou na execucao acidental de 25/08. A lista torna a
+# recuperacao repetivel sem depender de relogio, tamanho ou heuristica.
+DANIFICADOS_25AGO = {
+    "4c9a58a1-f2ea-45c8-bb2b-19eb383f14f9.png",
+    "antoniette_retrato_pixel.png",
+    "antoniette_vela_spritesheet.png",
+    "cama_servico.png",
+    "carmine_ataque_3_frames_348x172.png",
+    "carmine_ataque_direita_3_frames_348x172.png",
+    "carmine_ataques_3x3_348x516.png",
+    "carmine_chars_dropped.png",
+    "carmine_novo_design_348x688.png",
+    "carmine_spritesheet_completo_348x1204.png",
+    "ChatGPT Image Aug 25, 2026, 02_57_40 AM (1).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_41 AM (10).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_41 AM (5).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_41 AM (6).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_41 AM (7).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_41 AM (8).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_42 AM (11).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_43 AM (17).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_43 AM (22).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_45 AM (25).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_59 AM (1).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_59 AM (2).png",
+    "ChatGPT Image Aug 25, 2026, 02_57_59 AM (3).png",
+    "ChatGPT Image Aug 25, 2026, 03_07_09 AM.png",
+    "dara_spritesheet_3x4.png",
+    "fenn_spritesheet_3x4.png",
+    "gancho_chaves.png",
+    "malas_bau_ferramentas.png",
+    "porta_2_estados.png",
+    "porta_aberta.png",
+    "prataria_empilhada.png",
+    "rastro_01.png",
+    "rastro_02.png",
+    "rastro_03.png",
+    "rastro_04.png",
+}
 
 
 def opcao(nome):
@@ -65,82 +87,204 @@ def opcao(nome):
     return None
 
 
-def restaura(im):
-    """Devolve alfa a todo pixel transparente cujo RGB sobreviveu."""
-    im = im.convert("RGBA")
-    a = im.getchannel("A")
-    ap = a.load()
-    px = im.load()
-    w, h = im.size
-    n = 0
-
-    for y in range(h):
-        for x in range(w):
-            r, g, b, al = px[x, y]
-            if al >= 250:
-                continue
-            if r + g + b > PISO:
-                ap[x, y] = 255
-                n += 1
-
-    out = im.copy()
-    out.putalpha(a)
-    return out, n
+def absoluto(caminho):
+    if os.path.isabs(caminho):
+        return os.path.normpath(caminho)
+    return os.path.normpath(os.path.join(RAIZ, caminho))
 
 
-def resto_preto(im):
-    """Quanto de pixel preto continua transparente: o que nao volta.
+def sha_rgb(im):
+    return hashlib.sha256(im.convert("RGB").tobytes()).hexdigest()
 
-    Nao da para saber quanto disso era arte e quanto era fundo. E o
-    numero honesto a se dar ao autor: e o teto do prejuizo, nao o
-    prejuizo.
+
+def original_exato(caminho, im):
+    """Procura uma copia intacta de mesmo nome no diretorio pai."""
+    candidato = os.path.join(os.path.dirname(os.path.dirname(caminho)),
+                             os.path.basename(caminho))
+    if not os.path.isfile(candidato):
+        return None
+    outra = Image.open(candidato).convert("RGBA")
+    if outra.size != im.size or sha_rgb(outra) != sha_rgb(im):
+        return None
+    return outra
+
+
+def recupera_rgb(im):
+    """Devolve opacidade aos pixels coloridos preservados sob alfa baixo.
+
+    Preto puro permanece transparente: sem uma copia intacta, nao ha como
+    distinguir fundo preto de cabelo ou roupa preta. O relatorio registra
+    esse teto de incerteza em vez de fingir uma recuperacao exata.
     """
     im = im.convert("RGBA")
     px = im.load()
+    alfa = im.getchannel("A")
+    ap = alfa.load()
     w, h = im.size
-    n = 0
-    for y in range(0, h, 2):
-        for x in range(0, w, 2):
+    devolvidos = 0
+    ambiguos = 0
+
+    for y in range(h):
+        for x in range(w):
             r, g, b, a = px[x, y]
-            if a < 250 and r + g + b <= PISO:
-                n += 1
-    return n * 4
+            if a >= 250:
+                continue
+            if r + g + b > PISO:
+                ap[x, y] = 255
+                devolvidos += 1
+            else:
+                ambiguos += 1
+
+    out = im.copy()
+    out.putalpha(alfa)
+    return out, devolvidos, ambiguos
+
+
+def compoe(im, tamanho=(180, 180)):
+    """Miniatura em fundo verde-azulado: buracos pretos ficam visiveis."""
+    im = im.convert("RGBA")
+    k = min(tamanho[0] / float(im.width), tamanho[1] / float(im.height))
+    mini = im.resize((max(1, int(im.width * k)),
+                      max(1, int(im.height * k))), Image.NEAREST)
+    fundo = Image.new("RGBA", tamanho, (32, 104, 96, 255))
+    x = (tamanho[0] - mini.width) // 2
+    y = (tamanho[1] - mini.height) // 2
+    fundo.alpha_composite(mini, (x, y))
+    return fundo.convert("RGB")
+
+
+def contato(itens, destino, titulo):
+    if not itens:
+        return
+    colunas = 5
+    cel_w, cel_h = 200, 224
+    linhas = (len(itens) + colunas - 1) // colunas
+    folha = Image.new("RGB", (colunas * cel_w, 42 + linhas * cel_h),
+                      (20, 18, 19))
+    draw = ImageDraw.Draw(folha)
+    fonte = ImageFont.load_default()
+    draw.text((10, 12), titulo, fill=(229, 218, 194), font=fonte)
+    for i, (nome, im) in enumerate(itens):
+        c = i % colunas
+        l = i // colunas
+        x = c * cel_w + 10
+        y = 42 + l * cel_h
+        folha.paste(compoe(im), (x, y))
+        rotulo = nome if len(nome) <= 28 else nome[:25] + "..."
+        draw.text((x, y + 186), rotulo, fill=(229, 218, 194), font=fonte)
+    folha.save(destino)
 
 
 def main():
     pasta = opcao("--pasta")
     if not pasta:
-        sys.stderr.write("uso: --pasta <caminho>\n")
+        sys.stderr.write("uso: --pasta <origem> [--saida <destino>] [--seco]\n")
         return 2
 
-    d = pasta if os.path.isabs(pasta) else os.path.join(RAIZ, pasta)
-    if not os.path.isdir(d):
-        sys.stderr.write("pasta ausente: " + d + "\n")
+    origem = absoluto(pasta)
+    if not os.path.isdir(origem):
+        sys.stderr.write("pasta ausente: " + origem + "\n")
         return 2
 
-    nomes = sorted(f for f in os.listdir(d) if f.lower().endswith(".png"))
-    print("\nrestauro de alfa%s\n" % (" (seco)" if SECO else ""))
-    print("  %-46s %10s  %s" % ("arquivo", "devolvido", "preto que fica"))
+    saida_arg = opcao("--saida")
+    saida = absoluto(saida_arg) if saida_arg else origem.rstrip("\\/") + "_restaurada"
+    origem_real = os.path.normcase(os.path.realpath(origem))
+    saida_real = os.path.normcase(os.path.realpath(saida))
+    if saida_real == origem_real or saida_real.startswith(origem_real + os.sep):
+        sys.stderr.write("a saida deve ficar fora da pasta de origem\n")
+        return 2
+    if os.path.exists(saida) and not SECO:
+        sys.stderr.write("saida ja existe; remova-a ou escolha outro --saida: " + saida + "\n")
+        return 2
 
-    mexidos = 0
-    for f in nomes:
-        caminho = os.path.join(d, f)
-        im = Image.open(caminho).convert("RGBA")
-        out, n = restaura(im)
-        if not n:
+    nomes = sorted(os.listdir(origem))
+    pngs = [n for n in nomes if n.lower().endswith(".png")]
+    relatorio = []
+    antes_contato = []
+    depois_contato = []
+
+    print("\nrestauro seguro de alfa%s" % (" (seco)" if SECO else ""))
+    print("origem: " + origem)
+    print("saida:  " + saida + "\n")
+    print("  %-46s %-12s %10s %10s" %
+          ("arquivo", "metodo", "devolvido", "ambiguo"))
+
+    if not SECO:
+        os.makedirs(saida)
+
+    for nome in nomes:
+        caminho = os.path.join(origem, nome)
+        destino = os.path.join(saida, nome)
+        if not os.path.isfile(caminho):
             continue
-        mexidos += 1
-        total = im.size[0] * im.size[1]
-        if not SECO:
-            out.save(caminho)
-        print("  %-46s %9.2f%%  %.2f%%"
-              % (f[:46], n / float(total) * 100.0,
-                 resto_preto(out) / float(total) * 100.0))
+        if not nome.lower().endswith(".png"):
+            if not SECO:
+                shutil.copy2(caminho, destino)
+            continue
 
-    print("\n%d de %d arquivos restaurados" % (mexidos, len(nomes)))
-    print("\nA coluna da direita e o TETO do prejuizo, e nao o prejuizo:")
-    print("e todo pixel preto que continua transparente, sem distinguir")
-    print("sombra fechada de fundo legitimo.")
+        im = Image.open(caminho).convert("RGBA")
+        total = im.width * im.height
+        metodo = "inalterado"
+        devolvidos = 0
+        ambiguos = 0
+        out = im.copy()
+
+        if nome in DANIFICADOS_25AGO:
+            exato = original_exato(caminho, im)
+            if exato is not None:
+                out = exato
+                metodo = "original exato"
+                a0 = im.getchannel("A")
+                a1 = out.getchannel("A")
+                devolvidos = sum(1 for x, y in zip(a0.getdata(), a1.getdata())
+                                  if x < 250 and y >= 250)
+            else:
+                out, devolvidos, ambiguos = recupera_rgb(im)
+                metodo = "RGB preservado"
+
+        if not SECO:
+            out.save(destino)
+
+        if nome in DANIFICADOS_25AGO:
+            antes_contato.append((nome, im))
+            depois_contato.append((nome, out))
+
+        relatorio.append({
+            "arquivo": nome,
+            "tamanho": [im.width, im.height],
+            "metodo": metodo,
+            "pixels_devolvidos": devolvidos,
+            "percentual_devolvido": round(devolvidos / float(total) * 100.0, 4),
+            "pixels_pretos_ambiguos": ambiguos,
+            "percentual_ambiguo": round(ambiguos / float(total) * 100.0, 4),
+        })
+        print("  %-46s %-12s %9.2f%% %9.2f%%" %
+              (nome[:46], metodo[:12],
+               devolvidos / float(total) * 100.0,
+               ambiguos / float(total) * 100.0))
+
+    if not SECO:
+        with open(os.path.join(saida, "RELATORIO_RESTAURO.json"), "w",
+                  encoding="utf-8") as f:
+            json.dump({
+                "origem": origem,
+                "saida": saida,
+                "arquivos_png": len(pngs),
+                "incidente": "backgroundremover --pasta em 25/08/2026",
+                "resultados": relatorio,
+            }, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        contato(antes_contato, os.path.join(saida, "AUDITORIA_ANTES.png"),
+                "Antes: alfa apos a passada acidental")
+        contato(depois_contato, os.path.join(saida, "AUDITORIA_RESTAURADA.png"),
+                "Depois: alfa recuperado (fundo verde mostra os vazios)")
+
+    exatos = sum(1 for r in relatorio if r["metodo"] == "original exato")
+    rgb = sum(1 for r in relatorio if r["metodo"] == "RGB preservado")
+    print("\n%d PNGs copiados; %d restaurados exatamente; %d recuperados pelo RGB."
+          % (len(pngs), exatos, rgb))
+    if rgb:
+        print("Pixels pretos ambiguos foram mantidos transparentes e constam no relatorio.")
     return 0
 
 

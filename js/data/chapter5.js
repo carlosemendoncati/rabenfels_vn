@@ -73,7 +73,7 @@ var C5_KLARA_C = [
   { t:'dial', ch:'klara', tx:'Menti.' },
   { t:'pause' },
   { t:'dial', ch:'antoniette', tx:'N\u00e3o fa\u00e7a isso de novo.' },
-  { t:'nar', tx:'A menina considerou aquilo com aten\u00e7\u00e3o, do jeito que ela considerava tudo.' },
+  { t:'nar', tx:'Klara olhou para o corrim\u00e3o, depois para Antoniette. Levou duas respira\u00e7\u00f5es.' },
   { t:'dial', ch:'klara', tx:'Tudo bem.' },
   { t:'spr_hide', ch:'klara' },
   { t:'pause' },
@@ -160,7 +160,7 @@ RBF.CHAPTER5 = [
 { t:'inn', tx:'Engraxam o port\u00e3o toda semana. Engraxam isto tamb\u00e9m.' },
 { t:'inn', tx:'Ningu\u00e9m engraxa o que n\u00e3o usa.' },
 
-{ t:'nar', tx:'Ela ficou parada mais tempo do que precisava, e ningu\u00e9m apareceu no p\u00e1tio.' },
+{ t:'nar', tx:'A pedra esfriou pelas solas antes de ela voltar para dentro. Ningu\u00e9m apareceu no p\u00e1tio.' },
 { t:'inn', tx:'Aquilo ali serve para saber que algu\u00e9m entrou.' },
 { t:'pause' },
 { t:'inn', tx:'Foi o que eu escrevi no primeiro dia. Est\u00e1 certo e est\u00e1 incompleto.' },
@@ -185,7 +185,7 @@ RBF.CHAPTER5 = [
     'A FAVOR: o dossi\u00ea tem quarenta p\u00e1ginas e nenhuma planta do lado norte.'
 ]},
 
-{ t:'nar', tx:'Ela olhou as duas colunas por um tempo.' },
+{ t:'nar', tx:'O ponto de tinta no fim da terceira linha secou enquanto ela comparava as colunas.' },
 { t:'inn', tx:'Tr\u00eas contra e dois a favor.' },
 { t:'pause' },
 { t:'nar', tx:'Riscou a p\u00e1gina inteira e arrancou a folha.' },
@@ -214,7 +214,7 @@ RBF.CHAPTER5 = [
 { t:'inn', tx:'Est\u00e1 fazendo dois graus no p\u00e1tio e este corredor est\u00e1 morno.' },
 { t:'nar', tx:'Ela fechou a porta atr\u00e1s de si porque deixar aberta era pior.' },
 
-{ t:'nar', tx:'A vela iluminou dois metros e parou. O corredor engolia a luz do jeito que pano engole.' },
+{ t:'nar', tx:'A vela iluminou dois metros. Depois disso, a luz morria na parede sem voltar para o ch\u00e3o.' },
 { t:'nar', tx:'Os passos dela n\u00e3o voltaram. Nenhum eco, em pedra, num corredor estreito.' },
 { t:'pause' },
 { t:'inn', tx:'Algu\u00e9m forrou estas paredes.' },
@@ -340,7 +340,7 @@ RBF.CHAPTER5 = [
 
 { t:'spr', ch:'serafina', ex:'neutral', pos:'right' },
 { t:'dial', ch:'serafina', tx:'Est\u00e1 bem. Come.' },
-{ t:'nar', tx:'E foi tratar do dia dela, sem insistir uma segunda vez.' },
+{ t:'nar', tx:'Serafina puxou a cadeira e come\u00e7ou o caf\u00e9. N\u00e3o repetiu a pergunta.' },
 { t:'spr_hide', ch:'serafina' },
 { t:'pause' },
 
@@ -408,7 +408,7 @@ RBF.CHAPTER5 = [
 { t:'pause' },
 
 { t:'sfx', id:'sfx_candle' },
-{ t:'nar', tx:'Apagou a vela no pr\u00f3prio quarto e ficou acordada por um tempo.' },
+{ t:'nar', tx:'Apagou a vela. \u00c0s tr\u00eas, ainda sabia de que lado da parede a menina dormia.' },
 
 { t:'fade_out' },
 { t:'bgm', id:null },

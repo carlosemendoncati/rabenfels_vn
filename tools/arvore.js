@@ -138,7 +138,7 @@ for (const [onde, diz, real] of AFIRMADO) {
   checa(diz === real, onde + ': diz ' + diz + ', roteiro tem ' + real);
 }
 
-/* ---- os nove finais ---------------------------------------------------- */
+/* ---- os quatro finais -------------------------------------------------- */
 
 console.log('\n== FINAIS ==\n');
 
@@ -230,7 +230,7 @@ checa(!!fechado.tx, 'o ramo nao percorrido mostra o texto que o jogador ja leu n
 
 /* Os finais: so o alcancado abre. */
 const fins = W.Arvore.finais();
-checa(fins.length === (W.ENDINGS || []).length, 'os nove finais entram na lista');
+checa(fins.length === (W.ENDINGS || []).length, 'os quatro finais entram na lista');
 
 const vis = fins.find(f => f.id === 'arquivo');
 const oco = fins.find(f => f.id === 'divida');

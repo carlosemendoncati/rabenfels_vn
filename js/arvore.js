@@ -159,7 +159,7 @@ RBF.Arvore = (function () {
     return out;
   }
 
-  /* Os nove finais, na ordem em que RBF.ENDINGS os avalia - que e a
+  /* As quatro leituras, na ordem em que RBF.ENDINGS as apresenta - que e a
      ordem em que o jogo os decide, e por isso a unica ordem honesta de
      mostrar. Antes de a leitura ser alcancada aparecem os eixos e mais
      nada. */
@@ -180,12 +180,21 @@ RBF.Arvore = (function () {
       /* Eixo com direcao: "Esperanca alta", "Resposta baixa". O rotulo
          vem de RBF.ROUTES, e a direcao da anotacao. E o unico dado que
          aparece antes de a leitura ser alcancada, e o motivo e
-         navegacao: sem ele oito dos nove cartoes ficam identicos. */
+         navegacao: sem ele os cartoes fechados ficam identicos. */
       var eixos = [];
       for (var k = 0; k < (a.eixos || []).length; k++) {
         var ex = a.eixos[k];
         var d  = RBF.Routes.defById(ex && ex.r);
         if (d) { eixos.push(d.label + ' ' + (ex.d || '')); }
+      }
+
+      var rota = null;
+      var rotas = RBF.ROTAS || [];
+      for (var m = 0; m < rotas.length; m++) {
+        if (rotas[m].id === e.rota || rotas[m].ending === e.id) {
+          rota = rotas[m];
+          break;
+        }
       }
 
       out.push({
@@ -198,7 +207,7 @@ RBF.Arvore = (function () {
         eixos:    eixos,
         visto:    visto,
         atual:    run.ending === e.id,
-        padrao:   !e.when,
+        padrao:   !!(rota && !rota.when),
         condicao: visto ? (a.condicao || '') : '',
         porta:    visto ? (a.porta || '') : '',
         nota:     visto ? (e.note || '') : ''
@@ -223,7 +232,7 @@ RBF.Arvore = (function () {
      ponto onde o leque nao fecha.
 
      ESSE PONTO E O ASSUNTO DO DESENHO. O final e decidido no fim do
-     Capitulo 9, e so aparece tres capitulos depois. A aresta tracejada
+     Capitulo 9, e so aparece depois que a rota termina. A aresta tracejada
      do marco ate o bloco de finais e a unica coisa que o fluxograma diz
      que o texto nao diz em lugar nenhum.
 

@@ -147,8 +147,9 @@ volta como flag — que o roteiro lê com o mesmo `if:{}` de sempre.
 
 1. **Ela acha a linha.** Sempre — está no canon, em texto já escrito. O que
    varia é quanto ela apura no caminho.
-2. **Não se vê a noite do dia nove.** Ela está na estrada e não vê; o
-   jogador também não.
+2. **Carmine mata Antoniette antes da fuga.** Depois da linha, Carmine
+   ocupa a porta do pátio. Antoniette não chega à carruagem e não existe
+   continuação viva desta rota.
 3. **Não há combate.** O verbo é *conferir*. Um botão de atacar faria de
    Khar'Vel um inimigo com barra de vida, que é a única coisa que ela não
    pode ser.

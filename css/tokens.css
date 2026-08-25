@@ -135,7 +135,7 @@
   /* ---- tipografia ------------------------------------------------------ */
 
   /* Sem webfont: o projeto abre por file:// e o validador reprova
-     qualquer https:// em HTML ou CSS. Entao a pilha e toda de fontes
+     qualquer endereco externo em HTML ou CSS. Entao a pilha e toda de fontes
      que ja existem no sistema, ordenadas da mais desejada para a mais
      garantida.
 

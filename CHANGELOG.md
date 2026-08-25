@@ -1,5 +1,59 @@
 # Changelog
 
+## 0.14.0 — Quatro documentos
+
+Revisão narrativa integral orientada pelos estudos de escrita da pasta
+`docs/estudo/`. Diálogos e narração dos capítulos comuns e das quatro rotas
+foram enxugados, com ações concretas no lugar de frases intercambiáveis,
+vozes mais distintas e menos repetição entre Esperança e Perda.
+
+A cronologia foi conferida de ponta a ponta. Klara e Liara têm oito anos na
+chegada e doze no fechamento das rotas; o intervalo é de cinquenta e dois
+meses. Tempos de serviço, idade do filho de Fenn e prazos de correspondência
+foram alinhados ao calendário.
+
+O Epílogo agora lê o documento produzido por cada rota. Esperança e Perda
+chegam com quatro páginas ausentes; Cobertura termina na página 241; Resposta
+entrega 291 páginas e ainda assim recebe o parecer de “autoria falecida”. O
+extra As Quatro Páginas ganhou cabeçalho e fecho próprios para esses três
+estados. A galeria e a árvore deixaram de descrever os nove finais antigos e
+passaram a registrar os capítulos reais das quatro rotas.
+
+Na Cobertura, o baú fechado, o gancho vazio e os dois estados da moldura foram
+recortados, limpos, pixelizados e ligados ao mapa. A esteira de assets agora
+atualiza também sua cópia crua; isso impede que uma execução posterior
+restaure por engano a versão antiga de uma peça recém-entregue.
+
+O formato de save subiu para 5 porque os novos beats do Epílogo e de Resposta
+deslocam índices no vetor único do roteiro.
+
+## 0.13.0 — A porta não abre
+
+Decisão autoral de 25/08/2026: em **A Cobertura**, Carmine mata Antoniette
+antes da fuga. A continuação em que ela chegava à carruagem, alugava um
+quarto na Marca Cinzenta e vivia mais onze anos foi removida. Ela não era
+compatível com o encontro diante da porta nem com o capítulo seguinte.
+
+O salão agora é um ponto sem desvio: Carmine ocupa o vão, não desaparece e
+não pode ser atravessada. Interagir inicia uma execução narrativa automática
+com a folha de três quadros entregue para a personagem. Não há combate,
+ataque do jogador, vida ou repetição do percurso. O resultado gravado pelo
+beat passou a ser `carmine`, inclusive no fallback sem canvas.
+
+O Capítulo 10 termina com a morte antes do pátio. O Capítulo 11 passou a ser
+**A Baixa**: registra a carruagem vazia, a ficha de pessoal e o caderno que
+chega a Matheo no nonagésimo terceiro dia. As descobertas opcionais do RPG
+continuam condicionadas às marcas realmente apuradas.
+
+Também foram corrigidos os controles móveis do percurso: fechar o menu volta
+ao estado `percurso`, um toque define um destino contínuo e o botão Menu usa
+o mesmo painel da VN. Carmine passou a ter colisão física, e salvar pelo menu
+funciona enquanto o percurso está pausado.
+
+O formato de save subiu para 4 porque os índices dos dois capítulos da rota
+mudaram. Saves anteriores são recusados com aviso em vez de abrirem numa cena
+que deixou de existir.
+
 ## 0.12.0 — O percurso
 
 A rota **A Cobertura** ganhou um trecho jogado de cima, em canvas, dentro
@@ -123,6 +177,28 @@ O recorte sem degrau fica em `assets/cobertura/_sem_pixel/`. Rodar duas
 vezes sobre o mesmo arquivo empilharia degrau em cima de degrau; com a
 cópia crua no lugar, cada passada parte do mesmo ponto.
 
+### Restauro seguro da entrega de 25/08
+
+Uma passada antiga de `backgroundremover --pasta` gravou sobre a entrega
+e tratou folhas inteiras como um único objeto. O RGB permaneceu dentro dos
+PNGs; o dano estava no alfa. `tools/cobertura_restaura.py` agora recupera
+esse alfa em outra pasta e recusa usar a origem como destino. Cinco folhas
+da Carmine foram restauradas exatamente a partir das cópias intactas; as
+demais foram recuperadas pelo RGB preservado e auditadas sobre fundo verde.
+
+`tools/cobertura_fundo.py --pasta` também deixou de alterar a origem. As
+folhas são divididas quadro a quadro, preto transparente nunca é aprendido
+como cor de fundo e uma imagem que já possui alfa real não passa novamente
+pela rede. `tools/cobertura_pixel.py --pasta` aplica a paleta em uma terceira
+pasta. Os pacotes aprovados ficaram em `entrega_25ago_pronta/` e
+`entrega_25ago_pixel/`.
+
+Entraram no percurso a nova Antoniette com vela, a folha completa da
+Carmine, as malas e o baú de ferramentas, o gancho do primeiro ato, a
+prataria e os dois estados do retrato da governanta. O relógio entregue
+ficou fora: a arte marca 10:00 e o texto canônico exige 11:40. O gancho
+também some no segundo ato porque ainda não existe uma variação sem chave.
+
 ### Luz de sala, e o que não pisa no chão
 
 A vela é a única fonte do percurso — a casa está apagada. A câmara não
@@ -155,7 +231,7 @@ Nem `validate.js` nem `smoke.html` veem o percurso: os dois rodam em DOM
 sem `getContext`, e lá o beat resolve na hora e devolve o roteiro — que é
 o comportamento certo e também o que torna os dois cegos. Este entra por
 `startChapter('cob10')` num Chrome de verdade e mede o que só existe
-andando. **42 checagens.**
+andando. **45 checagens.**
 
 **Sete defeitos reais que só ele pegou:**
 
@@ -225,7 +301,7 @@ assets/cobertura/            44 arquivos derivados + CREDITOS.md
 | `python tools/validate.py` | 4 falhas — **as mesmas 4 de antes** desta versão |
 | `smoke.html` headless | 58 checagens, 0 falhas, `SMOKE-OK` |
 | `node tools/shots.js` | 32 checagens, 0 falhas |
-| `node tools/cobertura_shots.js` | **42 de 42** |
+| `node tools/cobertura_shots.js` | **45 de 45** |
 
 **Não testado:** áudio real, toque em telefone físico, e o percurso
 jogado a pé de ponta a ponta por uma pessoa.

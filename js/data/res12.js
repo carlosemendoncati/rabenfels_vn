@@ -102,7 +102,7 @@ RBF.RES12 = [
 { t:'pause', if:R },
 
 { t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u00b7 decis\u00e3o \u2014', lns:[
-    'Material instrut\u00f3rio completo e de proced\u00eancia verificada.',
+    'Relato singular, de autoria falecida, completo e de proced\u00eancia verificada.',
     'Julga-se improcedente por aus\u00eancia de terceiro lesado.',
     '',
     'A administra\u00e7\u00e3o dom\u00e9stica de casa maior sobre pessoa de sua',
@@ -112,6 +112,9 @@ RBF.RES12 = [
 
 { t:'nar', tx:'Antoniette leu a decis\u00e3o de p\u00e9, no corredor, e depois sentou para ler de novo.', if:R },
 { t:'pause', if:R },
+{ t:'inn', tx:'Autoria falecida.', if:R },
+{ t:'nar', tx:'N\u00e3o pediu emenda.', if:R },
+{ t:'pause', if:R },
 { t:'inn', tx:'N\u00e3o falta prova.', if:R },
 { t:'pause', if:R },
 { t:'inn', tx:'Falta parte.', if:R },
@@ -119,7 +122,7 @@ RBF.RES12 = [
 
 { t:'nar', tx:'A casa \u00e9 dona da casa. As filhas s\u00e3o filhas da casa.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela passou cinco anos montando o documento que provava exatamente aquilo, e o tribunal concordou com ele inteiro.', if:R },
+{ t:'nar', tx:'Ela passou cinco anos montando o documento que dava \u00e0 casa a pr\u00f3pria defesa. O tribunal aceitou cada p\u00e1gina.', if:R },
 
 /* ======================================================================
    C3 - A APOSTILA
@@ -145,7 +148,7 @@ RBF.RES12 = [
 { t:'pause', if:R },
 { t:'nar', tx:'Ela foi chamada duas vezes para falar com a turma nova.', if:R },
 { t:'nar', tx:'Na primeira falou quarenta minutos sobre datar a margem antes de escrever o corpo.', if:R },
-{ t:'nar', tx:'Na segunda, uma aluna de dezenove anos perguntou como se faz para n\u00e3o se envolver.', if:R },
+{ t:'nar', tx:'Na segunda, uma aluna de dezenove anos perguntou o que devia fazer para n\u00e3o se envolver.', if:R },
 { t:'pause', if:R },
 
 { t:'spr', ch:'antoniette', ex:'neutral', pos:'center', if:R },

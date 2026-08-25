@@ -127,7 +127,7 @@ var C7_RELATORIO_B = [
   { t:'nar', tx:'A resposta de Lervel chegou em quinze dias e pedia detalhamento.' },
   { t:'nar', tx:'Ela respondeu que n\u00e3o havia detalhamento a fornecer.' },
   { t:'pause' },
-  { t:'inn', tx:'Foi a primeira coisa inteiramente falsa que eu mandei para Lervel em onze anos de servi\u00e7o.' },
+  { t:'inn', tx:'Foi a primeira coisa inteiramente falsa que eu mandei para Lervel em cinco anos de servi\u00e7o.' },
   { t:'inn', tx:'E n\u00e3o custou nada. Levou dois minutos.' },
   { t:'pause' },
   { t:'inn', tx:'\u00c9 isso que assusta.' }
@@ -179,7 +179,7 @@ RBF.CHAPTER7 = [
 { t:'nar', tx:'No degrau do corredor leste, Liara tran\u00e7ava o cabelo da irm\u00e3, sentada atr\u00e1s dela.' },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'spr', ch:'liara', ex:'neutral', pos:'right' },
-{ t:'nar', tx:'Tran\u00e7ava mal e desmanchava, e recome\u00e7ava, do jeito que se faz quando o ponto \u00e9 ficar ali.' },
+{ t:'nar', tx:'Cruzava tr\u00eas mechas, errava, desmanchava e recome\u00e7ava. Nenhuma das duas tinha pressa.' },
 { t:'pause' },
 
 { t:'nar', tx:'E cantava baixo, no ritmo das m\u00e3os.' },
@@ -213,7 +213,7 @@ RBF.CHAPTER7 = [
 { t:'scene', id:'c7_patio', chapter:'capitulo7', title:'Sete e vinte',
   bg:'bg_nidhaus_gate', bgm:'bgm_agosto' },
 
-{ t:'nar', tx:'No dia dez, o p\u00e1tio \u00e0s sete e vinte estava do jeito que fica em agosto: laranja por baixo e ainda claro por cima.' },
+{ t:'nar', tx:'No dia dez, \u00e0s sete e vinte, havia uma faixa laranja rente aos muros e azul claro por cima.' },
 { t:'nar', tx:'As duas desceram sem pedir licen\u00e7a, porque havia dois anos que ningu\u00e9m pedia.' },
 { t:'pause' },
 
@@ -293,7 +293,7 @@ RBF.CHAPTER7 = [
 /* --- ramo A: o metodo ------------------------------------------------ */
 { t:'dial', ch:'klara', tx:'Quanto tempo?', if:{ taught:'A' } },
 { t:'dial', ch:'antoniette', tx:'Seis minutos.', if:{ taught:'A' } },
-{ t:'nar', tx:'A menina assentiu uma vez, como quem confere um n\u00famero contra outro que j\u00e1 tinha.', if:{ taught:'A' } },
+{ t:'nar', tx:'A menina assentiu e moveu os l\u00e1bios uma vez, refazendo a conta.', if:{ taught:'A' } },
 { t:'dial', ch:'klara', tx:'Da \u00faltima vez foi menos.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'inn', tx:'Da \u00faltima vez.', if:{ taught:'A' } },
@@ -313,7 +313,7 @@ RBF.CHAPTER7 = [
 { t:'inn', tx:'Eu ensinei isso a ela.', if:{ taught:'B' } },
 
 /* --- ramo C: o mundo ------------------------------------------------- */
-{ t:'nar', tx:'Klara ficou olhando o pr\u00f3prio joelho por um tempo antes de falar.', if:{ taught:'C' } },
+{ t:'nar', tx:'Klara esfregou o joelho at\u00e9 o tecido aquecer. Depois falou.', if:{ taught:'C' } },
 { t:'dial', ch:'klara', tx:'Isso impede?', if:{ taught:'C' } },
 { t:'dial', ch:'antoniette', tx:'Impede o qu\u00ea?', if:{ taught:'C' } },
 { t:'pause', if:{ taught:'C' } },
@@ -336,7 +336,7 @@ RBF.CHAPTER7 = [
 { t:'scene', id:'c7_casa', chapter:'capitulo7', title:'O que a casa faz',
   bg:'bg_main_hall', bgm:'bgm_nidhaus' },
 
-{ t:'nar', tx:'No jantar daquela noite Serafina serviu como servia e perguntou pela cataloga\u00e7\u00e3o do lado norte.' },
+{ t:'nar', tx:'No jantar daquela noite, Serafina terminou de servir a sopa antes de perguntar pela cataloga\u00e7\u00e3o do lado norte.' },
 { t:'spr', ch:'serafina', ex:'neutral', pos:'right' },
 { t:'dial', ch:'antoniette', tx:'Terceira estante. Devo fechar o lado at\u00e9 novembro.' },
 { t:'dial', ch:'serafina', tx:'Bom.' },
@@ -355,7 +355,7 @@ RBF.CHAPTER7 = [
 
 { t:'nar', tx:'Ela terminou o prato inteiro e n\u00e3o sentiu gosto de nada.' },
 { t:'pause' },
-{ t:'nar', tx:'Subiu, e no quarto ficou de p\u00e9 junto da janela por um tempo, com o p\u00e3o da noite na m\u00e3o.' },
+{ t:'nar', tx:'Subiu e ficou junto da janela at\u00e9 o p\u00e3o da noite endurecer na m\u00e3o.' },
 { t:'nar', tx:'Depois pousou o p\u00e3o na mesa de canto e n\u00e3o comeu.' },
 
 /* ======================================================================

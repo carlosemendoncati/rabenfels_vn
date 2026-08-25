@@ -65,7 +65,7 @@ RBF.PER11 = [
 
 { t:'dial', ch:'klara', tx:'Eu devia ter agradecido antes de sair.', if:{ rota:'perda', taught:'B' } },
 { t:'dial', ch:'antoniette', tx:'Agradece depois.', if:{ rota:'perda', taught:'B' } },
-{ t:'dial', ch:'klara', tx:'Depois \u00e9 tarde para a forma.', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Depois n\u00e3o vale. Eu tinha de dizer antes.', if:{ rota:'perda', taught:'B' } },
 
 { t:'dial', ch:'klara', tx:'O rio fica de que lado do sol?', if:{ rota:'perda', taught:'C' } },
 { t:'dial', ch:'antoniette', tx:'Esquerda, de manh\u00e3.', if:{ rota:'perda', taught:'C' } },
@@ -128,7 +128,7 @@ RBF.PER11 = [
 { t:'inn', tx:'A p\u00e9, com uma crian\u00e7a, cinco quil\u00f4metros d\u00e3o uma hora e quarenta.', if:R },
 { t:'inn', tx:'D\u00e1.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'A conta estava certa. Ela conferiu duas vezes, do jeito que conferia tudo, e fechou nas duas.', if:R },
+{ t:'nar', tx:'Ela refez a divis\u00e3o no verso do papel. O resultado continuou o mesmo.', if:R },
 
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'Vamos andando. D\u00e1 tempo.', if:R },
@@ -149,7 +149,7 @@ RBF.PER11 = [
 { t:'scene', id:'per11_floresta', chapter:'per11', title:'A floresta',
   bg:'bg_grey_march_road', bgm:null, if:R },
 
-{ t:'nar', tx:'Depois da aldeia a estrada entra na floresta e fica escura de repente, do jeito que fica quando as copas se tocam.', if:R },
+{ t:'nar', tx:'Depois da aldeia, as copas cobriram a lua. Antoniette perdeu a borda da estrada por tr\u00eas passos.', if:R },
 { t:'nar', tx:'Antoniette conhecia aquele trecho. Tinha atravessado ele em abril, cinco anos antes, com a janela aberta.', if:R },
 { t:'pause', if:R },
 
@@ -173,14 +173,14 @@ RBF.PER11 = [
 
 { t:'spr', ch:'klara', ex:'blank', pos:'center', if:R },
 { t:'nar', tx:'Klara parou onze minutos antes da ponte.', if:R },
-{ t:'nar', tx:'N\u00e3o trope\u00e7ou. N\u00e3o olhou para tr\u00e1s. Parou como quem chegou onde ia.', if:R },
+{ t:'nar', tx:'O p\u00e9 direito parou adiante do esquerdo. Klara n\u00e3o concluiu o passo.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'Klara.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'O ar da estrada esquentou.', if:R },
 
 { t:'pause', if:R },
-{ t:'nar', tx:'E Antoniette, que tinha cinco anos de registro e uma mem\u00f3ria treinada para dura\u00e7\u00f5es, n\u00e3o conseguiu dizer quanto tempo aquilo levou.', if:R },
+{ t:'nar', tx:'O rel\u00f3gio continuou no pulso dela. Depois, a dura\u00e7\u00e3o ficou em branco.', if:R },
 
 { t:'fade_out', if:R },
 { t:'bgm', id:null, if:R },

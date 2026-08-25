@@ -979,7 +979,8 @@ RBF.Engine = (function () {
       }
       /* Quantas marcas o jogador levantou. O roteiro le por faixa, e nao
          por marca individual, quando so quer saber se ele foi a fundo. */
-      RBF.STATE.flags[(beat.conta || 'percurso_marcas')] = contaMarcas(m);
+      RBF.STATE.flags[(beat.conta || 'percurso_marcas')] =
+        contaMarcas(m, beat.naoConta);
     }
 
     if (beat.campo) { RBF.STATE.flags[beat.campo] = saida; }
@@ -992,10 +993,16 @@ RBF.Engine = (function () {
     advance();
   }
 
-  function contaMarcas(m) {
+  function contaMarcas(m, naoConta) {
     var n = 0;
+    var ignora = {};
+    for (var i = 0; i < (naoConta || []).length; i++) {
+      ignora[naoConta[i]] = true;
+    }
     for (var k in m) {
-      if (Object.prototype.hasOwnProperty.call(m, k) && m[k]) { n += 1; }
+      if (Object.prototype.hasOwnProperty.call(m, k) && m[k] && !ignora[k]) {
+        n += 1;
+      }
     }
     return n;
   }

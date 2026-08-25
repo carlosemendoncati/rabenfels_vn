@@ -190,7 +190,7 @@ Funcionou.
 
 *Klara e Liara Rabenfels*
 
-Nasceram em uma noite de agosto sem lua, no interior de Velha Nidhaus.
+Nasceram em uma noite sem lua, no interior de Velha Nidhaus. O aniversário cai entre novembro e janeiro; os registros preservados não fixam o mês.
 
 A parteira foi dispensada antes do amanhecer. Em seu lugar, entraram três membros mais velhos da família que serviam como guardiões do pacto — os únicos dentro da linhagem que conhecem os termos completos do ciclo de geração a geração.
 

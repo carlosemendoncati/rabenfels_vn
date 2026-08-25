@@ -99,7 +99,7 @@ var C6_METODO = [
   { t:'dial', ch:'klara', tx:'E se duas dizem?' },
   { t:'dial', ch:'antoniette', tx:'A\u00ed voc\u00ea pergunta se as duas ouviram da mesma.' },
   { t:'pause' },
-  { t:'nar', tx:'Klara pensou nisso por um tempo desconfort\u00e1vel.' },
+  { t:'nar', tx:'Klara levou cinco respira\u00e7\u00f5es. Na quarta, franziu a testa.' },
   { t:'dial', ch:'klara', tx:'Quase tudo \u00e9 uma pessoa, ent\u00e3o.' },
   { t:'dial', ch:'antoniette', tx:'Quase tudo.' },
 
@@ -115,7 +115,7 @@ var C6_METODO = [
     bg:'bg_corridor', bgm:null },
   { t:'nar', tx:'Em fevereiro do terceiro ano, Antoniette achou um caderno debaixo do colch\u00e3o da menina.' },
 { t:'nar', tx:'O quarto delas era o mais frio da casa e cheirava a l\u00e3 guardada.' },
-  { t:'nar', tx:'N\u00e3o estava escondido de verdade. Estava guardado do jeito que crian\u00e7a guarda.' },
+  { t:'nar', tx:'Uma quina aparecia quando a colcha era puxada. Era o esconderijo de uma crian\u00e7a.' },
   { t:'pause' },
 
   { t:'arc', key:'caderno_klara', label:'\u2014 caderno de K. \u2014', lns:[
@@ -125,7 +125,7 @@ var C6_METODO = [
       'A senhorita V. n\u00e3o pergunta de outubro. Por qu\u00ea?'
   ]},
 
-  { t:'nar', tx:'Antoniette recolocou o caderno exatamente onde estava e alisou a colcha.' },
+  { t:'nar', tx:'Antoniette recolocou o caderno na marca rasa do colch\u00e3o e alisou a colcha.' },
   { t:'pause' },
   { t:'inn', tx:'\u00daltima linha.' },
   { t:'inn', tx:'Ela aplicou em mim.' },
@@ -149,7 +149,7 @@ var C6_FORMA = [
   { t:'scene', id:'c6b_visita', chapter:'capitulo6', title:'A visita',
     bg:'bg_main_hall', bgm:'bgm_nidhaus' },
 
-  { t:'nar', tx:'Em junho a casa recebeu gente de fora pela primeira vez em dez meses. Um administrador de terras e a mulher.' },
+  { t:'nar', tx:'Em junho a casa recebeu a primeira visita em dez meses: um administrador de terras e a mulher.' },
   { t:'nar', tx:'Serafina mandou que as meninas descessem, o que significava que as meninas seriam olhadas.' },
   { t:'pause' },
 
@@ -160,7 +160,7 @@ var C6_FORMA = [
   { t:'dial', ch:'antoniette', tx:'Responde a pergunta feita. S\u00f3 ela. E devolve o olhar pelo tempo exato.' },
   { t:'pause' },
   { t:'dial', ch:'klara', tx:'Quanto \u00e9 o tempo exato?' },
-  { t:'nar', tx:'Antoniette pensou em como se ensina isso e n\u00e3o achou jeito melhor.' },
+  { t:'nar', tx:'Antoniette procurou uma medida que coubesse em n\u00famero.' },
   { t:'dial', ch:'antoniette', tx:'At\u00e9 voc\u00ea querer desviar. A\u00ed \u00e9 uma respira\u00e7\u00e3o a mais.' },
 
   { t:'scene', id:'c6b_jantar', chapter:'capitulo6', title:'O jantar' },
@@ -196,14 +196,14 @@ var C6_FORMA = [
   { t:'pause' },
   { t:'dial', ch:'serafina', tx:'Obrigada.' },
   { t:'spr_hide', ch:'serafina' },
-  { t:'nar', tx:'E subiu, do jeito que subia.' },
+  { t:'nar', tx:'Serafina recolheu a saia e subiu sem olhar para tr\u00e1s.' },
 
   { t:'pause' },
   { t:'inn', tx:'Ela me agradeceu.' },
   { t:'inn', tx:'"Isso vai ser \u00fatil para ela."' },
   { t:'pause' },
   { t:'inn', tx:'\u00datil para qu\u00ea.' },
-  { t:'nar', tx:'Ela ficou no corredor da galeria por um tempo, na frente da moldura vazia.' },
+  { t:'nar', tx:'Ela ficou diante da moldura vazia at\u00e9 ouvir a porta de Serafina fechar no andar de cima.' },
 
   { t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
       'A senhora da casa agradeceu o que eu estou ensinando \u00e0 menina.',
@@ -313,7 +313,7 @@ RBF.CHAPTER6 = [
 { t:'inn', tx:'For\u00e7ar de novo em menos de um ano me tira daqui.' },
 { t:'pause' },
 { t:'inn', tx:'Isso \u00e9 verdade e \u00e9 o que eu vou escrever no relat\u00f3rio.' },
-{ t:'nar', tx:'Ela escreveu exatamente isso e fechou o caderno.' },
+{ t:'nar', tx:'Copiou as duas frases sem tirar uma palavra e fechou o caderno.' },
 
 /* Le a escolha do Capitulo 5. */
 { t:'nar', tx:'Klara aparecia na biblioteca de manh\u00e3 e ficava at\u00e9 o almo\u00e7o, sem pedir licen\u00e7a.',
@@ -415,7 +415,7 @@ RBF.CHAPTER6 = [
 { t:'inn', tx:'Trabalhando neste ritmo, sobra um ano.' },
 { t:'pause' },
 { t:'inn', tx:'Eu podia ter feito em dezoito meses.' },
-{ t:'nar', tx:'Ela sabia disso havia algum tempo e nunca tinha escrito a frase.' },
+{ t:'nar', tx:'A frase a acompanhava havia semanas. Era a primeira vez no papel.' },
 
 { t:'nar', tx:'\u00c0 tarde, as duas meninas estavam sentadas no degrau do corredor leste, uma encostada na outra.' },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
@@ -426,7 +426,7 @@ RBF.CHAPTER6 = [
 { t:'dial', ch:'liara', tx:'Faz assim mesmo.' },
 { t:'pause' },
 
-{ t:'nar', tx:'E ela fez de novo \u2014 a lista de confer\u00eancia, item por item, do jeito que Antoniette ensinou.', if:{ taught:'A' } },
+{ t:'nar', tx:'E ela fez de novo \u2014 a lista de confer\u00eancia, item por item, na ordem que Antoniette ensinou.', if:{ taught:'A' } },
 { t:'nar', tx:'Liara errava de prop\u00f3sito s\u00f3 para a irm\u00e3 corrigir.', if:{ taught:'A' } },
 
 { t:'nar', tx:'E ela fez de novo \u2014 a mesura, o cumprimento, a frase de recusa que passa.', if:{ taught:'B' } },
@@ -442,7 +442,7 @@ RBF.CHAPTER6 = [
 { t:'nar', tx:'Antoniette ficou no fim do corredor at\u00e9 elas se cansarem, e n\u00e3o anotou nada.' },
 { t:'pause' },
 { t:'inn', tx:'Vinte e sete meses.' },
-{ t:'inn', tx:'Em agosto faz tr\u00eas anos que eu cheguei.' },
+{ t:'inn', tx:'Em agosto come\u00e7a o terceiro ciclo que eu registro.' },
 
 { t:'fade_out' },
 { t:'bgm', id:null },

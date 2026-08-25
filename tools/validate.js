@@ -431,13 +431,19 @@ async function playthrough(optionId, useKeyboard) {
     if (dbg.isChoice()) {
       const btns = dbg.buttons();
       if (!btns.length) { break; }
+      /* Uma lista permite testar uma combinacao precisa. A Cobertura nao
+         nasce de escolher sempre a mesma letra: exige A no relatorio de
+         agosto e B na protecao de Fenn. */
+      const wanted = Array.isArray(optionId)
+        ? (optionId[chosen.length] || 'A')
+        : optionId;
       /* Acha a posicao do botao cujo id bate. Se aquela escolha nao tiver
          esse id, cai no ultimo botao. */
       let at = btns.length - 1;
       for (let k = 0; k < btns.length; k++) {
-        if (btns[k].getAttribute('data-option') === optionId) { at = k; break; }
+        if (btns[k].getAttribute('data-option') === wanted) { at = k; break; }
       }
-      chosen.push(optionId + '@' + (at + 1));
+      chosen.push(wanted + '@' + (at + 1));
       if (useKeyboard) { win.pressKey(String(at + 1)); }
       else { btns[at].click(); }
       /* A escolha segura a cena por um instante antes de avancar. */
@@ -540,6 +546,20 @@ async function playthroughChecks() {
 
   check(new Set(results.map(r => JSON.stringify(r.flags))).size === 3,
         'os tres ramos produzem estados diferentes');
+
+  section('PARTIDA COMPLETA (Cobertura)');
+  const cob = await playthrough(
+    ['A','A','A','A','A','A','A','A','B','A'], false);
+  check(cob.finished, 'cobertura: alcanca o fim do roteiro');
+  check(cob.errors.length === 0, 'cobertura: sem erro de runtime', cob.errors.join(' | '));
+  check(cob.flags.rota === 'cobertura', 'cobertura: combinacao entra na rota correta',
+        String(cob.flags.rota));
+  check(cob.flags.cob_saida === 'carmine',
+        'cobertura: fallback sem canvas termina em Carmine',
+        String(cob.flags.cob_saida));
+  check(cob.progress.chaptersReached.indexOf('cob10') !== -1 &&
+        cob.progress.chaptersReached.indexOf('cob11') !== -1,
+        'cobertura: le A Porta e A Baixa');
 
   section('PARTIDA COMPLETA (teclado)');
   const kb = await playthrough('C', true);
