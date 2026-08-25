@@ -5,7 +5,15 @@ import io, re, sys, glob, os, statistics, collections
 sys.stdout.reconfigure(encoding='utf-8')
 ESC = re.compile(r'\\u([0-9a-fA-F]{4})')
 dec = lambda t: ESC.sub(lambda m: chr(int(m.group(1), 16)), t)
-ORDEM = ['prologue'] + ['chapter%d' % i for i in range(1, 12)] + ['epilogue']
+# A obra se partiu em quatro rotas em 0.11.0 e chapter10/11 deixaram de
+# existir. A lista sai do disco para nao envelhecer de novo a cada
+# capitulo novo: qualquer js/data/*.js que nao seja tabela entra.
+_FORA = {'arvore', 'quatro_paginas', 'cob_mapas'}
+ORDEM = ['prologue'] + ['chapter%d' % i for i in range(1, 10)]
+ORDEM += sorted(os.path.basename(p)[:-3] for p in glob.glob('js/data/*.js')
+                if os.path.basename(p)[:-3] not in _FORA
+                and not os.path.basename(p).startswith(('prologue', 'chapter', 'epilogue')))
+ORDEM += ['epilogue']
 
 TXT = {n: dec(io.open('js/data/%s.js' % n, encoding='utf-8').read()) for n in ORDEM}
 FALA = {n: re.findall(r"t:'(nar|inn|dial)'[^\n]*?tx:'((?:[^'\\]|\\.)*)'", t) for n, t in TXT.items()}

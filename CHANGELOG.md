@@ -1,83 +1,214 @@
 # Changelog
 
-## 0.14.0 — Quatro documentos
+## 0.12.1 — A Perda ganha o que ela devia ter
 
-Revisão narrativa integral orientada pelos estudos de escrita da pasta
-`docs/estudo/`. Diálogos e narração dos capítulos comuns e das quatro rotas
-foram enxugados, com ações concretas no lugar de frases intercambiáveis,
-vozes mais distintas e menos repetição entre Esperança e Perda.
+A rota que deveria ser a mais emocionante da obra era a que menos deixava
+a menina falar. Medido antes de mexer:
 
-A cronologia foi conferida de ponta a ponta. Klara e Liara têm oito anos na
-chegada e doze no fechamento das rotas; o intervalo é de cinquenta e dois
-meses. Tempos de serviço, idade do filho de Fenn e prazos de correspondência
-foram alinhados ao calendário.
+| | antes | depois |
+|---|---:|---:|
+| falas de Klara na rota | **21** | **71** |
+| falas de Carmine | 10 | 25 |
+| diálogos (`dial`) | 73 | 158 |
+| beats | 532 | 769 |
 
-O Epílogo agora lê o documento produzido por cada rota. Esperança e Perda
-chegam com quatro páginas ausentes; Cobertura termina na página 241; Resposta
-entrega 291 páginas e ainda assim recebe o parecer de “autoria falecida”. O
-extra As Quatro Páginas ganhou cabeçalho e fecho próprios para esses três
-estados. A galeria e a árvore deixaram de descrever os nove finais antigos e
-passaram a registrar os capítulos reais das quatro rotas.
+E as 21 falas de Klara eram todas de procedimento: *"Confirmei"*, *"A
+senhorita conferiu o horário?"*, *"Está certo"*, *"Ele foi embora?"*. Ela
+nunca dizia do que tinha medo, nunca dizia o que sentia, nunca dizia que
+confiava. O Capítulo 13 — o mais longo da obra, 152 beats — tinha **4
+falas no total**.
 
-O Prólogo foi fixado como a primeira leitura de **O Arquivo**, e não como um
-flash-forward físico compartilhado pelas quatro rotas. Assim, o pacote de
-Matheo não contradiz **O Livro-Razão**, entregue em mãos por Antoniette, nem o
-caderno de 241 páginas produzido na Cobertura. Documento mestre, bíblia
-narrativa e instruções do projeto foram sincronizados com essa estrutura.
+Era uma rota sobre contabilidade em que a contabilidade virou o conteúdo.
 
-Na Cobertura, o baú fechado, o gancho vazio e os dois estados da moldura foram
-recortados, limpos, pixelizados e ligados ao mapa. A esteira de assets agora
-atualiza também sua cópia crua; isso impede que uma execução posterior
-restaure por engano a versão antiga de uma peça recém-entregue.
+### Os quarenta minutos
 
-As duas peças específicas que ainda faltavam foram concluídas a partir da
-arte existente. O relógio do corredor agora mostra 11h40, como dizem os dois
-atos, e o escritório troca o armário selado pelo estado aberto após a virada,
-com o lacre rompido, três pastas caídas e o espaço limpo da quarta ausente.
+O pior estava numa linha só:
 
-Os sete mapas genéricos do percurso foram substituídos por ambientes novos,
-desenhados para suas funções narrativas: quarto, corredor administrativo,
-escritório, escada em dois níveis, copa, câmara e salão final. Móveis,
-objetos de conferência, saídas, colisões e rotas de perseguição foram
-reposicionados sobre a nova arquitetura. Cama, porta fechada e rastros agora
-participam da composição; o cilindro ocupa o encaixe mecânico da câmara e
-Carmine permanece no eixo único entre Antoniette e a porta do pátio.
+> *"Andaram quarenta minutos. Klara não pediu para descansar uma vez."*
 
-O teste visual da Cobertura passou a reproduzir toque móvel real, abertura e
-fechamento do menu, deslocamento contínuo por um toque, colisão de Carmine e a
-sequência fatal completa. Ele também confirma que não existe saída para o
-pátio nem continuação pela carruagem nesta rota, agora em telas de desktop
-e telefone.
+Quarenta minutos. A única vez na vida daquela menina em que ela está fora
+da casa, no escuro, sem ninguém medindo. E o texto **narrava o silêncio
+em vez de preenchê-lo**.
 
-O formato de save subiu para 5 porque os novos beats do Epílogo e de Resposta
-deslocam índices no vetor único do roteiro.
+Agora ela fala. E fala a língua da casa, porque foi a única que deram a
+ela: ladrilhos contados com o pé, portas que trancam por fora, medições
+antes e depois. Nenhuma frase dela é bonita. Todas são exatas.
 
-## 0.13.0 — A porta não abre
+> — Eu não tenho medo da câmara.
+> — Não?
+> — Tenho medo de acordar no meio.
 
-Decisão autoral de 25/08/2026: em **A Cobertura**, Carmine mata Antoniette
-antes da fuga. A continuação em que ela chegava à carruagem, alugava um
-quarto na Marca Cinzenta e vivia mais onze anos foi removida. Ela não era
-compatível com o encontro diante da porta nem com o capítulo seguinte.
+Confiança, para Klara, é **entrega de informação** — numa casa assim,
+informação é a única moeda que uma criança tem. Ela não diz que confia:
+diz *"para a senhorita eu conto e acaba na senhorita"*.
 
-O salão agora é um ponto sem desvio: Carmine ocupa o vão, não desaparece e
-não pode ser atravessada. Interagir inicia uma execução narrativa automática
-com a folha de três quadros entregue para a personagem. Não há combate,
-ataque do jogador, vida ou repetição do percurso. O resultado gravado pelo
-beat passou a ser `carmine`, inclusive no fallback sem canvas.
+O pico da cena não é uma fala. É Antoniette levar o lápis ao papel para
+catalogar a confissão da menina — *alteração de padrão de sono, relato
+direto de procedimento, fonte primária* — e parar no meio. Primeira vez
+em cinco anos, e ela não sabe dizer a si mesma por quê.
 
-O Capítulo 10 termina com a morte antes do pátio. O Capítulo 11 passou a ser
-**A Baixa**: registra a carruagem vazia, a ficha de pessoal e o caderno que
-chega a Matheo no nonagésimo terceiro dia. As descobertas opcionais do RPG
-continuam condicionadas às marcas realmente apuradas.
+### O embate: as duas perdem
 
-Também foram corrigidos os controles móveis do percurso: fechar o menu volta
-ao estado `percurso`, um toque define um destino contínuo e o botão Menu usa
-o mesmo painel da VN. Carmine passou a ter colisão física, e salvar pelo menu
-funciona enquanto o percurso está pausado.
+A cena da Carmine estava escrita como **auditoria**. Ela chegava,
+apontava a promessa de fevereiro, apontava os onze minutos, e saía. O
+assunto era cronograma.
 
-O formato de save subiu para 4 porque os índices dos dois capítulos da rota
-mudaram. Saves anteriores são recusados com aviso em vez de abrirem numa cena
-que deixou de existir.
+O motor agora é outro: **Carmine sabe que o receptáculo que ela preparou
+por doze anos ama outra pessoa, e ela vai herdar isso junto com o corpo.**
+
+> — Quando eu ocupar, o corpo não esquece. Nada do que ela sente sai junto.
+> — Fica aqui dentro. Comigo. Todo dia.
+> — Então a senhora perde também.
+>
+> *Carmine não respondeu por tempo demais.*
+>
+> — Eu não perco. Eu recebo.
+>
+> *Foi a única vez naquela noite em que ela corrigiu a própria palavra.*
+
+Ela nunca nomeia o que sente. **A correção de uma palavra é a confissão
+inteira**, e ninguém em cena comenta. Quem escolheu ensinar o método no
+Capítulo 6 vê Antoniette reconhecer o gesto antes de reconhecer o resto —
+Carmine emendou ao lado em vez de riscar, e foi Antoniette quem ensinou
+isso à Klara.
+
+E as duas perguntas que fecham:
+
+> — Ela vai saber que sou eu?
+> — Vai.
+> — Ela vai poder falar comigo?
+> — Não.
+
+*"Eu não estava contando o tempo"* fica onde estava e ganha segundo
+sentido: os onze minutos nunca foram o ponto. Steiner continua valendo —
+a cadeia causal fica, o mérito sai — e agora sai por um motivo pior que
+acaso.
+
+### A última conversa é sobre nada
+
+O Capítulo 13 ganhou a cena que faltava: Klara bate na porta às quatro e
+dez. **Ela não sabe por que parou na estrada** — é canon, e ninguém em
+cena pode enunciar o que aconteceu ali.
+
+E Antoniette mente. Primeira vez em cinco anos, sobre a própria data de
+saída, porque a verdade não serve para nada e a mentira é a única coisa
+que ainda dá para dar a ela. Em `taught:'A'` a mentira vira duas, porque
+a menina confere — e foi Antoniette que ensinou a menina a conferir.
+
+> — Boa noite, senhorita.
+> — Boa noite, Klara.
+>
+> *Foi a última coisa que as duas disseram uma à outra.*
+> *As duas disseram do jeito que se diz todo dia.*
+
+### A escolha do Capítulo 6 passa a doer
+
+`taught` mudava a ficha da Academia no Epílogo e pouca coisa mais. Agora
+ela muda **o que a menina faz com a confiança**: 38 beats em `per11`, 8
+em `per12`, 23 em `per13`, 89 no Epílogo.
+
+- **A · o método** — ela confere a própria memória antes de contar, cita
+  a fonte e pede correção. É o mais frio dos três e o que mais machuca
+  depois, porque é o único em que a menina agradece na língua da Ordem.
+- **B · a forma** — ela trata a fuga como dívida. *"Quem abre porta de
+  noite fica devendo, e quem fica devendo tem nome."*
+- **C · o mundo** — ela pergunta pelo lado de fora, e é a única frase da
+  noite em que ela usa a palavra *gente*.
+
+### Eldoria — só em `taught:'A'`
+
+O Epílogo dizia: *"Ele tinha ensinado aquela disciplina uma vez na vida…
+achou coincidência bonita e passou adiante."*
+
+**`passou adiante` era a falha.** Escriba não passa adiante: confere — e
+conferir é a única coisa que Matheo sabe fazer bem. Ele pede o histórico
+da disciplina, que é público e ninguém pede:
+
+> Registro e verificação de fontes. Trinta e um anos.
+> Aprovações com menção: duas.
+
+Uma está morta havia seis anos, por parecer que ele mesmo assinou sem ler
+até o fim. A outra tem dezoito anos e mora em Velha Nidhaus.
+
+Ele vai. Assiste a uma aula do fundo da sala, e os dois trocam quatro
+falas sobre método — a única língua que os dois têm — sem que nenhum
+saiba o que o outro é. Klara devolve a regra de Antoniette com a emenda e
+tudo, e Matheo reconhece a própria aula voltando por uma boca que nunca
+esteve nela.
+
+E não diz o nome. Dizer seria informação, e informação atravessa aquela
+casa.
+
+### Quatro cortes na releitura
+
+O validador fechou em 845 e não viu nenhum destes. Só saiu lendo:
+
+- *"Eu não entendo." / "Entende."* — beat que avisa o leitor de que algo
+  importante foi dito. Antoniette é a pessoa mais rápida da obra.
+- *"E o que ela vai levar para dentro é a senhora."* — paráfrase que
+  reforça, três falas antes da versão melhor da mesma informação.
+- *"Eu vou passar o resto do tempo desta casa carregando o que uma
+  criança sentiu por uma empregada."* — Carmine **nomeando o próprio
+  sentimento**, a única coisa que ela não pode fazer. Era a frase mais
+  escrita do trecho, que é o sinal de que era minha e não dela.
+- *"Isso não é coincidência. Isso é transmissão."* — negação-contraste, o
+  antipadrão nº 1 deste projeto e a minha assinatura. Os números já
+  tinham dito.
+
+### Medido
+
+| camada | resultado |
+|---|---|
+| `node tools/validate.js` | 845 checagens, **0 falhas** |
+| `python tools/validate.py` | 11.003 checagens, **0 falhas** |
+| `node tools/smoke_chrome.js` | 58 checagens, 0 falhas, `SMOKE-OK` |
+| `node tools/cobertura_shots.js` | 70 de 70 |
+| `python tools/medir.py` | antipadrões: 0 em todas as categorias novas |
+
+---
+
+## 0.12.0 — A trilha que não saía, e o percurso
+
+**Relato:** *"ao andar pelas salas mudando de mapa o áudio buga e o
+antigo não sai nem pausa."*
+
+Três defeitos encadeados, e o do meio não era do percurso — era do motor
+de áudio da obra inteira, e aparece em qualquer troca rápida de faixa.
+
+**1 · Dois donos para a mesma trilha.** `vaiPara()` chamava `playBgm()` e
+**não** atualizava `jogo.bgm`. No quadro seguinte `passoTrilha()` via
+diferença e chamava de novo. Duas chamadas em dois quadros. A correção
+não é sincronizar as duas: é ter um dono só.
+
+**2 · `stopBgm` devolvia na hora com fade em andamento.** Ele zera
+`current` na primeira linha e só depois esmaece. Na segunda chamada
+`current` já era `null`, então `done()` disparava imediatamente e
+`startBgm` rodava com a faixa anterior ainda soando. E `pick()` cria
+`new Audio()` sem cache — a faixa órfã tocava até o fim **sem ninguém
+apontando para ela**. Era literalmente o "não sai nem pausa".
+
+**3 · Dois `setInterval` sobre o mesmo `el.volume`.** `fade()` não
+cancelava o fade anterior daquele elemento. Duas rampas disputando o
+mesmo volume é o pulo de nível que se ouve como "bugado".
+
+**A correção estrutural é geração:** cada pedido de trilha recebe um
+número, e o callback assíncrono de `pick` confere o número antes de virar
+`current`. Se foi atropelado, pausa o próprio elemento e sai.
+
+### A conferência que não sabia falhar
+
+A primeira versão do teste contava `document.querySelectorAll('audio')` —
+e dava **sempre zero**, porque `new Audio()` não entra no documento. Ela
+passava com os três defeitos repostos de propósito.
+
+`RBF.Audio._debug` expõe `vivos`, `tocando` e `orfas`. O teste também
+verifica que **alguma faixa chegou a tocar**, senão a checagem seria vazia
+num navegador que bloqueia áudio — e o Chrome bloqueia, sem
+`--autoplay-policy=no-user-gesture-required`.
+
+Reposto o defeito, os três checks falham. Foi assim que soube que valem.
+
+---
 
 ## 0.12.0 — O percurso
 

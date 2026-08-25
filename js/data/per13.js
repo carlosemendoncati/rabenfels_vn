@@ -105,6 +105,91 @@ RBF.PER13 = [
 /* ======================================================================
    C2 - A ULTIMA ENTRADA
    ====================================================================== */
+/* ======================================================================
+   C1b - A PORTA
+
+   A ultima conversa das duas, e ela e sobre nada.
+
+   Carmine acabou de dizer, na biblioteca, que a menina vai saber quem e
+   Antoniette e nunca mais vai poder falar com ela. Entao esta e a
+   ultima vez - e nenhuma das duas sabe, e e por isso que a conversa e
+   sobre hora, sobre um livro e sobre boa noite.
+
+   KLARA NAO EXPLICA POR QUE PAROU NA ESTRADA. Ela nao sabe. Ninguem em
+   cena pode enunciar o que aconteceu ali.
+
+   ANTONIETTE MENTE. Primeira vez em cinco anos, e sobre a propria data.
+   ====================================================================== */
+{ t:'scene', id:'per13_porta', chapter:'per13', title:'Quatro e dez',
+  bg:'bg_antoniette_room', bgm:null, if:R },
+
+{ t:'nar', tx:'Klara bateu na porta do quarto do fundo \u00e0s quatro e dez.', if:R },
+{ t:'nar', tx:'Ningu\u00e9m tinha impedido a menina de andar pela casa naquela noite.', if:R },
+{ t:'pause', if:R },
+{ t:'spr', ch:'klara', ex:'blank', pos:'right', if:R },
+{ t:'spr', ch:'antoniette', ex:'guarded', pos:'left', if:R },
+
+{ t:'dial', ch:'klara', tx:'Eu n\u00e3o sei por que eu parei.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'antoniette', tx:'Eu sei.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Ela n\u00e3o sabia.', if:R },
+
+{ t:'pause', if:R },
+{ t:'dial', ch:'klara', tx:'A senhorita vai embora?', if:R },
+{ t:'dial', ch:'antoniette', tx:'Vou.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'klara', tx:'Quando?', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Antoniette tinha a resposta, e a resposta era hoje.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'antoniette', tx:'Ainda n\u00e3o est\u00e1 marcado.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Foi a primeira mentira que ela contou \u00e0quela menina em cinco anos.', if:R },
+{ t:'nar', tx:'Contou porque a verdade n\u00e3o servia para nada, e era a \u00fanica coisa que ainda dava para dar a ela.', if:R },
+
+/* A - o metodo volta contra ela. A menina confere. */
+{ t:'pause', if:{ rota:'perda', taught:'A' } },
+{ t:'dial', ch:'klara', tx:'A senhorita conferiu?', if:{ rota:'perda', taught:'A' } },
+{ t:'dial', ch:'antoniette', tx:'Conferi.', if:{ rota:'perda', taught:'A' } },
+{ t:'pause', if:{ rota:'perda', taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Em dois lugares?', if:{ rota:'perda', taught:'A' } },
+{ t:'pause', if:{ rota:'perda', taught:'A' } },
+{ t:'dial', ch:'antoniette', tx:'Em dois lugares.', if:{ rota:'perda', taught:'A' } },
+{ t:'pause', if:{ rota:'perda', taught:'A' } },
+{ t:'nar', tx:'Duas.', if:{ rota:'perda', taught:'A' } },
+
+/* B - a forma. Ela cobra a si mesma o agradecimento que nao deu. */
+{ t:'pause', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Ent\u00e3o eu n\u00e3o agrade\u00e7o agora.', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'antoniette', tx:'N\u00e3o precisa agradecer.', if:{ rota:'perda', taught:'B' } },
+{ t:'pause', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Precisa. Depois n\u00e3o vale.', if:{ rota:'perda', taught:'B' } },
+{ t:'pause', if:{ rota:'perda', taught:'B' } },
+{ t:'nar', tx:'Ela tinha dito a mesma coisa na carro\u00e7a, seis horas antes, sobre outra pessoa.', if:{ rota:'perda', taught:'B' } },
+
+/* C - o mundo. Ela pede que a pagina fique marcada. */
+{ t:'pause', if:{ rota:'perda', taught:'C' } },
+{ t:'dial', ch:'klara', tx:'A senhorita leva o livro do norte?', if:{ rota:'perda', taught:'C' } },
+{ t:'dial', ch:'antoniette', tx:'Levo.', if:{ rota:'perda', taught:'C' } },
+{ t:'pause', if:{ rota:'perda', taught:'C' } },
+{ t:'dial', ch:'klara', tx:'Marca a p\u00e1gina da cidade em cima da \u00e1gua.', if:{ rota:'perda', taught:'C' } },
+{ t:'pause', if:{ rota:'perda', taught:'C' } },
+{ t:'nar', tx:'O livro estava na estante da biblioteca e ia continuar l\u00e1.', if:{ rota:'perda', taught:'C' } },
+
+{ t:'pause', if:R },
+{ t:'nar', tx:'Klara ficou na porta mais tempo do que uma resposta exige.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'klara', tx:'Boa noite, senhorita.', if:R },
+{ t:'dial', ch:'antoniette', tx:'Boa noite, Klara.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Foi a \u00faltima coisa que as duas disseram uma \u00e0 outra.', if:R },
+{ t:'nar', tx:'As duas disseram do jeito que se diz todo dia.', if:R },
+{ t:'spr_hide', ch:'klara', if:R },
+{ t:'spr_hide', ch:'antoniette', if:R },
+{ t:'pause', if:R },
+{ t:'fade_out', if:R },
+
 { t:'scene', id:'per13_ultima', chapter:'per13', title:'A \u00faltima entrada',
   bg:'bg_antoniette_room', bgm:null, if:R },
 { t:'spr', ch:'antoniette', ex:'away', pos:'center', if:R },

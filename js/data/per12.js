@@ -241,6 +241,80 @@ RBF.PER12 = [
 { t:'nar', tx:'Carmine n\u00e3o alterou o volume nem esperou defesa.', if:R },
 
 /* ======================================================================
+   C4b - O QUE ELA OUVIU NA ESTRADA
+
+   Aqui a cena deixa de ser auditoria.
+
+   Carmine nao veio cobrar cronograma. Ela veio porque o corpo que
+   preparou por doze anos quer outra pessoa, e ela vai herdar isso.
+
+   Ela nunca nomeia. Corrige uma palavra, e a correcao e a confissao.
+   Ninguem comenta.
+   ====================================================================== */
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Ela falou com voc\u00ea na estrada.', if:R },
+{ t:'dial', ch:'antoniette', tx:'Falou.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Trinta e uma frases.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Antoniette n\u00e3o tinha contado.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Eu contei.', if:R },
+
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'\u201cPara a senhorita eu conto e acaba na senhorita.\u201d', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'A frase saiu na entona\u00e7\u00e3o da menina. N\u00e3o parecida com ela. A dela.', if:R },
+{ t:'pause', if:R },
+{ t:'spr', ch:'antoniette', ex:'shaken', pos:'center', if:R },
+{ t:'dial', ch:'antoniette', tx:'A senhora estava l\u00e1.', if:R },
+{ t:'dial', ch:'carmine', tx:'Eu estou sempre l\u00e1.', if:R },
+
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Doze anos, escriba.', if:R },
+{ t:'dial', ch:'carmine', tx:'Eu aprendi o passo dela antes de ela andar. Aprendi de que lado ela dorme.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Antoniette tinha aprendido a segunda coisa em novembro do ano dois, e anotado como posi\u00e7\u00e3o habitual.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Quando eu ocupar, o corpo n\u00e3o esquece. Nada do que ela sente sai junto.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Fica aqui dentro. Comigo. Todo dia.', if:R },
+
+{ t:'pause', if:R },
+{ t:'dial', ch:'antoniette', tx:'Ent\u00e3o a senhora perde tamb\u00e9m.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Carmine n\u00e3o respondeu por tempo demais.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Eu n\u00e3o perco. Eu recebo.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Foi a \u00fanica vez naquela noite em que ela corrigiu a pr\u00f3pria palavra.', if:R },
+
+/* Quem ensinou o metodo reconhece o gesto: a correcao e uma emenda de
+   escriba, e Antoniette repara nisso antes de reparar no resto. */
+{ t:'pause', if:{ rota:'perda', taught:'A' } },
+{ t:'inn', tx:'Ela emendou ao lado, na mesma linha. N\u00e3o riscou.', if:{ rota:'perda', taught:'A' } },
+{ t:'pause', if:{ rota:'perda', taught:'A' } },
+{ t:'inn', tx:'Eu ensinei isso \u00e0 Klara.', if:{ rota:'perda', taught:'A' } },
+
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'A senhora n\u00e3o vai salvar essa menina.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'N\u00e3o hoje, n\u00e3o em setembro, n\u00e3o com barco nenhum.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'E ela vai continuar esperando. \u00c9 isso que eu vou ter de ouvir.', if:R },
+
+{ t:'pause', if:R },
+{ t:'dial', ch:'antoniette', tx:'Ela vai saber que sou eu?', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'Vai.', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'antoniette', tx:'Ela vai poder falar comigo?', if:R },
+{ t:'pause', if:R },
+{ t:'dial', ch:'carmine', tx:'N\u00e3o.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Antoniette p\u00f4s as duas m\u00e3os na mesa, uma de cada lado do caderno, e n\u00e3o escreveu nada.', if:R },
+
+/* ======================================================================
    C5 - OS ONZE MINUTOS
    A correcao do Steiner. NAO EXPLICAR. Saida: farpa.
    ====================================================================== */

@@ -249,7 +249,108 @@ RBF.EPILOGUE = [
 { t:'inn', tx:'\u00c9 o meu.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'Ele tinha ensinado aquela disciplina uma vez na vida, a uma escritur\u00e1ria de vinte e dois anos, em Lervel, num inverno.', if:{ taught:'A' } },
-{ t:'nar', tx:'Achou coincid\u00eancia bonita e passou adiante.', if:{ taught:'A' } },
+
+/* ======================================================================
+   O QUE ELE FAZ EM VEZ DE PASSAR ADIANTE
+
+   Estava escrito "achou coincidencia bonita e passou adiante". Escriba
+   nao passa adiante: confere. E conferir e a unica coisa que este homem
+   sabe fazer bem.
+   ====================================================================== */
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Ele n\u00e3o passou adiante. Pediu o hist\u00f3rico da disciplina, que \u00e9 p\u00fablico e ningu\u00e9m pede.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 hist\u00f3rico da disciplina \u2014', lns:[
+    'Registro e verifica\u00e7\u00e3o de fontes. Trinta e um anos.',
+    'Aprova\u00e7\u00f5es com men\u00e7\u00e3o: duas.'
+], if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Uma das duas estava morta havia seis anos, por parecer que ele mesmo assinara sem ler at\u00e9 o fim.', if:{ taught:'A' } },
+{ t:'nar', tx:'A outra tinha dezoito anos e morava em Velha Nidhaus.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'inn', tx:'Duas em trinta e um anos, e as duas saem da mesma casa.', if:{ taught:'A' } },
+
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Da estrada de Lervel at\u00e9 Eldoria s\u00e3o quatro dias de carruagem. Ele levou onze para decidir e quatro para ir.', if:{ taught:'A' } },
+
+/* ======================================================================
+   A AULA
+
+   Os dois falam de metodo porque e a unica lingua que os dois tem, e
+   nenhum dos dois sabe o que o outro e.
+   ====================================================================== */
+{ t:'scene', id:'ep_academia', chapter:'epilogo', title:'Eldoria',
+  bg:'bg_library', bgm:'bgm_archive', if:{ taught:'A' } },
+{ t:'fade_in', if:{ taught:'A' } },
+
+{ t:'nar', tx:'A sala tinha dezenove lugares e catorze ocupados. Ele ficou de p\u00e9 no fundo, como visitante da Ordem tem direito de ficar.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'spr', ch:'klara', ex:'neutral', pos:'center', if:{ taught:'A' } },
+{ t:'nar', tx:'Reconheceu a aluna pela postura antes de reconhecer pelo cabelo: sentada reta, as duas m\u00e3os na mesa, uma de cada lado do caderno.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'O exerc\u00edcio do dia era um invent\u00e1rio de casa grande com tr\u00eas erros plantados. Ela achou os tr\u00eas e marcou um quarto.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'O quarto n\u00e3o era erro. O professor disse isso, e ela n\u00e3o apagou a marca.', if:{ taught:'A' } },
+
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'No fim da aula ele perguntou uma coisa, do jeito que examinador pergunta, e sem se apresentar.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'spr', ch:'matheo', ex:'neutral', pos:'left', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'Por que a senhorita n\u00e3o apagou?', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Porque eu marquei.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'O professor disse que est\u00e1 certo.', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Disse. Ele \u00e9 fonte \u00fanica.', if:{ taught:'A' } },
+
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Matheo tinha escrito aquela express\u00e3o num quadro em Lervel, num inverno, para uma turma de tr\u00eas.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'E o que a senhorita faz com a marca?', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Deixo. Escrevo o acerto do lado, na mesma tinta.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Riscar ensina a esconder o erro.', if:{ taught:'A' } },
+
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Aquela frase n\u00e3o estava no quadro de Lervel. Foi de uma aluna que a inventou depois, sozinha, e ele nunca chegou a saber.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'inn', tx:'Ela n\u00e3o aprendeu isso aqui.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+
+{ t:'dial', ch:'matheo', tx:'Quem ensinou isso \u00e0 senhorita?', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Klara levou tempo. N\u00e3o o tempo de quem n\u00e3o lembra.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Uma pessoa da casa.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'Ela ainda est\u00e1 l\u00e1?', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'N\u00e3o.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Ela fechou o caderno com as duas m\u00e3os e n\u00e3o perguntou quem ele era.', if:{ taught:'A' } },
+{ t:'nar', tx:'Perguntar seria informa\u00e7\u00e3o, e ela tinha sido criada numa casa que l\u00ea tudo o que entra e sai.', if:{ taught:'A' } },
+
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Matheo tinha o nome dela na pasta e o parecer no bolso. Levou a m\u00e3o ao bolso e parou ali.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'inn', tx:'Se eu disser o nome, eu digo a esta casa que o nome importa.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'Bom exerc\u00edcio, senhorita.', if:{ taught:'A' } },
+{ t:'spr_hide', ch:'matheo', if:{ taught:'A' } },
+
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Na porta ele olhou para tr\u00e1s uma vez.', if:{ taught:'A' } },
+{ t:'nar', tx:'Klara tinha reaberto o caderno e estava escrevendo alguma coisa ao lado da marca que n\u00e3o apagou.', if:{ taught:'A' } },
+{ t:'spr_hide', ch:'klara', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'fade_out', if:{ taught:'A' } },
+
+{ t:'scene', id:'ep_cadastro_2', chapter:'epilogo', title:'O cadastro',
+  bg:'bg_prologue_room', bgm:'bgm_epilogo', if:{ taught:'A' } },
+{ t:'fade_in', if:{ taught:'A' } },
+{ t:'nar', tx:'Voltou a Lervel em quatro dias e n\u00e3o escreveu relat\u00f3rio da viagem.', if:{ taught:'A' } },
+{ t:'nar', tx:'Foi a \u00fanica vez em dezenove anos de servi\u00e7o que ele deixou de escrever um.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'B' } },
 { t:'nar', tx:'Curso de gente que vai administrar casa grande. Ele anotou como escolha de fam\u00edlia e passou adiante.', if:{ taught:'B' } },
