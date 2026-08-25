@@ -141,14 +141,48 @@ RBF.COB10 = [
 { t:'nar', tx:'Depois ela sentou na beira da cama e refez o caminho de tr\u00e1s para frente, do jeito que se confere um invent\u00e1rio.', if:R },
 { t:'pause', if:R },
 
-{ t:'inn', tx:'Serafina escreveu a Lervel em maio para conferir as minhas refer\u00eancias. Ela me disse isso na cara.', if:R },
-{ t:'inn', tx:'Eu anotei e segui.', if:R },
-{ t:'pause', if:R },
-{ t:'inn', tx:'O relat\u00f3rio de agosto do ano tr\u00eas saiu daqui num envelope que atravessa esta casa.', if:R },
-{ t:'inn', tx:'O nome da antecessora saiu daqui no mesmo caminho, com a fonte identificada.', if:R },
-{ t:'pause', if:R },
-{ t:'inn', tx:'Prova sem proced\u00eancia n\u00e3o vale em mat\u00e9ria de foro. Est\u00e1 no manual, p\u00e1gina onze.', if:R },
-{ t:'pause', if:R },
+/*
+  O PERCURSO.
+
+  Aqui a obra troca de registro e o jogador refaz o caminho com ela.
+  A frase de cima e o briefing inteiro: "refez o caminho de tras para
+  frente, do jeito que se confere um inventario". O percurso e essa
+  frase jogada, e nao um acontecimento novo.
+
+  O que ele apura entra como flag e volta nos beats abaixo. O que ele
+  NAO apura nao vira lacuna: ela chega a conclusao de qualquer jeito,
+  porque o canon ja diz que ela chegou. O jogador decide quanto do
+  trabalho dela ele viu, e nao SE ela trabalhou.
+
+  Sem canvas - validador, navegador sem 2d - o beat resolve na hora
+  com `sets`, e o capitulo corre inteiro pelo caminho de baixo.
+*/
+{ t:'percurso', id:'cob10_inventario', chapter:'cob10',
+  campo:'cob_saida', conta:'cob_apurou',
+  sets:{ cob_conferiu:true }, padrao:'linha', if:R },
+
+{ t:'scene', id:'cob10_malas_fim', chapter:'cob10', title:'De volta ao quarto',
+  bg:'bg_antoniette_room', bgm:'bgm_archive', if:R },
+{ t:'fade_in', if:R },
+{ t:'spr', ch:'antoniette', ex:'shaken', pos:'center', if:R },
+
+{ t:'inn', tx:'Serafina escreveu a Lervel em maio para conferir as minhas refer\u00eancias. Ela me disse isso na cara.', if:{ rota:'cobertura', cob_maio:true } },
+{ t:'inn', tx:'Eu anotei e segui.', if:{ rota:'cobertura', cob_maio:true } },
+{ t:'pause', if:{ rota:'cobertura', cob_maio:true } },
+
+{ t:'inn', tx:'O relat\u00f3rio de agosto do ano tr\u00eas saiu daqui num envelope que atravessa esta casa.', if:{ rota:'cobertura', cob_agosto:true } },
+{ t:'inn', tx:'O nome da antecessora saiu daqui no mesmo caminho, com a fonte identificada.', if:{ rota:'cobertura', cob_fonte:true } },
+{ t:'pause', if:{ rota:'cobertura', cob_agosto:true } },
+
+{ t:'inn', tx:'Prova sem proced\u00eancia n\u00e3o vale em mat\u00e9ria de foro. Est\u00e1 no manual, p\u00e1gina onze.', if:{ rota:'cobertura', cob_manual:true } },
+{ t:'pause', if:{ rota:'cobertura', cob_manual:true } },
+
+/* Quem atravessou o percurso sem abrir gaveta nenhuma nao le a lista
+   acima. Le esta, que diz a mesma coisa sem nomear as pecas. Nao e
+   punicao - e o mesmo fato com menos detalhe, que e exatamente o que
+   sobra de quem conferiu depressa. */
+{ t:'inn', tx:'Tudo o que saiu daqui saiu por dentro desta casa. E tudo o que sai daqui e lido antes de sair.', if:{ rota:'cobertura', cob_livro:false } },
+{ t:'pause', if:{ rota:'cobertura', cob_livro:false } },
 
 { t:'nar', tx:'Ela achou a linha. Levou quarenta minutos e achou a linha, e a linha estava correta.', if:R },
 { t:'pause', if:R },

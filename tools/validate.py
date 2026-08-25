@@ -434,10 +434,25 @@ def manifest_checks():
 # 4. ROTEIRO
 # =========================================================================
 
+def marcas_do_percurso():
+    """Nomes de marca declarados em js/data/cob_mapas.js.
+
+    Le por expressao regular de proposito: este validador nao executa
+    JavaScript, e o arquivo e so dados. Se ele deixar de ser so dados, a
+    leitura falha em silencio e as flags voltam a aparecer como orfas -
+    que e um jeito barulhento o bastante de avisar.
+    """
+    caminho = os.path.join(ROOT, 'js', 'data', 'cob_mapas.js')
+    if not os.path.isfile(caminho):
+        return set()
+    texto = io.open(caminho, encoding='utf-8').read()
+    return set(re.findall(r"marca:\s*'([A-Za-z0-9_]+)'", texto))
+
+
 BEAT_TYPES = set([
     'scene', 'fade_in', 'fade_out', 'pause', 'bg', 'bgm', 'sfx', 'spr',
     'spr_hide', 'spr_clear', 'nar', 'inn', 'dial', 'arc', 'last', 'title',
-    'chap', 'end_chap', 'flag', 'cho', 'ending'
+    'chap', 'end_chap', 'flag', 'cho', 'ending', 'percurso'
 ])
 TEXT_BEATS = set(['nar', 'inn', 'dial'])
 POSITIONS = set(['left', 'center', 'right'])
@@ -559,6 +574,20 @@ def script_checks():
         # ou todo 'if:{ ending:... }' apareceria como flag orfa.
         if t == 'ending':
             flags_written.add('ending')
+
+        # O beat { t:'percurso' } grava o que promete em `sets`, a saida
+        # em `campo`, a contagem em `conta` e uma flag por marca
+        # declarada nos mapas do percurso. As marcas valem true OU false
+        # - nunca undefined - e por isso um beat pode se condicionar as
+        # duas faces.
+        if t == 'percurso':
+            for k in (beat.get('sets') or {}):
+                flags_written.add(k)
+            if beat.get('campo'):
+                flags_written.add(beat['campo'])
+            flags_written.add(beat.get('conta') or 'percurso_marcas')
+            for k in marcas_do_percurso():
+                flags_written.add(k)
 
         if beat.get('if'):
             for k in beat['if']:

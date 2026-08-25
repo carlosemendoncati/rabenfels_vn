@@ -157,7 +157,7 @@ function manifestChecks(win) {
 
   const KNOWN = new Set(['scene','bg','bgm','sfx','spr','spr_hide','spr_clear','flag','ending',
                          'pause','fade_in','fade_out','nar','inn','dial','arc','last',
-                         'title','chap','end_chap','cho']);
+                         'title','chap','end_chap','cho','percurso']);
 
   const seenScenes = new Set();
   const usedBg = new Set(), usedBgm = new Set(), usedSfx = new Set();
@@ -295,6 +295,28 @@ function manifestChecks(win) {
          'rota', o caminho. A segunda entrou quando a obra passou a se
          partir no fim do Capitulo 9. */
       if (b.t === 'ending') { settable.add('ending'); settable.add('rota'); }
+
+      /* O beat { t:'percurso' } grava quatro famílias de flag:
+           `sets`  o que ele promete de qualquer jeito
+           `campo` qual saída foi
+           `conta` quantas marcas o jogador levantou
+           marcas  uma por ponto de interação declarado nos mapas
+         As marcas vêm de js/data/cob_mapas.js e valem `true` ou `false`
+         — nunca undefined —, e por isso um beat pode se condicionar às
+         duas faces. Sem esta varredura, toda flag do percurso apareceria
+         como órfã aqui. */
+      if (b.t === 'percurso') {
+        for (const k of Object.keys(b.sets || {})) { settable.add(k); }
+        if (b.campo) { settable.add(b.campo); }
+        settable.add(b.conta || 'percurso_marcas');
+        const salas = RBF.COB_MAPAS || {};
+        for (const id of Object.keys(salas)) {
+          for (const pt of (salas[id].pontos || [])) {
+            if (pt.marca) { settable.add(pt.marca); }
+          }
+        }
+      }
+
       if (b.t === 'cho') { for (const o of b.opts) { if (o.then) { scanSet(o.then); } } }
     }
   })(script);

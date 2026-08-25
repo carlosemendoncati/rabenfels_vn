@@ -46,6 +46,14 @@ RBF.Engine = (function () {
   var busy          = false;
   var awaitingClick = false;
   var choiceActive  = false;
+
+  /* O percurso - o trecho jogado de cima da rota Cobertura - segura o
+     laco do mesmo jeito que uma escolha segura. Bandeira propria, e nao
+     reuso de choiceActive: a caixa de escolha se limpa por seletor e o
+     percurso nao tem botao nenhum para limpar. */
+  var percursoAtivo = false;
+  var percursoBeat  = null;
+  var percursoDados = null;
   var finished      = false;
 
   var typing     = false;
@@ -739,6 +747,26 @@ RBF.Engine = (function () {
         renderChoices(beat);
         return 'choice';
 
+      /*
+        O PERCURSO.
+
+        O roteiro para aqui, o modulo de canvas assume a tela, e o que o
+        jogador apurou volta como flag - `sets` do beat mais o que o
+        percurso marcou. Nada do roteiro sabe que houve um canvas.
+
+        Em modo silencioso (redesenho de load) o beat nao reabre o
+        percurso: quem reabre e loadFrom(), que tem o estado gravado na
+        mao. Aqui ele so deixa passar.
+      */
+      case 'percurso':
+        if (silent) { return 'go'; }
+        stopTyping();
+        hideOverlays();
+        resetText();
+        /* 'choice' so quando o modulo assumiu mesmo a tela. Recusa
+           sincrona ja aplicou as flags e o laco segue sem parar. */
+        return abrePercurso(beat, null) ? 'choice' : 'go';
+
       default:
         if (RBF.CONFIG.debug && typeof console !== 'undefined') {
           console.warn('[rabenfels] beat desconhecido: ' + beat.t);
@@ -885,6 +913,93 @@ RBF.Engine = (function () {
     }, wait);
   }
 
+  /* ---- percurso -----------------------------------------------------------
+
+     Duas portas: abrePercurso() entra, fechaPercurso() volta. A segunda
+     e sempre chamada pelo modulo, inclusive quando ele desiste por falta
+     de canvas - e por isso que o roteiro nunca fica preso num beat de
+     percurso, nem no validador, nem num navegador sem canvas.            */
+
+  /* Devolve true quando o modulo assumiu a tela, e false quando ele
+     recusou na hora - sem canvas ou sem segmento declarado. */
+  function abrePercurso(beat, dados) {
+    if (!RBF.Rpg) {
+      fechaPercurso(beat, beat.padrao || 'passou', null, true);
+      return false;
+    }
+
+    percursoAtivo = true;
+    percursoBeat  = beat;
+    percursoDados = null;
+
+    var mine     = epoch;
+    var abrindo  = true;    /* ainda dentro da chamada de entrada */
+    var recusou  = false;
+
+    function volta(saida, estado) {
+      if (mine !== epoch) { return; }   /* carregou outro save no meio */
+      if (abrindo) { recusou = true; }
+      fechaPercurso(beat, saida, estado, abrindo);
+    }
+
+    var entrou = dados
+      ? RBF.Rpg.retoma(beat, dados, volta)
+      : RBF.Rpg.entra(beat, volta);
+
+    abrindo = false;
+
+    if (!entrou || recusou) {
+      percursoAtivo = false;
+      return false;
+    }
+    return true;
+  }
+
+  /* `sincrono` = ainda estamos dentro de exec(), com busy em true.
+     Chamar advance() dali nao faz nada e deixa o roteiro parado; quem
+     segue o laco, nesse caso, e o proprio exec devolvendo 'go'. */
+  function fechaPercurso(beat, saida, estado, sincrono) {
+    percursoAtivo = false;
+    percursoBeat  = null;
+    percursoDados = estado || null;
+
+    /* Tres origens de flag, nesta ordem, e a ordem importa: o que o beat
+       promete, o que o percurso marcou, e por fim qual saida foi. A
+       saida vence porque ela e a conclusao. */
+    applyFlags(beat.sets);
+
+    if (RBF.Rpg && RBF.Rpg.marcas) {
+      var m = RBF.Rpg.marcas();
+      for (var k in m) {
+        if (!Object.prototype.hasOwnProperty.call(m, k)) { continue; }
+        /* Grava false tambem. Um beat condicionado a `cob_livro:false`
+           precisa do valor escrito: `passes()` compara por igualdade
+           estrita e undefined nao e false. */
+        RBF.STATE.flags[k] = !!m[k];
+      }
+      /* Quantas marcas o jogador levantou. O roteiro le por faixa, e nao
+         por marca individual, quando so quer saber se ele foi a fundo. */
+      RBF.STATE.flags[(beat.conta || 'percurso_marcas')] = contaMarcas(m);
+    }
+
+    if (beat.campo) { RBF.STATE.flags[beat.campo] = saida; }
+
+    if (sincrono) { return; }
+
+    RBF.State.set('playing');
+    el.fader.classList.remove('out');
+    setHint(RBF.UI_TEXT.hintClick);
+    advance();
+  }
+
+  function contaMarcas(m) {
+    var n = 0;
+    for (var k in m) {
+      if (Object.prototype.hasOwnProperty.call(m, k) && m[k]) { n += 1; }
+    }
+    return n;
+  }
+
   /* ---- HUD de rotas ------------------------------------------------------
      Le RBF.Routes, que por sua vez soma apenas deltas declarados nas
      escolhas. Nao existe valor visual independente do estado.            */
@@ -990,7 +1105,7 @@ RBF.Engine = (function () {
   /* ---- loop principal --------------------------------------------------- */
 
   async function advance() {
-    if (busy || choiceActive || finished) { return; }
+    if (busy || choiceActive || percursoAtivo || finished) { return; }
     if (!RBF.State.canAdvanceScript()) { return; }
 
     var mine = epoch;
@@ -1100,7 +1215,7 @@ RBF.Engine = (function () {
        jogador ficava clicando numa tela preta sem resposta. */
     if (finished) { closeArchive(); return; }
 
-    if (choiceActive || busy) { return; }
+    if (choiceActive || percursoAtivo || busy) { return; }
     if (typing) { completeTyping(); return; }
     advance();
   }
@@ -1336,10 +1451,12 @@ RBF.Engine = (function () {
     cancelAuto();
     stopSkip();
     if (typing) { completeTyping(); }
+    if (percursoAtivo && RBF.Rpg) { RBF.Rpg.pausa(); }
   }
 
   function resume() {
     startClock();
+    if (percursoAtivo && RBF.Rpg) { RBF.Rpg.volta(); return; }
     if (awaitingClick) { scheduleAuto(); }
   }
 
@@ -1381,7 +1498,12 @@ RBF.Engine = (function () {
       },
 
       sceneLabel:      RBF.STATE.sceneTitle || RBF.STATE.scene || '',
-      dialogueExcerpt: RBF.History.excerpt(90)
+      dialogueExcerpt: RBF.History.excerpt(90),
+
+      /* Percurso em andamento. Sem isto o load voltaria para o beat do
+         percurso e comecaria o trecho do zero, com a bolsa vazia e as
+         gavetas fechadas de novo. */
+      percurso: percursoAtivo && RBF.Rpg ? RBF.Rpg.serializa() : null
     };
   }
 
@@ -1396,6 +1518,12 @@ RBF.Engine = (function () {
   /* Salvar em transicao ou no meio de uma escolha produziria um save
      que nao restaura direito. */
   function canSave() {
+    /* Dentro do percurso quem decide e o percurso: ele tem estado
+       proprio e sabe se esta no meio de uma fala. Um trecho de
+       exploracao sem save e castigo, nao tensao. */
+    if (percursoAtivo) {
+      return started && !finished && !!(RBF.Rpg && RBF.Rpg.podeSalvar());
+    }
     return started && !finished && !busy && !choiceActive && awaitingClick;
   }
 
@@ -1432,6 +1560,11 @@ RBF.Engine = (function () {
     lastTextBeat    = null;
     currentChoice   = null;
     pendingAutosave = false;
+
+    if (percursoAtivo && RBF.Rpg && RBF.Rpg.encerra) { RBF.Rpg.encerra('cancelado'); }
+    percursoAtivo   = false;
+    percursoBeat    = null;
+    percursoDados   = null;
 
     playtimeBase = 0;
     playtimeMark = null;
@@ -1563,6 +1696,15 @@ RBF.Engine = (function () {
     RBF.Audio.unlock();
     applyBgm(p.currentBgmId || null);
 
+    /* Save gravado dentro do percurso: reabre o trecho no lugar em que
+       parou, e nao no comeco dele. O beat do percurso e o que estava
+       correndo, entao ele e o de index-1. */
+    var beatPerc = data.percurso ? beatDePercurso(index - 1) : null;
+    if (beatPerc) {
+      abrePercurso(beatPerc, data.percurso);
+      return;
+    }
+
     /* Redesenha o beat que estava na tela, sem audio e sem duplicar
        o registro no historico. */
     if (redrawLastVisible()) {
@@ -1570,6 +1712,17 @@ RBF.Engine = (function () {
     } else {
       advance();
     }
+  }
+
+  /* O beat de percurso que estava correndo quando o save foi gravado.
+     Anda para tras porque beats condicionais reprovados ficam no meio. */
+  function beatDePercurso(at) {
+    for (var i = at; i >= 0 && i > at - 12; i--) {
+      var b = script[i];
+      if (!b) { continue; }
+      if (b.t === 'percurso') { return passes(b) ? b : null; }
+    }
+    return null;
   }
 
   function redrawLastVisible() {
@@ -1654,6 +1807,8 @@ RBF.Engine = (function () {
         return r ? r.ending : null;
       },
       resolveRota:   resolveRota,
+      percursoAtivo: function () { return percursoAtivo; },
+      fechaPercurso: fechaPercurso,
       /* Fim de partida: permite conferir que o arquivo se fecha e o
          menu volta, sem ter de percorrer o roteiro inteiro. */
       endOfScript:   endOfScript,

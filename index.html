@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ui.css">
+<link rel="stylesheet" href="css/rpg.css">
 </head>
 <body>
 
@@ -295,6 +296,39 @@
     </div>
   </div>
 
+  <!-- ======================= O PERCURSO =========================
+       O trecho jogado de cima da rota "A Cobertura". Fica entre o palco
+       e o fader: quando ele entra, cobre a cena; quando o roteiro corta,
+       o fader cobre os dois. O canvas tem a medida logica de
+       RBF.CONFIG.stage e e escalado por CSS, entao a arte nao depende do
+       tamanho da janela.
+       ============================================================ -->
+  <div id="rf-percurso" aria-hidden="true">
+    <!-- O palco tem exatamente a medida do canvas. Tudo o que e interface
+         pendura nele, e nao na camada: em telefone em retrato a camada
+         ocupa a tela inteira e o canvas fica no meio, com tarja preta em
+         cima e embaixo. Pendurado na camada, o rodape da fala caia dentro
+         da tarja. -->
+    <div class="rf-perc__palco">
+      <canvas id="rf-perc-canvas" width="1280" height="720"></canvas>
+
+      <div class="rf-perc__hud">
+        <span class="rf-perc__sala" data-sala=""></span>
+        <div class="rf-perc__bolsa" aria-label="O que ela leva"></div>
+        <span class="rf-perc__aviso" role="status" aria-live="polite"></span>
+        <span class="rbf-code rf-perc__ajuda">setas mover &middot; shift devagar &middot; espa&ccedil;o conferir</span>
+      </div>
+
+      <div class="rf-perc__fala">
+        <span class="rf-perc__face" aria-hidden="true"></span>
+        <div class="rf-perc__corpo">
+          <span class="rf-perc__nome"></span>
+          <p class="rf-perc__txt"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== PORTAO DE ABERTURA ==================== -->
   <div id="rf-gate">
     <div class="rf-gate__dust rbf-optional" aria-hidden="true"></div>
@@ -344,6 +378,7 @@
     <script src="js/data/per13.js"></script>
     <script src="js/data/cob10.js"></script>
     <script src="js/data/cob11.js"></script>
+    <script src="js/data/cob_mapas.js"></script>
     <script src="js/data/epilogue.js"></script>
     <script src="js/data/quatro_paginas.js"></script>
     <script src="js/data/arvore.js"></script>
@@ -353,6 +388,7 @@
 <script src="js/gallery.js"></script>
     <script src="js/paginas.js"></script>
     <script src="js/arvore.js"></script>
+<script src="js/rpg.js"></script>
 <script src="js/engine.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/menu.js"></script>

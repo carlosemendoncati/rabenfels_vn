@@ -33,15 +33,21 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.11.1',
+  gameVersion:       '0.12.0',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
     Prologo e o Capitulo 1 foram reescritos: um save antigo aponta para
     um beatIndex que agora cai em outra frase. Recusar com aviso e
     honesto; carregar no lugar errado nao seria.
+
+    Subiu para 3 em 0.12.0, pelo mesmo motivo e nao por outro. O campo
+    `percurso` que o save ganhou e compativel para tras - save antigo
+    simplesmente nao tem, e o load segue pelo caminho de sempre. O que
+    quebra e o Capitulo 10 da rota Cobertura, que ganhou beats no meio:
+    quem tinha save ali reabriria em outra frase.
   */
-  saveSchemaVersion: 2,
+  saveSchemaVersion: 3,
 
   paths: {
     backgrounds:  'assets/backgrounds/',
@@ -51,7 +57,17 @@ RBF.CONFIG = {
     music:        'assets/audio/music/',
     uiSfx:        'assets/audio/ui/',
     ui:           'assets/ui/',
-    placeholders: 'assets/placeholders/'
+    placeholders: 'assets/placeholders/',
+
+    /* "A Cobertura". Pasta propria porque o kit inteiro veio de uma vez
+       e tem formato proprio - mapa de sala inteiro, folha de caminhada,
+       grade de icone. Recortado de assets/A Cobertura/ por
+       tools/cobertura_assets.py, que e o unico jeito de refazer. */
+    cobMaps:   'assets/cobertura/maps/',
+    cobProps:  'assets/cobertura/props/',
+    cobChars:  'assets/cobertura/chars/',
+    cobFaces:  'assets/cobertura/faces/',
+    cobIcons:  'assets/cobertura/icons/'
   },
 
   audio: {
@@ -100,7 +116,13 @@ RBF.CONFIG = {
     /* Tempo de ler a marca na escolha antes de
        a cena seguir. Maior quando uma rota muda. */
     choiceHoldMs:      380,
-    choiceHoldRouteMs: 620
+    choiceHoldRouteMs: 620,
+
+    /* Percurso. A entrada e a saida sao mais longas que um fade de cena
+       de proposito: e a troca de registro da obra, e o jogador precisa
+       sentir que saiu de onde estava. */
+    percursoInMs:  1400,
+    percursoOutMs: 1100
   },
 
   stage: {
@@ -628,6 +650,72 @@ RBF.BGM = {
     available: true,
     loop: false,
     volume: 0.32
+  },
+
+  /* --- "A COBERTURA": trilha do percurso -----------------------------
+     Pack "Uneasy Melodies v1", de Serotone (Sebastian Petrei), licenca
+     de uso livre inclusive comercial. Convertido de wav por
+     tools/cobertura_assets.py. Creditos em assets/cobertura/CREDITOS.md.
+
+     Volume mais baixo que o das faixas da VN: no percurso o som que
+     importa e o passo e a porta, e a trilha nao pode cobrir os dois. */
+
+  /* Andar pela casa. Sem ninguem por perto. */
+  cob_percurso: {
+    files: ['cob_percurso.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.26
+  },
+
+  /* Sala vazia, so ar. Entra onde nao ha nada a fazer alem de olhar. */
+  cob_respiro: {
+    files: ['cob_respiro.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.22
+  },
+
+  /* Ha alguma coisa no mesmo comodo. Troca por crossfade, sem aviso na
+     tela: o jogador descobre pela trilha antes de descobrir pelo olho. */
+  cob_perto: {
+    files: ['cob_perto.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.30
+  },
+
+  /* Conferir papel. A unica coisa que ela sabe fazer bem. */
+  cob_conferencia: {
+    files: ['cob_conferencia.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.24
+  },
+
+  /* O forro. Onde o caderno fica e onde nada entra. */
+  cob_forro: {
+    files: ['cob_forro.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.24
+  },
+
+  /* O mesmo forro, depois. Mesma duracao, mesma melodia, afinacao
+     errada - e por isso que a peca existe em duas versoes no pack. */
+  cob_forro_ruim: {
+    files: ['cob_forro_ruim.mp3'],
+    available: true,
+    loop: true,
+    volume: 0.24
+  },
+
+  /* Ultimo trecho do percurso. Nao repete. */
+  cob_ultima: {
+    files: ['cob_ultima.mp3'],
+    available: true,
+    loop: false,
+    volume: 0.28
   }
 };
 
@@ -695,7 +783,29 @@ RBF.SFX = {
     files: ['sfx_wind.ogg', 'sfx_wind.wav'],
     available: true,
     volume: 0.40
-  }
+  },
+
+  /* --- "A COBERTURA" -------------------------------------------------
+     Os tres primeiros sao do pack Uneasy Melodies; os dois ultimos, do
+     Fantasy UI SFX de Atelier Magicae. Trocar o som e trocar o numero
+     de origem em tools/cobertura_assets.py e rodar de novo. */
+
+  /* Achou papel que serve. */
+  sfx_cob_achado:   { files: ['cob_achado.ogg'],   available: true, volume: 0.42 },
+
+  /* Fechadura cedendo. */
+  sfx_cob_destranca:{ files: ['cob_destranca.ogg'],available: true, volume: 0.46 },
+
+  /* Foi notada. Toca uma vez por deteccao e nao se repete enquanto o
+     vulto estiver no encalco - alarme em loop vira ruido e o jogador
+     para de ouvir. */
+  sfx_cob_notada:   { files: ['cob_notada.ogg'],   available: true, volume: 0.40 },
+
+  /* Marcou uma sala como conferida. */
+  sfx_cob_marca:    { files: ['cob_marca.ogg'],    available: true, volume: 0.34 },
+
+  /* Escreveu no caderno. */
+  sfx_cob_anota:    { files: ['cob_anota.ogg'],    available: true, volume: 0.38 }
 };
 
 /* -------------------------------------------------------------------------
@@ -1601,6 +1711,142 @@ RBF.UI_ART = {
      escolher isso sozinho. O arquivo esta no lugar e o dia que a
      decisao vier e so virar para true. */
   ui_listener_silhouette:    { file: 'ui_listener_silhouette.png', available: false }
+};
+
+/* -------------------------------------------------------------------------
+   17. "A COBERTURA" - MANIFESTO DO PERCURSO
+
+   O percurso e o trecho jogado de cima, em canvas, dentro da rota
+   Cobertura. Ele nao substitui a VN: entra por um beat do roteiro, roda,
+   grava o que apurou em flags e devolve a leitura no beat seguinte.
+
+   Tudo aqui e caminho de arquivo e medida. Nenhum nome de arquivo mora
+   em js/rpg.js nem em js/data/cob_mapas.js - a mesma regra que ja vale
+   para cenario e sprite da VN.
+
+   Os arquivos sao recortados de assets/A Cobertura/ por
+   tools/cobertura_assets.py. Rodar de novo depois de mexer no kit.
+
+   available:false = o motor nao pede o arquivo e desenha o piso: retangulo
+   de pedra para mapa, silhueta chapada para personagem, caixa para movel.
+   O percurso e jogavel inteiro sem nenhuma imagem.
+   ------------------------------------------------------------------------- */
+
+RBF.COBERTURA = {
+  /* Grade de colisao. O mapa e uma imagem inteira, e nao um tileset
+     montado: a grade existe so para o roteiro descrever parede e movel
+     em numero redondo em vez de pixel solto. */
+  grade: 32,
+
+  /* Passo em pixels por segundo. O valor baixo e proposital - a rota nao
+     tem corrida, e a lentidao e o que faz a casa ficar grande. */
+  passo:       152,
+  passoSilencioso: 82,
+
+  /* A vela.
+
+       raio     onde a luz ainda e luz cheia, em pixels
+       queda    onde ela acaba de vez
+       tremor   amplitude da chama, em pixels
+       ambiente quanto da cena aparece FORA do alcance da vela. Nao e
+                zero de proposito: com zero, uma parede a dois metros
+                fica identica ao vazio e o jogador anda as cegas em vez
+                de andar no escuro. Sao coisas diferentes.
+       ganho    quantas vezes a copia iluminada e somada. Dois porque a
+                arte das salas veio com luminancia media de 28 em 255 -
+                uma passagem so nao chega a nada legivel, tres estoura
+                o ladrilho claro. */
+  vela:  { raio: 190, queda: 430, tremor: 8, ambiente: 0.10, ganho: 2 },
+
+  /* Quanto barulho cada modo de andar faz, por segundo. O vulto ouve a
+     soma; ver js/rpg.js. */
+  ruido: { andando: 1.0, silencioso: 0.18, parada: 0, decaimento: 1.4 },
+
+  /* Personagens do percurso. `fw`/`fh` sao o quadro da folha de
+     caminhada, 3 colunas por 4 linhas, na ordem herdada do formato de
+     RPG: frente, esquerda, direita, costas.
+
+     `pes` e a altura do retangulo de colisao medido do rodape para
+     cima: o personagem colide pelos pes, nao pelo corpo inteiro, senao
+     a cabeca bate na parede antes de o corpo chegar nela. */
+  chars: {
+    antoniette: {
+      file: 'antoniette.png', available: true,
+      fw: 98, fh: 150, pes: 28, cor: '#6b1f28'
+    },
+    klara: {
+      file: 'klara.png', available: true,
+      fw: 76, fh: 116, pes: 22, cor: '#8f8a84'
+    },
+    klara_casulo: {
+      file: 'klara_casulo.png', available: true,
+      fw: 76, fh: 116, pes: 22, cor: '#6d2026'
+    },
+    vulto: {
+      file: 'vulto.png', available: true,
+      fw: 108, fh: 162, pes: 26, cor: '#59151a'
+    },
+    carmine: {
+      file: 'carmine.png', available: true,
+      fw: 116, fh: 172, pes: 28, cor: '#7a1420'
+    }
+  },
+
+  /* Retratos. Entram na faixa de fala do percurso, do lado do nome. */
+  faces: {
+    klara:        { file: 'klara.png',        available: true },
+    klara_casulo: { file: 'klara_casulo.png', available: true },
+    vulto:        { file: 'vulto.png',        available: true },
+    carmine:      { file: 'carmine.png',      available: true }
+  },
+
+  /* Moveis. `base` e a fracao da altura, contada do rodape, que o
+     personagem NAO atravessa: uma estante bloqueia inteira (1), uma
+     escrivaninha so bloqueia a parte de baixo. `frente` decide se o
+     movel e desenhado por cima do personagem quando ele passa atras. */
+  props: {
+    arquivo_gavetas: { file: 'arquivo_gavetas.png', available: true, base: 0.62 },
+    armario_selado:  { file: 'armario_selado.png',  available: true, base: 0.34, frente: true },
+    bancada:         { file: 'bancada.png',         available: true, base: 0.70 },
+    bau:             { file: 'bau.png',             available: true, base: 1.00 },
+    cadeira:         { file: 'cadeira.png',         available: true, base: 0.40 },
+    carrinho:        { file: 'carrinho.png',        available: true, base: 0.55 },
+    cilindro:        { file: 'cilindro.png',        available: true, base: 0.26, frente: true },
+    escrivaninha:    { file: 'escrivaninha.png',    available: true, base: 0.66 },
+    estante_a:       { file: 'estante_a.png',       available: true, base: 0.28, frente: true },
+    estante_b:       { file: 'estante_b.png',       available: true, base: 0.28, frente: true },
+    mesa_contencao:  { file: 'mesa_contencao.png',  available: true, base: 0.60 },
+    mesa_longa:      { file: 'mesa_longa.png',      available: true, base: 0.72 },
+    pia:             { file: 'pia.png',             available: true, base: 0.46 },
+    poltrona:        { file: 'poltrona.png',        available: true, base: 0.42 }
+  },
+
+  /* Salas. Sao imagens inteiras, e nao tileset: cada uma ja vem com
+     parede, piso e vao de porta pintados. A planta - o que e chao e o
+     que e parede - vive em js/data/cob_mapas.js. */
+  maps: {
+    salao:    { file: 'salao.png',    available: true },
+    sala_a:   { file: 'sala_a.png',   available: true },
+    sala_b:   { file: 'sala_b.png',   available: true },
+    sala_c:   { file: 'sala_c.png',   available: true },
+    sala_d:   { file: 'sala_d.png',   available: true },
+    corredor: { file: 'corredor.png', available: true },
+    escada:   { file: 'escada.png',   available: true }
+  },
+
+  /* Grade de icones. Os nomes seguem a ordem de leitura da folha, da
+     esquerda para a direita e de cima para baixo. Sao os nomes do
+     desenho, e nao do item: quem decide o que cada icone representa e
+     js/data/cob_mapas.js. */
+  icons: {
+    file: 'itens.png', available: true, lado: 64, cols: 4, rows: 4,
+    ordem: [
+      'livro_lacrado', 'livro_aberto', 'tinteiro',   'chave',
+      'vela',          'sino',         'pena',       'mariposa',
+      'espelho',       'frasco',       'fechadura',  'gaveta',
+      'corvo',         'rosa_ventos',  'selo',       'bau'
+    ]
+  }
 };
 
 /* -------------------------------------------------------------------------

@@ -103,6 +103,15 @@
   --rbf-sweep:    900ms;
   --rbf-step:      45ms;
 
+  /* Entrada e saida do percurso - o trecho jogado de cima da rota
+     Cobertura. Nao entram na escala acima de proposito: as faixas dali
+     medem gesto de interface, e isto e troca de registro da obra. Mais
+     longo que qualquer transicao de tela porque o jogador precisa sentir
+     que saiu de onde estava. Acompanham RBF.CONFIG.timing.percursoInMs
+     e percursoOutMs - se um mudar, o outro muda junto. */
+  --rbf-perc-in:  1400ms;
+  --rbf-perc-out: 1100ms;
+
   --rbf-ease-ritual: cubic-bezier(0.22, 1, 0.36, 1);
   --rbf-ease-page:   cubic-bezier(0.65, 0, 0.35, 1);
 

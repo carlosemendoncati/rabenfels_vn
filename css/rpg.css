@@ -1,0 +1,301 @@
+/* ==========================================================================
+   ARQUIVO RABENFELS - css/rpg.css
+
+   O PERCURSO - camada do trecho jogado de cima da rota "A Cobertura".
+
+   Camada 55: por cima do palco e dos cartoes de cena (50), por baixo do
+   fader (60). E deliberado - quando o roteiro corta, o fader cobre o
+   percurso pelo mesmo caminho por que cobre a cena, sem regra especial.
+
+   Cor, duracao e easing saem de css/tokens.css. Nenhum hex solto aqui:
+   o percurso e outro registro da mesma obra, e nao outra obra.
+
+   Escrito mobile primeiro, como o resto do projeto. A base atende
+   telefone em retrato; o que muda por faixa e o tamanho da interface,
+   nunca a medida do canvas - ela e logica e vem de RBF.CONFIG.stage.
+   ========================================================================== */
+
+#rf-percurso {
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--rbf-void);
+
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity    var(--rbf-perc-in) var(--rbf-ease-ritual),
+    visibility 0s linear var(--rbf-perc-in);
+}
+
+#rf-percurso.is-on {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity    var(--rbf-perc-in) var(--rbf-ease-ritual),
+    visibility 0s;
+}
+
+/* Enquanto o percurso corre, a interface de leitura sai de cena: barra
+   de jogo, HUD de rotas e caixa de dialogo nao pertencem a este
+   registro. Some por seletor de irmao, e nao por classe no <html>:
+   assim o estado visual segue o elemento, e nao um sinalizador que
+   alguem precisa lembrar de apagar. */
+#rf-percurso.is-on ~ #game-bar,
+#rf-percurso.is-on ~ #rf-routes,
+#rf-percurso.is-on ~ #rf-route-note {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   O CANVAS
+
+   Medida logica fixa (1280x720) escalada por CSS. `contain` e nao
+   `cover`: cortar a sala para preencher a janela tiraria justamente a
+   borda onde o vao de porta esta pintado.
+   ========================================================================== */
+
+/* O palco ocupa a camada inteira, e a interface pendura nele.
+
+   Sem proporcao fixa de proposito. Em telefone em retrato um palco 16:9
+   fica com 220px de altura numa tela de 780, a caixa de fala cobre dois
+   tercos dele e o trecho e injogavel - medido, nao suposto. A camera do
+   percurso trabalha em qualquer medida, entao o que muda com a tela e
+   quanto da sala se enxerga, que e o comportamento certo.
+
+   E outro caso do palco da VN, que mantem proporcao porque la o cenario
+   e uma imagem so e precisa caber inteira. */
+.rf-perc__palco {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#rf-perc-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  /* A arte e recorte de pixel: interpolar borra o contorno da
+     personagem contra o piso. */
+  image-rendering: pixelated;
+
+  /* Sem isto o toque no canvas rola a pagina em telefone antes de
+     chegar ao ouvinte. */
+  touch-action: none;
+}
+
+/* ==========================================================================
+   INTERFACE DE CIMA
+
+   Tres pecas soltas nos cantos, sem painel: qualquer moldura aqui
+   competiria com a moldura da sala, que ja e desenhada na arte.
+   ========================================================================== */
+
+.rf-perc__hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--rbf-font-body);
+}
+
+/* Nome da sala. Entra ao chegar e sai sozinho. */
+.rf-perc__sala {
+  position: absolute;
+  top: calc(var(--rbf-ui) * 18px);
+  left: calc(var(--rbf-ui) * 20px);
+
+  font-size: calc(var(--rbf-ui) * 13px);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--rbf-ink);
+
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.rf-perc__sala.is-on {
+  opacity: .82;
+  transform: none;
+}
+
+/* Recusa curta: porta trancada, item que falta. */
+.rf-perc__aviso {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--rbf-ui) * 96px);
+  transform: translateX(-50%) translateY(6px);
+
+  max-width: 80%;
+  text-align: center;
+  font-size: calc(var(--rbf-ui) * 14px);
+  font-style: italic;
+  color: var(--rbf-ink);
+  text-shadow: 0 1px 6px var(--rbf-void);
+
+  opacity: 0;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.rf-perc__aviso.is-on {
+  opacity: .9;
+  transform: translateX(-50%);
+}
+
+/* O que ela leva. Uma fileira de selos no rodape, sem contagem e sem
+   moldura de inventario - ela nao carrega equipamento, carrega papel. */
+/* No alto, do lado oposto ao nome da sala. Estava no rodape e disputava
+   o canto com a caixa de fala: em telefone os dois se sobrepunham. */
+.rf-perc__bolsa {
+  position: absolute;
+  top: calc(var(--rbf-ui) * 16px);
+  right: calc(var(--rbf-ui) * 20px);
+
+  display: flex;
+  gap: calc(var(--rbf-ui) * 8px);
+}
+
+.rf-perc__item {
+  display: block;
+  width: calc(var(--rbf-ui) * 34px);
+  height: calc(var(--rbf-ui) * 34px);
+
+  background-repeat: no-repeat;
+  border: 1px solid var(--rbf-line);
+  border-radius: 2px;
+  background-color: rgba(10, 8, 10, .55);
+  opacity: .92;
+}
+
+/* Sem a folha de icones: a inicial do nome, no lugar do desenho. */
+.rf-perc__item.is-texto {
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--rbf-ui) * 15px);
+  color: var(--rbf-gold);
+}
+
+.rf-perc__ajuda {
+  position: absolute;
+  left: calc(var(--rbf-ui) * 20px);
+  bottom: calc(var(--rbf-ui) * 14px);
+  font-size: calc(var(--rbf-ui) * 11px);
+  color: var(--rbf-ink);
+  opacity: .34;
+  transition: opacity var(--rbf-fast) var(--rbf-ease-settle);
+}
+
+/* Enquanto ha fala, a ajuda sai: os dois ocupam o mesmo rodape e a
+   sobreposicao foi medida, nao suposta - fala 654..735 contra ajuda
+   718..738 em 1366x768. A classe vem do modulo, que ja sabe quando ha
+   fala; `:has()` resolveria em CSS puro e nao vale a dependencia. */
+.rf-perc__palco.tem-fala .rf-perc__ajuda { opacity: 0; }
+
+/* ==========================================================================
+   FALA DE PERCURSO
+
+   Painel proprio, mais baixo e mais estreito que a caixa da VN. E
+   proposital: o que se diz aqui e legenda de objeto, e nao cena. Se
+   tivesse o mesmo peso da caixa de dialogo, cada gaveta aberta pareceria
+   um beat de roteiro.
+   ========================================================================== */
+
+.rf-perc__fala {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--rbf-ui) * 22px);
+  transform: translateX(-50%) translateY(10px);
+
+  display: flex;
+  align-items: flex-end;
+  gap: calc(var(--rbf-ui) * 12px);
+
+  width: min(92%, calc(var(--rbf-ui) * 720px));
+  padding: calc(var(--rbf-ui) * 14px) calc(var(--rbf-ui) * 18px);
+
+  background:
+    linear-gradient(180deg,
+      rgba(9, 8, 11, .90) 0%,
+      rgba(9, 8, 11, .96) 100%);
+  border: 1px solid var(--rbf-line);
+  border-radius: 2px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s ease, transform .28s ease;
+}
+
+.rf-perc__fala.is-on {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+.rf-perc__face {
+  flex: 0 0 auto;
+  display: none;
+  width: calc(var(--rbf-ui) * 72px);
+  height: calc(var(--rbf-ui) * 72px);
+  background-size: cover;
+  background-position: top center;
+  border: 1px solid var(--rbf-line);
+  image-rendering: pixelated;
+}
+
+.rf-perc__face.is-on { display: block; }
+
+.rf-perc__corpo { min-width: 0; }
+
+.rf-perc__nome {
+  display: block;
+  margin-bottom: calc(var(--rbf-ui) * 4px);
+  font-size: calc(var(--rbf-ui) * 12px);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rbf-gold);
+}
+
+.rf-perc__txt {
+  margin: 0;
+  font-family: var(--rbf-font-body);
+  font-size: calc(var(--rbf-ui) * 16px);
+  line-height: 1.55;
+  color: var(--rbf-ink);
+}
+
+/* ==========================================================================
+   FAIXAS
+
+   Nenhuma. --rbf-ui e global, vive em css/tokens.css e ja cresce por
+   faixa de tela; toda medida aqui e calc() em cima dele. Redeclarar o
+   token dentro do componente e a regressao que o projeto proibe por
+   escrito - a escala passaria a ter duas fontes e a interface do
+   percurso descolaria do resto do jogo numa faixa so.
+
+   O que sobra e a excecao real: paisagem curta - telefone deitado -
+   onde a ajuda de teclado nao serve a ninguem e o rodape nao cabe.
+   ========================================================================== */
+
+@media (max-height: 460px) {
+  .rf-perc__ajuda { display: none; }
+  .rf-perc__fala  { bottom: calc(var(--rbf-ui) * 10px); }
+  .rf-perc__face  { display: none; }
+}
+
+/* Quem pediu menos movimento nao recebe o tremor de entrada. A vela
+   continua tremendo no canvas: ela e conteudo da cena, e nao transicao
+   de interface. */
+@media (prefers-reduced-motion: reduce) {
+  #rf-percurso,
+  .rf-perc__fala,
+  .rf-perc__sala,
+  .rf-perc__aviso {
+    transition-duration: .01ms;
+  }
+}

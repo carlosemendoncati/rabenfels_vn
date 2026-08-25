@@ -1,5 +1,252 @@
 # Changelog
 
+## 0.12.0 — O percurso
+
+A rota **A Cobertura** ganhou um trecho jogado de cima, em canvas, dentro
+do Capítulo 10. Não substitui nada: entra por um beat do roteiro, roda,
+grava o que o jogador apurou em flags, e devolve a leitura.
+
+```
+{ t:'percurso', id:'cob10_inventario', campo:'cob_saida',
+  conta:'cob_apurou', sets:{ cob_conferiu:true }, padrao:'linha' }
+```
+
+### O que a rota é — decisão do autor, 25/08/2026
+
+> *"A rota onde a Antoniette investiga demais e todos começam a caçá-la
+> por chegar fundo demais. Cada rota é totalmente diferente, então pode
+> quebrar o canon à vontade trazendo outras perspectivas."*
+
+Dois atos, e a virada é o meio do percurso.
+
+**Fase 0 — o inventário.** Noite do dia oito para o nove. Serafina
+encerrou às nove com cortesia integral e a carruagem sai às seis. O
+Capítulo 10 já escrevia o que ela faz nessas horas:
+
+> *"Depois ela sentou na beira da cama e refez o caminho de trás para
+> frente, do jeito que se confere um inventário."*
+
+**Fase 1 — a caça.** Ela acha a linha. E, achando, lê a margem do livro.
+Depois disso a casa para de fazer barulho de casa.
+
+Sete salas: o quarto, o corredor de serviço, o escritório, a escada, a
+copa, a câmara e o salão. Doze móveis, quatro personagens de mapa, e as
+duas trilhas de refúgio do pacote — a certa e a mesma desafinada.
+
+### O que esta rota quebra, e está registrado no próprio arquivo
+
+Quatro pontos, todos autorizados e nenhum por descuido: **Khar'Vel
+aparece** — uma vez, parada, e não há o que fazer com ela; **Klara é
+vista como casulo** antes do Epílogo; a casa **age**, em vez de encerrar
+por horário; e Antoniette corre perigo físico dentro dela.
+
+**O que não muda:** ela sai viva e antes das seis. A carruagem do C4
+continua sendo o desfecho e o Capítulo 11 não muda uma linha. A caça é a
+noite; a cortesia de Serafina é o que deu a ela até as cinco e meia.
+
+### Três regras de conteúdo
+
+**Ela acha a linha.** Sempre — está em texto já escrito, e um percurso
+que a deixasse sem achar contradiria o capítulo seguinte. O que varia é
+quanto mais ela apura, e isso volta como detalhe do monólogo: as quatro
+linhas de dentro do Cap. 10 passaram a ser condicionais às marcas. Quem
+abriu as gavetas lê a lista; quem atravessou depressa lê uma linha que
+diz o mesmo com menos detalhe.
+
+**Não há luta e não há morte.** Ser alcançada custa informação, nunca
+tempo de leitura: ela recua ao quarto e leva a marca de ter sido vista.
+Um percurso desta obra com tela de *você morreu* pediria para reler vinte
+minutos, e o preço certo aqui é outro.
+
+**Ninguém explica.** Nem a virada, nem o que está no cilindro, nem por
+que a porta do quarto dela passou a dar na escada.
+
+### A vela soma luz, e não fura máscara
+
+A primeira versão punha uma máscara escura por cima e abria um buraco em
+degradê. Ficou uma tela preta com um halo alaranjado e nada legível
+dentro dele. O motivo é aritmético: **a arte das salas veio com
+luminância média de 28 em 255.** Furar máscara não *acrescenta* luz — só
+deixa de tirar, e sobre quase-preto isso não chega a lugar nenhum.
+
+Agora a cena inteira é desenhada numa tela fora do quadro, uma cópia é
+recortada por degradê radial, e entra por `lighter` duas vezes. O que a
+vela alcança acende junto — piso, móvel e personagem. Fora do alcance
+sobra 10%: não é zero de propósito, porque com zero uma parede a dois
+metros fica idêntica ao vazio, e **andar no escuro é diferente de andar
+às cegas**.
+
+### Escala tirada da própria arte
+
+A cadeira do escritório saiu com 267px de altura contra 108 da
+Antoniette — uma cadeira duas vezes e meia maior que quem senta nela.
+Nenhuma checagem numérica veria; foi a captura que mostrou.
+
+A régua sai do ladrilho do piso: período de 28px, tomado por 30cm, dá
+1,07 pixel por centímetro. Adulta de pé = **150px**. Daí desce tudo, com
+fator 1,3 sobre a altura real porque móvel em três quartos ocupa mais
+altura do que tem.
+
+### Pixel art, com paleta por personagem
+
+O kit veio em arte pintada de alta resolução. O percurso passou a ser
+tratado por um porte de [pixelit](https://github.com/giventofly/pixelit)
+em `tools/cobertura_pixel.py` — os dois passos do original: reduzir por
+um fator e devolver ao tamanho com vizinho mais próximo, e trocar cada
+pixel pela cor mais próxima de uma paleta, por distância euclidiana em
+RGB. Sem ponderação perceptual, de propósito: é o que dá o corte seco.
+
+**Duas coisas que o original não faz e que precisavam existir:**
+
+*O alfa.* pixelit trabalha em RGB e ignora transparência. Aqui o alfa
+passa pelo mesmo degrau do bloco e depois é cortado em quatro níveis.
+Quatro, e não dois: com corte binário a saia da Antoniette perde a
+franja e o vulto perde a ponta dos tentáculos. Sem isso o contorno fica
+macio em cima de um miolo em degrau, que é o que denuncia pixel art
+falso a dez metros.
+
+*A paleta por personagem.* O mundo — cenário, móvel, ícone — tem uma
+paleta só, para que duas salas não pareçam dois jogos. Cada folha de
+personagem tem a própria, tirada dela mesma por mediana de corte, sobre
+uma base neutra comum. As duas Klaras dividem o branco e não dividem o
+vermelho; a Antoniette é a única dona do dourado.
+
+**A paleta do mundo estava fria e a pedra desta casa não é.** A primeira
+versão usou `--rbf-panel` e `--rbf-raised`, que são as superfícies do
+*arquivo* e são frias por escrito em `css/tokens.css` — o piso do
+escritório saiu cor de ardósia. Medido nos sete mapas, um pixel a cada
+cinco: dos vinte e seis tons dominantes, **vinte e quatro têm R maior ou
+igual a B**. A rampa nova mantém a temperatura em toda a extensão, e o
+frio sobra só onde ele existe — vidro e metal.
+
+O recorte sem degrau fica em `assets/cobertura/_sem_pixel/`. Rodar duas
+vezes sobre o mesmo arquivo empilharia degrau em cima de degrau; com a
+cópia crua no lugar, cada passada parte do mesmo ponto.
+
+### Luz de sala, e o que não pisa no chão
+
+A vela é a única fonte do percurso — a casa está apagada. A câmara não
+está. Duas capacidades entraram por causa de uma cena só, e as duas são
+gerais:
+
+**`luzes` na sala.** A menina está a dois metros do chão, dentro do
+vidro, fora do alcance da vela. Puxá-la para baixo iluminaria e
+destruiria o único enquadramento que a cena tem. A luz de sala **não
+treme** — a vela treme porque é chama; aquilo é máquina, e máquina que
+pisca é efeito. A diferença entre as duas luzes na mesma tela é o que
+faz a câmara parecer outro lugar.
+
+A força é baixa (0,20): a composição soma a cópia iluminada duas vezes e
+o vidro já é claro na arte. Com força alta ele estoura em branco e a
+menina desaparece dentro do próprio brilho — foi o que aconteceu em duas
+tentativas antes desta.
+
+**`desloca` e `semSombra` na peça.** O vidro do cilindro é chapado na
+arte e esconde quem estiver atrás dele. A menina precisa ser desenhada
+**depois** do vidro e ao mesmo tempo dois metros acima do próprio pé —
+são duas coisas diferentes, e até aqui o motor tratava as duas pelo
+mesmo número. `desloca` sobe o desenho sem mexer no `y` que ordena a
+profundidade; `semSombra` porque quem não pisa no chão não faz sombra
+nele.
+
+### `tools/cobertura_shots.js`
+
+Nem `validate.js` nem `smoke.html` veem o percurso: os dois rodam em DOM
+sem `getContext`, e lá o beat resolve na hora e devolve o roteiro — que é
+o comportamento certo e também o que torna os dois cegos. Este entra por
+`startChapter('cob10')` num Chrome de verdade e mede o que só existe
+andando. **42 checagens.**
+
+**Sete defeitos reais que só ele pegou:**
+
+- **`fechar` estava a 36px de `livro_saida`.** `alvo()` escolhe o ponto
+  mais próximo da mão: o livro ganhava sempre e o ponto que **encerra o
+  percurso** era inalcançável. Virou checagem permanente — e ela pegou
+  um segundo par, `carmine` × `porta_patio`, quarenta pixels.
+- **O cilindro da câmara não respondia.** Ponto no meio do vidro, a 106px
+  do lugar onde a personagem consegue parar. A regra passou a ser: o
+  ponto fica na linha de base do móvel, e o alcance subiu de 56 para 72.
+- **A interface pendurava na camada, e não no canvas.** Em telefone em
+  retrato a caixa de fala caía dentro da tarja preta.
+- **A ajuda de teclado ficava por baixo da caixa de fala.** Medido:
+  `654..735` contra `718..738` em 1366×768.
+- **A bolsa só era pintada na entrada.**
+- **Entrar com o menu aberto passa em todas as checagens de estado** e
+  grava uma captura do menu — o percurso estava vivo por baixo dele.
+
+### O deadlock do beat
+
+Sem canvas, o módulo recusa de forma **síncrona** — é o caso do
+`minidom.js`, onde o validador roda o jogo inteiro. A primeira versão
+chamava `advance()` de dentro de `exec()`, com `busy` ainda em `true`: a
+chamada voltava sem fazer nada, `exec` devolvia `'choice'`, o laço
+parava, e o roteiro ficava preso naquele beat para sempre. O validador
+rodou 120 segundos sem escrever uma linha.
+
+Agora `abrePercurso()` diz se o módulo assumiu a tela. Se assumiu, quem
+retoma o laço é `fechaPercurso()`. Se não assumiu, as flags já foram
+aplicadas e `exec` devolve `'go'`.
+
+### Marca não feita vale `false`, e não `undefined`
+
+`passes()` compara por igualdade estrita. Um beat com
+`if:{ cob_livro:false }` — o resumo de quem passou depressa — nunca
+rodaria se a flag simplesmente não existisse. `RBF.Rpg.marcas()` devolve
+**toda** marca declarada nos mapas, as não feitas com `false`.
+
+### Proporção fixa saiu
+
+O canvas do percurso assume a medida da caixa. Com 16:9 fixo, um telefone
+em retrato dava um palco de 220px de altura numa tela de 780, com a caixa
+de fala cobrindo dois terços dele. Não é o caso do palco da VN, que
+mantém proporção porque lá o cenário é uma imagem só e precisa caber
+inteira; aqui o cenário é maior que a tela por definição e a câmera corta
+de qualquer jeito. A vela encolhe junto, pela raiz quadrada da menor
+dimensão.
+
+### Arquivos
+
+```
+js/rpg.js                    o motor do percurso
+js/data/cob_mapas.js         planta, móveis, pontos e as duas fases
+css/rpg.css                  a camada, na profundidade 55
+tools/cobertura_assets.py    recorta o kit bruto do autor
+tools/cobertura_pixel.py     pixelit + paleta, uma por personagem
+tools/cobertura_planta.py    mede a planta de cada sala
+tools/cobertura_shots.js     joga o percurso num Chrome e mede
+assets/cobertura/            44 arquivos derivados + CREDITOS.md
+```
+
+### Medido
+
+| camada | resultado |
+|---|---|
+| `node tools/validate.js` | 840 checagens, **0 falhas** |
+| `python tools/validate.py` | 4 falhas — **as mesmas 4 de antes** desta versão |
+| `smoke.html` headless | 58 checagens, 0 falhas, `SMOKE-OK` |
+| `node tools/shots.js` | 32 checagens, 0 falhas |
+| `node tools/cobertura_shots.js` | **42 de 42** |
+
+**Não testado:** áudio real, toque em telefone físico, e o percurso
+jogado a pé de ponta a ponta por uma pessoa.
+
+### Save
+
+`saveSchemaVersion` subiu para **3**. O campo `percurso` é compatível
+para trás — save antigo não tem, e o load segue pelo caminho de sempre.
+O que quebra é o Capítulo 10 da rota Cobertura, que ganhou beats no meio.
+Salvar dentro do percurso funciona, menos no meio de uma fala.
+
+### Licença que não entrou
+
+`assets/A Cobertura/httpstabletopaudio.com.txt` aponta para faixas em
+**CC BY-NC-ND 4.0**. NC proíbe uso comercial e ND proíbe cortar ou montar
+em laço. Todo o resto do áudio do projeto é livre inclusive para uso
+comercial, então nada foi baixado de lá. Registrado em
+`assets/cobertura/CREDITOS.md`.
+
+---
+
 ## 0.11.1 — "A Conta" vira página
 
 O extra pós-jogo era um painel modal de 940px com moldura ornamentada por

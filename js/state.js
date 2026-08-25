@@ -17,6 +17,7 @@
      history     historico de dialogo
      credits     creditos
      conta       a pagina de "A Conta" - extra pos-jogo em tela cheia
+     percurso    o trecho jogado de cima da rota Cobertura
      modal       confirmacao ou aviso por cima de outro estado
      transition  transicao em andamento, nenhuma entrada aceita
 
@@ -39,6 +40,7 @@ RBF.State = (function () {
     'history',
     'credits',
     'conta',
+    'percurso',
     'modal',
     'transition'
   ];
@@ -49,6 +51,12 @@ RBF.State = (function () {
 
   /* Estados em que o roteiro pode avancar. */
   var GAMEPLAY = { playing: true };
+
+  /* 'percurso' nao entra em GAMEPLAY nem em OVERLAY, e a ausencia nos
+     dois e o ponto. Fora de GAMEPLAY o clique no palco nao adianta beat
+     - o roteiro esta parado esperando o percurso terminar. Fora de
+     OVERLAY a entrada de teclado nao e desviada para a interface, que e
+     o que permite ao percurso ler as setas. */
 
   /* Estados que representam uma interface por cima do jogo. */
   var OVERLAY = {

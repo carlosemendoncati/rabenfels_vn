@@ -36,6 +36,12 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIG = os.path.join(RAIZ, "assets", "A Cobertura")
 DEST = os.path.join(RAIZ, "assets", "cobertura")
 
+# O audio sai de assets/cobertura/ de proposito - os caminhos comecam com
+# "../". RBF.BGM e RBF.SFX resolvem por RBF.CONFIG.paths.bgm e .sfx, que
+# apontam para assets/audio/, e o validador confere o arquivo em disco
+# por ali. Uma pasta de audio propria obrigaria um segundo caminho no
+# manifesto para nada.
+
 LISTAR = "--listar" in sys.argv
 
 
@@ -94,6 +100,120 @@ def _aplica(im, fundo):
     return saida
 
 
+def _mede_xadrez(rgb, fundo):
+    """Deduz lado, fase e os dois tons do xadrez a partir do que ja e fundo.
+
+    Sem isto so sai o fundo ligado a borda. Os vaos fechados - entre duas
+    trancas da Carmine, entre o braco e o corpo - continuariam brancos,
+    e no mapa escuro cada um deles vira um buraco aceso.
+    """
+    w, h = rgb.size
+    g = rgb.convert("L").load()
+
+    amostra = []
+    passo = max(1, (w * h) // 40000)
+    i = 0
+    for y in range(0, h, 2):
+        base = y * w
+        for x in range(0, w, 2):
+            if fundo[base + x]:
+                i += 1
+                if i % passo == 0:
+                    amostra.append((x, y, g[x, y]))
+    if len(amostra) < 200:
+        return None
+
+    def avalia(lado):
+        soma = [0.0, 0.0]
+        cont = [0, 0]
+        for x, y, v in amostra:
+            par = (int(x / lado) + int(y / lado)) & 1
+            soma[par] += v
+            cont[par] += 1
+        if cont[0] < 20 or cont[1] < 20:
+            return None
+        t = (soma[0] / cont[0], soma[1] / cont[1])
+        erro = 0.0
+        for x, y, v in amostra:
+            par = (int(x / lado) + int(y / lado)) & 1
+            erro += abs(v - t[par])
+        return erro / len(amostra), lado, t
+
+    def varre(ini, fim, passo):
+        bom = None
+        lado = ini
+        while lado <= fim:
+            r = avalia(lado)
+            if r and (bom is None or r[0] < bom[0]):
+                bom = r
+            lado += passo
+        return bom
+
+    # Duas varreduras. Uma so, grossa, nao serve: com passo de meio pixel
+    # o erro de fase acumula dezenas de pixels ao longo de uma folha de
+    # 1536, e a metade direita da imagem passa a ser julgada pela cor
+    # errada.
+    grosso = varre(6.0, 48.0, 0.5)
+    if grosso is None:
+        return None
+    melhor = varre(max(4.0, grosso[1] - 0.6), grosso[1] + 0.6, 0.02) or grosso
+
+    if melhor[0] > 6.0 or abs(melhor[2][0] - melhor[2][1]) < 3:
+        return None
+    return melhor[1], melhor[2]
+
+
+def _vaos_fechados(rgb, fundo, aceita, xadrez, margem=4.0):
+    """Apaga tambem os vaos fechados que sao xadrez, e so eles.
+
+    A prova e a fase: um vao de fundo alterna os dois tons na grade
+    medida. Uma mecha do cabelo da Klara e clara do mesmo jeito e nao
+    alterna, entao fica.
+    """
+    lado, tons = xadrez
+    w, h = rgb.size
+    px = rgb.load()
+    g = rgb.convert("L").load()
+    visto = bytearray(w * h)
+
+    for y0 in range(h):
+        linha = y0 * w
+        for x0 in range(w):
+            i0 = linha + x0
+            if visto[i0] or fundo[i0] or not aceita(px[x0, y0]):
+                continue
+
+            fila = deque([(x0, y0)])
+            visto[i0] = 1
+            regiao = []
+            erro = 0.0
+            pares = [0, 0]
+            while fila:
+                x, y = fila.popleft()
+                regiao.append(y * w + x)
+                par = (int(x / lado) + int(y / lado)) & 1
+                pares[par] += 1
+                erro += abs(g[x, y] - tons[par])
+                for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < w and 0 <= ny < h:
+                        j = ny * w + nx
+                        if not visto[j] and not fundo[j] and aceita(px[nx, ny]):
+                            visto[j] = 1
+                            fila.append((nx, ny))
+
+            # Alternancia so vale como prova se as duas cores aparecerem
+            # de verdade. Sem esta guarda, uma mecha de quatro pixels do
+            # cabelo da Klara cai inteira dentro de uma casa clara,
+            # "acerta" o tom e vira buraco no cabelo.
+            if len(regiao) < 30 or min(pares) < 8:
+                continue
+            if erro / len(regiao) <= margem:
+                for j in regiao:
+                    fundo[j] = 1
+    return fundo
+
+
 def recorta_xadrez(im, claro=232, tol=16):
     """Tira o xadrez de falsa transparencia (dois cinzas claros)."""
     rgb = im.convert("RGB")
@@ -104,7 +224,11 @@ def recorta_xadrez(im, claro=232, tol=16):
             return False
         return (max(c) - min(c)) <= tol
 
-    return _aplica(rgb, _preenche(rgb, aceita))
+    fundo = _preenche(rgb, aceita)
+    xadrez = _mede_xadrez(rgb, fundo)
+    if xadrez:
+        fundo = _vaos_fechados(rgb, fundo, aceita, xadrez)
+    return _aplica(rgb, fundo)
 
 
 def recorta_preto(im, escuro=42):
@@ -137,6 +261,49 @@ def recorta_preto(im, escuro=42):
     return saida
 
 
+def tapa_furos(im, area=80):
+    """Fecha furo pequeno de alfa que nao encosta na borda.
+
+    O preenchimento entra por canais de um pixel entre duas mechas do
+    cabelo da Klara e deixa pontinhos vazados. Contra o piso escuro do
+    mapa eles aparecem como sujeira.
+    """
+    w, h = im.size
+    a = im.getchannel("A")
+    ap = a.load()
+    visto = bytearray(w * h)
+
+    for y0 in range(h):
+        linha = y0 * w
+        for x0 in range(w):
+            i0 = linha + x0
+            if visto[i0] or ap[x0, y0] > 8:
+                continue
+            fila = deque([(x0, y0)])
+            visto[i0] = 1
+            regiao = []
+            borda = False
+            while fila:
+                x, y = fila.popleft()
+                regiao.append((x, y))
+                if x == 0 or y == 0 or x == w - 1 or y == h - 1:
+                    borda = True
+                for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < w and 0 <= ny < h:
+                        j = ny * w + nx
+                        if not visto[j] and ap[nx, ny] <= 8:
+                            visto[j] = 1
+                            fila.append((nx, ny))
+            if not borda and len(regiao) <= area:
+                for x, y in regiao:
+                    ap[x, y] = 255
+
+    im = im.copy()
+    im.putalpha(a)
+    return im
+
+
 def com_alfa(im):
     """A folha ja tem alfa de verdade?"""
     if im.mode not in ("RGBA", "LA", "P"):
@@ -153,8 +320,8 @@ def normaliza(im):
     rgb = im.convert("RGB")
     r, g, b = rgb.getpixel((0, 0))
     if (r + g + b) / 3.0 > 150:
-        return recorta_xadrez(rgb)
-    return recorta_preto(rgb)
+        return tapa_furos(recorta_xadrez(rgb))
+    return tapa_furos(recorta_preto(rgb))
 
 
 # ---------------------------------------------------------------------------
@@ -382,13 +549,16 @@ def mapa(origem, saida, escala=1.0):
 
 A = "ChatGPT Image Aug 24, 2026, "
 
+# A regua do projeto: 1,07 pixel por centimetro, tirada do ladrilho de
+# 28 pixels da arte das salas. Adulto de pe = 150. Menina de oito anos =
+# 1,25m = 115. Ver o cabecalho de tools/cobertura_assets.py.
 ANDAR = [
-    (A + "11_08_10 PM.png",              "chars/antoniette.png", 72, 108),
+    (A + "11_08_10 PM.png",              "chars/antoniette.png",  98, 150),
     ("4660d5ff-6e2b-466c-a8f4-c6c26df09eb5.png",
-                                          "chars/klara.png",      64,  92),
-    (A + "10_38_10 PM.png",              "chars/klara_casulo.png", 64, 92),
-    (A + "10_11_45 PM.png",              "chars/vulto.png",       80, 112),
-    (A + "10_46_36 PM.png",              "chars/carmine.png",     88, 124),
+                                          "chars/klara.png",       76, 116),
+    (A + "10_38_10 PM.png",              "chars/klara_casulo.png", 76, 116),
+    (A + "10_11_45 PM.png",              "chars/vulto.png",       108, 162),
+    (A + "10_46_36 PM.png",              "chars/carmine.png",     116, 172),
 ]
 
 ICONES = [(A + "09_47_49 PM.png", "icons/itens.png", 64, 4, 4)]
@@ -399,20 +569,22 @@ PECAS = [
     (A + "11_06_38 PM (3).png",  "faces/vulto.png",           360, 360),
     (A + "11_06_39 PM (4).png",  "faces/carmine.png",         420, 420),
 
-    (A + "10_29_41 PM (1).png",  "props/mesa_longa.png",      None, 232),
-    (A + "10_29_41 PM (2).png",  "props/mesa_contencao.png",  None, 224),
-    (A + "10_29_41 PM (3).png",  "props/armario_selado.png",  248, None),
-    (A + "10_29_41 PM (4).png",  "props/carrinho.png",        None, 168),
-    (A + "10_29_41 PM (5).png",  "props/escrivaninha.png",    None, 176),
-    (A + "10_29_42 PM (6).png",  "props/estante_a.png",       232, None),
-    (A + "10_29_42 PM (7).png",  "props/estante_b.png",       232, None),
-    (A + "10_29_42 PM (8).png",  "props/bancada.png",         None, 152),
-    (A + "10_29_42 PM (9).png",  "props/poltrona.png",        192, None),
-    (A + "10_29_42 PM (10).png", "props/cadeira.png",         160, None),
-    (A + "10_29_42 PM (11).png", "props/pia.png",             176, None),
-    (A + "10_29_42 PM (12).png", "props/cilindro.png",        184, None),
-    (A + "10_29_43 PM (13).png", "props/arquivo_gavetas.png", 280, None),
-    (A + "10_29_43 PM (14).png", "props/bau.png",             184, None),
+    # (largura maxima, altura maxima). Onde so a altura importa, a
+    # largura vai como None e a proporcao manda.
+    (A + "10_29_41 PM (1).png",  "props/mesa_longa.png",      None, 118),
+    (A + "10_29_41 PM (2).png",  "props/mesa_contencao.png",  None, 112),
+    (A + "10_29_41 PM (3).png",  "props/armario_selado.png",  None, 280),
+    (A + "10_29_41 PM (4).png",  "props/carrinho.png",        None, 122),
+    (A + "10_29_41 PM (5).png",  "props/escrivaninha.png",    None, 105),
+    (A + "10_29_42 PM (6).png",  "props/estante_a.png",       None, 260),
+    (A + "10_29_42 PM (7).png",  "props/estante_b.png",       None, 260),
+    (A + "10_29_42 PM (8).png",  "props/bancada.png",         None, 108),
+    (A + "10_29_42 PM (9).png",  "props/poltrona.png",        None, 168),
+    (A + "10_29_42 PM (10).png", "props/cadeira.png",         None, 130),
+    (A + "10_29_42 PM (11).png", "props/pia.png",             None, 138),
+    (A + "10_29_42 PM (12).png", "props/cilindro.png",        None, 300),
+    (A + "10_29_43 PM (13).png", "props/arquivo_gavetas.png", None, 140),
+    (A + "10_29_43 PM (14).png", "props/bau.png",             None,  72),
 ]
 
 MAPAS = [
@@ -426,6 +598,58 @@ MAPAS = [
 ]
 
 TILES = [("Inside_C.png", "tiles/interior.png")]
+
+
+# ---------------------------------------------------------------------------
+# audio
+# ---------------------------------------------------------------------------
+
+# Trilha: pack "Uneasy Melodies v1", de Serotone (Sebastian Petrei).
+# Licenca no proprio pack: uso livre, inclusive comercial, credito
+# opcional, proibido revender como pacote. Ver assets/cobertura/CREDITOS.md.
+TRILHAS = [
+    ("UneasyMelodies_v1/horror_dungeon_explore.wav",    "../audio/bgm/cob_percurso.mp3"),
+    ("UneasyMelodies_v1/horror_amb_haunted.wav",        "../audio/bgm/cob_respiro.mp3"),
+    ("UneasyMelodies_v1/horror_dark_reveal.wav",        "../audio/bgm/cob_perto.mp3"),
+    ("UneasyMelodies_v1/horror_puzzle.wav",             "../audio/bgm/cob_conferencia.mp3"),
+    ("UneasyMelodies_v1/horror_saferoom.wav",           "../audio/bgm/cob_forro.mp3"),
+    ("UneasyMelodies_v1/horror_saferoom_corrupted.wav", "../audio/bgm/cob_forro_ruim.mp3"),
+    ("UneasyMelodies_v1/horror_scene_finalmoment.wav",  "../audio/bgm/cob_ultima.mp3"),
+]
+
+# Efeitos. Os tres primeiros vem do mesmo pack; os dois ultimos do
+# "Fantasy UI SFX", de Atelier Magicae - uso livre, sem redistribuir.
+# Os nomes de origem sao numeros: se o som estiver errado, e trocar o
+# numero aqui e rodar de novo.
+EFEITOS = [
+    ("UneasyMelodies_v1/horror_sfx_itemfound.wav", "../audio/sfx/cob_achado.ogg"),
+    ("UneasyMelodies_v1/horror_sfx_unlock.wav",    "../audio/sfx/cob_destranca.ogg"),
+    ("UneasyMelodies_v1/horror_sfx_alarm.wav",     "../audio/sfx/cob_notada.ogg"),
+    ("Fantasy UI SFX/Fantasy UI SFX/Fantasy/Fantasy_UI (60).wav",
+                                                   "../audio/sfx/cob_marca.ogg"),
+    ("Fantasy UI SFX/Fantasy UI SFX/Piano/Piano_Ui (2).wav",
+                                                   "../audio/sfx/cob_anota.ogg"),
+]
+
+
+def tem_ffmpeg():
+    from shutil import which
+    return which("ffmpeg") is not None
+
+
+def converte(origem, destino, mp3):
+    import subprocess
+    if mp3:
+        cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", origem,
+               "-ac", "2", "-ar", "44100", "-b:a", "128k", destino]
+    else:
+        cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", origem,
+               "-ac", "2", "-ar", "44100", "-c:a", "libvorbis", "-q:a", "4",
+               destino]
+    r = subprocess.run(cmd, capture_output=True)
+    if r.returncode != 0:
+        return None, (r.stderr.decode("utf-8", "replace").strip() or "ffmpeg falhou")
+    return os.path.getsize(destino), "convertido"
 
 
 def garante(caminho):
@@ -486,6 +710,30 @@ def main():
             continue
         t, nota = mapa(os.path.join(ORIG, origem), destino)
         registra(rel, destino, t, nota)
+
+    print("\naudio")
+    if "--sem-audio" in sys.argv:
+        print("  pulado por --sem-audio")
+    elif not tem_ffmpeg():
+        print("  FALHA  ffmpeg ausente - trilha e efeitos nao convertidos")
+        falhas.append("ffmpeg ausente")
+    else:
+        for origem, rel in TRILHAS + EFEITOS:
+            destino = os.path.join(DEST, rel)
+            garante(destino)
+            if LISTAR:
+                continue
+            fonte = os.path.join(ORIG, origem)
+            if not os.path.isfile(fonte):
+                registra(rel, destino, None, "origem ausente")
+                continue
+            tam, nota = converte(fonte, destino, rel.endswith(".mp3"))
+            if tam is None:
+                registra(rel, destino, None, nota)
+            else:
+                total += 1
+                print("  ok     %-26s %-14s %s"
+                      % (rel, "%d KB" % (tam // 1024), nota))
 
     print("\ntileset")
     for origem, rel in TILES:

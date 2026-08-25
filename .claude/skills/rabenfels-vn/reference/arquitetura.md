@@ -241,3 +241,35 @@ capitulo.
 
 **O teto vive em `RBF.ROUTES` e em nenhum outro lugar.** Hoje 20. Mudar la
 muda o medidor, os limiares da galeria e nada mais.
+
+
+## O percurso — beat `{ t:'percurso' }`
+
+Trecho jogado de cima, em canvas, dentro da rota Cobertura. Vive em
+`js/rpg.js`; planta e conteúdo em `js/data/cob_mapas.js`; manifesto de
+asset em `RBF.COBERTURA` (`js/config.js`).
+
+```js
+{ t:'percurso',
+  id:      'cob10_inventario',   // segmento em RBF.COB_SEGMENTOS
+  campo:   'cob_saida',          // flag que recebe qual saída foi
+  conta:   'cob_apurou',         // flag que recebe quantas marcas
+  sets:    { cob_conferiu:true },// o que o beat promete de qualquer jeito
+  padrao:  'linha' }             // saída usada quando não há canvas
+```
+
+**O contrato:** o engine para, o módulo assume a tela, e quando devolve o
+engine aplica `sets`, todas as marcas (com `true` **ou** `false`), a
+contagem e a saída — nessa ordem. Depois `advance()`.
+
+**Sem canvas o beat resolve na hora** e `exec` devolve `'go'`. Chamar
+`advance()` dali travaria o laço, porque `busy` ainda está em `true` —
+foi um defeito real e o validador ficou 120 segundos sem escrever nada.
+
+**Salvar dentro do percurso funciona**, menos no meio de uma fala. O
+estado vai no campo `percurso` do save e `loadFrom()` reabre o trecho no
+lugar em que parou.
+
+Os dois validadores conhecem o beat: `BEAT_TYPES` em `tools/validate.py`
+e `KNOWN` em `tools/validate.js`, e os dois varrem `cob_mapas.js` atrás
+das marcas declaradas para não acusá-las de órfãs.
