@@ -124,7 +124,7 @@ do mesmo jeito.
 ## A Árvore
 
 Terceira aba de **A Conta**, junto com As Quatro Páginas e As Leituras.
-Mostra as dez decisões com os três ramos de cada uma e os nove finais na
+Mostra as dez decisões com os três ramos de cada uma e os quatro finais na
 ordem em que `RBF.ENDINGS` os avalia.
 
 Junta três fontes e não inventa uma quarta:
@@ -152,12 +152,12 @@ reprova qualquer anotação que transcreva um delta.
 
 O ramo não percorrido aparece como lacuna e não some. A direção do eixo
 (`{ r:'hope', d:'alta' }`) é o único dado que aparece antes de a leitura
-ser alcançada, e existe por legibilidade: sem ela oito dos nove cartões
+ser alcançada, e existe por legibilidade: sem ela três dos quatro cartões
 ficam idênticos. **Direção de rota, nunca conteúdo.**
 
 ### Ao mexer no roteiro
 
-As consequências citam números de beats — 13 no Cap. 2, 17 no Cap. 3, 108
+As consequências citam números de beats — 13 no Cap. 2, 17 no Cap. 3, 123
 do Cap. 6 ao Epílogo. `node tools/arvore.js` reconta e reprova se um
 número deixar de bater. Texto desse tipo envelhece calado; o validador é
 o que faz barulho.
@@ -166,7 +166,7 @@ o que faz barulho.
 
 ```bash
 node tools/validate.js                 # o mais completo; exige Node
-node tools/finais.js                   # os nove finais; --dump escreve o transcript
+node tools/finais.js                   # as quatro rotas; --dump escreve o transcript
 node tools/arvore.js                   # a árvore: anotação vs roteiro, e a tela num DOM
 node tools/shot_arvore.js              # a árvore em Chrome, em quatro tamanhos
 node tools/escape.js js/data/x.js      # normaliza para ASCII puro

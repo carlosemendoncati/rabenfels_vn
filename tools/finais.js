@@ -43,11 +43,25 @@ const ARQS = (RBF0.CHAPTERS || []).map(c => {
   return { cap: c, arq: 'js/data/' + nome + '.js' };
 });
 ARQS.forEach(a => carrega(a.arq));
+carrega('js/data/cob_mapas.js');
 carrega('js/data/quatro_paginas.js');
 
 const RBF = ctx.RBF;
 
-function morre(fim) { return /\bMORRE\b/.test(fim.note || ''); }
+function morre(fim) { return fim && fim.morre === true; }
+
+/* O percurso grava suas marcas fora dos arrays de roteiro. Este validador
+   roda sem canvas, entao precisa reproduzir o contrato do fallback: toda
+   marca declarada existe e vale false quando nao foi apurada. */
+function marcasDoPercurso() {
+  const out = {};
+  for (const mapa of Object.values(RBF.COB_MAPAS || {})) {
+    for (const ponto of mapa.pontos || []) {
+      if (ponto.marca) { out[ponto.marca] = false; }
+    }
+  }
+  return out;
+}
 
 /* ---- caminhada --------------------------------------------------------- */
 
@@ -60,6 +74,11 @@ function anda(beats, flags) {
       if (!ok) { continue; }
     }
     if (b.t === 'flag' && b.set) { Object.assign(flags, b.set); }
+    if (b.t === 'percurso') {
+      Object.assign(flags, marcasDoPercurso(), b.sets || {});
+      if (b.campo) { flags[b.campo] = b.padrao; }
+      if (b.conta) { flags[b.conta] = 0; }
+    }
     vistos.push(b);
   }
   return vistos;
@@ -184,6 +203,11 @@ const varre = beats => {
   for (const b of beats || []) {
     if (b.if) { Object.keys(b.if).forEach(k => lidas.add(k)); }
     if (b.t === 'flag' && b.set) { Object.keys(b.set).forEach(k => escritas.add(k)); }
+    if (b.t === 'percurso') {
+      Object.keys(b.sets || {}).forEach(k => escritas.add(k));
+      if (b.campo) { escritas.add(b.campo); }
+      if (b.conta) { escritas.add(b.conta); }
+    }
     if (b.t === 'cho') {
       for (const o of b.opts || []) {
         if (o.flags) { Object.keys(o.flags).forEach(k => escritas.add(k)); }
@@ -193,6 +217,7 @@ const varre = beats => {
   }
 };
 (RBF.CHAPTERS || []).forEach(c => varre(RBF[c.data]));
+Object.keys(marcasDoPercurso()).forEach(k => escritas.add(k));
 ['rota', 'ending', 'relendo', 'lastChoice'].forEach(k => escritas.add(k));
 
 console.log('== FLAGS ==');

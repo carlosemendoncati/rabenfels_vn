@@ -530,14 +530,16 @@ def peca(origem, saida, alt_max=None, larg_max=None):
     return im.size, "peca"
 
 
-def mapa(origem, saida, escala=1.0):
+def mapa(origem, saida, escala=1.0, alvo=None):
     """Mapa de sala: corta a moldura preta e guarda sem alfa."""
     im = Image.open(origem).convert("RGB")
     g = im.convert("L").point(lambda v: 255 if v > 16 else 0)
     b = g.getbbox()
     if b:
         im = im.crop(b)
-    if escala != 1.0:
+    if alvo and im.size != alvo:
+        im = im.resize(alvo, Image.LANCZOS)
+    elif escala != 1.0:
         im = im.resize((int(im.size[0] * escala), int(im.size[1] * escala)),
                        Image.LANCZOS)
     im.save(saida)
@@ -596,8 +598,7 @@ PECAS = [
     ("bau_fechado_140x100.png",      "props/bau.png",              140, 100),
 
     # Entrega complementar de 25/08. So entram aqui as pecas com uso
-    # documentado no percurso; relogio ficou de fora porque a arte marca
-    # 10:00 e o texto canonico exige 11:40.
+    # documentado no percurso.
     (E + "malas_bau_ferramentas.png",       "props/malas_bau.png",              120,  90),
     (E + "gancho_chaves.png",               "props/gancho_chaves.png",           90,  70),
     ("gancho_vazio_90x70.png",               "props/gancho_vazio.png",            90,  70),
@@ -606,16 +607,34 @@ PECAS = [
     (E + "prataria_empilhada.png",          "props/prataria_empilhada.png",     140,  60),
     (E + "retrato_governanta_virado.png",   "props/retrato_governanta_virado.png",   110, 90),
     (E + "retrato_governanta_revelado.png", "props/retrato_governanta_revelado.png", 110, 90),
+
+    # Elementos de ambientacao entregues com o pacote complementar. A cama
+    # fecha a funcao visual do quarto; porta e rastros entram como estados
+    # do mapa, nunca como nomes de arquivo nos dados da rota.
+    (E + "cama_servico.png",  "props/cama_servico.png", 300, 165),
+    (E + "porta_fechada.png", "props/porta_fechada.png",  90, 120),
+    (E + "rastro_01.png",     "props/rastro_01.png",     120, 120),
+    (E + "rastro_02.png",     "props/rastro_02.png",     120, 120),
+    (E + "rastro_03.png",     "props/rastro_03.png",     120, 120),
+    (E + "rastro_04.png",     "props/rastro_04.png",     120, 120),
+
+    # Pecas geradas a partir dos desenhos entregues, sem mudar perspectiva
+    # nem identidade visual: estado aberto do armario e relogio canonico.
+    ("armario_aberto.png", "props/armario_aberto.png", None, 280),
+    ("gerados_limpos_final/relogio_servico_1140.png",
+                              "props/relogio_servico.png", 100, 140),
 ]
 
 MAPAS = [
-    (A + "10_08_08 PM (1).png",  "maps/sala_a.png"),
-    (A + "10_08_09 PM (2).png",  "maps/salao.png"),
-    (A + "10_08_09 PM (3).png",  "maps/sala_b.png"),
-    (A + "10_08_09 PM (4).png",  "maps/sala_c.png"),
-    (A + "10_08_10 PM (5).png",  "maps/sala_d.png"),
-    (A + "10_08_10 PM (6).png",  "maps/escada.png"),
-    (A + "10_08_10 PM (7).png",  "maps/corredor.png"),
+    # Mapas novos preservam as dimensoes logicas dos anteriores. Assim a
+    # troca de arte nao altera escala de personagem, velocidade nem camera.
+    ("mapas_gerados/quarto.png",     "maps/sala_a.png",   1301, 1075),
+    ("mapas_gerados/salao.png",      "maps/salao.png",    1402,  910),
+    ("mapas_gerados/copa.png",       "maps/sala_b.png",   1417,  932),
+    ("mapas_gerados/camara.png",     "maps/sala_c.png",   1249,  994),
+    ("mapas_gerados/escritorio.png", "maps/sala_d.png",   1344,  932),
+    ("mapas_gerados/escada.png",     "maps/escada.png",    903, 1428),
+    ("mapas_gerados/corredor.png",   "maps/corredor.png", 1963,  529),
 ]
 
 TILES = [("Inside_C.png", "tiles/interior.png")]
@@ -766,7 +785,7 @@ def main():
         registra(rel, destino, im.size, "folha exata")
 
     print("\nmapas")
-    for origem, rel in MAPAS:
+    for origem, rel, mw, mh in MAPAS:
         destino = os.path.join(DEST, rel)
         garante(destino)
         if LISTAR:
@@ -775,7 +794,7 @@ def main():
         if not os.path.isfile(fonte):
             registra(rel, destino, None, "origem ausente: " + origem)
             continue
-        t, nota = mapa(fonte, destino)
+        t, nota = mapa(fonte, destino, alvo=(mw, mh))
         registra(rel, destino, t, nota)
 
     print("\naudio")

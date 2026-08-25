@@ -1,11 +1,11 @@
 # Rabenfels — contexto do projeto
 
 Visual Novel de horror psicológico e tragédia. Referências de estilo: The House
-in Fata Morgana, Umineko, Saya no Uta, Higurashi. O jogador lê primeiro o
-Arquivo (documento deixado por uma morta) e depois vive os eventos que o
-produziram.
+in Fata Morgana, Umineko, Saya no Uta, Higurashi. O jogador lê primeiro uma
+das leituras do Arquivo, tratada como documento póstumo, e depois vive os
+eventos que podem produzir quatro documentos diferentes.
 
-> Há uma skill completa deste projeto em `.Codex/skills/rabenfels-vn/`.
+> Há uma skill completa deste projeto em `.agents/skills/rabenfels-vn/`.
 > Ela tem as regras de escrita, a referência de canon e o mapa da arquitetura
 > em arquivos separados. Consulte antes de escrever capítulo ou mexer no engine.
 
@@ -19,18 +19,18 @@ sem confirmar comigo.
 Arquivos de apoio em `docs/`:
 - `arquivo_rabenfels.docx` — o documento diegético da Antoniette (in-fiction),
   usado como fonte de citação quando uma cena referencia o Arquivo diretamente.
-- `biblia_rabenfels.md` — a bíblia de execução. Reescrita do zero em
-  26/07/2026; as três anteriores foram apagadas e estão em `_backup/`.
-- `estrutura_v1.md` — atos, trocas e o gráfico de fios dos onze capítulos.
+- `biblia_narrativa_rabenfels.md` — a bíblia narrativa e a estrutura das
+  quatro rotas.
 - `roteiro_prologo_cap1.docx`.
 
 ## O arco meta-narrativo (não esquecer nunca)
 
-O Arquivo Rabenfels existe dentro da ficção. Foi escrito por Antoniette,
-morta antes do fim da obra. É interpretação de uma pessoa com informação
-incompleta sob pressão — não uma verdade objetiva. O "Compilador" que
-comenta em notas de rodapé é ela. Isso afeta como qualquer trecho do Arquivo
-deve soar: frio, factual, com a máscara escorregando perto do fim.
+O Arquivo Rabenfels existe dentro da ficção. Foi escrito por Antoniette, que
+morre em três leituras e sobrevive em **O Livro-Razão**. É interpretação de
+uma pessoa com informação incompleta sob pressão — não uma verdade objetiva.
+O "Compilador" que comenta em notas de rodapé é ela. Isso afeta como qualquer
+trecho do Arquivo deve soar: frio, factual, com a máscara escorregando quando
+a leitura permite.
 
 ## Estilo de escrita — regras fixas
 

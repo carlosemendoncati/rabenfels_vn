@@ -10,18 +10,18 @@
    O PENSAMENTO UNICO DESTE CAPITULO (Zinsser, unidade):
    "Foram felizes, e e isso que torna o resto insuportavel."
 
-   A TROCA (docs/estrutura_v1.md):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela ganha a confianca das duas meninas.
    Entrega O RELOGIO. A amizade e o que a faz devagar.
    "Fui metodica. Fui devagar. Foi o devagar que custou."
 
    =========================================================================
    ESTE E O UNICO CAPITULO QUE RAMIFICA DE VERDADE.
-   Decisao do autor em 26/07/2026, registrada em docs/estrutura_v1.md.
+   Decisao do autor em 26/07/2026, preservada nesta implementacao.
 
    Nao ramifica enredo - ramifica QUEM KLARA VIRA. Os mesmos dezoito
    meses, tres substancias diferentes, cada uma semeando um traco da
-   tabela de "Onde Klara chega" (docs/biblia_rabenfels.md).
+   tabela de "Onde Klara chega" (docs/biblia_narrativa_rabenfels.md).
 
    NAO RECONVERGE. A flag 'taught' carrega ate o Epilogo, e a ultima
    entrada do Arquivo passa a ter tres versoes.

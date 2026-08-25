@@ -57,7 +57,7 @@ Seção 6 — A Balada das Filhas Rabenfels
 
 # **O Projeto**
 
-Arquivo Rabenfels é uma Visual Novel de horror psicológico e tragédia. A obra posiciona o jogador como leitor de um documento deixado por uma personagem morta — e então o mergulha nos eventos que produziram esse documento.
+Arquivo Rabenfels é uma Visual Novel de horror psicológico e tragédia. A obra posiciona o jogador como leitor de um documento inicialmente tratado como póstumo — e então o mergulha nos eventos que podem produzir quatro versões desse documento.
 
 As referências de estilo são The House in Fata Morgana, Umineko no Naku Koro ni, Saya no Uta e Higurashi. O horror nunca é visual ou baseado em impacto imediato. É construído por acumulação, por normalização do terror e pela inevitabilidade trágica de cada momento.
 
@@ -73,13 +73,13 @@ O Arquivo Rabenfels — o documento de lore que serve como material de referênc
 
 Foi escrito por Antoniette ao longo dos anos que passou em Velha Nidhaus. É o produto de sua pesquisa, suas inferências, seus erros e sua determinação de deixar alguma coisa para trás caso não sobrevivesse.
 
-Ela não sobreviveu.
+Ela morre em três leituras. Em **O Livro-Razão**, sobrevive, e o tribunal chama de falecida uma autora viva.
 
 *Tudo no Arquivo Rabenfels é interpretação de uma única pessoa trabalhando com informação incompleta sob pressão crescente. Antoniette nomeia Khar**'**Vel com base em fragmentos. Descreve Serafina com a frieza de quem tenta manter distância emocional. Escreve sobre o ciclo como quem ainda está tentando acreditar que existe uma saída. O jogador que leu o Arquivo antes de jogar já foi exposto à perspectiva de Antoniette — e parte da experiência da VN é descobrir onde ela estava certa, onde estava errada, e o que ela nunca chegou a entender.*
 
-O "Compilador" que aparece no documento e faz observações em notas é ela. A frieza formal é uma máscara. A máscara vai escorregando nas seções finais, escritas quando ela já sabia que o tempo estava acabando.
+O "Compilador" que aparece no documento e faz observações em notas é ela. A frieza formal é uma máscara. Em **O Arquivo** e **A Dívida**, a máscara escorrega nas páginas escritas antes da tentativa de fuga. Em **A Cobertura Queimada**, o trabalho termina na página 241. Em **O Livro-Razão**, a numeração fecha em 291 e a máscara permanece quase inteira.
 
-A última entrada do Arquivo foi escrita na noite anterior à tentativa de fuga.
+O Prólogo apresenta primeiro a leitura **O Arquivo**, antes de qualquer decisão. Não é um flash-forward físico comum às quatro rotas: depois do Capítulo 9, cada leitura produz seu próprio documento e seu próprio destino para Antoniette.
 
 *SEÇÃO 2*
 
@@ -269,7 +269,7 @@ Dois predadores reconhecendo um ao outro — esse foi o início.
 
 **Idade na chegada: **20 anos
 
-**Idade na morte: **25 anos
+**Idade na morte:** 25 anos em três leituras; sobrevive em **O Livro-Razão**
 
 **Origem: **Lervel, cidade mercantil no centro de Eldoria
 
@@ -311,7 +311,7 @@ Fase 3 (Anos 4-5): Não existe um momento exato em que decide que Klara é mais 
 
 Fase 4 (Fim): a obra se divide. Em **A Esperança** e **A Perda**, Antoniette tenta a fuga e morre depois dela. Em **A Cobertura**, Carmine a mata diante da porta do pátio, antes da carruagem. Em **A Resposta**, Antoniette não desce, não cria o vínculo que Carmine viria cobrar e sobrevive. Nenhuma leitura salva Klara nem interrompe o ciclo.
 
-*A última coisa que Antoniette escreve no Arquivo é endereçada a quem encontrar o documento. Não a Klara — Klara não pode receber isso. Ao desconhecido que vier depois. Ela pede apenas uma coisa: que alguém tente onde ela falhou.*
+*Em O Arquivo e A Dívida, a última coisa que Antoniette escreve é endereçada a quem encontrar o documento. A Cobertura termina antes dessa entrada. O Livro-Razão fecha sem o pedido.*
 
 — ✦ —
 
@@ -329,9 +329,9 @@ Recrutou Antoniette porque reconheceu nela algo que raramente via: alguém que c
 
 Sabia dos riscos de Nidhaus. Sabia que a Ordem já havia perdido um agente tentando infiltrar a família décadas antes. Enviou Antoniette porque ela era a melhor opção disponível. A questão que o perseguirá pelo resto da vida é se "melhor opção disponível" era razão suficiente.
 
-É Matheo quem encontra o Arquivo depois da morte dela — através de um contato externo estabelecido como ponto morto, com instrução de "se eu não aparecer em noventa dias, abra isso".
+É Matheo quem recebe o Arquivo pelo ponto morto nas três leituras em que Antoniette morre. Em **O Livro-Razão**, ela entrega o material completo em Lervel.
 
-Ele lê o Arquivo inteiro numa noite. Não como supervisor revisando relatório de campo. Como alguém lendo a última voz de uma pessoa que não deveria ter morrido.
+No Prólogo, ele lê o Arquivo inteiro numa noite. Não como supervisor revisando relatório de campo. Como alguém lendo a última voz de uma pessoa que não deveria ter morrido.
 
 *Matheo é o narrador da moldura da VN. É através dele que o jogador recebe o Arquivo no Prólogo. Ele nunca aparece de forma que possa ser confrontado. A VN não lhe dá essa absolvição.*
 
@@ -371,9 +371,9 @@ A VN é estruturada em torno de um dispositivo de moldura: começamos com o fim 
 
 ### **Prólogo: ****"****O Arquivo****"**
 
-Matheo recebe o pacote póstumo. Lê fragmentos do Arquivo. O título aparece. Flashback.
+Matheo recebe um pacote tratado como póstumo. Lê fragmentos do Arquivo. O título aparece. Flashback.
 
-Função: estabelecer que Matheo recebe um documento tratado como póstumo e acredita que Antoniette morreu. Em três leituras ele está certo. Em **O Livro-Razão**, o ponto morto foi disparado pelo silêncio administrativo de uma agente recolhida, e o tribunal chama de falecida uma autora que respira.
+Função: estabelecer a primeira leitura, **O Arquivo**, e fazer o jogador acreditar que Antoniette morreu. As decisões posteriores podem produzir outro documento. Em **O Livro-Razão**, não há pacote; a ironia volta quando o tribunal chama de falecida uma autora que respira.
 
 ### **Capítulo 1: ****"****A Chegada****"**
 
@@ -385,23 +385,23 @@ Antoniette estabelece sua cobertura, conhece os servos, começa a catalogar a bi
 
 ### **Capítulo 3: ****"****As Duas Klara****"**
 
-Primeiro contato real com as gêmeas. Tom: humano, quase normal. O horror fica em pausa para que o jogador possa se importar com as pessoas antes de ver o que vai acontecer com elas.
+Primeiro contato real com as gêmeas. No primeiro agosto, a aldeia nomeia as borboletas que a casa apagou dos próprios livros. Klara pede para vê-las. Tom: humano, quase normal.
 
 ### **Capítulo 4: ****"****Os Rituais de Outubro****"**
 
-Antoniette testemunha um ritual menor. As borboletas de sangue aparecem pela primeira vez. Tom: o horror voltando, filtrado pelo distanciamento profissional.
+Antoniette testemunha um ritual menor e aprende a palavra que a casa usa entre si: treinamento. O capítulo entrega o vocabulário, não o mecanismo.
 
 ### **Capítulo 5: ****"****A Câmara****"**
 
-Antoniette descobre evidências físicas dos experimentos. Tom: o horror é a compreensão do que os documentos significam.
+Antoniette atravessa a porta da câmara. A corrente registra passagem; não impede entrada. Ela mede a sala e sai sem entender o mecanismo. Klara mente para protegê-la. Tom: a informação é concreta, mas a compreensão ainda não chegou.
 
-### **Capítulo 6: ****"****Agosto****"**
+### **Capítulo 6: ****"****Uma Amizade****"**
 
-O agosto das borboletas vermelhas. Klara tem episódios onde Khar'Vel "surfaça". Tom: terror psicológico.
+Dezoito meses em que a investigação para. O que Antoniette ensina — método, forma ou mundo — altera o que Klara fará depois. Tom: o único trecho quente da obra.
 
-### **Capítulo 7: ****"****Uma Amizade****"**
+### **Capítulo 7: ****"****Agosto****"**
 
-Capítulo deliberadamente mais calmo. A relação entre Antoniette e Klara é agora real. Tom: lirismo, ternura. O jogador deve sentir que quer que dure para sempre. Exatamente porque não vai.
+No terceiro agosto, Antoniette vê Khar'Vel aflorar em Klara. A informação da Câmara se torna real dentro de uma pessoa. O relatório que fecha o capítulo muda a relação de Antoniette com a missão.
 
 ### **Capítulo 8: ****"****O Que Ela Não Deveria Saber****"**
 
@@ -411,17 +411,13 @@ Antoniette descobre a extensão completa do ritual final. Encontra registros de 
 
 Klara diz "não tenho medo de morrer" com a calma de quem nunca recebeu permissão de considerar outra possibilidade. Antoniette fecha o livro. Naquela noite, começa a planejar. Tom: determinação quieta.
 
-### **Capítulo 10: ****"****A Fuga****"**
+### **Capítulo 10 e seguintes: ****"****As Quatro Rotas****"**
 
-Antoniette executa o plano. O jogador acompanha com a tensão de saber — desde o prólogo — que vai falhar. O horror não é o fracasso em si: é assistir a cada momento onde poderia ter funcionado. Tom: thriller com a tragédia grega da inevitabilidade.
-
-### **Capítulo 11: ****"****O Florescimento****"**
-
-Na rota **A Esperança**, a entidade age através de Klara e Antoniette morre. A cena é restrita, sem espetáculo. O horror é que Klara está presente mas não completamente no controle. As demais rotas têm capítulos finais próprios. Tom: devastação quieta.
+Em **A Esperança** e **A Perda**, Antoniette tenta a fuga por caminhos diferentes. Em **A Resposta**, confere o cronograma e não desce. Em **A Cobertura**, o contrato termina e a busca pela linha que a entregou vira o percurso jogado de cima. Cada rota possui capítulos próprios. Na Cobertura não há combate.
 
 ### **Epílogo: ****"****O Que Ficou****"**
 
-Retorno à moldura. Matheo com o Arquivo. Um fragmento final que não estava no documento — algo que Antoniette escondeu com mais cuidado. Corte para Klara, sozinha. As borboletas de agosto. O ciclo continua.
+Retorno a Matheo e ao documento produzido pela leitura: 287 folhas com quatro ausentes, uma conta de omissões, 291 páginas completas ou um caderno interrompido na página 241. O tribunal chega ao mesmo vazio por razões diferentes. Klara permanece, e o ciclo continua.
 
 — ✦ —
 
@@ -464,7 +460,7 @@ Capítulo 5. Não treinamento. Monitoramento do processo de gestação de Khar'V
 
 ### **Revelação 3 — Serafina Sabe Quem Antoniette É**
 
-Capítulo 6-7. Serafina identificou a verdadeira afiliação de Antoniette muito antes. Não a expôs porque uma arquivista da Ordem dentro de Nidhaus é, para Serafina, uma variável controlável. Isso aterroriza mais do que qualquer confronto direto.
+Capítulo 8. Serafina identificou a verdadeira afiliação de Antoniette muito antes. Não a expôs porque uma arquivista da Ordem dentro de Nidhaus é, para Serafina, uma variável controlável. Isso aterroriza mais do que qualquer confronto direto.
 
 ### **Revelação 4 — O Predecessor**
 
@@ -472,11 +468,11 @@ Capítulo 8. Nos registros da família: evidências de que a Ordem enviou algué
 
 ### **Revelação 5 — Khar****'****Vel Já Surfaçou em Klara**
 
-Capítulo 8-9. Alguns dos momentos registrados como "comportamento incomum" foram Khar'Vel usando a menina brevemente. O plano de fuga já está comprometido antes de começar — mas Antoniette não entende isso a tempo.
+Capítulo 7. Antoniette vê Khar'Vel aflorar brevemente em Klara. O plano de fuga já está comprometido antes de começar — mas Antoniette não entende isso a tempo.
 
 ### **Revelação 6 — A Fuga Traída**
 
-Capítulo 11. A tentativa falha porque Khar'Vel age através de Klara para impedi-la — sem que Klara entenda completamente o que está fazendo. A pessoa que Antoniette tentava salvar, involuntariamente, foi o instrumento de sua morte.
+Em **A Esperança**, a tentativa falha porque Khar'Vel age através de Klara para impedi-la — sem que Klara entenda completamente o que está fazendo. As outras rotas cobram causas diferentes.
 
 — ✦ —
 

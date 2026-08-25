@@ -11,7 +11,7 @@
    "A aldeia inteira sabe o nome de uma coisa que esta familia nunca
    escreveu."
 
-   A TROCA (docs/estrutura_v1.md, secao 1):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela ganha o nome local do fenomeno.
    Entrega a distancia profissional - primeira conversa direta com Klara.
 

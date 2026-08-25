@@ -15,8 +15,7 @@ Eles são curtos e evitam os erros que mais custam retrabalho neste projeto.
 |---|---|
 | **a postura de trabalho deste projeto** | **`reference/persona.md`** — leia primeiro |
 | **o que fazer e por quê, com fonte** | **`docs/estudo/00_indice.md`** — índice do corpus de referência |
-| **canon, elenco por cena, arquitetura da informação** | **`docs/biblia_rabenfels.md`** — a bíblia. Única. |
-| **atos, trocas, gráfico de fios, ordem dos capítulos** | **`docs/estrutura_v1.md`** |
+| **canon, elenco por cena, rotas e arquitetura narrativa** | **`docs/biblia_narrativa_rabenfels.md`** |
 | tiques que denunciam texto de máquina | `reference/antipadroes-ia.md` |
 | regras de escrita, voz de cada personagem | `reference/estilo.md` |
 | cronologia, terminologia, o que pode ser revelado quando | `reference/canon.md` |

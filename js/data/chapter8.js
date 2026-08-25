@@ -10,7 +10,7 @@
    "Ela descobriu o cronograma, e outra pessoa pagou por isso no lugar
    dela."
 
-   A TROCA (docs/estrutura_v1.md):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela ganha o cronograma da casa.
    Entrega OUTRA PESSOA. Primeira vez que o custo cai sobre terceiro.
 

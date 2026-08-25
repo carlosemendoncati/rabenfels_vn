@@ -10,13 +10,13 @@
    Nenhum outro capitulo pode deixar este pensamento.
 
    Posicao no arco: Matheo Drell recebe o Arquivo tres dias depois do
-   ponto morto combinado e le a noite inteira. O jogador conhece o fim
-   antes de viver o comeco.
+   ponto morto combinado e le a noite inteira. O jogador conhece primeiro
+   a leitura O Arquivo; as decisoes podem produzir outro documento.
 
    Sem escolha nenhuma, de proposito. E o unico capitulo em que o jogador
    so assiste.
 
-   CANON APLICADO (docs/biblia_rabenfels.md):
+   CANON APLICADO (docs/biblia_narrativa_rabenfels.md):
    - Khar'Vel e o nome que Antoniette deu. Os registros que ela cita sao
      reais e conferiveis; a convencao e o nome. O jogador nao descobre
      isso aqui.
@@ -383,10 +383,6 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'A pergunta ocupava a p\u00e1gina inteira e o resto era papel limpo.' },
 { t:'pause' },
 { t:'nar', tx:'Ela deixou o espa\u00e7o da resposta e foi embora antes de poder receb\u00ea-la.' },
-{ t:'pause', if:{ relendo:true } },
-{ t:'nar', tx:'Ela escreveu essa p\u00e1gina com uma hora e quarenta de prazo, depois de arrumar tudo o que lhe pediram para arrumar.', if:{ relendo:true } },
-{ t:'nar', tx:'Foi a \u00fanica coisa daquela noite que ela escreveu sem calcular se serviria para alguma coisa.', if:{ relendo:true } },
-
 /* ======================================================================
    P10 - A ULTIMA ENTRADA
    A mascara cai. O colapso e de silencio.
@@ -437,10 +433,6 @@ RBF.PROLOGUE = [
     'Velha Nidhaus, agosto.'
 ]},
 
-{ t:'pause', if:{ relendo:true } },
-{ t:'nar', tx:'As quatro p\u00e1ginas est\u00e3o no livro-caixa da casa, em Velha Nidhaus, no lugar de quatro folhas em branco.', if:{ relendo:true } },
-{ t:'nar', tx:'Continuam l\u00e1. Ningu\u00e9m foi busc\u00e1-las, e o tribunal indeferiu por falta delas.', if:{ relendo:true } },
-{ t:'pause', if:{ relendo:true } },
 { t:'nar', tx:'Ele ficou com a \u00faltima p\u00e1gina na m\u00e3o.' },
 { t:'pause' },
 

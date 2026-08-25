@@ -3420,7 +3420,7 @@
 }
 
 /* ==========================================================================
-   A ARVORE - as dez decisoes e os nove finais
+   A ARVORE - as dez decisoes e os quatro finais
 
    Mesma gramatica das outras abas de "A Conta": filete a esquerda,
    maiuscula espacada no titulo, corpo em serifa. O que muda e a
@@ -3631,7 +3631,7 @@
   color: var(--rbf-ink-ghost);
 }
 
-/* ---- os nove finais ---------------------------------------------------- */
+/* ---- os quatro finais -------------------------------------------------- */
 
 .rbf-arv__sec {
   font-family: var(--rbf-font-display);

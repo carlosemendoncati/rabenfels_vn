@@ -322,7 +322,8 @@ async function main() {
      e a interacao, e nao a navegacao. */
   await page.evaluate(() => {
     const j = RBF.Rpg._debug.estado();
-    j.p.x = 300; j.p.y = 932; j.p.dir = 'cima';
+    const pt = RBF.COB_MAPAS.quarto.pontos.find(p => p.id === 'bau');
+    j.p.x = pt.x; j.p.y = pt.y + 52; j.p.dir = 'cima';
   });
   await page.waitForTimeout(200);
 
@@ -473,7 +474,8 @@ async function main() {
 
   const fecha = await page.evaluate(() => {
     const j = RBF.Rpg._debug.estado();
-    j.p.x = 790; j.p.y = 712; j.p.dir = 'cima';
+    const pt = RBF.COB_MAPAS.escritorio.pontos.find(p => p.id === 'fechar');
+    j.p.x = pt.x; j.p.y = pt.y + 52; j.p.dir = 'cima';
     j.fala = null;
     RBF.Rpg._debug.usa();
     const f = RBF.Rpg._debug.estado().fala;
@@ -499,8 +501,9 @@ async function main() {
 
   const virou = await page.evaluate(async () => {
     const j = RBF.Rpg._debug.estado();
+    const pt = RBF.COB_MAPAS.escritorio.pontos.find(p => p.id === 'fechar');
     j.sala = 'escritorio';
-    j.p.x = 790; j.p.y = 712; j.p.dir = 'cima';
+    j.p.x = pt.x; j.p.y = pt.y + 52; j.p.dir = 'cima';
     j.fala = null;
     RBF.Rpg._debug.usa();
     /* seis linhas ate a virada */
@@ -540,18 +543,23 @@ async function main() {
 
   const parede = await page.evaluate(async () => {
     const j = RBF.Rpg._debug.estado();
+    const obstaculo = RBF.COB_MAPAS.escada.paredes[0];
     /* fora do vao da escada, empurrando para baixo contra a divisoria */
-    j.p.x = 150; j.p.y = 560; j.p.dir = 'baixo';
+    j.p.x = obstaculo.x + obstaculo.w / 2;
+    j.p.y = obstaculo.y - 80;
+    j.p.dir = 'baixo';
     const y0 = j.p.y;
     for (let i = 0; i < 60; i++) {
       document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       await new Promise(r => setTimeout(r, 16));
     }
     document.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
-    return { y0: y0, y1: RBF.Rpg._debug.estado().p.y };
+    return { y0: y0, y1: RBF.Rpg._debug.estado().p.y,
+             limite: obstaculo.y };
   });
-  check(parede.y1 < 604, 'a divisoria da escada segura fora do vao',
-        'parou em y=' + Math.round(parede.y1) + ' e a parede comeca em 604');
+  check(parede.y1 < parede.limite, 'a divisoria da escada segura fora do vao',
+        'parou em y=' + Math.round(parede.y1) +
+        ' e a parede comeca em ' + parede.limite);
 
   /* ---- o vulto ---------------------------------------------------------- */
 
@@ -584,7 +592,8 @@ async function main() {
     RBF.Rpg._debug.vaiPara('camara', 620, 800, 'cima');
     await new Promise(r => setTimeout(r, 900));
     const j = RBF.Rpg._debug.estado();
-    j.p.x = 620; j.p.y = 632; j.p.dir = 'cima';
+    const pt = RBF.COB_MAPAS.camara.pontos.find(p => p.id === 'cilindro');
+    j.p.x = pt.x; j.p.y = pt.y + 52; j.p.dir = 'cima';
     j.fala = null;
     RBF.Rpg._debug.usa();
     const f = RBF.Rpg._debug.estado().fala;
@@ -632,11 +641,12 @@ async function main() {
     const st = RBF.Rpg._debug.estado();
     st.fala = null;
     const movel = RBF.COB_MAPAS.salao.moveis.find(m => m.marca === 'cob_retrato');
+    const pt = RBF.COB_MAPAS.salao.pontos.find(p => p.id === 'retrato');
     const antes = RBF.Rpg._debug.tipoMovel(movel);
-    RBF.Rpg._debug.vaiPara('salao', 1060, 520, 'cima');
+    RBF.Rpg._debug.vaiPara('salao', pt.x, pt.y + 52, 'cima');
     await new Promise(r => setTimeout(r, 500));
     const j = RBF.Rpg._debug.estado();
-    j.p.x = 1060; j.p.y = 520; j.p.dir = 'cima';
+    j.p.x = pt.x; j.p.y = pt.y + 52; j.p.dir = 'cima';
     RBF.Rpg._debug.usa();
     const depois = RBF.Rpg._debug.tipoMovel(movel);
     return { antes: antes, depois: depois,

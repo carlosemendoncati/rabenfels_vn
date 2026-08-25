@@ -29,7 +29,7 @@
    O PENSAMENTO UNICO (Zinsser, unidade):
    "A coisa esta dentro dela, e esta crescendo no ritmo certo."
 
-   A TROCA (docs/estrutura_v1.md):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela ganha a certeza.
    Entrega A MISSAO. Daqui em diante todo relatorio mente.
 

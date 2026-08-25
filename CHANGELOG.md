@@ -19,10 +19,35 @@ extra As Quatro Páginas ganhou cabeçalho e fecho próprios para esses três
 estados. A galeria e a árvore deixaram de descrever os nove finais antigos e
 passaram a registrar os capítulos reais das quatro rotas.
 
+O Prólogo foi fixado como a primeira leitura de **O Arquivo**, e não como um
+flash-forward físico compartilhado pelas quatro rotas. Assim, o pacote de
+Matheo não contradiz **O Livro-Razão**, entregue em mãos por Antoniette, nem o
+caderno de 241 páginas produzido na Cobertura. Documento mestre, bíblia
+narrativa e instruções do projeto foram sincronizados com essa estrutura.
+
 Na Cobertura, o baú fechado, o gancho vazio e os dois estados da moldura foram
 recortados, limpos, pixelizados e ligados ao mapa. A esteira de assets agora
 atualiza também sua cópia crua; isso impede que uma execução posterior
 restaure por engano a versão antiga de uma peça recém-entregue.
+
+As duas peças específicas que ainda faltavam foram concluídas a partir da
+arte existente. O relógio do corredor agora mostra 11h40, como dizem os dois
+atos, e o escritório troca o armário selado pelo estado aberto após a virada,
+com o lacre rompido, três pastas caídas e o espaço limpo da quarta ausente.
+
+Os sete mapas genéricos do percurso foram substituídos por ambientes novos,
+desenhados para suas funções narrativas: quarto, corredor administrativo,
+escritório, escada em dois níveis, copa, câmara e salão final. Móveis,
+objetos de conferência, saídas, colisões e rotas de perseguição foram
+reposicionados sobre a nova arquitetura. Cama, porta fechada e rastros agora
+participam da composição; o cilindro ocupa o encaixe mecânico da câmara e
+Carmine permanece no eixo único entre Antoniette e a porta do pátio.
+
+O teste visual da Cobertura passou a reproduzir toque móvel real, abertura e
+fechamento do menu, deslocamento contínuo por um toque, colisão de Carmine e a
+sequência fatal completa. Ele também confirma que não existe saída para o
+pátio nem continuação pela carruagem nesta rota, agora em telas de desktop
+e telefone.
 
 O formato de save subiu para 5 porque os novos beats do Epílogo e de Resposta
 deslocam índices no vetor único do roteiro.

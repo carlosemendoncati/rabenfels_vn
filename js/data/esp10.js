@@ -16,7 +16,7 @@
    O PENSAMENTO UNICO (Zinsser, unidade):
    "Faltavam quatro horas."
 
-   A TROCA (docs/estrutura_v1.md):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela entrega tudo o que sobrou. Nao ha o que ganhar neste capitulo.
 
    NAO TEM ESCOLHA, DE PROPOSITO.

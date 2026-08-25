@@ -1,7 +1,7 @@
 # Arquivo Rabenfels — Visual Novel
 
-Prólogo, Capítulo 1 e Capítulo 2, jogáveis. Abre direto no navegador, sem
-servidor, sem build, sem framework, sem dependência externa.
+Obra completa com tronco comum, quatro rotas e Epílogo. Abre direto no
+navegador, sem servidor, sem build, sem framework e sem dependência externa.
 
 ```
 index.html    <- abrir este arquivo
@@ -36,7 +36,7 @@ js/script.js        montagem determinística do roteiro
 js/saves.js         12 espaços, autosave, save rápido
 js/gallery.js       desbloqueio por progresso real
 js/paginas.js       As Quatro Páginas e o laudo de cada leitura
-js/arvore.js        a árvore de escolhas e o mapa dos nove finais
+js/arvore.js        a árvore de escolhas e o mapa dos quatro finais
 js/engine.js        renderer
 js/ui.js            componentes reutilizáveis
 js/menu.js          portão, menu principal, painéis
@@ -44,7 +44,7 @@ js/main.js          boot
 assets/             arte e som (ver assets/README.md)
 docs/               documentos canônicos
 tools/              validação e utilitários
-.claude/skills/     skill do projeto para assistentes
+.agents/skills/     skill do projeto para assistentes
 ```
 
 Três camadas que não se misturam: **dados de narrativa** (`js/data/`),
@@ -202,7 +202,7 @@ msedge --headless=new --virtual-time-budget=90000 --dump-dom tools/smoke.html
 uma vez por ramo de escolha e confere capítulo alcançado, capítulo
 concluído, divergência entre ramos, save, load e galeria. Aberto no
 navegador, mostra o relatório na tela. Em modo headless, procure por
-`SMOKE-OK` ou `SMOKE-FALHA` no fim do dump. **55 checagens, 0 falhas.**
+`SMOKE-OK` ou `SMOKE-FALHA` no fim do dump. **58 checagens, 0 falhas.**
 
 `tools/validate.py` não executa o jogo: lê os arquivos e confere a camada
 de dados, que é onde um capítulo novo quebra as coisas. Não substitui

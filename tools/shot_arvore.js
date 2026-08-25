@@ -10,7 +10,7 @@
    entra direto no painel.
 
    O que ele mede e a lista mais longa da obra - dez decisoes, trinta
-   ramos, nove finais - e o que quebra nela e sempre a mesma coisa:
+   ramos, quatro finais - e o que quebra nela e sempre a mesma coisa:
    texto que nao cabe na largura de telefone.
 
    Uso:  node tools/shot_arvore.js

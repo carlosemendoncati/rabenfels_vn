@@ -1531,24 +1531,28 @@ RBF.ENDINGS = [
     id:    'cover_burned',
     rota:  'cobertura',
     label: 'A Cobertura Queimada',
+    morre: true,
     note:  'Serafina encerra o contrato. Carmine mata Antoniette antes da fuga; o Arquivo sai incompleto, e Klara fica.'
   },
   {
     id:    'divida',
     rota:  'perda',
     label: 'A D\u00edvida',
+    morre: true,
     note:  'A soma do que ela decidiu n\u00e3o fazer. Ela MORRE, e a \u00faltima p\u00e1gina \u00e9 uma coluna de valores que fecha.'
   },
   {
     id:    'registro',
     rota:  'resposta',
     label: 'O Livro-Raz\u00e3o',
+    morre: false,
     note:  'Entendeu tudo e n\u00e3o pagou nada. Ela VIVE, o Arquivo sai completo e frio, e ningu\u00e9m nele tem nome.'
   },
   {
     id:    'arquivo',
     rota:  'esperanca',
     label: 'O Arquivo',
+    morre: true,
     note:  'Chega mais longe do que qualquer outra rota, e volta a p\u00e9. Ela MORRE no prazo que Carmine deu.'
   }
 ];
@@ -1832,8 +1836,10 @@ RBF.COBERTURA = {
   props: {
     arquivo_gavetas: { file: 'arquivo_gavetas.png', available: true, base: 0.62 },
     armario_selado:  { file: 'armario_selado.png',  available: true, base: 0.34, frente: true },
+    armario_aberto:  { file: 'armario_aberto.png',  available: true, base: 0.34, frente: true },
     bancada:         { file: 'bancada.png',         available: true, base: 0.70 },
     bau:             { file: 'bau.png',             available: true, base: 1.00 },
+    cama_servico:    { file: 'cama_servico.png',    available: true, base: 0.44, frente: true },
     cadeira:         { file: 'cadeira.png',         available: true, base: 0.40 },
     carrinho:        { file: 'carrinho.png',        available: true, base: 0.55 },
     cilindro:        { file: 'cilindro.png',        available: true, base: 0.26, frente: true },
@@ -1847,6 +1853,12 @@ RBF.COBERTURA = {
     gancho_vazio:    { file: 'gancho_vazio.png',    available: true, base: 0.00 },
     moldura_vazia:   { file: 'moldura_vazia.png',   available: true, base: 0.00 },
     moldura_ocupada: { file: 'moldura_ocupada.png', available: true, base: 0.00 },
+    porta_fechada:   { file: 'porta_fechada.png',   available: true, base: 0.00 },
+    relogio_servico: { file: 'relogio_servico.png', available: true, base: 0.00 },
+    rastro_01:       { file: 'rastro_01.png',       available: true, base: 0.00 },
+    rastro_02:       { file: 'rastro_02.png',       available: true, base: 0.00 },
+    rastro_03:       { file: 'rastro_03.png',       available: true, base: 0.00 },
+    rastro_04:       { file: 'rastro_04.png',       available: true, base: 0.00 },
     prataria_empilhada: { file: 'prataria_empilhada.png', available: true, base: 0.00 },
     retrato_governanta_virado: {
       file: 'retrato_governanta_virado.png', available: true, base: 0.00

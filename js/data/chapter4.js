@@ -10,7 +10,7 @@
    "Eles chamam de treinamento, e chamam assim entre si, quando ninguem
    esta ouvindo."
 
-   A TROCA (docs/estrutura_v1.md):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela ganha o vocabulario do ritual.
    Entrega uma TESTEMUNHA - ve e nao relata inteiro. Primeira mentira por
    omissao a Lervel, e ela sabe que e mentira quando lacra o envelope.

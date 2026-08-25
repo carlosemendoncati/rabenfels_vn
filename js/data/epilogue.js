@@ -205,7 +205,8 @@ RBF.EPILOGUE = [
 /* ======================================================================
    E3 - O CADASTRO
    A divergencia unica: quantos nomes. E o curso de Klara, que e a
-   digital de Antoniette num formulario, seis anos depois da morte dela.
+   digital de Antoniette num formulario, seis anos depois da passagem por
+   Nidhaus. Em Resposta, Antoniette continua viva.
    ====================================================================== */
 { t:'scene', id:'ep_cadastro', chapter:'epilogo', title:'O cadastro',
   bg:'bg_archive_closeup' },

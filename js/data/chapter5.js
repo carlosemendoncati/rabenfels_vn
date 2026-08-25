@@ -10,7 +10,7 @@
    "O nome mais antigo daquele lugar e o unico honesto que esta casa ja
    produziu."
 
-   A TROCA (docs/estrutura_v1.md):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela ganha a camara.
    Entrega a seguranca da cobertura. A partir daqui a casa sabe, e o que
    ela paga nao e ser pega - e ser REGISTRADA.

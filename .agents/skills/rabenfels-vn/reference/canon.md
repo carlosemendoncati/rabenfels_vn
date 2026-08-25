@@ -7,14 +7,14 @@ Isto é atalho, não substituto. Hierarquia completa:
 | Documento | Autoridade |
 |---|---|
 | `docs/documento_mestre_rabenfels.md` | **lore.** Onde divergir, vale ele |
-| `docs/biblia_rabenfels.md` | **execução.** Elenco por cena, arquitetura da informação |
-| `docs/estrutura_v1.md` | **arquitetura.** Atos, trocas, gráfico de fios |
+| `docs/biblia_narrativa_rabenfels.md` | **execução.** Elenco, rotas e arquitetura narrativa |
 
 ## Estrutura meta
 
-O Arquivo Rabenfels existe dentro da ficção. Foi escrito por Antoniette, morta
-antes do fim da obra. É interpretação de alguém com informação incompleta sob
-pressão, não verdade objetiva. O "Compilador" das notas de rodapé é ela.
+O Arquivo Rabenfels existe dentro da ficção. Foi escrito por Antoniette, que
+morre em três leituras e sobrevive em **O Livro-Razão**. É interpretação de
+alguém com informação incompleta sob pressão, não verdade objetiva. O
+"Compilador" das notas de rodapé é ela.
 
 O jogador lê primeiro o Arquivo (Prólogo, Matheo lendo) e depois vive os
 eventos que o produziram.

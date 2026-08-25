@@ -439,7 +439,7 @@ RBF.CHAPTER2 = [
 ]},
 
 /* ----------------------------------------------------------------------
-   A TROCA DO CAPITULO 2 (docs/estrutura_v1.md, secao 1).
+   A TROCA DO CAPITULO 2 (docs/biblia_narrativa_rabenfels.md).
    Ela ganha a lacuna dos dois anos. Entrega a honestidade operacional.
    O preco tem de ficar visivel no fim do capitulo, e nao inferido.
    ---------------------------------------------------------------------- */

@@ -9,7 +9,7 @@
    O PENSAMENTO UNICO (Zinsser, unidade):
    "Ela vai tentar, e sabe a probabilidade."
 
-   A TROCA (docs/estrutura_v1.md):
+   A TROCA (docs/biblia_narrativa_rabenfels.md):
    Ela ganha o plano.
    Entrega A ORDEM. Deixa de ser agente.
 

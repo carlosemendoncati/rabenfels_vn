@@ -7,6 +7,9 @@
 - `entrega_25ago_pronta/`: 56 PNGs restaurados e limpos, sem pixelização
   adicional. É a fonte usada por `tools/cobertura_assets.py`.
 - `entrega_25ago_pixel/`: os mesmos 56 PNGs depois de PixelIt e paletas.
+- `mapas_gerados/`: as sete plantas novas em alta resolução, antes da
+  adaptação e da paleta do jogo. Os prompts usados estão documentados na
+  própria pasta.
 - `assets/cobertura/`: recortes finais usados pelo jogo.
 
 Os intermediários e as auditorias descartadas foram movidos para
@@ -22,19 +25,20 @@ Os intermediários e as auditorias descartadas foram movidos para
    própria para cada personagem.
 5. O runtime continua sendo gerado na ordem: recortar, limpar, pixelizar.
 
-## Pendências de arte
+## Peças complementares
 
-### Relógio de serviço — horário incompatível
+### Relógio de serviço — gerado e integrado
 
 - Uso: corredor de serviço, nos dois atos, junto do ponto `relogio`.
-- O arquivo entregue marca 10:00; o texto canônico marca 11:40.
-- Aparência: o mesmo relógio de serviço já entregue, alterando somente os
-  ponteiros para onze e quarenta.
+- A referência entregue marcava 10:00. A versão integrada preserva o corpo
+  do relógio e altera os ponteiros para o horário canônico de 11:40.
 - Perspectiva: frontal, para parede.
 - Dimensão: 100 × 140 px.
 - Formato: PNG RGBA, fundo transparente real.
 - Animação: nenhuma.
 - Variações/direções: uma única imagem.
+- Fonte limpa: `gerados_limpos_final/relogio_servico_1140.png`.
+- Runtime: `assets/cobertura/props/relogio_servico.png`.
 
 ### Gancho de chaves vazio — entregue e integrado
 
@@ -64,7 +68,7 @@ Os intermediários e as auditorias descartadas foram movidos para
   `assets/cobertura/props/moldura_ocupada.png`; a fase 0 usa
   `moldura_vazia.png`.
 
-### Armário aberto — ainda pendente
+### Armário aberto — gerado e integrado
 
 - Uso: escritório de serviço, fase 1, depois da virada do percurso.
 - Aparência: o mesmo armário de duas portas de `armario_selado.png`, com
@@ -75,7 +79,31 @@ Os intermediários e as auditorias descartadas foram movidos para
 - Formato: PNG RGBA, fundo transparente real.
 - Animação: nenhuma.
 - Variações/direções: uma imagem, sugerida `armario_aberto.png`.
+- Fonte: `armario_aberto.png`.
+- Runtime: `assets/cobertura/props/armario_aberto.png`.
+- O mapa usa o armário selado na fase 0 e este estado aberto na fase 1.
 
-`cama_servico.png`, portas e rastros estão prontos, mas ainda não receberam
-posição ou comportamento documentado no mapa. Eles não foram colocados por
-suposição.
+## Sete mapas novos — gerados e integrados
+
+Os mapas anteriores repetiam a mesma sala vazia e não davam função visual
+aos objetos. Eles foram substituídos por plantas diferentes, ainda na mesma
+perspectiva ortográfica elevada e na paleta quente/desaturada da Cobertura:
+
+| Fonte em `mapas_gerados/` | ID do jogo | Dimensão no runtime | Função |
+|---|---|---:|---|
+| `quarto.png` | `sala_a` | 1301 × 1075 | dormir, escrever e esconder o caderno |
+| `corredor.png` | `corredor` | 1963 × 529 | circulação administrativa e mudança de fase |
+| `escritorio.png` | `sala_d` | 1344 × 932 | conferir livro, gavetas e armário |
+| `escada.png` | `escada` | 903 × 1428 | dois patamares ligados por um único vão |
+| `copa.png` | `sala_b` | 1417 × 932 | mesa de serviço, pia e rota do carrinho |
+| `camara.png` | `sala_c` | 1249 × 994 | aro mecânico central para o cilindro |
+| `salao.png` | `salao` | 1402 × 910 | corredor fatal até a porta do pátio |
+
+`tools/cobertura_assets.py` redimensiona cada fonte para a medida histórica
+do respectivo mapa. Depois, `tools/cobertura_pixel.py` aplica a paleta única
+do mundo. Assim, as coordenadas continuam em pixels de mapa e os originais de
+alta resolução não são degradados por execuções sucessivas.
+
+A cama de serviço, a porta fechada e os quatro rastros receberam posição e
+comportamento. Não resta peça específica pendente para as cenas e mecânicas
+documentadas.

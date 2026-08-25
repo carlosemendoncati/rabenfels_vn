@@ -93,59 +93,60 @@ quarto: {
   nome: 'O quarto do fundo',
   mapa: 'sala_a',
   bgm:  'cob_forro',
-  piso: [80, 190, 1244, 1006],
+  piso: [52, 192, 1248, 1000],
 
   moveis: [
-    { tipo: 'bau',          x: 300,  y: 880 },
-    { tipo: 'escrivaninha', x: 250,  y: 420 },
-    { tipo: 'cadeira',      x: 400,  y: 440 },
-    { tipo: 'estante_a',    x: 980,  y: 380 },
-    { tipo: 'poltrona',     x: 1090, y: 800 },
-    { tipo: 'malas_bau',    x: 520,  y: 940 }
+    { tipo: 'cama_servico', x: 230,  y: 410 },
+    { tipo: 'bau',          x: 250,  y: 640 },
+    { tipo: 'escrivaninha', x: 690,  y: 400 },
+    { tipo: 'cadeira',      x: 690,  y: 525 },
+    { tipo: 'estante_a',    x: 1135, y: 430 },
+    { tipo: 'poltrona',     x: 1040, y: 800 },
+    { tipo: 'malas_bau',    x: 310,  y: 910 }
   ],
 
   saidas: [
-    { x: 1244, y: 462, w: 60, h: 134, para: 'corredor',
+    { x: 1244, y: 500, w: 60, h: 134, para: 'corredor',
       px: 190, py: 250, dir: 'baixo' },
-    { x: 588, y: 1006, w: 100, h: 60, para: 'corredor',
-      px: 690, py: 420, dir: 'cima' }
+    { x: 590, y: 996, w: 112, h: 60, para: 'corredor',
+      px: 690, py: 410, dir: 'cima' }
   ],
 
   pontos: [
-    { id: 'bau', x: 300, y: 880, alto: 76, raio: 84, uma: true,
+    { id: 'bau', x: 250, y: 640, alto: 76, raio: 84, uma: true,
       item: 'caderno', marca: 'cob_caderno',
       tx: ['O forro do ba\u00fa de ferramentas cede com a unha, do lado da dobradi\u00e7a.',
            'O caderno estava onde esteve por quatro anos.',
            'Duzentas e quarenta e uma p\u00e1ginas, sem identifica\u00e7\u00e3o na capa.'],
       depois: ['O forro fecha melhor do que abre.'] },
 
-    { id: 'manual', x: 250, y: 420, alto: 110, raio: 84, uma: true,
+    { id: 'manual', x: 690, y: 400, alto: 110, raio: 84, uma: true,
       marca: 'cob_manual',
       tx: ['O manual da Ordem, encadernado como tratado de contabilidade.',
            'P\u00e1gina onze: prova sem proced\u00eancia n\u00e3o vale em mat\u00e9ria de foro.',
            'Ela leu a linha duas vezes e n\u00e3o precisou da segunda.'],
       depois: ['P\u00e1gina onze.'] },
 
-    { id: 'estante', x: 980, y: 380, alto: 264, raio: 84, uma: true,
+    { id: 'estante', x: 1135, y: 430, alto: 264, raio: 84, uma: true,
       tx: ['Sete volumes. Seis s\u00e3o da casa e um \u00e9 dela.',
            'O que \u00e9 dela n\u00e3o cabe na mala e vai ficar.'],
       depois: ['Vai ficar.'] },
 
-    { id: 'poltrona', x: 1090, y: 800, alto: 172, raio: 84, uma: true,
+    { id: 'poltrona', x: 1040, y: 800, alto: 172, raio: 84, uma: true,
       tx: ['A cadeira que Fenn subiu no terceiro ano, sem ela pedir.'],
       depois: ['A cadeira.'] },
 
-    { id: 'janela', x: 660, y: 200, alto: 20, uma: true, fase: 0,
+    { id: 'janela', x: 690, y: 200, alto: 20, uma: true, fase: 0,
       tx: ['A janela d\u00e1 para o p\u00e1tio dos fundos, e n\u00e3o para o de entrada.',
            'Em cinco anos ela nunca precisou do outro.'],
       depois: ['O p\u00e1tio dos fundos.'] },
 
     /* A mesma janela, depois da virada. */
-    { id: 'janela_2', x: 660, y: 200, alto: 20, fase: 1,
+    { id: 'janela_2', x: 690, y: 200, alto: 20, fase: 1,
       tx: ['A janela d\u00e1 para o p\u00e1tio dos fundos.',
            'H\u00e1 luz no p\u00e1tio dos fundos, e o p\u00e1tio dos fundos n\u00e3o tem lampi\u00e3o.'] },
 
-    { id: 'malas', x: 520, y: 940, alto: 40, uma: true,
+    { id: 'malas', x: 310, y: 910, alto: 40, uma: true,
       tx: ['Duas malas fechadas e o ba\u00fa de ferramentas.',
            'Nove horas.'],
       depois: ['Nove horas.'] }
@@ -162,39 +163,43 @@ corredor: {
   nome: 'Corredor de servi\u00e7o',
   mapa: 'corredor',
   bgm:  'cob_percurso',
-  piso: [82, 96, 1878, 462],
+  piso: [82, 125, 1880, 450],
 
   moveis: [
-    { tipo: 'bancada', x: 980,  y: 210 },
-    { tipo: 'cadeira', x: 1500, y: 250 },
-    { tipo: 'gancho_chaves', x: 980, y: 210, fase: 0, atravessa: true },
-    { tipo: 'gancho_vazio',  x: 980, y: 210, fase: 1, atravessa: true },
-    { tipo: 'moldura_vazia', x: 480, y: 250, fase: 0, atravessa: true },
-    { tipo: 'moldura_ocupada', x: 480, y: 250, fase: 1, atravessa: true }
+    { tipo: 'bancada', x: 780,  y: 235 },
+    { tipo: 'relogio_servico', x: 1280, y: 225, atravessa: true },
+    { tipo: 'porta_fechada', x: 1540, y: 225, atravessa: true },
+    { tipo: 'gancho_chaves', x: 780, y: 210, fase: 0, atravessa: true },
+    { tipo: 'gancho_vazio',  x: 780, y: 210, fase: 1, atravessa: true },
+    { tipo: 'moldura_vazia', x: 300, y: 225, fase: 0, atravessa: true },
+    { tipo: 'moldura_ocupada', x: 300, y: 225, fase: 1, atravessa: true },
+    { tipo: 'rastro_01', x: 1660, y: 370, fase: 1, atravessa: true },
+    { tipo: 'rastro_02', x: 1430, y: 335, fase: 1, atravessa: true },
+    { tipo: 'rastro_03', x: 1190, y: 365, fase: 1, atravessa: true }
   ],
 
   saidas: [
     /* Primeiro ato: as duas portas do quarto dela. */
-    { x: 30,  y: 210, w: 60, h: 88, fase: 0, para: 'quarto',
+    { x: 30,  y: 220, w: 60, h: 88, fase: 0, para: 'quarto',
       px: 1190, py: 528, dir: 'esquerda' },
-    { x: 648, y: 462, w: 66, h: 60, fase: 0, para: 'quarto',
+    { x: 648, y: 446, w: 78, h: 60, fase: 0, para: 'quarto',
       px: 638, py: 950, dir: 'baixo' },
 
     /* Segundo ato: a mesma porta da esquerda passa a dar na escada.
        Ninguem comenta. */
-    { x: 30,  y: 210, w: 60, h: 88, fase: 1, para: 'escada',
+    { x: 30,  y: 220, w: 60, h: 88, fase: 1, para: 'escada',
       px: 260, py: 300, dir: 'baixo' },
-    { x: 648, y: 462, w: 66, h: 60, fase: 1, para: 'quarto',
+    { x: 648, y: 446, w: 78, h: 60, fase: 1, para: 'quarto',
       px: 638, py: 950, dir: 'baixo' },
 
-    { x: 1258, y: 462, w: 66, h: 60, para: 'escritorio',
+    { x: 1258, y: 446, w: 78, h: 60, para: 'escritorio',
       px: 672, py: 790, dir: 'cima' },
 
     /* A copa. Trancada enquanto a casa e administrativa. */
-    { x: 1878, y: 210, w: 60, h: 88, fase: 0, exige: 'nunca',
+    { x: 1878, y: 220, w: 60, h: 88, fase: 0, exige: 'nunca',
       recusa: 'A copa fecha \u00e0s seis esta semana.',
       para: 'corredor', px: 1800, py: 254 },
-    { x: 1878, y: 210, w: 60, h: 88, fase: 1, para: 'copa',
+    { x: 1878, y: 220, w: 60, h: 88, fase: 1, para: 'copa',
       px: 200, py: 460, dir: 'direita' }
   ],
 
@@ -207,43 +212,43 @@ corredor: {
   ],
 
   pontos: [
-    { id: 'gancho', x: 980, y: 210, alto: 112, raio: 84, uma: true, fase: 0,
+    { id: 'gancho', x: 780, y: 210, alto: 112, raio: 84, uma: true, fase: 0,
       item: 'chave_servico',
       tx: ['O gancho das chaves de servi\u00e7o, na bancada do corredor.',
            'Falta a da copa e falta a da adega. Sobra a do escrit\u00f3rio.',
            'Fenn recolhe as chaves \u00e0s dez e nunca recolheu a do escrit\u00f3rio.'],
       depois: ['O gancho, com uma chave a menos do que devia ter.'] },
 
-    { id: 'gancho_2', x: 980, y: 210, alto: 112, raio: 84, fase: 1,
+    { id: 'gancho_2', x: 780, y: 210, alto: 112, raio: 84, fase: 1,
       tx: ['O gancho est\u00e1 vazio.',
            'Nenhuma chave foi recolhida. Elas foram tiradas.'] },
 
-    { id: 'porta_gemeas', x: 1560, y: 110, alto: 40, uma: true, fase: 0,
+    { id: 'porta_gemeas', x: 1540, y: 150, alto: 120, uma: true, fase: 0,
       tx: ['A porta do quarto das g\u00eameas fica no fim do corredor, do lado da escada.',
            'Debaixo dela n\u00e3o passa luz nenhuma, e passava at\u00e9 a semana passada.'],
       depois: ['N\u00e3o passa luz.'] },
 
     /* Nao abre no primeiro ato e nao abre no segundo. */
-    { id: 'porta_gemeas_2', x: 1560, y: 110, alto: 40, fase: 1,
+    { id: 'porta_gemeas_2', x: 1540, y: 150, alto: 120, fase: 1,
       tx: ['A porta do quarto das g\u00eameas continua fechada.',
            'De todas as portas desta casa, \u00e9 a \u00fanica que n\u00e3o mudou nada.'] },
 
-    { id: 'quadro', x: 480, y: 110, alto: 40, uma: true, fase: 0,
+    { id: 'quadro', x: 300, y: 150, alto: 120, uma: true, fase: 0,
       marca: 'cob_moldura',
       tx: ['A moldura vazia continua no mesmo prego.',
            'Algu\u00e9m limpou a moldura esta semana. O prego est\u00e1 limpo tamb\u00e9m.'],
       depois: ['A moldura vazia.'] },
 
-    { id: 'quadro_2', x: 480, y: 110, alto: 40, fase: 1,
+    { id: 'quadro_2', x: 300, y: 150, alto: 120, fase: 1,
       tx: ['A moldura vazia n\u00e3o est\u00e1 mais vazia.',
            'Ela n\u00e3o chegou perto o bastante para ver o que tem dentro.'] },
 
-    { id: 'relogio', x: 1500, y: 250, alto: 134, raio: 84, uma: true, fase: 0,
+    { id: 'relogio', x: 1280, y: 225, alto: 134, raio: 84, uma: true, fase: 0,
       tx: ['O rel\u00f3gio de servi\u00e7o marca onze e quarenta.',
            'Ela conferiu no dela e os dois estavam certos.'],
       depois: ['Onze e quarenta.'] },
 
-    { id: 'relogio_2', x: 1500, y: 250, alto: 134, raio: 84, fase: 1, uma: true,
+    { id: 'relogio_2', x: 1280, y: 225, alto: 134, raio: 84, fase: 1, uma: true,
       marca: 'cob_relogio',
       tx: ['O rel\u00f3gio de servi\u00e7o marca onze e quarenta.',
            'O dela marca duas e dez.'],
@@ -261,67 +266,68 @@ escritorio: {
   nome: 'Escrit\u00f3rio de servi\u00e7o',
   mapa: 'sala_d',
   bgm:  'cob_conferencia',
-  piso: [66, 152, 1272, 838],
+  piso: [45, 190, 1298, 850],
 
   moveis: [
-    { tipo: 'arquivo_gavetas', x: 340,  y: 480 },
-    { tipo: 'escrivaninha',    x: 780,  y: 520 },
-    { tipo: 'cadeira',         x: 790,  y: 650 },
-    { tipo: 'armario_selado',  x: 1130, y: 440 },
-    { tipo: 'estante_b',       x: 200,  y: 330 }
+    { tipo: 'arquivo_gavetas', x: 300,  y: 500 },
+    { tipo: 'escrivaninha',    x: 760,  y: 470 },
+    { tipo: 'cadeira',         x: 760,  y: 610 },
+    { tipo: 'armario_selado',  x: 1170, y: 450, fase: 0 },
+    { tipo: 'armario_aberto',  x: 1170, y: 450, fase: 1 },
+    { tipo: 'estante_b',       x: 150,  y: 400 }
   ],
 
   saidas: [
-    { x: 630, y: 838, w: 86, h: 60, para: 'corredor',
+    { x: 640, y: 846, w: 94, h: 60, para: 'corredor',
       px: 1290, py: 420, dir: 'cima' },
-    { x: 1272, y: 428, w: 60, h: 110, fase: 0, exige: 'nunca',
+    { x: 1294, y: 430, w: 60, h: 120, fase: 0, exige: 'nunca',
       recusa: 'Do outro lado \u00e9 a ala da fam\u00edlia.',
       para: 'escritorio', px: 1200, py: 480 },
-    { x: 1272, y: 428, w: 60, h: 110, fase: 1, exige: 'nunca',
+    { x: 1294, y: 430, w: 60, h: 120, fase: 1, exige: 'nunca',
       recusa: 'Do outro lado daquela porta, alguma coisa est\u00e1 encostada nela.',
       para: 'escritorio', px: 1200, py: 480 }
   ],
 
   pontos: [
-    { id: 'livro_saida', x: 780, y: 520, alto: 110, raio: 84, uma: true,
+    { id: 'livro_saida', x: 760, y: 470, alto: 110, raio: 84, uma: true,
       marca: 'cob_livro', sfx: 'sfx_cob_anota',
       tx: ['O livro de entrada e sa\u00edda de correspond\u00eancia, aberto em julho.',
            'Toda linha tem data, destinat\u00e1rio e um visto na margem.',
            'O visto \u00e9 sempre da mesma letra, e a letra n\u00e3o \u00e9 de nenhum escritur\u00e1rio.'],
       depois: ['Toda linha tem visto na margem.'] },
 
-    { id: 'gaveta_maio', x: 290, y: 480, alto: 146, raio: 76, uma: true,
+    { id: 'gaveta_maio', x: 250, y: 500, alto: 146, raio: 46, uma: true,
       marca: 'cob_maio',
       tx: ['Maio. Uma carta da casa para Lervel, com pedido de confer\u00eancia de refer\u00eancias.',
            'Serafina disse isso na cara dela em maio, e ela anotou e seguiu.',
            'A resposta de Lervel entrou em junho e est\u00e1 lan\u00e7ada. O envelope n\u00e3o est\u00e1.'],
       depois: ['Maio, para Lervel.'] },
 
-    { id: 'gaveta_agosto', x: 390, y: 480, alto: 146, raio: 76, uma: true,
+    { id: 'gaveta_agosto', x: 300, y: 500, alto: 146, raio: 46, uma: true,
       marca: 'cob_agosto',
       tx: ['Agosto do ano tr\u00eas. O relat\u00f3rio saiu daqui num envelope selado por ela mesma.',
            'Hora, local e testemunha direta, na \u00edntegra, porque relato incompleto n\u00e3o serve.',
            'Est\u00e1 lan\u00e7ado no livro com visto na margem.'],
       depois: ['Agosto do ano tr\u00eas.'] },
 
-    { id: 'gaveta_fonte', x: 490, y: 480, alto: 146, raio: 76, uma: true,
+    { id: 'gaveta_fonte', x: 350, y: 500, alto: 146, raio: 46, uma: true,
       marca: 'cob_fonte', sfx: 'sfx_cob_achado',
       tx: ['Outubro do ano quatro. O nome da antecessora, remetido com identifica\u00e7\u00e3o da fonte.',
            'A fonte \u00e9 um empregado vivo desta casa.',
            'Visto na margem, mesma letra.'],
       depois: ['Com a fonte identificada.'] },
 
-    { id: 'armario', x: 1130, y: 440, alto: 284, raio: 84, fase: 0,
+    { id: 'armario', x: 1170, y: 450, alto: 284, raio: 84, fase: 0,
       tx: ['O arm\u00e1rio da casa. Lacre de cera inteiro, e o lacre \u00e9 de hoje.'] },
 
-    { id: 'armario_2', x: 1130, y: 440, alto: 284, raio: 84, fase: 1, uma: true,
+    { id: 'armario_2', x: 1170, y: 450, alto: 284, raio: 84, fase: 1, uma: true,
       marca: 'cob_armario',
       tx: ['O lacre do arm\u00e1rio est\u00e1 rompido e as duas portas est\u00e3o abertas.',
            'Dentro h\u00e1 espa\u00e7o para quatro pastas e h\u00e1 quatro marcas de poeira.',
            'Tr\u00eas pastas est\u00e3o no ch\u00e3o. A quarta n\u00e3o est\u00e1 em lugar nenhum.'],
       depois: ['Tr\u00eas no ch\u00e3o.'] },
 
-    { id: 'estante_b', x: 200, y: 330, alto: 264, raio: 84, uma: true,
+    { id: 'estante_b', x: 150, y: 400, alto: 264, raio: 84, uma: true,
       tx: ['Livros-caixa dos cinco anos, de p\u00e9, por ano.',
            'O do primeiro ano tem uma lacuna de tr\u00eas meses que ningu\u00e9m nunca explicou.'],
       depois: ['Cinco anos, de p\u00e9.'] },
@@ -340,7 +346,7 @@ escritorio: {
       Nao dizer de quem e a letra. Quem leu o Capitulo 1 sabe quem le
       tudo o que entra e sai desta casa.
     */
-    { id: 'fechar', x: 790, y: 660, alto: 134, raio: 84, exige: 'caderno',
+    { id: 'fechar', x: 760, y: 620, alto: 134, raio: 84, exige: 'caderno',
       recusa: 'Sem o caderno n\u00e3o d\u00e1 para conferir nada contra nada.',
       viraFase: 1, viraBgm: 'cob_perto', marca: 'cob_linha',
       tx: ['Ela sentou, p\u00f4s o caderno ao lado do livro e conferiu as duas colunas, linha a linha.',
@@ -362,17 +368,21 @@ escada: {
   nome: 'A escada de servi\u00e7o',
   mapa: 'escada',
   bgm:  'cob_perto',
-  piso: [52, 68, 874, 1348],
+  piso: [40, 150, 870, 1360],
 
   paredes: [
-    { x: 52,  y: 604, w: 287, h: 34 },
-    { x: 576, y: 604, w: 298, h: 34 }
+    { x: 40,  y: 640, w: 280, h: 370 },
+    { x: 580, y: 640, w: 290, h: 370 }
+  ],
+
+  moveis: [
+    { tipo: 'rastro_04', x: 680, y: 1160, atravessa: true }
   ],
 
   saidas: [
-    { x: 339, y: 28, w: 237, h: 60, para: 'corredor',
+    { x: 330, y: 120, w: 250, h: 70, para: 'corredor',
       px: 200, py: 300, dir: 'direita' },
-    { x: 322, y: 1348, w: 242, h: 60, para: 'salao',
+    { x: 320, y: 1352, w: 250, h: 60, para: 'salao',
       px: 160, py: 470, dir: 'direita' }
   ],
 
@@ -405,45 +415,45 @@ copa: {
   nome: 'A copa',
   mapa: 'sala_b',
   bgm:  'cob_respiro',
-  piso: [66, 200, 1400, 850],
+  piso: [40, 210, 1375, 835],
 
   moveis: [
-    { tipo: 'mesa_longa', x: 700,  y: 520 },
-    { tipo: 'prataria_empilhada', x: 700, y: 520, atravessa: true },
-    { tipo: 'cadeira',    x: 540,  y: 640 },
-    { tipo: 'cadeira',    x: 880,  y: 640 },
-    { tipo: 'pia',        x: 1180, y: 400 },
-    { tipo: 'carrinho',   x: 300,  y: 720 }
+    { tipo: 'mesa_longa', x: 740,  y: 500 },
+    { tipo: 'prataria_empilhada', x: 740, y: 500, atravessa: true },
+    { tipo: 'cadeira',    x: 560,  y: 630 },
+    { tipo: 'cadeira',    x: 920,  y: 630 },
+    { tipo: 'pia',        x: 1190, y: 430 },
+    { tipo: 'carrinho',   x: 260,  y: 650 }
   ],
 
   saidas: [
-    { x: 20,  y: 416, w: 60, h: 90, para: 'corredor',
+    { x: 20,  y: 410, w: 60, h: 100, para: 'corredor',
       px: 1800, py: 254, dir: 'esquerda' },
-    { x: 672, y: 850, w: 66, h: 60, para: 'camara',
+    { x: 680, y: 831, w: 78, h: 60, para: 'camara',
       px: 620, py: 230, dir: 'baixo' }
   ],
 
   pontos: [
-    { id: 'mesa', x: 700, y: 520, alto: 122, raio: 84, uma: true,
+    { id: 'mesa', x: 740, y: 500, alto: 122, raio: 84, uma: true,
       marca: 'cob_copa',
       tx: ['A prataria est\u00e1 contada e empilhada na ordem em que Dara conta.',
            'Est\u00e1 contada at\u00e9 o fim. Dara conta at\u00e9 o fim toda noite h\u00e1 dezenove anos.',
            'A caneca dela est\u00e1 na mesa, cheia, e a mesa est\u00e1 fria.'],
       depois: ['Cheia, e fria.'] },
 
-    { id: 'pia', x: 1180, y: 400, alto: 142, raio: 84, uma: true,
+    { id: 'pia', x: 1190, y: 430, alto: 142, raio: 84, uma: true,
       tx: ['A torneira est\u00e1 aberta no fio mais fino que uma torneira consegue.',
            'Ela fechou. Meia volta e fechou.'],
       depois: ['Fechada.'] },
 
-    { id: 'carrinho', x: 300, y: 720, alto: 126, raio: 84, uma: true,
+    { id: 'carrinho', x: 260, y: 650, alto: 126, raio: 84, uma: true,
       marca: 'cob_carrinho',
       tx: ['Um carrinho de servi\u00e7o que n\u00e3o \u00e9 da copa.',
            'A copa tem tr\u00eas carrinhos de madeira, e este \u00e9 de metal.',
            'A bandeja de cima est\u00e1 limpa. A de baixo foi limpa.'],
       depois: ['A de baixo foi limpa.'] },
 
-    { id: 'porta_baixo', x: 705, y: 820, alto: 40,
+    { id: 'porta_baixo', x: 720, y: 810, alto: 40,
       tx: ['A porta do fundo da copa d\u00e1 na despensa.',
            'Dava.'] }
   ]
@@ -459,14 +469,14 @@ camara: {
   nome: '\u2014',
   mapa: 'sala_c',
   bgm:  'cob_forro_ruim',
-  piso: [24, 150, 1226, 928],
+  piso: [40, 180, 1210, 900],
 
   moveis: [
-    { tipo: 'cilindro',       x: 620, y: 580 },
-    { tipo: 'mesa_contencao', x: 300, y: 680 },
-    { tipo: 'bancada',        x: 960, y: 500 },
-    { tipo: 'carrinho',       x: 900, y: 700 },
-    { tipo: 'pia',            x: 160, y: 420 }
+    { tipo: 'cilindro',       x: 620,  y: 470 },
+    { tipo: 'mesa_contencao', x: 330,  y: 610 },
+    { tipo: 'bancada',        x: 1010, y: 400 },
+    { tipo: 'carrinho',       x: 1000, y: 650 },
+    { tipo: 'pia',            x: 1110, y: 760 }
   ],
 
   /* A unica sala com luz propria. Nao treme, porque nao e chama.
@@ -481,7 +491,7 @@ camara: {
        com forca alta ele estoura em branco e a menina desaparece
        dentro do proprio brilho. O trabalho desta luz e so tirar ela
        do preto. */
-    { x: 620, y: 500, raio: 110, queda: 260, forca: 0.20,
+    { x: 620, y: 390, raio: 110, queda: 260, forca: 0.20,
       cor: '150,40,44', tinta: 0.07 }
   ],
 
@@ -490,20 +500,20 @@ camara: {
        vidro da arte e chapado e esconderia quem estivesse atras. O
        `desloca` sobe o desenho para dentro do tubo sem mexer nessa
        ordem, e sem sombra, porque ela nao esta no chao. */
-    { ch: 'klara_casulo', x: 620, y: 600, dir: 'baixo', parado: true,
+    { ch: 'klara_casulo', x: 620, y: 490, dir: 'baixo', parado: true,
       desloca: -96, semSombra: true }
   ],
 
   saidas: [
-    { x: 562, y: 928, w: 120, h: 60, para: 'copa',
+    { x: 565, y: 896, w: 120, h: 60, para: 'copa',
       px: 700, py: 790, dir: 'cima' },
-    { x: 1226, y: 415, w: 60, h: 155, exige: 'nunca',
+    { x: 1206, y: 410, w: 60, h: 160, exige: 'nunca',
       recusa: 'Aquela porta d\u00e1 para dentro.',
       para: 'camara', px: 1160, py: 490 }
   ],
 
   pontos: [
-    { id: 'cilindro', x: 620, y: 580, alto: 190, raio: 96, uma: true,
+    { id: 'cilindro', x: 620, y: 470, alto: 190, raio: 96, uma: true,
       marca: 'cob_camara', sfx: 'sfx_cob_notada',
       tx: ['O cilindro tem dois metros e quarenta e est\u00e1 cheio at\u00e9 a marca de cima.',
            'Dentro dele h\u00e1 uma menina de doze anos.',
@@ -512,21 +522,21 @@ camara: {
            'Olhou para a porta por onde Antoniette tinha entrado, e Antoniette n\u00e3o virou.'],
       depois: ['Ela n\u00e3o virou.'] },
 
-    { id: 'mesa_contencao', x: 300, y: 680, alto: 116, raio: 84, uma: true,
+    { id: 'mesa_contencao', x: 330, y: 610, alto: 116, raio: 84, uma: true,
       marca: 'cob_mesa',
       tx: ['Uma mesa com correias em quatro pontos e uma manivela.',
            'As correias do tornozelo est\u00e3o na quarta casa e as do pulso na primeira.',
            'Quem ajustou isso ajustou para algu\u00e9m que ainda ia crescer.'],
       depois: ['Quarta casa e primeira.'] },
 
-    { id: 'bancada', x: 960, y: 500, alto: 112, raio: 84, uma: true,
+    { id: 'bancada', x: 1010, y: 400, alto: 112, raio: 84, uma: true,
       marca: 'cob_laudo',
       tx: ['Formul\u00e1rios em branco, empilhados, com o cabe\u00e7alho j\u00e1 impresso.',
            'O campo do motivo tem tr\u00eas op\u00e7\u00f5es marcadas com quadradinho.',
            'A terceira \u00e9 "motivo de sa\u00fade".'],
       depois: ['A terceira.'] },
 
-    { id: 'pia_camara', x: 160, y: 420, alto: 142, raio: 84, uma: true,
+    { id: 'pia_camara', x: 1110, y: 760, alto: 142, raio: 84, uma: true,
       tx: ['A pia tem ralo largo e o ralo est\u00e1 limpo.',
            'Nada nesta sala est\u00e1 sujo. \u00c9 a sala mais limpa da casa.'],
       depois: ['A mais limpa da casa.'] }
@@ -544,15 +554,15 @@ salao: {
   nome: 'O sal\u00e3o',
   mapa: 'salao',
   bgm:  'cob_ultima',
-  piso: [66, 200, 1342, 810],
+  piso: [40, 180, 1360, 825],
 
   moveis: [
-    { tipo: 'poltrona',   x: 260,  y: 720 },
-    { tipo: 'mesa_longa', x: 1060, y: 440 },
+    { tipo: 'poltrona',   x: 280,  y: 650 },
+    { tipo: 'mesa_longa', x: 1090, y: 470 },
     { tipo: 'retrato_governanta_virado',
       tipoDepois: 'retrato_governanta_revelado', marca: 'cob_retrato',
-      x: 1060, y: 440, atravessa: true },
-    { tipo: 'cadeira',    x: 1060, y: 580 }
+      x: 1090, y: 470, atravessa: true },
+    { tipo: 'cadeira',    x: 1090, y: 630 }
   ],
 
   gente: [
@@ -581,7 +591,7 @@ salao: {
            'Na segunda vez que olhou, a mulher estava tr\u00eas passos mais perto e continuava sem se mexer.',
            'Antoniette come\u00e7ou a terceira contagem.'] },
 
-    { id: 'retrato', x: 1060, y: 440, alto: 122, raio: 84, uma: true,
+    { id: 'retrato', x: 1090, y: 470, alto: 122, raio: 84, uma: true,
       marca: 'cob_retrato',
       tx: ['Na mesa comprida do sal\u00e3o h\u00e1 um retrato virado para baixo.',
            'Ela virou. \u00c9 uma mulher de uniforme de governanta, e a grafia embaixo n\u00e3o \u00e9 um nome.',
@@ -603,11 +613,11 @@ RBF.COB_SEGMENTOS = {
 cob10_inventario: {
   entrada: 'quarto',
   jogador: 'antoniette',
-  x: 420, y: 760, dir: 'baixo',
+  x: 560, y: 760, dir: 'baixo',
 
   /* Para onde ela volta quando e alcancada. Nao ha morte no percurso: o
      preco de ser vista e o proveito da noite, e nao a leitura. */
-  refugio: { sala: 'quarto', x: 420, y: 760, dir: 'baixo' },
+  refugio: { sala: 'quarto', x: 560, y: 760, dir: 'baixo' },
 
   /* Nome e icone de cada item na bolsa. O icone e um id da grade
      declarada em RBF.COBERTURA.icons - a ordem de leitura da folha. */

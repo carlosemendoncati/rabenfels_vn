@@ -18,37 +18,22 @@ correspondente de `js/config.js`.
 | Sons de interface | os 7, sintetizados em `tools/make_sfx.py` |
 | Cursor | SVG embutido em `css/tokens.css`, três estados |
 | Sigilo, selo e arco | SVG embutido em `index.html` |
-| Cobertura | baú fechado, gancho com chaves/vazio, moldura vazia/ocupada, portas, cama, rastros, retrato da governanta, personagens e mapas |
+| Cobertura | baú fechado, armário selado/aberto, relógio às 11h40, gancho com chaves/vazio, moldura vazia/ocupada, portas, cama, rastros, retrato da governanta, personagens e mapas |
 
 ---
 
-## A Cobertura — 2 peças ainda pendentes
+## A Cobertura — peças específicas concluídas
 
-### Armário aberto
+O armário aberto e o relógio de serviço às 11h40 foram gerados a partir das
+peças existentes, limpos, pixelizados e integrados ao mapa. O escritório
+troca de `armario_selado` para `armario_aberto` na fase 1; o relógio aparece
+nos dois atos junto da interação correspondente.
 
-- Uso: escritório de serviço, fase 1, depois de Antoniette encontrar a linha.
-- Aparência: o mesmo armário de duas portas de `armario_selado.png`, com o
-  lacre rompido, portas abertas, três pastas no chão e a marca limpa de uma
-  quarta pasta ausente.
-- Perspectiva: frontal levemente elevada, igual à peça fechada.
-- Dimensão: até **180×280 px**, preservando base e escala.
-- Formato: **PNG RGBA**, com fundo transparente real.
-- Animação: nenhuma.
-- Direções/variações: uma imagem, nome sugerido `armario_aberto.png`.
-
-### Relógio de serviço marcando 11:40
-
-- Uso: corredor de serviço, nos dois atos, junto da interação do relógio.
-- Aparência: igual ao relógio já entregue, mudando somente os ponteiros. A
-  versão disponível marca 10:00, enquanto a cena registra 11:40.
-- Perspectiva: frontal, para parede.
-- Dimensão: **100×140 px**.
-- Formato: **PNG RGBA**, com fundo transparente real.
-- Animação: nenhuma.
-- Direções/variações: uma imagem.
-
-Essas ausências não bloqueiam o percurso: os estados atuais continuam com
-fallback. Não foi criada arte genérica para fingir que as peças existem.
+Não há peça específica pendente para as cenas e mecânicas atualmente
+documentadas da rota. `cama_servico.png`, `porta_fechada.png` e os quatro
+rastros foram integrados aos sete mapas novos, com posição e comportamento
+definidos em `js/data/cob_mapas.js` — fase e colisão conforme a função de
+cada peça.
 
 ---
 

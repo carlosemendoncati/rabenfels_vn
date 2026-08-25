@@ -704,7 +704,8 @@ def gallery_checks(arc_keys):
         check('arc:' + key in gallery_needs,
               'cartao do Arquivo tem item de galeria', 'arc:' + key)
     for bg in sorted(CONFIG['BACKGROUNDS']):
-        if bg == 'bg_black':
+        # Superficies tecnicas, nao cenarios narrativos da galeria.
+        if bg in ('bg_black', 'bg_menu_archive'):
             continue
         if bg not in used_bg:
             warn('background sem item de galeria', bg)
