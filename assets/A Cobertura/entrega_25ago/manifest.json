@@ -1,0 +1,53 @@
+{
+  "project": "Arquivo Rabenfels",
+  "package": "assets_faltantes_rota_rpg",
+  "version": 1,
+  "format": "PNG RGBA",
+  "background": "transparent",
+  "assets": {
+    "antoniette_candle": {
+      "file": "antoniette_vela_spritesheet.png",
+      "size": [1055, 1491],
+      "layout": [3, 4],
+      "rows": ["front", "left", "right", "back"]
+    },
+    "antoniette_portrait": {
+      "file": "antoniette_retrato_pixel.png",
+      "size": [1254, 1254]
+    },
+    "fenn": {
+      "file": "fenn_spritesheet_3x4.png",
+      "size": [1055, 1491],
+      "layout": [3, 4],
+      "rows": ["front", "left", "right", "back"]
+    },
+    "dara": {
+      "file": "dara_spritesheet_3x4.png",
+      "size": [1055, 1491],
+      "layout": [3, 4],
+      "rows": ["front", "left", "right", "back"]
+    },
+    "service_bed": {"file": "cama_servico.png", "size": [328, 180]},
+    "luggage_tool_chest": {"file": "malas_bau_ferramentas.png", "size": [120, 90]},
+    "empty_frame": {"file": "moldura_vazia.png", "size": [120, 150]},
+    "key_rack": {"file": "gancho_chaves.png", "size": [90, 70], "hooks": 6, "keys": 1},
+    "service_clock": {"file": "relogio_servico.png", "size": [100, 140], "time": "10:00"},
+    "stacked_silver": {"file": "prataria_empilhada.png", "size": [140, 60]},
+    "trail_variants": {
+      "files": ["rastro_01.png", "rastro_02.png", "rastro_03.png", "rastro_04.png"],
+      "size": [120, 120]
+    },
+    "door": {
+      "sheet": "porta_2_estados.png",
+      "sheet_size": [360, 240],
+      "frame_size": [180, 240],
+      "frames": ["porta_fechada.png", "porta_aberta.png"]
+    },
+    "previous_governess_portrait": {
+      "sheet": "retrato_governanta_2_estados.png",
+      "sheet_size": [220, 90],
+      "frame_size": [110, 90],
+      "frames": ["retrato_governanta_virado.png", "retrato_governanta_revelado.png"]
+    }
+  }
+}
