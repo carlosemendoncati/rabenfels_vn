@@ -22,6 +22,7 @@ RBF.Menu = (function () {
   var archiveOpen = false;   /* o portao ja foi aberto nesta sessao */
 
   function grab() {
+    el.conta    = document.getElementById('rf-conta');
     UI = RBF.UI;
 
     el.gate       = document.getElementById('rf-gate');
@@ -1096,52 +1097,160 @@ RBF.Menu = (function () {
      CAPITULOS
      ====================================================================== */
 
+  /* ======================================================================
+     CAPITULOS
+
+     Agrupado por rota desde que a obra passou a se partir no fim do
+     Capitulo 9. Antes era uma lista corrida, e uma lista corrida com
+     quatro Capitulos 10 diferentes nao diz nada a ninguem.
+
+     O trecho compartilhado vem primeiro, sem cabecalho. Depois vem uma
+     faixa por rota, com o nome, a condicao em linguagem de eixo e a
+     contagem de quantos capitulos daquele caminho o jogador alcancou.
+
+     REGRA DE LIBERACAO INALTERADA: capitulo nao alcancado continua
+     travado e continua visivel. A faixa da rota aparece sempre - saber
+     que existe um caminho que voce nao percorreu e o ponto.
+     ====================================================================== */
+
+  function cartaoCapitulo(ch, progress) {
+    var reached = progress.chaptersReached.indexOf(ch.id) !== -1;
+
+    var card = UI.el('button', 'rbf-chapter' + (reached ? '' : ' locked'));
+    card.type = 'button';
+    card.appendChild(UI.el('span', 'rbf-chapter-label', ch.label));
+    card.appendChild(UI.el('span', 'rbf-chapter-title',
+      reached ? ch.title : 'ainda n\u00e3o alcan\u00e7ado'));
+
+    if (reached) {
+      card.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        UI.confirm({
+          title: 'Come\u00e7ar em ' + ch.label + '?',
+          message: 'A partida come\u00e7a do in\u00edcio do cap\u00edtulo, sem as escolhas ' +
+                   'anteriores. Seus registros continuam guardados.',
+          confirmLabel: 'Come\u00e7ar',
+          onConfirm: function () {
+            UI.closePanel();
+            sweep(function () {
+              hideMenu();
+              RBF.Engine.startChapter(ch.id);
+            });
+          }
+        });
+      });
+    } else {
+      card.setAttribute('aria-disabled', 'true');
+    }
+    return card;
+  }
+
+  /* A condicao de uma rota em linguagem de eixo, lida de RBF.ROTAS.
+     Nunca transcrita: se o limiar mudar no manifesto, muda aqui. */
+  function condicaoDaRota(rt) {
+    if (!rt.when) { return 'quando nenhum desvio ocorre'; }
+    if (rt.when.flag) { return 'por escolha declarada, n\u00e3o por rota'; }
+    var partes = [];
+    var eixo;
+    for (eixo in (rt.when.min || {})) {
+      var dmin = RBF.Routes.defById(eixo);
+      if (dmin) { partes.push(dmin.label + ' alta'); }
+    }
+    for (eixo in (rt.when.max || {})) {
+      var dmax = RBF.Routes.defById(eixo);
+      if (dmax) { partes.push(dmax.label + ' baixa'); }
+    }
+    return partes.length ? partes.join(' e ') : 'sem condi\u00e7\u00e3o';
+  }
+
   function openChapterSelect() {
     var fromTitle = RBF.State.is('title');
     RBF.State.push('load');
 
-    var body = UI.el('div', 'rbf-chapters');
+    var body = UI.el('div', 'rbf-chapters-wrap');
     var progress = RBF.Saves.readProgress();
+    var caps = RBF.CHAPTERS || [];
+    var i;
 
-    for (var i = 0; i < RBF.CHAPTERS.length; i++) {
-      (function (ch) {
-        var reached = progress.chaptersReached.indexOf(ch.id) !== -1;
+    /* ---- o tronco: tudo o que nao tem rota, menos o Epilogo ---- */
+    var tronco = UI.el('div', 'rbf-chapters');
+    for (i = 0; i < caps.length; i++) {
+      if (caps[i].rota || caps[i].id === 'epilogo') { continue; }
+      tronco.appendChild(cartaoCapitulo(caps[i], progress));
+    }
+    body.appendChild(tronco);
 
-        var card = UI.el('button', 'rbf-chapter' + (reached ? '' : ' locked'));
-        card.type = 'button';
-        card.appendChild(UI.el('span', 'rbf-chapter-label', ch.label));
-        card.appendChild(UI.el('span', 'rbf-chapter-title',
-          reached ? ch.title : 'ainda n\u00e3o alcan\u00e7ado'));
+    /* ---- uma faixa por rota ---- */
+    var rotas = RBF.ROTAS || [];
+    if (rotas.length) {
+      var aviso = UI.el('div', 'rbf-rotas__aviso');
+      aviso.appendChild(UI.el('p', 'rbf-rotas__avisoTx',
+        'A partir daqui a obra se parte. O n\u00famero do cap\u00edtulo se repete: ' +
+        'existe um Cap\u00edtulo 10 em cada caminho, e eles n\u00e3o t\u00eam nada em comum.'));
+      body.appendChild(aviso);
+    }
 
-        if (reached) {
-          card.addEventListener('click', function (ev) {
-            ev.stopPropagation();
-            UI.confirm({
-              title: 'Come\u00e7ar em ' + ch.label + '?',
-              message: 'A partida come\u00e7a do in\u00edcio do cap\u00edtulo, sem as escolhas ' +
-                       'anteriores. Seus registros continuam guardados.',
-              confirmLabel: 'Come\u00e7ar',
-              onConfirm: function () {
-                UI.closePanel();
-                sweep(function () {
-                  hideMenu();
-                  RBF.Engine.startChapter(ch.id);
-                });
-              }
-            });
-          });
-        } else {
-          card.setAttribute('aria-disabled', 'true');
+    for (i = 0; i < rotas.length; i++) {
+      (function (rt) {
+        var abertos = 0;
+        for (var k = 0; k < rt.chapters.length; k++) {
+          if (progress.chaptersReached.indexOf(rt.chapters[k]) !== -1) { abertos += 1; }
         }
-        body.appendChild(card);
-      })(RBF.CHAPTERS[i]);
+
+        var faixa = UI.el('section', 'rbf-rota' + (abertos ? '' : ' is-intocada'));
+
+        var cab = UI.el('div', 'rbf-rota__cab');
+        cab.appendChild(UI.el('h3', 'rbf-rota__nome', rt.label));
+        cab.appendChild(UI.el('span', 'rbf-rota__cond', condicaoDaRota(rt)));
+        cab.appendChild(UI.el('span', 'rbf-rota__conta',
+          abertos + '/' + rt.chapters.length));
+        faixa.appendChild(cab);
+
+        /* A nota da rota so aparece depois de ela ter sido percorrida
+           ate o fim: antes disso ela entrega o desfecho. */
+        var vistos = (RBF.Saves.endingsSeen && RBF.Saves.endingsSeen()) || [];
+        if (vistos.indexOf(rt.ending) !== -1 && rt.nota) {
+          faixa.appendChild(UI.el('p', 'rbf-rota__nota', rt.nota));
+        } else {
+          faixa.appendChild(UI.el('p', 'rbf-rota__nota rbf-rota__nota--lacre',
+            '[ caminho n\u00e3o percorrido at\u00e9 o fim ]'));
+        }
+
+        var lista = UI.el('div', 'rbf-chapters');
+        for (var j = 0; j < rt.chapters.length; j++) {
+          for (var c = 0; c < caps.length; c++) {
+            if (caps[c].id === rt.chapters[j]) {
+              lista.appendChild(cartaoCapitulo(caps[c], progress));
+              break;
+            }
+          }
+        }
+        faixa.appendChild(lista);
+        body.appendChild(faixa);
+      })(rotas[i]);
+    }
+
+    /* ---- o Epilogo volta a ser compartilhado ---- */
+    for (i = 0; i < caps.length; i++) {
+      if (caps[i].id !== 'epilogo') { continue; }
+      var fecho = UI.el('div', 'rbf-chapters rbf-chapters--fecho');
+      fecho.appendChild(cartaoCapitulo(caps[i], progress));
+      body.appendChild(fecho);
+    }
+
+    var totalCaps = caps.length;
+    var abertosTotal = 0;
+    for (i = 0; i < caps.length; i++) {
+      if (progress.chaptersReached.indexOf(caps[i].id) !== -1) { abertosTotal += 1; }
     }
 
     UI.panel({
       name:  'chapters',
       title: 'Cap\u00edtulos',
-      subtitle: 'VOLUMES LIBERADOS',
+      subtitle: abertosTotal + ' de ' + totalCaps + ' alcan\u00e7ados \u00b7 ' +
+                rotas.length + ' caminhos',
       body:  body,
+      wide:  true,
       actions: [
         { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
       ],
@@ -1353,9 +1462,6 @@ RBF.Menu = (function () {
      que nao corresponde ao que jogou.
      ====================================================================== */
 
-  /* Aba visivel do painel 'A Conta'. Sobrevive a fechar e reabrir. */
-  var contaAba = 'paginas';
-
   /* Corpo da aba das quatro paginas. Devolve o no; nao abre painel. */
   function corpoQuatroPaginas() {
     var doc = RBF.Paginas && RBF.Paginas.build();
@@ -1479,75 +1585,452 @@ RBF.Menu = (function () {
     return body;
   }
 
+
   /* ======================================================================
-     A CONTA - um painel, duas abas.
+     A ARVORE
 
-     Eram dois registros de menu separados. Somados aos oito que ja
-     existiam, o menu deixou de caber na tela em telefone e em janela
-     baixa: o jogador passou a rolar uma lista que sempre coube inteira.
+     O jogador terminava a obra sem ter como comparar o que escolheu com
+     o que existia para escolher. As rotas apareciam como tres mostradores
+     no HUD, sem numero e sem causa, e o efeito de uma escolha so aparecia
+     na cena - onde, de proposito, nada e explicado.
 
-     O nome e o da obra: tudo aqui e alguem contando. Noventa e tres
-     dias, duzentas e oitenta e sete paginas, faltam quatro.
+     Aqui as dez decisoes aparecem inteiras, com os tres ramos de cada uma
+     e o delta de rota LIDO DA PROPRIA OPCAO, e os nove finais aparecem na
+     ordem em que o jogo os avalia.
+
+     A regra de liberacao e a mesma do resto do extra e nao afrouxa aqui:
+     o enunciado e as opcoes aparecem quando o capitulo foi alcancado - o
+     jogador ja leu aquele texto na tela. O delta e a consequencia so
+     aparecem no ramo que ele percorreu de fato. O que falta aparece como
+     lacuna, e nao some.
      ====================================================================== */
 
-  function openConta() {
-    if (!RBF.Paginas || !RBF.Paginas.available()) { return; }
 
-    var fromTitle = RBF.State.is('title');
-    RBF.State.push('pages');
+  /* ----------------------------------------------------------------------
+     O MAPA
 
+     Desenha o grafo que RBF.Arvore.grafo() calculou. Coordenada nenhuma
+     e decidida aqui: este bloco so vira no em <rect> e aresta em <path>.
+
+     O SVG tem viewBox e largura minima. Em monitor cabe inteiro; em
+     telefone o quadro rola de lado, que e como se le um fluxograma
+     grande em tela pequena. A lista detalhada continua embaixo, e e ela
+     que serve para LER - o mapa serve para ver a forma.
+
+     Clicar num no leva a linha correspondente da lista.
+     ---------------------------------------------------------------------- */
+
+  var NS_SVG = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs) {
+    var n = document.createElementNS(NS_SVG, tag);
+    for (var k in attrs) {
+      if (Object.prototype.hasOwnProperty.call(attrs, k)) {
+        n.setAttribute(k, String(attrs[k]));
+      }
+    }
+    return n;
+  }
+
+  function svgTexto(x, y, classe, txt) {
+    var t = svgEl('text', { x: x, y: y, class: classe });
+    t.textContent = txt || '';
+    return t;
+  }
+
+  function desenharMapa(g, aoClicar) {
+    var quadro = UI.el('div', 'rbf-arv__mapa');
+
+    var svg = svgEl('svg', {
+      viewBox: '0 0 ' + g.largura + ' ' + g.altura,
+      class:   'rbf-arv__svg',
+      role:    'img',
+      'aria-label':
+        'Mapa das dez decisoes e das nove leituras. A lista completa vem logo abaixo.'
+    });
+
+    /* Arestas antes dos nos, para a caixa cobrir a ponta da linha. */
+    var camadaE = svgEl('g', { class: 'rbf-arv__arestas' });
+    for (var i = 0; i < g.arestas.length; i++) {
+      var a = g.arestas[i];
+      camadaE.appendChild(svgEl('path', {
+        d: a.d,
+        class: 'rbf-e rbf-e--' + a.tipo + (a.ativo ? ' is-ativo' : '')
+      }));
+    }
+    svg.appendChild(camadaE);
+
+    var camadaN = svgEl('g', { class: 'rbf-arv__nos' });
+
+    for (var n = 0; n < g.nos.length; n++) {
+      (function (no) {
+        var cls = 'rbf-n rbf-n--' + no.tipo + ' is-' + no.estado;
+        if (no.rota) { cls += ' rbf-n--rota-' + no.rota; }
+
+        var grupo = svgEl('g', { class: cls });
+
+        grupo.appendChild(svgEl('rect', {
+          x: no.x, y: no.y, width: no.w, height: no.h, rx: 2, class: 'rbf-n__caixa'
+        }));
+
+        if (no.tipo === 'cap') {
+          grupo.appendChild(svgTexto(no.cx, no.y + 20, 'rbf-n__tit', no.rotulo));
+          if (no.sub) { grupo.appendChild(svgTexto(no.cx, no.y + 37, 'rbf-n__sub', no.sub)); }
+
+        } else if (no.tipo === 'marco') {
+          grupo.appendChild(svgTexto(no.cx, no.y + 21, 'rbf-n__marco', no.rotulo));
+          grupo.appendChild(svgTexto(no.cx, no.y + 37, 'rbf-n__sub', no.sub));
+
+        } else if (no.tipo === 'rot') {
+          grupo.appendChild(svgTexto(no.cx, no.y + 20, 'rbf-n__rot', no.rotulo));
+
+        } else if (no.tipo === 'rcap') {
+          grupo.appendChild(svgTexto(no.cx, no.y + 17, 'rbf-n__rcapNum', no.rotulo));
+          if (no.sub) { grupo.appendChild(svgTexto(no.cx, no.y + 32, 'rbf-n__rcapTit', no.sub)); }
+
+        } else if (no.tipo === 'opt') {
+          if (no.sub) {
+            grupo.appendChild(svgTexto(no.x + 9, no.y + 17, 'rbf-n__marca', no.sub));
+          }
+          grupo.appendChild(svgTexto(no.cx, no.y + 36, 'rbf-n__opt', no.rotulo));
+
+        } else {
+          grupo.appendChild(svgTexto(no.x + 9, no.y + 17, 'rbf-n__marca', no.sub));
+          grupo.appendChild(svgTexto(no.cx, no.y + 40, 'rbf-n__fim', no.rotulo));
+        }
+
+        /* So no que tem para onde levar. Marco e caixa lacrada nao
+           viram alvo de clique: nao ha o que abrir do outro lado. */
+        var clicavel = (no.tipo === 'opt' || no.tipo === 'fim') && no.estado !== 'lacrado';
+        if (clicavel) {
+          grupo.setAttribute('tabindex', '0');
+          grupo.setAttribute('role', 'button');
+          grupo.classList.add('is-clicavel');
+          grupo.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            aoClicar(no);
+          });
+          grupo.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Enter' || ev.key === ' ') {
+              ev.preventDefault();
+              aoClicar(no);
+            }
+          });
+        }
+
+        var titulo = svgEl('title', {});
+        titulo.textContent = no.rotulo + (no.sub ? ' \u00b7 ' + no.sub : '');
+        grupo.appendChild(titulo);
+
+        camadaN.appendChild(grupo);
+      })(g.nos[n]);
+    }
+
+    svg.appendChild(camadaN);
+    quadro.appendChild(svg);
+    return quadro;
+  }
+
+  /* Leva a linha da lista e acende por um instante. Sem rolagem
+     instantanea: o painel ja rola, e o salto seco desorienta. */
+  function irPara(chave) {
+    var alvo = document.querySelector('[data-no="' + chave + '"]');
+    if (!alvo) { return; }
+    if (alvo.scrollIntoView) { alvo.scrollIntoView({ block: 'center' }); }
+    alvo.classList.remove('is-apontado');
+    /* reinicia a animacao */
+    if (alvo.offsetWidth !== undefined) { void alvo.offsetWidth; }
+    alvo.classList.add('is-apontado');
+  }
+
+  /* Selo de rota: rotulo e delta, com a cor que a rota ja tem no HUD.
+     Le RBF.Routes para o nome, e o numero vem do roteiro. */
+  function seloRota(id, valor) {
+    var def = RBF.Routes.defById(id);
+    if (!def) { return null; }
+    var sel = UI.el('span', 'rbf-arv__rota rbf-arv__rota--' + id);
+    sel.appendChild(UI.el('span', 'rbf-arv__rotaNome', def.label));
+    sel.appendChild(UI.el('span', 'rbf-arv__rotaVal', '+' + valor));
+    sel.title = def.label + ' ' + '\u2014 ' + def.hint;
+    return sel;
+  }
+
+  function corpoArvore() {
+    var nos = RBF.Arvore && RBF.Arvore.build();
+    if (!nos) { return UI.el('p', 'rbf-quatro__vazio', '[ sem registro ]'); }
+
+    var body = UI.el('div', 'rbf-arv');
+
+    var d = RBF.ARVORE || {};
+    if (d.nota && d.nota.length) {
+      var cab = UI.el('div', 'rbf-arv__cab');
+      for (var c = 0; c < d.nota.length; c++) {
+        cab.appendChild(UI.el('p', 'rbf-arv__cabline', d.nota[c]));
+      }
+      body.appendChild(cab);
+    }
+
+    /* ---- as dez decisoes ---- */
+    /* O mapa. Vem antes da lista porque e ele que responde a pergunta
+       "qual e a forma disto"; a lista responde "o que cada coisa fez". */
+    var g = RBF.Arvore.grafo();
+    if (g) {
+      body.appendChild(desenharMapa(g, function (no) {
+        irPara(no.tipo === 'fim' ? 'fim:' + no.final : no.escolha + ':' + no.opcao);
+      }));
+      body.appendChild(UI.el('p', 'rbf-arv__legenda',
+        'Clique num ramo ou numa leitura para ir ao registro dela. ' +
+        'A linha tracejada e a unica coisa que o texto nao diz: a leitura ' +
+        'e decidida no fim do Cap\u00edtulo 9 e s\u00f3 aparece tr\u00eas cap\u00edtulos depois.'));
+    }
+
+    var lista = UI.el('ol', 'rbf-arv__lista');
+
+    for (var i = 0; i < nos.length; i++) {
+      var n  = nos[i];
+      var li = UI.el('li', 'rbf-arv__no' + (n.alcancada ? '' : ' is-lacrado'));
+
+      var head = UI.el('div', 'rbf-arv__head');
+      head.appendChild(UI.el('span', 'rbf-arv__cap', n.chapterLabel || ''));
+      head.appendChild(UI.el('h3', 'rbf-arv__tit',
+        n.alcancada ? n.prompt : 'decis\u00e3o n\u00e3o alcan\u00e7ada'));
+      head.appendChild(UI.el('span', 'rbf-arv__conta',
+        n.abertos + '/' + n.total));
+      li.appendChild(head);
+
+      if (!n.alcancada) {
+        li.appendChild(UI.el('p', 'rbf-arv__vazio',
+          '[ nenhum registro desta decis\u00e3o neste arquivo ]'));
+        lista.appendChild(li);
+        continue;
+      }
+
+      if (n.decide) {
+        li.appendChild(UI.el('p', 'rbf-arv__decide', n.decide));
+      }
+
+      var ramos = UI.el('ul', 'rbf-arv__ramos');
+      for (var j = 0; j < n.opts.length; j++) {
+        var o  = n.opts[j];
+        var cl = 'rbf-arv__ramo';
+        if (!o.tomada)  { cl += ' is-fechado'; }
+        if (o.naUltima) { cl += ' is-atual'; }
+
+        var ram = UI.el('li', cl);
+        ram.setAttribute('data-no', n.id + ':' + o.id);
+        var lin = UI.el('div', 'rbf-arv__linha');
+        lin.appendChild(UI.el('span', 'rbf-arv__marca', o.id));
+        lin.appendChild(UI.el('span', 'rbf-arv__tx', o.tx));
+        ram.appendChild(lin);
+
+        if (o.tomada) {
+          var rot = UI.el('div', 'rbf-arv__rotas');
+          var algum = false;
+          for (var r in o.routes) {
+            if (!Object.prototype.hasOwnProperty.call(o.routes, r)) { continue; }
+            var sel = seloRota(r, o.routes[r]);
+            if (sel) { rot.appendChild(sel); algum = true; }
+          }
+          if (!algum) {
+            rot.appendChild(UI.el('span', 'rbf-arv__rota is-nula', 'n\u00e3o move rota'));
+          }
+          ram.appendChild(rot);
+
+          if (o.efeito) {
+            ram.appendChild(UI.el('p', 'rbf-arv__efeito', o.efeito));
+          }
+        } else {
+          ram.appendChild(UI.el('p', 'rbf-arv__efeito rbf-arv__efeito--lacuna',
+            '[ ramo n\u00e3o percorrido ]'));
+        }
+
+        ramos.appendChild(ram);
+      }
+      li.appendChild(ramos);
+      lista.appendChild(li);
+    }
+    body.appendChild(lista);
+
+    /* ---- os nove finais ---- */
+    var fins = RBF.Arvore.finais() || [];
+    if (fins.length) {
+      body.appendChild(UI.el('h3', 'rbf-arv__sec', 'Para onde as dez decis\u00f5es levam'));
+
+      var grade = UI.el('ul', 'rbf-arv__finais');
+      for (var f = 0; f < fins.length; f++) {
+        var F  = fins[f];
+        var cf = 'rbf-arv__final';
+        if (!F.visto) { cf += ' is-lacrado'; }
+        if (F.atual)  { cf += ' is-atual'; }
+
+        var fl = UI.el('li', cf);
+        fl.setAttribute('data-no', 'fim:' + F.id);
+        var fh = UI.el('div', 'rbf-arv__finalHead');
+        fh.appendChild(UI.el('span', 'rbf-arv__finalNum', String(F.ordem)));
+        fh.appendChild(UI.el('h4', 'rbf-arv__finalTit',
+          F.visto ? F.label : 'leitura n\u00e3o alcan\u00e7ada'));
+        if (F.padrao) {
+          fh.appendChild(UI.el('span', 'rbf-arv__finalTag', 'padr\u00e3o'));
+        }
+        fl.appendChild(fh);
+
+        /* Os eixos, com direcao, aparecem mesmo na leitura que falta:
+           e o bastante para o jogador saber para onde empurrar, e nao
+           entrega nada do que acontece la. Sem isso, oito dos nove
+           cartoes ficavam identicos e a grade virava uma parede. */
+        var ex = UI.el('p', 'rbf-arv__finalEixos',
+          F.eixos.length
+            ? 'responde a ' + F.eixos.join(' e ')
+            : 'n\u00e3o depende de rota');
+        fl.appendChild(ex);
+
+        if (F.visto) {
+          if (F.condicao) { fl.appendChild(UI.el('p', 'rbf-arv__finalTx', F.condicao)); }
+          if (F.porta)    { fl.appendChild(UI.el('p', 'rbf-arv__finalTx', F.porta)); }
+        } else {
+          fl.appendChild(UI.el('p', 'rbf-arv__finalVazio',
+            '[ nenhum registro desta leitura neste arquivo ]'));
+        }
+        grade.appendChild(fl);
+      }
+      body.appendChild(grade);
+    }
+
+    return body;
+  }
+
+  /* ======================================================================
+     A CONTA - pagina inteira, tres secoes.
+
+     Era um painel modal. Deixou de caber: as quatro paginas, as
+     leituras e o mapa da arvore disputavam uma caixa de 940px com
+     moldura ornamentada por fora e rolagem por dentro, e o mapa - que
+     tem 640 por 2700 unidades - ficava espremido num quadro que ja
+     rolava dentro de outro que tambem rolava.
+
+     Agora e uma tela irma do menu principal, com trilho de secoes a
+     esquerda e o corpo rolando na altura toda da janela.
+
+     DOIS DEFEITOS REAIS QUE VIERAM JUNTO:
+
+     1. RBF.State.push('pages') nunca funcionou. 'pages' nao consta de
+        RBF.State.STATES, entao push() recusava em silencio, nada era
+        empilhado, e o pop() do fechamento tirava da pilha o estado de
+        OUTRO painel. O estado novo se chama 'conta' e esta declarado.
+
+     2. Rolagem aninhada. O quadro do mapa rola de lado dentro do corpo
+        do painel, que rolava para baixo dentro do overlay. Em telefone
+        o gesto ia para o container errado. Com a pagina, so o corpo
+        rola na vertical.
+     ====================================================================== */
+
+  /* Secao visivel. Sobrevive a fechar e reabrir. */
+  var contaAba = 'paginas';
+
+  var CONTA_SECOES = [
+    { id: 'paginas',  rot: 'As Quatro P\u00e1ginas',
+      nota: 'O que o tribunal precisava e n\u00e3o recebeu.' },
+    { id: 'leituras', rot: 'As Leituras',
+      nota: 'Os quatro desfechos, e qual deles voc\u00ea alcan\u00e7ou.' },
+    { id: 'arvore',   rot: 'A \u00c1rvore',
+      nota: 'Dez decis\u00f5es, quatro caminhos, e o que cada ramo mudou.' }
+  ];
+
+  function contaSubtitulo() {
     var run = (RBF.Saves.lastRun && RBF.Saves.lastRun()) || {};
     var lab = RBF.Paginas.endingLabel(run.ending) || '';
     var ep  = RBF.Paginas.endingProgress();
+    var rc  = (RBF.Arvore && RBF.Arvore.counts()) || { taken: 0, total: 0 };
+    return (lab ? 'Leitura alcan\u00e7ada: ' + lab + ' \u00b7 ' : '') +
+           ep.seen + ' de ' + ep.total + ' registradas \u00b7 ' +
+           rc.taken + ' de ' + rc.total + ' ramos percorridos';
+  }
 
-    UI.panel({
-      name:     'pages',
-      title:    'A Conta',
-      subtitle: (lab ? 'Leitura alcan\u00e7ada: ' + lab + ' \u00b7 ' : '') +
-                ep.seen + ' de ' + ep.total + ' registradas',
-      body:     UI.el('div', 'rbf-conta'),
-      wide:     true,
-      actions: [
-        { label: 'Fechar', className: 'rbf-btn-primary', onClick: function () { UI.closePanel(); } }
-      ],
-      onClose: panelReturn(fromTitle)
-    });
+  function corpoDaSecao(id) {
+    if (id === 'paginas') { return corpoQuatroPaginas(); }
+    if (id === 'arvore')  { return corpoArvore(); }
+    return corpoLeituras();
+  }
 
-    /* O painel e montado e destruido a cada abertura, entao pegar o no
-       pelo documento e seguro: so existe um. */
-    var alvo = document.querySelector('.rbf-conta');
-    if (!alvo) { return; }
+  function pintarConta() {
+    var rail = document.getElementById('rf-conta-rail');
+    var body = document.getElementById('rf-conta-body');
+    var sub  = document.getElementById('rf-conta-sub');
+    if (!rail || !body) { return; }
 
-    function pintar() {
-      UI.clear(alvo);
+    if (sub) { sub.textContent = contaSubtitulo(); }
 
-      var abas = UI.el('div', 'rbf-abas');
-      var defs = [
-        { id: 'paginas',  rot: 'As Quatro P\u00e1ginas' },
-        { id: 'leituras', rot: 'As Leituras' }
-      ];
-      for (var i = 0; i < defs.length; i++) {
-        (function (d) {
-          var t = document.createElement('button');
-          t.type = 'button';
-          t.className = 'rbf-aba' + (contaAba === d.id ? ' on' : '');
-          t.textContent = d.rot;
-          t.setAttribute('aria-pressed', contaAba === d.id ? 'true' : 'false');
-          t.addEventListener('click', function () {
-            if (contaAba === d.id) { return; }
-            contaAba = d.id;
-            RBF.Audio.playUi('ui_page');
-            pintar();
-          });
-          abas.appendChild(t);
-        })(defs[i]);
-      }
-      alvo.appendChild(abas);
-      alvo.appendChild(contaAba === 'paginas' ? corpoQuatroPaginas() : corpoLeituras());
+    UI.clear(rail);
+    for (var i = 0; i < CONTA_SECOES.length; i++) {
+      (function (d, n) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'rf-conta__aba' + (contaAba === d.id ? ' on' : '');
+        b.setAttribute('aria-pressed', contaAba === d.id ? 'true' : 'false');
+
+        var num = (RBF.ARCHIVE && RBF.ARCHIVE.numerals) || [];
+        b.appendChild(UI.el('span', 'rf-conta__abaNum', num[n] || String(n + 1)));
+        b.appendChild(UI.el('span', 'rf-conta__abaRot', d.rot));
+        b.appendChild(UI.el('span', 'rf-conta__abaNota', d.nota));
+
+        b.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          if (contaAba === d.id) { return; }
+          contaAba = d.id;
+          RBF.Audio.playUi('ui_page');
+          pintarConta();
+          body.scrollTop = 0;
+        });
+        rail.appendChild(b);
+      })(CONTA_SECOES[i], i);
     }
 
-    pintar();
+    UI.clear(body);
+    body.appendChild(corpoDaSecao(contaAba));
   }
+
+  /* De onde a pagina foi aberta, para o Fechar devolver a mesma tela. */
+  var contaVeioDoTitulo = true;
+
+  function openConta() {
+    if (!RBF.Paginas || !RBF.Paginas.available()) { return; }
+    if (!el.conta) { return; }
+
+    contaVeioDoTitulo = RBF.State.is('title');
+    UI.closePanel();
+    RBF.State.push('conta');
+
+    el.conta.hidden = false;
+    void el.conta.offsetWidth;          /* reinicia a animacao de entrada */
+    el.conta.classList.add('show');
+
+    pintarConta();
+    RBF.Audio.playUi('ui_page');
+
+    var body = document.getElementById('rf-conta-body');
+    if (body) { body.scrollTop = 0; }
+  }
+
+  function closeConta() {
+    if (!el.conta || !contaAberta()) { return; }
+    el.conta.classList.remove('show');
+    RBF.Audio.playUi('ui_back');
+
+    var alvo = el.conta;
+    setTimeout(function () {
+      alvo.hidden = true;
+      UI.clear(document.getElementById('rf-conta-body'));
+    }, RBF.CONFIG.timing.contaMs);
+
+    RBF.State.pop(contaVeioDoTitulo ? 'title' : 'paused');
+    if (contaVeioDoTitulo) { renderNav(); }
+  }
+
+  /* Quem sabe se a pagina esta aberta e a maquina de estados, e nao o
+     atributo hidden do elemento: 'hidden' e atributo em HTML e
+     propriedade em JS, e contar com o reflexo entre os dois amarra o
+     codigo a um detalhe de DOM que nem todo ambiente honra. */
+  function contaAberta() { return RBF.State.is('conta'); }
 
   /* ======================================================================
      CREDITOS
@@ -1599,6 +2082,21 @@ RBF.Menu = (function () {
     });
   }
 
+  /* A pagina "A Conta" nao passa por RBF.UI.bind: ela nao e overlay, e
+     um irmao do menu principal. O botao e o clique no fundo fecham; o
+     clique dentro do corpo nao. */
+  function bindConta() {
+    if (!el.conta) { return; }
+
+    var fechar = document.getElementById('rf-conta-close');
+    if (fechar) {
+      fechar.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        closeConta();
+      });
+    }
+  }
+
   function bindShortcuts() {
     document.addEventListener('keydown', function (ev) {
       if (el.gate.classList.contains('is-open')) { return; }
@@ -1624,6 +2122,12 @@ RBF.Menu = (function () {
 
       /* Escape com painel aberto e tratado em RBF.UI.bind, na fase de
          captura, e nao chega ate aqui. */
+      if (ev.key === 'Escape' && contaAberta()) {
+        ev.preventDefault();
+        closeConta();
+        return;
+      }
+
       if (ev.key === 'Escape') {
         if (RBF.State.is('title'))  { return; }
         if (RBF.State.hasOverlay()) { return; }
@@ -1711,6 +2215,7 @@ RBF.Menu = (function () {
     RBF.UI.bind(el.overlayRoot);
     bindGate();
     bindShortcuts();
+    bindConta();
 
     RBF.Assets.applyUiArtVars();
     fillArchiveChrome();
@@ -1738,6 +2243,8 @@ RBF.Menu = (function () {
     openSettings:  openSettings,
     openHistory:   openHistory,
     openGallery:   openGallery,
+    openConta:     openConta,
+    closeConta:    closeConta,
     openCredits:   openCredits,
     openChapters:  openChapterSelect,
     quickSave:     quickSave,

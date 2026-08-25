@@ -291,7 +291,10 @@ function manifestChecks(win) {
       if (b.t === 'flag') {
         for (const k of Object.keys(b.set || {})) { settable.add(k); }
       }
-      if (b.t === 'ending') { settable.add('ending'); }
+      /* O beat { t:'ending' } grava DUAS flags: 'ending', o desfecho, e
+         'rota', o caminho. A segunda entrou quando a obra passou a se
+         partir no fim do Capitulo 9. */
+      if (b.t === 'ending') { settable.add('ending'); settable.add('rota'); }
       if (b.t === 'cho') { for (const o of b.opts) { if (o.then) { scanSet(o.then); } } }
     }
   })(script);
@@ -482,9 +485,33 @@ async function playthroughChecks() {
     check(Object.keys(r.choiceLog).length === r.choiceCount,
           'ramo ' + labels[i] + ': registrou todas as escolhas do roteiro',
           JSON.stringify(r.choiceLog) + ' de ' + r.choiceCount);
-    check(r.progress.chaptersReached.length === r.chapterCount,
-          'ramo ' + labels[i] + ': todos os capitulos marcados como alcancados',
-          r.progress.chaptersReached.length + ' de ' + r.chapterCount);
+    /* A obra se parte no fim do Capitulo 9. Uma partida alcanca o
+       tronco inteiro, o Epilogo, e os capitulos de UMA rota - nunca os
+       das outras tres. Exigir o total era a expectativa da versao de
+       espinha unica, e passar a exigi-lo de novo esconderia vazamento
+       de rota em vez de acusar. */
+    const M = r.win.RBF;   /* o manifesto vive no contexto da partida */
+    const alcancados = new Set(r.progress.chaptersReached);
+    const tronco  = M.CHAPTERS.filter(c => !c.rota);
+    const faltaT  = tronco.filter(c => !alcancados.has(c.id)).map(c => c.id);
+    check(faltaT.length === 0,
+          'ramo ' + labels[i] + ': alcancou o tronco inteiro e o Epilogo',
+          faltaT.join(' '));
+
+    const daRota  = M.CHAPTERS.filter(c => c.rota && alcancados.has(c.id));
+    const rotasVistas = new Set(daRota.map(c => c.rota));
+    check(rotasVistas.size === 1,
+          'ramo ' + labels[i] + ': alcancou os capitulos de UMA rota, e nao de duas',
+          [...rotasVistas].join(' '));
+
+    const rotaDef = (M.ROTAS || []).find(x => x.id === [...rotasVistas][0]);
+    check(!!rotaDef && rotaDef.chapters.every(c => alcancados.has(c)),
+          'ramo ' + labels[i] + ': alcancou a rota inteira',
+          rotaDef ? rotaDef.id + ': ' +
+            rotaDef.chapters.filter(c => !alcancados.has(c)).join(' ') : 'sem rota');
+
+    console.log('        rota=' + (rotaDef ? rotaDef.id : '?') +
+                ' capitulos=' + alcancados.size + ' de ' + r.chapterCount);
     console.log('        passos=' + r.steps + ' historico=' + r.history +
                 ' escolhas=' + r.chosen.join(','));
   }
@@ -1267,14 +1294,19 @@ function endingsReachableCheck() {
     return true;
   }
 
+  /* A condicao mudou de casa: quem decide agora e RBF.ROTAS, e o
+     desfecho vem do campo 'ending' da rota que bater. RBF.ENDINGS
+     ficou so com rotulo e nota. */
   function resolve(rotas, flags) {
-    for (const e of RBF.ENDINGS) {
-      if (bate(e.when, rotas, flags)) { return e.id; }
+    const lista = RBF.ROTAS || [];
+    for (const rt of lista) {
+      if (bate(rt.when, rotas, flags)) { return rt; }
     }
-    return null;
+    return lista.length ? lista[lista.length - 1] : null;
   }
 
-  const alcancados = new Set();
+  const alcancados    = new Set();   /* ids de rota  */
+  const alcancadosFim = new Set();   /* ids de desfecho */
   const total = Math.pow(3, escolhas.length);
   const limite = 200000;
 
@@ -1303,7 +1335,8 @@ function endingsReachableCheck() {
         if (b.t === 'cho') { for (const o of b.opts) { if (o.then) { varre(o.then); } } }
       }
     })(RBF.Script.base());
-    alcancados.add(resolve(rotas, flags));
+    const esc = resolve(rotas, flags);
+    if (esc) { alcancados.add(esc.id); alcancadosFim.add(esc.ending); }
   }
 
   /* Sem excecao. A versao anterior pulava final cuja condicao era uma
@@ -1312,8 +1345,30 @@ function endingsReachableCheck() {
      por toda a producao, e o SKIP no meio de duzentos PASS nao chamou a
      atencao de ninguem. Agora todo final declarado tem de ser atingido
      por alguma combinacao de escolhas, e ponto. */
+  for (const rt of RBF.ROTAS || []) {
+    check(alcancados.has(rt.id), 'rota alcancavel: ' + rt.id + ' (' + rt.label + ')');
+  }
   for (const e of RBF.ENDINGS) {
-    check(alcancados.has(e.id), 'final alcancavel: ' + e.id + ' (' + e.label + ')');
+    check(alcancadosFim.has(e.id), 'desfecho alcancavel: ' + e.id + ' (' + e.label + ')');
+  }
+
+  /* Cada rota precisa declarar capitulos, e cada capitulo declarado
+     precisa existir no manifesto. Rota que aponta para capitulo que
+     ninguem escreveu toca vazia, e o jogador ve tela preta. */
+  for (const rt of RBF.ROTAS || []) {
+    check((rt.chapters || []).length > 0, 'rota ' + rt.id + ' declara capitulos');
+    for (const cid of rt.chapters || []) {
+      const def = RBF.CHAPTERS.find(c => c.id === cid);
+      check(!!def, 'capitulo declarado existe: ' + cid);
+      check(!!def && def.rota === rt.id,
+            'capitulo ' + cid + ' pertence a rota ' + rt.id,
+            def ? String(def.rota) : 'ausente');
+      check(!!def && Array.isArray(RBF[def.data]) && RBF[def.data].length > 20,
+            'capitulo ' + cid + ' tem corpo',
+            def && RBF[def.data] ? RBF[def.data].length + ' beats' : 'vazio');
+    }
+    const fim = RBF.ENDINGS.find(e => e.id === rt.ending);
+    check(!!fim, 'rota ' + rt.id + ' aponta para desfecho declarado: ' + rt.ending);
   }
 }
 
@@ -1456,23 +1511,25 @@ async function dialogueChecks() {
    motivo, para nao voltar.
    ========================================================================== */
 
+/* Junta todas as declaracoes do seletor, nao apenas o primeiro bloco:
+   o mesmo seletor aparece na regra base e dentro de media queries.
+   Vive no escopo do modulo: layoutRegressionChecks e hudRegressionChecks
+   usam a mesma. */
+function rule(css, selector) {
+  const re = new RegExp(
+    selector.replace(/[.#*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}', 'g'
+  );
+  let m, out = '';
+  while ((m = re.exec(css)) !== null) { out += m[1] + '\n'; }
+  return out || null;
+}
+
 function layoutRegressionChecks() {
   section('REGRESSOES DE LAYOUT');
 
   const tokens = fs.readFileSync(path.join(ROOT, 'css/tokens.css'), 'utf8');
   const stage  = fs.readFileSync(path.join(ROOT, 'css/style.css'), 'utf8');
   const ui     = fs.readFileSync(path.join(ROOT, 'css/ui.css'), 'utf8');
-
-  /* Junta todas as declaracoes do seletor, nao apenas o primeiro bloco:
-     o mesmo seletor aparece na regra base e dentro de media queries. */
-  function rule(css, selector) {
-    const re = new RegExp(
-      selector.replace(/[.#*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}', 'g'
-    );
-    let m, out = '';
-    while ((m = re.exec(css)) !== null) { out += m[1] + '\n'; }
-    return out || null;
-  }
 
   /* --- titulo cortado -------------------------------------------------
      'ARQUIVO RABENFEI': max-width em ch cortava a ultima letra, porque
@@ -1569,6 +1626,91 @@ function layoutRegressionChecks() {
   check(ctl && /min-height:\s*(4[0-9]|[5-9][0-9])px/.test(ctl),
         'controle de leitura tem alvo de toque adequado',
         ctl ? (ctl.match(/min-height:\s*\d+px/) || [''])[0] : '');
+}
+
+/* ==========================================================================
+   12b. HUD E CROMO DE INTERFACE
+
+   Tres defeitos chegaram a tela e nenhum validador os via: a checagem de
+   alvo de toque acima olhava min-height e ignorava min-width, entao um
+   min-width de 38px passou; o codigo de transcricao ficou em tinta
+   'ghost' a 1,46:1 e com font-size cru de 8px, furando o piso que o
+   proprio token declara; e um par de classes vivia no CSS sem existir em
+   lugar nenhum do HTML ou do JS.
+
+   As tres regras ficam aqui com o motivo junto.
+   ========================================================================== */
+
+function hudRegressionChecks() {
+  section('HUD E CROMO DE INTERFACE');
+
+  const stage = fs.readFileSync(path.join(ROOT, 'css/style.css'), 'utf8');
+  const ui    = fs.readFileSync(path.join(ROOT, 'css/ui.css'), 'utf8');
+
+  /* --- alvo de toque: nenhuma medida declarada abaixo de 40px ----------
+     Vale para os dois eixos. min-height: 0 e idioma de flex e passa. */
+  [['style.css', stage], ['ui.css', ui]].forEach(function (par) {
+    const nome = par[0];
+    const linhas = par[1].split('\n');
+    const pequenos = [];
+    linhas.forEach(function (linha, i) {
+      const m = linha.match(/min-(?:height|width):\s*(\d+)px/);
+      if (m) {
+        const v = parseInt(m[1], 10);
+        if (v > 0 && v < 40) { pequenos.push(nome + ':' + (i + 1) + ' ' + m[0]); }
+      }
+    });
+    check(pequenos.length === 0,
+          'nenhum alvo de toque abaixo de 40px em ' + nome,
+          pequenos.join(' ;; '));
+  });
+
+  /* --- o codigo de transcricao precisa ser legivel ---------------------
+     E posicao/total dentro da cena: informacao, nao enfeite. */
+  const code = rule(stage, '.rf-dlg__code');
+  check(code !== null, 'regra .rf-dlg__code existe');
+  check(code && !/color:\s*var\(--rbf-ink-ghost\)/.test(code),
+        'codigo de transcrição não usa a tinta mais fraca',
+        code ? (code.match(/color:\s*[^;]+/) || [''])[0] : '');
+  check(code && !/font-size:\s*\d+px/.test(code),
+        'codigo de transcrição usa o token, não tamanho cru',
+        code ? (code.match(/font-size:\s*[^;]+/) || [''])[0] : '');
+
+  /* --- classe de CSS que nao existe em lugar nenhum --------------------
+     Regra que mira elemento inexistente nao quebra a tela, mas mente
+     sobre o que o componente faz: o comentario prometia troca de rotulo
+     por sigla no telefone, e ela nunca acontecia. */
+  const fontes = html + '\n' +
+    fs.readdirSync(path.join(ROOT, 'js'))
+      .filter(f => f.endsWith('.js'))
+      .map(f => fs.readFileSync(path.join(ROOT, 'js', f), 'utf8'))
+      .join('\n');
+
+  /* Comentario nao e regra: sem tirar, a propria nota que explica a
+     remocao de uma classe faria a checagem acusar a classe removida. */
+  const semComentario = (stage + '\n' + ui).replace(/\/\*[\s\S]*?\*\//g, ' ');
+
+  const mortas = [];
+  const vistas = {};
+  let m;
+  const re = /\.((?:rf|rbf)-[a-z0-9]+(?:-[a-z0-9]+)*__[a-z0-9-]+(?:--[a-z0-9-]+)?)/g;
+  while ((m = re.exec(semComentario)) !== null) {
+    const cls = m[1];
+    if (vistas[cls]) { continue; }
+    vistas[cls] = true;
+
+    /* Modificador pode ser montado em tempo de execucao - menu.js faz
+       'rf-dossier__row--' + d.id. Entao vale tanto o nome inteiro
+       quanto o prefixo ate o '--'. */
+    const corte = cls.indexOf('--');
+    const raiz  = corte === -1 ? cls : cls.slice(0, corte + 2);
+    if (fontes.indexOf(cls) === -1 && fontes.indexOf(raiz) === -1) {
+      mortas.push(cls);
+    }
+  }
+  check(mortas.length === 0,
+        'nenhuma classe de elemento existe só no CSS',
+        mortas.join(', '));
 }
 
 /* ==========================================================================
@@ -1698,6 +1840,7 @@ async function quatroPaginasChecks() {
   staticChecks();
   responsiveChecks();
   layoutRegressionChecks();
+  hudRegressionChecks();
 
   const win = boot();
   manifestChecks(win);

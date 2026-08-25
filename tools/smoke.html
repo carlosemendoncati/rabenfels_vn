@@ -109,15 +109,26 @@
 <script src="../js/data/chapter7.js"></script>
 <script src="../js/data/chapter8.js"></script>
 <script src="../js/data/chapter9.js"></script>
-<script src="../js/data/chapter10.js"></script>
-<script src="../js/data/chapter11.js"></script>
+<script src="../js/data/esp10.js"></script>
+<script src="../js/data/esp11.js"></script>
+<script src="../js/data/res10.js"></script>
+<script src="../js/data/res11.js"></script>
+<script src="../js/data/res12.js"></script>
+<script src="../js/data/per10.js"></script>
+<script src="../js/data/per11.js"></script>
+<script src="../js/data/per12.js"></script>
+<script src="../js/data/per13.js"></script>
+<script src="../js/data/cob10.js"></script>
+<script src="../js/data/cob11.js"></script>
 <script src="../js/data/epilogue.js"></script>
 <script src="../js/data/quatro_paginas.js"></script>
+<script src="../js/data/arvore.js"></script>
 
 <script src="../js/script.js"></script>
 <script src="../js/saves.js"></script>
 <script src="../js/gallery.js"></script>
 <script src="../js/paginas.js"></script>
+<script src="../js/arvore.js"></script>
 <script src="../js/engine.js"></script>
 <script src="../js/ui.js"></script>
 <script src="../js/menu.js"></script>
@@ -267,18 +278,69 @@
       check(r.history > 100,
             'partida ' + pick + ' registrou o backlog', r.history + ' entradas');
 
-      var reached = RBF.Saves.readProgress().chaptersReached;
-      for (var c = 0; c < RBF.CHAPTERS.length; c++) {
-        check(reached.indexOf(RBF.CHAPTERS[c].id) !== -1,
-              'partida ' + pick + ' alcancou ' + RBF.CHAPTERS[c].id);
-      }
+      /* A obra se parte no fim do Capitulo 9. Uma partida percorre o
+         tronco inteiro, o Epilogo, e os capitulos de UMA rota - nunca
+         os das outras tres.
 
-      var done = RBF.Saves.readProgress().finishedChapters;
-      for (var d = 0; d < RBF.CHAPTERS.length; d++) {
-        check(done.indexOf(RBF.CHAPTERS[d].id) !== -1,
-              'partida ' + pick + ' concluiu ' + RBF.CHAPTERS[d].id,
-              'finishedChapters: ' + done.join(', '));
+         Exigir o manifesto inteiro era a expectativa da versao de
+         espinha unica. Voltar a exigi-lo esconderia vazamento de rota
+         em vez de acusar, entao o que se confere agora e: tronco
+         completo, exatamente uma rota, e ela inteira. */
+      var reached = RBF.Saves.readProgress().chaptersReached;
+      var done    = RBF.Saves.readProgress().finishedChapters;
+      var c, cap;
+
+      var faltaTronco = [];
+      for (c = 0; c < RBF.CHAPTERS.length; c++) {
+        cap = RBF.CHAPTERS[c];
+        if (cap.rota) { continue; }
+        if (reached.indexOf(cap.id) === -1) { faltaTronco.push(cap.id); }
       }
+      check(faltaTronco.length === 0,
+            'partida ' + pick + ' alcancou o tronco inteiro e o Epilogo',
+            faltaTronco.join(' '));
+
+      var rotasVistas = [];
+      for (c = 0; c < RBF.CHAPTERS.length; c++) {
+        cap = RBF.CHAPTERS[c];
+        if (!cap.rota || reached.indexOf(cap.id) === -1) { continue; }
+        if (rotasVistas.indexOf(cap.rota) === -1) { rotasVistas.push(cap.rota); }
+      }
+      check(rotasVistas.length === 1,
+            'partida ' + pick + ' alcancou os capitulos de UMA rota',
+            rotasVistas.join(' '));
+
+      var def = null;
+      for (c = 0; c < (RBF.ROTAS || []).length; c++) {
+        if (RBF.ROTAS[c].id === rotasVistas[0]) { def = RBF.ROTAS[c]; }
+      }
+      var faltaRota = [];
+      var faltaFim  = [];
+      if (def) {
+        for (c = 0; c < def.chapters.length; c++) {
+          if (reached.indexOf(def.chapters[c]) === -1) { faltaRota.push(def.chapters[c]); }
+          if (done.indexOf(def.chapters[c]) === -1) { faltaFim.push(def.chapters[c]); }
+        }
+      }
+      check(!!def && faltaRota.length === 0,
+            'partida ' + pick + ' alcancou a rota inteira',
+            (def ? def.id + ': ' : '') + faltaRota.join(' '));
+      check(!!def && faltaFim.length === 0,
+            'partida ' + pick + ' concluiu todos os capitulos da rota',
+            (def ? def.id + ': ' : '') + faltaFim.join(' '));
+
+      var faltaDone = [];
+      for (c = 0; c < RBF.CHAPTERS.length; c++) {
+        cap = RBF.CHAPTERS[c];
+        if (cap.rota) { continue; }
+        if (done.indexOf(cap.id) === -1) { faltaDone.push(cap.id); }
+      }
+      check(faltaDone.length === 0,
+            'partida ' + pick + ' concluiu o tronco inteiro',
+            faltaDone.join(' '));
+
+      log('       rota: ' + (def ? def.id : '?') +
+          ' | capitulos: ' + reached.length + ' de ' + RBF.CHAPTERS.length);
 
       log('       cenas: ' + r.scenes.length +
           ' | rotas: ' + JSON.stringify(r.routes) +

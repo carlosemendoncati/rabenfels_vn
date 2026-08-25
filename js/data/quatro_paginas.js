@@ -67,49 +67,60 @@ RBF.QUATRO_PAGINAS = {
      ------------------------------------------------------------------ */
   finais: {
 
-    archive: {
+    arquivo: {
       titulo: 'O Arquivo',
       o_que: 'Cinco anos inteiros, no ritmo que o m\u00e9todo pedia. Tentou na noite de nove de agosto e chegou at\u00e9 a floresta \u2014 mais longe do que qualquer pessoa chegou em cinco s\u00e9culos.',
-      custou: 'Klara parou de andar no meio da trilha e voltou a p\u00e9, e n\u00e3o soube dizer por qu\u00ea. Antoniette foi atr\u00e1s. Ningu\u00e9m na casa soube que as duas tinham sa\u00eddo.',
+      custou: 'Klara parou no meio da trilha e voltou a p\u00e9, e n\u00e3o soube dizer por qu\u00ea. Antoniette foi atr\u00e1s. Ningu\u00e9m na casa soube que as duas tinham sa\u00eddo.',
       ela_sentiu: 'Al\u00edvio, e n\u00e3o \u00e9 engano de leitura. As quatro horas depois da floresta foram as \u00fanicas em cinco anos em que ela n\u00e3o teve de decidir mais nada. O trabalho estava fechado e a parte dela tinha acabado. Ficou no port\u00e3o at\u00e9 o sol subir de todo e n\u00e3o pensou em nada em particular.',
       klara: 'Sobreviveu. Seis anos depois entrou na Academia de Eldoria com a irm\u00e3, mesma turma, levando junto tudo o que Antoniette ensinou \u2014 inclusive o que a fez valer mais.',
       nao_soube: 'Que a menina viveu. E por que ela mesma morreu.'
     },
 
-    distance: {
-      titulo: 'O Distanciamento',
-      o_que: 'Dist\u00e2ncia profissional do primeiro ao \u00faltimo dia. N\u00e3o prometeu, n\u00e3o se aproximou, n\u00e3o tentou. A mala ficou feita debaixo da cama por onze dias e nunca saiu de l\u00e1.',
-      custou: 'Nada, no papel. A miss\u00e3o foi cumprida e a Ordem recebeu exatamente o que pediu. Recolheram-na do campo em setembro, com a correspond\u00eancia particular suspensa por prazo indeterminado.',
-      ela_sentiu: 'Nada que ela deixasse subir. \u00c9 o \u00fanico final em que a disciplina n\u00e3o rachou uma vez, e por isso o mais frio de ler. A porta do quarto das g\u00eameas abriu e fechou naquela madrugada, algu\u00e9m parou no alto da escada, e ela ficou onde estava. Ficaram as duas paradas por um tempo que ela n\u00e3o conseguiu medir \u2014 e ela tinha cinco anos de registro e uma mem\u00f3ria treinada para dura\u00e7\u00f5es.',
-      klara: 'Sobreviveu do mesmo jeito, e entrou na Academia do mesmo jeito. Atravessou cinco anos sem ningu\u00e9m, e ningu\u00e9m reparou que faltava alguma coisa, porque nunca teve.',
-      nao_soube: 'Que a dist\u00e2ncia n\u00e3o a protegeu de nada. A conta era sobre a menina ter escolhido algu\u00e9m, e a menina escolheu assim mesmo.'
+    registro: {
+      titulo: 'O Livro-Raz\u00e3o',
+      o_que: 'Entendeu o cronograma inteiro e n\u00e3o desceu nenhuma noite. P\u00f4s a m\u00e3o na ma\u00e7aneta \u00e0s onze e vinte e cinco, ouviu a guarda trocar, e voltou para a escrivaninha.',
+      custou: 'Nada que apare\u00e7a em coluna, e \u00e9 isso que a leitura \u00e9. A porta da biblioteca ficou fechada a noite inteira e ningu\u00e9m veio bater nela.',
+      ela_sentiu: 'Satisfa\u00e7\u00e3o com a margem. A dura\u00e7\u00e3o estimada da entrada 214 errou por nove minutos, contra vinte e seis da entrada 160, e ela registrou a melhora. \u00c9 o sentimento de cima e \u00e9 sincero, e \u00e9 por isso que esta \u00e9 a leitura mais dif\u00edcil de ler duas vezes.',
+      klara: 'Sobreviveu. Em nenhuma das duzentas e catorze entradas aparece a palavra Klara, e Carmine precisou corrigir a idade da menina no caderno de quem passou cinco anos ao lado dela.',
+      nao_soube: 'Que o documento serviria. O tribunal julgou improcedente por aus\u00eancia de terceiro lesado, a Ordem arquivou o material como exemplar, e a apostila de forma\u00e7\u00e3o de escribas leva o nome dela no \u00edndice, entre duas circulares.'
     },
 
-    early: {
-      titulo: 'Agosto Antecipado',
-      o_que: 'Entendeu o cronograma antes da hora e agiu com o que tinha. A casa percebeu o movimento e antecipou o pr\u00f3prio calend\u00e1rio.',
-      custou: 'A porta nordeste ficou aberta e o p\u00e1tio, vazio. Ningu\u00e9m gritou. Numa casa daquele tamanho, isso significa que ningu\u00e9m precisou.',
-      ela_sentiu: 'Pressa, e depois o que vem quando j\u00e1 n\u00e3o h\u00e1 o que apressar. Escreveu o Arquivo em quatro noites, documentando uma coisa que j\u00e1 tinha acontecido, e a m\u00e3o continuou firme porque a m\u00e3o dela era assim. Escreveu a \u00faltima entrada para uma menina que j\u00e1 n\u00e3o estava naquela casa, e n\u00e3o mudou uma palavra por causa disso.',
-      klara: 'Levada em agosto do quinto ano, sem preparo e sem cerim\u00f4nia, com uma cama a menos no quarto desde as duas e dez. A irm\u00e3 continuou dormindo.',
-      nao_soube: 'Que a pr\u00f3pria pressa moveu a data. Cinco anos sendo a \u00fanica pessoa em cinco s\u00e9culos capaz de mover uma data, e moveu \u2014 para o lado errado.'
+    divida: {
+      titulo: 'A D\u00edvida',
+      o_que: 'Cinco anos economizando o que dava para economizar. Tentou na noite de nove de agosto e chegou a onze minutos da ponte.',
+      custou: 'A porta da copa estava trancada porque tr\u00eas moedas pedidas em maio pareceram caras, e a avalia\u00e7\u00e3o estava correta: tr\u00eas moedas \u00e9 caro por uma tranca. A volta pelo p\u00e1tio custou onze minutos. O cocheiro tinha esperado dez.',
+      ela_sentiu: 'A conta. Ela armou os tr\u00eas valores em coluna antes do amanhecer, com data ao lado de cada um, somou de tr\u00e1s para frente para conferir, e escreveu a \u00fanica linha do documento inteiro em que ela julga alguma coisa.',
+      klara: 'Parou onze minutos antes da ponte e n\u00e3o soube dizer por qu\u00ea. Voltou a p\u00e9, devolveu a mala e pediu desculpa. Sobreviveu, e seis anos depois entrou na Academia com a irm\u00e3.',
+      nao_soube: 'Que os onze minutos n\u00e3o eram o motivo. Carmine disse isso na biblioteca, em voz alta, e a frase foi para a margem com um ponto de interroga\u00e7\u00e3o. A conta continua fechando na p\u00e1gina duzentos e oitenta e sete, e continua errada.'
     },
 
     cover_burned: {
       titulo: 'A Cobertura Queimada',
-      o_que: 'Fez tudo o que a Ordem manda: relatou agosto na \u00edntegra, com testemunha direta, e remeteu a Lervel o nome da antecessora com identifica\u00e7\u00e3o da fonte, porque prova sem proveni\u00eancia n\u00e3o vale em mat\u00e9ria de foro.',
+      o_que: 'Fez tudo o que a Ordem manda: relatou agosto na \u00edntegra, com testemunha direta, e remeteu a Lervel o nome da antecessora com identifica\u00e7\u00e3o da fonte, porque prova sem proced\u00eancia n\u00e3o vale em mat\u00e9ria de foro.',
       custou: 'A casa l\u00ea tudo o que entra e sai, e sempre leu. N\u00e3o houve acusa\u00e7\u00e3o nem gritaria: houve encerramento de contrato, com dois meses de aviso pagos e uma carta de refer\u00eancia correta.',
-      ela_sentiu: 'Vergonha profissional, e \u00e9 o \u00fanico final em que esse \u00e9 o sentimento de cima. N\u00e3o foi descoberta por descuido nem por azar: foi descoberta por compet\u00eancia, por ter feito o procedimento certo dentro de uma casa que ela sabia que lia a correspond\u00eancia. Ficou de p\u00e9 no escuro esperando uma batida que n\u00e3o veio, e o que doeu n\u00e3o foi o medo. Foi saber exatamente qual linha do pr\u00f3prio relat\u00f3rio a entregou.',
-      klara: 'Ficou. O Arquivo saiu incompleto e saiu mesmo assim, escrito em nove noites num quarto alugado. Seis anos depois, a Academia.',
-      nao_soube: 'Que o nome remetido era de um homem vivo que trabalhava naquela casa, e que ele n\u00e3o pediu garantia nenhuma antes de d\u00e1-lo a ela.'
+      ela_sentiu: 'Vergonha profissional, e \u00e9 o \u00fanico final em que esse \u00e9 o sentimento de cima. N\u00e3o foi descoberta por descuido nem por azar: foi descoberta por compet\u00eancia. Levou quarenta minutos procurando a linha que a entregou, achou, e a linha estava correta.',
+      klara: 'Ficou. O Arquivo saiu incompleto e saiu mesmo assim, escrito em nove noites num quarto alugado acima de uma selaria. Seis anos depois, a Academia.',
+      nao_soube: 'Que ele concluiria que ela estava morta. Ela deixou de escrever de prop\u00f3sito, porque o pacote s\u00f3 sai com noventa dias de sil\u00eancio, e passou onze anos copiando escritura a duzentos e trinta quil\u00f4metros dali.'
     }
 
   },
 
-  /* Cabecalho do documento, comum as quatro. */
+  /* Cabecalho do documento, comum a oito das nove leituras. */
   cabecalho: [
     'Retiradas do corpo do Arquivo em 10 de agosto, entre as tr\u00eas e trinta e as quatro e dez.',
     'Repostas no livro-caixa da casa, no lugar das quatro folhas em branco do fim.',
     'Numera\u00e7\u00e3o original mantida.'
+  ],
+
+  /* A Vigilia nao tem corpo de Arquivo de onde retirar: o documento
+     nunca foi montado. O que ela arranca e caderno de trabalho, e as
+     quatro folhas sao justamente as quatro coisas que nunca passaram
+     por correspondencia - e portanto as quatro que a reconstrucao da
+     Ordem nao teria como conter. */
+  cabecalho_vigil: [
+    'Retiradas do caderno de trabalho em 10 de agosto, entre as quatro e vinte e as quatro e cinquenta.',
+    'Repostas no livro-caixa da casa, no lugar das quatro folhas em branco do fim.',
+    'Nenhuma das quatro chegou a passar por correspond\u00eancia.'
   ],
 
   paginas: [

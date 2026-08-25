@@ -530,11 +530,16 @@ body {
   text-transform: lowercase;
 }
 
+/* O codigo e posicao/total dentro da cena - informacao, nao enfeite, e
+   precisa ser lido. Em 'ghost' (#3a3833) ele media 1,46:1 contra o
+   painel, muito abaixo dos 4,5:1 de texto; 'dim' mede 4,89:1 e continua
+   discreto. O tamanho sai de --rbf-code, que ja e max(10px, ...): o piso
+   existe de proposito e nao deve ser atropelado por valor cru. */
 .rf-dlg__code {
   font-family: var(--rbf-font-display);
   font-size: var(--rbf-code);
   letter-spacing: .18em;
-  color: var(--rbf-ink-ghost);
+  color: var(--rbf-ink-dim);
   white-space: nowrap;
   padding-bottom: calc(7px * var(--rbf-ui));
 }
@@ -729,17 +734,59 @@ body {
   animation: rbfQuill 1.9s ease-in-out infinite;
 }
 
-/* Telefone: rotulo some, sobra o icone. A dica sai de cena. */
+/* Telefone: rotulo some, sobra o icone. A dica sai de cena.
+
+   Sem o rotulo, o icone passa a ser o unico portador de significado, e
+   por isso ele cresce e clareia aqui. Com a tinta 'mute' de 13px que
+   valia antes, os sete controles viravam sete manchas na base do
+   painel - legiveis no monitor, invisiveis no telefone.
+
+   min-width acompanha min-height: 40px e o piso de alvo de toque que o
+   projeto declara, e 38 nao e 40. */
 @media (max-width: 700px) {
   .rf-ctl__label { display: none; }
-  .rf-ctl { padding: calc(8px * var(--rbf-ui)); min-width: 38px; justify-content: center; }
+  .rf-ctl {
+    padding: calc(8px * var(--rbf-ui));
+    min-width: 40px;
+    justify-content: center;
+    color: var(--rbf-ink-dim);
+  }
+  .rf-ctl__icon {
+    width: calc(16px * var(--rbf-ui));
+    height: calc(16px * var(--rbf-ui));
+  }
   .rf-dlg__hint { display: none; }
-  .rf-dlg__code { font-size: 8px; }
+}
+
+/* Telefone estreito: a barra vira grade de quatro colunas.
+
+   Sete alvos de 40px somam 280px, e a barra mede 215px em 320px de tela
+   e 285px em 390px - nao cabem em uma linha, e 40px e o piso de toque
+   que o projeto declara, entao nao ha o que espremer. A quebra e
+   inevitavel; o que estava errado era ela cair sozinha na esquerda, com
+   um icone orfao parecendo defeito.
+
+   Quatro colunas dao 4+3 fechado, que le como teclado e nao como
+   sobra. Acima de 430px os sete voltam para uma linha so. */
+@media (max-width: 430px) {
+  .rf-dlg__bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(40px, 1fr));
+    justify-items: center;
+    row-gap: calc(2px * var(--rbf-ui));
+  }
 }
 
 @media (max-width: 420px) {
   .rf-dlg__panel { padding-left: calc(13px * var(--rbf-ui)); padding-right: calc(13px * var(--rbf-ui)); }
   .textcontent { padding-right: calc(16px * var(--rbf-ui)); }
+
+  /* Em 320px o codigo nao cabe na largura do palco. O aperto sai do
+     tracking, nao do corpo da letra: .18em numa string em caixa alta e
+     nowrap custa mais largura do que os dois pontos de tamanho que
+     seriam perdidos encolhendo a fonte - e tracking apertado continua
+     legivel, 8px nao. */
+  .rf-dlg__code { letter-spacing: .06em; }
 }
 
 /* ==========================================================================

@@ -17,6 +17,7 @@
         75   barra de jogo
         80   camada de transicao
         90   menu principal
+        92   pagina "A Conta"
         95   portao de abertura
        100   overlays de interface
    ========================================================================== */
@@ -1489,7 +1490,7 @@
   }
 
   .rf-nav__item {
-    min-height: 38px;
+    min-height: 40px;
     padding-top: 4px;
     padding-bottom: 4px;
   }
@@ -1629,7 +1630,7 @@
   text-transform: uppercase;
 
   padding: calc(7px * var(--rbf-ui)) calc(11px * var(--rbf-ui));
-  min-height: 34px;
+  min-height: 40px;
 
   transition: color var(--rbf-fast), border-color var(--rbf-fast), background var(--rbf-fast);
 }
@@ -1640,14 +1641,14 @@
   background: rgba(30, 8, 10, .85);
 }
 
-/* Em telefone a barra vira icones curtos para nao ocupar a cena. */
+/* Em telefone a barra aperta o respiro lateral para nao ocupar a cena.
+
+   Havia aqui um par .rbf-bar-btn__long / __short para trocar rotulo por
+   sigla. Nenhum dos dois chegou a existir em index.html nem no JS: a
+   barra tem um botao so, "Menu", e a troca nunca aconteceu. Regra que
+   mira elemento inexistente e ruido - some. */
 @media (max-width: 560px) {
   .rbf-bar-btn { padding: 8px 9px; letter-spacing: .08em; }
-  .rbf-bar-btn__long { display: none; }
-}
-
-@media (min-width: 561px) {
-  .rbf-bar-btn__short { display: none; }
 }
 
 /* Botao para trazer a interface de volta quando escondida. */
@@ -2269,7 +2270,7 @@
 .rbf-btn-mini {
   font-size: var(--rbf-code);
   padding: calc(5px * var(--rbf-ui)) calc(10px * var(--rbf-ui));
-  min-height: 32px;
+  min-height: 40px;
   letter-spacing: .1em;
 }
 
@@ -3416,4 +3417,914 @@
 .rbf-aba.on {
   color: var(--rbf-gold);
   border-bottom-color: var(--rbf-gold);
+}
+
+/* ==========================================================================
+   A ARVORE - as dez decisoes e os nove finais
+
+   Mesma gramatica das outras abas de "A Conta": filete a esquerda,
+   maiuscula espacada no titulo, corpo em serifa. O que muda e a
+   hierarquia - aqui existe um nivel a mais (decisao > ramo), e ele
+   precisa ser legivel em telefone, onde tres ramos empilhados por dez
+   decisoes formam a maior lista da obra.
+
+   Cor com significado, e so estas tres:
+     ouro      a decisao alcancada, e o eixo Esperanca
+     carmim    o ramo desta leitura, e o eixo Perda
+     frio      o eixo Resposta
+   Ramo nao percorrido nao ganha cor nenhuma: fica no filete fantasma,
+   do mesmo jeito que a ficha mostra lacuna sem esconder que ela existe.
+   ========================================================================== */
+
+.rbf-arv {
+  display: flex;
+  flex-direction: column;
+  gap: calc(24px * var(--rbf-ui));
+}
+
+.rbf-arv__cab {
+  padding-bottom: calc(14px * var(--rbf-ui));
+  border-bottom: 1px solid var(--rbf-line);
+}
+
+.rbf-arv__cabline {
+  font-family: var(--rbf-font-body);
+  font-size: calc(12px * var(--rbf-ui));
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--rbf-ink-dim);
+}
+
+/* ---- a decisao --------------------------------------------------------- */
+
+.rbf-arv__lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(22px * var(--rbf-ui));
+  margin: 0;
+  padding: 0;
+}
+
+.rbf-arv__no {
+  padding: calc(16px * var(--rbf-ui)) calc(18px * var(--rbf-ui));
+  border-left: 3px solid var(--rbf-gold);
+  background: rgba(217, 213, 200, .03);
+}
+
+.rbf-arv__no.is-lacrado {
+  border-left-color: var(--rbf-ink-ghost);
+  background: none;
+}
+
+.rbf-arv__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(10px * var(--rbf-ui));
+  margin-bottom: calc(10px * var(--rbf-ui));
+}
+
+.rbf-arv__cap {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--rbf-gold);
+  flex: none;
+}
+
+.rbf-arv__no.is-lacrado .rbf-arv__cap { color: var(--rbf-ink-ghost); }
+
+.rbf-arv__tit {
+  font-family: var(--rbf-font-display);
+  font-size: calc(13px * var(--rbf-ui));
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-dim);
+  flex: 1 1 auto;
+}
+
+/* Quantos dos tres ramos ja foram percorridos. Contagem, nunca porcentagem. */
+.rbf-arv__conta {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  color: var(--rbf-ink-mute);
+  flex: none;
+}
+
+.rbf-arv__decide {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: calc(12px * var(--rbf-ui));
+  line-height: 1.8;
+  color: var(--rbf-gold);
+  margin-bottom: calc(14px * var(--rbf-ui));
+}
+
+.rbf-arv__vazio {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  color: var(--rbf-ink-ghost);
+}
+
+/* ---- o ramo ------------------------------------------------------------ */
+
+.rbf-arv__ramos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--rbf-ui));
+  margin: 0;
+  padding: 0;
+}
+
+.rbf-arv__ramo {
+  padding-left: calc(14px * var(--rbf-ui));
+  border-left: 1px solid var(--rbf-line);
+}
+
+.rbf-arv__ramo.is-fechado { border-left-color: var(--rbf-ink-ghost); }
+
+/* O ramo desta leitura. E a unica marca de "voce esteve aqui" da tela. */
+.rbf-arv__ramo.is-atual { border-left: 2px solid var(--rbf-red-lit); }
+
+.rbf-arv__linha {
+  display: flex;
+  align-items: baseline;
+  gap: calc(10px * var(--rbf-ui));
+}
+
+.rbf-arv__marca {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .16em;
+  color: var(--rbf-ink-mute);
+  flex: none;
+  min-width: 1.4em;
+}
+
+.rbf-arv__ramo.is-atual   .rbf-arv__marca { color: var(--rbf-red-lit); }
+.rbf-arv__ramo.is-fechado .rbf-arv__marca { color: var(--rbf-ink-ghost); }
+
+.rbf-arv__tx {
+  font-family: var(--rbf-font-body);
+  font-size: calc(12.5px * var(--rbf-ui));
+  line-height: 1.75;
+  color: var(--rbf-paper);
+}
+
+.rbf-arv__ramo.is-fechado .rbf-arv__tx { color: var(--rbf-ink-mute); }
+
+/* ---- selo de rota ------------------------------------------------------
+   O numero vem do campo routes da propria opcao, nunca transcrito.      */
+
+.rbf-arv__rotas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6px * var(--rbf-ui));
+  margin: calc(8px * var(--rbf-ui)) 0 0 calc(24px * var(--rbf-ui));
+}
+
+.rbf-arv__rota {
+  --rbf-route-tint: var(--rbf-ink-mute);
+
+  display: inline-flex;
+  align-items: baseline;
+  gap: .45em;
+
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--rbf-route-tint);
+
+  padding: calc(3px * var(--rbf-ui)) calc(8px * var(--rbf-ui));
+  border: 1px solid var(--rbf-route-tint);
+}
+
+.rbf-arv__rota--hope   { --rbf-route-tint: var(--rbf-gold); }
+.rbf-arv__rota--loss   { --rbf-route-tint: var(--rbf-red-lit); }
+.rbf-arv__rota--answer { --rbf-route-tint: var(--rbf-cold); }
+
+.rbf-arv__rota.is-nula {
+  color: var(--rbf-ink-ghost);
+  border-color: var(--rbf-ink-ghost);
+}
+
+.rbf-arv__rotaVal { font-variant-numeric: tabular-nums; }
+
+.rbf-arv__efeito {
+  font-family: var(--rbf-font-body);
+  font-size: calc(12px * var(--rbf-ui));
+  line-height: 1.8;
+  color: var(--rbf-ink-dim);
+  margin: calc(8px * var(--rbf-ui)) 0 0 calc(24px * var(--rbf-ui));
+}
+
+.rbf-arv__efeito--lacuna {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  color: var(--rbf-ink-ghost);
+}
+
+/* ---- os nove finais ---------------------------------------------------- */
+
+.rbf-arv__sec {
+  font-family: var(--rbf-font-display);
+  font-size: calc(12px * var(--rbf-ui));
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--rbf-gold);
+  padding-top: calc(18px * var(--rbf-ui));
+  border-top: 1px solid var(--rbf-line);
+}
+
+.rbf-arv__finais {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--rbf-ui));
+  margin: 0;
+  padding: 0;
+}
+
+.rbf-arv__final {
+  padding: calc(14px * var(--rbf-ui)) calc(16px * var(--rbf-ui));
+  border-left: 3px solid var(--rbf-red);
+  background: rgba(217, 213, 200, .03);
+}
+
+.rbf-arv__final.is-lacrado {
+  border-left-color: var(--rbf-ink-ghost);
+  background: none;
+}
+
+.rbf-arv__final.is-atual { border-left-color: var(--rbf-gold); }
+
+.rbf-arv__finalHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(10px * var(--rbf-ui));
+  margin-bottom: calc(6px * var(--rbf-ui));
+}
+
+.rbf-arv__finalNum {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .18em;
+  color: var(--rbf-red-lit);
+  flex: none;
+}
+
+.rbf-arv__final.is-lacrado .rbf-arv__finalNum { color: var(--rbf-ink-ghost); }
+.rbf-arv__final.is-atual   .rbf-arv__finalNum { color: var(--rbf-gold); }
+
+.rbf-arv__finalTit {
+  font-family: var(--rbf-font-display);
+  font-size: calc(13px * var(--rbf-ui));
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-dim);
+  flex: 1 1 auto;
+}
+
+.rbf-arv__finalTag {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-mute);
+  border: 1px solid var(--rbf-line);
+  padding: calc(2px * var(--rbf-ui)) calc(7px * var(--rbf-ui));
+  flex: none;
+}
+
+.rbf-arv__finalEixos {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-mute);
+  margin-bottom: calc(8px * var(--rbf-ui));
+}
+
+.rbf-arv__finalTx {
+  font-family: var(--rbf-font-body);
+  font-size: calc(12.5px * var(--rbf-ui));
+  line-height: 1.85;
+  color: var(--rbf-paper);
+}
+
+.rbf-arv__finalTx + .rbf-arv__finalTx { margin-top: calc(8px * var(--rbf-ui)); }
+
+/* A partir de tablet a lista de finais cabe em duas colunas. Nao ha
+   media query de max-width aqui: a base atende telefone e a faixa
+   maior so cresce. */
+@media (min-width: 760px) {
+  .rbf-arv__finais {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(14px * var(--rbf-ui));
+  }
+}
+
+/* Lacuna do cartao de final. Classe propria em vez de empilhar
+   rbf-arv__finalTx com o modificador de lacuna: as duas regras tem a
+   mesma especificidade, e quem vencia era a ordem no arquivo. */
+.rbf-arv__finalVazio {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  color: var(--rbf-ink-ghost);
+}
+
+/* ==========================================================================
+   O MAPA DA ARVORE
+
+   O quadro rola de lado abaixo de 660px e o SVG guarda largura minima:
+   fluxograma que encolhe ate caber vira borrao, e o texto do no e a
+   unica coisa que o jogador le sem clicar. Em telefone ele arrasta,
+   que e como se le um fluxograma grande em tela pequena.
+
+   Cor com significado, e as mesmas tres do resto do jogo:
+     ouro      Esperanca
+     carmim    Perda, e o ramo desta leitura
+     frio      Resposta
+   Ramo nao percorrido nao ganha cor: fica no fio fantasma.
+   ========================================================================== */
+
+.rbf-arv__mapa {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: calc(8px * var(--rbf-ui));
+  -webkit-overflow-scrolling: touch;
+}
+
+.rbf-arv__svg {
+  display: block;
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+}
+
+.rbf-arv__legenda {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: calc(11.5px * var(--rbf-ui));
+  line-height: 1.75;
+  color: var(--rbf-ink-mute);
+  margin-top: calc(6px * var(--rbf-ui));
+}
+
+/* ---- arestas ----------------------------------------------------------- */
+
+.rbf-e {
+  fill: none;
+  stroke: var(--rbf-line);
+  stroke-width: 1.4;
+}
+
+.rbf-e--espinha    { stroke: var(--rbf-ink-mute); stroke-width: 1.8; }
+.rbf-e--barramento { stroke: var(--rbf-line); }
+
+/* O trilho da esquerda e estrutura: existe para o bloco de finais nao
+   ser atravessado pelo meio. Nunca acende como caminho percorrido. */
+.rbf-e--trilho     { stroke: var(--rbf-ink-mute); stroke-width: 1.4; }
+
+/* A aresta do assunto: do marco ate o bloco de finais, por fora. */
+.rbf-e--decisao {
+  stroke: var(--rbf-red);
+  stroke-width: 1.6;
+  stroke-dasharray: 7 6;
+  opacity: .75;
+}
+
+.rbf-e.is-ativo {
+  stroke: var(--rbf-red-lit);
+  stroke-width: 2.2;
+}
+
+/* ---- nos --------------------------------------------------------------- */
+
+.rbf-n__caixa {
+  fill: var(--rbf-raised);
+  stroke: var(--rbf-line);
+  stroke-width: 1.2;
+}
+
+.rbf-n__tit,
+.rbf-n__opt,
+.rbf-n__fim,
+.rbf-n__marca,
+.rbf-n__marco {
+  font-family: var(--rbf-font-display);
+  fill: var(--rbf-ink-dim);
+}
+
+.rbf-n__tit {
+  font-size: 19px;
+  letter-spacing: 1.6px;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.rbf-n__sub {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: 15px;
+  fill: var(--rbf-ink-mute);
+  text-anchor: middle;
+}
+
+.rbf-n__opt {
+  font-size: 18px;
+  letter-spacing: .6px;
+  text-anchor: middle;
+  fill: var(--rbf-ink-mute);
+}
+
+.rbf-n__fim {
+  font-size: 17px;
+  letter-spacing: .6px;
+  text-anchor: middle;
+  fill: var(--rbf-ink-mute);
+}
+
+.rbf-n__marca {
+  font-size: 13px;
+  letter-spacing: 1.4px;
+  fill: var(--rbf-ink-ghost);
+}
+
+.rbf-n__marco {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: 16px;
+  text-anchor: middle;
+  fill: var(--rbf-red-lit);
+}
+
+/* ---- estados ----------------------------------------------------------- */
+
+/* Capitulo alcancado: a espinha da obra, em ouro. */
+.rbf-n--cap.is-aberto .rbf-n__caixa { stroke: var(--rbf-gold); }
+.rbf-n--cap.is-aberto .rbf-n__tit   { fill: var(--rbf-gold); }
+
+.rbf-n--cap.is-lacrado .rbf-n__caixa { fill: none; stroke: var(--rbf-ink-ghost); }
+.rbf-n--cap.is-lacrado .rbf-n__tit   { fill: var(--rbf-ink-ghost); }
+
+/* O marco nao e capitulo nem escolha: e o lugar onde a conta fecha. */
+.rbf-n--marco .rbf-n__caixa {
+  fill: none;
+  stroke: var(--rbf-red);
+  stroke-dasharray: 5 4;
+}
+
+/* Ramo percorrido: ganha a cor da rota dominante daquela opcao. */
+.rbf-n--opt.is-aberto .rbf-n__caixa,
+.rbf-n--opt.is-atual  .rbf-n__caixa,
+.rbf-n--fim.is-aberto .rbf-n__caixa,
+.rbf-n--fim.is-atual  .rbf-n__caixa {
+  fill: var(--rbf-panel);
+  stroke: var(--rbf-ink-mute);
+}
+
+.rbf-n--opt.is-aberto .rbf-n__opt,
+.rbf-n--fim.is-aberto .rbf-n__fim { fill: var(--rbf-paper); }
+
+.rbf-n--rota-hope.is-aberto   .rbf-n__caixa { stroke: var(--rbf-gold); }
+.rbf-n--rota-loss.is-aberto   .rbf-n__caixa { stroke: var(--rbf-red-lit); }
+.rbf-n--rota-answer.is-aberto .rbf-n__caixa { stroke: var(--rbf-cold); }
+
+.rbf-n--rota-hope.is-aberto   .rbf-n__marca { fill: var(--rbf-gold); }
+.rbf-n--rota-loss.is-aberto   .rbf-n__marca { fill: var(--rbf-red-lit); }
+.rbf-n--rota-answer.is-aberto .rbf-n__marca { fill: var(--rbf-cold); }
+
+/* O caminho desta leitura. E a unica marca de "voce esteve aqui". */
+.rbf-n.is-atual .rbf-n__caixa {
+  stroke: var(--rbf-red-lit);
+  stroke-width: 2;
+}
+.rbf-n.is-atual .rbf-n__opt,
+.rbf-n.is-atual .rbf-n__fim   { fill: var(--rbf-paper); }
+.rbf-n.is-atual .rbf-n__marca { fill: var(--rbf-red-lit); }
+
+/* Nao percorrido: fio fantasma, sem preenchimento. A caixa continua
+   la, porque some-la esconderia que ha mais para achar. */
+.rbf-n.is-fechado .rbf-n__caixa { fill: none; stroke: var(--rbf-ink-ghost); }
+.rbf-n.is-fechado .rbf-n__opt,
+.rbf-n.is-fechado .rbf-n__fim   { fill: var(--rbf-ink-ghost); }
+
+.rbf-n.is-lacrado .rbf-n__caixa { fill: none; stroke: var(--rbf-ink-ghost); }
+
+.rbf-n.is-clicavel { cursor: pointer; }
+
+.rbf-n.is-clicavel:hover .rbf-n__caixa,
+.rbf-n.is-clicavel:focus .rbf-n__caixa {
+  stroke: var(--rbf-gold-lit);
+  stroke-width: 2;
+}
+
+.rbf-n.is-clicavel:focus { outline: none; }
+
+/* ---- a linha apontada pelo mapa ---------------------------------------- */
+
+.rbf-arv__ramo.is-apontado,
+.rbf-arv__final.is-apontado {
+  animation: rbf-apontar var(--rbf-slow) var(--rbf-ease-settle);
+}
+
+@keyframes rbf-apontar {
+  0%   { background: rgba(185, 151, 91, .22); }
+  100% { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rbf-arv__ramo.is-apontado,
+  .rbf-arv__final.is-apontado { animation: none; }
+}
+
+/* ---- a secao de rota do mapa ------------------------------------------
+   Quatro colunas, uma por caminho. A coluna mais longa e a Perda, e a
+   diferenca de altura entre elas e a coisa que o desenho diz melhor do
+   que qualquer texto: uma rota desce mais do que as outras tres. */
+
+.rbf-n__rot {
+  font-family: var(--rbf-font-display);
+  font-size: 15px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-anchor: middle;
+  fill: var(--rbf-ink-mute);
+}
+
+.rbf-n--rot .rbf-n__caixa { fill: none; stroke: none; }
+.rbf-n--rot.is-atual .rbf-n__rot { fill: var(--rbf-red-lit); }
+
+.rbf-n__rcapNum {
+  font-family: var(--rbf-font-display);
+  font-size: 15px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  text-anchor: middle;
+  fill: var(--rbf-ink-dim);
+}
+
+.rbf-n__rcapTit {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: 13px;
+  text-anchor: middle;
+  fill: var(--rbf-ink-mute);
+}
+
+.rbf-n--rcap.is-aberto .rbf-n__caixa   { stroke: var(--rbf-gold); }
+.rbf-n--rcap.is-aberto .rbf-n__rcapNum { fill: var(--rbf-gold); }
+.rbf-n--rcap.is-atual  .rbf-n__rcapNum { fill: var(--rbf-paper); }
+.rbf-n--rcap.is-fechado .rbf-n__caixa   { fill: none; stroke: var(--rbf-ink-ghost); }
+.rbf-n--rcap.is-fechado .rbf-n__rcapNum,
+.rbf-n--rcap.is-fechado .rbf-n__rcapTit { fill: var(--rbf-ink-ghost); }
+
+/* ==========================================================================
+   SELECAO DE CAPITULOS POR ROTA
+
+   O tronco vem primeiro, sem cabecalho, porque ele nao precisa de nome:
+   e a obra ate o Capitulo 9. Depois vem uma faixa por caminho.
+
+   A faixa da rota aparece SEMPRE, inclusive intocada. Saber que existe
+   um caminho que voce nao percorreu e o ponto da tela.
+   ========================================================================== */
+
+.rbf-chapters-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: calc(20px * var(--rbf-ui));
+}
+
+.rbf-rotas__aviso {
+  padding-top: calc(14px * var(--rbf-ui));
+  border-top: 1px solid var(--rbf-line);
+}
+
+.rbf-rotas__avisoTx {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: calc(12px * var(--rbf-ui));
+  line-height: 1.8;
+  color: var(--rbf-ink-dim);
+}
+
+.rbf-rota {
+  padding: calc(14px * var(--rbf-ui)) 0 0 calc(14px * var(--rbf-ui));
+  border-left: 3px solid var(--rbf-gold);
+}
+
+.rbf-rota.is-intocada { border-left-color: var(--rbf-ink-ghost); }
+
+.rbf-rota__cab {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(10px * var(--rbf-ui));
+  margin-bottom: calc(6px * var(--rbf-ui));
+}
+
+.rbf-rota__nome {
+  font-family: var(--rbf-font-display);
+  font-size: calc(13px * var(--rbf-ui));
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rbf-gold);
+  flex: none;
+}
+
+.rbf-rota.is-intocada .rbf-rota__nome { color: var(--rbf-ink-ghost); }
+
+.rbf-rota__cond {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-mute);
+  flex: 1 1 auto;
+}
+
+.rbf-rota__conta {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  color: var(--rbf-ink-mute);
+  flex: none;
+}
+
+.rbf-rota__nota {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: calc(12px * var(--rbf-ui));
+  line-height: 1.8;
+  color: var(--rbf-paper);
+  margin-bottom: calc(12px * var(--rbf-ui));
+}
+
+.rbf-rota__nota--lacre {
+  font-family: var(--rbf-font-display);
+  font-style: normal;
+  font-size: var(--rbf-code);
+  letter-spacing: .12em;
+  color: var(--rbf-ink-ghost);
+}
+
+.rbf-chapters--fecho { padding-top: calc(14px * var(--rbf-ui)); border-top: 1px solid var(--rbf-line); }
+
+/* ==========================================================================
+   A CONTA - pagina inteira
+
+   Irma do menu principal, e nao overlay. O extra pos-jogo cresceu ate
+   nao caber num modal de 940px com moldura ornamentada por fora e
+   rolagem por dentro - e o mapa da arvore, que tem 640 por 2700
+   unidades, ficava num quadro que rolava dentro de outro que tambem
+   rolava.
+
+   Aqui so o corpo rola, e ele rola na altura toda da janela.
+
+   Mobile-first: a base empilha o trilho de secoes acima do corpo, e o
+   trilho rola de lado. A partir de 900px ele vira coluna a esquerda,
+   que e a forma de dossie que a obra usa em todo o resto.
+   ========================================================================== */
+
+#rf-conta {
+  /* absolute, e nao fixed: a pagina vive dentro de #vn, como o menu e o
+     portao. 'fixed' dentro de um ancestral com transform passa a se
+     referir a ele, e a caixa deixaria de bater com o palco.
+
+     Camada 92: acima do menu principal (90) e abaixo dos overlays de
+     interface (100), para que confirmacao e aviso continuem abrindo por
+     cima dela. */
+  position: absolute;
+  inset: 0;
+  z-index: 92;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--rbf-ground);
+  color: var(--rbf-ink);
+
+  opacity: 0;
+  transition: opacity var(--rbf-panel-ms) var(--rbf-ease-page);
+}
+
+#rf-conta.show { opacity: 1; }
+#rf-conta[hidden] { display: none; }
+
+/* Mesma luz de vela do menu, sem a vela: a pagina e leitura, e nao
+   cerimonia. Fica so o clareado de canto. */
+#rf-conta-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(185, 151, 91, .07), transparent 60%),
+    radial-gradient(90% 70% at 50% 110%, rgba(140, 39, 51, .06), transparent 60%);
+}
+
+/* ---- cabecalho --------------------------------------------------------- */
+
+.rf-conta__top {
+  position: relative;
+  z-index: 1;
+  flex: none;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(10px * var(--rbf-ui));
+
+  padding: calc(20px * var(--rbf-ui)) var(--rbf-pad) calc(14px * var(--rbf-ui));
+  border-bottom: 1px solid var(--rbf-line);
+}
+
+.rf-conta__id {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--rbf-ui));
+  flex: none;
+}
+
+.rf-conta__eyebrow {
+  font-size: var(--rbf-code);
+  letter-spacing: .2em;
+  color: var(--rbf-red-lit);
+}
+
+.rf-conta__title {
+  font-family: var(--rbf-font-display);
+  font-size: calc(24px * var(--rbf-ui));
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--rbf-gold);
+  line-height: 1.1;
+}
+
+.rf-conta__sub {
+  font-family: var(--rbf-font-body);
+  font-style: italic;
+  font-size: calc(12px * var(--rbf-ui));
+  line-height: 1.7;
+  color: var(--rbf-ink-dim);
+  flex: 1 1 240px;
+}
+
+.rf-conta__close { flex: none; }
+
+/* ---- corpo ------------------------------------------------------------- */
+
+.rf-conta__main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- trilho de secoes -------------------------------------------------- */
+
+.rf-conta__rail {
+  flex: none;
+  display: flex;
+  gap: calc(6px * var(--rbf-ui));
+
+  padding: calc(10px * var(--rbf-ui)) var(--rbf-pad);
+  border-bottom: 1px solid var(--rbf-line);
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rf-conta__aba {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(2px * var(--rbf-ui));
+
+  min-height: 44px;
+  padding: calc(8px * var(--rbf-ui)) calc(12px * var(--rbf-ui));
+
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  text-align: left;
+
+  transition: color var(--rbf-fast), border-color var(--rbf-fast);
+}
+
+.rf-conta__abaNum {
+  font-family: var(--rbf-font-display);
+  font-size: var(--rbf-code);
+  letter-spacing: .18em;
+  color: var(--rbf-ink-ghost);
+}
+
+.rf-conta__abaRot {
+  font-family: var(--rbf-font-display);
+  font-size: calc(12px * var(--rbf-ui));
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--rbf-ink-mute);
+  white-space: nowrap;
+}
+
+/* A nota de cada secao so cabe na coluna. Em telefone ela some, e o
+   trilho vira uma fileira de rotulos. */
+.rf-conta__abaNota { display: none; }
+
+.rf-conta__aba:hover .rf-conta__abaRot { color: var(--rbf-ink-dim); }
+
+.rf-conta__aba.on { border-bottom-color: var(--rbf-gold); }
+.rf-conta__aba.on .rf-conta__abaRot { color: var(--rbf-gold); }
+.rf-conta__aba.on .rf-conta__abaNum { color: var(--rbf-red-lit); }
+
+/* ---- a area que rola --------------------------------------------------- */
+
+.rf-conta__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  padding: var(--rbf-pad);
+}
+
+.rf-conta__body:focus { outline: none; }
+
+/* Coluna de leitura. O mapa da arvore escapa dela por conta propria:
+   ele tem largura minima e rola de lado no proprio quadro. */
+.rf-conta__body > * {
+  max-width: 78ch;
+  margin-inline: auto;
+}
+
+.rf-conta__body > .rbf-arv { max-width: 1100px; }
+
+/* ---- a partir de tablet: trilho em coluna ------------------------------ */
+
+@media (min-width: 900px) {
+  .rf-conta__main { flex-direction: row; }
+
+  .rf-conta__rail {
+    flex: none;
+    width: calc(280px * var(--rbf-ui));
+    flex-direction: column;
+    gap: calc(2px * var(--rbf-ui));
+
+    padding: calc(18px * var(--rbf-ui)) calc(14px * var(--rbf-ui));
+    border-bottom: none;
+    border-right: 1px solid var(--rbf-line);
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .rf-conta__aba {
+    width: 100%;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    padding: calc(12px * var(--rbf-ui)) calc(14px * var(--rbf-ui));
+  }
+
+  .rf-conta__aba.on {
+    border-bottom-color: transparent;
+    border-left-color: var(--rbf-gold);
+    background: rgba(217, 213, 200, .03);
+  }
+
+  .rf-conta__abaRot { white-space: normal; }
+
+  .rf-conta__abaNota {
+    display: block;
+    font-family: var(--rbf-font-body);
+    font-style: italic;
+    font-size: calc(11.5px * var(--rbf-ui));
+    line-height: 1.6;
+    color: var(--rbf-ink-ghost);
+  }
+
+  .rf-conta__aba.on .rf-conta__abaNota { color: var(--rbf-ink-mute); }
+
+  .rf-conta__body { padding: calc(28px * var(--rbf-ui)) calc(32px * var(--rbf-ui)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #rf-conta { transition: none; }
 }

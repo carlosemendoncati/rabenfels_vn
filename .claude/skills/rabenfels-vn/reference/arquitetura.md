@@ -16,6 +16,8 @@ js/audio.js        BGM com crossfade, SFX, desbloqueio de autoplay
 js/history.js      backlog de diálogo
 js/routes.js       Esperança, Perda e Resposta
 js/gallery.js      desbloqueio por progresso real
+js/paginas.js      As Quatro Páginas e o laudo de cada leitura
+js/arvore.js       árvore de escolhas e mapa das quatro rotas
 js/data/*.js       roteiro — só dados
 js/script.js       montagem determinística do roteiro
 js/saves.js        esquema de save, 12 espaços, autosave, quicksave
@@ -109,15 +111,64 @@ arc:<chave>   cartão do Arquivo lido   (o beat precisa de `key:`)
 chapter:<id>  capítulo alcançado
 done:<id>     capítulo concluído
 route:<id>:<n> rota atingiu o valor
+cho:<escolha>:<opção>  ramo percorrido de fato
 ```
 
 O engine grava o que foi visto durante a partida. Item novo = uma linha
 no catálogo.
 
+`cho:` é gravado por `RBF.Arvore.mark()` no **momento do clique**, e não
+no fim da partida: quem abandonou no Capítulo 7 percorreu aqueles ramos
+do mesmo jeito.
+
+## A Árvore
+
+Terceira aba de **A Conta**, junto com As Quatro Páginas e As Leituras.
+Mostra as dez decisões com os três ramos de cada uma e os nove finais na
+ordem em que `RBF.ENDINGS` os avalia.
+
+Junta três fontes e não inventa uma quarta:
+
+| fonte | o que vem dela |
+|---|---|
+| `js/data/chapter*.js` | enunciado, opções e o campo `routes` de cada opção |
+| `js/data/arvore.js` | o que a escolha decide, e o que cada ramo muda depois |
+| `localStorage` | o que este jogador alcançou e percorreu |
+
+**O delta de rota é lido do roteiro, nunca transcrito na anotação.** É a
+mesma regra que o engine segue, pelo mesmo motivo: número repetido em dois
+lugares fica errado no dia em que um dos dois muda. `tools/arvore.js`
+reprova qualquer anotação que transcreva um delta.
+
+### O que aparece, e quando
+
+| camada | condição |
+|---|---|
+| o painel | a obra terminada uma vez |
+| enunciado e as três opções | o capítulo daquela escolha alcançado |
+| delta de rota e consequência | **o ramo percorrido**, em qualquer partida |
+| condição do final | a leitura alcançada |
+| eixos do final, com direção | sempre |
+
+O ramo não percorrido aparece como lacuna e não some. A direção do eixo
+(`{ r:'hope', d:'alta' }`) é o único dado que aparece antes de a leitura
+ser alcançada, e existe por legibilidade: sem ela oito dos nove cartões
+ficam idênticos. **Direção de rota, nunca conteúdo.**
+
+### Ao mexer no roteiro
+
+As consequências citam números de beats — 13 no Cap. 2, 17 no Cap. 3, 108
+do Cap. 6 ao Epílogo. `node tools/arvore.js` reconta e reprova se um
+número deixar de bater. Texto desse tipo envelhece calado; o validador é
+o que faz barulho.
+
 ## Ferramentas
 
 ```bash
 node tools/validate.js                 # o mais completo; exige Node
+node tools/finais.js                   # os nove finais; --dump escreve o transcript
+node tools/arvore.js                   # a árvore: anotação vs roteiro, e a tela num DOM
+node tools/shot_arvore.js              # a árvore em Chrome, em quatro tamanhos
 node tools/escape.js js/data/x.js      # normaliza para ASCII puro
 node tools/escape.js js/data/x.js --decode --stdout   # lê com acento
 

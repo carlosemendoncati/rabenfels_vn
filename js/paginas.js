@@ -91,10 +91,16 @@ RBF.Paginas = (function () {
       });
     }
 
+    /* A Vigilia tem cabecalho proprio: nesta leitura o Arquivo nunca
+       foi montado, e as quatro folhas saem do caderno de trabalho. */
+    var ending = (run && run.ending) || null;
+    var cab = (ending === 'vigil' && d.cabecalho_vigil)
+                ? d.cabecalho_vigil : d.cabecalho;
+
     return {
-      cabecalho: d.cabecalho.slice(),
+      cabecalho: cab.slice(),
       fecho:     d.fecho.slice(),
-      ending:    (run && run.ending) || null,
+      ending:    ending,
       paginas:   out
     };
   }

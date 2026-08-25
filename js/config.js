@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.9.0',
+  gameVersion:       '0.11.1',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
@@ -85,6 +85,11 @@ RBF.CONFIG = {
     /* Pagina escura atravessando entre telas. A cena troca aqui, no
        meio do trajeto, com o veu parado cobrindo a tela.   */
     sweepMs: 380,
+
+    /* Saida da pagina "A Conta". Acompanha --rbf-panel-ms em
+       css/tokens.css: o elemento so pode ser escondido depois de a
+       transicao de opacidade terminar. */
+    contaMs: 320,
     /* Duracao total do corte de tela, ponta a ponta. Acompanha o token
        --rbf-sweep de css/tokens.css; e o prazo que RBF.Motion usa para
        tirar a classe .is-sweeping.                          */
@@ -802,21 +807,127 @@ RBF.CHAPTERS = [
     selectable: true
   },
 
+  /* -----------------------------------------------------------------
+     A PARTIR DAQUI A OBRA SE PARTE EM QUATRO.
+
+     Ate o Capitulo 9 todo mundo le o mesmo texto e as escolhas mexem
+     em graus. No fim do Capitulo 9 o beat { t:'rota' } fecha a conta e
+     manda o jogador para UM dos quatro caminhos, e os quatro sao
+     capitulos diferentes, e nao variantes do mesmo capitulo.
+
+     O numero do capitulo se repete de proposito: existe um Capitulo 10
+     em cada rota, e eles nao tem nada em comum. Quem joga de novo por
+     outro caminho le um Capitulo 10 que nunca viu.
+
+     'rota' amarra o capitulo ao caminho. O engine nao entra num
+     capitulo cuja rota nao e a da partida, e a selecao de capitulos
+     agrupa por esse campo.
+     ----------------------------------------------------------------- */
+
+  /* --- ESPERANCA: ela tenta. A rota mais curta, e a mais comum. --- */
   {
-    id:    'capitulo10',
+    id:    'esp10',
     code:  'C-X',
-    data:  'CHAPTER10',
+    data:  'ESP10',
+    rota:  'esperanca',
     label: 'Cap\u00edtulo 10',
     title: 'A Fuga',
     selectable: true
   },
-
   {
-    id:    'capitulo11',
+    id:    'esp11',
     code:  'C-XI',
-    data:  'CHAPTER11',
+    data:  'ESP11',
+    rota:  'esperanca',
     label: 'Cap\u00edtulo 11',
     title: 'Noventa Dias',
+    selectable: true
+  },
+
+  /* --- RESPOSTA: ela documenta. Nao desce nenhuma noite. --- */
+  {
+    id:    'res10',
+    code:  'C-X',
+    data:  'RES10',
+    rota:  'resposta',
+    label: 'Cap\u00edtulo 10',
+    title: 'O Registro',
+    selectable: true
+  },
+  {
+    id:    'res11',
+    code:  'C-XI',
+    data:  'RES11',
+    rota:  'resposta',
+    label: 'Cap\u00edtulo 11',
+    title: 'A Entrada 214',
+    selectable: true
+  },
+  {
+    id:    'res12',
+    code:  'C-XII',
+    data:  'RES12',
+    rota:  'resposta',
+    label: 'Cap\u00edtulo 12',
+    title: 'O Corredor',
+    selectable: true
+  },
+
+  /* --- PERDA: a soma do que ela decidiu nao fazer. A mais longa. --- */
+  {
+    id:    'per10',
+    code:  'C-X',
+    data:  'PER10',
+    rota:  'perda',
+    label: 'Cap\u00edtulo 10',
+    title: 'A Conta',
+    selectable: true
+  },
+  {
+    id:    'per11',
+    code:  'C-XI',
+    data:  'PER11',
+    rota:  'perda',
+    label: 'Cap\u00edtulo 11',
+    title: 'As Tr\u00eas Moedas',
+    selectable: true
+  },
+  {
+    id:    'per12',
+    code:  'C-XII',
+    data:  'PER12',
+    rota:  'perda',
+    label: 'Cap\u00edtulo 12',
+    title: 'A Volta',
+    selectable: true
+  },
+  {
+    id:    'per13',
+    code:  'C-XIII',
+    data:  'PER13',
+    rota:  'perda',
+    label: 'Cap\u00edtulo 13',
+    title: 'O Que Ela Anotou',
+    selectable: true
+  },
+
+  /* --- COBERTURA: Serafina a remove antes de agosto. --- */
+  {
+    id:    'cob10',
+    code:  'C-X',
+    data:  'COB10',
+    rota:  'cobertura',
+    label: 'Cap\u00edtulo 10',
+    title: 'A Carruagem',
+    selectable: true
+  },
+  {
+    id:    'cob11',
+    code:  'C-XI',
+    data:  'COB11',
+    rota:  'cobertura',
+    label: 'Cap\u00edtulo 11',
+    title: 'Marca Cinzenta',
     selectable: true
   },
 
@@ -1202,54 +1313,124 @@ RBF.ROUTES = [
    ------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------
-   FINAIS
+   AS QUATRO ROTAS
 
-   Escolhidos ao fim do Capitulo 9, pelo estado acumulado. O beat
-   { t:'ending' } avalia esta lista NA ORDEM e grava o primeiro que
-   bater em RBF.STATE.flags.ending. O ultimo nao tem condicao: e o que
-   acontece quando nenhum desvio ocorreu.
+   Ate o fim do Capitulo 9 a obra e uma so. Ali o beat { t:'rota' }
+   fecha a conta e manda o jogador para UM dos quatro caminhos, cada um
+   com capitulos proprios que nao existem nos outros.
 
-   Nenhum final altera o destino. Antoniette morre, Klara e consumida, o
-   ciclo continua. O que muda e QUANTO o jogador entendeu.
+   Isto substituiu nove finais que dividiam os mesmos tres capitulos por
+   condicional. O motivo e simples: nove desfechos empilhados dentro de
+   um Capitulo 10 unico produziam um capitulo que nao era de ninguem, e
+   o jogador que repetia a obra relia 90% do mesmo texto. Quatro rotas
+   com capitulos proprios dao a quem repete um capitulo que ele nunca
+   viu, que e a promessa que uma segunda partida faz.
 
-   Os limiares foram recalibrados em 26/07/2026 contra as escolhas que
-   existem de fato. A biblia pedia Esperanca >= 14 E Resposta >= 14, e o
-   maximo alcancavel de min(Esperanca, Resposta) e 11: o final verdadeiro
-   estava inatingivel. tools/validate.js confere isso a cada mudanca.
+   COMO SE LE ESTA TABELA
+   Avaliada NA ORDEM. A primeira que bate vence, e a ultima nao tem
+   condicao: e o que acontece quando nenhum desvio ocorreu.
 
    Campos de 'when', todos opcionais e combinados por E:
-     flag   : nome de flag que precisa ser verdadeira
-     min    : { rota: valor minimo }
-     max    : { rota: valor maximo }
+     flag : nome de flag que precisa ser verdadeira
+     min  : { eixo: valor minimo }
+     max  : { eixo: valor maximo }
+
+   DISTRIBUICAO MEDIDA nas 59.049 combinacoes de escolha - contada por
+   `node tools/rotas.js`, nunca estimada. Este projeto ja perdeu uma
+   producao inteira com limiar chutado: um final pedia Esperanca >= 14 E
+   Resposta >= 14 num teto cruzado de 13, e nasceu inalcancavel.
+
+     cobertura  11,1%     perda  ~13%     resposta  ~17%     esperanca  resto
+
+   'ending' e o id do desfecho daquela rota. E um por rota, e a tabela
+   de RBF.ENDINGS logo abaixo so acrescenta rotulo e nota - a decisao
+   mora aqui, e em nenhum outro lugar.
+   ------------------------------------------------------------------------- */
+
+RBF.ROTAS = [
+  {
+    id:     'cobertura',
+    label:  'A Cobertura',
+    nome:   'A Cobertura Queimada',
+    ending: 'cover_burned',
+    /* Duas escolhas, e nas duas ela esta CERTA pelas regras da Ordem:
+       relatou agosto na integra e remeteu o nome da antecessora com
+       identificacao da fonte. Nidhaus le tudo o que entra e sai. */
+    when:   { flag: 'cover_burned' },
+    chapters: ['cob10', 'cob11'],
+    nota:   'Ela sai viva, antes de agosto, e sem entender que foi a compet\u00eancia dela que a entregou.'
+  },
+
+  {
+    id:     'perda',
+    label:  'A Perda',
+    nome:   'A D\u00edvida',
+    ending: 'divida',
+    when:   { min: { loss: 11 } },
+    chapters: ['per10', 'per11', 'per12', 'per13'],
+    nota:   'A soma do que ela decidiu n\u00e3o fazer. \u00c9 a rota mais longa, e a \u00fanica em que a conta fecha.'
+  },
+
+  {
+    id:     'resposta',
+    label:  'A Resposta',
+    nome:   'O Livro-Raz\u00e3o',
+    ending: 'registro',
+    when:   { min: { answer: 12 } },
+    chapters: ['res10', 'res11', 'res12'],
+    nota:   'Ela entende tudo e n\u00e3o desce nenhuma noite. O documento sai completo, e sair completo \u00e9 o pre\u00e7o.'
+  },
+
+  {
+    id:     'esperanca',
+    label:  'A Esperan\u00e7a',
+    nome:   'O Arquivo',
+    ending: 'arquivo',
+    /* sem 'when': e o caminho padrao */
+    chapters: ['esp10', 'esp11'],
+    nota:   'Ela tenta. Chega mais longe do que qualquer pessoa em cinco s\u00e9culos, e volta a p\u00e9.'
+  }
+];
+
+/* -------------------------------------------------------------------------
+   OS QUATRO FINAIS
+
+   Um por rota. O beat { t:'rota' } grava RBF.STATE.flags.rota e, junto,
+   RBF.STATE.flags.ending com o campo 'ending' da rota escolhida.
+
+   Nenhum final altera o destino da menina. Antoniette morre em duas das
+   quatro leituras e vive nas outras duas, e o que muda nao e isso: e
+   QUANTO o jogador entendeu, e quanto custou entender.
+
+   Steiner, no corpus: a tragedia nao admite compensos. Nenhum destes
+   quatro pode pagar o jogador - nem com salvacao, nem com licao, nem
+   com a satisfacao de ter jogado certo. Sobreviver, aqui, nao e premio.
    ------------------------------------------------------------------------- */
 
 RBF.ENDINGS = [
   {
     id:    'cover_burned',
+    rota:  'cobertura',
     label: 'A Cobertura Queimada',
-    note:  'Serafina encerra o contrato antes de agosto. Ela VIVE, o Arquivo sai incompleto, e Klara fica.',
-    when:  { flag: 'cover_burned' }
+    note:  'Serafina encerra o contrato antes de agosto. Ela VIVE, o Arquivo sai incompleto, e Klara fica.'
   },
-
   {
-    id:    'distance',
-    label: 'O Distanciamento',
-    note:  'Ela nunca tenta e cumpre a missao. Ela VIVE, e e o pior dos quatro.',
-    when:  { max: { hope: 4 } }
+    id:    'divida',
+    rota:  'perda',
+    label: 'A D\u00edvida',
+    note:  'A soma do que ela decidiu n\u00e3o fazer. Ela MORRE, e a \u00faltima p\u00e1gina \u00e9 uma coluna de valores que fecha.'
   },
-
   {
-    id:    'early',
-    label: 'Agosto Antecipado',
-    note:  'Entende cedo e age cedo. A casa antecipa junto. Ela MORRE sem as quatro horas.',
-    when:  { min: { answer: 13 }, max: { hope: 7 } }
+    id:    'registro',
+    rota:  'resposta',
+    label: 'O Livro-Raz\u00e3o',
+    note:  'Entendeu tudo e n\u00e3o pagou nada. Ela VIVE, o Arquivo sai completo e frio, e ningu\u00e9m nele tem nome.'
   },
-
   {
-    id:    'archive',
+    id:    'arquivo',
+    rota:  'esperanca',
     label: 'O Arquivo',
-    note:  'Chega mais longe do que qualquer outra rota, e volta a pe. Ela MORRE no prazo que Carmine deu.'
-    /* sem 'when': e o final padrao */
+    note:  'Chega mais longe do que qualquer outra rota, e volta a p\u00e9. Ela MORRE no prazo que Carmine deu.'
   }
 ];
 

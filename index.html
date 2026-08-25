@@ -269,6 +269,32 @@
     </div>
   </div>
 
+  <!-- ========================= A CONTA ==========================
+       Pagina inteira, e nao painel. O extra pos-jogo cresceu ate nao
+       caber num modal de 940px: as quatro paginas, as leituras e o mapa
+       da arvore disputavam a mesma caixa com moldura ornamentada por
+       fora e rolagem por dentro. Aqui ele tem a tela toda.
+       ============================================================ -->
+  <div id="rf-conta" role="region" aria-label="A Conta" hidden>
+    <div id="rf-conta-bg" aria-hidden="true"></div>
+
+    <header class="rf-conta__top">
+      <div class="rf-conta__id">
+        <span class="rbf-label rf-conta__eyebrow">O QUE FICOU DA LEITURA</span>
+        <h2 class="rf-conta__title">A Conta</h2>
+      </div>
+      <p class="rf-conta__sub" id="rf-conta-sub"></p>
+      <button type="button" class="rbf-btn rbf-btn-ghost rf-conta__close" id="rf-conta-close">
+        Fechar
+      </button>
+    </header>
+
+    <div class="rf-conta__main">
+      <nav class="rf-conta__rail" id="rf-conta-rail" aria-label="Seções"></nav>
+      <div class="rf-conta__body" id="rf-conta-body" tabindex="-1"></div>
+    </div>
+  </div>
+
   <!-- ==================== PORTAO DE ABERTURA ==================== -->
   <div id="rf-gate">
     <div class="rf-gate__dust rbf-optional" aria-hidden="true"></div>
@@ -307,15 +333,26 @@
 <script src="js/data/chapter7.js"></script>
 <script src="js/data/chapter8.js"></script>
 <script src="js/data/chapter9.js"></script>
-<script src="js/data/chapter10.js"></script>
-    <script src="js/data/chapter11.js"></script>
+    <script src="js/data/esp10.js"></script>
+    <script src="js/data/esp11.js"></script>
+    <script src="js/data/res10.js"></script>
+    <script src="js/data/res11.js"></script>
+    <script src="js/data/res12.js"></script>
+    <script src="js/data/per10.js"></script>
+    <script src="js/data/per11.js"></script>
+    <script src="js/data/per12.js"></script>
+    <script src="js/data/per13.js"></script>
+    <script src="js/data/cob10.js"></script>
+    <script src="js/data/cob11.js"></script>
     <script src="js/data/epilogue.js"></script>
     <script src="js/data/quatro_paginas.js"></script>
+    <script src="js/data/arvore.js"></script>
 
 <script src="js/script.js"></script>
 <script src="js/saves.js"></script>
 <script src="js/gallery.js"></script>
     <script src="js/paginas.js"></script>
+    <script src="js/arvore.js"></script>
 <script src="js/engine.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/menu.js"></script>

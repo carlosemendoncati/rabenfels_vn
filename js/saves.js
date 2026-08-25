@@ -317,11 +317,15 @@ RBF.Saves = (function () {
     var p = readProgress();
     if (!p.runs) { p.runs = []; }
 
+    /* choiceLog entra para que a tela de arvore possa marcar o caminho
+       DESTA leitura. Run gravado por versao anterior nao traz o campo, e
+       nesse caso a arvore nao marca ninguem em vez de adivinhar. */
     var run = {
-      ending:  (snapshot && snapshot.ending)  || null,
-      flags:   (snapshot && snapshot.flags)   || {},
-      routes:  (snapshot && snapshot.routes)  || {},
-      at:      new Date().toISOString()
+      ending:    (snapshot && snapshot.ending)    || null,
+      flags:     (snapshot && snapshot.flags)     || {},
+      routes:    (snapshot && snapshot.routes)    || {},
+      choiceLog: (snapshot && snapshot.choiceLog) || {},
+      at:        new Date().toISOString()
     };
 
     p.runs.push(run);

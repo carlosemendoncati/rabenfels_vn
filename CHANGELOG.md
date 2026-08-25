@@ -1,5 +1,375 @@
 # Changelog
 
+## 0.11.1 — "A Conta" vira página
+
+O extra pós-jogo era um painel modal de 940px com moldura ornamentada por
+fora e rolagem por dentro. Com o mapa da árvore — 640 por 2.700 unidades —
+ele passou a rolar de lado dentro de um quadro que já rolava para baixo
+dentro de outro. Em telefone o gesto ia para o container errado.
+
+Agora é uma tela irmã do menu principal: trilho de seções à esquerda a
+partir de 900px, corpo rolando na altura toda da janela, e o mapa com
+largura de verdade.
+
+### Dois defeitos reais que vieram junto
+
+**`RBF.State.push('pages')` nunca funcionou.** `'pages'` não constava de
+`RBF.State.STATES`, então `push()` recusava em silêncio, nada era empilhado,
+e o `pop()` do fechamento tirava da pilha o estado de **outro** painel. O
+estado novo se chama `conta` e está declarado.
+
+**Camada errada.** A página nasceu em `z-index: 60`, que é o do fader de
+cena, e ficava atrás do menu. Foi para 92 — acima do menu (90) e abaixo dos
+overlays de interface (100), para que confirmação e aviso continuem abrindo
+por cima dela. A tabela de camadas no topo de `css/ui.css` foi atualizada.
+
+**`position: fixed` virou `absolute`**, como o menu e o portão: a página vive
+dentro de `#vn`, e `fixed` dentro de um ancestral com `transform` passa a se
+referir a ele.
+
+### Detalhe de implementação
+
+`contaAberta()` pergunta à máquina de estados, e não ao atributo `hidden` do
+elemento. `hidden` é atributo em HTML e propriedade em JS, e contar com o
+reflexo entre os dois amarra o código a um detalhe de DOM que nem todo
+ambiente honra — inclusive o `tools/minidom.js` deste projeto.
+
+---
+
+## 0.11.0 — A obra se parte em quatro
+
+Até o fim do Capítulo 9 a obra é uma só. Ali o beat `{ t:'ending' }` fecha a
+conta e manda o jogador para **um de quatro caminhos, com capítulos
+próprios que não existem nos outros**.
+
+```
+CAP. 9 ──┬── A COBERTURA ──→ 10 A Carruagem · 11 Marca Cinzenta
+         ├── A PERDA ──────→ 10 A Conta · 11 As Três Moedas
+         │                   12 A Volta · 13 O Que Ela Anotou
+         ├── A RESPOSTA ───→ 10 O Registro · 11 A Entrada 214
+         │                   12 O Corredor
+         └── A ESPERANÇA ──→ 10 A Fuga · 11 Noventa Dias
+                                    ↓
+                             EPÍLOGO (compartilhado)
+```
+
+O número do capítulo se repete de propósito: existe um Capítulo 10 em cada
+caminho, e eles não têm nada em comum. Quem repete a obra por outro caminho
+lê um Capítulo 10 que nunca viu — que é a promessa que uma segunda partida
+faz e que a versão anterior não cumpria.
+
+**Onze capítulos novos**, 2.400 beats. A rota mais longa chega ao Capítulo 13.
+
+### Nove desfechos viraram quatro, um por rota
+
+A versão anterior tinha nove finais dividindo os mesmos três capítulos por
+condicional. O resultado era um Capítulo 10 que não era de ninguém, e quem
+repetia relia noventa por cento do mesmo texto.
+
+| rota | condição | desfecho | Antoniette |
+|---|---|---|---|
+| A Cobertura | `lied_to_order:'A'` **e** `third_paid:'B'` | A Cobertura Queimada | vive |
+| A Perda | Perda ≥ 11 | A Dívida | morre |
+| A Resposta | Resposta ≥ 12 | O Livro-Razão | vive |
+| A Esperança | sem condição — é o padrão | O Arquivo | morre |
+
+**Distribuição medida nas 59.049 combinações**, contada por
+`node tools/rotas.js` e nunca estimada:
+
+```
+cobertura  11,11%   perda  14,51%   resposta  15,93%   esperanca  58,45%
+```
+
+O material dos cinco desfechos aposentados não se perdeu: virou cena dentro
+dos capítulos novos. A Vigília está no braço dormente de `esp10`; A
+Testemunha, na grafia de lápide; A Casa Vazia, no corredor de `res12`.
+
+### O que cada rota carrega
+
+**A Esperança** é o caminho padrão e o mais curto. Ela tenta, chega à
+floresta, e Klara para de andar sem saber dizer por quê.
+
+**A Resposta** é a rota de quem entendeu tudo e não desceu nenhuma noite —
+e ela está **certa**: conferiu a probabilidade em junho com a própria letra,
+e a probabilidade era baixa. Carmine vem, confere, e vai embora dizendo
+*"Nada. Eu vim conferir, e conferi."* Ela vive porque não valeu a pena
+matá-la, e ninguém em cena diz isso.
+
+**A Perda** é a mais longa, e é a única em que a conta fecha. Três moedas
+recusadas em maio, uma porta trancada, onze minutos de desvio, um cocheiro
+que esperou dez. Ela arma a coluna antes do amanhecer e escreve a única
+linha do documento inteiro em que julga a si mesma.
+**E a aritmética está errada, e ela nunca vai saber.** Carmine desmonta em
+quatro palavras — *"Eu não estava contando o tempo."* — e não há resto de
+frase. Steiner, R11: a cadeia causal fica e o mérito sai.
+
+**A Cobertura** é a única em que ela sai viva e antes de agosto, e é a única
+em que ela usa a própria morte presumida como ferramenta: não escreve
+nenhuma quarta-feira, porque o pacote só sai com noventa dias de silêncio.
+
+### O Prólogo não mudou uma linha
+
+A moldura sobrevive às quatro. O pacote chega, Matheo conta as páginas antes
+de ler a primeira, e o que muda é o que está dentro.
+
+---
+
+## O MAPA — fluxograma no painel "A Conta"
+
+A aba **A Árvore** ganhou um fluxograma em SVG antes da lista: espinha
+compartilhada com dez leques de três, o marco onde a conta fecha, e as
+quatro colunas de rota com alturas diferentes.
+
+**A diferença de altura entre as colunas é a coisa que o desenho diz melhor
+do que qualquer texto.** A Perda desce mais.
+
+- coordenadas calculadas em `RBF.Arvore.grafo()`, nunca medidas no DOM: um
+  `viewBox` escala sozinho e nada precisa ser remedido quando a janela muda
+- o quadro rola de lado abaixo de 660px, com largura mínima — fluxograma que
+  encolhe até caber vira borrão
+- clicar num nó leva à linha correspondente da lista
+- a aresta tracejada é o assunto do desenho: a rota é decidida no fim do
+  Capítulo 9 e o desfecho só aparece dois a quatro capítulos depois
+
+Cor com significado, e as mesmas três do jogo: ouro para Esperança, carmim
+para Perda e para o caminho desta leitura, frio para Resposta. Ramo não
+percorrido não ganha cor.
+
+### Dois defeitos pegos olhando a imagem, que nenhum validador via
+
+**O fecho de um leque e a abertura do seguinte desenhavam duas barras quase
+coladas** e a figura virava ruído. Agora as três reconvergem num ponto só e
+o par forma um losango em volta da junção.
+
+**O trilho da esquerda estava pintado de carmim**, dando a entender que o
+jogador tinha passado por todas as leituras — o oposto do que a tela diz.
+
+---
+
+## SELEÇÃO DE CAPÍTULOS por rota
+
+Era uma lista corrida, e lista corrida com quatro Capítulos 10 diferentes
+não diz nada a ninguém. Agora o tronco vem primeiro, sem cabeçalho, e depois
+vem uma faixa por caminho com nome, condição em linguagem de eixo lida de
+`RBF.ROTAS`, e a contagem de quantos capítulos daquele caminho foram
+alcançados.
+
+A faixa aparece **sempre**, inclusive intocada: saber que existe um caminho
+que você não percorreu é o ponto. A nota da rota só abre depois de ela ter
+sido percorrida até o fim.
+
+**Um furo real, corrigido:** entrar por seleção de capítulo num capítulo de
+rota deixava `flags.rota` vazia, e como todo beat daqueles capítulos é
+condicional a ela, o capítulo tocaria em branco — tela preta e cartão de
+fim. `startChapter()` passou a declarar a rota e o desfecho.
+
+---
+
+## Ferramentas
+
+```bash
+node tools/rotas.js            # distribuicao nas 59.049 combinacoes
+node tools/rotas.js --tabela   # varredura de limiar por eixo
+node tools/finais.js           # as quatro rotas, com checagens
+node tools/finais.js --dump    # transcript de cada uma
+node tools/arvore.js           # a arvore: anotacao vs roteiro, e a tela
+node tools/shot_arvore.js      # o mapa em Chrome, em quatro tamanhos
+```
+
+`tools/rotas.js` existe porque este projeto já perdeu uma produção inteira
+com limiar estimado. Ele conta, e falha se alguma rota nascer inalcançável.
+
+### Expectativas atualizadas em vez de afrouxadas
+
+`validate.js` e `smoke.html` exigiam que **toda** partida alcançasse todos os
+capítulos do manifesto. Com quatro rotas isso é falso por construção. As duas
+passaram a exigir o que é verdade e é mais estrito: tronco completo,
+**exatamente uma** rota, e ela inteira. Voltar a exigir o manifesto inteiro
+esconderia vazamento de rota em vez de acusar.
+
+`validate.js` ganhou também: toda rota alcançável, todo desfecho alcançável,
+todo capítulo declarado existe, pertence à rota que o declara e tem corpo.
+
+---
+
+## 0.10.0 — A Árvore, e os cinco finais que não tinham fim
+
+### Cinco dos nove finais paravam no Capítulo 10
+
+A obra foi de quatro para nove finais e o Capítulo 11 e o Epílogo
+continuaram cobrindo quatro. `witness`, `vigil`, `ledger`, `debt` e
+`hollow` divergiam em `chapter10.js` e depois caíam no tronco de
+`archive`: quem chegasse a `ledger` — em que ela **vive** — atravessava a
+cena de Carmine, arrancava quatro páginas, escrevia a última entrada,
+despachava o pacote e não recebia destino nenhum. O Epílogo não tinha uma
+linha para eles.
+
+Nenhum validador via isso. `validate.js` joga três ramos de escolha e
+alcança no máximo três finais dos nove; os outros seis nunca tinham sido
+lidos por ninguém. **`tools/finais.js`** existe por causa disso: escreve o
+transcript dos três últimos capítulos para cada um dos nove e confere o
+que dá para conferir por máquina — beat próprio em cada capítulo, ficha de
+baixa batendo com quem morre, cartão de fim único, laudo preenchido, e
+nenhuma flag lida sem ser escrita em algum lugar.
+
+### As correções do Steiner e do Ishiguro
+
+O estudo de *A Morte da Tragédia* reprovou dois dos nove por escrito, e a
+reprovação foi acatada.
+
+**A Dívida** era o mais frágil: ela morria **porque errou**, e o jogador
+saía com lição de moral em vez de catástrofe — `colpa morale specifica`, o
+modelo que Steiner opõe ao trágico. A cadeia causal ficou inteira e o
+mérito saiu: as três moedas custam caro sem que pagá-las tivesse salvado
+alguém. Carmine desmonta a aritmética em voz alta, sem explicar —
+*"Você chegou onze minutos atrasada." / "Cheguei." / "Eu não estava
+contando o tempo."* — e Antoniette anota na margem com um ponto de
+interrogação e segue. A conta continua fechando na página duzentos e
+oitenta e sete, e continua errada.
+
+**O Livro-Razão** corria risco de virar prêmio: ela vivia **e** o documento
+saía completo, duas recompensas no mesmo final. Agora o documento completo
+é a punição. Carmine aponta que a idade da entrada 214 está errada — Klara
+fez doze em março — e Antoniette confere, corrige com a mesma pena e
+classifica: *"Um erro em duzentas e catorze entradas. Está dentro da
+margem."* No Epílogo o tribunal não indefere: julga improcedente por
+ausência de terceiro lesado, a Ordem arquiva o material como exemplar, e a
+apostila de formação de escribas leva o nome dela no índice. Ela e Matheo
+trabalham no mesmo corredor por seis anos e falam do assunto duas vezes.
+As duas foram sobre método.
+
+**A Vigília** e **A Casa Vazia** ganharam o modelo de fecho do Ishiguro —
+permitir uma lembrança, cortar no meio, voltar ao trabalho. Na Casa Vazia
+uma borboleta de asa clara entra pela janela do corredor do arquivo em
+agosto do ano seguinte; ela para com a caixa na mão o tempo de a borboleta
+sair, e depois leva a caixa até a mesa, porque era o que estava fazendo.
+
+### A Vigília e o Prólogo, resolvidos sem tocar no Prólogo
+
+`vigil` diz que o Arquivo **nunca é compilado**, e o Prólogo mostra Matheo
+lendo o Arquivo. A contradição estava registrada em `canon.md` como não
+implementada.
+
+`compilou` separa as oito leituras em que o documento sai pela mão dela da
+Vigília, em que não sai. C11-4 e C11-5 ficam atrás dessa flag, e a Vigília
+ganha cauda própria: ela senta com uma hora e quarenta para uma tarefa de
+três noites, escreve a palavra *Índice* no alto de uma folha limpa e mais
+nada, desce às seis e meia e abre a biblioteca às sete porque às sete ela
+abre a biblioteca. Na quarta seguinte o mensageiro para no portão e
+ninguém desce com nada para ele.
+
+O Epílogo conta de onde veio o pacote: montado em Lervel, em nove noites,
+de correspondência interceptada e relatório de campo, por um escriturário
+do terceiro andar que assina o rodapé das notas como Compilador **porque o
+formulário pede nome de função e não nome de pessoa**. Ninguém em cena diz
+o que isso faz com o que o jogador leu no Prólogo.
+
+### A última entrada parou de mentir
+
+*"Tentei tirá-la daqui. Fui metódica. Fui devagar."* saía em todas as
+leituras, inclusive nas três em que **não houve tentativa nenhuma** — e
+saía em `distance` desde antes desta versão. `tentou` e `nao_tentou`
+dividem a cena. Quem não tentou fecha o documento com as três linhas de
+formulário: *"Não houve tentativa de extração. A avaliação de risco está
+nas páginas 44 a 51 e não mudou em cinco anos. O Compilador subscreve a
+avaliação."*
+
+Nada no beat repreende a personagem. Ela relê o parágrafo duas vezes, do
+jeito que conferia tudo, e ele está completo nas duas.
+
+---
+
+## A ÁRVORE — `A Conta`, terceira aba
+
+O jogador terminava a obra sem ter como comparar o que escolheu com o que
+existia para escolher. As rotas apareciam como três mostradores no HUD,
+sem número e sem causa, e o efeito de uma escolha só aparecia na cena —
+onde, de propósito, nada é explicado.
+
+As dez decisões aparecem inteiras, com os três ramos de cada uma, e os
+nove finais aparecem na ordem em que o jogo os avalia.
+
+**O delta de rota é lido do campo `routes` da própria opção**, e não
+transcrito na anotação. É a mesma regra que o engine segue: número
+repetido em dois lugares fica errado no dia em que um dos dois muda. O
+validador da árvore reprova se algum texto de anotação transcrever um
+delta.
+
+### O que aparece, e quando
+
+Nada é liberado para demonstrar.
+
+| camada | condição |
+|---|---|
+| o painel | a obra terminada uma vez |
+| enunciado e as três opções | o capítulo daquela escolha alcançado |
+| delta de rota e consequência | **o ramo percorrido de fato**, em qualquer partida |
+| condição do final | a leitura alcançada |
+| eixos do final, com direção | sempre |
+
+O ramo não percorrido aparece como `[ ramo não percorrido ]` e não some,
+do mesmo jeito que a ficha de personagem mostra lacuna em vez de esconder
+que há mais.
+
+**A direção do eixo entrou depois da primeira montagem.** Sem ela, oito
+dos nove cartões diziam "leitura não alcançada" e mais nada, e a grade
+virava uma parede. Com ela, A Testemunha (Esperança alta, Resposta alta) e
+A Vigília (Esperança alta, Resposta baixa) passam a ser dois destinos
+legíveis, e nenhum dos dois entrega o que acontece lá. É o limite:
+**direção de rota, nunca conteúdo.**
+
+### Consequências conferidas contra o roteiro, não contra memória
+
+Cada linha de `js/data/arvore.js` foi escrita depois de ler o beat que ela
+descreve. Os números citados são contagens de verdade, e
+`node tools/arvore.js` reconta a cada execução:
+
+```
+aldric_pressed   13 beats no Cap. 2
+klara_asked      17 no Cap. 3
+taught          108 do Cap. 6 ao Epílogo
+```
+
+Se alguém mexer no Capítulo 6 e o `taught` deixar de ser lido 108 vezes, o
+validador reprova a frase "cento e oito beats" antes de ela chegar ao
+jogador.
+
+---
+
+## Dois defeitos de save, corrigidos de passagem
+
+**`recordCompletion` gravava `routes: undefined`.** Lia
+`RBF.STATE.routes`, que nunca existiu — as rotas vivem em `RBF.Routes`.
+Toda partida concluída, desde sempre, guardou a fotografia sem os valores
+de rota. Passou a ler `RBF.Routes.serialize()`.
+
+**O run concluído não guardava `choiceLog`.** Sem ele a árvore não tem como
+marcar o caminho *daquela* leitura. Passou a guardar. Run gravado por
+versão anterior não traz o campo, e nesse caso a árvore não marca ninguém
+em vez de adivinhar.
+
+---
+
+## Ferramentas novas
+
+```bash
+node tools/finais.js            # os nove finais, com checagens
+node tools/finais.js --dump     # transcript de cada um em tools/_finais/
+node tools/arvore.js            # anotação vs roteiro, e a tela num DOM
+node tools/shot_arvore.js       # a árvore em Chrome, em quatro tamanhos
+```
+
+`tools/arvore.js` monta o painel num DOM próprio e confere a regra que
+mais importa, que é negativa: **a consequência de um ramo fechado não pode
+aparecer no HTML.** Conferir por leitura que uma coisa *não* aparece é o
+tipo de checagem que passa por engano.
+
+`tools/shot_arvore.js` existe porque `tools/shots.js` não chega ao painel —
+ele exige a obra terminada, e a partida do shots começa do zero. Este
+semeia o progresso e entra direto, mede a geometria e grava a imagem.
+
+---
+
 ## 0.9.0 — A fuga deixa de teleportar, e a morte pode ser falsa
 
 ### O defeito mais grave da obra

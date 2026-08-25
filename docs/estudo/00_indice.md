@@ -7,7 +7,11 @@ Ferramentas: `tools/refextract.py`, `tools/refslice.py`, `tools/desgruda.py`.
 
 ---
 
-## Estado da leitura — **corpus fechado**
+## Estado da leitura — **reaberto em 24/08/2026**
+
+O corpus esteve fechado em 11 títulos. Reabriu quando a obra passou de
+quatro para nove finais: faltava fundamento para **tragédia como forma** e
+para o **registro documental de primeira pessoa**. Entraram 12 e 13.
 
 | # | Livro | Situação |
 |---|---|---|
@@ -22,13 +26,28 @@ Ferramentas: `tools/refextract.py`, `tools/refslice.py`, `tools/desgruda.py`.
 | 09 | Kenworthy, *Writing SF, Fantasy & Horror* | **integral** |
 | 10 | Kristoff, *Império do Vampiro* | amostragem dirigida — moldura |
 | 11 | Peters, *Brother Cadfael* | amostragem dirigida — comunidade fechada |
+| 12 | Ishiguro, *Não Me Abandone Jamais* | **integral** — as tres partes |
+| 13 | Steiner, *A Morte da Tragédia* | **integral** — cap. 1-10 |
 
-Os três últimos foram lidos **por alvo declarado**, não de capa a capa.
+Os tres ultimos foram lidos **por alvo declarado**, não de capa a capa.
 Cavallaro e Corbett têm estudos de caso e exercícios que não transferem.
+
+**12 e 13 foram relidos integralmente em 24/08/2026**, a pedido do autor,
+depois de uma primeira passagem por amostragem. A leitura completa mudou as
+duas notas: no Ishiguro revelou que a Galeria e o adiamento são mentira e que
+a revelação vem de uma velha gentil, não de um vilão; no Steiner revelou o
+capítulo sobre **tragédia em prosa** e a frase que defende o registro deste
+projeto melhor que qualquer outra do corpus. Ainda assim, em ambos a parte
+util e pequena e esta marcada no aviso de utilidade de cada nota.
+
+**Steiner exigiu conserto antes de ler.** As ligaduras tipográficas tinham
+sido extraídas para o bloco de uso privado do Unicode, furando as palavras
+(`tragie`, `leerario`, `Esilo`). Sete códigos identificados por contexto e
+restaurados; texto limpo em `steiner_limpo.txt`. Detalhe em `13`.
 
 ---
 
-## As dez regras de confiança alta
+## As regras de confiança alta
 
 Onde fontes independentes convergem. **Prevalecem sobre gosto.**
 
@@ -88,6 +107,44 @@ Frey ("é quando autores jogam um red herring que os enredos começam a
 feder") · Crombie ("não planejo pistas falsas; elas fluem das suposições
 que as personagens fariam") · minha correção.
 **Fazer:** dar agenda própria a cada criado. O falso rastro nasce. → `03` `08`
+
+### R11 · A tragédia não admite troco — **nova em 24/08/2026**
+Steiner ("um só aceno a uma teologia que ofereça o Paraíso como prêmio é
+fatal ao herói trágico"; "a necessidade é cega, e quem a encontra fica sem
+a vista") · e a distinção que decide tudo: catástrofe por **culpa moral
+específica** é parábola, não tragédia.
+**Fazer:** nenhum dos nove finais pode pagar o jogador — nem com salvação,
+nem com lição, nem com a satisfação de ter jogado certo. **Compreender não
+salva:** em A Testemunha ela sabe o nome e diz o nome, e o ar esquenta do
+mesmo jeito.
+**Não fazer:** final em que ela morre *porque errou*. Ver a crítica a
+A Dívida e a O Livro-Razão em `13`. → `13`
+
+> **Aplicado em 24/08/2026.** A Dívida: a cadeia causal ficou e o mérito
+> saiu — Carmine desmonta os onze minutos em voz alta, sem explicar, e a
+> conta continua fechando na página 287 e continua errada. O Livro-Razão:
+> o documento completo virou a punição — o tribunal julga improcedente por
+> ausência de terceiro lesado, a Ordem arquiva o material como exemplar, e
+> a apostila leva o nome dela no índice.
+
+### R12 · A emoção vai para o ofício, não some — **nova em 24/08/2026**
+Ishiguro (Kathy abre o livro com métrica de desempenho — "quase exatos doze
+anos de serviço" — e se gaba: "talvez eu esteja me vangloriando um pouco").
+**Fazer:** Antoniette não se contém. Ela fica **satisfeita com a qualidade
+do registro**. O horror sobe quando o orgulho é sincero.
+**Corolário — o léxico faz o trabalho pesado:** `conclui` no lugar de morrer,
+e um formulário impresso de pêsames. Rabenfels já tem `entrada`, `sujeito`,
+`duração estimada`; falta o formulário. → `12`
+
+> **Aplicado em 24/08/2026.** O orgulho sincero está no Livro-Razão — *"A
+> duração estimada da 160 errou por vinte e seis minutos. Esta não vai
+> errar por vinte e seis."* — e a classificação do erro de idade de Klara
+> como *"dentro da margem"* é o léxico fazendo o trabalho pesado. O fecho
+> do Ishiguro (permitir uma lembrança, cortar no meio, voltar ao trabalho)
+> está na Vigília, na folha com a palavra *Índice* e mais nada, e na Casa
+> Vazia, na borboleta que entra pela janela do arquivo.
+>
+> **O formulário continua faltando.**
 
 ---
 
@@ -206,6 +263,7 @@ essa piada. **Pergunta aberta ao autor.**
 13. Marcar a **cena pivô** (provável Cap. 5) e mudar a personagem depois.
 14. Frase longa e desnorteada no clímax; beat de uma palavra em algum
     lugar; **fechar nas borboletas** no Epílogo.
+    *Parcial: a Casa Vazia fecha nas borboletas.*
 15. Notas do Compilador como **sistema**: Antoniette discutindo com
     Antoniette, no lugar do ouvinte que a obra não tem.
 16. **"Diziam alguns"** — atribuição vaga no Arquivo.

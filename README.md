@@ -31,10 +31,12 @@ js/assets.js        resolução de caminho e fallback
 js/audio.js         BGM, SFX, trilha do menu, sons de interface
 js/history.js       backlog de diálogo
 js/routes.js        Esperança, Perda e Resposta a partir das escolhas
-js/data/*.js        roteiro — só dados
+js/data/*.js        roteiro — só dados (11 capítulos de rota)
 js/script.js        montagem determinística do roteiro
 js/saves.js         12 espaços, autosave, save rápido
 js/gallery.js       desbloqueio por progresso real
+js/paginas.js       As Quatro Páginas e o laudo de cada leitura
+js/arvore.js        a árvore de escolhas e o mapa dos nove finais
 js/engine.js        renderer
 js/ui.js            componentes reutilizáveis
 js/menu.js          portão, menu principal, painéis
@@ -172,13 +174,19 @@ infere efeito a partir do texto da opção.
 
 ## Validação
 
-Quatro ferramentas, duas delas independentes do Node. A escolha depende do
-que a máquina tem instalado — nenhuma exige `npm install`.
+Sete ferramentas, duas delas independentes do Node. A escolha depende do
+que a máquina tem instalado — só `shots.js` e `shot_arvore.js` precisam do
+pacote `playwright` e de um Chrome no disco; sem eles avisam e saem com
+código 0, porque são conferência e não requisito para o jogo rodar.
 
 ```bash
 # com Node
 node tools/validate.js          # estrutura, estado, roteiro, save, entrada
+node tools/rotas.js             # distribuição das rotas nas 59.049 combinações
+node tools/finais.js            # as quatro rotas, e o transcript com --dump
+node tools/arvore.js            # a árvore: anotação vs roteiro, e a tela
 node tools/shots.js --open      # geometria em navegador de verdade
+node tools/shot_arvore.js       # a árvore em Chrome, em quatro tamanhos
 
 # sem Node
 python tools/validate.py        # dados, manifesto, roteiro, galeria

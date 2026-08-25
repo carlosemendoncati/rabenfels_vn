@@ -237,16 +237,74 @@ inferência.** Teto: **20 por rota**, em `RBF.ROUTES`.
 beats condicionais do Capítulo 2. `klara_asked` (Cap. 3) muda a cena do
 entardecer.
 
-## Os finais
+## As quatro rotas
 
-Escolhidos no fim do Capítulo 9, pelo estado acumulado.
+**Reestruturado em 24/08/2026, a pedido do autor.** Até o fim do Capítulo 9 a
+obra é uma só. Ali o beat `{ t:'ending' }` fecha a conta e manda o jogador
+para **um de quatro caminhos com capítulos próprios**, no modelo de rota do
+Fate/Stay Night — e não para uma variante condicional do mesmo capítulo.
 
-| Final | Condição |
-|---|---|
-| A Cobertura Queimada | flag `cover_burned` |
-| O Distanciamento | Esperança ≤ 4 |
-| Agosto Antecipado | Resposta ≥ 13 e Esperança ≤ 7 |
-| **O Arquivo** | **sem condição - e o padrão** |
+Substituiu nove finais que dividiam três capítulos por `if`. O motivo é
+prático: nove desfechos empilhados dentro de um Capítulo 10 único produziam
+um capítulo que não era de ninguém, e quem repetia a obra relia noventa por
+cento do mesmo texto.
+
+| rota | condição | capítulos | desfecho | Antoniette |
+|---|---|---|---|---|
+| A Cobertura | flag `cover_burned` | 10, 11 | A Cobertura Queimada | vive |
+| A Perda | Perda ≥ 11 | 10, 11, 12, 13 | A Dívida | morre |
+| A Resposta | Resposta ≥ 12 | 10, 11, 12 | O Livro-Razão | vive |
+| **A Esperança** | **sem condição — é o padrão** | 10, 11 | O Arquivo | morre |
+
+Avaliadas **na ordem**. A primeira que bate vence.
+
+**O número do capítulo se repete de propósito.** Existe um Capítulo 10 em
+cada caminho e eles não têm nada em comum. O Epílogo volta a ser
+compartilhado e fecha as quatro.
+
+### Distribuição medida — não estime
+
+Contada nas 59.049 combinações por `node tools/rotas.js`:
+
+```
+cobertura  11,11%   perda  14,51%   resposta  15,93%   esperanca  58,45%
+```
+
+Este projeto já perdeu uma produção inteira com limiar chutado: um final
+pedia Esperança ≥ 14 **e** Resposta ≥ 14 num teto cruzado de 13 e nasceu
+inalcançável. Os tetos continuam valendo:
+
+```
+Esperanca  3..20     max min(Esperanca, Resposta) = 13
+Perda      2..16     max min(Esperanca, Perda)    = 13
+Resposta   0..20     max min(Resposta, Perda)     = 11
+```
+
+### O que cada rota não pode fazer
+
+**A Resposta** — ela está CERTA. Conferiu a probabilidade em junho com a
+própria letra e a probabilidade era baixa. Não escrever como covardia.
+Carmine vem, confere, e vai embora: ela vive porque não valeu a pena matá-la,
+e ninguém em cena diz isso.
+
+**A Perda** — a cadeia causal fica e o mérito sai. Os onze minutos são reais,
+são contados, e **não são o motivo**. Nenhum beat pode sugerir que pagar as
+três moedas teria salvado alguém. Final em que ela morre *porque errou* é
+parábola, e Steiner reprova.
+
+**A Cobertura** — o sentimento de cima é vergonha profissional, não medo.
+Ela foi descoberta por competência. Serafina não acusa, não diz a palavra
+Ordem e não dá motivo: dá horário.
+
+**A Esperança** — Klara para de andar e não sabe dizer por quê. Ninguém em
+cena enuncia o que aconteceu.
+
+### O material aposentado
+
+Os cinco desfechos que saíram viraram cena dentro dos capítulos novos, e não
+sumiram: A Vigília está no braço dormente de `esp10`, A Testemunha na grafia
+de lápide, A Casa Vazia no corredor de `res12`, Agosto Antecipado na
+tentativa de fevereiro, O Distanciamento na mão na maçaneta de `res10`.
 
 **A Cobertura Queimada tem gatilho desde 0.8.0:** `lied_to_order:'A'` **e**
 `third_paid:'B'` — as duas escolhas em que ela é **correta** pelas regras da

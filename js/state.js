@@ -16,6 +16,7 @@
      settings    painel de ajustes
      history     historico de dialogo
      credits     creditos
+     conta       a pagina de "A Conta" - extra pos-jogo em tela cheia
      modal       confirmacao ou aviso por cima de outro estado
      transition  transicao em andamento, nenhuma entrada aceita
 
@@ -37,6 +38,7 @@ RBF.State = (function () {
     'settings',
     'history',
     'credits',
+    'conta',
     'modal',
     'transition'
   ];
@@ -56,6 +58,7 @@ RBF.State = (function () {
     settings: true,
     history:  true,
     credits:  true,
+    conta:    true,
     modal:    true
   };
 

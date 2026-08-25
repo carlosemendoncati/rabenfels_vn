@@ -79,6 +79,8 @@ js/audio.js         BGM com crossfade, SFX, desbloqueio de autoplay
 js/history.js       backlog de diálogo
 js/routes.js        Esperança, Perda e Resposta
 js/gallery.js       desbloqueio por progresso real
+js/paginas.js       As Quatro Páginas e o laudo de cada leitura
+js/arvore.js        árvore de escolhas e mapa das quatro rotas
 js/data/*.js        roteiro — só dados, ASCII puro com escapes \uXXXX
 js/script.js        montagem determinística do roteiro
 js/saves.js         12 espaços manuais, autosave, quicksave

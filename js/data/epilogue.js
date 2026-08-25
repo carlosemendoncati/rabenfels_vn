@@ -172,16 +172,10 @@ RBF.EPILOGUE = [
 { t:'sfx', id:'sfx_page_turn' },
 { t:'pause' },
 
-/* --- tres rotas: as duas irmas --- */
-{ t:'nar', tx:'Duas linhas, mesmo sobrenome, mesma casa de origem, mesma turma.', if:{ ending:'archive' } },
-{ t:'nar', tx:'Duas linhas, mesmo sobrenome, mesma casa de origem, mesma turma.', if:{ ending:'distance' } },
-{ t:'nar', tx:'Duas linhas, mesmo sobrenome, mesma casa de origem, mesma turma.', if:{ ending:'cover_burned' } },
-
-/* --- rota early: Klara foi levada no ano cinco --- */
-{ t:'nar', tx:'Uma linha.', if:{ ending:'early' } },
-{ t:'pause', if:{ ending:'early' } },
-{ t:'nar', tx:'Ele conferiu a folha inteira, virou, conferiu o verso e voltou \u00e0 frente.', if:{ ending:'early' } },
-{ t:'nar', tx:'Uma linha.', if:{ ending:'early' } },
+/* Klara sobrevive nas quatro rotas. O cadastro traz duas linhas em
+   todas elas, e a diferenca entre as leituras nao esta aqui - esta no
+   que Matheo faz com a folha, e em quem esta viva para nao ver. */
+{ t:'nar', tx:'Duas linhas, mesmo sobrenome, mesma casa de origem, mesma turma.' },
 { t:'pause' },
 
 { t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
@@ -303,57 +297,62 @@ RBF.EPILOGUE = [
 { t:'scene', id:'ep_oque_ficou', chapter:'epilogo', title:'O que ficou',
   bg:'bg_prologue_room', bgm:null },
 
-/* --- ARCHIVE --------------------------------------------------------- */
-{ t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.', if:{ ending:'archive' } },
+/* --- ESPERANCA: ela morre, e chegou mais longe que qualquer uma ------ */
+{ t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.', if:{ rota:'esperanca' } },
 { t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
     'VAEL, Antoniette. Baixa: agosto, ano cinco.',
     '',
     'Motivo de sa\u00fade.'
-], if:{ ending:'archive' } },
-{ t:'inn', tx:'Eu j\u00e1 li esta linha.', if:{ ending:'archive' } },
-{ t:'inn', tx:'Numa outra ficha, com outro nome, uma semana antes de assinar a dela.', if:{ ending:'archive' } },
-{ t:'nar', tx:'Ele p\u00f4s as duas folhas lado a lado. A caligrafia era a mesma, com trinta e sete anos de diferen\u00e7a.', if:{ ending:'archive' } },
-{ t:'nar', tx:'Depois virou as duas para baixo, uma em cima da outra.', if:{ ending:'archive' } },
-{ t:'pause', if:{ ending:'archive' } },
-{ t:'nar', tx:'Ela chegou at\u00e9 a floresta. \u00c9 mais longe do que qualquer outra pessoa chegou em cinco s\u00e9culos, e ningu\u00e9m nunca vai saber disso.', if:{ ending:'archive' } },
+], if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Eu j\u00e1 li esta linha.', if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Numa outra ficha, com outro nome, uma semana antes de assinar a dela.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ele p\u00f4s as duas folhas lado a lado. A caligrafia era a mesma, com trinta e sete anos de diferen\u00e7a.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Depois virou as duas para baixo, uma em cima da outra.', if:{ rota:'esperanca' } },
+{ t:'pause', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ela chegou at\u00e9 a floresta. \u00c9 mais longe do que qualquer outra pessoa chegou em cinco s\u00e9culos, e ningu\u00e9m nunca vai saber disso.', if:{ rota:'esperanca' } },
 
-/* --- EARLY ----------------------------------------------------------- */
-{ t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, com a baixa em agosto.', if:{ ending:'early' } },
+/* --- RESPOSTA: ela vive, e o documento serviu para arquivar ---------- */
+{ t:'nar', tx:'Ele nunca pediu a ficha de pessoal dela, porque n\u00e3o havia baixa nenhuma para pedir.', if:{ rota:'resposta' } },
+{ t:'pause', if:{ rota:'resposta' } },
+{ t:'nar', tx:'O material dela entrou no tribunal em quatro meses e saiu em nove, julgado improcedente por aus\u00eancia de terceiro lesado.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'N\u00e3o faltou prova. Faltou parte.', if:{ rota:'resposta' } },
+{ t:'pause', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Matheo leu a decis\u00e3o no ano seis e concordou com o enquadramento, porque o enquadramento estava correto.', if:{ rota:'resposta' } },
+{ t:'pause', if:{ rota:'resposta' } },
+{ t:'nar', tx:'A folha de aviso da Academia chegou seis anos depois disso, e ele a leu como boa not\u00edcia.', if:{ rota:'resposta' } },
+{ t:'inn', tx:'Duas linhas. As duas entraram.', if:{ rota:'resposta' } },
+{ t:'pause', if:{ rota:'resposta' } },
+{ t:'nar', tx:'A sala de Antoniette ficava dois andares abaixo daquele gabinete, e ela leu a mesma folha na segunda-feira seguinte, por dever de of\u00edcio.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Anotou a data de ingresso na entrada 251 e fechou o caderno.', if:{ rota:'resposta' } },
+
+/* --- PERDA: ela morre, e a soma fecha ------------------------------- */
+{ t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.', if:{ rota:'perda' } },
 { t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
     'VAEL, Antoniette. Baixa: agosto, ano cinco.',
     '',
     'Motivo de sa\u00fade.'
-], if:{ ending:'early' } },
-{ t:'inn', tx:'Eu j\u00e1 li esta linha.', if:{ ending:'early' } },
-{ t:'pause', if:{ ending:'early' } },
-{ t:'nar', tx:'Na mesma remessa veio a baixa de uma das filhas da casa, com a mesma data e a mesma f\u00f3rmula.', if:{ ending:'early' } },
-{ t:'nar', tx:'Ele leu as duas e n\u00e3o juntou as duas. Ningu\u00e9m junta duas fichas de pessoal e uma crian\u00e7a.', if:{ ending:'early' } },
-{ t:'pause', if:{ ending:'early' } },
-{ t:'nar', tx:'O cadastro da Academia, seis anos depois, viria com uma linha s\u00f3.', if:{ ending:'early' } },
+], if:{ rota:'perda' } },
+{ t:'pause', if:{ rota:'perda' } },
+{ t:'nar', tx:'A \u00faltima p\u00e1gina do Arquivo \u00e9 uma coluna de tr\u00eas valores, com data ao lado de cada um.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Matheo conferiu a subtra\u00e7\u00e3o, porque ele confere toda subtra\u00e7\u00e3o. Fechava.', if:{ rota:'perda' } },
+{ t:'pause', if:{ rota:'perda' } },
+{ t:'nar', tx:'Embaixo do total havia uma linha em que ela julgava a si mesma, e era a \u00fanica do documento inteiro.', if:{ rota:'perda' } },
+{ t:'pause', if:{ rota:'perda' } },
+{ t:'nar', tx:'Ele ficou com a folha na m\u00e3o sem saber o que se faz com uma conta que fecha.', if:{ rota:'perda' } },
+{ t:'pause', if:{ rota:'perda' } },
+{ t:'nar', tx:'Seis anos depois, o cadastro trouxe duas linhas, e ele n\u00e3o voltou \u00e0 p\u00e1gina duzentos e oitenta e sete para conferir de novo.', if:{ rota:'perda' } },
 
-/* --- DISTANCE: ela esta viva ---------------------------------------- */
-{ t:'nar', tx:'Ele nunca pediu a ficha de pessoal dela, porque n\u00e3o havia baixa nenhuma para pedir.', if:{ ending:'distance' } },
-{ t:'pause', if:{ ending:'distance' } },
-{ t:'nar', tx:'Antoniette Vael foi recolhida do campo em setembro do ano cinco e reconduzida ao servi\u00e7o interno em Lervel.', if:{ ending:'distance' } },
-{ t:'nar', tx:'Correspond\u00eancia particular suspensa por prazo indeterminado, conforme o protocolo de agente recolhido.', if:{ ending:'distance' } },
-{ t:'pause', if:{ ending:'distance' } },
-{ t:'nar', tx:'O tribunal declarou a mat\u00e9ria de autoria falecida porque foi o que o pacote parecia, e ningu\u00e9m conferiu.', if:{ ending:'distance' } },
-{ t:'pause', if:{ ending:'distance' } },
-{ t:'nar', tx:'Ela trabalhava a tr\u00eas ruas do gabinete dele, e os dois passaram seis anos assim.', if:{ ending:'distance' } },
-{ t:'inn', tx:'Ele achou que ela tinha morrido.', if:{ ending:'distance' } },
-{ t:'inn', tx:'Ela deixou ele achar, porque a alternativa era explicar por que voltou sem a menina.', if:{ ending:'distance' } },
-
-/* --- COVER_BURNED: ela esta viva ------------------------------------ */
-{ t:'nar', tx:'Duzentas e quarenta e uma p\u00e1ginas. Ele contou, como conta tudo, e a numera\u00e7\u00e3o fechava.', if:{ ending:'cover_burned' } },
-{ t:'nar', tx:'Faltava metade das plantas e todos os hor\u00e1rios de guarda depois de julho, e nada disso estava marcado como falta.', if:{ ending:'cover_burned' } },
-{ t:'pause', if:{ ending:'cover_burned' } },
-{ t:'nar', tx:'O tribunal indeferiu em quatro meses, e n\u00e3o precisou nem das quatro p\u00e1ginas.', if:{ ending:'cover_burned' } },
-{ t:'pause', if:{ ending:'cover_burned' } },
-{ t:'nar', tx:'Antoniette Vael deixou Velha Nidhaus em setembro do ano cinco com carta de refer\u00eancia correta e dois meses de aviso pagos.', if:{ ending:'cover_burned' } },
-{ t:'nar', tx:'Nunca voltou a Lervel e nunca escreveu a ele.', if:{ ending:'cover_burned' } },
-{ t:'pause', if:{ ending:'cover_burned' } },
-{ t:'inn', tx:'Se ela estivesse viva ela teria escrito.', if:{ ending:'cover_burned' } },
-{ t:'nar', tx:'Foi a \u00fanica conclus\u00e3o que ele tirou em seis anos, e estava errada.', if:{ ending:'cover_burned' } },
+/* --- COBERTURA: ela vive, e ele conclui errado por seis anos --------- */
+{ t:'nar', tx:'Duzentas e quarenta e uma p\u00e1ginas. Ele contou, como conta tudo, e a numera\u00e7\u00e3o fechava.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Faltava metade das plantas e todos os hor\u00e1rios de guarda depois de julho, e nada disso estava marcado como falta.', if:{ rota:'cobertura' } },
+{ t:'pause', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'O tribunal indeferiu em quatro meses, e n\u00e3o precisou nem das quatro p\u00e1ginas.', if:{ rota:'cobertura' } },
+{ t:'pause', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Antoniette Vael deixou Velha Nidhaus em agosto do ano cinco com carta de refer\u00eancia correta e dois meses de aviso pagos.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Copiou escritura num cart\u00f3rio de pra\u00e7a da Marca Cinzenta por onze anos, e nunca escreveu a ele.', if:{ rota:'cobertura' } },
+{ t:'pause', if:{ rota:'cobertura' } },
+{ t:'inn', tx:'Se ela estivesse viva ela teria escrito.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Foi a \u00fanica conclus\u00e3o que ele tirou em seis anos, e estava errada.', if:{ rota:'cobertura' } },
 
 { t:'fade_out' },
 { t:'scene', id:'ep_cantiga', chapter:'epilogo', title:'A cantiga',
@@ -380,16 +379,16 @@ RBF.EPILOGUE = [
 
 { t:'title', main:'ARQUIVO RABENFELS',
   sub:'"V\u00e1 mais r\u00e1pido do que eu fui."',
-  time:'Fim.', if:{ ending:'archive' } },
+  time:'Fim.', if:{ rota:'esperanca' } },
 { t:'title', main:'ARQUIVO RABENFELS',
-  sub:'"O devagar n\u00e3o foi o que custou."',
-  time:'Fim.', if:{ ending:'early' } },
+  sub:'"As duas foram sobre m\u00e9todo."',
+  time:'Fim.', if:{ rota:'resposta' } },
 { t:'title', main:'ARQUIVO RABENFELS',
-  sub:'"Ela deixou ele achar."',
-  time:'Fim.', if:{ ending:'distance' } },
+  sub:'"O erro \u00e9 do Compilador e a data dele \u00e9 maio."',
+  time:'Fim.', if:{ rota:'perda' } },
 { t:'title', main:'ARQUIVO RABENFELS',
   sub:'"Ele precisa abrir."',
-  time:'Fim.', if:{ ending:'cover_burned' } },
+  time:'Fim.', if:{ rota:'cobertura' } },
 { t:'fade_out' }
 
 ];

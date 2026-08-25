@@ -146,7 +146,21 @@ RBF.Engine = (function () {
 
   function delay(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 
-  /* ---- final ------------------------------------------------------------ */
+  /* ---- rota e final ------------------------------------------------------
+
+     Ate o fim do Capitulo 9 a obra e uma so. Ali a conta fecha e a
+     partida entra em UM dos quatro caminhos declarados em RBF.ROTAS,
+     cada um com capitulos proprios.
+
+     Duas flags saem daqui e nenhum outro lugar as escreve:
+       flags.rota    qual caminho - manda o engine entrar nos capitulos
+                     daquela rota e ignorar os das outras
+       flags.ending  o desfecho daquele caminho, um por rota
+
+     Sao duas porque servem a leitores diferentes: o roteiro pergunta
+     pela rota quando quer saber ONDE esta, e pelo final quando quer
+     saber COMO termina. Manter uma so obrigaria cada beat a saber a
+     tabela inteira. */
 
   function endingMatches(when) {
     if (!when) { return true; }          /* sem condicao: e o padrao */
@@ -167,10 +181,29 @@ RBF.Engine = (function () {
     return true;
   }
 
-  function resolveEnding() {
-    var list = RBF.ENDINGS || [];
+  /* A primeira rota que bate vence, e a ultima nao tem condicao. */
+  function resolveRota() {
+    var list = RBF.ROTAS || [];
     for (var i = 0; i < list.length; i++) {
-      if (endingMatches(list[i].when)) { return list[i].id; }
+      if (endingMatches(list[i].when)) { return list[i]; }
+    }
+    return list.length ? list[list.length - 1] : null;
+  }
+
+  function rotaById(id) {
+    var list = RBF.ROTAS || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id === id) { return list[i]; }
+    }
+    return null;
+  }
+
+  /* Um capitulo de rota so entra na partida daquela rota. Capitulo sem
+     campo 'rota' e compartilhado e entra sempre. */
+  function capituloDaRota(chapterId) {
+    var caps = RBF.CHAPTERS || [];
+    for (var i = 0; i < caps.length; i++) {
+      if (caps[i].id === chapterId) { return caps[i].rota || null; }
     }
     return null;
   }
@@ -519,13 +552,20 @@ RBF.Engine = (function () {
         return 'go';
 
       /*
-        Avalia RBF.ENDINGS na ordem e grava o primeiro que bater em
-        RBF.STATE.flags.ending. As regras vivem no manifesto; aqui so
-        se executa. Depois disto, capitulos e Epilogo leem o final com
-        um 'if' comum, sem saber como ele foi decidido.
+        Avalia RBF.ROTAS na ordem e grava a primeira que bater. As
+        regras vivem no manifesto; aqui so se executa. Depois disto o
+        roteiro le 'rota' e 'ending' com um 'if' comum, sem saber como
+        foram decididos.
+
+        't:ending' continua valendo como nome do beat: o roteiro do
+        Capitulo 9 ja o usava, e trocar o nome quebraria save gravado.
       */
       case 'ending':
-        RBF.STATE.flags.ending = resolveEnding();
+        var esc = resolveRota();
+        if (esc) {
+          RBF.STATE.flags.rota   = esc.id;
+          RBF.STATE.flags.ending = esc.ending;
+        }
         return 'go';
 
       case 'bg':
@@ -680,9 +720,12 @@ RBF.Engine = (function () {
              engine nao precisar saber o id do ultimo capitulo. */
           if (beat.completes) {
             RBF.Saves.recordCompletion({
-              ending: RBF.STATE.flags.ending || null,
-              flags:  RBF.STATE.flags,
-              routes: RBF.STATE.routes
+              ending:    RBF.STATE.flags.ending || null,
+              flags:     RBF.STATE.flags,
+              /* RBF.STATE.routes nunca existiu: as rotas vivem em
+                 RBF.Routes, e o run saia com routes indefinido. */
+              routes:    RBF.Routes.serialize(),
+              choiceLog: RBF.STATE.choiceLog
             });
           }
           await delay(RBF.CONFIG.timing.cardMs);
@@ -807,6 +850,10 @@ RBF.Engine = (function () {
 
     if (currentChoice && currentChoice.id) {
       RBF.STATE.choiceLog[currentChoice.id] = opt.id;
+      /* Abre o ramo na tela de arvore. Grava no clique, e nao no fim
+         da partida: quem abandonou no Capitulo 7 percorreu aqueles
+         ramos do mesmo jeito. */
+      RBF.Arvore.mark(currentChoice.id, opt.id);
     }
 
     /* Rotas: o delta vem do roteiro, nunca do texto da opcao. */
@@ -1438,6 +1485,18 @@ RBF.Engine = (function () {
     prepare();
     resetRuntime();
 
+    /* Entrar direto num capitulo de rota exige declarar a rota: todo
+       beat daqueles capitulos e condicional a ela, e sem a flag o
+       capitulo tocaria vazio - o jogador veria a tela preta e o cartao
+       de fim. A rota tambem traz o desfecho, para o Epilogo fechar
+       certo quando a partida seguir ate la. */
+    var r = capituloDaRota(chapterId);
+    if (r) {
+      var def = rotaById(r);
+      RBF.STATE.flags.rota   = r;
+      if (def) { RBF.STATE.flags.ending = def.ending; }
+    }
+
     script = RBF.Script.build({});
     var at = RBF.Script.chapterStart(script, chapterId);
     if (at < 0) { at = 0; }
@@ -1587,7 +1646,14 @@ RBF.Engine = (function () {
       /* Executa um beat isolado, para teste de comportamento. Sempre em
          modo silencioso: sem audio, sem galeria, sem autosave. */
       exec:         function (beat) { return exec(beat, true); },
-      resolveEnding: resolveEnding,
+      /* Mantido pelo nome antigo: o harness de validate.js chama isto
+         para conferir a tabela sem percorrer o roteiro. Devolve o id do
+         desfecho, que agora vem da rota resolvida. */
+      resolveEnding: function () {
+        var r = resolveRota();
+        return r ? r.ending : null;
+      },
+      resolveRota:   resolveRota,
       /* Fim de partida: permite conferir que o arquivo se fecha e o
          menu volta, sem ter de percorrer o roteiro inteiro. */
       endOfScript:   endOfScript,
