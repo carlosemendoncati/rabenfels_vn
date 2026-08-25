@@ -255,7 +255,13 @@ RBF.PER12 = [
 { t:'dial', ch:'carmine', tx:'Ela falou com voc\u00ea na estrada.', if:R },
 { t:'dial', ch:'antoniette', tx:'Falou.', if:R },
 { t:'pause', if:R },
-{ t:'dial', ch:'carmine', tx:'Trinta e uma frases.', if:R },
+/* O numero e contado, e nao estimado: sao as frases da Klara na
+   caminhada de per11, por ramo de `taught`, porque cada partida ve um
+   ramo so. Recontado em 25/08 depois de a cena da infancia entrar:
+   comum 89, A 96, B 93, C 95. Recontar se a caminhada mudar. */
+{ t:'dial', ch:'carmine', tx:'Noventa e seis frases.', if:{ rota:'perda', taught:'A' } },
+{ t:'dial', ch:'carmine', tx:'Noventa e tr\u00eas frases.', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'carmine', tx:'Noventa e cinco frases.', if:{ rota:'perda', taught:'C' } },
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette n\u00e3o tinha contado.', if:R },
 { t:'pause', if:R },

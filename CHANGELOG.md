@@ -7,10 +7,10 @@ a menina falar. Medido antes de mexer:
 
 | | antes | depois |
 |---|---:|---:|
-| falas de Klara na rota | **21** | **71** |
-| falas de Carmine | 10 | 25 |
-| diálogos (`dial`) | 73 | 158 |
-| beats | 532 | 769 |
+| falas de Klara na rota | **21** | **132** |
+| falas de Carmine | 10 | **27** |
+| diálogos (`dial`) | 73 | **284** |
+| beats da rota | 532 | **977** |
 
 E as 21 falas de Klara eram todas de procedimento: *"Confirmei"*, *"A
 senhorita conferiu o horário?"*, *"Está certo"*, *"Ele foi embora?"*. Ela
@@ -20,7 +20,7 @@ falas no total**.
 
 Era uma rota sobre contabilidade em que a contabilidade virou o conteúdo.
 
-### Os quarenta minutos
+### Os quarenta minutos — e a segunda tentativa, que era a certa
 
 O pior estava numa linha só:
 
@@ -30,22 +30,203 @@ Quarenta minutos. A única vez na vida daquela menina em que ela está fora
 da casa, no escuro, sem ninguém medindo. E o texto **narrava o silêncio
 em vez de preenchê-lo**.
 
-Agora ela fala. E fala a língua da casa, porque foi a única que deram a
-ela: ladrilhos contados com o pé, portas que trancam por fora, medições
-antes e depois. Nenhuma frase dela é bonita. Todas são exatas.
+A primeira reescrita errou de outro jeito, e a crítica do autor foi
+exata:
+
+> *"isso está péssimo. o momento mais humano você quer deixar com frases
+> feitas. um diálogo longo e 'idiota' é necessário. ninguém é o Batman
+> 100% do tempo, às vezes precisa da simplicidade dos Wayne. você tá
+> tirando a humanidade das duas, aonde no curto período de tempo elas
+> venceram."*
+
+O que eu tinha escrito era isto:
 
 > — Eu não tenho medo da câmara.
 > — Não?
 > — Tenho medo de acordar no meio.
 
-Confiança, para Klara, é **entrega de informação** — numa casa assim,
-informação é a única moeda que uma criança tem. Ela não diz que confia:
-diz *"para a senhorita eu conto e acaba na senhorita"*.
+Três falas, remate perfeito, epigrama. **Ninguém fala assim** — e menos
+ainda uma menina de doze anos que acabou de sair de casa a pé. Eu tinha
+escrito o Batman para as duas: cada linha um martelo, cada troca com
+fecho.
 
-O pico da cena não é uma fala. É Antoniette levar o lápis ao papel para
-catalogar a confissão da menina — *alteração de padrão de sono, relato
-direto de procedimento, fonte primária* — e parar no meio. Primeira vez
-em cinco anos, e ela não sabe dizer a si mesma por quê.
+**A regra desta cena passou a ser: nenhuma fala pode ser citável.** Se
+der para tirar do contexto e colar num cartaz, está errada e sai.
+
+Elas ganharam. Por quarenta minutos, elas ganharam — e a conversa é a de
+duas pessoas que escaparam e ainda não sabem o que fazer com isso.
+Comprida, mal arrumada, com pergunta boba e discussão sobre cavalo:
+
+> — Cavalo sabe nadar.
+> — Sabe.
+> — Viu.
+> — Mas não muito longe.
+> — Quanto é muito longe?
+> — Não sei.
+> — Então a senhorita não sabe se não é longe.
+>
+> *Ela ficou satisfeita com aquilo por uns bons cem metros.*
+
+Klara tem doze anos: erra, teima, repete pergunta, ganha por
+tecnicalidade. Antoniette é ruim nisso, porque nunca conversou com uma
+criança que não fosse objeto de estudo — e uma hora conta uma coisa dela,
+que não fez em cinco anos:
+
+> — A senhorita já fugiu?
+> — Não.
+> — …
+> — Já. Uma vez. Eu tinha nove anos.
+> — E foi longe?
+> — Até a cerca.
+> — A cerca de quê?
+> — Do quintal.
+>
+> *Klara riu com a boca fechada primeiro. Depois desistiu e riu direito,
+> alto, na estrada vazia. Foi a primeira vez em cinco anos que Antoniette
+> ouviu aquilo.*
+
+E a bota, que é o horror entrando por dentro de um gesto comum:
+
+> *A bota era um número menor do que devia ser, e era um número menor
+> desde abril. Ninguém tinha medido o pé dela desde abril, e naquela casa
+> mediam tudo.*
+
+**O medo não é clímax.** Sai no meio de outra coisa, mal, e a própria
+menina muda de assunto — porque ela não sabe que disse uma coisa enorme:
+
+> — Uma vez eu acordei no meio e fiquei quieta, porque se eu mexer eles
+> começam de novo e demora mais.
+> — A senhorita quer pão?
+>
+> *Antoniette ficou com aquilo na mão e sem lugar nenhum onde pôr.*
+>
+> — Eu peguei seis.
+> — Eu sei.
+> — Foi muito.
+
+E depois ela volta ao assunto e **não tem o resto da frase**. Cinco anos
+escrevendo, e não tem. Quem salva o momento é a menina, oferecendo
+carregar o saco.
+
+E o plano ruim, que é de criança:
+
+> — A senhorita pode ser professora.
+> — Pode ser.
+> — Eu seria a aluna.
+> — Você seria a aluna.
+> — E a Liara também.
+>
+> *Antoniette não corrigiu essa parte.*
+
+**Nenhuma linha da caminhada avisa o que vem depois.** A caminhada é boa.
+O peso vem de o jogador saber, e não de o texto dizer.
+
+`per11` foi de 96 para **427** beats, e o comprimento médio de frase caiu
+de 39 para **29,7** caracteres — a cena inteira é mais rasa de propósito, porque
+é assim que as pessoas falam andando.
+
+### Quem Antoniette foi
+
+> *"fazer Klara perguntar da infância da Antoniette, quem ela foi, se ela
+> tinha amigos, como conheceu. essa é a única chance de desenvolver a
+> personagem."*
+
+E dá para provar que era a única chance: em **4.534 beats, Antoniette não
+dizia uma frase sobre a própria vida.** Ela narra a obra inteira e é a
+única pessoa sobre quem a obra não conta nada — porque fora desta
+caminhada ela está sempre de serviço, e quem está de serviço não fala de
+si.
+
+Klara pergunta como uma criança pergunta, e não aceita a primeira
+resposta:
+
+> — A senhorita era como?
+> — Como assim, como?
+> — Antes. Quando era do meu tamanho.
+> — Eu morava em Alsbeck. Meu pai trabalhava no cartório da praça.
+> — Isso não é o que eu perguntei.
+>
+> *Não era.*
+
+Tem uma amiga que falava demais — *"Igual eu." / "Um pouco."* — e para
+quem ela não escreve há nove anos, *"porque não dá para escrever para as
+pessoas neste trabalho"*. É o preço da Ordem, dito de raspão.
+
+E tem o recrutamento, sem nome:
+
+> — Um homem me perguntou uma coisa numa fila.
+> — Que coisa?
+> — Se eu sabia por que a fila estava parada.
+> — E a senhorita sabia?
+> — Sabia. O escriturário da frente estava com o carimbo errado e ninguém
+>   tinha reparado.
+> — E aí?
+> — E aí ele me ofereceu emprego.
+> — Só por causa do carimbo?
+> — Só por causa do carimbo.
+> — Isso é pouco.
+> — É.
+>
+> *Ela tinha dezessete anos e achou que era muito.*
+
+Reparar no que ninguém repara é o que faz dela boa no serviço, e é o que
+vai matá-la. A cena não diz isso. Conta o carimbo.
+
+### O dispositivo dispara, uma vez só
+
+`reference/canon.md` guarda o motor da relação das duas:
+
+> *"ela repete com Klara gestos que a mãe dela fazia, e **não os
+> reconhece como lembrança — reconhece como método**."*
+
+| o gesto | como ela classifica |
+|---|---|
+| corrige ao lado, na mesma tinta | *riscar ensina a esconder o erro* |
+| repara se a menina comeu | *alteração de apetite é dado* |
+| aprende de que lado ela dorme | *posição habitual, para notar mudança* |
+
+**Esta é a única cena da obra em que ele pode disparar**, porque é a única
+em que ela fala da mãe. Ela lista os três como lembrança:
+
+> — Ela não riscava. Quando eu errava a lição ela escrevia o certo do
+>   lado, na mesma tinta.
+> — E reparava se eu tinha comido. Não perguntava. Olhava o prato.
+> — E sabia de que lado eu dormia. Eu nunca contei. Ela sabia.
+>
+> *Andaram uns vinte passos.*
+>
+> — A senhorita faz essas três.
+> — Faço não.
+> — Faz.
+> — É método.
+> — Tá.
+>
+> *Klara não insistiu.*
+
+*"É método"* é a frase exata com que o canon diz que ela classifica esses
+gestos. A menina de doze anos vê. A mulher de vinte e cinco recusa. **E
+ninguém explica** — havia uma narração aqui listando as três explicações
+do caderno para o leitor fechar a conta, e fechar a conta é trabalho do
+leitor.
+
+Depois a menina pergunta o nome da mãe, ouve *Maren*, e repete uma vez,
+baixo, do jeito de quem está guardando.
+
+E o fecho, que é a única vez que as duas dizem a mesma coisa:
+
+> — A senhorita gosta da casa?
+> — Não.
+> — Eu também não.
+
+### O número que a Carmine diz
+
+Ela conta as frases da menina na estrada e diz o total em voz alta. Era
+*"trinta e uma"* — o tamanho da caminhada antes de ela virar cena. Depois
+da reescrita ficou mentindo.
+
+Este projeto não chuta número que uma personagem enuncia. Contado, por
+ramo de `taught`, porque cada partida vê um ramo só: **65 · 62 · 64**. A
+fala virou três.
 
 ### O embate: as duas perdem
 
