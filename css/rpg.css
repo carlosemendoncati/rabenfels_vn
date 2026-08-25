@@ -42,13 +42,18 @@
 }
 
 /* Enquanto o percurso corre, a interface de leitura sai de cena: barra
-   de jogo, HUD de rotas e caixa de dialogo nao pertencem a este
-   registro. Some por seletor de irmao, e nao por classe no <html>:
-   assim o estado visual segue o elemento, e nao um sinalizador que
-   alguem precisa lembrar de apagar. */
-#rf-percurso.is-on ~ #game-bar,
-#rf-percurso.is-on ~ #rf-routes,
-#rf-percurso.is-on ~ #rf-route-note {
+   de jogo, HUD de rotas e nota de rota nao pertencem a este registro.
+
+   Por CLASSE NO PALCO, e nao por combinador de irmao. A versao anterior
+   usava `#rf-percurso.is-on ~ #game-bar`, e `~` so alcanca irmao
+   POSTERIOR: no index.html a barra esta na linha 177 e o percurso na
+   306. A regra nunca casou, e nao dava para ver porque as primeiras
+   conferencias entravam por `RBF.Rpg.entra()` direto - caminho em que a
+   barra nunca recebe `show`. Entrando pelo capitulo, como o jogador
+   entra, o botao Menu ficava por cima da sala. */
+#vn.tem-percurso #game-bar,
+#vn.tem-percurso #rf-routes,
+#vn.tem-percurso #rf-route-note {
   opacity: 0;
   pointer-events: none;
 }

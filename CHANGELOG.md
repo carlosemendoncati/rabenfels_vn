@@ -166,6 +166,86 @@ A régua sai do ladrilho do piso: período de 28px, tomado por 30cm, dá
 fator 1,3 sobre a altura real porque móvel em três quartos ocupa mais
 altura do que tem.
 
+### A casa habitada — Fenn e Dara entram no primeiro ato
+
+As duas folhas foram geradas a pedido, recortadas, limpas e registradas —
+e não estavam em cena nenhuma.
+
+O motivo de as colocar não é de inventário. **O segundo ato depende de um
+corredor vazio, e corredor que já estava vazio não esvazia** — só continua
+igual. A ausência precisava ter tido presença.
+
+O que os dois fazem ali é o método da obra: nenhum dos dois está errado, e
+os dois estão no lugar errado.
+
+**Fenn** está de pé diante da porta das gêmeas às onze e quarenta. O canon
+diz que ele recolhe as chaves às dez; então terminou o serviço há uma hora
+e quarenta e continua no corredor, sem chave nenhuma na mão. Ele diz boa
+noite e continua onde estava.
+
+**Dara** atravessa o corredor no sentido da escada, com a caneca cheia. A
+copa fechou às seis. *"Eu subo hoje."* — e Dara dorme na copa há dezenove
+anos. A caneca reaparece cheia e fria na copa do segundo ato, e nenhuma
+das duas cenas comenta a outra.
+
+### `passivo` — gente que anda e não está caçando ninguém
+
+Todo mundo que andava pelo mapa ouvia ruído, perseguia e alcançava. Essa é
+a regra do **segundo** ato.
+
+Sem uma peça passiva, a única opção para os dois seria deixá-los `parado`,
+plantados num ponto — e empregado plantado num corredor às onze e quarenta
+não lê como empregado, lê como manequim. `passivo` anda a ronda declarada,
+não ouve, não persegue e não alcança.
+
+É a diferença entre uma casa habitada e uma casa à espreita, e ela precisa
+existir no primeiro ato para o segundo custar alguma coisa.
+
+A conferência disso é **comparativa**, porque tem de ser: conta gente em
+cena na fase 0, conta de novo na fase 1, e exige que o número caia. Uma
+checagem que olhasse só o segundo ato nunca veria os dois sumirem — e
+sumir é o efeito inteiro.
+
+### O botão Menu ficava por cima da sala
+
+A regra que escondia a interface de leitura usava o combinador de irmão
+**geral**:
+
+```css
+#rf-percurso.is-on ~ #game-bar
+```
+
+`~` só alcança irmão **posterior**. No `index.html` a barra está na linha
+177 e o percurso na 306 — a barra vem antes, e a regra nunca casou.
+
+Ela parecia funcionar porque as primeiras conferências entravam no percurso
+chamando `RBF.Rpg.entra()` direto, e nesse caminho a barra nunca recebe
+`show`. Assim que o teste passou a entrar pelo Capítulo 10 **como o jogador
+entra**, o botão apareceu por cima da sala.
+
+Trocado por uma classe no palco (`#vn.tem-percurso`), posta e tirada pelo
+próprio módulo. Ordem de markup deixa de importar.
+
+A checagem nova mede **opacidade computada no quadro que vira imagem**, e
+não a classe: o que importa é o que o jogador vê, e não qual seletor tentou
+esconder. A primeira versão dela media na entrada e passava — o botão
+aparecia depois.
+
+### `tools/cobertura_confere.js` — a planta declarada sobre a arte real
+
+Os sete mapas foram substituídos por plantas novas, com a mesma dimensão em
+pixel e paredes em outro lugar. **Nenhum validador vê isso**: `validate.js`
+confere que o mapa existe no manifesto, e `cobertura_shots.js` confere que
+a parede segura — e ela segura, no lugar errado.
+
+A ferramenta desenha `piso`, `paredes`, `saidas`, `moveis`, `pontos` (com o
+raio de alcance) e `luzes` por cima da arte que está em disco, com régua de
+200 em 200. Lê e escreve PNG só com o `zlib` do Node: puxar uma biblioteca
+de imagem para desenhar seis retângulos seria desproporcional.
+
+Ela também acusa por conta própria móvel fora do piso, ponto fora do piso,
+saída solta longe do piso e piso maior que a arte.
+
 ### Pixel art, com paleta por personagem
 
 O kit veio em arte pintada de alta resolução. O percurso passou a ser
@@ -314,6 +394,9 @@ css/rpg.css                  a camada, na profundidade 55
 tools/cobertura_assets.py    recorta o kit bruto do autor
 tools/cobertura_pixel.py     pixelit + paleta, uma por personagem
 tools/cobertura_planta.py    mede a planta de cada sala
+tools/cobertura_confere.js   desenha a planta declarada sobre a arte
+tools/cobertura_fundo.py     backgroundremover, por quadro
+tools/cobertura_restaura.py  recupera alfa apagado por engano
 tools/cobertura_shots.js     joga o percurso num Chrome e mede
 assets/cobertura/            44 arquivos derivados + CREDITOS.md
 ```
@@ -322,11 +405,11 @@ assets/cobertura/            44 arquivos derivados + CREDITOS.md
 
 | camada | resultado |
 |---|---|
-| `node tools/validate.js` | 840 checagens, **0 falhas** |
-| `python tools/validate.py` | 4 falhas — **as mesmas 4 de antes** desta versão |
+| `node tools/validate.js` | 845 checagens, **0 falhas** |
+| `python tools/validate.py` | 10.394 checagens, **0 falhas** |
 | `smoke.html` headless | 58 checagens, 0 falhas, `SMOKE-OK` |
 | `node tools/shots.js` | 32 checagens, 0 falhas |
-| `node tools/cobertura_shots.js` | **45 de 45** |
+| `node tools/cobertura_shots.js` | **66 de 66** |
 
 **Não testado:** áudio real, toque em telefone físico, e o percurso
 jogado a pé de ponta a ponta por uma pessoa.

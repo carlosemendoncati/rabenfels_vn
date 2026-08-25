@@ -204,6 +204,28 @@ corredor: {
   ],
 
   gente: [
+    /*
+      PRIMEIRO ATO - a casa ainda tem gente dentro.
+
+      Os dois sao `passivo`: andam, e so. Nao ouvem, nao perseguem e nao
+      alcancam. A casa deste ato fechou mais cedo; ela nao esta a
+      espreita, e transforma-los em ameaca destruiria a virada.
+
+      Eles existem para que o corredor do segundo ato possa esvaziar.
+      Corredor que ja estava vazio nao esvazia - so continua igual.
+    */
+
+    /* Fenn, parado diante da porta das gemeas. Recolhe as chaves as dez;
+       sao onze e quarenta e ele continua aqui, sem chave na mao. */
+    { ch: 'fenn', x: 1545, y: 250, dir: 'cima', fase: 0, parado: true },
+
+    /* Dara atravessando para a escada, com a caneca. A copa fechou as
+       seis. A caneca reaparece cheia e fria na copa do segundo ato, e
+       nenhuma das duas cenas comenta a outra. */
+    { ch: 'dara', x: 1180, y: 330, dir: 'esquerda', fase: 0,
+      passivo: true, passo: 46, espera: 2.6,
+      ronda: [[300, 330], [1180, 330]] },
+
     { ch: 'vulto', x: 1700, y: 300, dir: 'esquerda', fase: 1,
       passo: 68, ouvido: 190, toque: 34,
       ronda: [[1700, 300], [400, 240], [1700, 380]],
@@ -212,6 +234,25 @@ corredor: {
   ],
 
   pontos: [
+    /* Fenn. Ele nao explica nada, porque foi treinado para nao explicar
+       nada. O que ele diz esta correto e nao responde a pergunta. */
+    { id: 'fenn', x: 1545, y: 250, alto: 160, raio: 96, uma: true, fase: 0,
+      ch: 'fenn', marca: 'cob_fenn',
+      tx: ['Fenn est\u00e1 de p\u00e9 diante da porta das g\u00eameas, e n\u00e3o est\u00e1 fazendo nada.',
+           'As chaves s\u00e3o recolhidas \u00e0s dez. S\u00e3o onze e quarenta e ele n\u00e3o tem chave nenhuma na m\u00e3o.',
+           'Boa noite, senhorita.',
+           'Ele disse boa noite e continuou onde estava.'],
+      depois: ['Ele continua onde estava.'] },
+
+    /* Dara. Ela responde uma coisa que ninguem perguntou. */
+    { id: 'dara', x: 700, y: 330, alto: 150, raio: 110, uma: true, fase: 0,
+      ch: 'dara', marca: 'cob_dara',
+      tx: ['Dara atravessa o corredor com a caneca dela na m\u00e3o.',
+           'A copa fechou \u00e0s seis e a caneca est\u00e1 cheia.',
+           'Eu subo hoje.',
+           'Dara dorme na copa h\u00e1 dezenove anos.'],
+      depois: ['Ela subiu.'] },
+
     { id: 'gancho', x: 780, y: 210, alto: 112, raio: 84, uma: true, fase: 0,
       item: 'chave_servico',
       tx: ['O gancho das chaves de servi\u00e7o, na bancada do corredor.',
@@ -606,6 +647,26 @@ salao: {
    SEGMENTOS
    Um segmento e uma entrada no percurso: onde comeca, com quem, para
    onde recua quando e alcancada, e o que cada item quer dizer.
+   ========================================================================== */
+
+/* ==========================================================================
+   O QUE FICOU DE FORA, E POR QUE
+
+   `chars.klara` - a folha de caminhada da Klara nao-corrompida - esta
+   recortada, limpa e no manifesto, e nao entra em sala nenhuma.
+
+   Nao e esquecimento. As salas jogaveis do primeiro ato sao tres, e a
+   porta do quarto das gemeas nao abre em nenhum dos dois atos: e a unica
+   porta desta casa que nao muda. Por baixo dela nao passa luz, e nao
+   passava desde a semana anterior. Por Klara aparecer andando pelo
+   corredor as onze e quarenta seria contradizer a propria linha que da
+   peso aquela porta.
+
+   No segundo ato ela ja esta no cilindro, e ali quem entra e
+   `klara_casulo`.
+
+   A folha fica registrada para o dia em que houver cena para ela. Uma
+   peca sem cena e melhor do que uma cena forcada para justificar a peca.
    ========================================================================== */
 
 RBF.COB_SEGMENTOS = {

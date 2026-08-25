@@ -204,6 +204,41 @@ async function main() {
     return { on: el.classList.contains('is-on'), w: r.width, h: r.height };
   });
   check(capa.on, 'camada visivel');
+
+  /* A interface de leitura tem de sair de cena.
+
+     Esta checagem nasce de um defeito que sobreviveu a tudo: a regra que
+     escondia a barra usava combinador de irmao GERAL, e `~` so alcanca
+     irmao posterior - no index.html a barra vem ANTES do percurso, entao
+     a regra nunca casou. Nao aparecia porque as conferencias antigas
+     entravam por `RBF.Rpg.entra()` direto, caminho em que a barra nunca
+     recebe `show`. Entrando pelo capitulo, o botao Menu ficava por cima
+     da sala.
+
+     Medido por opacidade computada, e nao pela classe: o que importa e o
+     que o jogador ve, e nao qual seletor tentou esconder. */
+  const chrome = await page.evaluate(() => {
+    const ver = (id) => {
+      const el = document.getElementById(id);
+      if (!el) { return null; }
+      const cs = getComputedStyle(el);
+      const r = el.getBoundingClientRect();
+      return {
+        opacidade: Number(cs.opacity),
+        area: Math.round(r.width * r.height),
+        visivel: cs.visibility !== 'hidden' && cs.display !== 'none'
+      };
+    };
+    return { barra: ver('game-bar'), rotas: ver('rf-routes'),
+             caixa: ver('textbox') };
+  });
+  const escondido = (o) => !o || !o.visivel || o.opacidade < 0.02 || o.area === 0;
+  check(escondido(chrome.barra), 'o botao Menu nao fica por cima da sala',
+        JSON.stringify(chrome.barra));
+  check(escondido(chrome.rotas), 'o HUD de rotas sai de cena',
+        JSON.stringify(chrome.rotas));
+  check(escondido(chrome.caixa), 'a caixa de dialogo da VN sai de cena',
+        JSON.stringify(chrome.caixa));
   check(capa.w > 0 && capa.h > 0, 'camada com area', JSON.stringify(capa));
 
   /* ---- menu no percurso ------------------------------------------------
@@ -388,6 +423,85 @@ async function main() {
   });
   check(pinta2 > 20, 'o corredor desenhou', pinta2 + ' amostras acesas');
   await page.screenshot({ path: path.join(OUT, '05_corredor.png') });
+
+  /* ---- a casa habitada do primeiro ato ----------------------------------
+
+     Fenn e Dara existem para que o corredor do segundo ato possa
+     esvaziar. Conferir so o segundo ato nunca veria os dois sumirem, e
+     sumir e o efeito inteiro - entao a checagem e comparativa.        */
+
+  const povoado = await page.evaluate(() => {
+    const s = RBF.COB_MAPAS.corredor;
+    const naFase = (f) => (s.gente || []).filter(g =>
+      g.fase === undefined || (g.fase === 0 ? f === 0 : f >= g.fase));
+    return {
+      fase0: naFase(0).map(g => g.ch),
+      fase1: naFase(1).map(g => g.ch),
+      passivos: (s.gente || []).filter(g => g.passivo).length,
+      pontos0: (s.pontos || []).filter(p => p.fase === 0).length
+    };
+  });
+
+  check(povoado.fase0.indexOf('fenn') !== -1 && povoado.fase0.indexOf('dara') !== -1,
+        'o corredor do primeiro ato tem gente dentro',
+        povoado.fase0.join(', '));
+  check(povoado.fase1.indexOf('fenn') === -1 && povoado.fase1.indexOf('dara') === -1,
+        'e o do segundo nao tem mais',
+        povoado.fase1.join(', '));
+  check(povoado.passivos >= 1,
+        'quem anda no primeiro ato e passivo, e nao cacador');
+
+  /* Nenhum passivo pode alcancar: se um deles empurrasse a personagem de
+     volta ao refugio, o primeiro ato viraria perseguicao. */
+  const naoCaca = await page.evaluate(async () => {
+    const j = RBF.Rpg._debug.estado();
+    const faseAntes = j.fase;
+    j.fase = 0;
+    j.sala = 'corredor';
+    j.p.x = 700; j.p.y = 330; j.p.dir = 'direita';
+    j.marcas.cob_vista = false;
+    for (let i = 0; i < 90; i++) {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+      await new Promise(r => setTimeout(r, 16));
+    }
+    document.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
+    const st = RBF.Rpg._debug.estado();
+    const r = { sala: st.sala, vista: !!st.marcas.cob_vista };
+    st.fase = faseAntes;
+    return r;
+  });
+  check(!naoCaca.vista && naoCaca.sala === 'corredor',
+        'andar entre eles nao custa nada no primeiro ato',
+        JSON.stringify(naoCaca));
+
+  await page.evaluate(() => {
+    const j = RBF.Rpg._debug.estado();
+    j.fase = 0; j.sala = 'corredor';
+    j.p.x = 1300; j.p.y = 330; j.p.dir = 'direita'; j.fala = null;
+  });
+  await page.waitForTimeout(1200);
+
+  /* Medido AQUI, e nao so na entrada: e este o quadro que vira imagem, e
+     foi numa imagem como esta que o botao apareceu. */
+  const chrome2 = await page.evaluate(() => {
+    const el = document.getElementById('game-bar');
+    const cs = getComputedStyle(el);
+    return { op: Number(cs.opacity), vis: cs.visibility, disp: cs.display,
+             dentroDeVn: !!document.getElementById('vn').contains(el),
+             classePalco: document.getElementById('vn').className };
+  });
+  check(chrome2.op < 0.02, 'a barra continua escondida na sala',
+        JSON.stringify(chrome2));
+
+  await page.screenshot({ path: path.join(OUT, '05b_corredor_habitado.png') });
+
+  /* Devolve a fase 0: a virada e conferida mais adiante, pelo caminho do
+     roteiro, e comecar aquele trecho ja virado tornaria a checagem cega. */
+  await page.evaluate(() => {
+    const j = RBF.Rpg._debug.estado();
+    j.fase = 0; j.fala = null;
+  });
+  await page.waitForTimeout(400);
 
   /* ---- sair por porta, pisando nela -------------------------------------
 

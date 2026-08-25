@@ -480,9 +480,47 @@ RBF.Rpg = (function () {
 
       if (g.parado) { continue; }
 
+      var d = dist(v, jogo.p);
+
+      /*
+        PASSIVO: anda, e so.
+
+        A casa do primeiro ato fechou mais cedo; ela nao esta a espreita.
+        Um empregado em ronda ali nao ouve, nao persegue e nao alcanca -
+        ele cumpre o horario dele e passa. Sem esta faixa, a unica forma
+        de por o Fenn em cena seria planta-lo parado, e empregado
+        plantado num corredor as onze e quarenta le como manequim.
+
+        E a existencia dele no primeiro ato que faz o corredor vazio do
+        segundo custar alguma coisa.
+      */
+      if (g.passivo) {
+        var alvoP = proximaRonda(g, v);
+        if (alvoP) {
+          var angP = Math.atan2(alvoP.y - v.y, alvoP.x - v.x);
+          var vP = (g.passo || 52) * dt;
+          var dxP = Math.cos(angP) * vP;
+          var dyP = Math.sin(angP) * vP;
+          if (Math.abs(dxP) > Math.abs(dyP)) {
+            v.dir = dxP < 0 ? 'esquerda' : 'direita';
+          } else {
+            v.dir = dyP < 0 ? 'cima' : 'baixo';
+          }
+          move(v, dxP, dyP, charDef(g.ch));
+          v.anim += dt * 3.6;
+          v.andando = true;
+          if (dist(v, alvoP) < 16) {
+            v.ronda = ((v.ronda || 0) + 1) % Math.max(1, (g.ronda || []).length);
+            /* Parada declarada no fim do trecho: `espera` em segundos. */
+            if (g.espera) { v.pausa = g.espera; }
+          }
+        }
+        if (v.pausa > 0) { v.pausa -= dt; v.andando = false; }
+        continue;
+      }
+
       /* Ouve. O alcance cresce com o ruido acumulado, e nao com a
          distancia sozinha: ficar parado no escuro funciona. */
-      var d = dist(v, jogo.p);
       var alcance = (g.ouvido || 210) + jogo.ruido * 70;
 
       if (jogo.p.andando && d < alcance) {
@@ -610,7 +648,8 @@ RBF.Rpg = (function () {
     if (!jogo.atores[k]) {
       jogo.atores[k] = {
         x: g.x, y: g.y, dir: g.dir || 'baixo', anim: 0,
-        ronda: 0, atento: 0, avisou: false, alvoX: g.x, alvoY: g.y
+        ronda: 0, atento: 0, avisou: false, alvoX: g.x, alvoY: g.y,
+        pausa: 0, andando: false
       };
     }
     return jogo.atores[k];
@@ -668,7 +707,15 @@ RBF.Rpg = (function () {
     jogo.ruido = 0;
     preCarrega(idSala);
     RBF.Audio.playSfx('sfx_door');
-    if (s.bgm) { RBF.Audio.playBgm(s.bgm); }
+
+    /* A trilha NAO se troca aqui.
+
+       `passoTrilha()` e o dono unico dela: ele ja decide entre a faixa da
+       sala e a de perseguicao, no quadro seguinte. Quando esta linha
+       tambem tocava, saiam duas chamadas de `playBgm` em dois quadros -
+       porque `vaiPara` nunca atualizava `jogo.bgm` - e a faixa anterior
+       ficava tocando sem dono. Dois donos para o mesmo som e o defeito;
+       sincronizar os dois seria remendo. */
   }
 
   /* ---- trilha ------------------------------------------------------------- */
@@ -1152,7 +1199,8 @@ RBF.Rpg = (function () {
     /* Tres quadros por direcao, na ida e na volta: 1 2 1 3. Um ciclo de
        0 1 2 sem o retorno da perna produz manqueira. */
     var ordem = [1, 0, 1, 2];
-    var col = st.andando ? ordem[Math.floor(st.anim) % 4] : 1;
+    var anda = st.andando === undefined ? false : st.andando;
+    var col = anda ? ordem[Math.floor(st.anim) % 4] : 1;
     var lin = LADOS[st.dir] === undefined ? 0 : LADOS[st.dir];
 
     c.drawImage(im, col * fw, lin * fh, fw, fh, px, py, fw, fh);
@@ -1590,6 +1638,7 @@ RBF.Rpg = (function () {
 
     pintaHud();
     capa.classList.add('is-on');
+    marcaPalco(true);
     /* Medir depois de acender: com a camada em visibility:hidden o
        palco devolve caixa zerada e o canvas nasceria no minimo. */
     mede();
@@ -1608,6 +1657,15 @@ RBF.Rpg = (function () {
       cv.removeEventListener('pointerdown', aoTocar);
     }
     if (capa) { capa.classList.remove('is-on', 'is-desfecho'); }
+    marcaPalco(false);
+  }
+
+  /* A classe vive no palco, e nao no <html>: o percurso e uma camada de
+     dentro do jogo, e um sinalizador no documento sobreviveria a uma
+     partida encerrada no meio. */
+  function marcaPalco(ligado) {
+    var vn = document.getElementById('vn');
+    if (vn && vn.classList) { vn.classList.toggle('tem-percurso', !!ligado); }
   }
 
   /* Sai. `saida` e o id que o roteiro vai ler. */

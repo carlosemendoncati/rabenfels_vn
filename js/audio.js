@@ -85,26 +85,52 @@ RBF.Audio = (function () {
     tryNext();
   }
 
+  /* Cancela o fade que ja estava correndo NESTE elemento.
+
+     Sem isto, duas rampas escrevem em `el.volume` no mesmo intervalo de
+     50ms e o nivel pula entre os dois destinos. E o que se ouve como
+     "audio bugado" quando a troca de sala pede duas faixas seguidas. */
+  function cancelaFade(el) {
+    if (el && el._rbfFade) {
+      clearInterval(el._rbfFade);
+      el._rbfFade = null;
+    }
+  }
+
   function fade(el, from, to, ms, done) {
     if (!el) { if (done) { done(); } return; }
+    cancelaFade(el);
+
     var steps = Math.max(1, Math.round(ms / 50));
     var step  = 0;
     try { el.volume = clamp(from); } catch (e) { /* ignora */ }
-    var timer = setInterval(function () {
+
+    el._rbfFade = setInterval(function () {
       step += 1;
       try { el.volume = clamp(from + (to - from) * (step / steps)); } catch (e) { /* ignora */ }
       if (step >= steps) {
-        clearInterval(timer);
+        cancelaFade(el);
         if (done) { done(); }
       }
     }, 50);
   }
 
-  function startBgm(id) {
+  function startBgm(id, minha) {
     var def = RBF.BGM[id];
     if (!def || failed[id]) { return; }
+    if (minha === undefined) { geracao += 1; minha = geracao; }
+
     pick(def, paths().bgm, id, function (el) {
       if (!el) { return; }
+
+      /* O pedido foi atropelado enquanto o arquivo carregava. O elemento
+         ja existe e pode ate ter comecado a tocar; ele morre aqui, e nao
+         vira `current`. */
+      if (minha !== geracao) {
+        cancelaFade(el);
+        try { el.pause(); el.currentTime = 0; } catch (e) { /* ignora */ }
+        return;
+      }
       if (pending && pending !== id) { return; }  /* outra faixa foi pedida */
       el.loop = (def.loop !== false);
       var target = (def.volume != null ? def.volume : 1) * cfg().bgmVolume;
@@ -118,23 +144,69 @@ RBF.Audio = (function () {
   }
 
   /* id null ou vazio = parar a trilha atual */
+  /* Numero do pedido de trilha.
+
+     `pick()` e assincrono - espera `canplaythrough` - e nao garante
+     ordem de chegada. Sem um numero por pedido, o callback de uma troca
+     atropelada ainda virava `current`, e a faixa da troca mais nova
+     ficava tocando sem dono. Comparar por id nao basta: duas trocas
+     podem pedir a MESMA faixa. */
+  var geracao = 0;
+
   function playBgm(id) {
     if (!cfg().enabled) { return; }
-    if (!id) { pending = null; stopBgm(); return; }
+
+    geracao += 1;
+    var minha = geracao;
+
+    if (!id) { pending = null; calaPendentes(); stopBgm(); return; }
     if (current && current.id === id) { return; }
+
+    /* Uma troca nova chegou antes de a anterior terminar de sair: o que
+       ainda estava esmaecendo cala agora, e nao daqui a 900ms. */
+    calaPendentes();
+
     pending = id;
     stopBgm(function () {
-      if (!unlocked) { return; }   /* dispara no unlock */
-      startBgm(id);
+      if (minha !== geracao) { return; }  /* atropelado no caminho */
+      if (!unlocked) { return; }          /* dispara no unlock */
+      startBgm(id, minha);
     });
+  }
+
+  /* Elementos que ja receberam ordem de sair e ainda estao esmaecendo.
+     Existem porque `stopBgm` desanexa `current` na primeira linha: a
+     partir dali, ninguem mais aponta para a faixa que esta saindo, e uma
+     segunda troca no meio do caminho a deixava tocando ate o fim sem
+     dono. */
+  var saindo = [];
+
+  function esquece(el) {
+    for (var i = saindo.length - 1; i >= 0; i--) {
+      if (saindo[i] === el) { saindo.splice(i, 1); }
+    }
+  }
+
+  /* Corta na hora tudo o que ainda estiver soando. Usado quando uma
+     troca nova chega antes de a anterior terminar de sair. */
+  function calaPendentes() {
+    for (var i = 0; i < saindo.length; i++) {
+      var el = saindo[i];
+      cancelaFade(el);
+      try { el.pause(); el.currentTime = 0; } catch (e) { /* ignora */ }
+    }
+    saindo.length = 0;
   }
 
   function stopBgm(done) {
     if (!current) { if (done) { done(); } return; }
     var el = current.el;
     current = null;
+    saindo.push(el);
+
     fade(el, el.volume, 0, cfg().fadeMs, function () {
       try { el.pause(); el.currentTime = 0; } catch (e) { /* ignora */ }
+      esquece(el);
       if (done) { done(); }
     });
   }

@@ -564,9 +564,18 @@ RBF.BACKGROUNDS = {
      e o mesmo que #rf-menu-bg usava sozinho antes da foto existir -
      continua valendo como fallback enquanto a imagem carrega ou se
      available virar false. */
+  /* DESLIGADO em 25/08/2026 porque o arquivo saiu do disco.
+
+     Nada no runtime o usa como cena - o menu ficou com
+     bg_archive_closeup, por decisao anterior registrada mais abaixo -
+     e a entrada continua aqui de proposito, para a galeria e para nao
+     perder a intencao. Mas com available:true o motor pediria um PNG que
+     nao existe, e `validate.js` reprovava por isso.
+
+     Repondo o arquivo em assets/backgrounds/, e so virar para true. */
   bg_menu_archive: {
     file: 'bg_menu_archive.png',
-    available: true,
+    available: false,
     css: 'radial-gradient(ellipse at 68% 52%, #241a10 0%, #100c09 42%, #07080c 100%)'
   },
 
