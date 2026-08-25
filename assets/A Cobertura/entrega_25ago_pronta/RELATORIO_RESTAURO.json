@@ -1,0 +1,680 @@
+{
+  "origem": "C:\\Users\\maudh\\Downloads\\rabenfels_vn\\assets\\A Cobertura\\entrega_25ago",
+  "saida": "C:\\Users\\maudh\\Downloads\\rabenfels_vn\\assets\\A Cobertura\\entrega_25ago_restaurada",
+  "arquivos_png": 56,
+  "incidente": "backgroundremover --pasta em 25/08/2026",
+  "resultados": [
+    {
+      "arquivo": "4c9a58a1-f2ea-45c8-bb2b-19eb383f14f9.png",
+      "tamanho": [
+        1881,
+        836
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 128558,
+      "percentual_devolvido": 8.1753,
+      "pixels_pretos_ambiguos": 905451,
+      "percentual_ambiguo": 57.5798
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (1).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1166742,
+      "percentual_devolvido": 74.1795,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (2).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (3).png",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (4).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (10).png",
+      "tamanho": [
+        1254,
+        1254
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1235953,
+      "percentual_devolvido": 78.5972,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (5).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 314081,
+      "percentual_devolvido": 19.9687,
+      "pixels_pretos_ambiguos": 689332,
+      "percentual_ambiguo": 43.8265
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (6).png",
+      "tamanho": [
+        1254,
+        1254
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 913241,
+      "percentual_devolvido": 58.0751,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (7).png",
+      "tamanho": [
+        1312,
+        1199
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 5151,
+      "percentual_devolvido": 0.3274,
+      "pixels_pretos_ambiguos": 751309,
+      "percentual_ambiguo": 47.7601
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (8).png",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1131681,
+      "percentual_devolvido": 71.9503,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (9).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (11).png",
+      "tamanho": [
+        2172,
+        724
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1253,
+      "percentual_devolvido": 0.0797,
+      "pixels_pretos_ambiguos": 703710,
+      "percentual_ambiguo": 44.7502
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (12).png",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (13).png",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (14).png",
+      "tamanho": [
+        1236,
+        1272
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (15).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (16).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (17).png",
+      "tamanho": [
+        1214,
+        1295
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 3120,
+      "percentual_devolvido": 0.1985,
+      "pixels_pretos_ambiguos": 1280462,
+      "percentual_ambiguo": 81.4476
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (18).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (19).png",
+      "tamanho": [
+        1224,
+        1285
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (20).png",
+      "tamanho": [
+        1205,
+        1306
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (21).png",
+      "tamanho": [
+        1312,
+        1199
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (22).png",
+      "tamanho": [
+        1183,
+        1329
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 921372,
+      "percentual_devolvido": 58.6037,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (23).png",
+      "tamanho": [
+        1312,
+        1199
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_44 AM (24).png",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_45 AM (25).png",
+      "tamanho": [
+        1164,
+        1351
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 3564,
+      "percentual_devolvido": 0.2266,
+      "pixels_pretos_ambiguos": 547534,
+      "percentual_ambiguo": 34.8179
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_59 AM (1).png",
+      "tamanho": [
+        1084,
+        1451
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1078306,
+      "percentual_devolvido": 68.556,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_59 AM (2).png",
+      "tamanho": [
+        1651,
+        953
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1095839,
+      "percentual_devolvido": 69.6477,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_59 AM (3).png",
+      "tamanho": [
+        1942,
+        809
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 5037,
+      "percentual_devolvido": 0.3206,
+      "pixels_pretos_ambiguos": 601555,
+      "percentual_ambiguo": 38.2893
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 03_07_09 AM.png",
+      "tamanho": [
+        878,
+        1791
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 739573,
+      "percentual_devolvido": 47.0317,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "antoniette_retrato_pixel.png",
+      "tamanho": [
+        1254,
+        1254
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 819611,
+      "percentual_devolvido": 52.121,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "antoniette_vela_spritesheet.png",
+      "tamanho": [
+        1055,
+        1491
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 157775,
+      "percentual_devolvido": 10.0302,
+      "pixels_pretos_ambiguos": 1189821,
+      "percentual_ambiguo": 75.64
+    },
+    {
+      "arquivo": "cama_servico.png",
+      "tamanho": [
+        328,
+        180
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 7645,
+      "percentual_devolvido": 12.9488,
+      "pixels_pretos_ambiguos": 13433,
+      "percentual_ambiguo": 22.7524
+    },
+    {
+      "arquivo": "carmine_ataque_3_frames_348x172.png",
+      "tamanho": [
+        348,
+        172
+      ],
+      "metodo": "original exato",
+      "pixels_devolvidos": 9,
+      "percentual_devolvido": 0.015,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "carmine_ataque_direita_3_frames_348x172.png",
+      "tamanho": [
+        348,
+        172
+      ],
+      "metodo": "original exato",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "carmine_ataques_3x3_348x516.png",
+      "tamanho": [
+        348,
+        516
+      ],
+      "metodo": "original exato",
+      "pixels_devolvidos": 41719,
+      "percentual_devolvido": 23.233,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "carmine_chars_dropped.png",
+      "tamanho": [
+        1607,
+        979
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1045822,
+      "percentual_devolvido": 66.4751,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "carmine_novo_design_348x688.png",
+      "tamanho": [
+        348,
+        688
+      ],
+      "metodo": "original exato",
+      "pixels_devolvidos": 37161,
+      "percentual_devolvido": 15.521,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "carmine_spritesheet_completo_348x1204.png",
+      "tamanho": [
+        348,
+        1204
+      ],
+      "metodo": "original exato",
+      "pixels_devolvidos": 73092,
+      "percentual_devolvido": 17.4447,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "dara_spritesheet_3x4.png",
+      "tamanho": [
+        1055,
+        1491
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 1279975,
+      "percentual_devolvido": 81.3713,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "fenn_spritesheet_3x4.png",
+      "tamanho": [
+        1055,
+        1491
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 36750,
+      "percentual_devolvido": 2.3363,
+      "pixels_pretos_ambiguos": 1287235,
+      "percentual_ambiguo": 81.8329
+    },
+    {
+      "arquivo": "gancho_chaves.png",
+      "tamanho": [
+        90,
+        70
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 10,
+      "percentual_devolvido": 0.1587,
+      "pixels_pretos_ambiguos": 4933,
+      "percentual_ambiguo": 78.3016
+    },
+    {
+      "arquivo": "malas_bau_ferramentas.png",
+      "tamanho": [
+        120,
+        90
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 2327,
+      "percentual_devolvido": 21.5463,
+      "pixels_pretos_ambiguos": 2071,
+      "percentual_ambiguo": 19.1759
+    },
+    {
+      "arquivo": "moldura_vazia.png",
+      "tamanho": [
+        120,
+        150
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "porta_2_estados.png",
+      "tamanho": [
+        360,
+        240
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 5653,
+      "percentual_devolvido": 6.5428,
+      "pixels_pretos_ambiguos": 31816,
+      "percentual_ambiguo": 36.8241
+    },
+    {
+      "arquivo": "porta_aberta.png",
+      "tamanho": [
+        180,
+        240
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 5680,
+      "percentual_devolvido": 13.1481,
+      "pixels_pretos_ambiguos": 23299,
+      "percentual_ambiguo": 53.9329
+    },
+    {
+      "arquivo": "porta_fechada.png",
+      "tamanho": [
+        180,
+        240
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "prataria_empilhada.png",
+      "tamanho": [
+        140,
+        60
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 276,
+      "percentual_devolvido": 3.2857,
+      "pixels_pretos_ambiguos": 4051,
+      "percentual_ambiguo": 48.2262
+    },
+    {
+      "arquivo": "rastro_01.png",
+      "tamanho": [
+        120,
+        120
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 484,
+      "percentual_devolvido": 3.3611,
+      "pixels_pretos_ambiguos": 13261,
+      "percentual_ambiguo": 92.0903
+    },
+    {
+      "arquivo": "rastro_02.png",
+      "tamanho": [
+        120,
+        120
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 713,
+      "percentual_devolvido": 4.9514,
+      "pixels_pretos_ambiguos": 13119,
+      "percentual_ambiguo": 91.1042
+    },
+    {
+      "arquivo": "rastro_03.png",
+      "tamanho": [
+        120,
+        120
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 986,
+      "percentual_devolvido": 6.8472,
+      "pixels_pretos_ambiguos": 12682,
+      "percentual_ambiguo": 88.0694
+    },
+    {
+      "arquivo": "rastro_04.png",
+      "tamanho": [
+        120,
+        120
+      ],
+      "metodo": "RGB preservado",
+      "pixels_devolvidos": 226,
+      "percentual_devolvido": 1.5694,
+      "pixels_pretos_ambiguos": 11497,
+      "percentual_ambiguo": 79.8403
+    },
+    {
+      "arquivo": "relogio_servico.png",
+      "tamanho": [
+        100,
+        140
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "retrato_governanta_2_estados.png",
+      "tamanho": [
+        220,
+        90
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "retrato_governanta_revelado.png",
+      "tamanho": [
+        110,
+        90
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    },
+    {
+      "arquivo": "retrato_governanta_virado.png",
+      "tamanho": [
+        110,
+        90
+      ],
+      "metodo": "inalterado",
+      "pixels_devolvidos": 0,
+      "percentual_devolvido": 0.0,
+      "pixels_pretos_ambiguos": 0,
+      "percentual_ambiguo": 0.0
+    }
+  ]
+}

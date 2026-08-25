@@ -1,0 +1,567 @@
+{
+  "origem": "C:\\Users\\maudh\\Downloads\\rabenfels_vn\\assets\\A Cobertura\\entrega_25ago_pronta",
+  "saida": "C:\\Users\\maudh\\Downloads\\rabenfels_vn\\assets\\A Cobertura\\entrega_25ago_pixel",
+  "bloco": 2,
+  "arquivos": [
+    {
+      "arquivo": "4c9a58a1-f2ea-45c8-bb2b-19eb383f14f9.png",
+      "familia": "personagem",
+      "tamanho": [
+        1881,
+        836
+      ],
+      "cores_paleta": 20,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (1).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (2).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (3).png",
+      "familia": "mundo",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_40 AM (4).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (10).png",
+      "familia": "mundo",
+      "tamanho": [
+        1254,
+        1254
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (5).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (6).png",
+      "familia": "mundo",
+      "tamanho": [
+        1254,
+        1254
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (7).png",
+      "familia": "mundo",
+      "tamanho": [
+        1312,
+        1199
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (8).png",
+      "familia": "mundo",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_41 AM (9).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (11).png",
+      "familia": "mundo",
+      "tamanho": [
+        2172,
+        724
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (12).png",
+      "familia": "mundo",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (13).png",
+      "familia": "mundo",
+      "tamanho": [
+        1024,
+        1536
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (14).png",
+      "familia": "mundo",
+      "tamanho": [
+        1236,
+        1272
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_42 AM (15).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (16).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (17).png",
+      "familia": "mundo",
+      "tamanho": [
+        1214,
+        1295
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (18).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (19).png",
+      "familia": "mundo",
+      "tamanho": [
+        1224,
+        1285
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (20).png",
+      "familia": "mundo",
+      "tamanho": [
+        1205,
+        1306
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (21).png",
+      "familia": "mundo",
+      "tamanho": [
+        1312,
+        1199
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (22).png",
+      "familia": "mundo",
+      "tamanho": [
+        1183,
+        1329
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_43 AM (23).png",
+      "familia": "mundo",
+      "tamanho": [
+        1312,
+        1199
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_44 AM (24).png",
+      "familia": "mundo",
+      "tamanho": [
+        1536,
+        1024
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_45 AM (25).png",
+      "familia": "mundo",
+      "tamanho": [
+        1164,
+        1351
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_59 AM (1).png",
+      "familia": "mundo",
+      "tamanho": [
+        1084,
+        1451
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_59 AM (2).png",
+      "familia": "mundo",
+      "tamanho": [
+        1651,
+        953
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 02_57_59 AM (3).png",
+      "familia": "mundo",
+      "tamanho": [
+        1942,
+        809
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "ChatGPT Image Aug 25, 2026, 03_07_09 AM.png",
+      "familia": "personagem",
+      "tamanho": [
+        878,
+        1791
+      ],
+      "cores_paleta": 19,
+      "bloco": 2
+    },
+    {
+      "arquivo": "antoniette_retrato_pixel.png",
+      "familia": "personagem",
+      "tamanho": [
+        1254,
+        1254
+      ],
+      "cores_paleta": 19,
+      "bloco": 2
+    },
+    {
+      "arquivo": "antoniette_vela_spritesheet.png",
+      "familia": "personagem",
+      "tamanho": [
+        1055,
+        1491
+      ],
+      "cores_paleta": 19,
+      "bloco": 2
+    },
+    {
+      "arquivo": "cama_servico.png",
+      "familia": "mundo",
+      "tamanho": [
+        328,
+        180
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "carmine_ataque_3_frames_348x172.png",
+      "familia": "personagem",
+      "tamanho": [
+        348,
+        172
+      ],
+      "cores_paleta": 20,
+      "bloco": 2
+    },
+    {
+      "arquivo": "carmine_ataque_direita_3_frames_348x172.png",
+      "familia": "personagem",
+      "tamanho": [
+        348,
+        172
+      ],
+      "cores_paleta": 19,
+      "bloco": 2
+    },
+    {
+      "arquivo": "carmine_ataques_3x3_348x516.png",
+      "familia": "personagem",
+      "tamanho": [
+        348,
+        516
+      ],
+      "cores_paleta": 20,
+      "bloco": 2
+    },
+    {
+      "arquivo": "carmine_chars_dropped.png",
+      "familia": "personagem",
+      "tamanho": [
+        1607,
+        979
+      ],
+      "cores_paleta": 20,
+      "bloco": 2
+    },
+    {
+      "arquivo": "carmine_novo_design_348x688.png",
+      "familia": "personagem",
+      "tamanho": [
+        348,
+        688
+      ],
+      "cores_paleta": 20,
+      "bloco": 2
+    },
+    {
+      "arquivo": "carmine_spritesheet_completo_348x1204.png",
+      "familia": "personagem",
+      "tamanho": [
+        348,
+        1204
+      ],
+      "cores_paleta": 20,
+      "bloco": 2
+    },
+    {
+      "arquivo": "dara_spritesheet_3x4.png",
+      "familia": "personagem",
+      "tamanho": [
+        1055,
+        1491
+      ],
+      "cores_paleta": 19,
+      "bloco": 2
+    },
+    {
+      "arquivo": "fenn_spritesheet_3x4.png",
+      "familia": "personagem",
+      "tamanho": [
+        1055,
+        1491
+      ],
+      "cores_paleta": 19,
+      "bloco": 2
+    },
+    {
+      "arquivo": "gancho_chaves.png",
+      "familia": "mundo",
+      "tamanho": [
+        90,
+        70
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "malas_bau_ferramentas.png",
+      "familia": "mundo",
+      "tamanho": [
+        120,
+        90
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "moldura_vazia.png",
+      "familia": "mundo",
+      "tamanho": [
+        120,
+        150
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "porta_2_estados.png",
+      "familia": "mundo",
+      "tamanho": [
+        360,
+        240
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "porta_aberta.png",
+      "familia": "mundo",
+      "tamanho": [
+        180,
+        240
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "porta_fechada.png",
+      "familia": "mundo",
+      "tamanho": [
+        180,
+        240
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "prataria_empilhada.png",
+      "familia": "mundo",
+      "tamanho": [
+        140,
+        60
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "rastro_01.png",
+      "familia": "mundo",
+      "tamanho": [
+        120,
+        120
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "rastro_02.png",
+      "familia": "mundo",
+      "tamanho": [
+        120,
+        120
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "rastro_03.png",
+      "familia": "mundo",
+      "tamanho": [
+        120,
+        120
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "rastro_04.png",
+      "familia": "mundo",
+      "tamanho": [
+        120,
+        120
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "relogio_servico.png",
+      "familia": "mundo",
+      "tamanho": [
+        100,
+        140
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "retrato_governanta_2_estados.png",
+      "familia": "mundo",
+      "tamanho": [
+        220,
+        90
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "retrato_governanta_revelado.png",
+      "familia": "mundo",
+      "tamanho": [
+        110,
+        90
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    },
+    {
+      "arquivo": "retrato_governanta_virado.png",
+      "familia": "mundo",
+      "tamanho": [
+        110,
+        90
+      ],
+      "cores_paleta": 33,
+      "bloco": 2
+    }
+  ]
+}
