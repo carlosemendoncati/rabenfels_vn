@@ -1,0 +1,125 @@
+# res10 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar res10
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 10', name:'O REGISTRO', chapter:'res10', if:R },
+@ fade_out
+### CENA res10_agosto "Terceiro dia"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . A primeira linha da tabela do quinto agosto recebeu a data três. Era dois dias antes da faixa anterior.
+---
+nar . Antoniette abriu o caderno na tabela de agosto e acrescentou uma coluna.
+nar . A tabela tinha quatro linhas e passou a ter cinco, e a quinta era a primeira que não batia.
+---
+inn . Dois dias antes.
+inn . Em cinco anos isso nunca variou mais que um.
+---
+inn . Ou a casa antecipou, ou eu estava medindo a coisa errada.
+---
+nar . Ela escreveu as duas hipóteses e não escolheu entre elas, porque fonte única não decide nada.
+@ spr dara guarded center
+DARA . A copa fecha às seis esta semana.
+ANTONIETTE . Desde quando?
+DARA . Desde esta semana.
+---
+ANTONIETTE . E nos outros agostos?
+nar . Dara parou com a caneca no meio do caminho.
+DARA . Nos outros agostos ninguém perguntou.
+@ spr_hide dara
+---
+nar . Antoniette anotou a resposta inteira, com a pausa, porque a pausa era o dado.
+### CENA res10_ultimo_dia "O último dia"  bg=bg_corridor bgm=-
+nar . No dia nove, à tarde, as duas estavam no degrau do corredor leste.
+@ spr klara neutral center
+@ spr liara bright right
+LIARA . Mil novecentos e trinta e dois.
+KLARA . Mil novecentos e trinta e dois.
+nar . Liara olhou para a irmã, porque a irmã nunca concordava com a conta de primeira.
+---
+LIARA . Você conferiu?
+KLARA . Confirmei.
+---
+nar . Depois Klara pediu para Liara trançar o cabelo dela, o que ela nunca pedia.
+nar . Liara trançou mal, desmanchou e recomeçou três vezes, e a irmã deixou.
+@ spr_hide liara
+@ spr_hide klara
+---
+nar . Antoniette anotou a hora, a duração e o pedido.
+---
+inn . Comportamento de despedida. Consistente com as entradas 38, 91 e 160.
+---
+nar . Escreveu essa frase e leu de novo, e a frase estava correta.
+---
+inn . Consistente com as entradas.
+---
+nar . Sublinhou a palavra consistente e não soube dizer por quê, e não anotou isso.
+### CENA res10_decisao "Onze e meia"  bg=bg_antoniette_room bgm=bgm_archive
+@ spr antoniette guarded center
+nar . A troca da guarda do portão era às onze e meia. Ela sabia disso havia quatro meses.
+---
+nar . Às onze e vinte ela tirou o papel do bolso interno e leu inteiro mais uma vez, à vela.
+nar . Estava tudo certo. Datas, horários, o que funciona e o que não funciona.
+---
+nar . No rodapé, com a letra dela, de junho: probabilidade honesta, baixa.
+---
+inn . Baixa não é nula.
+---
+inn . Baixa é o que eu escrevi quando não tinha nada em jogo.
+---
+nar . Ela pôs a mão na maçaneta às onze e vinte e cinco.
+---
+nar . Ficou ali o tempo de a guarda trocar. Ouviu os dois pares de botas no calçamento.
+---
+nar . Depois voltou para a escrivaninha, acendeu a vela nova e abriu o caderno.
+---
+@ spr antoniette away center
+inn . Se eu descer e falhar, não sobra registro e não sobra ninguém para escrever o registro.
+inn . Se eu ficar, sobra o documento.
+---
+inn . O documento serve a alguém depois.
+---
+nar . Escreveu a conclusão duas vezes, uma embaixo da outra. As duas ficaram iguais.
+---
+nar . O raciocínio estava correto. O custo tinha nome e ficou fora da folha.
+### CENA res10_entrada "Entrada 214"  bg=bg_archive_closeup bgm=bgm_archive
+nar . Ela abriu a entrada daquela noite antes de a noite acabar, coisa que nunca tinha feito.
+---
+### CARTAO caderno "— caderno sem identificação —"
+  | Entrada 214. Sujeito feminino, onze anos, segunda linha.
+  | Início do processo às três e dez.
+  | Duração estimada quatro horas, conforme as entradas 38, 91 e 160.
+---
+inn . As três anteriores foram escritas depois, de memória.
+inn . Esta não.
+---
+nar . Ela trocou a vela às duas e meia e continuou.
+nar . A entrada 214 ocupou três páginas, que é a média das entradas longas.
+---
+inn . Está saindo melhor que a 160.
+---
+nar . A satisfação era verdadeira e ela não a escondeu de si mesma. Escondeu do papel, que é outra coisa.
+---
+nar . Em nenhuma das duzentas e catorze entradas aparece a palavra Klara.
+nar . O documento usa sujeito, e usa segunda linha, e usa a escolhida quando cita a casa.
+nar . É a nomenclatura correta para material de foro. Está no manual, página quatro.
+### CENA res10_farpa "Três e dez"  bg=bg_black bgm=-
+nar . Faltavam quatro horas para o fim do processo.
+---
+nar . Ela ouviu a porta do quarto das gêmeas às três e dez e anotou a hora.
+---
+nar . Passos curtos no assoalho, indo até o alto da escada. E parando lá.
+---
+nar . Antoniette não levantou. A pena continuou onde estava.
+---
+nar . O ar do escritório esquentou. Ela anotou isso também.
+---
+nar . O relógio continuou sobre a mesa. Ela não olhou para ele enquanto o ar ficava quente.
+---
+nar . Ela deixou o campo da duração em branco e voltou a ele de manhã.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Agosto do quinto ano.', line2:'Ela n\u00e3o desceu.', chapter:'res10', if:R },
+@ fade_out

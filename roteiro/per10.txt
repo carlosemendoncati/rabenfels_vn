@@ -1,0 +1,113 @@
+# per10 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar per10
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 10', name:'A CONTA', chapter:'per10', if:R },
+@ fade_out
+### CENA per10_agosto "Terceiro dia"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . A tabela de agosto abriu no dia três. O padrão dos quatro anos anteriores começava dois dias depois.
+nar . Antoniette escreveu a diferença na margem: menos dois.
+---
+@ spr dara guarded center
+DARA . A copa fecha às seis esta semana.
+ANTONIETTE . Às seis?
+DARA . Ordem da senhora.
+@ spr_hide dara
+---
+inn . Seis em vez de oito. Menos duas.
+---
+nar . Ela abriu o caderno de despesas e conferiu o que sobrava do trimestre.
+nar . Sobrava o bastante para uma passagem de barco e três semanas de estalagem, e mais nada.
+---
+inn . A conta fecha. Fecha justa, mas fecha.
+### CENA per10_maio "Maio"  bg=bg_corridor bgm=-
+nar . Em maio, na cocheira, Fenn tinha dito o preço olhando para o cavalo.
+@ spr fenn neutral right
+FENN . Três moedas e a porta da cozinha fica destrancada na noite que a senhora disser.
+---
+ANTONIETTE . Três é caro por uma tranca.
+---
+FENN . Não é pela tranca.
+---
+nar . Fenn voltou a escovar o cavalo. Antoniette não perguntou o que as três moedas compravam além da tranca.
+---
+ANTONIETTE . Eu penso.
+FENN . Pensa.
+@ spr_hide fenn
+---
+nar . Ela anotou o valor no caderno de despesas naquela mesma tarde e escreveu desnecessário ao lado.
+---
+inn . A porta de serviço fica destrancada até as onze de qualquer jeito. Está no registro de junho do ano dois.
+inn . E se não estiver, dá a volta pelo pátio. São onze minutos.
+---
+nar . Ela mediu os onze minutos numa quinta-feira de junho, com relógio, para não estar chutando.
+---
+nar . A avaliação estava correta. Três moedas é caro por uma tranca.
+### CENA per10_ultimo_dia "O último dia"  bg=bg_corridor bgm=-
+nar . Na tarde do dia nove, Liara e Klara dividiam o degrau do corredor leste.
+@ spr klara neutral center
+@ spr liara bright right
+LIARA . Mil novecentos e trinta e dois.
+nar . Liara olhou para a irmã, porque a irmã nunca concordava com a conta de primeira.
+KLARA . Confirmei.
+---
+nar . Depois Klara pediu para Liara trançar o cabelo dela, o que ela nunca pedia.
+nar . Liara trançou mal, desmanchou e recomeçou três vezes, e a irmã deixou.
+@ spr_hide liara
+@ spr_hide klara
+---
+nar . Antoniette passou no fim do corredor com dois volumes que não precisava carregar.
+inn . Ela está se despedindo.
+---
+inn . E fez isso do único jeito que não levanta pergunta nenhuma.
+### CENA per10_porta "Onze e vinte e cinco"  bg=bg_antoniette_room bgm=bgm_archive
+nar . A troca da guarda do portão era às onze e meia. Ela sabia disso havia quatro meses.
+---
+nar . Às onze e vinte e cinco ela desceu pela escada de serviço com o papel no bolso interno.
+---
+@ spr klara neutral center
+nar . Klara já estava no pé da escada, vestida, com o saco de pano na mão.
+nar . Não perguntou nada. Foi atrás.
+---
+@@@ { t:'sfx', id:'sfx_door', if:R },
+nar . A porta da cozinha estava trancada.
+---
+nar . Antoniette experimentou duas vezes, porque duas vezes é o protocolo antes de concluir que uma porta está trancada.
+---
+inn . Onze minutos pelo pátio.
+---
+nar . Ela olhou o relógio, fez a conta e a conta ainda dava.
+nar . O barco era às seis e faltavam seis horas e trinta e cinco.
+---
+ANTONIETTE . Por aqui.
+nar . Klara foi atrás sem perguntar por que o caminho tinha mudado.
+---
+nar . Deram a volta pelo pátio. Custou onze minutos e passou debaixo da janela de Aldric.
+nar . A janela estava aberta por causa do calor.
+---
+nar . Não havia luz no quarto. Havia som de página virando, que é um som que não precisa de luz para quem já sabe o livro.
+---
+nar . Antoniette parou Klara com a mão no ombro dela e as duas esperaram quarenta segundos.
+nar . O som não parou e não mudou de ritmo.
+---
+inn . Ele lê de pé. Nunca senta na própria biblioteca.
+---
+inn . Aquilo ali é uma cadeira.
+---
+nar . Ela não anotou. Foi a única observação de cinco anos que ela não anotou, e não houve tempo.
+### CENA per10_farpa "Onze minutos"  bg=bg_black bgm=-
+nar . Elas saíram pela porta nordeste às onze e quarenta e um.
+---
+inn . Onze minutos.
+---
+inn . Está dentro da folga.
+---
+nar . Estava.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Nove de agosto, onze e quarenta e um.', line2:'Onze minutos de atraso.', chapter:'per10', if:R },
+@ fade_out

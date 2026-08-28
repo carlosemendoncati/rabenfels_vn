@@ -1,0 +1,245 @@
+# per12 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar per12
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 12', name:'A VOLTA', chapter:'per12', if:R },
+@ fade_out
+### CENA per12_volta "A volta"  bg=bg_grey_march_road bgm=-
+@ fade_in
+nar . O ar voltou ao normal antes das quatro.
+nar . Foi o único aviso que a estrada deu de que aquilo tinha acabado.
+---
+@ spr klara blank center
+nar . Klara estava de costas com a mala na mão, a onze minutos da ponte.
+nar . Antoniette olhou o relógio antes de olhar a menina.
+---
+ANTONIETTE . Klara. O barco é às seis.
+---
+nar . A menina virou o corpo inteiro, não só a cabeça, e olhou para o lado de onde tinham vindo.
+KLARA . Eu preciso voltar.
+---
+ANTONIETTE . Por quê?
+---
+nar . Klara puxou ar para responder. Soltou sem palavra.
+KLARA . Não sei.
+---
+KLARA . Está com fome de novo. E aquela outra coisa junto.
+nar . Não soube dar mais que isso.
+---
+nar . Klara virou e começou a desfazer o caminho. A mala batia no joelho a cada passo.
+---
+@ spr antoniette shaken left
+inn . Segura o braço dela.
+inn . Levanta e carrega. Ela tem doze anos e trinta e oito quilos.
+---
+nar . Trinta e oito quilos. Dois braços livres. O rio ainda ao alcance.
+nar . Nenhum dos três valores explicou por que ela não estendeu a mão.
+---
+nar . Depois foi atrás dela.
+---
+nar . Três quilômetros de volta, e nenhuma das duas falou.
+nar . Passaram o mourão de pedra. O sulco da roda continuava lá, e tinha secado.
+---
+nar . No portão, Klara estendeu a mala. Antoniette levou um segundo para perceber que precisava pegá-la.
+KLARA . Desculpa.
+---
+ANTONIETTE . Não foi você.
+nar . A frase saiu antes da conta e ficou sem correção.
+@ spr_hide klara
+@ spr_hide antoniette
+---
+nar . As duas entraram pelo mesmo caminho por onde tinham saído, e ninguém na casa soube que elas tinham saído.
+### CENA per12_coluna "A coluna"  bg=bg_archive_closeup bgm=bgm_archive
+@ spr antoniette away center
+nar . Ela fez o inventário, porque era o que sabia fazer com as mãos tremendo.
+inn . Caderno. Chave da biblioteca. Duas velas. Papel para umas quarenta páginas.
+---
+nar . Depois abriu o caderno de despesas na página de maio e leu a própria letra.
+---
+### CARTAO caderno "— caderno de despesas · maio —"
+  | Fenn, cocheiro-chefe. Solicitação: 3 moedas.
+  | Objeto: destranca da porta da copa, noite a combinar.
+  | 
+  | Desnecessário.
+---
+inn . Onze minutos.
+inn . O cocheiro esperou dez.
+---
+nar . Ela armou os três valores em coluna, alinhados pela vírgula, com a data ao lado de cada um.
+---
+nar . Somou. Conferiu a soma. Somou de trás para frente e conferiu de novo.
+---
+nar . Depois escreveu quatro letras ao lado do total, e é a única vez que a palavra aparece nas duzentas e noventa e uma páginas.
+---
+inn . Erro.
+---
+nar . A conta fecha. Ela fechou nas duas vezes, e vai continuar fechando.
+@ spr_hide antoniette
+### CENA per12_carmine "Carmine"  bg=bg_library_night bgm=bgm_camara
+@ spr antoniette guarded center
+nar . Ela acendeu a segunda vela e a primeira apagou.
+nar . Não havia corrente de ar na biblioteca. Ela conferiu as janelas em março e anotou.
+---
+@@@ { t:'sfx', id:'sfx_candle', if:R },
+nar . A segunda vela continuou acesa.
+---
+VOZ . Você ainda está somando.
+---
+@ spr antoniette shaken center
+nar . A voz chegou do lado esquerdo da mesa, na altura do tampo. Não havia cadeira ali.
+---
+ANTONIETTE . Khar’Vel.
+VOZ . Esse não é o meu nome. Mas você inventou bem. Serve.
+---
+VOZ . Vim agradecer.
+---
+VOZ . Cinco anos. Ela lê mais rápido. Corrige adulto sem constranger ninguém.
+---
+VOZ {A} . Ela confere fonte até quando está com fome. Você ensinou isso.
+VOZ {B} . Ela pede desculpa antes de desobedecer. Você ensinou isso.
+VOZ {C} . Ela sabe quantos dias há entre esta casa e o rio. Você ensinou isso.
+---
+VOZ . Isso eu não dei. Chegou por fora.
+---
+inn . Onze minutos. Três moedas. Cinquenta e dois meses. Ela somou sem unidade até concluir que perdera Klara para economizar três moedas.
+---
+VOZ . Não.
+VOZ . Estaria viva do mesmo jeito. Você acertou essa parte.
+### CENA per12_perguntas "As perguntas"  bg=bg_library_night bgm=-
+@ spr antoniette neutral center
+VOZ . Ela te chama de quê?
+ANTONIETTE . Senhorita.
+VOZ . Na frente dos outros. E quando não tem ninguém.
+ANTONIETTE . Senhorita. Nos dois.
+---
+nar . Liara dizia Toni desde o primeiro mês. Em cinco anos, Klara não tinha usado o nome uma vez.
+---
+VOZ . Quantas vezes ela procurou você sem precisar de nada?
+ANTONIETTE . Eu não contei.
+VOZ . Eu contei.
+---
+@ spr antoniette guarded center
+ANTONIETTE . O que isso tem a ver com o cronograma?
+---
+nar . Carmine não respondeu. Antoniette preencheu a pausa sozinha.
+---
+inn . É o calendário.
+inn . Sou a única coisa nesta casa que chegou perto de mover uma data.
+---
+nar . Escreveu data, altura e atraso em três linhas. As três apontavam para ela.
+---
+VOZ . Você vai escrever isto. Então escreva certo.
+---
+CARMINE . Carmine.
+---
+nar . Antoniette tinha passado cinco anos batizando aquilo por conta própria.
+---
+inn . Ela nunca ouviu esse nome. Nem uma vez em doze anos de vida.
+inn . E eu ouvi hoje.
+---
+CARMINE . Você prometeu alguma coisa a ela em fevereiro.
+ANTONIETTE . Eu mostrei o caderno. Não prometi nada.
+ANTONIETTE . Eu disse que tiraria ela daqui.
+ANTONIETTE . Eu dei uma data.
+---
+CARMINE . Ela entendeu como promessa.
+CARMINE . Sem condição. Ela repetiu para a irmã na mesma noite.
+CARMINE . Agosto, antes do dia dez. Ela contou os dias no calendário da cozinha. Riscando.
+---
+CARMINE . Hoje é dia dez.
+---
+CARMINE . Ela acreditou em você.
+nar . Carmine não alterou o volume nem esperou defesa.
+---
+CARMINE . Ela falou com você na estrada.
+ANTONIETTE . Falou.
+---
+CARMINE {A} . 
+CARMINE {B} . 
+CARMINE {C} . 
+---
+nar . Antoniette não tinha contado.
+---
+CARMINE . Eu contei.
+---
+CARMINE . “Para a senhorita eu conto e acaba na senhorita.”
+---
+nar . A frase saiu na entonação da menina. Não parecida com ela. A dela.
+---
+@ spr antoniette shaken center
+ANTONIETTE . A senhora estava lá.
+CARMINE . Eu estou sempre lá.
+---
+CARMINE . Doze anos, escriba.
+CARMINE . Eu aprendi o passo dela antes de ela andar. Aprendi de que lado ela dorme.
+---
+nar . Antoniette tinha aprendido a segunda coisa em novembro do ano dois, e anotado como posição habitual.
+---
+CARMINE . Quando eu ocupar, o corpo não esquece. Nada do que ela sente sai junto.
+---
+CARMINE . Fica aqui dentro. Comigo. Todo dia.
+---
+ANTONIETTE . Então a senhora perde também.
+---
+nar . Carmine não respondeu por tempo demais.
+---
+CARMINE . Eu não perco. Eu recebo.
+---
+nar . Foi a única vez naquela noite em que ela corrigiu a própria palavra.
+--- {A}
+inn {A} . Ela emendou ao lado, na mesma linha. Não riscou.
+--- {A}
+inn {A} . Eu ensinei isso à Klara.
+---
+CARMINE . A senhora não vai salvar essa menina.
+---
+CARMINE . Não hoje, não em setembro, não com barco nenhum.
+---
+CARMINE . E ela vai continuar esperando. É isso que eu vou ter de ouvir.
+---
+ANTONIETTE . Ela vai saber que sou eu?
+---
+CARMINE . Vai.
+---
+ANTONIETTE . Ela vai poder falar comigo?
+---
+CARMINE . Não.
+---
+nar . Antoniette pôs as duas mãos na mesa, uma de cada lado do caderno, e não escreveu nada.
+### CENA per12_onze "Onze minutos"  bg=bg_library_night bgm=-
+CARMINE . Você chegou onze minutos atrasada na estrada.
+---
+@ spr antoniette shaken center
+ANTONIETTE . Cheguei.
+---
+CARMINE . Eu não estava contando o tempo.
+---
+nar . Antoniette esperou o resto da frase.
+---
+nar . Não veio resto.
+---
+ANTONIETTE . Se eu tivesse chegado às onze e trinta.
+---
+CARMINE . Boa noite, escriba.
+---
+@@@ { t:'sfx', id:'sfx_candle', if:R },
+nar . A vela apagou e acendeu de novo.
+nar . A luz voltou. O lado oposto da mesa continuava vazio.
+---
+inn . Ela não perguntou nada sobre o plano.
+inn . Nem uma vez.
+---
+nar . Ela anotou aquilo na margem, com um ponto de interrogação, e passou para o assunto seguinte.
+---
+nar . Na margem de baixo, com a mesma pena, ela anotou a outra frase e o mesmo ponto de interrogação.
+---
+nar . Depois voltou à página da coluna e conferiu a soma pela terceira vez.
+---
+nar . Fechava.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Dez de agosto, quatro da manh\u00e3.', line2:'A soma continua fechando.', chapter:'per12', if:R },
+@ fade_out

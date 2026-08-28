@@ -1,0 +1,251 @@
+# chapter4 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter4
+
+nar . Ela escreveu tudo. A hora, os nomes, o que ouviu pela porta, o estado da menina depois.
+nar . Quatro páginas. Levou até o amanhecer.
+---
+inn . Isto é o que a Ordem me mandou fazer.
+nar . Lacrou o envelope e o deixou na saída da manhã.
+---
+nar . A resposta de Lervel chegou em nove dias, e tinha três linhas.
+### CARTAO lervel "— Ordem dos Olhos Cinzentos — resposta —"
+  | Recebido. Excelente detalhamento.
+  | Manter observação. Não intervir sob nenhuma circunstância.
+  | Prazo estimado revisto para quatro anos.
+inn . Não intervir sob nenhuma circunstância.
+---
+inn . Eu contei tudo e eles anotaram tudo, e a única coisa que mudou foi o prazo.
+nar . Ela escreveu o termo e o calendário. Outubro, quatro dias, três oficiantes, sujeito K.
+nar . Não escreveu o que ouviu pela porta.
+---
+inn . O que eu ouvi não é dado. É impressão.
+nar . Releu a frase e a manteve, sabendo o que ela era.
+---
+nar . Lacrou o envelope. A cera endureceu sob a palma antes que ela recolhesse a mão.
+inn . Um relatório com termo técnico e sem testemunha é um relatório que não pede nada.
+inn . Foi o que eu quis.
+nar . O relatório para Lervel saiu em vinte minutos. Volumes catalogados, estado das encadernações, previsão de conclusão.
+nar . Nada de outubro.
+---
+nar . Depois tirou o caderno sem identificação de baixo do forro do baú.
+nar . Depois tirou do baú um caderno em branco e não escreveu data nem cabeçalho.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Outubro. Quatro dias. Três oficiantes.
+  | Chamam de treinamento entre si, sem baixar a voz.
+  | A menina entrou andando e saiu andando.
+  | Não sei o que aconteceu no meio e não vou fingir que sei.
+inn . A última linha é a única honesta que eu escrevi hoje.
+nar . Guardou o caderno debaixo do forro e deixou o envelope de Lervel na beira da mesa.
+---
+inn . Dois documentos sobre o mesmo mês. Um deles vai viajar.
+@@@ { t:'chap', num:'CAP\u00cdTULO 4', name:'OS RITUAIS DE OUTUBRO', chapter:'capitulo4' },
+@ fade_out
+### CENA c4_vocabulario "A palavra"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . Em outubro a copa cheira a repolho e a gordura fria. A janela fica fechada o dia inteiro.
+nar . Antoniette catalogava a lista de conserva na ponta da mesa porque a biblioteca estava fria demais de manhã.
+@ spr dara neutral center
+DARA . Semana que vem eu preciso da senhorita fora da ala leste depois das quatro.
+ANTONIETTE . Por quantos dias?
+DARA . Quatro.
+---
+ANTONIETTE . Obra?
+DARA . Treinamento.
+nar . Ela disse a palavra e continuou descascando, sem pausa e sem baixar a voz.
+---
+inn . Ela não explicou o termo.
+inn . Quem explica um termo acha que o outro não conhece. Ela achou que eu conhecia.
+ANTONIETTE . Treinamento de quê?
+@ spr dara guarded center
+nar . A faca parou.
+DARA . Da casa.
+nar . E voltou a andar, mais devagar do que antes.
+@ spr_hide dara
+inn . Ela respondeu duas palavras e errou uma.
+---
+inn . "Da casa" responde "de quem". Eu perguntei "de quê".
+---
+inn . E não sei se ela ouviu errado ou se respondeu a outra pergunta de propósito.
+nar . Antoniette anotou as duas hipóteses e não riscou nenhuma.
+### CENA c4_vespera "A véspera"  bg=bg_nidhaus_gate bgm=bgm_grey_march
+@@@ { t:'sfx', id:'sfx_door' },
+nar . A carruagem chegou às três e ninguém saiu para receber.
+nar . Desceram três pessoas com casaco de viagem e uma caixa de couro comprida, do tamanho de uma prancheta.
+---
+nar . Uma mulher de sessenta anos e mão firme. Um homem de barba curta, que conferiu a caixa antes de soltá-la.
+nar . E uma terceira, mais nova que Antoniette, que ficou perto da carruagem tempo demais.
+@ spr fenn neutral left
+ANTONIETTE . Hóspedes?
+FENN . Elsbeth, Cort e Ines.
+ANTONIETTE . De onde?
+---
+FENN . Vêm em outubro.
+inn . Ele me deu três nomes e nenhum sobrenome, e respondeu "de onde" com "quando".
+nar . Fenn pegou a caixa comprida e a levou sozinho, com as duas mãos, sem apoiar no ombro.
+nar . Levou pelo pátio, e não pela porta da frente.
+---
+ANTONIETTE . Fenn.
+nar . Ele parou sem virar.
+ANTONIETTE . Quantos outubros o senhor já viu?
+---
+FENN . Nove.
+ANTONIETTE . E o seu filho?
+nar . Aí ele virou.
+@ spr fenn neutral left
+FENN . O meu filho não trabalha aqui.
+---
+FENN . E não vai.
+@ spr_hide fenn
+inn . Eu perguntei por curiosidade e recebi uma decisão.
+inn . Ele já tinha essa frase pronta antes de eu chegar nesta casa.
+nar . Ela voltou pelo caminho mais longo, contando as janelas acesas do lado norte. Eram sempre as mesmas quatro.
+### CENA c4_tentativa "A tentativa"  bg=bg_corridor bgm=-
+nar . Na manhã do primeiro dia a porta do quarto das gêmeas estava fechada, o que não acontecia.
+nar . Do outro lado, Liara falava alto e sozinha.
+---
+@ spr liara neutral right
+LIARA . Você não está quente!
+@ spr klara neutral center
+KLARA . Estou.
+LIARA . Eu pus a mão. Você não está.
+KLARA . Põe de novo.
+---
+LIARA . Você molhou a testa.
+KLARA . Não molhei.
+LIARA . Tem água no travesseiro.
+nar . Silêncio do outro lado por uns quatro segundos.
+KLARA . Não conta.
+LIARA . Por quê?
+---
+KLARA . Só não conta.
+inn . Ela molhou a testa para parecer febre.
+inn . Uma criança de oito anos planejou isso ontem à noite.
+---
+nar . A senhora Elke subiu às nove, entrou sem bater e desceu com Klara três minutos depois.
+@ spr_hide klara
+@ spr_hide liara
+nar . Ninguém levantou a voz. Ninguém explicou nada a ninguém.
+---
+nar . No almoço, o prato da menina voltou para a copa como saiu.
+inn . Ela não comeu.
+nar . Antoniette anotou no caderno operacional, entre a contagem de volumes e o estado das encadernações.
+inn . Alteração de apetite é dado. Registrar.
+---
+nar . Depois voltou à página anterior e conferiu se tinha anotado a mesma coisa na terça.
+nar . Tinha.
+### CENA c4_porta "Quatro e dez"  bg=bg_corridor bgm=bgm_archive
+nar . Dara pediu a ala leste vazia depois das quatro. Antoniette estava no corredor às quatro e dez.
+inn . Se alguém perguntar, eu vim buscar dois volumes que ficaram no quarto.
+nar . Os dois volumes estavam debaixo do braço dela, pelo mesmo motivo.
+---
+nar . A porta do fim do corredor estava fechada e havia luz por baixo.
+nar . O corredor cheirava a álcool e a alguma coisa metálica que ela conhecia do ferimento dos outros, não dos próprios.
+---
+nar . Não havia grito.
+nar . Havia conversa, no volume de quem confere uma lista.
+ELSBETH . Segundo braço.
+---
+CORT . Anotado.
+ELSBETH . Doze.
+CORT . Doze. Está subindo.
+---
+ELSBETH . Está no prazo.
+inn . Doze o quê.
+---
+nar . Uma voz mais nova disse alguma coisa que Antoniette não pegou.
+ELSBETH . Ela sabe respirar. Faz isso desde os quatro.
+nar . Depois disso ficou só o som de instrumento pousado em pano.
+---
+nar . Antoniette ficou no corredor por dezenove minutos e não ouviu a menina uma única vez.
+inn . Nem para responder.
+### CENA c4_saida "Quem sai"  bg=bg_corridor bgm=-
+@@@ { t:'sfx', id:'sfx_door' },
+nar . A porta abriu às cinco e quarenta.
+nar . Antoniette estava na curva do corredor, catalogando uma estante que não precisava ser catalogada.
+---
+nar . Cort saiu primeiro, com a caixa fechada, e passou por ela dizendo boa tarde.
+nar . Elsbeth saiu depois, secando as mãos numa toalha, e não disse nada.
+---
+@ spr ines neutral right
+nar . A terceira saiu por último e parou no corredor. Ficou com a mão no puxador e os olhos no piso.
+nar . Ficou ali uns cinco segundos, com a mão ainda no puxador.
+---
+INES . Boa tarde.
+ANTONIETTE . Boa tarde.
+nar . Ela olhou os volumes debaixo do braço de Antoniette e pareceu ir dizer alguma coisa.
+---
+INES . A senhorita é a que cataloga.
+ANTONIETTE . Sou.
+---
+INES . Deve ser bom.
+nar . E desceu antes que a frase pedisse resposta.
+@ spr_hide ines
+---
+inn . "Deve ser bom."
+inn . Ninguém diz isso de um trabalho. Diz de uma vida.
+---
+inn . Ela tem a minha idade. Quando disse "deve ser bom", olhou para a porta que acabara de fechar.
+nar . A porta do fim do corredor ficou aberta por mais um tempo, e não saiu mais ninguém.
+nar . Klara desceu sozinha, às seis, pela escada de serviço.
+inn . Andando.
+### CENA c4_relatorio "O que entra no relatório"  bg=bg_antoniette_room bgm=-
+nar . À noite, o relatório mensal para Lervel.
+nar . Ela molhou a pena e ficou olhando a folha até a tinta secar na ponta.
+---
+inn . Eu tenho a palavra. Tenho a data, os três nomes e a duração.
+inn . E tenho dezenove minutos de corredor que não são dado nenhum.
+@@@ { t:'cho', id:'cap4_ritual', code:'C-IV', prompt:'O QUE ENTRA NO RELAT\u00d3RIO', opts:[ { id:'C', tx:'Nada. Lervel recebe o invent\u00e1rio do m\u00eas, e o resto vai para o caderno sem identifica\u00e7\u00e3o.', flags:{ ritual_report:'C', saw_ritual:true, hid_from_order:true }, routes:{ hope: 2, loss: 1 }, then: C4_RITUAL_C }, { id:'B', tx:'O termo e o calend\u00e1rio. Sem o que ela ouviu pela porta.', flags:{ ritual_report:'B', saw_ritual:true, hid_from_order:true }, routes:{ answer: 1, loss: 1 }, then: C4_RITUAL_B }, { id:'A', tx:'Tudo. \u00c9 o que a Ordem mandou fazer, e \u00e9 o que ela veio fazer.', flags:{ ritual_report:'A', saw_ritual:true, hid_from_order:false }, routes:{ answer: 2 }, then: C4_RITUAL_A } ]},
+### CENA c4_braco "O braço"  bg=bg_corridor bgm=-
+nar . Três dias depois de terminado, Liara arrastou a irmã pelo corredor para mostrar um ninho no beiral.
+@ spr liara neutral right
+@ spr klara neutral center
+LIARA . Tem quatro! Ontem tinha três.
+KLARA . Tinha quatro ontem. Você contou errado.
+LIARA . Não contei.
+KLARA . Contou.
+nar . Para apontar, Klara levantou o braço, e a manga desceu até o cotovelo.
+---
+nar . Não havia curativo.
+nar . Não havia marca, nem casca, nem a mancha amarela que uma dobra de cotovelo leva duas semanas para perder.
+---
+nar . A pele estava limpa.
+@ spr_hide klara
+@ spr_hide liara
+inn . Em abril ela tinha um curativo e a irmã não tinha nenhum.
+inn . Faz quatro dias que abriram os dois braços dela.
+---
+nar . Antoniette anotou a data, a hora e a palavra limpa.
+inn . Sem conclusão.
+### CENA c4_fim "Fim de outubro"  bg=bg_antoniette_room bgm=-
+nar . A carruagem dos três saiu no quinto dia, de manhã, sem que ninguém fosse ao pátio.
+nar . A casa voltou ao horário de sempre no mesmo dia.
+---
+nar . À noite Antoniette abriu o caderno operacional e escreveu uma entrada curta.
+### CARTAO caderno "— Caderno Operacional — Entrada 44 —"
+  | Outubro: quatro dias, três oficiantes externos, ala leste interditada.
+  | Denominação usada pela casa, sem baixar a voz: treinamento.
+  | O sujeito K. entrou andando nos quatro dias e saiu andando nos quatro.
+  | Não há registro de instrução verbal para a criadagem. Todos já sabiam.
+nar . Releu a última linha e acrescentou uma nota abaixo dela.
+### CARTAO compilador "— nota do Compilador —"
+  | 44a. O Compilador esteve no corredor por dezenove minutos naquela tarde.
+  | O relatório da mesma data não menciona isso porque dezenove minutos de
+  | porta fechada não constituem observação.
+  | Não por outro motivo.
+---
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . Apagou a vela.
+---
+inn . Eles chamam de treinamento.
+inn . E chamam assim entre eles, quando acham que não tem ninguém ouvindo.
+---
+inn . Uma palavra que a pessoa usa em particular é a palavra em que ela acredita.
+nar . Ela escreveu a palavra da casa no caderno, sozinha no meio da folha, e deixou o resto da página em branco.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Primeiro outubro em Velha Nidhaus.', line2:'Ela guardou dezenove minutos para si.', chapter:'capitulo4' },
+@ fade_out

@@ -1,0 +1,1089 @@
+# per11 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar per11
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 11', name:'AS TR\u00caS MOEDAS', chapter:'per11', if:R },
+@ fade_out
+### CENA per11_estrada "A estrada"  bg=bg_grey_march_road bgm=-
+@ fade_in
+@ spr klara neutral center
+nar . A estrada do vale à meia-noite é mais clara do que se espera. A lua bate na pedra molhada.
+nar . Antoniette andou mais rápido do que tinha calculado para uma criança, e Klara acompanhou sem reclamar.
+---
+KLARA {A} . A senhorita conferiu o horário da carroça?
+ANTONIETTE {A} . Três vezes.
+KLARA {A} . Então está certo.
+KLARA {B} . Eu devia ter agradecido antes de sair.
+ANTONIETTE {B} . Agradece depois.
+KLARA {B} . Depois não vale. Eu tinha de dizer antes.
+KLARA {C} . O rio fica de que lado do sol?
+ANTONIETTE {C} . Esquerda, de manhã.
+KLARA {C} . Está no livro. Eu queria conferir com a senhorita.
+---
+nar . Passaram a aldeia com onze minutos de atraso sobre o papel.
+nar . Quinze casas caiadas, um poço, roupa no varal, e as janelas fechadas apesar do calor de agosto.
+---
+inn . O cocheiro é de Alsbeck e cobra por espera.
+inn . Ele vai esperar.
+### CENA per11_ponto "O cruzamento"  bg=bg_grey_march_road bgm=-
+nar . O ponto de encontro era o cruzamento da estrada do vale com a de Alsbeck, marcado por um mourão de pedra.
+nar . Alcançaram o mourão onze minutos atrasadas.
+---
+nar . Não havia carroça.
+---
+nar . Antoniette andou até o mourão e passou a mão na pedra, o que não servia para nada.
+---
+nar . Havia esterco fresco na terra do lado leste e o sulco de uma roda que virou ali e voltou.
+---
+inn . Ele veio.
+---
+inn . Ele veio e esperou.
+---
+nar . Ela ajoelhou e mediu o esterco com dois dedos, porque esterco esfria numa taxa que dá para estimar.
+nar . Estimou dez minutos e conferiu a estimativa contra o próprio relógio, que é o que se faz com estimativa.
+---
+KLARA . Ele foi embora?
+---
+ANTONIETTE . Foi.
+---
+KLARA . Há quanto tempo?
+---
+nar . Antoniette abriu a boca para dar o número e fechou.
+---
+ANTONIETTE . Pouco.
+---
+nar . Foi a primeira vez em cinco anos que ela deu a uma criança um número redondo em vez do número.
+### CENA per11_ape "A pé"  bg=bg_grey_march_road bgm=-
+nar . Do mourão até a ponte de Alsbeck são três quilômetros. Da ponte até o rio, mais dois.
+nar . O barco era às seis e faltavam cinco horas e vinte.
+---
+inn . A pé, com uma criança, cinco quilômetros dão uma hora e quarenta.
+inn . Dá.
+---
+nar . Ela refez a divisão no verso do papel. O resultado continuou o mesmo.
+---
+ANTONIETTE . Vamos andando. Dá tempo.
+KLARA . Eu sei.
+---
+nar . A menina disse aquilo sem levantar a cabeça e sem parar de andar, e Antoniette não perguntou como ela sabia.
+---
+nar . Klara trocou o saco de pano de mão duas vezes, e da segunda vez pegou com a mão que já estava carregando.
+nar . Antoniette reparou e não disse nada, porque dizer teria parado a caminhada.
+@ spr klara neutral right
+@ spr antoniette neutral left
+nar . A estrada de terra ia reta por um tempo e depois deixava de ir.
+---
+ANTONIETTE . Se cansar, você diz.
+KLARA . Eu digo.
+---
+nar . Andaram um tempo sem dizer nada, e não foi um silêncio pesado. Foi o silêncio de duas pessoas andando.
+KLARA . Eu peguei pão.
+ANTONIETTE . Pegou quanto?
+---
+KLARA . Seis.
+---
+ANTONIETTE . Seis pães.
+KLARA . Foi muito, né.
+ANTONIETTE . Foi.
+---
+nar . Klara ajeitou o saco no ombro com as duas mãos, do jeito de quem carrega mais peso do que devia e não vai dizer.
+---
+KLARA . Eu não sabia quantos dias.
+ANTONIETTE . Dois.
+KLARA . Então seis tá bom.
+---
+nar . Seis não estava bom para dois dias, e nenhuma das duas fez essa conta em voz alta.
+KLARA . Quanto é um quilômetro?
+ANTONIETTE . Mil metros.
+---
+KLARA . Isso eu sei. Quanto é andando?
+---
+ANTONIETTE . Uns doze minutos.
+KLARA . Doze certos?
+ANTONIETTE . Doze mais ou menos.
+---
+KLARA . Então não é doze.
+---
+nar . Antoniette abriu a boca para explicar o que é uma média e desistiu no meio.
+ANTONIETTE . Não é doze.
+KLARA . Tá.
+nar . Passou um cheiro de água parada e Klara achou que era o rio. Não era. Faltavam cinco quilômetros para o rio.
+---
+KLARA . Cavalo sabe nadar.
+ANTONIETTE . Sabe.
+KLARA . Viu.
+---
+ANTONIETTE . Mas não muito longe.
+KLARA . Quanto é muito longe?
+ANTONIETTE . Não sei.
+---
+KLARA . Então a senhorita não sabe se não é longe.
+---
+ANTONIETTE . Não sei.
+KLARA . Tá.
+---
+nar . Ela ficou satisfeita com aquilo por uns bons cem metros.
+nar . No terceiro quilômetro Klara começou a andar diferente, apoiando de lado.
+---
+ANTONIETTE . A bota.
+KLARA . Não é nada.
+ANTONIETTE . Senta.
+KLARA . Não é nada.
+---
+nar . Sentaram.
+---
+nar . A bota era um número menor do que devia ser, e era um número menor desde abril.
+nar . Ninguém tinha medido o pé dela desde abril, e naquela casa mediam tudo.
+---
+nar . Antoniette dobrou a meia por cima do calcanhar e refez o laço mais frouxo.
+nar . A menina não reclamou e não agradeceu, e ficou olhando o próprio pé como quem confere serviço.
+---
+KLARA . Melhorou.
+ANTONIETTE . Melhorou o suficiente?
+KLARA . Melhorou.
+nar . Andaram mais um tempo.
+---
+KLARA . A senhorita já fugiu?
+ANTONIETTE . Não.
+---
+ANTONIETTE . Já.
+---
+KLARA . Já ou não?
+ANTONIETTE . Uma vez. Eu tinha nove anos.
+---
+KLARA . E foi longe?
+ANTONIETTE . Até a cerca.
+---
+KLARA . A cerca de quê?
+ANTONIETTE . Do quintal.
+---
+nar . Klara riu com a boca fechada primeiro. Depois desistiu e riu direito, alto, na estrada vazia.
+---
+nar . Foi a primeira vez em cinco anos que Antoniette ouviu aquilo.
+---
+KLARA . Até a cerca do quintal.
+ANTONIETTE . Até a cerca do quintal.
+KLARA . E depois?
+ANTONIETTE . Depois eu voltei porque deu fome.
+---
+nar . Klara riu de novo, e dessa vez foi só o barulho, sem graça nenhuma junto.
+nar . Ela correu vinte passos à frente e voltou, sem motivo nenhum.
+ANTONIETTE . Guarda o fôlego.
+KLARA . Eu tenho muito.
+nar . Correu de novo.
+---
+nar . Antoniette riu uma vez, curto, e depois olhou em volta para ver se alguém tinha ouvido.
+nar . Não havia ninguém em cinco quilômetros. Ela olhou assim mesmo.
+KLARA . A senhorita era como?
+ANTONIETTE . Como assim, como?
+KLARA . Antes. Quando era do meu tamanho.
+---
+ANTONIETTE . Eu morava em Alsbeck. Meu pai trabalhava no cartório da praça.
+---
+KLARA . Isso não é o que eu perguntei.
+---
+nar . Não era.
+KLARA . A senhorita tinha amiga?
+ANTONIETTE . Tinha uma.
+KLARA . Como chamava?
+---
+ANTONIETTE . Bettine.
+KLARA . E ela era como?
+ANTONIETTE . Falava demais.
+---
+KLARA . Igual eu.
+ANTONIETTE . Um pouco.
+---
+KLARA . E cadê ela?
+---
+ANTONIETTE . Não sei. Casou, acho.
+KLARA . A senhorita não escreve?
+ANTONIETTE . Faz nove anos que não.
+KLARA . Por quê?
+---
+ANTONIETTE . Porque não dá para escrever para as pessoas neste trabalho.
+---
+nar . Klara fez cara de quem está resolvendo aquilo e não resolveu.
+KLARA . E a senhorita virou isso como?
+ANTONIETTE . Isso o quê?
+KLARA . Isso. O que a senhorita é.
+---
+ANTONIETTE . Um homem me perguntou uma coisa numa fila.
+KLARA . Que coisa?
+ANTONIETTE . Se eu sabia por que a fila estava parada.
+---
+KLARA . E a senhorita sabia?
+ANTONIETTE . Sabia. O escriturário da frente estava com o carimbo errado e ninguém tinha reparado.
+---
+KLARA . E aí?
+ANTONIETTE . E aí ele me ofereceu emprego.
+---
+KLARA . Só por causa do carimbo?
+ANTONIETTE . Só por causa do carimbo.
+---
+KLARA . Isso é pouco.
+ANTONIETTE . É.
+---
+nar . Ela tinha dezessete anos e achou que era muito.
+---
+KLARA . Como ele chamava?
+---
+nar . Antoniette continuou andando.
+KLARA . A senhorita não lembra o nome dele?
+ANTONIETTE . Lembro.
+---
+KLARA . Então?
+---
+ANTONIETTE . Ele é da Ordem. Eu não falo de gente da Ordem com quem não é.
+---
+KLARA . A senhorita falou da sua mãe.
+ANTONIETTE . Minha mãe não era da Ordem.
+---
+nar . Klara andou dois passos e mudou de assunto, que é como criança desiste: troca o assunto e não a opinião.
+KLARA . A senhorita tinha quem em casa?
+---
+nar . Antoniette andou um pouco antes de responder.
+---
+ANTONIETTE . Minha mãe. Até os seis.
+KLARA . Ah.
+---
+KLARA . Desculpa.
+ANTONIETTE . Faz tempo.
+---
+KLARA . A senhorita lembra dela?
+ANTONIETTE . De umas coisas.
+KLARA . Que coisas?
+---
+nar . Antoniette demorou para responder.
+---
+ANTONIETTE . Ela não riscava. Quando eu errava a lição ela escrevia o certo do lado, na mesma tinta.
+---
+ANTONIETTE . E reparava se eu tinha comido. Não perguntava. Olhava o prato.
+---
+ANTONIETTE . E sabia de que lado eu dormia. Eu nunca contei. Ela sabia.
+---
+nar . Andaram uns vinte passos.
+---
+KLARA . A senhorita faz essas três.
+---
+ANTONIETTE . Faço não.
+---
+KLARA . Faz.
+---
+ANTONIETTE . É método.
+KLARA . Tá.
+---
+nar . Klara não insistiu.
+KLARA . Como ela chamava?
+ANTONIETTE . Maren.
+---
+KLARA . Maren.
+---
+nar . A menina repetiu o nome uma vez, baixo, do jeito de quem está guardando.
+KLARA . A senhorita gosta da casa?
+---
+nar . Antoniette tinha uma resposta pronta para essa pergunta havia cinco anos, e ela servia para qualquer pessoa daquela casa que perguntasse.
+---
+ANTONIETTE . Não.
+---
+KLARA . Eu também não.
+nar . Voltaram ao passo normal.
+---
+KLARA . A senhorita já dormiu numa cama que não é sua?
+ANTONIETTE . Já.
+KLARA . E dá?
+ANTONIETTE . Dá.
+---
+KLARA . Eu não sei se dá.
+---
+KLARA . Lá em casa eu durmo e às vezes eu acordo e tem gente no quarto. Não é gente ruim. É gente do trabalho.
+---
+KLARA . Eles medem.
+ANTONIETTE . Eu sei.
+---
+KLARA . Uma vez eu acordei no meio e fiquei quieta, porque se eu mexer eles começam de novo e demora mais.
+---
+KLARA . A senhorita quer pão?
+---
+nar . Antoniette ficou com aquilo na mão e sem lugar nenhum onde pôr.
+---
+KLARA . Eu peguei seis.
+ANTONIETTE . Eu sei.
+KLARA . Foi muito.
+nar . Um pouco depois Antoniette tirou o lápis do bolso do casaco.
+nar . Levou o lápis até a altura do papel e parou ali.
+---
+inn . Alteração de padrão de sono. Relato direto de procedimento.
+---
+nar . Guardou o lápis sem escrever.
+nar . Foi a primeira vez em cinco anos, e ela não soube dizer a si mesma por quê.
+nar . Andaram mais uns quinhentos metros.
+---
+ANTONIETTE . Klara.
+KLARA . Oi.
+---
+ANTONIETTE . Aquilo de acordar no meio.
+KLARA . Aham.
+---
+nar . Antoniette tinha passado cinco anos escrevendo, e não tinha o resto da frase.
+---
+KLARA . A senhorita quer que eu carregue o saco?
+ANTONIETTE . Não.
+KLARA . Eu carrego.
+---
+nar . Carregou.
+KLARA . A senhorita vai fazer o quê depois?
+ANTONIETTE . Não sei.
+KLARA . Como não sabe?
+ANTONIETTE . Não sei mesmo.
+---
+nar . Era verdade, e era a primeira resposta inteiramente verdadeira que ela deu naquela noite.
+---
+KLARA . A senhorita pode ser professora.
+---
+ANTONIETTE . Posso?
+KLARA . Pode.
+---
+ANTONIETTE . De quê?
+---
+KLARA . De escrever.
+ANTONIETTE . Isso é uma matéria muito ruim.
+KLARA . Por quê?
+ANTONIETTE . Porque primeiro eu teria que ensinar você a segurar o lápis direito.
+---
+KLARA . Eu seguro direito.
+ANTONIETTE . Você aperta.
+KLARA . É para não cair.
+ANTONIETTE . O lápis não tenta fugir.
+---
+nar . Klara olhou para a própria mão como se Antoniette tivesse acabado de acusar o lápis de alguma coisa.
+---
+KLARA . A senhorita me ensinaria?
+ANTONIETTE . A segurar o lápis?
+KLARA . Não. A fazer o que a senhorita faz.
+---
+ANTONIETTE . Ser escriba?
+KLARA . É.
+---
+nar . Antoniette levou alguns passos para responder.
+---
+ANTONIETTE . Posso ensinar uma parte.
+KLARA . Qual parte?
+ANTONIETTE . A parte que se ensina.
+---
+KLARA . E tem parte que não se ensina?
+ANTONIETTE . Tem parte que ninguém conseguiu organizar ainda.
+---
+KLARA . A senhorita organizou?
+ANTONIETTE . Não.
+KLARA . Mas a senhorita organiza tudo.
+ANTONIETTE . Não tudo.
+---
+nar . Klara aceitou a correção com mais facilidade do que Antoniette.
+---
+KLARA . Então começa pela parte que se ensina.
+ANTONIETTE . Agora?
+KLARA . A gente está andando.
+ANTONIETTE . Eu reparei.
+KLARA . Então dá.
+---
+nar . Antoniette olhou a estrada. Não havia quadro, mesa, pena, tinta ou qualquer outra coisa que justificasse uma aula.
+---
+ANTONIETTE . Tá.
+---
+ANTONIETTE . Primeira coisa: você não escreve o que acha que aconteceu.
+KLARA . Escreve o que aconteceu.
+ANTONIETTE . Não.
+---
+KLARA . Não?
+ANTONIETTE . Você escreve o que consegue sustentar que aconteceu.
+---
+KLARA . É diferente?
+ANTONIETTE . Muito.
+---
+KLARA . O cocheiro veio.
+---
+ANTONIETTE . Veio.
+KLARA . Como eu sustento?
+ANTONIETTE . Sulco da roda. Esterco fresco. Marca de ferradura na borda leste.
+---
+KLARA . Três coisas.
+ANTONIETTE . Três coisas.
+---
+KLARA . E ele esperou.
+---
+ANTONIETTE . Esperou.
+KLARA . Como sustenta?
+---
+nar . Antoniette olhou para a estrada por tempo demais para uma pergunta tão simples.
+---
+ANTONIETTE . A roda parou no cruzamento antes de voltar.
+KLARA . Então ele esperou.
+ANTONIETTE . Sim.
+---
+nar . Ela não disse dez.
+---
+KLARA . É isso que o Matheo ensinava?
+---
+nar . Antoniette virou a cabeça.
+---
+ANTONIETTE . Onde você ouviu esse nome?
+KLARA . No seu livro.
+ANTONIETTE . Qual livro?
+KLARA . O pequeno. De capa marrom.
+---
+nar . Antoniette tinha três livros pequenos de capa marrom.
+---
+KLARA . Tem escrito Método Matheo no começo.
+ANTONIETTE . Você abriu meu manual.
+KLARA . Abri.
+ANTONIETTE . Sem pedir.
+KLARA . A senhorita estava dormindo.
+---
+ANTONIETTE . Isso não melhora.
+KLARA . Eu não sujei.
+---
+nar . Antoniette conseguiu ficar séria por três passos.
+---
+ANTONIETTE . É. É parte do Método Matheo.
+KLARA . Ele era escriba?
+ANTONIETTE . Era professor.
+KLARA . Igual a senhorita vai ser.
+ANTONIETTE . Eu ainda não concordei com essa parte.
+KLARA . Mas não disse não.
+---
+nar . Antoniette não respondeu porque Klara estava tecnicamente certa.
+---
+KLARA . E o Matheo fazia o quê?
+ANTONIETTE . Tentava impedir escribas de estragarem documentos.
+KLARA . Só?
+ANTONIETTE . Já era bastante.
+---
+KLARA . Como estraga?
+ANTONIETTE . Escrevendo cedo demais.
+---
+KLARA . Cedo de manhã?
+ANTONIETTE . Não.
+---
+ANTONIETTE . Antes de conferir.
+KLARA . Ah.
+---
+ANTONIETTE . Ele separava observação, inferência e conclusão.
+KLARA . Três.
+ANTONIETTE . Três.
+---
+KLARA . Faz comigo.
+ANTONIETTE . O quê?
+KLARA . Essas três.
+---
+ANTONIETTE . Tá. Você está mancando.
+KLARA . Não estou.
+ANTONIETTE . Está.
+KLARA . Pouco.
+---
+ANTONIETTE . Observação: você encurta o passo direito.
+KLARA . Tá.
+ANTONIETTE . Inferência: seu pé ainda dói.
+KLARA . Não dói.
+---
+ANTONIETTE . Então a inferência estava errada.
+---
+KLARA . Mas dói um pouquinho.
+---
+ANTONIETTE . Então estava certa por acidente.
+KLARA . Isso conta?
+ANTONIETTE . Não.
+---
+KLARA . Chato.
+ANTONIETTE . Muito.
+---
+KLARA . E conclusão?
+ANTONIETTE . A bota precisa ser trocada.
+KLARA . Essa eu já sabia.
+ANTONIETTE . Então você pode passar na primeira aula.
+---
+nar . Klara sorriu para a estrada.
+---
+KLARA . Eu passei.
+ANTONIETTE . Na primeira parte.
+KLARA . Passei.
+---
+KLARA . A senhorita aprendeu isso onde?
+ANTONIETTE . Na Academia.
+---
+KLARA . A Academia de verdade?
+ANTONIETTE . Quantas Academias de mentira você conhece?
+KLARA . Nenhuma.
+ANTONIETTE . Então essa.
+---
+KLARA . A senhorita estudou lá?
+ANTONIETTE . Um tempo.
+---
+KLARA . Quanto?
+ANTONIETTE . Dois anos e sete meses.
+---
+KLARA . A senhorita sabe até os meses.
+ANTONIETTE . Eu sei.
+---
+KLARA . Por que saiu?
+---
+nar . Antoniette passou o polegar pela borda do relógio.
+---
+ANTONIETTE . Porque me ofereceram trabalho.
+KLARA . O do carimbo?
+ANTONIETTE . O do carimbo veio antes.
+---
+KLARA . Então conta direito.
+---
+nar . Antoniette não estava acostumada a ter a própria biografia devolvida por falta de informação.
+---
+ANTONIETTE . Eu trabalhava no cartório durante o dia.
+KLARA . E estudava quando?
+ANTONIETTE . No fim da tarde.
+KLARA . Todo dia?
+ANTONIETTE . Quatro dias.
+KLARA . E sobrava?
+ANTONIETTE . Sobrava o quinto.
+---
+KLARA . Não. Sobrava tempo.
+---
+ANTONIETTE . Ah.
+---
+ANTONIETTE . Não muito.
+---
+KLARA . E seu pai deixava?
+ANTONIETTE . Meu pai achava estranho.
+KLARA . Por quê?
+ANTONIETTE . Porque ele já tinha conseguido um emprego para mim.
+KLARA . Mas estudar é melhor.
+ANTONIETTE . Para você.
+KLARA . Para a senhorita também.
+---
+ANTONIETTE . Na época eu não sabia.
+---
+KLARA . A senhorita gostava?
+ANTONIETTE . Da Academia?
+KLARA . É.
+---
+ANTONIETTE . Gostava de algumas salas.
+KLARA . Isso não é gostar da Academia.
+ANTONIETTE . Então não sei.
+---
+KLARA . Qual sala?
+ANTONIETTE . A sala de arquivo.
+---
+KLARA . Claro.
+---
+nar . Antoniette quase perguntou o que aquilo queria dizer e decidiu que sabia.
+---
+ANTONIETTE . E uma sala no segundo andar que pegava sol depois das quatro.
+KLARA . O que tinha nela?
+ANTONIETTE . Nada de especial.
+KLARA . Então por que gostava?
+ANTONIETTE . Porque pegava sol depois das quatro.
+---
+nar . Klara pensou um pouco e aceitou aquilo como motivo suficiente.
+---
+KLARA . E o Matheo dava aula lá?
+ANTONIETTE . Não quando eu estudei.
+KLARA . Então como a senhorita aprendeu o método dele?
+ANTONIETTE . A matéria ficou.
+---
+KLARA . Como chama?
+ANTONIETTE . Registro Comparado e Reconstrução Documental.
+---
+KLARA . Que nome ruim.
+ANTONIETTE . Eu falei que era uma matéria ruim.
+---
+KLARA . E a senhorita era boa?
+---
+ANTONIETTE . Era.
+---
+nar . Ela respondeu sem falsa modéstia porque falsa modéstia exigia uma energia que Antoniette nunca viu utilidade em gastar.
+---
+KLARA . Quanto boa?
+ANTONIETTE . Klara.
+KLARA . Quanto?
+---
+ANTONIETTE . Fui a melhor da turma nos dois anos.
+---
+KLARA . Eu sabia.
+ANTONIETTE . Você não sabia.
+KLARA . Sabia sim.
+ANTONIETTE . Você acabou de perguntar.
+KLARA . Eu queria ouvir.
+---
+KLARA . E depois teve alguém melhor?
+---
+ANTONIETTE . Não sei.
+KLARA . A senhorita sabe.
+---
+ANTONIETTE . Recebi uma carta da Academia há dois anos.
+KLARA . De quem?
+ANTONIETTE . Do professor Halvern.
+KLARA . Ele escreveu o quê?
+---
+ANTONIETTE . Que a cadeira estava com seis alunos.
+KLARA . Isso é pouco?
+ANTONIETTE . É.
+---
+ANTONIETTE . E perguntou se eu tinha interesse em mandar algumas notas.
+KLARA . A senhorita mandou?
+---
+ANTONIETTE . Não.
+---
+KLARA . Por quê?
+---
+nar . A resposta era simples. Por cinco anos, quase todas as respostas de Antoniette tinham sido simples porque o trabalho gostava delas assim.
+---
+ANTONIETTE . Eu estava ocupada.
+---
+KLARA . Comigo.
+---
+ANTONIETTE . Com a casa.
+---
+KLARA . Eu estava na casa.
+---
+ANTONIETTE . Estava.
+---
+nar . Nenhuma das duas encontrou coisa melhor para fazer com aquela distinção.
+---
+KLARA . Então a última pessoa boa foi a senhorita.
+ANTONIETTE . Não foi isso que eu disse.
+KLARA . Foi quase.
+ANTONIETTE . Quase não serve para arquivo.
+---
+KLARA . Mas serve para conversar.
+---
+ANTONIETTE . Às vezes.
+---
+KLARA . A gente pode ir lá.
+---
+ANTONIETTE . Onde?
+KLARA . Na Academia.
+---
+ANTONIETTE . Klara, a Academia fica para o norte.
+KLARA . Eu sei.
+ANTONIETTE . Nós estamos indo para o rio.
+KLARA . Não agora.
+---
+KLARA . Depois.
+---
+nar . A palavra ficou andando com elas por alguns passos.
+---
+KLARA . Depois do barco.
+ANTONIETTE . O barco não vai para o norte.
+KLARA . Então depois do lugar que o barco vai.
+ANTONIETTE . Isso pode levar bastante tempo.
+KLARA . A gente tem.
+---
+nar . Antoniette verificou mentalmente dinheiro, distância, documentos e três rotas possíveis antes de perceber que tinha começado a planejar.
+---
+ANTONIETTE . Talvez.
+---
+KLARA . Talvez é sim?
+ANTONIETTE . Talvez é talvez.
+KLARA . É mais sim que não?
+ANTONIETTE . Não funciona assim.
+KLARA . Funciona um pouco.
+---
+ANTONIETTE . Um pouco.
+---
+KLARA . Eu posso estudar lá?
+ANTONIETTE . Quando tiver idade.
+KLARA . Quanto falta?
+ANTONIETTE . Alguns anos.
+KLARA . Quantos?
+---
+ANTONIETTE . Depende da admissão.
+KLARA . A senhorita entrou com quantos?
+ANTONIETTE . Dezessete.
+---
+KLARA . É muito.
+ANTONIETTE . Para você, agora, é.
+KLARA . Até lá a senhorita me ensina.
+---
+ANTONIETTE . Até lá?
+KLARA . É.
+---
+nar . Antoniette fez a conta sem querer. Nove anos. Talvez oito, dependendo do calendário da Academia.
+---
+ANTONIETTE . Dá para ensinar bastante coisa em oito anos.
+KLARA . Então pronto.
+---
+KLARA . E quando eu entrar a senhorita vai comigo.
+ANTONIETTE . Para quê?
+KLARA . Para falar que eu sei.
+ANTONIETTE . Eles têm prova para isso.
+KLARA . A senhorita fala também.
+ANTONIETTE . Isso seria interferência.
+---
+KLARA . Então interfere pouco.
+---
+nar . Antoniette quase explicou que interferência pouca continuava sendo interferência.
+---
+ANTONIETTE . Eu posso esperar do lado de fora.
+KLARA . Tá.
+---
+KLARA . A Liara vai também.
+---
+nar . Antoniette olhou para Klara.
+---
+KLARA . Ela não vai querer ser escriba.
+ANTONIETTE . Provavelmente não.
+KLARA . Ela ia odiar.
+ANTONIETTE . Provavelmente.
+KLARA . Ela ia ficar perguntando quando termina.
+ANTONIETTE . Isso eu consigo imaginar.
+---
+KLARA . Mas ela pode ir comigo.
+---
+ANTONIETTE . Pode.
+---
+nar . Antoniette não corrigiu essa parte.
+---
+KLARA . O que mais um escriba aprende?
+ANTONIETTE . Caligrafia. Arquivo. Protocolo. Cópia. Línguas, se você tiver paciência.
+KLARA . Tenho.
+ANTONIETTE . Você acabou de correr quarenta passos porque estava entediada.
+KLARA . Mas voltei.
+---
+ANTONIETTE . Isso não é a mesma coisa.
+---
+KLARA . E o Matheo?
+ANTONIETTE . O método?
+KLARA . É.
+---
+ANTONIETTE . Você aprende a não confiar na primeira versão.
+---
+KLARA . Mesmo se for sua?
+ANTONIETTE . Principalmente se for sua.
+---
+KLARA . Então quando eu escrever uma coisa eu tenho que achar outra pessoa?
+ANTONIETTE . Não sempre.
+KLARA . Outra fonte.
+ANTONIETTE . Isso.
+---
+KLARA . E se só tiver eu?
+---
+ANTONIETTE . Você escreve que só tinha você.
+---
+KLARA . E pronto?
+ANTONIETTE . E pronto.
+---
+KLARA . Isso é fácil.
+ANTONIETTE . É fácil quando você não quer que a resposta seja outra.
+---
+KLARA . Como assim?
+---
+ANTONIETTE . Nada.
+---
+nar . Antoniette deixou a explicação para uma aula que ainda não existia.
+---
+KLARA . A senhorita queria ser escriba quando era criança?
+---
+ANTONIETTE . Não.
+KLARA . O que queria ser?
+---
+ANTONIETTE . Eu não sei.
+---
+KLARA . Nunca pensou?
+ANTONIETTE . Pensei.
+KLARA . Então sabe.
+---
+ANTONIETTE . Mudava.
+KLARA . Para quê?
+---
+ANTONIETTE . Quando eu tinha oito anos eu queria trabalhar na estação.
+KLARA . Por quê?
+ANTONIETTE . Porque as pessoas chegavam.
+---
+KLARA . Só?
+ANTONIETTE . Eu tinha oito anos.
+---
+ANTONIETTE . Depois quis copiar mapas.
+KLARA . Isso parece mais a senhorita.
+ANTONIETTE . Eu era ruim em desenhar rio.
+KLARA . Rio é só uma linha.
+ANTONIETTE . Não fala isso perto de um cartógrafo.
+---
+KLARA . E depois?
+---
+ANTONIETTE . Depois minha mãe morreu.
+---
+nar . Klara não falou por alguns passos.
+---
+ANTONIETTE . Depois meu pai passou a trabalhar mais.
+---
+ANTONIETTE . Depois eu comecei a ajudar no cartório.
+---
+ANTONIETTE . Depois eu percebi o carimbo errado.
+---
+ANTONIETTE . Depois me deram uma mesa.
+---
+ANTONIETTE . Depois apareceu a Academia.
+---
+ANTONIETTE . Depois apareceu outro trabalho.
+---
+ANTONIETTE . E depois eu estava na casa.
+---
+KLARA . Isso foi rápido.
+---
+ANTONIETTE . Não foi.
+---
+nar . Foram onze anos. Contado daquele jeito, cabia em menos de um minuto.
+---
+KLARA . E a senhorita queria ir para a casa?
+---
+ANTONIETTE . Eu queria o trabalho.
+KLARA . Não foi o que eu perguntei.
+---
+nar . Era a segunda vez naquela noite.
+---
+ANTONIETTE . Não.
+---
+KLARA . Então por que foi?
+---
+ANTONIETTE . Pagava mais.
+KLARA . Só?
+ANTONIETTE . Dava alojamento.
+KLARA . Só?
+---
+ANTONIETTE . Eu achei que ia aprender alguma coisa.
+---
+KLARA . Aprendeu?
+---
+ANTONIETTE . Aprendi.
+---
+KLARA . Coisa boa?
+---
+ANTONIETTE . Alguma.
+---
+nar . Klara chutou uma pedra pequena para fora da estrada.
+---
+KLARA . Eu aprendi coisa boa com a senhorita.
+---
+ANTONIETTE . Aprendeu a contar ladrilho.
+KLARA . Isso também.
+---
+KLARA . Se eu virar escriba, eu posso ter aqueles livros grandes?
+ANTONIETTE . Pode comprar livros sem virar escriba.
+KLARA . Mas escriba ganha?
+ANTONIETTE . Alguns.
+KLARA . Então eu viro.
+---
+ANTONIETTE . A profissão está decidida pelo livro grátis?
+KLARA . Não é grátis. Eu vou trabalhar.
+---
+ANTONIETTE . Justo.
+---
+KLARA . E eu posso escrever sobre o que eu quiser?
+ANTONIETTE . Se for seu caderno.
+KLARA . Então eu vou ter dois.
+ANTONIETTE . Dois?
+KLARA . Um do trabalho e um meu.
+---
+ANTONIETTE . É uma boa divisão.
+---
+KLARA . A senhorita tem um seu?
+---
+ANTONIETTE . Não.
+KLARA . Devia.
+ANTONIETTE . Talvez.
+---
+KLARA . Quando chegar a gente compra.
+ANTONIETTE . Onde?
+KLARA . No lugar que vende caderno.
+---
+ANTONIETTE . Bom planejamento.
+KLARA . Obrigada.
+---
+nar . Andaram mais um pouco.
+---
+KLARA . Qual era sua nota?
+ANTONIETTE . Em quê?
+KLARA . Na matéria do Matheo.
+---
+ANTONIETTE . Noventa e quatro.
+---
+KLARA . De quanto?
+ANTONIETTE . Cem.
+---
+KLARA . Onde perdeu seis?
+---
+nar . Antoniette lembrava.
+---
+ANTONIETTE . Reconstruí uma data sem marcar que era reconstrução.
+KLARA . Mas estava certa?
+ANTONIETTE . Estava.
+KLARA . Então por que tirou ponto?
+ANTONIETTE . Porque eu não podia provar.
+---
+KLARA . Mas estava certa.
+ANTONIETTE . Isso não muda a nota.
+---
+nar . Klara pensou nisso com muito mais seriedade do que dedicara ao emprego escolhido por causa de livros.
+---
+KLARA . Então o erro não era a data.
+---
+ANTONIETTE . Não.
+KLARA . Era dizer que sabia como sabia.
+---
+ANTONIETTE . Era.
+---
+KLARA . Eu acho isso difícil.
+ANTONIETTE . É.
+KLARA . A senhorita me ensina.
+---
+ANTONIETTE . Ensino.
+---
+nar . A resposta saiu antes que Antoniette calculasse quanto tempo aquela promessa continha.
+---
+KLARA . Amanhã?
+---
+ANTONIETTE . Depois de dormir.
+KLARA . Isso é amanhã.
+ANTONIETTE . Depende da hora que a gente dormir.
+KLARA . Então depois que eu acordar.
+---
+ANTONIETTE . Depois que você acordar.
+---
+KLARA . Primeira aula de escriba.
+ANTONIETTE . Primeira aula de segurar o lápis sem tentar quebrar ele.
+KLARA . Isso já passou.
+ANTONIETTE . Não passou.
+KLARA . Passei na outra.
+ANTONIETTE . Você passou em uma pergunta.
+KLARA . Passei.
+---
+nar . Klara começou a andar de costas por três passos para continuar a discussão olhando para Antoniette.
+ANTONIETTE . Olha a estrada.
+KLARA . Estou olhando.
+ANTONIETTE . Para a estrada.
+---
+nar . Klara virou.
+---
+KLARA . Professora chata.
+ANTONIETTE . Você que escolheu.
+---
+KLARA . Escolhi.
+---
+nar . Andaram uns vinte passos.
+---
+KLARA . Senhorita.
+ANTONIETTE . Hm?
+KLARA . Quando a gente for na Academia, eu quero ver a sala que pega sol.
+---
+ANTONIETTE . Se ainda for a mesma sala.
+KLARA . A gente confere.
+---
+ANTONIETTE . Confere.
+---
+nar . Klara ficou satisfeita e voltou a prestar atenção onde pisava.
+---
+KLARA . E a Liara vai reclamar do sol.
+ANTONIETTE . Provavelmente.
+KLARA . Ela reclama de calor.
+ANTONIETTE . Eu sei.
+---
+nar . Antoniette não corrigiu essa parte também.
+--- {A}
+KLARA {A} . A senhorita anota tudo?
+ANTONIETTE {A} . Quase tudo.
+KLARA {A} . Eu também anoto.
+--- {A}
+KLARA {A} . Eu contei os ladrilhos da câmara duas vezes, em noite diferente, porque uma noite só é fonte única.
+--- {A}
+nar {A} . Antoniette tinha dito aquela expressão na biblioteca uma vez, sem saber que estava dando uma regra a alguém.
+--- {A}
+KLARA {A} . Deu quarenta e um do lado comprido nas duas.
+ANTONIETTE {A} . Então são quarenta e um.
+KLARA {A} . São.
+--- {A}
+KLARA {A} . Se a senhorita achar errado, corrige do lado. Não risca.
+--- {A}
+nar {A} . Ela devolveu a regra inteira, com a emenda e tudo, e não reparou.
+--- {B}
+KLARA {B} . Eu não agradeci ao Fenn.
+ANTONIETTE {B} . Ele foi pago.
+KLARA {B} . Pago não é a mesma coisa.
+--- {B}
+ANTONIETTE {B} . Não é.
+--- {B}
+KLARA {B} . Quando eu puder eu pago.
+ANTONIETTE {B} . Você não deve nada a ninguém.
+KLARA {B} . Devo sim.
+--- {B}
+nar {B} . Ela estava certa.
+--- {C}
+KLARA {C} . No livro do norte tem uma cidade em cima da água.
+ANTONIETTE {C} . Tem.
+KLARA {C} . As casas ficam em estaca. A senhorita já viu?
+ANTONIETTE {C} . Não.
+--- {C}
+KLARA {C} . Então a gente vai ver as duas primeiro.
+--- {C}
+ANTONIETTE {C} . Pode ser.
+--- {C}
+KLARA {C} . Como é o cheiro do mar?
+ANTONIETTE {C} . Não sei.
+KLARA {C} . A senhorita não sabe nada hoje.
+--- {C}
+nar {C} . Antoniette concordou, e concordar era mais fácil do que a alternativa.
+KLARA . A senhorita é a única pessoa que pergunta antes de fazer.
+---
+ANTONIETTE . Como assim?
+---
+KLARA . Ah. Sei lá.
+---
+nar . Andaram uns quarenta passos.
+---
+KLARA . A Liara não pergunta. Ela conta depois.
+ANTONIETTE . Conta para quem?
+KLARA . Para a mãe.
+---
+KLARA . E eu conto tudo para a Liara, então no fim é a mesma coisa.
+---
+KLARA . Para a senhorita eu conto e acaba na senhorita.
+---
+ANTONIETTE . Acaba.
+---
+nar . Klara achou que aquilo tinha sido uma conversa boa e mudou de assunto.
+---
+KLARA . Falta muito?
+ANTONIETTE . Falta.
+KLARA . Tá.
+nar . Ela passou o saco de pano para a outra mão e andou meio passo mais perto.
+nar . Ficou naquela distância pelo resto do caminho, e nenhuma das duas ajustou.
+@ spr_hide klara
+@ spr_hide antoniette
+### CENA per11_floresta "A floresta"  bg=bg_grey_march_road bgm=-
+nar . Depois da aldeia, as copas cobriram a lua. Antoniette perdeu a borda da estrada por três passos.
+nar . Antoniette conhecia aquele trecho. Tinha atravessado ele em abril, cinco anos antes, com a janela aberta.
+---
+nar . Ela contou os passos, porque passo é a única medida que serve quando não há roda.
+---
+inn . Trezentos e quarenta até a curva. Depois a ponte.
+---
+inn . Onze minutos de ponte.
+---
+nar . Foi a terceira vez naquela noite que ela usou aquele número para medir uma coisa que não tinha nada a ver com ele.
+### CENA per11_farpa "Onze minutos da ponte"  bg=bg_black bgm=-
+nar . Faltavam quatro horas para o barco.
+---
+@ spr klara blank center
+nar . Klara parou onze minutos antes da ponte.
+nar . O pé direito parou adiante do esquerdo. Klara não concluiu o passo.
+---
+ANTONIETTE . Klara.
+---
+nar . O ar da estrada esquentou.
+---
+nar . O relógio continuou no pulso dela. Depois, a duração ficou em branco.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Onze minutos antes da ponte.', line2:'O cocheiro esperou dez.', chapter:'per11', if:R },
+@ fade_out

@@ -1,0 +1,227 @@
+# chapter9 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter9
+
+@@@ { t:'ending' },
+ANTONIETTE . Agosto. Antes do dia dez.
+nar . Klara não perguntou como. Não perguntou por que agosto.
+---
+KLARA . Está bem.
+nar . E foi guardar a data em algum lugar de onde ela não ia sair.
+@ spr_hide klara
+---
+inn . Eu dei a ela um número.
+inn . Ela não repetiu a data. Não precisava.
+---
+inn . De hoje até agosto são cento e setenta e dois dias.
+nar . Ela contou os dias antes de contar o que ia precisar.
+ANTONIETTE . Eu vou tirar você daqui.
+nar . Disse assim, inteiro, olhando no olho, sem qualificar nada.
+---
+nar . Klara recebeu a frase de pé, com a postura que tinha aprendido, e demorou a responder.
+KLARA . Obrigada.
+@ spr_hide klara
+---
+inn . Ela agradeceu antes de perguntar qualquer coisa. Não perguntou.
+---
+inn . Eu não sei se consigo. Sei que era a única coisa que dava para dizer.
+inn . Se eu dissesse "talvez", ela apagaria a palavra e guardaria o resto.
+nar . Antoniette abriu o caderno operacional numa página em branco e virou para o lado da menina.
+ANTONIETTE . Senta. Vamos escrever o que falta.
+---
+nar . Levaram quarenta minutos. Klara conferiu três itens e achou um erro no horário da guarda.
+KLARA . A troca é às onze e meia. A senhorita pôs onze.
+ANTONIETTE . Onze e meia. Corrigido.
+@ spr_hide klara
+---
+inn . Eu não prometi nada. Eu mostrei o trabalho.
+---
+inn . E ela achou um erro meu na segunda leitura, o que significa que confere.
+inn . Confere porque não confia. Eu ensinei a não confiar.
+@@@ { t:'chap', num:'CAP\u00cdTULO 9', name:'A DECIS\u00c3O', chapter:'capitulo9' },
+@ fade_out
+### CENA c9_fechada "Quatro mil e duzentos"  bg=bg_library bgm=bgm_nidhaus
+@ fade_in
+nar . Ela catalogou o último volume numa terça de fevereiro, às três da tarde.
+nar . A biblioteca em fevereiro é fria de um jeito que entra pelos pés. Os dedos dela estavam duros de segurar pena.
+nar . Era um tratado de drenagem agrícola, em mau estado, sem valor nenhum.
+---
+nar . Escreveu a ficha, alinhou com a borda da mesa e ficou olhando a pilha vazia.
+inn . Quatro mil e duzentos.
+---
+inn . Contrato de nove meses. Quarenta e seis meses.
+nar . Ela levou a última ficha ao fichário. Os dedos ficaram na aba até a junta perder cor.
+---
+inn . A partir de agora eu sou uma mulher que mora nesta casa sem motivo.
+inn . Toda casa acaba perguntando por quê.
+### CENA c9_aldric "A biblioteca vazia"  bg=bg_library bgm=-
+@@@ { t:'sfx', id:'sfx_footsteps' },
+nar . Aldric apareceu na porta no fim daquela mesma tarde, o que não acontecia desde o primeiro ano.
+@ spr aldric cold left
+ALDRIC . Terminou.
+ANTONIETTE . Terminei.
+---
+nar . Ele subiu ao segundo andar, tirou um volume da estante e leu de pé, apoiado, como sempre.
+ALDRIC . Minha mulher vai oferecer à senhorita a catalogação do arquivo de contas.
+ANTONIETTE . Eu não sabia disso.
+ALDRIC . Vai ser amanhã ou depois. Ela leva dois dias para propor uma coisa que já decidiu.
+---
+inn . Ele está me contando o que a mulher dele vai fazer.
+inn . Isso não é fofoca. É prazo.
+@ spr aldric side left
+nar . Ele virou uma página sem levantar os olhos.
+ALDRIC . Se a senhorita aceitar, fica mais três anos.
+---
+ALDRIC . Trabalho de arquivo não acaba. É o que ele tem de bom e de ruim.
+nar . Antoniette esperou, porque ele estava indo a algum lugar e ela sabia disso havia cinco anos.
+---
+@ spr aldric stare left
+ALDRIC . Eu tinha vinte e seis anos quando entendi como esta casa funciona.
+ALDRIC . Levei uma tarde.
+---
+ALDRIC . Depois disso eu tive trinta anos para fazer alguma coisa a respeito, e não fiz.
+nar . Ele fechou o volume, encaixou-o entre os vizinhos e alinhou a lombada com o polegar.
+ALDRIC . Não é remorso. Remorso é para quem hesitou.
+---
+ALDRIC . Eu não hesitei. Eu fiz a conta uma vez e nunca mais refiz.
+nar . Desceu a escada e parou no meio, de costas, como já tinha parado uma vez em abril do primeiro ano.
+ALDRIC . A senhorita ainda está na parte em que refazer a conta é possível.
+@ spr_hide aldric
+@@@ { t:'sfx', id:'sfx_door' },
+---
+inn . Ele não me disse para ir embora.
+inn . Disse que a janela existe. Disse que sabe a que horas ela fecha.
+---
+inn . E não disse o nome dela uma vez sequer.
+### CENA c9_liara "O que Liara ganhou"  bg=bg_corridor bgm=-
+nar . Liara ganhou a discussão em março, depois de quatro meses pedindo todo dia.
+@ spr liara bright right
+LIARA . Papai disse sim!
+LIARA . Quando eu fizer dezoito. As duas juntas, na mesma turma.
+---
+ANTONIETTE . As duas?
+LIARA . Eu falei que não ia sem ela. Aí ele deixou.
+nar . Contou sorrindo, com o papel da Academia apertado contra o peito.
+@ spr_hide liara
+nar . E saiu correndo contar para mais alguém.
+---
+inn . Aldric e Serafina passaram doze anos sem deixar aquela menina sair do vale.
+inn . E cederam para uma criança de doze anos que pediu todo dia durante quatro meses.
+inn . Cederam uma coisa que só acontece daqui a seis anos. Dizer sim para isso hoje não custa nada.
+---
+inn . Gente que administra um pacto de trezentos anos não cede por cansaço.
+nar . Ela anotou a data no caderno operacional e pôs um ponto de interrogação ao lado.
+nar . Foi a única vez em cinco anos que ela usou um ponto de interrogação num registro.
+### CENA c9_pedido "O que ela pede"  bg=bg_antoniette_room bgm=-
+nar . Klara bateu na porta do quarto leste às nove. Três toques iguais. Em cinco anos, nunca fora ali àquela hora.
+@ spr klara neutral center
+nar . Entrou, fechou a porta e ficou de costas para ela.
+---
+KLARA . A Liara contou.
+ANTONIETTE . Contou.
+---
+KLARA . A senhorita disse fevereiro.
+nar . E fevereiro tinha acabado onze dias antes.
+nar {A} . Ela pôs sobre a mesa duas folhas dobradas e as abriu com as duas mãos.
+KLARA {A} . Guarda do portão, por dia da semana. Hora da carroça do sal. Quando o Fenn dorme.
+nar {A} . A letra era pequena e reta, e as colunas estavam alinhadas com régua.
+--- {A}
+KLARA {A} . Eu não quero ser levada. Quero ver o plano.
+KLARA {A} . Se tiver erro eu acho.
+--- {A}
+inn {A} . Ela não veio pedir socorro. Veio pedir para conferir.
+nar {B} . Ela se virou, e tinha se arrumado para aquela conversa.
+KLARA {B} . Eu queria pedir do jeito certo, e não tem jeito certo. A senhorita disse.
+--- {B}
+KLARA {B} . Então eu peço assim: eu queria ouvir a senhorita dizer.
+ANTONIETTE {B} . Dizer o quê?
+KLARA {B} . Em voz alta. Inteiro. Sem "se der".
+--- {B}
+inn {B} . Ela sabe que promessa dita em voz alta prende quem diz.
+inn {B} . Eu ensinei isso a ela numa sala de jantar, sobre uma visita.
+nar {C} . Ela pôs sobre a mesa um saco de pano, e dentro havia pão duro, meia vela e o anel da avó.
+KLARA {C} . Está pronto desde outubro.
+--- {C}
+KLARA {C} . Eu só preciso do dia.
+nar {C} . Antoniette olhou o pão duro e reconheceu o mês pela cor.
+--- {C}
+inn {C} . Cinco meses com um saco pronto debaixo da cama.
+inn {C} . Esperando eu.
+---
+nar . Antoniette ficou de pé junto da janela e não olhou para a menina enquanto pensava.
+inn . A marca da parede está a menos de um palmo.
+inn . O ciclo mede altura. Está tudo na folha que ela mesma me trouxe.
+inn . Se eu errar, ela não tem uma segunda vez.
+@@@ { t:'cho', id:'cap9_promessa', code:'C-IX', prompt:'A PROMESSA', opts:[ { id:'C', tx:'Dar a data. Agosto, antes do dia dez.', flags:{ promised:'C', plan_shape:'data' }, routes:{ hope: 3, answer: 1 }, then: C9_PROMESSA_C }, { id:'B', tx:'Dizer em voz alta, inteiro, sem qualificar.', flags:{ promised:'B', plan_shape:'palavra' }, routes:{ hope: 2, loss: 2 }, then: C9_PROMESSA_B }, { id:'A', tx:'N\u00e3o prometer. Abrir o caderno e mostrar o trabalho.', flags:{ promised:'A', plan_shape:'plano' }, routes:{ answer: 3, hope: 1 }, then: C9_PROMESSA_A } ]},
+### CENA c9_ponto_morto "Noventa dias"  bg=bg_antoniette_room bgm=bgm_archive
+nar . Ela escreveu a Matheo em abril. Foi a carta mais curta de toda a correspondência.
+### CARTAO matheo "— correspondência de campo —"
+  | M. — solicito ponto morto em noventa dias, a contar desta data,
+  | renovável a cada relatório.
+  | Sem notícia em noventa dias, o pacote sai por conta própria.
+  | Não peça explicação por carta. Eu não daria uma boa.
+  | A.
+nar . A resposta veio em doze dias e tinha uma linha.
+### CARTAO matheo "— correspondência de campo —"
+  | Concedido. Noventa dias. — M.
+---
+inn . Ele não perguntou.
+inn . Dois anos antes, uma pergunta dessas teria recebido três páginas.
+---
+inn . Ou ele confia, ou já entendeu, ou não quer ter escrito a pergunta.
+nar . Ela guardou as duas cartas juntas, dobradas na mesma dobra.
+### CENA c9_plano "O que ela tem"  bg=bg_antoniette_room bgm=-
+nar . De abril a julho ela montou a coisa em papel, e o papel ficou embaixo do forro do baú.
+nar . Escreveu tanto naqueles três meses que a dobra do dedo médio ficou com um calo que não saiu mais.
+nar . Fenn continuava com a chave e com o filho na cocheira. Ela não pediu nada a ele.
+inn . Pedir seria cobrar o obrigado, e o obrigado dele já foi caro demais.
+nar . Fenn estava na cocheira em tempo integral e não entrava mais na casa. Não havia o que pedir.
+inn . Eu gastei a única pessoa que sabia os horários de dentro.
+nar . Fenn apareceu sozinho numa noite de junho e disse o horário da guarda sem que ela perguntasse.
+nar . Disse, virou as costas e não voltou ao assunto em julho inteiro.
+inn . Ele não me deve nada. Foi ele que decidiu que devia.
+---
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Três dias de carruagem até Lervel. A Ordem não pode receber. Descartado.
+  | Marca Cinzenta: quatro aldeias, todas contratadas pela casa. Descartado.
+  | Rio: quatro dias a pé até barco navegável, com uma criança. Possível.
+  | Melhor janela: agosto, madrugada, enquanto a casa espera o fenômeno.
+  | Probabilidade honesta: baixa.
+nar . Ela releu a última linha e a manteve.
+---
+inn . Eu escrevi baixa porque é baixa.
+inn . Se eu escrever outra coisa, eu estou preparando a desculpa em vez do plano.
+@@@ { t:'ending' },
+### CENA c9_julho "Fim de julho"  bg=bg_corridor bgm=-
+@@@ { t:'flag', set:{ cover_burned:true }, if:{ lied_to_order:'A', third_paid:'B' } },
+@@@ { t:'ending' },
+nar . No fim de julho começaram os preparativos de agosto.
+nar . Ninguém disse a palavra. Trocaram o horário da copa e fecharam duas janelas do lado leste.
+---
+@ spr klara neutral center
+@ spr liara neutral right
+nar . As duas meninas estavam no degrau do corredor, contando quantos dias faltavam para a maioridade de Liara.
+LIARA . Mil novecentos e quarenta e oito.
+KLARA . Mil novecentos e quarenta e nove. Você contou hoje duas vezes.
+LIARA . Contei não.
+KLARA . Contou.
+---
+nar . Liara refez a conta nos dedos, aceitou o mil novecentos e quarenta e nove e recomeçou a falar de outra coisa.
+@ spr_hide liara
+@ spr_hide klara
+---
+inn . Uma está contando os dias até a Academia.
+inn . A outra está contando os dias até agosto.
+---
+inn . E as duas acham que estão contando a mesma coisa.
+nar . Antoniette voltou ao quarto e tirou o papel de baixo do forro pela última vez para conferir.
+nar . Estava tudo lá. Datas, horários, o que funciona e o que não funciona.
+---
+nar . Ela dobrou o papel e o guardou no bolso interno, onde ele ia ficar até o dia.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Cinco anos em Velha Nidhaus.', line2:'Faltam dez dias.', chapter:'capitulo9' },
+@ fade_out

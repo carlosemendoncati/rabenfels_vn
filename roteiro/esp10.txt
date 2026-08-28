@@ -1,0 +1,131 @@
+# esp10 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar esp10
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 10', name:'A FUGA', chapter:'esp10', if:R },
+@ fade_out
+### CENA esp10_agosto "Terceiro dia"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . Vieram no dia três. Nos quatro anos anteriores, o começo nunca tinha caído tão cedo.
+nar . Antoniette cercou o três. A ponta da pena atravessou o papel.
+---
+inn . Dois dias antes.
+inn . Em cinco anos isso nunca variou mais que um.
+@ spr dara guarded center
+nar . Dara encheu a caneca e não sentou do outro lado da mesa, o que ela fazia havia cinco anos.
+DARA . A copa fecha às seis esta semana.
+ANTONIETTE . Às seis?
+DARA . Ordem da senhora.
+---
+ANTONIETTE . A senhora deu motivo?
+nar . Dara contou a prataria antes de responder, e ela já tinha contado a prataria naquela manhã.
+DARA . A senhora não dá motivo. A senhora dá horário.
+@ spr_hide dara
+---
+inn . Oito, sempre. Cinco anos de oito.
+inn . Ninguém muda o horário da copa por causa de bicho.
+---
+inn . Duas horas a menos. O plano perdeu duas horas antes de começar.
+### CENA esp10_ultimo_dia "O último dia"  bg=bg_corridor bgm=-
+nar . No dia nove, à tarde, as duas estavam no degrau do corredor leste.
+@ spr klara neutral center
+@ spr liara bright right
+LIARA . Mil novecentos e trinta e dois.
+KLARA . Mil novecentos e trinta e dois.
+nar . Liara olhou para a irmã, porque a irmã nunca concordava com a conta de primeira.
+---
+LIARA . Você conferiu?
+KLARA . Confirmei.
+nar . Liara aceitou aquilo e passou a falar do que ia levar para Eldoria.
+nar . Falou por onze minutos, incluindo dois pares de botas que ela não tinha.
+---
+nar . Klara ouviu inteiro. Não corrigiu nenhuma das botas.
+---
+nar . Depois pediu para Liara trançar o cabelo dela, o que ela nunca pedia.
+nar . Liara trançou mal, desmanchou e recomeçou três vezes, e a irmã deixou.
+@ spr_hide liara
+@ spr_hide klara
+---
+nar . Antoniette passou no fim do corredor com dois volumes que não precisava carregar.
+inn . Ela está se despedindo.
+---
+inn . E fez isso do único jeito que não levanta pergunta nenhuma.
+### CENA esp10_descida "Onze e meia"  bg=bg_antoniette_room bgm=bgm_archive
+nar . A troca da guarda do portão era às onze e meia. Ela sabia disso havia quatro meses.
+---
+nar . Às onze e vinte e cinco ela desceu pela escada de serviço com o papel no bolso interno.
+nar . A porta da cozinha estava destrancada, como Fenn tinha dito que estaria.
+---
+@ spr klara neutral center
+nar . Klara já estava no pé da escada, vestida, com o saco de pano na mão.
+nar . Não perguntou nada. Não disse nada. Foi atrás.
+---
+inn . Ela desceu antes de mim.
+inn . Eu não disse a hora a ninguém.
+---
+nar . Antoniette anotou aquilo na margem, no dia seguinte, com um ponto de interrogação.
+---
+@@@ { t:'sfx', id:'sfx_door', if:R },
+nar . A guarda trocou às onze e meia e as duas atravessaram o pátio em quarenta segundos.
+nar . A corrente da porta nordeste estava no lugar de sempre, com os dois elos pendurados.
+nar . Elas passaram longe dela.
+---
+### CENA esp10_estrada "A estrada"  bg=bg_grey_march_road bgm=-
+nar . A estrada do vale à meia-noite é mais clara do que se espera. A lua bate na pedra molhada.
+nar . Andaram quarenta minutos sem falar, no ritmo que Antoniette tinha calculado para uma criança.
+---
+KLARA {A} . A senhorita conferiu o horário da carroça?
+ANTONIETTE {A} . Três vezes.
+KLARA {A} . Então está certo.
+KLARA {B} . Eu devia ter agradecido antes de sair.
+ANTONIETTE {B} . Agradece depois.
+KLARA {B} . Depois não vale. Eu tinha de dizer antes.
+KLARA {C} . O rio fica de que lado do sol?
+ANTONIETTE {C} . Esquerda, de manhã.
+KLARA {C} . Está no livro. Eu queria conferir com a senhorita.
+---
+nar . Passaram a aldeia aos quarenta minutos. Quinze casas caiadas, um poço, roupa no varal.
+nar . Não havia ninguém acordado, e as janelas estavam fechadas apesar do calor de agosto.
+---
+nar . No fim da aldeia havia um cão amarrado, e ele levantou a cabeça quando as duas passaram.
+nar . Não latiu. Acompanhou com os olhos até o fim da corda e deitou de novo.
+---
+inn . Cão de aldeia late para forasteiro. É o que ele faz.
+---
+inn . Anota depois.
+---
+inn . Quatro horas até o barco.
+inn . Está dando certo.
+---
+inn . Eu não escrevi essa frase no plano porque não se escreve isso num plano.
+### CENA esp10_floresta "O que sobrou"  bg=bg_grey_march_road bgm=-
+nar . Depois da aldeia, as copas fecharam a lua e a pedra clara desapareceu sob os pés.
+nar . Antoniette conhecia aquele trecho. Tinha atravessado ele em abril, cinco anos antes, com a janela aberta.
+---
+nar . Naquela vez ela ia contando os quilômetros para não pensar no contrato.
+nar . Desta vez contou os passos, porque passo é a única medida que serve quando não há roda.
+---
+nar . Em algum ponto daquela noite, Antoniette escreveu a última entrada do Arquivo.
+nar . Não há registro da hora. A caligrafia continuava firme. O espaçamento não.
+---
+inn . Está tudo nas páginas anteriores.
+inn . Cinco anos de trabalho. Use.
+### CENA esp10_farpa "Quatro horas"  bg=bg_black bgm=-
+nar . Faltavam quatro horas para o barco.
+---
+@ spr klara blank center
+nar . No meio da floresta, Klara parou de andar.
+nar . Não tropeçou. Os dois pés ficaram alinhados sobre a mesma pedra. Ela não tornou a levantá-los.
+---
+ANTONIETTE . Klara.
+---
+nar . O ar da floresta esquentou.
+---
+nar . Antoniette começou a contar. Depois não conseguiu fixar qual tinha sido o primeiro número.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Agosto do quinto ano.', line2:'Faltavam quatro horas.', chapter:'esp10', if:R },
+@ fade_out

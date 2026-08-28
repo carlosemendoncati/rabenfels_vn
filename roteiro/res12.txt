@@ -1,0 +1,115 @@
+# res12 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar res12
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 12', name:'O CORREDOR', chapter:'res12', if:R },
+@ fade_out
+### CENA res12_despacho "Dezembro"  bg=bg_nidhaus_gate bgm=bgm_prologue
+@ fade_in
+nar . O contrato correu até dezembro. Ela ficou os quatro meses e fechou o inventário da biblioteca inteira.
+---
+nar . Duzentas e noventa e uma páginas, índice, plantas, três anexos, numeração fechando.
+nar . Nenhuma folha arrancada, porque não havia nada ali que ela precisasse esconder de quem fosse ler.
+---
+@ spr serafina grave right
+nar . Serafina desceu ao pátio no último dia, o que não tinha feito por nenhuma outra saída da casa.
+SERAFINA . A senhorita foi a melhor catalogadora que esta casa contratou.
+---
+ANTONIETTE . A senhora contratou quantas?
+---
+SERAFINA . Sete.
+nar . Foi o número mais útil que alguém daquela casa deu a ela em cinco anos, e foi dado de graça.
+@ spr_hide serafina
+---
+nar . Antoniette anotou o sete na carruagem, com a letra tremida que a estrada faz.
+---
+nar . Ela entregou o material em Lervel, em mão, com recibo, num terça-feira de manhã.
+nar . Não houve pacote, não houve cordel em quatro voltas e não houve prazo de noventa dias.
+---
+nar . Foi o material de campo mais completo que a Ordem recebeu em quarenta anos.
+### CENA res12_tribunal "O tribunal"  bg=bg_prologue_room bgm=-
+nar . O processo entrou em quatro meses e saiu em nove.
+---
+nar . O tribunal não indeferiu.
+---
+### CARTAO lervel "— tribunal da Marca · decisão —"
+  | Relato singular, de autoria falecida, completo e de procedência verificada.
+  | Julga-se improcedente por ausência de terceiro lesado.
+  | 
+  | A administração doméstica de casa maior sobre pessoa de sua
+  | própria linhagem não constitui matéria de foro.
+---
+nar . Antoniette leu a decisão de pé, no corredor, e depois sentou para ler de novo.
+---
+inn . Autoria falecida.
+nar . Não pediu emenda.
+---
+inn . Não falta prova.
+---
+inn . Falta parte.
+---
+nar . A casa é dona da casa. As filhas são filhas da casa.
+---
+nar . Ela passou cinco anos montando o documento que dava à casa a própria defesa. O tribunal aceitou cada página.
+### CENA res12_apostila "A apostila"  bg=bg_archive_closeup bgm=bgm_archive
+nar . A Ordem arquivou o material como exemplar.
+---
+nar . Em março do ano seis, a escola de campo de Lervel passou a usar as entradas 38, 91, 160 e 214 na formação de escribas.
+---
+### CARTAO lervel "— Ordem dos Olhos Cinzentos · formação de campo —"
+  | Unidade 4 — Registro de procedimento observado.
+  | 
+  | Leitura obrigatória: VAEL, A. — entradas 38, 91, 160 e 214.
+  | Exemplo de série longa com margem de duração decrescente.
+---
+nar . O nome dela está no índice da apostila, entre duas circulares sobre conservação de papel.
+---
+nar . Ela foi chamada duas vezes para falar com a turma nova.
+nar . Na primeira falou quarenta minutos sobre datar a margem antes de escrever o corpo.
+nar . Na segunda, uma aluna de dezenove anos perguntou o que devia fazer para não se envolver.
+---
+@ spr antoniette neutral center
+ANTONIETTE . Você data a margem antes de escrever o corpo.
+---
+nar . A aluna anotou. Foi a resposta certa e foi a única que ela tinha.
+@ spr_hide antoniette
+---
+nar . Ela foi efetivada no arquivo central em janeiro do ano seis, com aumento e uma sala com janela.
+nar . A janela dava para o pátio de cargas.
+### CENA res12_corredor "Seis anos"  bg=bg_corridor bgm=-
+nar . O gabinete de Matheo ficava dois andares acima da sala dela.
+nar . Eles trabalharam no mesmo corredor por seis anos e falaram do assunto duas vezes.
+---
+@ spr matheo read center
+nar . A primeira foi em fevereiro do ano seis, na escada.
+MATHEO . A numeração do seu material fecha em duzentos e noventa e um.
+ANTONIETTE . Fecha.
+MATHEO . Sem buraco.
+ANTONIETTE . Sem buraco.
+---
+nar . Ele fez que sim com a cabeça e subiu. Era um elogio, e os dois entenderam como elogio.
+---
+nar . A segunda foi quatro anos depois, num corredor, sobre encadernação.
+nar . Ele achava que couro encerado era exagero para material interno. Ela discordou.
+nar . A conversa durou seis minutos e nenhum dos dois cedeu.
+@ spr_hide matheo
+---
+nar . Em nenhuma das duas apareceu o nome da casa, o nome da menina, ou a palavra agosto.
+---
+nar . Não houve motivo. As duas conversas eram sobre método, e método é um assunto inteiro.
+---
+nar . Em agosto do ano seguinte uma borboleta de asa clara entrou pela janela da sala dela.
+nar . A janela dava para o pátio de cargas, e não há registro de borboleta daquele tipo em Lervel.
+---
+nar . Ela parou com a caixa na mão e ficou ali o tempo de a borboleta sair outra vez.
+---
+nar . Depois levou a caixa até a mesa, porque era o que ela estava fazendo.
+---
+nar . Não anotou.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Seis anos em Lervel.', line2:'As duas foram sobre m\u00e9todo.', chapter:'res12', if:R },
+@ fade_out

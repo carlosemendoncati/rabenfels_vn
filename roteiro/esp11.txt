@@ -1,0 +1,419 @@
+# esp11 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar esp11
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 11', name:'NOVENTA DIAS', chapter:'esp11', if:R },
+@ fade_out
+### CENA esp11_restou "O que restou da noite"  bg=bg_black bgm=-
+@ fade_in
+nar . O ar voltou ao normal antes das quatro.
+nar . Foi o único aviso que a casa deu de que aquilo tinha acabado.
+---
+nar . Klara estava três passos à frente, de costas, com a mala ainda na mão.
+nar . Não tinha se movido.
+nar . A trilha continuava adiante e não havia nada nela.
+---
+### CENA esp11_volta "A volta"  bg=bg_grey_march_road bgm=-
+@ spr klara blank center
+ANTONIETTE . Klara. O barco é às seis.
+---
+nar . A menina virou o corpo inteiro, não só a cabeça, e olhou para o lado de onde tinham vindo.
+KLARA . Eu preciso voltar.
+---
+ANTONIETTE . Por quê?
+---
+nar . Klara puxou ar para responder. Soltou sem palavra.
+KLARA . Não sei.
+---
+KLARA . Está com fome de novo. E aquela outra coisa junto.
+nar . Não soube dar mais que isso.
+---
+nar . Klara virou e começou a desfazer o caminho. A mala batia no joelho a cada passo.
+---
+@ spr antoniette shaken left
+inn . Segura o braço dela.
+inn . Levanta e carrega. Ela tem doze anos e trinta e oito quilos.
+---
+nar . Antoniette ergueu a mão até a altura do braço da menina. Klara já estava dois passos adiante.
+nar . A mão desceu sem tocar em nada.
+---
+nar . Depois foi atrás dela.
+---
+nar . Dois quilômetros de volta, e nenhuma das duas falou.
+nar . Passaram a aldeia outra vez. As janelas continuavam fechadas.
+nar . O cão amarrado no fim da aldeia estava de pé, virado para o lado da casa, e não olhou para elas.
+---
+nar . No portão, Klara segurou a mala pela alça até Antoniette pegá-la.
+KLARA . Desculpa.
+---
+ANTONIETTE . Não foi você.
+nar . Antoniette respondeu antes de escolher a resposta. Não corrigiu.
+@ spr_hide klara
+@ spr_hide antoniette
+---
+nar . A guarda do portão trocava às onze e meia e não trocava mais nada até as seis.
+nar . As duas entraram pelo mesmo caminho por onde tinham saído, e ninguém na casa soube que elas tinham saído.
+---
+inn . Ninguém vai me punir por isto. Não houve isto.
+inn . É pior.
+---
+nar . Ela fez o inventário, porque era o que sabia fazer com as mãos tremendo.
+inn . Caderno. Chave da biblioteca. Duas velas. Papel para umas quarenta páginas.
+inn . O barão não vai mandar ninguém antes do amanhecer. Ele nunca resolve nada de noite.
+---
+inn . Então tenho até o amanhecer.
+nar . Foi a última previsão correta que ela fez.
+### CENA esp11_carmine "Carmine"  bg=bg_library_night bgm=bgm_camara
+@ spr antoniette guarded center
+nar . Ela acendeu a segunda vela e a primeira apagou.
+nar . Não havia corrente de ar na biblioteca. Ela conferiu as janelas em março e anotou.
+---
+@@@ { t:'sfx', id:'sfx_candle', if:R },
+nar . A segunda vela continuou acesa.
+---
+VOZ . Você escreve muito depressa para quem escreve à mão.
+---
+@ spr antoniette shaken center
+nar . A voz vinha da altura errada. Vinha da altura de alguém sentado, e não havia cadeira daquele lado.
+---
+ANTONIETTE . Khar’Vel.
+---
+VOZ . Esse não é o meu nome. Mas você inventou bem. Serve.
+---
+VOZ . Sente, por favor. Isto leva alguns minutos e você está de pé desde ontem.
+---
+nar . Antoniette não sentou.
+VOZ . Como quiser.
+---
+VOZ . Vim agradecer.
+---
+@ spr antoniette neutral center
+ANTONIETTE . Agradecer.
+VOZ . Cinco anos. Ela lê mais rápido. Corrige adulto sem constranger ninguém. Sabe atravessar uma sala que está medindo ela.
+---
+VOZ {A} . E confere fonte. Nunca acredita em uma só. Isso foi você.
+VOZ {B} . E a forma toda. Postura, protocolo, a etiqueta inteira. Isso foi você.
+VOZ {C} . E o mundo inteiro pela biblioteca. Ela sabe o nome de portos onde nunca esteve. Isso foi você.
+---
+VOZ . Eu conheço cada coisa que ela sabe. Sei o dia em que aprendeu cada uma.
+---
+VOZ . Essas três eu não sei. Essas chegaram por fora.
+---
+@ spr antoniette shaken center
+inn . Não.
+---
+VOZ . Eu não preciso que você concorde. Estou conferindo.
+---
+ANTONIETTE . Então é isso. Eu melhorei o que você vai levar.
+---
+VOZ . É isso que você vai escrever.
+---
+VOZ . E você teria feito de novo.
+---
+nar . Antoniette abriu a boca para responder e não achou a frase.
+---
+inn . Ela pensou no primeiro dia, no inventário da despensa, e em como tinha decidido ser metódica porque método era o único jeito de não ser expulsa na primeira semana, e pensou que quatro anos e quatro meses de método tinham deixado uma criança mais interessante para a coisa que ia comê-la, e que se tivesse sido desleixada, se tivesse sido burra, se tivesse chegado ali e feito barulho no primeiro mês e sido posta na estrada em outubro do primeiro ano, Klara estaria hoje assustada, calada e útil, e viva do mesmo jeito, e o método dela não teria custado nada a ninguém.
+---
+VOZ . Não.
+---
+VOZ . Estaria viva do mesmo jeito. Você acertou essa parte.
+---
+@ spr antoniette neutral center
+VOZ . Ela te chama de quê?
+---
+nar . Por um instante, Antoniette pensou em Liara. Então entendeu.
+ANTONIETTE . Senhorita.
+VOZ . Na frente dos outros. E quando não tem ninguém.
+---
+ANTONIETTE . Senhorita. Nos dois.
+---
+nar . A irmã dizia Toni desde o primeiro mês. Klara nunca disse, uma vez sequer, em cinco anos.
+---
+nar . A vela não oscilou.
+---
+VOZ . Quantas vezes ela procurou você sem precisar de nada?
+ANTONIETTE . Eu não contei.
+---
+VOZ . Eu contei.
+---
+@ spr antoniette guarded center
+ANTONIETTE . O que isso tem a ver com o cronograma?
+---
+nar . Carmine não respondeu. Antoniette tomou o silêncio por confirmação.
+---
+inn . É o calendário.
+inn . Dezesseis gerações sem atraso, e eu tenho num caderno as datas e a planta inteira.
+inn . Sou a única coisa nesta casa que chegou perto de mover uma data.
+---
+nar . Escreveu "data" na margem e cercou a palavra duas vezes.
+---
+VOZ . Ela já falou de mim com você?
+---
+nar . Antoniette procurou na memória e não achou uma vez.
+ANTONIETTE . Ela nunca falou de você. Nenhuma vez em cinco anos.
+---
+ANTONIETTE . Ela fala de fome. Fala de um vazio que vem e passa.
+ANTONIETTE . Nunca falou de ninguém do outro lado.
+---
+VOZ . Eu sei.
+---
+nar . Foi a única resposta da noite inteira que veio depressa demais.
+---
+@@@ { t:'sfx', id:'sfx_door', if:R },
+nar . A porta da biblioteca abriu.
+@ spr klara blank left
+nar . Klara estava de camisola e descalça.
+---
+KLARA . Está com fome de novo.
+---
+nar . Ela não disse quem. Nunca dizia quem.
+nar . Para ela era uma fome e um vazio, e vinham quando vinham.
+---
+KLARA . Posso ficar aqui até passar?
+---
+nar . Antoniette olhou para o lado da mesa onde não havia cadeira.
+nar . Klara seguiu o olhar dela até lá, e não encontrou nada.
+nar . Voltou os olhos para Antoniette, esperando resposta.
+---
+@ spr antoniette shaken center
+ANTONIETTE . Volta para a cama, Klara.
+nar . Klara voltou.
+@ spr_hide klara
+---
+nar . A porta fechou.
+---
+nar . O ar da biblioteca esfriou dois graus e levou um tempo para voltar.
+---
+VOZ . Com fome, no meio da noite, ela levantou e veio aqui.
+---
+VOZ . Você vai escrever isto. Então escreva certo.
+---
+CARMINE . Carmine.
+---
+nar . Antoniette tinha passado cinco anos batizando aquilo por conta própria.
+---
+inn . Ela nunca ouviu esse nome. Nem uma vez em doze anos de vida.
+---
+inn . E eu ouvi hoje.
+---
+CARMINE . Você prometeu alguma coisa a ela em fevereiro.
+---
+@ spr antoniette guarded center
+ANTONIETTE . Eu mostrei o caderno. Não prometi nada.
+ANTONIETTE . Eu prometi.
+ANTONIETTE . Eu dei uma data.
+---
+CARMINE . Ela entendeu como promessa.
+CARMINE . Inteiro, sem qualificar. Ela repetiu para a irmã na mesma noite.
+CARMINE . Agosto, antes do dia dez. Ela contou os dias no calendário da cozinha. Riscando.
+---
+CARMINE . Hoje é dia dez.
+---
+@ spr antoniette shaken center
+---
+CARMINE . Ela acreditou em você.
+---
+nar . Carmine não aumentou a voz nem esperou defesa.
+---
+ANTONIETTE . O que você quer.
+CARMINE . Que você pare.
+---
+CARMINE . Não é pedido. Estou avisando com antecedência porque é mais limpo assim.
+nar . A vela não oscilou uma vez durante a conversa inteira.
+---
+CARMINE . Você tem até o amanhecer.
+---
+nar . Ela tinha chegado sozinha àquela mesma conta, três horas antes.
+---
+ANTONIETTE . Por que me avisar?
+---
+CARMINE . Porque quem é avisado arruma as coisas. Quem não é deixa papel espalhado pela casa.
+---
+CARMINE . Boa noite, escriba.
+---
+@@@ { t:'sfx', id:'sfx_candle', if:R },
+nar . A vela apagou e acendeu de novo.
+nar . Antoniette ficou olhando para a cadeira que não existia daquele lado da mesa.
+---
+inn . Ela não perguntou nada sobre o plano.
+---
+inn . Nem uma vez.
+---
+nar . Ela anotou aquilo na margem, com um ponto de interrogação, e passou para o assunto seguinte.
+---
+inn . Ela quer que eu arrume.
+---
+@ spr antoniette neutral center
+inn . Então eu arrumo.
+### CENA esp11_paginas "Quatro páginas"  bg=bg_archive_closeup bgm=bgm_archive
+@ spr antoniette away center
+nar . Ela escreveu até as três e meia sem parar para reler.
+nar . Duzentas e noventa e uma páginas numeradas, cinco anos, tudo o que servia.
+---
+nar . Às três e meia ela parou e voltou ao começo.
+inn . Se alguém usar isto, vai usar contra a casa.
+inn . E vai ler tudo. Inclusive o que eu fiz.
+---
+nar . Ela abriu na primeira e passou o polegar pela dobra interna.
+@@@ { t:'sfx', id:'sfx_page_turn', if:R },
+nar . A página de outubro do primeiro ano. O que ela viu no pátio e não mandou para a Ordem.
+nar . A página de outubro do primeiro ano. O que ela mandou para a Ordem, e o que a Ordem arquivou sem responder.
+inn . Três.
+---
+nar . A página da câmara. Ela desceu, viu, e subiu com uma criança de nove anos cobrindo a ausência dela no andar de cima.
+nar . Na margem, o que ela respondeu a Klara depois: nada. Deixou fechar sozinho.
+nar . Na margem, o que ela respondeu a Klara depois: uma versão limpa, feita para a menina não ter de carregar aquilo.
+nar . Na margem, o que ela respondeu a Klara depois: a verdade, e um pedido para não repetir.
+inn . Duas.
+---
+nar . A página de agosto do terceiro ano.
+nar . O relatório inteiro, com o que ela viu subir. Lervel recebeu tudo e respondeu em nove semanas mandando continuar observando.
+nar . O relatório com o episódio dado como de natureza indeterminada, sem testemunha direta. Ela foi a testemunha direta.
+nar . A página em que agosto não existe. Lervel recebeu o mês sem o mês dentro.
+inn . Uma.
+---
+nar . A página de Fenn.
+nar . Ela leu duas vezes antes de arrancar.
+nar . Estava tudo certo ali. Datas conferidas, valores conferidos, a dívida quitada num sábado. Nada errado na página.
+nar . Um homem foi útil a ela e ela negaria a fonte se perguntassem. Isso não cabia em coluna nenhuma.
+nar . Ela comprou o nome para levar a Lervel, e o nome era de um homem vivo. Isso não cabia em coluna nenhuma.
+nar . Ela recusou o nome e mandou o rapaz embora no mesmo dia. Ficou sem a prova e nunca soube se o menino chegou.
+---
+inn . Nenhuma.
+---
+nar . Quatro folhas na mão esquerda. Duzentas e oitenta e sete no maço.
+inn . A numeração vai continuar terminando em duzentos e noventa e um.
+inn . Quem contar vai ver.
+---
+@ spr antoniette guarded center
+inn . Bom. Que veja.
+---
+nar . Ela desceu ao escritório do barão com as quatro páginas e a chave que copiou no segundo ano.
+nar . O livro-caixa da casa tinha quatro folhas em branco no fim, como todo livro-caixa tem.
+nar . Ela pôs as quatro páginas no lugar delas e fechou a fivela.
+---
+inn . Se alguém entrar nesta casa, entra por aqui. Sempre entra por aqui.
+---
+nar . Subiu. Faltava uma hora e quarenta para o amanhecer.
+### CENA esp11_ultima "A última entrada"  bg=bg_antoniette_room bgm=-
+@ spr antoniette away center
+nar . Ela molhou a pena e não escreveu.
+nar . A caligrafia continuou firme quando finalmente saiu. O espaçamento não.
+---
+### CARTAO arquivo
+  | “Para quem encontrar isto.”
+  | “Não sei seu nome. Tanto faz.”
+---
+inn . Escreve o que serve. Ninguém lê lamento.
+nar . Ela escreveu a idade, a velocidade de leitura e o jeito de corrigir os outros em voz baixa.
+---
+nar . Parou.
+---
+inn . Isso não é informação operacional.
+---
+@ spr antoniette soft center
+inn . Deixa.
+---
+nar . Escreveu também que ela ri depois, quando já passou, quando acha que não tem ninguém olhando.
+nar . Isso também não servia para nada. Ficou.
+---
+nar . Depois escreveu as três linhas que custaram mais do que as duzentas e oitenta e sete páginas juntas.
+### CARTAO arquivo
+  | “Tentei tirá-la daqui.”
+  | “Fui metódica. Fui devagar.”
+  | “Foi o devagar que custou.”
+---
+nar . E a linha das quatro páginas, para quem contasse.
+### CARTAO arquivo
+  | “Tirei quatro páginas. Se você chegar até elas, vai entender por quê.”
+  | “Se não chegar, melhor.”
+---
+@ spr antoniette shaken center
+nar . Assinou com as iniciais, porque o nome inteiro num documento daqueles é um risco para quem recebe.
+nar . Pôs o lugar e o mês. Não pôs o dia.
+---
+inn . O dia não interessa a ninguém.
+---
+nar . Então ela virou duas folhas em branco e começou outra vez, no alto de uma página limpa.
+---
+nar . Escreveu o nome dele. Quando ergueu a pena, a tinta na ponta já tinha secado.
+---
+inn . Ele leu a ficha da escriba anterior antes de assinar a autorização. Eu sei que leu. Eu vi o protocolo.
+inn . Faz oito anos que eu não pergunto.
+---
+### CARTAO arquivo
+  | “Matheo — se você estiver lendo isto, preciso de uma resposta que não posso pedir de outro jeito.”
+  | “Você sabia?”
+---
+nar . Deixou o resto da página em branco.
+nar . Foi a única coisa que ela escreveu naquela noite sem calcular se serviria para alguma coisa.
+---
+@ spr_hide antoniette
+### CENA esp11_noventa "Noventa dias"  bg=bg_nidhaus_gate bgm=bgm_prologue
+@ fade_in
+@ spr antoniette neutral center
+nar . O céu estava clareando na direção do portão quando ela desceu com o embrulho.
+---
+nar . Couro encerado, porque chuva na estrada arruina papel.
+nar . Sem selo, porque selo diz de onde veio.
+nar . Cordel escuro, quatro voltas, nó cego. O nó ficou sob o pacote, fora de vista.
+---
+nar . Pesava mais do que devia para o tamanho. Ela reparou nisso e achou bom.
+---
+nar . O mensageiro da rota de Alsbeck parava no portão toda quarta antes do sol.
+nar . Era um homem que não fazia pergunta. Ela conferiu isso no segundo ano e anotou.
+---
+nar . Ela entregou o pacote com as duas mãos.
+---
+ANTONIETTE . Isto não vai agora.
+MENSAGEIRO . Então vai quando, senhora?
+---
+ANTONIETTE . Guarda aí. Eu mando notícia toda quarta. Se passar noventa dias sem notícia minha, você leva.
+---
+MENSAGEIRO . E se a senhora mandar notícia?
+ANTONIETTE . Aí o prazo recomeça.
+---
+MENSAGEIRO . Noventa é muito tempo.
+---
+@ spr antoniette away center
+ANTONIETTE . É o que dá para eu garantir.
+---
+nar . Ela contou as moedas do adiantamento na palma dele, uma a uma, e conferiu duas vezes.
+nar . Depois disse o endereço em voz alta e pediu que ele repetisse. Ele repetiu certo na segunda.
+---
+@@@ { t:'sfx', id:'sfx_footsteps', if:R },
+nar . O cavalo saiu andando e ela não esperou recibo.
+---
+inn . Pronto.
+---
+nar . O relatório estava despachado. O trabalho estava fechado. Não restava nada em cima da mesa.
+---
+nar . Ela ficou no portão até o sol subir de todo, e não pensou em nada em particular.
+---
+nar . Depois voltou para dentro, porque às sete ela abria a biblioteca.
+@ spr_hide antoniette
+---
+nar . Ren chegou às sete e vinte e encontrou a porta aberta e a sala vazia.
+nar . Esperou uma hora antes de perguntar a alguém, porque não era da conta dele perguntar.
+---
+nar . A casa registrou a baixa no livro de pessoal no dia seguinte, na letra do escriturário.
+### CARTAO ficha "— Velha Nidhaus · livro de pessoal —"
+  | VAEL, Antoniette. Catalogadora contratada.
+  | Admissão: abril, ano um. Baixa: agosto, ano cinco.
+  | 
+  | Motivo de saúde.
+nar . Três palavras, na mesma letra de trinta e sete anos antes.
+nar . Matheo tinha lido aquela linha uma semana antes de assinar a autorização dela.
+---
+nar . A partir daquela quarta-feira, o mensageiro esperou.
+---
+nar . Noventa dias.
+---
+nar . Ele entregou no nonagésimo terceiro. Levou três dias a mais porque a estrada de Alsbeck alaga em novembro, e ele não achou que três dias fizessem diferença.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Noventa e tr\u00eas dias depois.', line2:'O pacote foi entregue.', chapter:'esp11', if:R },
+@ fade_out

@@ -1,0 +1,258 @@
+# chapter6 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter6
+
+### CENA c6a_fichas "As fichas"  bg=bg_library bgm=bgm_nidhaus
+nar . Ela cortou papel do tamanho da palma e ensinou a ordem: autor, assunto, data, estado.
+@ spr klara neutral center
+KLARA . Por que nessa ordem?
+ANTONIETTE . Porque a próxima pessoa vai procurar por autor.
+KLARA . E se não for?
+---
+ANTONIETTE . Aí ela reclama, e a gente muda a ordem.
+nar . A menina achou isso engraçado, o que Antoniette não esperava.
+nar . Em três semanas ela fazia quarenta fichas por manhã, com letra melhor que a de Ren.
+nar . Em dois meses parou de perguntar a ordem e começou a perguntar as exceções.
+---
+inn . Ninguém nesta casa nunca pediu a ela para pensar em voz alta.
+inn . Ela estava com fome disso.
+nar . Antoniette cortou mais papel do que precisava para aquela tarde, e guardou o resto na gaveta.
+### CENA c6a_fonte "Fonte única"  bg=- bgm=-
+nar . No verão do segundo ano, Antoniette ensinou a única regra que importa.
+nar . Fazia calor de rachar e as duas trabalhavam com as mangas dobradas. O papel colava na palma da mão.
+ANTONIETTE . Uma pessoa disse. Isso não é um fato. É uma pessoa.
+@ spr klara neutral center
+KLARA . E se duas dizem?
+ANTONIETTE . Aí você pergunta se as duas ouviram da mesma.
+---
+nar . Klara levou cinco respirações. Na quarta, franziu a testa.
+KLARA . Quase tudo é uma pessoa, então.
+ANTONIETTE . Quase tudo.
+nar . A partir dali a menina passou a perguntar de onde as coisas vinham.
+nar . Perguntou a Dara de onde vinha a regra das oito horas.
+nar . Perguntou a Ren quem tinha mandado desviar das borboletas.
+---
+nar . Perguntou à mãe por que a feira de maio não servia para ela.
+inn . Eu não previ isso.
+inn . E não sei como não previ.
+### CENA c6a_caderno "O caderno dela"  bg=bg_corridor bgm=-
+nar . Em fevereiro do terceiro ano, Antoniette achou um caderno debaixo do colchão da menina.
+nar . O quarto delas era o mais frio da casa e cheirava a lã guardada.
+nar . Uma quina aparecia quando a colcha era puxada. Era o esconderijo de uma criança.
+---
+### CARTAO caderno_klara "— caderno de K. —"
+  | Feira de maio: mamãe diz sol. Elke diz sol. Elke ouviu da mamãe.
+  | Outubro: quatro dias. Ano passado quatro dias. Antes disso não sei.
+  | Perguntar ao Fenn quantos outubros. Fenn conta certo.
+  | A senhorita V. não pergunta de outubro. Por quê?
+nar . Antoniette recolocou o caderno na marca rasa do colchão e alisou a colcha.
+---
+inn . Última linha.
+inn . Ela aplicou em mim.
+---
+inn . Eu ensinei a uma criança de dez anos a reparar em quem não pergunta.
+inn . E eu sou a pessoa desta casa que menos pergunta.
+nar . Naquela noite ela escreveu no caderno sem identificação uma linha só.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Fiz uma colega de uma criança de dez anos.
+### CENA c6b_visita "A visita"  bg=bg_main_hall bgm=bgm_nidhaus
+nar . Em junho a casa recebeu a primeira visita em dez meses: um administrador de terras e a mulher.
+nar . Serafina mandou que as meninas descessem, o que significava que as meninas seriam olhadas.
+---
+@ spr klara neutral center
+KLARA . O que eu falo?
+ANTONIETTE . Nada, se puder. Quem fala primeiro entrega o assunto.
+KLARA . E se perguntarem?
+ANTONIETTE . Responde a pergunta feita. Só ela. E devolve o olhar pelo tempo exato.
+---
+KLARA . Quanto é o tempo exato?
+nar . Antoniette procurou uma medida que coubesse em número.
+ANTONIETTE . Até você querer desviar. Aí é uma respiração a mais.
+### CENA c6b_jantar "O jantar"  bg=- bgm=-
+nar . A mulher do administrador perguntou às meninas se elas gostavam de estudar.
+@ spr liara neutral right
+LIARA . Eu gosto de montaria! E de mapa. E de contar história.
+---
+@ spr klara neutral center
+KLARA . Gosto, senhora.
+nar . E devolveu o olhar por uma respiração a mais, e a mulher mudou de assunto.
+---
+inn . Ela fez na primeira tentativa.
+nar . Nos dezoito meses seguintes a menina aprendeu a entrar numa sala e medir quem manda.
+nar . Aprendeu que a pessoa que serve o chá é a que ouve tudo.
+nar . Aprendeu a agradecer antes de recusar, que é o que faz a recusa passar.
+---
+inn . Eu estou ensinando a ela o que a Ordem me ensinou.
+inn . A diferença é que eu uso isso para trabalhar numa casa que não é minha.
+### CENA c6b_aprovacao "A aprovação"  bg=bg_main_hall bgm=-
+nar . Em março do terceiro ano, Serafina a parou no corredor da galeria.
+@ spr serafina direct right
+SERAFINA . A menina melhorou muito à mesa.
+ANTONIETTE . Ela aprende rápido.
+---
+@ spr serafina smirk right
+SERAFINA . Ela aprendeu com alguém.
+nar . Antoniette não respondeu, porque não havia resposta que servisse.
+SERAFINA . Isso vai ser útil para ela.
+---
+SERAFINA . Obrigada.
+@ spr_hide serafina
+nar . Serafina recolheu a saia e subiu sem olhar para trás.
+---
+inn . Ela me agradeceu.
+inn . "Isso vai ser útil para ela."
+---
+inn . Útil para quê.
+nar . Ela ficou diante da moldura vazia até ouvir a porta de Serafina fechar no andar de cima.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | A senhora da casa agradeceu o que eu estou ensinando à menina.
+  | Ela não agradeceria se aquilo atrapalhasse o cronograma.
+### CENA c6c_volume "O volume"  bg=bg_library bgm=bgm_nidhaus
+nar . Ela tirou da estante nordeste um volume de couro cansado e o pousou na mesa sem dizer nada.
+@ spr klara neutral center
+KLARA . É sobre o quê?
+ANTONIETTE . Abre.
+---
+nar . Gravuras de dragão, em prancha dobrada, com escala humana ao lado para comparação.
+nar . O texto era em três línguas e nenhuma delas era a da casa.
+KLARA . Por que este?
+---
+nar . Antoniette voltou para a própria pilha e não respondeu.
+inn . Porque tem gravura grande e eu não sei explicar melhor do que isso.
+nar . A menina levou quatro meses para atravessar o volume, com dicionário.
+nar . Terminou e voltou ao começo.
+---
+KLARA . Eles não atacam quem não os desafia.
+ANTONIETTE . É o que o livro diz.
+KLARA . E eles cumprem a palavra. Está aqui. Duas vezes.
+---
+nar . Ela apontou a linha com o dedo, e o dedo ficou ali um tempo.
+### CENA c6c_fora "O que existe fora"  bg=bg_library bgm=-
+nar . Depois do volume vieram os outros. Rotas de comércio, praças de cidade, a planta de uma universidade.
+nar . Antoniette catalogava e ia empurrando os que servissem para o lado da mesa onde a menina sentava.
+---
+nar . Nunca disse por que aqueles. A menina nunca perguntou de novo.
+@ spr klara neutral center
+KLARA . Lervel é longe?
+ANTONIETTE . Três dias de carruagem, se o tempo ajudar.
+---
+KLARA . Três dias é pouco.
+nar . Antoniette parou de escrever.
+---
+KLARA . A senhorita veio em três dias.
+ANTONIETTE . Vim.
+KLARA . Então dá.
+### CENA c6c_conta "A conta dela"  bg=bg_corridor bgm=-
+nar . Em abril do terceiro ano, Liara contou de graça, no meio de outra conversa.
+@ spr liara neutral right
+LIARA . A Klara está guardando pão.
+ANTONIETTE . Guardando por quê?
+LIARA . Ela não fala. Guarda no armário, embrulhado.
+---
+LIARA . Fica duro e ela joga fora e guarda outro.
+@ spr_hide liara
+---
+inn . Ela está treinando o que se leva.
+inn . Dez anos.
+---
+inn . E não pediu ajuda a ninguém, porque não sabe que se pode pedir.
+nar . Antoniette não falou nada sobre o pão, naquela semana nem nas seguintes.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Ela sabe que existe um fora, e sabe a distância em dias.
+  | Aprendeu as duas coisas comigo.
+  | Guardar pão é o começo de um plano feito por quem nunca viu um plano.
+@@@ { t:'chap', num:'CAP\u00cdTULO 6', name:'UMA AMIZADE', chapter:'capitulo6' },
+@ fade_out
+### CENA c6_parada "O que ela deixou de fazer"  bg=bg_antoniette_room bgm=bgm_nidhaus
+@ fade_in
+nar . Em março do segundo ano, o caderno operacional passou nove dias sem entrada nova.
+nar . Foi o intervalo mais longo desde a chegada. O anterior tinha sido de dois.
+---
+nar . Ela reparou no nono dia, ao abrir para anotar outra coisa.
+inn . Nove.
+nar . Escreveu o número na margem e olhou para ele.
+---
+inn . A ala norte tem uma pessoa na frente da chave.
+inn . Forçar de novo em menos de um ano me tira daqui.
+---
+inn . Isso é verdade e é o que eu vou escrever no relatório.
+nar . Copiou as duas frases sem tirar uma palavra e fechou o caderno.
+nar . Klara aparecia na biblioteca de manhã e ficava até o almoço, sem pedir licença.
+nar . Klara voltou a aparecer na biblioteca depois dos nove dias, e nenhuma das duas comentou os nove dias.
+nar . Klara aparecia na biblioteca de manhã e nunca mais mencionou a ala norte.
+nar . Sentava do outro lado da mesa, com um livro dela, e passava horas sem falar.
+---
+inn . Ela não pede nada. Só ocupa a cadeira.
+inn . E eu trabalho melhor com ela ali, o que é um dado que eu não vou registrar.
+### CENA c6_padrao "O padrão"  bg=bg_library bgm=bgm_amizade
+nar . Em maio já era rotina. As duas de manhã, na biblioteca, cada uma no seu lado da mesa.
+nar . Klara respirava pela boca quando lia rápido. Era o único barulho da sala durante horas.
+nar . Liara aparecia por volta das onze, falava dezessete minutos e ia embora.
+---
+nar . Antoniette começou a contar os dezessete minutos e depois parou de contar.
+nar . Em julho a menina trouxe a própria cadeira do quarto, porque a da biblioteca era alta.
+nar . Ninguém na casa comentou a cadeira. A cadeira ficou.
+---
+@ spr klara neutral center
+KLARA . A senhorita fica quanto tempo ainda?
+ANTONIETTE . O contrato era de nove meses. Já passou de um ano.
+KLARA . Não foi isso que eu perguntei.
+---
+nar . Antoniette olhou para a pilha de volumes por catalogar, que era grande e ia continuar grande.
+ANTONIETTE . Enquanto tiver trabalho.
+@ spr_hide klara
+nar . A menina aceitou a resposta e voltou para o livro.
+---
+inn . Eu acabei de prometer uma coisa que eu não controlo.
+inn . E ela ouviu como promessa.
+nar . No dia seguinte havia duas canecas na mesa antes de Klara chegar, e nenhuma das duas comentou.
+### CENA c6_escolha "O que ensinar"  bg=bg_library bgm=-
+nar . No fim de maio a menina perguntou uma coisa que Antoniette levou três dias para responder.
+@ spr klara neutral center
+KLARA . A senhorita pode me ensinar alguma coisa?
+ANTONIETTE . A senhora Elke ensina.
+KLARA . A senhora Elke ensina o que eu preciso saber.
+---
+KLARA . Não é a mesma coisa.
+@ spr_hide klara
+nar . Ela levou três dias porque três dias foi o tempo de admitir que ia dizer sim.
+---
+inn . Uma preceptora não faz isso. Uma catalogadora contratada muito menos.
+inn . E o que eu escolher ensinar vai ficar.
+@@@ { t:'cho', id:'cap6_ensino', code:'C-VI', prompt:'O QUE ENSINAR', opts:[ { id:'B', tx:'A forma. Etiqueta, protocolo, como atravessar uma sala que est\u00e1 medindo voc\u00ea.', flags:{ taught:'B' }, routes:{ hope: 2, loss: 2 }, then: C6_FORMA }, { id:'C', tx:'O mundo. A biblioteca inteira, e o que existe fora desta casa.', flags:{ taught:'C' }, routes:{ hope: 3, loss: 1 }, then: C6_MUNDO }, { id:'A', tx:'O m\u00e9todo. Catalogar, conferir, e nunca acreditar em fonte \u00fanica.', flags:{ taught:'A' }, routes:{ hope: 2, answer: 2 }, then: C6_METODO } ]},
+### CENA c6_julho "Julho"  bg=bg_corridor bgm=bgm_amizade
+nar . Em julho do terceiro ano Antoniette completou vinte e sete meses em Velha Nidhaus.
+nar . O contrato era de nove. Ninguém tinha mencionado o contrato havia mais de um ano.
+---
+nar . A biblioteca estava catalogada até a terceira estante do lado norte. Faltava um quinto do total.
+inn . Trabalhando neste ritmo, sobra um ano.
+---
+inn . Eu podia ter feito em dezoito meses.
+nar . A frase a acompanhava havia semanas. Era a primeira vez no papel.
+nar . À tarde, as duas meninas estavam sentadas no degrau do corredor leste, uma encostada na outra.
+@ spr klara neutral center
+@ spr liara neutral right
+LIARA . Faz de novo.
+KLARA . Você já sabe o final.
+LIARA . Faz assim mesmo.
+---
+nar {A} . E ela fez de novo — a lista de conferência, item por item, na ordem que Antoniette ensinou.
+nar {A} . Liara errava de propósito só para a irmã corrigir.
+nar {B} . E ela fez de novo — a mesura, o cumprimento, a frase de recusa que passa.
+nar {B} . Liara ria alto no meio e estragava, e as duas recomeçavam.
+nar {C} . E ela fez de novo — o dragão de asa curta do norte, a envergadura, o que ele come.
+nar {C} . Liara perguntava se ele era maior que a casa, todas as vezes.
+@ spr_hide klara
+@ spr_hide liara
+---
+nar . Antoniette ficou no fim do corredor até elas se cansarem, e não anotou nada.
+---
+inn . Vinte e sete meses.
+inn . Em agosto começa o terceiro ciclo que eu registro.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Dezoito meses em Velha Nidhaus.', line2:'Foi o \u00fanico tempo bom, e ela gastou inteiro.', chapter:'capitulo6' },
+@ fade_out

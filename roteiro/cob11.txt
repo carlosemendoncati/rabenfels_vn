@@ -1,0 +1,67 @@
+# cob11 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar cob11
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 11', name:'A BAIXA', chapter:'cob11', if:R },
+@ fade_out
+### CENA cob11_carruagem "Seis da manhã"  bg=bg_nidhaus_gate bgm=-
+@ fade_in
+nar . A carruagem esperou no pátio com a porta aberta.
+nar . As duas malas estavam presas atrás do banco. O baú de ferramentas não estava.
+---
+nar . O cocheiro perguntou uma vez pela passageira.
+nar . Recebeu o valor da corrida inteira e saiu às seis.
+---
+nar . Fenn levou as malas de volta ao quarto do fundo.
+nar . A cama estava feita. A vela não estava no castiçal.
+### CENA cob11_ficha "Nove dias"  bg=bg_archive_closeup bgm=bgm_archive
+nar . A ficha de pessoal chegou a Lervel nove dias depois, certificada.
+### CARTAO ficha "— Velha Nidhaus · livro de pessoal —"
+  | VAEL, Antoniette. Catalogadora contratada.
+  | Admissão: abril, ano um. Baixa: agosto, ano cinco.
+  | 
+  | Motivo de saúde.
+---
+inn . Eu já li esta linha.
+nar . Matheo tinha lido a mesma fórmula numa ficha de trinta e sete anos antes.
+nar . Leu uma semana antes de assinar a autorização de campo dela.
+### CENA cob11_pacote "Noventa e três dias"  bg=bg_prologue_room bgm=-
+nar . O pacote chegou no nonagésimo terceiro dia.
+nar . Dentro havia o caderno sem identificação que ficava no forro do baú.
+nar . Duzentas e quarenta e uma páginas.
+---
+### CARTAO cob_linha "— caderno sem identificação · p. 241 —"
+  | Remessa de agosto, ano três: conferida.
+  | Nome da antecessora e identificação da fonte: conferidos.
+  | As duas remessas passaram pelo livro de saída da casa.
+  | 
+  | A linha está correta.
+  | O visto na margem tem a data de amanhã.
+### CARTAO cob_maio "— margem · maio, ano cinco —"
+  | S. Rabenfels escreveu a Lervel para conferir as referências do Compilador.
+  | Informou o procedimento ao Compilador na mesma tarde.
+### CARTAO cob_manual "— margem do manual · p. 11 —"
+  | Prova sem procedência não vale em matéria de foro.
+  | O procedimento foi cumprido.
+### CARTAO cob_camara "— anotação sem data —"
+  | Câmara sob a copa. Cilindro de vidro.
+  | Dentro: Klara Rabenfels.
+### CARTAO cob_laudo "— anotação sem data —"
+  | Formulários de baixa já impressos.
+  | Terceira opção: motivo de saúde.
+### CARTAO cob_retrato "— anotação sem data —"
+  | Retrato de uma governanta sem nome.
+  | A legenda registra entrada e saída.
+nar . Não havia outra conferência depois da linha.
+---
+nar . Matheo contou as páginas duas vezes.
+nar . A numeração terminava em duzentos e quarenta e um.
+---
+inn . Ela achou a linha.
+inn . A linha não abriu a porta.
+@ fade_out
+@@@ { t:'end_chap', line1:'O Arquivo saiu incompleto.', line2:'Antoniette n\u00e3o saiu.', chapter:'cob11', if:R },
+@ fade_out

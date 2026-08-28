@@ -1,0 +1,396 @@
+# chapter1 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter1
+
+ANTONIETTE . Como quiser, senhor Rabenfels.
+@ spr aldric side left
+nar . Ele esperou mais um instante do que a resposta pedia.
+ALDRIC . A senhorita é fácil de empregar.
+@ spr_hide aldric
+---
+inn . Ele me classificou em quatro palavras e desceu a escada.
+nar . Ela esperou a porta fechar antes de voltar à estante.
+inn . Comprei três meses de sossego pelo preço de virar mobília.
+inn . Nove meses não vão bastar.
+ANTONIETTE . O que eu deveria estar procurando?
+@ spr aldric stare left
+nar . A mão dele parou no corrimão por meio segundo.
+ALDRIC . Nada. A senhorita não deveria estar procurando.
+ALDRIC . Eu disse: se encontrar.
+@ spr_hide aldric
+---
+inn . Ele corrigiu o verbo duas vezes na mesma frase.
+inn . Ele queria que eu guardasse o "se".
+nar . Ela anotou a hora junto com a frase.
+nar . Antoniette não respondeu.
+@ spr aldric stare left
+nar . No terceiro segundo, Aldric ergueu o queixo.
+ALDRIC . Minha mulher acha que a senhorita vai gostar desta casa.
+---
+ALDRIC . Eu acho que a casa vai gostar da senhorita.
+@ spr_hide aldric
+nar . Desceu sem esperar resposta desta vez.
+---
+inn . Ele preencheu o silêncio. Eu não precisei.
+inn . Ele precisava saber o que eu faria com a frase.
+nar . Ela escreveu as gêmeas em um parágrafo só.
+inn . Duas crianças de oito anos. Comportamento consistente com a linhagem. Sem distinção operacional relevante.
+nar . Releu. Estava correto.
+---
+nar . A frase do corredor ficou de fora. O curativo também.
+nar . Ela lacrou o envelope e comeu o pão que tinha subido, em pé, junto da janela.
+---
+inn . Relatório limpo. Ninguém em Lervel vai fazer nenhuma pergunta.
+inn . E eu continuo com a pergunta.
+nar . Ela abriu uma seção nova e escreveu um cabeçalho: sujeito K.
+inn . Registra o ambiente inteiro enquanto lê.
+inn . Responde a estímulo indireto antes de responder ao direto.
+nar . Encheu três páginas antes de olhar a hora.
+---
+nar . Sobre a irmã, meia linha.
+inn . Uma delas virou dado. A outra virou contexto.
+nar . Ela lacrou o envelope sem reler a meia linha.
+---
+inn . A partir de amanhã, Lervel vai querer mais sobre a menina.
+inn . E eu vou ter de conseguir.
+nar . O relatório para a Ordem levou vinte minutos. Fatos, medidas, nada além disso.
+nar . Ela lacrou o envelope e o deixou na beira da mesa.
+---
+nar . Depois tirou do baú de ferramentas um caderno em branco.
+nar . Sem data. Sem cabeçalho.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Por que ela não disse nada?
+inn . Isto não vai para Lervel.
+nar . Guardou o caderno debaixo do forro do baú.
+---
+inn . Agora tenho um caderno para Lervel e outro que Lervel não pode ver.
+@@@ { t:'chap', num:'CAP\u00cdTULO 1', name:'A CHEGADA', chapter:'capitulo1' },
+@ fade_out
+### CENA c1_estrada "A estrada"  bg=bg_grey_march_road bgm=bgm_grey_march
+@ fade_in
+nar . Antoniette Vael abriu a janela da carruagem no terceiro dia de viagem e deixou aberta.
+nar . O ar de abril entrou morno e com cheiro de terra molhada. O calor devolveu movimento às mãos rachadas pela rédea.
+---
+inn . É bonito.
+nar . Ela anotou a impressão abaixo da data.
+inn . Anotar que é bonito serve para depois. Impressão de chegada muda em três semanas e ninguém lembra qual era.
+nar . O vale se abriu na curva. Velha Nidhaus apareceu lá embaixo, com o telhado molhado pegando o sol deitado.
+nar . Releu o dossiê de quarenta páginas que tinha decorado em Lervel.
+inn . Reler não é insegurança. É conferência.
+nar . Dobrou o dossiê e guardou na mala menor.
+@@@ { t:'sfx', id:'sfx_wind' },
+nar . A estrada entrou na floresta. Quando as copas se tocaram, o interior da carruagem escureceu.
+nar . A temperatura caiu junto. Ela fechou a janela sem pensar e só percebeu que tinha fechado meio quilômetro depois.
+nar . Correu assim por três quilômetros sem abrir uma clareira.
+inn . O dossiê dizia densa.
+---
+inn . As árvores crescem umas em direção às outras.
+nar . A aldeia veio depois da floresta. Quinze casas caiadas, um poço, roupa no varal e cheiro de fumaça de lenha úmida.
+nar . Uma menina de uns seis anos estava sentada na mureta do poço, cantando.
+---
+### CARTAO balada "— cantiga da Marca —"
+  | Cantai, cantai, as filhas do pacto,
+  | uma nasce casulo, uma nasce intacta,
+  | cantai, cantai, o ciclo que não para...
+inn . Cantiga de roda. Anotar a letra antes de esquecer.
+nar . A carruagem passou a três metros dela.
+nar . A menina parou de cantar e ficou olhando até a carruagem sumir.
+---
+nar . Não acenou.
+### CARTAO caderno "— Caderno Operacional —"
+  | Aldeia a quatro quilômetros de Nidhaus. Quinze casas.
+  | Cantiga local recolhida na chegada. Letra transcrita em anexo.
+  | A criança não acenou.
+inn . Sem valor operacional. Anotado mesmo assim.
+### CENA c2_portao "O portão"  bg=bg_nidhaus_gate bgm=bgm_nidhaus
+nar . A carruagem parou a duzentos metros do portão.
+nar . O cocheiro desceu as duas malas e o baú ali mesmo, na estrada.
+ANTONIETTE . O portão é logo ali.
+nar . Ele concordou com a cabeça e continuou descarregando.
+---
+inn . Concordou comigo e não se mexeu. As duas coisas ao mesmo tempo.
+nar . Ela abriu a boca para perguntar por quê.
+nar . Fechou.
+inn . Primeira hora. Não gasto uma pergunta com um homem que vai embora hoje.
+---
+inn . Fica anotado que eu não perguntei.
+@@@ { t:'sfx', id:'sfx_door' },
+nar . O portão abriu sem ranger.
+inn . Ferro desse peso deveria ranger. Alguém engraxa este portão toda semana.
+@ spr fenn neutral center
+nar . Um homem de meia-idade veio buscar a bagagem. Uniforme cinzento, sem bordado.
+FENN . Senhorita Vael. A família esperava a senhorita amanhã.
+ANTONIETTE . Saí um dia antes.
+FENN . A casa não desarruma.
+nar . Ele pegou o baú de ferramentas primeiro, sem perguntar qual das malas era qual.
+FENN . Fenn. Respondo pela casa. O que precisar, pede a mim.
+inn . Contato visual pelo tempo exato. Nem um segundo além.
+inn . Isso é treino.
+@@@ { t:'sfx', id:'sfx_footsteps' },
+nar . No caminho ele passou pela cocheira e disse alguma coisa para dentro, sem parar.
+FENN . Já vou, já vou. Você comeu às quatro, seu mentiroso.
+---
+nar . Voltou ao silêncio no passo seguinte.
+inn . Vinte palavras para um cavalo. Nove para mim.
+nar . Na porta da cocheira havia um risco a faca na madeira, e outro dois dedos acima, e mais um acima daquele.
+ANTONIETTE . Filho?
+FENN . Cresceu quatro dedos este ano e come como três.
+nar . Foi a primeira frase que ele disse sem ser perguntado.
+---
+inn . Anotado. Um homem que responde curto tem um assunto que abre.
+nar . Atravessaram o pátio. As janelas do andar de baixo estavam fechadas apesar do calor de abril.
+nar . Cheirava a pedra molhada e a cera. Nenhum cheiro de comida, e já passava da hora do jantar.
+nar . No canto nordeste havia uma porta sem janela, com uma corrente leve no puxador.
+---
+nar . A corrente não tinha cadeado.
+inn . Aquilo ali serve para saber que alguém entrou.
+nar . Fenn parou até ela terminar de olhar.
+FENN . O pátio é atalho para a cozinha. A casa inteira usa.
+@ spr_hide fenn
+inn . Ele acabou de responder uma pergunta que eu não fiz.
+### CENA c3_salao "O salão"  bg=bg_main_hall bgm=bgm_nidhaus
+nar . O teto do salão era alto demais para a largura da sala.
+nar . Fazia dois graus a menos ali do que no pátio, e não havia lareira acesa em abril.
+nar . Retratos nas paredes. Rostos diferentes, olhos iguais.
+@ spr serafina neutral right
+nar . Serafina Rabenfels desceu a escada com o passo de quem já sabia a que horas a carruagem tinha chegado.
+inn . O retrato do dossiê mostra uma mulher que escolheu esta vida.
+inn . Esta aqui construiu a vida dela com material que não era dela.
+SERAFINA . Senhorita Vael. Bem-vinda a Velha Nidhaus.
+ANTONIETTE . Senhora Rabenfels. A coleção da família tem reputação até em Lervel, e eu vim disposta a descobrir se ela é merecida.
+@ spr serafina smirk right
+nar . O sorriso chegou aos olhos no tempo certo e saiu no tempo certo.
+inn . Sem nenhuma falha técnica.
+@ spr serafina direct right
+SERAFINA . Li sua carta de recomendação três vezes.
+ANTONIETTE . Três?
+SERAFINA . Leio um documento até parar de encontrar coisa nova nele.
+---
+inn . Eu li o dossiê quatro vezes pelo mesmo motivo.
+SERAFINA . Nove meses de contrato para quatro mil volumes.
+ANTONIETTE . É o que foi combinado.
+SERAFINA . Combinado é o que se escreve antes de conhecer o trabalho.
+nar . Uma das filhas apareceu no alto da escada, de camisola, e desceu dois degraus.
+@ spr serafina side right
+SERAFINA . Liara. Cama.
+nar . A menina subiu de volta sem reclamar.
+---
+inn . Duas palavras para a filha. Vinte para mim.
+@ spr serafina neutral right
+SERAFINA . Mandei preparar o quarto do lado leste para a senhorita. É o de melhor vista para o pátio.
+ANTONIETTE . Obrigada.
+SERAFINA . Fenn a leva. A copa fica aberta até meia-noite.
+nar . Serafina se afastou. Não corrigiu uma palavra nem acrescentou outra.
+@ spr_hide serafina
+---
+inn . Nenhuma menção ao senhor da casa.
+inn . Ausência sem explicação também é informação.
+### CENA c4_quarto "O quarto"  bg=bg_antoniette_room bgm=-
+nar . Quarto confortável sem ser caloroso. Mesa de trabalho, vela, papel de sobra.
+nar . Alguém tinha deixado pão e uma jarra na mesa de canto.
+nar . Ela desfez as malas na ordem de sempre: ferramentas primeiro, nada da Ordem à vista.
+nar . Depois mediu o quarto a passo, como media qualquer sala nova.
+nar . Quatorze passos de parede a parede. O corredor lá fora tinha dezessete até a mesma esquina.
+---
+inn . Três passos de parede. Nenhuma casa gasta três passos de parede.
+nar . Anotou o número e deixou sem explicação.
+nar . A janela dava para o pátio traseiro. Dali via-se a porta nordeste inteira.
+inn . Serafina escolheu este quarto. Disse que ele tem a melhor vista do pátio.
+---
+inn . Cortesia e permissão custam o mesmo na entrada. Só uma cobra depois.
+nar . Ela puxou a cadeira da mesa de trabalho para o lado da janela, e trabalhou de costas para a parede pelos cinco anos seguintes.
+nar . Comeu o pão ali mesmo, de pé, olhando o pátio. Não sentou para isso.
+nar . Depois sentou. Abriu o caderno operacional. Escreveu a data.
+### CARTAO caderno "— Caderno Operacional — Entrada 1 —"
+  | Chegada em Velha Nidhaus. Cobertura estável. Recepção sem incidente.
+  | 1. Discrepância de três passos entre o quarto leste e o corredor. Verificar planta.
+  | 2. Serafina Rabenfels: controle excepcional. Monitorar.
+  | 3. Aldric Rabenfels: ausente na recepção. Deliberado ou protocolo da casa.
+  | 4. Porta nordeste do pátio: corrente sem cadeado. Registro de passagem.
+  | 5. A floresta ao norte não cresce em direção ao sol.
+nar . Ela olhou o item cinco.
+inn . Observação subjetiva. Sem valor operacional documentável.
+nar . Riscou.
+---
+nar . Desriscou.
+inn . Detalhe subjetivo que sobrevive ao descarte costuma ser relevante. Protocolo da Ordem, página quarenta e dois.
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . Apagou a vela. No pátio, a corrente continuou parada.
+### CENA c5_biblioteca "A biblioteca"  bg=bg_library bgm=bgm_nidhaus
+@ fade_in
+nar . De manhã Fenn a deixou na porta da biblioteca e não entrou.
+inn . Nem olhou para dentro.
+nar . Dois andares de estantes. Cheiro de couro, cola velha e poeira parada.
+nar . As lombadas mostravam quais seções a família usava.
+nar . No canto nordeste do segundo andar as estantes estavam viradas para dentro, sem luz direta.
+nar . Antoniette subiu a escada.
+nar . Latim. Uma língua que ela não reconheceu. Datas de dois séculos atrás.
+---
+@@@ { t:'sfx', id:'sfx_footsteps' },
+nar . Passos no andar de baixo. Lentos, regulares, com o peso de quem sabe que o chão é dele.
+@ spr aldric cold left
+nar . Ele viu Antoniette no segundo andar sem demonstrar surpresa.
+ALDRIC . Senhorita Vael.
+nar . Pronunciou "Vael" sem mudar o ritmo da passada.
+ANTONIETTE . Senhor Rabenfels. Não sabia que era esperada aqui.
+ALDRIC . Não era. Vim buscar um documento.
+@ spr aldric side left
+nar . Subiu, passou por ela no corredor estreito e tirou um rolo de uma caixa sem procurar.
+nar . Leu de pé, com o rolo apoiado na estante. Não usou a mesa que estava a dois passos.
+ALDRIC . A senhorita cataloga por estante ou por assunto?
+ANTONIETTE . Por estante. Assunto é o que se descobre depois.
+---
+@ spr aldric cold left
+ALDRIC . Correto.
+inn . Ele acabou de corrigir uma prova.
+ANTONIETTE . A coleção é maior do que o contrato previa.
+ALDRIC . Leve o tempo que precisar.
+nar . Desceu. Parou no meio da escada, de costas.
+@ spr aldric stare left
+ALDRIC . A seção nordeste do segundo andar está fora do escopo contratado.
+ALDRIC . Se encontrar algo lá, traga a mim antes de catalogar.
+---
+inn . Ele não disse para eu não subir.
+inn . Disse para levar a ele antes de catalogar.
+@@@ { t:'cho', id:'cap1_aldric', code:'C-I', prompt:'A PERMISS\u00c3O', opts:[ { id:'B', tx:'Perguntar o que ela deveria estar procurando.', flags:{ aldric_reply:'B', aldric_pressed:true }, routes:{ answer: 2 }, then: C1_ALDRIC_B }, { id:'A', tx:'Aceitar a permiss\u00e3o como ela foi dada. N\u00e3o dar a ele nada para medir.', flags:{ aldric_reply:'A', aldric_pressed:false }, routes:{ loss: 1 }, then: C1_ALDRIC_A }, { id:'C', tx:'N\u00e3o responder. Deixar o sil\u00eancio trabalhar por ela.', flags:{ aldric_reply:'C', aldric_pressed:false }, routes:{ answer: 1 }, then: C1_ALDRIC_C } ]},
+@@@ { t:'sfx', id:'sfx_door' },
+nar . A porta da biblioteca fechou no andar de baixo.
+---
+inn . A segunda frase dele confirma que há alguma coisa naquela seção.
+inn . E que ele conta com o fato de que eu vou encontrar.
+---
+inn . Por quê?
+nar . Ela anotou a hipótese, releu e riscou. Faltava evidência.
+inn . Continuava sendo a mais provável.
+### CENA c6_retratos "A galeria"  bg=bg_portrait_hall bgm=-
+nar . O caminho mais curto entre a biblioteca e a ala leste passa por um corredor de retratos.
+nar . Nove gerações, da mais antiga à mais recente, na ordem.
+inn . Casa que pendura retrato em ordem cronológica quer que alguém leia a ordem.
+nar . Ela leu.
+---
+nar . Duas.
+nar . Duas.
+nar . Duas.
+---
+nar . Cada geração tinha duas filhas. Todas as nove.
+inn . Nove gerações sem um filho. Estatisticamente improvável.
+inn . Improvável não chega a ser impossível. Anotar e seguir.
+nar . Nos nove quadros as duas meninas posavam do mesmo jeito.
+nar . Uma de frente. A outra meio passo atrás, sempre à direita.
+---
+inn . Convenção de composição. O pintor copia o quadro anterior.
+inn . Nove pintores diferentes ao longo de duzentos anos copiando a mesma convenção.
+nar . No fim da fila havia uma moldura vazia.
+nar . Ela passou o dedo na borda de baixo. Saiu limpo.
+---
+nar . A parede tinha pó até a borda externa. Dentro do contorno, não.
+inn . Alguém limpa uma moldura que não tem quadro.
+---
+nar . A moldura tinha o tamanho dos outros nove.
+inn . Está esperando duas meninas.
+---
+nar . Ela mediu a moldura com a mão aberta, duas vezes, e anotou a medida.
+nar . Depois seguiu pelo corredor contando os passos até a ala leste, para ter o que fazer com a cabeça.
+### CENA c7_corredor "O corredor leste"  bg=bg_corridor bgm=-
+nar . Voltando com dois volumes, ela ouviu vozes no corredor leste.
+nar . A última porta estava entreaberta. Vinha cheiro de leite morno e de papel.
+---
+@ spr liara neutral right
+@ spr klara neutral center
+nar . Duas meninas idênticas. Uma deitada sobre um mapa, batendo o pé no ar. A outra lendo, com o dedo no texto.
+LIARA . A senhora Elke falou que em Lervel tem uma casa só de livro! Do tamanho da capela.
+KLARA . Biblioteca.
+LIARA . É. Eu quero ir.
+KLARA . Você quer ir em tudo.
+LIARA . Você não quer?
+---
+KLARA . Quero.
+nar . Liara rolou de barriga para cima e ficou olhando o teto.
+LIARA . Mamãe disse que você não vai na feira de maio por causa do sol.
+KLARA . Eu posso ir.
+LIARA . Ela disse que não.
+---
+KLARA . Então não posso.
+inn . A menina do mapa vai à feira. A outra não.
+inn . Para as duas, a diferença não exige explicação.
+nar . A que lia virou a página.
+KLARA . Conta depois.
+LIARA . Contar o quê?
+KLARA . A feira. Tudo. Quantas barracas, o que vendem, o cheiro.
+LIARA . Isso é muita coisa.
+KLARA . Você fala muito. Vai dar.
+nar . Liara riu e disse que ia contar até o que ninguém perguntou.
+---
+inn . Ela não pediu para ir. Pediu a feira inteira pela boca da irmã.
+LIARA . Coça?
+KLARA . Não.
+LIARA . Ontem coçava.
+KLARA . Hoje não.
+---
+LIARA . Você comeu?
+KLARA . Comi.
+LIARA . Está com fome de novo?
+---
+KLARA . Um pouco.
+nar . Liara apenas mudou de assunto. Aquilo já pertencia à rotina.
+nar . Pela fresta, curativo no braço esquerdo da que lia. Dobra do cotovelo, atadura limpa.
+nar . A outra menina não tinha nenhum.
+inn . Anotado. Sem conclusão.
+LIARA . Amanhã é dia de treino.
+KLARA . Eu sei.
+LIARA . Você nem perguntou de quê.
+KLARA . É sempre o mesmo.
+LIARA . Não é. Semana passada foi diferente.
+---
+KLARA . Foi.
+nar . Klara virou a página sem levantar os olhos.
+KLARA . Você perdeu o marcador de novo.
+LIARA . Como você—
+KLARA . Você apertou o lápis quando eu disse mapa. Você faz isso quando perde alguma coisa.
+LIARA . Isso é chato.
+KLARA . Está embaixo de você.
+nar . Liara levantou o quadril, achou o marcador e riu alto por uns cinco segundos.
+nar . A outra continuou lendo.
+nar . Antoniette ficou parada no corredor.
+inn . Ela achou o marcador sem tirar os olhos da página.
+inn . Está registrando a sala inteira enquanto lê.
+---
+inn . É o que eu faço.
+nar . Klara virou a cabeça um grau na direção da porta. Voltou para o livro.
+@ spr_hide klara
+@ spr_hide liara
+inn . Ela sabe que tem alguém aqui.
+---
+inn . E não disse nada.
+nar . Antoniette andou até o fim do corredor antes de anotar. Anotar ali seria barulho.
+---
+inn . Uma criança de oito anos que sabe quando não vale a pena avisar.
+inn . Aprendeu isso com alguém.
+### CENA c8_relatorio "O primeiro relatório"  bg=bg_antoniette_room bgm=-
+nar . À noite, o relatório operacional para Matheo.
+nar . Ela molhou a pena e parou antes da primeira linha.
+inn . A pergunta do corredor não tem campo no formulário.
+@@@ { t:'cho', id:'cap1_relatorio', code:'C-I', prompt:'O PRIMEIRO RELAT\u00d3RIO', opts:[ { id:'A', tx:'As duas juntas. Sujeitos de observa\u00e7\u00e3o, comportamento consistente com a linhagem.', flags:{ report_style:'A', distance_kept:true, klara_focus:false, archive_seed:false }, routes:{ loss: 1 }, then: C1_RELATORIO_A }, { id:'C', tx:'O relat\u00f3rio para a Ordem. E um caderno separado, para a pergunta que sobrou.', flags:{ report_style:'C', distance_kept:false, klara_focus:true, archive_seed:true }, routes:{ answer: 1, hope: 1 }, then: C1_RELATORIO_C }, { id:'B', tx:'Klara em se\u00e7\u00e3o pr\u00f3pria. Abrir monitoramento individual.', flags:{ report_style:'B', distance_kept:false, klara_focus:true, archive_seed:false }, routes:{ answer: 1, loss: 1 }, then: C1_RELATORIO_B } ]},
+### CENA c9_meia_noite "Meia-noite"  bg=bg_antoniette_room bgm=-
+nar . Meia-noite. A vela estava pela metade.
+nar . O silêncio de Nidhaus tinha uma qualidade que ela ainda não sabia nomear.
+nar . Era o silêncio de antes de uma frase, não o de depois.
+---
+nar . Da janela das gêmeas ainda vinha luz.
+inn . Quatro anos. Talvez cinco. Foi o que a Ordem estimou para um relatório completo do pacto.
+---
+inn . Ela ficou olhando aquela luz e pensou no contrato de nove meses, e nos quatro mil volumes que nenhuma pessoa cataloga em nove meses, e na frase da senhora da casa sobre combinado ser o que se escreve antes de conhecer o trabalho, e só então entendeu que ninguém naquela casa tinha esperado que ela fosse embora em nove meses, e que a única pessoa surpresa com a duração do próprio contrato era ela.
+---
+inn . Em quatro anos as duas terão doze.
+nar . Ela escreveu o número na margem e não soube dizer por quê.
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . Apagou a vela e deitou no escuro.
+---
+nar . No quarto das gêmeas, a luz ficou acesa mais uma hora.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Primeiro ano em Velha Nidhaus.', line2:'Quatro ainda vir\u00e3o.', chapter:'capitulo1' },
+@ fade_out

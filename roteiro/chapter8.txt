@@ -1,0 +1,304 @@
+# chapter8 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter8
+
+nar . Ela usou. Levou o nome da escriba ao livro de pessoal e cruzou com as datas da parede.
+nar . Levou quatro noites e fechou.
+---
+inn . Agora eu tenho um caso.
+nar . Onze dias depois, Fenn foi transferido para a cocheira em tempo integral.
+nar . Não foi demitido. Não houve conversa. O uniforme dele passou a ser outro.
+---
+nar . Ele deixou de entrar na casa. Deixou de ter chave. Deixou de responder pela casa.
+inn . Vinte e nove anos de serviço e a palavra dele valia mais que a de qualquer criado daqui.
+inn . Ninguém precisou dizer por quê.
+---
+nar . Ela cruzou com ele no pátio três vezes naquele mês, e nas três ele cumprimentou.
+inn . A melhor fonte que eu tinha nesta casa, e eu gastei ela em quatro noites.
+ANTONIETTE . Fenn não me disse nada. Eu achei no livro de pessoal, sozinha.
+nar . Serafina recebeu a frase sem mover o rosto.
+---
+SERAFINA . O livro de pessoal está no meu escritório há quatro anos.
+ANTONIETTE . Está.
+---
+SERAFINA . Então a senhorita esteve no meu escritório.
+nar . Serafina deixou a frase entre as duas. Antoniette não pediu uma saída.
+ANTONIETTE . Estive.
+@ spr_hide serafina
+---
+nar . Fenn manteve a chave e o uniforme. Ninguém falou nada com ele.
+nar . Na semana seguinte o filho dele foi contratado para a cocheira.
+---
+inn . Dezessete anos.
+inn . Entrou de vez.
+---
+nar . Fenn a agradeceu numa manhã de novembro, no pátio, de cabeça baixa e em cinco palavras.
+inn . Foi o pior obrigado que eu já recebi.
+ANTONIETTE . Manda ele hoje. Antes que alguém decida.
+nar . Fenn fechou a mão no pano e não perguntou por quê.
+FENN . Hoje é quarta. A carroça do sal passa às onze.
+ANTONIETTE . Então às onze.
+---
+nar . Ela deu a ele o pagamento de dois trimestres em moeda, embrulhado em pano.
+nar . Não perguntou o nome da escriba. Não perguntou mais nada.
+---
+nar . O rapaz saiu às onze e dez, na carroça do sal, com um saco e o casaco do pai.
+nar . Fenn ficou.
+---
+nar . Continuou respondendo pela casa. Continuou econômico com gente.
+nar . Parou de falar com os cavalos.
+---
+inn . Eu não tenho o nome da escriba e não vou ter.
+inn . E o rapaz está em algum lugar que não é aqui.
+@@@ { t:'chap', num:'CAP\u00cdTULO 8', name:'O QUE ELA N\u00c3O DEVERIA SABER', chapter:'capitulo8' },
+@ fade_out
+### CENA c8_cocheira "A cocheira"  bg=bg_nidhaus_gate bgm=bgm_nidhaus
+@ fade_in
+nar . Outubro do quarto ano veio com chuva atravessada e a casa fechou o pátio às cinco.
+nar . A cocheira cheirava a palha molhada e a couro. Era o único lugar da propriedade onde o cheiro não era de cera.
+nar . Fenn a esperou na porta da cocheira, o que ele nunca tinha feito.
+---
+@ spr fenn neutral left
+FENN . A senhorita recebe da Ordem por trimestre ou por ano?
+---
+nar . Antoniette parou de tirar a capa.
+inn . Ele não perguntou se eu recebo da Ordem.
+inn . Perguntou como.
+ANTONIETTE . Há quanto tempo o senhor sabe?
+FENN . Desde que a senhorita mediu o corredor com os pés, no primeiro dia.
+---
+FENN . Empregada não mede casa. Empregada trabalha na casa que tem.
+nar . Usou o mesmo tom com que anunciava o jantar. Não havia ameaça nele.
+inn . Três anos e meio.
+inn . Ele sabe há três anos e meio e não disse a ninguém.
+---
+ANTONIETTE . O que o senhor quer?
+FENN . Dois trimestres. Em moeda.
+ANTONIETTE . Para quê?
+---
+FENN . Meu filho fez dezessete em agosto.
+@ spr_hide fenn
+nar . E entrou na cocheira, porque tinha o que fazer.
+### CENA c8_escriba "O que ele vende"  bg=bg_nidhaus_gate bgm=-
+nar . Voltou na noite seguinte, com a mesma capa molhada, e ele começou sem cumprimentar.
+@ spr fenn neutral left
+FENN . Trinta e sete anos atrás veio uma mulher de Lervel. Ficou seis meses.
+---
+inn . Eu conheço essa linha. Está no dossiê. Partiu por motivo de saúde.
+FENN . Meu pai trabalhava aqui. Eu tinha nove anos.
+FENN . Ela media as coisas com os pés.
+---
+nar . Antoniette ficou parada com a capa na mão.
+---
+ANTONIETTE . O que aconteceu com ela?
+FENN . Isso eu não sei e não vou inventar.
+---
+FENN . Sei o nome dela. Sei onde está escrito, e não é no livro de pessoal.
+ANTONIETTE . Onde?
+@ spr fenn neutral left
+FENN . Dois trimestres.
+@ spr_hide fenn
+---
+inn . Ele guardou isso a vida inteira e escolheu vender agora.
+inn . Não porque o preço subiu. Porque o filho fez dezessete.
+### CENA c8_cronograma "O cronograma"  bg=bg_library_night bgm=bgm_archive
+nar . Ela subiu com a lista das nove datas que tinha copiado da parede da câmara dois anos antes.
+nar . Cruzou com os registros de família da estante nordeste, que ela já conhecia de cor.
+---
+inn . Eu vinha lendo isto como idade. Sempre li como idade.
+nar . Ela alinhou as nove colunas interrompidas pela data de nascimento de cada par.
+---
+nar . Doze anos.
+nar . Quinze.
+nar . Onze.
+nar . Dezesseis.
+---
+inn . Não bate. Não tem idade nenhuma em comum.
+nar . A tinta dos quatro números secou antes de ela virar a régua de lado.
+---
+nar . Alinhou pela altura em vez da idade.
+nar . As nove colunas interrompiam na mesma marca, com dois dedos de diferença entre a mais alta e a mais baixa.
+---
+inn . Não é quando ela faz uma idade.
+inn . É quando ela chega a um ponto.
+---
+nar . Ela pousou a régua e ficou com as duas mãos na mesa.
+inn . E se é um ponto, ele pode ser adiantado.
+---
+inn . E se pode ser adiantado, alguém já pensou nisso antes de mim.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Nove interrupções. Idades diferentes, alturas iguais.
+  | O ciclo não conta anos. Conta desenvolvimento.
+  | K. tem onze anos e está a um palmo da marca.
+  | Não tenho cinco anos. Tenho o tempo que ela levar para crescer.
+### CENA c8_academia "O que Liara quer"  bg=bg_corridor bgm=-
+nar . No corredor leste, Liara estava deitada de bruços no chão com três folhas espalhadas.
+@ spr liara bright right
+LIARA . Toni, tem uma academia que aceita menina.
+---
+ANTONIETTE . Escola tem várias.
+LIARA . Não é escola. É academia. De mana, em Eldoria.
+nar . Ela empurrou a folha pelo chão com dois dedos.
+LIARA . A senhora Elke tem uma prima que foi. Só entra depois da maioridade.
+LIARA . Faltam sete anos para mim. Eu já contei.
+---
+@ spr klara side center
+nar . Klara estava sentada na soleira com um livro fechado no colo e não disse nada.
+LIARA . Papai vai dizer que não.
+LIARA . Mas eu tenho sete anos para ele cansar. Eu ganho do papai. Sempre ganho.
+nar . E voltou para as folhas, satisfeita com o próprio plano.
+@ spr_hide liara
+@ spr_hide klara
+---
+nar . Antoniette catalogou dois volumes naquela tarde e não escreveu nada sobre a conversa.
+### CENA c8_pedido "O pedido"  bg=bg_library bgm=-
+@ spr klara neutral center
+nar . Klara apareceu na biblioteca à noite, o que ela não fazia havia quatro anos.
+nar . Ficou de pé do outro lado da mesa em vez de sentar.
+---
+KLARA {A} . Eu queria conferir uma coisa com a senhorita.
+nar {A} . Ela pôs sobre a mesa uma folha com três colunas e uma data em cada linha.
+KLARA {A} . Outubro, todo ano. Fevereiro, alguns anos. Agosto, todo ano, e o de agosto é diferente.
+--- {A}
+KLARA {A} . Está certo?
+nar {A} . Antoniette olhou a folha e reconheceu o próprio método na letra de uma criança de onze anos.
+ANTONIETTE {A} . Está certo.
+--- {A}
+KLARA {A} . Então me ensina o que falta.
+KLARA {B} . Eu preciso pedir uma coisa e não sei o jeito certo.
+ANTONIETTE {B} . Não tem jeito certo. Tem o pedido.
+nar {B} . A menina endireitou os ombros, contou uma respiração e levantou os olhos.
+--- {B}
+KLARA {B} . Quando a senhorita for embora daqui, eu queria ir junto.
+nar {B} . Disse aquilo com a postura inteira, sem tremer a voz, olhando no olho pelo tempo exato.
+--- {B}
+inn {B} . Ela ensaiou.
+nar {C} . Ela pôs sobre a mesa um pano dobrado, e dentro havia moeda miúda e um anel de prata.
+KLARA {C} . Isso dá para três dias de carruagem?
+--- {C}
+nar {C} . Antoniette contou sem tocar. Dava para meio dia, e não em carruagem.
+ANTONIETTE {C} . De onde veio o anel?
+KLARA {C} . Era da minha avó. Ninguém procura.
+--- {C}
+KLARA {C} . Se não der, eu junto mais. Só me diz quanto falta.
+---
+nar . Antoniette abriu a boca para dizer que não era possível.
+nar . E ficou com a frase pronta na boca por quatro ou cinco segundos.
+---
+ANTONIETTE . Me dá até fevereiro.
+nar . A menina assentiu uma vez, recolheu o que tinha trazido e subiu.
+@ spr_hide klara
+---
+inn . Eu acabei de dar uma data a ela.
+inn . Uma data é uma promessa com número.
+### CENA c8_serafina "O chá das quatro"  bg=bg_main_hall bgm=bgm_nidhaus
+@ spr serafina direct right
+nar . Serafina a chamou para o chá das quatro pela primeira vez em quatro anos.
+nar . A sala do lado sul era a única aquecida em outubro, e o chá veio quente demais para beber.
+nar . Serviu ela mesma, o que significava que não haveria criado na sala.
+---
+SERAFINA . A biblioteca fecha quando?
+ANTONIETTE . Fevereiro.
+SERAFINA . Fevereiro.
+nar . Serafina repetiu a palavra sem interrogá-la e pousou a colher.
+---
+@ spr serafina smirk right
+SERAFINA . A senhorita chegou com um contrato de nove meses e ficou três anos e meio.
+ANTONIETTE . A coleção era maior do que o contrato previa.
+---
+SERAFINA . Era.
+nar . Ela pousou a xícara sem fazer barulho na louça.
+@ spr serafina grave right
+SERAFINA . Eu escrevi a Lervel no seu segundo mês aqui, para confirmar as referências.
+---
+SERAFINA . Responderam em nove dias, com timbre e selo.
+SERAFINA . Nove dias é rápido demais para uma casa que não esperava a pergunta.
+---
+inn . Ela sabe desde o segundo mês.
+inn . E nunca apertou a corrente.
+---
+inn . Deixou-me entrar na câmara.
+---
+inn . Deixou a menina ocupar a cadeira diante da minha.
+inn . E agora serve o chá.
+---
+inn . Nada disso foi tolerância.
+---
+inn . Foi uso.
+inn . Três anos e quatro meses de uso.
+---
+ANTONIETTE . Por que a senhora não me removeu?
+nar . Serafina girou a xícara até a asa ficar à direita. Só então respondeu.
+@ spr serafina neutral right
+SERAFINA . A senhorita é boa com a menina.
+@ spr_hide serafina
+nar . E levantou, porque o chá das quatro terminava às cinco.
+---
+inn . Ela me deixou ficar porque eu sou útil para a menina.
+inn . Útil para a menina chegar inteira onde precisa chegar.
+### CENA c8_copa "A copa"  bg=bg_kitchen bgm=-
+@ spr dara neutral center
+nar . Na copa, naquela noite, Dara pôs a caneca na frente dela sem que ela pedisse.
+nar . A copa continuava sendo o único cômodo quente, e continuava cheirando a fermento e a cinza.
+---
+inn . Dara nunca pôs uma caneca aqui antes das oito.
+inn . Agora não tira os olhos do fogo.
+---
+inn . A alça está virada para a minha mão direita.
+inn . Ela lembra com qual mão eu escrevo.
+DARA . A senhorita devia comer.
+ANTONIETTE . Eu como.
+---
+DARA . A menina come melhor quando a senhorita come.
+nar . Antoniette levantou os olhos da caneca.
+---
+ANTONIETTE . Alteração de apetite em criança dessa idade costuma acompanhar crescimento. É esperado.
+nar . Dara olhou para ela por dois segundos e voltou para o fogo.
+@ spr_hide dara
+---
+nar . Antoniette terminou a caneca e subiu.
+### CENA c8_escolha "Quem ela protege"  bg=bg_antoniette_room bgm=-
+nar . A moeda de dois trimestres estava na gaveta, contada, embrulhada em pano.
+nar . Manteve o embrulho na palma até a marca do cordel ficar na pele.
+---
+inn . Se eu comprar o nome, eu tenho a antecessora e um caso que Lervel não pode ignorar.
+inn . E Fenn fica com um segredo vendido dentro de uma casa que conta tudo.
+---
+inn . Não dá para ficar com as duas coisas.
+@@@ { t:'cho', id:'cap8_protecao', code:'C-VIII', prompt:'QUEM ELA PROTEGE', opts:[ { id:'B', tx:'A informa\u00e7\u00e3o. Comprar o nome e usar. \u00c9 a \u00fanica prova que ela pode levar a Lervel.', flags:{ third_paid:'B', knows_predecessor:true, fenn_debt:'pago' }, routes:{ answer: 3, loss: 1 }, then: C8_PROTEGE_B }, { id:'A', tx:'Fenn. Comprar o nome e negar a fonte se algu\u00e9m perguntar.', flags:{ third_paid:'A', knows_predecessor:true, fenn_debt:'pago' }, routes:{ answer: 1, loss: 2 }, then: C8_PROTEGE_A }, { id:'C', tx:'O rapaz. Dar a moeda, recusar o nome e mandar o menino embora hoje.', flags:{ third_paid:'C', knows_predecessor:false, fenn_debt:'pago' }, routes:{ hope: 3, loss: 1 }, then: C8_PROTEGE_C } ]},
+### CENA c8_conta "Quem pagou"  bg=bg_antoniette_room bgm=-
+nar . A carta de Matheo chegou no fim de novembro, fora do ciclo dos relatórios.
+### CARTAO matheo "— correspondência de campo —"
+  | A. — os seus relatórios encolheram pela metade em quinze meses.
+  | Não peço explicação. Peço que você confira se ainda está fazendo o
+  | trabalho, ou se passou a fazer outro.
+  | Se for o outro, escreva isso e eu arranjo a substituição sem registro.
+  | M.
+### CARTAO matheo "— correspondência de campo —"
+  | A. — "sem testemunha direta" foi a primeira frase sua que eu li duas
+  | vezes em oito anos.
+  | Não vou perguntar de novo. Estou anotando a data desta carta.
+  | M.
+### CARTAO matheo "— correspondência de campo —"
+  | A. — o relatório de agosto foi o melhor documento que este arquivo
+  | recebeu em vinte anos.
+  | Reduza o contato pessoal. Isto não é conselho.
+  | M.
+nar . Ela leu a carta duas vezes e não respondeu naquela semana.
+---
+nar . No fim de dezembro escreveu quatro linhas sobre encadernação e a previsão de fechamento da biblioteca.
+nar . E acrescentou, no rodapé, uma frase que não tinha campo no formulário.
+### CARTAO caderno "— rodapé do relatório trimestral —"
+  | Solicito manutenção do ponto morto em noventa dias.
+---
+inn . Ponto morto é o que se pede quando se pensa em não voltar.
+inn . Eu escrevi isso sem decidir nada.
+---
+inn . Ou decidi em outubro e levei dois meses para pôr no papel.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Quarto outubro em Velha Nidhaus.', line2:'A conta caiu em outra pessoa.', chapter:'capitulo8' },
+@ fade_out

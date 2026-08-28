@@ -1,0 +1,339 @@
+# epilogue - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar epilogue
+
+@@@ { t:'chap', num:'EP\u00cdLOGO', name:'O QUE FICOU', chapter:'epilogo' },
+@ fade_out
+### CENA ep_seis_anos "O parecer"  bg=bg_prologue_room bgm=bgm_epilogo
+@ fade_in
+@ spr matheo neutral center
+nar . Em março do segundo ano o tribunal da Marca pediu as quatro páginas que faltavam.
+nar . Ele explicou que não as tinha. Explicou por escrito, três vezes, em três formatos diferentes.
+---
+nar . O parecer veio em duas linhas. Ele decorou as duas sem querer.
+### CARTAO lervel "— tribunal da Marca —"
+  | "Relato singular, de autoria falecida, sem terceiro lesado identificável."
+  | "Sem elemento externo, a matéria pertence ao foro doméstico da casa."
+---
+inn . Sem terceiro lesado.
+nar . As quatro páginas davam nome aos terceiros. Ele não sabia o que havia nelas.
+inn . Ela escreveu que, se eu chegasse até elas, entenderia.
+inn . Eu não cheguei.
+nar . Ele recorreu duas vezes. A segunda foi indeferida no ano quatro.
+nar . Em março do segundo ano o tribunal da Marca pediu as quatro páginas que faltavam.
+nar . Ele explicou que não as tinha. Explicou por escrito, três vezes, em três formatos diferentes.
+---
+nar . O parecer veio em duas linhas. Ele decorou as duas sem querer.
+### CARTAO lervel "— tribunal da Marca —"
+  | "Relato singular, de autoria falecida, sem terceiro lesado identificável."
+  | "Sem elemento externo, a matéria pertence ao foro doméstico da casa."
+---
+inn . Sem terceiro lesado.
+nar . As quatro páginas davam nome aos terceiros. Ele não sabia o que havia nelas.
+inn . Ela escreveu que, se eu chegasse até elas, entenderia.
+inn . Eu não cheguei.
+nar . Ele recorreu duas vezes. A segunda foi indeferida no ano quatro.
+nar . O material entrou no tribunal em quatro meses e saiu em nove.
+nar . Tinha duzentas e noventa e uma páginas. A numeração fechava.
+---
+### CARTAO lervel "— tribunal da Marca · decisão —"
+  | "Relato singular, de autoria falecida, completo e de procedência verificada."
+  | "Julga-se improcedente por ausência de terceiro lesado."
+---
+inn . Autoria falecida.
+nar . A autora trabalhava dois andares abaixo. O parecer ficou como veio.
+inn . Sem terceiro lesado.
+nar . Todos estavam nas páginas. Sujeito. Fonte. Empregado. Nenhum nome.
+nar . Matheo não recorreu. O enquadramento estava correto.
+nar . O material chegou com duzentas e quarenta e uma páginas.
+nar . Faltavam plantas, horários e tudo o que viria depois de julho. A numeração fechava mesmo assim.
+---
+### CARTAO lervel "— tribunal da Marca —"
+  | "Relato singular, de autoria falecida, sem terceiro lesado identificável."
+  | "Material insuficiente para instrução."
+---
+inn . Sem terceiro lesado.
+nar . O tribunal não pediu as quatro páginas. Não chegou a precisar delas.
+@ spr matheo hollow center
+---
+nar . Ele tinha conhecido a autora do relato numa fila de cartório, em Alsbeck, quando ela tinha dezessete anos.
+nar . Ela reparou que o escriturário da frente estava com o carimbo errado. Ninguém mais na fila reparou, e ele estava na fila havia meia hora.
+---
+nar . Perguntou o nome dela e não disse o dele.
+nar . Escreveu o endereço da Academia num papel de balcão e pagou a inscrição do exame, que a Ordem manda pagar e ninguém paga.
+---
+nar . Não a ensinou. Apontou uma porta e voltou para Lervel, e não acompanhou o resultado.
+---
+inn . Ela entrou por mim.
+---
+nar . Oito anos entre o papel de balcão e o parecer.
+nar . Ele escreveu os dois.
+---
+nar . Depois do parecer ele continuou trabalhando. Era o que havia para fazer com o dia.
+### CENA ep_alerta "O alerta"  bg=bg_prologue_room bgm=-
+@ spr matheo read center
+nar . No mês em que o material de Nidhaus entrou no arquivo central, ele fez uma coisa pequena e administrativa.
+nar . Deixou o sobrenome em alerta permanente no cadastro geral da Ordem.
+---
+inn . Uma família que não registra nada em três séculos.
+inn . Se aparecer em papel algum dia, eu quero saber no mesmo dia.
+---
+nar . Depois esqueceu. O alerta ficou no cadastro, sem prazo de expiração.
+---
+@@@ { t:'sfx', id:'sfx_package' },
+nar . O alerta disparou numa terça de maio, seis anos depois, às quatro e vinte da tarde.
+nar . Veio numa folha de aviso comum, do mesmo maço que a Ordem usa para mudança de endereço.
+---
+nar . Ele leu o sobrenome de pé, ainda com o casaco.
+### CENA ep_cadastro "O cadastro"  bg=bg_archive_closeup bgm=-
+nar . Era uma cópia de registro de matrícula da Academia de Eldoria, ano letivo corrente.
+@@@ { t:'sfx', id:'sfx_page_turn' },
+---
+nar . Duas linhas, mesmo sobrenome, mesma casa de origem, mesma turma.
+---
+### CARTAO cadastro "— Academia de Eldoria · matrícula —"
+  | RABENFELS, Liara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.
+  | Curso: mana aplicada. Ingresso por exame, primeira colocação.
+---
+nar . Ele parou na expressão "primeira colocação". A unha do polegar marcou a margem.
+---
+### CARTAO cadastro {A} "— Academia de Eldoria · matrícula —"
+  | RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.
+  | Curso: Registro Comparado e Reconstrução Documental.
+### CARTAO cadastro {B} "— Academia de Eldoria · matrícula —"
+  | RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.
+  | Curso: protocolo e direito das casas maiores.
+### CARTAO cadastro {C} "— Academia de Eldoria · matrícula —"
+  | RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.
+  | Curso: geografia e línguas do norte.
+--- {A}
+nar {A} . Ele leu o curso duas vezes.
+inn {A} . É o meu.
+--- {A}
+nar {A} . Ele deu aquela cadeira por nove anos. Largou quando entrou para a Ordem.
+nar {A} . A matéria ficou. Ele nunca soube quem passou por ela.
+--- {A}
+nar {A} . Ele não passou adiante. Pediu o histórico da disciplina, que é público e ninguém pede.
+nar {A} . Quem respondeu foi o professor Halvern, que ocupa a cadeira agora.
+--- {A}
+### CARTAO cadastro {A} "— Academia de Eldoria · histórico da disciplina —"
+  | Registro Comparado e Reconstrução Documental. Trinta e um anos.
+  | Aprovações com menção: duas.
+--- {A}
+nar {A} . Uma das duas estava morta havia seis anos, por parecer que ele mesmo assinara sem ler até o fim.
+nar {A} . A outra tinha dezoito anos e morava em Velha Nidhaus.
+--- {A}
+inn {A} . Duas em trinta e um anos, e as duas saem da mesma casa.
+--- {A}
+nar {A} . Junto do histórico veio uma folha que ele não tinha pedido.
+--- {A}
+### CARTAO cadastro {A} "— anexo, de próprio punho —"
+  | Escrevi à senhorita Rabenfels há oito anos e nunca tive resposta.
+  | Se o senhor tiver o endereço dela, eu agradeço. H. Halvern.
+--- {A}
+inn {A} . Ele tem o endereço.
+--- {A}
+nar {A} . Respondeu no mesmo dia, em quatro linhas. Uma delas era a data da morte.
+--- {A}
+nar {A} . Da estrada de Lervel até Eldoria são quatro dias de carruagem. Ele levou onze para decidir e quatro para ir.
+### CENA ep_academia {A} "Eldoria"  bg=bg_library bgm=bgm_archive
+@ fade_in {A}
+nar {A} . A sala tinha dezenove lugares e catorze ocupados. Ele ficou de pé no fundo, como visitante da Ordem tem direito de ficar.
+--- {A}
+@ spr klara neutral center {A}
+nar {A} . Reconheceu a aluna pela postura antes de reconhecer pelo cabelo: sentada reta, as duas mãos na mesa, uma de cada lado do caderno.
+--- {A}
+nar {A} . O exercício do dia era um inventário de casa grande com três erros plantados. Ela achou os três e marcou um quarto.
+--- {A}
+nar {A} . O quarto não era erro. O professor disse isso, e ela não apagou a marca.
+--- {A}
+nar {A} . No fim da aula ele perguntou uma coisa, do jeito que examinador pergunta, e sem se apresentar.
+--- {A}
+@ spr matheo neutral left {A}
+MATHEO {A} . Por que a senhorita não apagou?
+--- {A}
+KLARA {A} . Porque eu marquei.
+--- {A}
+MATHEO {A} . O professor disse que está certo.
+KLARA {A} . Disse. Ele é fonte única.
+--- {A}
+nar {A} . “Fonte única” está na página nove do manual da cadeira. Foi ele que escreveu o manual.
+--- {A}
+MATHEO {A} . E o que a senhorita faz com a marca?
+--- {A}
+KLARA {A} . Deixo. Escrevo o acerto do lado, na mesma tinta.
+--- {A}
+KLARA {A} . Riscar ensina a esconder o erro.
+--- {A}
+nar {A} . Essa não era dele.
+--- {A}
+inn {A} . Ela não aprendeu isso aqui.
+nar {A} . Ele conferiu o manual naquela noite, na estalagem, página por página. Não estava.
+--- {A}
+MATHEO {A} . Quem ensinou isso à senhorita?
+--- {A}
+nar {A} . Klara levou tempo. Não o tempo de quem não lembra.
+--- {A}
+KLARA {A} . Uma pessoa da casa.
+--- {A}
+MATHEO {A} . Ela ainda está lá?
+--- {A}
+KLARA {A} . Não.
+--- {A}
+nar {A} . Ela fechou o caderno com as duas mãos e não perguntou quem ele era.
+--- {A}
+inn {A} . A outra também não perguntou.
+--- {A}
+inn {A} . As duas entraram por mim.
+nar {A} . Perguntar seria informação, e ela tinha sido criada numa casa que lê tudo o que entra e sai.
+--- {A}
+nar {A} . Matheo tinha o nome dela na pasta e o parecer no bolso. Levou a mão ao bolso e parou ali.
+--- {A}
+inn {A} . Se eu disser o nome, eu digo a esta casa que o nome importa.
+--- {A}
+MATHEO {A} . Bom exercício, senhorita.
+@ spr_hide matheo {A}
+--- {A}
+nar {A} . Na porta ele olhou para trás uma vez.
+nar {A} . Klara tinha reaberto o caderno e estava escrevendo alguma coisa ao lado da marca que não apagou.
+@ spr_hide klara {A}
+--- {A}
+@ fade_out {A}
+### CENA ep_cadastro_2 {A} "O cadastro"  bg=bg_prologue_room bgm=bgm_epilogo
+@ fade_in {A}
+nar {A} . Voltou a Lervel em quatro dias e não escreveu relatório da viagem.
+nar {A} . Foi a única vez em dezenove anos de serviço que ele deixou de escrever um.
+--- {B}
+nar {B} . Curso de gente que vai administrar casa grande. Ele anotou como escolha de família e passou adiante.
+--- {C}
+nar {C} . Curso de gente que pretende sair. Ele reparou nisso e não soube o que fazer com o reparo.
+---
+nar . No rodapé, a folha trazia a observação de praxe sobre o regime interno.
+### CARTAO cadastro "— Academia de Eldoria · matrícula —"
+  | Residência obrigatória em recinto da Academia durante o ciclo integral.
+  | A Academia responde pelo desenvolvimento do aluno até a titulação.
+---
+nar . Ele leu a linha inteira sem entender que estava lendo um cronograma.
+### CENA ep_asa "A asa"  bg=bg_prologue_room bgm=-
+@ spr matheo read center
+nar . Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.
+nar . Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.
+nar . Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.
+nar . Ele pediu ao arquivo central a cópia de consulta do Livro-Razão. A ficha de empréstimo veio presa à contracapa.
+nar . O couro tinha perdido o cheiro de cavalo. Continuava pesando mais do que devia.
+---
+nar . Procurou a entrada das borboletas para conferir uma data e abriu direto na dobra certa, sem contar páginas.
+---
+nar . A asa continuava lá. Clara, com uma veia vermelha atravessando.
+nar . Sete anos colada ao papel e a veia não tinha desbotado.
+---
+nar . Ele pôs o dedo ao lado dela, sem tocar.
+---
+inn . Ela prensou isto de propósito.
+---
+inn . Ela não prensava nada de propósito. Ela transcrevia.
+---
+nar . A luz atravessou a página até tocar a asa. Ele continuava com o dedo ao lado dela.
+---
+nar . Depois voltou à folha de aviso e escreveu a resposta que a Ordem esperava.
+### CARTAO lervel "— M. Drell · resposta ao alerta —"
+  | Nada a apurar. Ingresso regular em instituição de ensino.
+  | Manter o alerta ativo.
+### CARTAO lervel "— M. Drell · resposta ao alerta —"
+  | Nada a apurar. Ingresso regular em instituição de ensino.
+  | Solicito visita de rotina à Academia dentro do prazo ordinário.
+### CARTAO lervel "— M. Drell · resposta ao alerta —"
+  | Nada a apurar. Ingresso regular em instituição de ensino.
+  | Solicito informação sobre o calendário de agosto da instituição.
+---
+nar . Assinou, datou, pôs na bandeja de saída.
+---
+nar . Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o nó.
+nar . Guardou na terceira gaveta.
+nar . Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o nó.
+nar . Guardou na terceira gaveta.
+nar . Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o nó.
+nar . Guardou na terceira gaveta.
+nar . Fechou o Livro-Razão, assinou a devolução e deixou o volume na bandeja do arquivo central.
+---
+nar . Levantou.
+---
+@ spr matheo hollow center
+nar . Na janela ainda havia luz de maio, e ele reparou que era uma boa tarde.
+---
+nar . Era.
+@ spr_hide matheo
+@ fade_out
+### CENA ep_oque_ficou "O que ficou"  bg=bg_prologue_room bgm=-
+nar . A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.
+### CARTAO ficha "— Velha Nidhaus · livro de pessoal —"
+  | VAEL, Antoniette. Baixa: agosto, ano cinco.
+  | 
+  | Motivo de saúde.
+inn . Eu já li esta linha.
+inn . Numa outra ficha, com outro nome, uma semana antes de assinar a dela.
+nar . Ele pôs as duas folhas lado a lado. A caligrafia era a mesma, com trinta e sete anos de diferença.
+nar . Depois virou as duas para baixo, uma em cima da outra.
+---
+nar . Ela chegou até a floresta. É mais longe do que qualquer outra pessoa chegou em cinco séculos, e ninguém nunca vai saber disso.
+nar . Ele nunca pediu a ficha de pessoal dela, porque não havia baixa nenhuma para pedir.
+---
+nar . O material dela entrou no tribunal em quatro meses e saiu em nove, julgado improcedente por ausência de terceiro lesado.
+nar . Não faltou prova. Faltou parte.
+---
+nar . Matheo leu a decisão no ano seis e concordou com o enquadramento, porque o enquadramento estava correto.
+---
+nar . A folha de aviso da Academia chegou seis anos depois disso, e ele a leu como boa notícia.
+inn . Duas linhas. As duas entraram.
+---
+nar . A sala de Antoniette ficava dois andares abaixo daquele gabinete, e ela leu a mesma folha na segunda-feira seguinte, por dever de ofício.
+nar . Anotou a data de ingresso na entrada 251 e fechou o caderno.
+nar . A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.
+### CARTAO ficha "— Velha Nidhaus · livro de pessoal —"
+  | VAEL, Antoniette. Baixa: agosto, ano cinco.
+  | 
+  | Motivo de saúde.
+---
+nar . A última página do Arquivo é uma coluna de três valores, com data ao lado de cada um.
+nar . Matheo conferiu a subtração, porque ele confere toda subtração. Fechava.
+---
+nar . Embaixo do total havia uma linha em que ela julgava a si mesma, e era a única do documento inteiro.
+---
+nar . Ele ficou com a folha na mão sem saber o que se faz com uma conta que fecha.
+---
+nar . Seis anos depois, o cadastro trouxe duas linhas, e ele não voltou à página duzentos e oitenta e sete para conferir de novo.
+nar . Duzentas e quarenta e uma páginas. Ele contou, como conta tudo, e a numeração fechava.
+nar . Faltava metade das plantas e todos os horários de guarda depois de julho, e nada disso estava marcado como falta.
+---
+nar . O tribunal indeferiu em quatro meses, e não precisou nem das quatro páginas.
+---
+nar . A página duzentos e quarenta e um terminava com a data escrita na margem do livro de saída.
+inn . Ela achou a linha antes de morrer.
+---
+nar . A ficha de pessoal e o caderno davam a mesma data.
+nar . Nenhum dos dois dizia que Carmine estava diante da porta.
+@ fade_out
+### CENA ep_cantiga "A cantiga"  bg=bg_black bgm=-
+---
+### CARTAO balada "— cantiga da Marca —"
+  | Cantai, cantai, as filhas do pacto,
+  | uma nasce casulo, uma nasce intacta,
+  | cantai, cantai, o ciclo que não para,
+  | a que dorme na casca, a que sai pela clara,
+  | 
+  | cantai, cantai, e não perguntai nada,
+  | que as duas vão juntas pela mesma estrada,
+  | uma leva a outra e nenhuma repara,
+  | cantai, cantai, o ciclo que não para.
+---
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Seis anos depois de Velha Nidhaus.', line2:'Duas matr\u00edculas, mesma turma.', chapter:'epilogo', completes:true },
+@@@ { t:'title', main:'ARQUIVO RABENFELS', sub:'"V\u00e1 mais r\u00e1pido do que eu fui."', time:'Fim.', if:{ rota:'esperanca' } },
+@@@ { t:'title', main:'ARQUIVO RABENFELS', sub:'"As duas foram sobre m\u00e9todo."', time:'Fim.', if:{ rota:'resposta' } },
+@@@ { t:'title', main:'ARQUIVO RABENFELS', sub:'"O erro \u00e9 do Compilador e a data dele \u00e9 maio."', time:'Fim.', if:{ rota:'perda' } },
+@@@ { t:'title', main:'ARQUIVO RABENFELS', sub:'"A linha estava correta."', time:'Fim.', if:{ rota:'cobertura' } },
+@ fade_out

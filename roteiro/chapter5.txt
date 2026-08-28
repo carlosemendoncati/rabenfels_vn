@@ -1,0 +1,222 @@
+# chapter5 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter5
+
+ANTONIETTE . Eu estava lá.
+nar . Klara não perguntou por quê. Não perguntou o que ela viu.
+---
+KLARA . Eu sei.
+ANTONIETTE . Você mentiu para a senhora Rabenfels por minha causa.
+KLARA . Menti.
+---
+ANTONIETTE . Não faça isso de novo.
+nar . Klara olhou para o corrimão, depois para Antoniette. Levou duas respirações.
+KLARA . Tudo bem.
+@ spr_hide klara
+---
+inn . Ela disse "tudo bem" e não disse "não faço".
+inn . Nove anos, e já sabe a diferença.
+nar . Antoniette agradeceu o recado sobre o horário do jantar e subiu.
+---
+nar . Klara ficou no pé da escada um pouco depois de a conversa acabar.
+@ spr_hide klara
+inn . Ela esperou eu dizer alguma coisa.
+inn . E eu deixei o assunto fechar sozinho, que é o que se faz com um assunto que não convém.
+---
+nar . Na semana seguinte a menina parou de aparecer na biblioteca de manhã.
+nar . Voltou depois de nove dias, e nenhuma das duas mencionou os nove dias.
+inn . Eu economizei uma conversa e paguei nove.
+ANTONIETTE . Eu não estava na ala norte.
+nar . Klara olhou para ela pelo tempo de uma respiração inteira.
+---
+KLARA . Está bem.
+nar . E foi embora sem discutir, porque ela nunca discutia.
+@ spr_hide klara
+---
+inn . Ela sabe que eu estava. Ela me viu descer.
+inn . E aceitou a versão.
+---
+inn . Foi a primeira coisa que eu ensinei a ela nesta casa.
+@@@ { t:'chap', num:'CAP\u00cdTULO 5', name:'A C\u00c2MARA', chapter:'capitulo5' },
+@ fade_out
+### CENA c5_fevereiro "Fevereiro"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . Em fevereiro a casa encolhe. Fecham três quartos do lado oeste e a criadagem inteira dorme mais perto da cozinha.
+nar . O corredor da biblioteca fica com a temperatura do pátio. Antoniette catalogava de luva cortada nos dedos.
+---
+nar . Na terceira semana o gelo rachou a canalização do telhado leste, e a água desceu por dentro da parede.
+@ spr dara neutral center
+DARA . A senhorita não vai ter luz na biblioteca hoje. Fenn levou o rapaz e as duas escadas.
+ANTONIETTE . Por quantos dias?
+DARA . Três, se tiver sorte.
+@ spr_hide dara
+inn . Três dias com Fenn no telhado e Ren segurando escada.
+---
+inn . A casa inteira olhando para cima.
+### CENA c5_corrente "A corrente"  bg=bg_nidhaus_gate bgm=-
+nar . Ela atravessou o pátio às seis, de propósito, para olhar a porta nordeste com a luz de fim de tarde.
+nar . A corrente estava lá, no puxador, sem cadeado, como estava em abril do ano anterior.
+---
+nar . Em abril havia quatro elos pendurados abaixo do puxador. Ela tinha anotado quatro.
+nar . Agora havia dois.
+---
+inn . Alguém encurtou a corrente.
+inn . Encurtar não tranca nada. Só faz o barulho ficar diferente.
+nar . Ela passou o dedo pelo elo mais baixo. Saiu graxa fresca.
+---
+inn . Engraxam o portão toda semana. Engraxam isto também.
+inn . Ninguém engraxa o que não usa.
+nar . A pedra esfriou pelas solas antes de ela voltar para dentro. Ninguém apareceu no pátio.
+inn . Aquilo ali serve para saber que alguém entrou.
+---
+inn . Foi o que eu escrevi no primeiro dia. Está certo e está incompleto.
+inn . Serve para saber quem, e serve para o quem saber que sabem.
+### CENA c5_conta "A conta"  bg=bg_antoniette_room bgm=-
+nar . À noite ela abriu o caderno operacional numa página em branco e escreveu duas colunas.
+### CARTAO caderno "— Caderno Operacional — sem número —"
+  | CONTRA: a corrente registra passagem. Entrar = constar.
+  | CONTRA: dez meses de cobertura. Substituição leva um ano.
+  | CONTRA: nenhuma instrução da Ordem autoriza isto.
+  | A FAVOR: três dias de telhado. Não haverá outra janela em fevereiro.
+  | A FAVOR: o dossiê tem quarenta páginas e nenhuma planta do lado norte.
+nar . O ponto de tinta no fim da terceira linha secou enquanto ela comparava as colunas.
+inn . Três contra e dois a favor.
+---
+nar . Riscou a página inteira e arrancou a folha.
+inn . Eu não estava pesando. Estava procurando permissão.
+---
+nar . Queimou a folha na vela e esperou a cinza esfriar antes de largar no prato.
+inn . Quem escreve os contras primeiro já decidiu.
+### CENA c5_dentro "Dentro"  bg=bg_black bgm=bgm_camara
+@@@ { t:'sfx', id:'sfx_door' },
+nar . A corrente saiu do puxador sem ruído nenhum, o que ela já esperava.
+nar . A porta abriu para dentro e o ar que veio de lá era morno.
+---
+inn . Morno.
+inn . Está fazendo dois graus no pátio e este corredor está morno.
+nar . Ela fechou a porta atrás de si porque deixar aberta era pior.
+nar . A vela iluminou dois metros. Depois disso, a luz morria na parede sem voltar para o chão.
+nar . Os passos dela não voltaram. Nenhum eco, em pedra, num corredor estreito.
+---
+inn . Alguém forrou estas paredes.
+nar . Cheirava a sabão de soda e a metal limpo. Cheirava como a copa depois que Dara termina.
+inn . Eu esperava mofo.
+@@@ { t:'sfx', id:'sfx_footsteps' },
+nar . A sala do fim era retangular e não tinha janela.
+nar . Uma mesa de aço no centro, escovada, com o dreno da borda voltado para um balde vazio.
+nar . Duas cadeiras. Uma de altura normal, e outra baixa, de criança, encostadas uma de frente para a outra.
+---
+nar . Sobre a mesa, um pano de bordado dobrado em quatro. Ponto miúdo, feito à mão, com um canto por terminar.
+inn . Alguém borda enquanto espera.
+nar . Prateleira com frascos etiquetados em letra de escritório, alinhados pelo rótulo.
+nar . Um livro de registro aberto, com a caneta atravessada na dobra.
+---
+nar . Ela leu a página aberta e não entendeu uma palavra. Eram colunas de número e uma abreviação repetida.
+inn . Isto é uma planilha.
+inn . Não é grimório, não é altar. É planilha.
+### CENA c5_parede "A parede"  bg=bg_black bgm=-
+nar . A parede do fundo tinha marcas a lápis, do chão até a altura do ombro dela.
+nar . Traço curto, data ao lado, letra diferente a cada punhado de anos.
+---
+inn . Marcam a altura das crianças.
+nar . Ela chegou mais perto com a vela.
+nar . As marcas vinham em pares. Sempre duas na mesma data, uma ao lado da outra, a poucos dedos de distância.
+---
+nar . Ela seguiu um par com o dedo, subindo.
+nar . As duas colunas subiam juntas, ano a ano, com a diferença de sempre.
+---
+nar . Uma delas parava.
+nar . A outra continuava por mais seis anos.
+---
+nar . Ela procurou o par seguinte, à esquerda.
+nar . Uma parava.
+---
+nar . O par seguinte.
+nar . Uma parava.
+---
+nar . Ela contou os pares de trás para a frente, com a vela na altura do rosto.
+nar . Nove.
+---
+nar . O último par era recente. A tinta do lápis ainda não tinha escurecido.
+nar . As duas colunas subiam juntas, e as duas continuavam.
+---
+nar . Antoniette copiou as datas para o punho da própria manga, com a ponta da unha, porque não tinha trazido lápis.
+nar . Saiu sem tocar em mais nada.
+### CENA c6_patio_noite "O pátio"  bg=bg_nidhaus_gate bgm=-
+@@@ { t:'sfx', id:'sfx_door' },
+nar . Ela recolocou a corrente no puxador com os mesmos dois elos pendurados.
+---
+nar . No outro canto do pátio havia luz numa janela do primeiro andar.
+nar . O quarto das gêmeas.
+---
+@ spr klara neutral center
+nar . Na janela, uma silhueta de criança, parada, com a testa encostada no vidro.
+nar . Ficou ali enquanto Antoniette atravessava o pátio, e não se moveu quando ela olhou para cima.
+@ spr_hide klara
+---
+nar . A luz apagou antes de ela chegar à porta da cozinha.
+inn . Ela estava acordada à uma e vinte da manhã, de pé, na janela que dá para aquela porta.
+---
+inn . Isso não foi hoje.
+inn . Isso é o que ela faz.
+### CENA c5_mentira "O recado"  bg=bg_main_hall bgm=bgm_nidhaus
+nar . Na manhã seguinte Serafina desceu antes das oito, o que não fazia.
+@ spr serafina direct right
+@ spr klara neutral center
+SERAFINA . Você levantou de noite.
+KLARA . Levantei.
+SERAFINA . Por quê?
+---
+KLARA . Liara estava roncando.
+nar . Antoniette estava no meio da escada com dois volumes, e parou onde estava.
+inn . Liara não ronca. Eu durmo do outro lado do mesmo corredor há dez meses.
+---
+SERAFINA . Você viu alguém no pátio?
+nar . A menina não olhou para a escada. Nem um grau.
+---
+KLARA . Não.
+@ spr serafina neutral right
+SERAFINA . Está bem. Come.
+nar . Serafina puxou a cadeira e começou o café. Não repetiu a pergunta.
+@ spr_hide serafina
+---
+inn . Ela não insistiu porque não precisava.
+inn . A corrente já contou.
+---
+inn . A pergunta não era sobre o pátio. Era sobre a menina.
+inn . E a menina mentiu.
+@@@ { t:'cho', id:'cap5_camara', code:'C-V', prompt:'O RECADO', opts:[ { id:'C', tx:'Dizer a ela que estava l\u00e1. E que n\u00e3o fa\u00e7a isso de novo.', flags:{ told_klara:'C', klara_covered:true, entered_chamber:true }, routes:{ hope: 2, loss: 1 }, then: C5_KLARA_C }, { id:'A', tx:'N\u00e3o tocar no assunto. Deixar fechar sozinho.', flags:{ told_klara:'A', klara_covered:true, entered_chamber:true }, routes:{ loss: 2 }, then: C5_KLARA_A }, { id:'B', tx:'Negar. Dar a ela uma vers\u00e3o que a proteja de saber.', flags:{ told_klara:'B', klara_covered:true, entered_chamber:true }, routes:{ answer: 1, loss: 1 }, then: C5_KLARA_B } ]},
+### CENA c5_registro "O que a casa fez"  bg=bg_antoniette_room bgm=-
+nar . Nos onze dias seguintes ninguém disse uma palavra sobre a ala norte.
+nar . O contrato dela não foi mencionado. O trabalho seguiu. Serafina cumprimentou como cumprimentava.
+---
+nar . No décimo segundo dia, a chave da biblioteca passou a ficar com Ren.
+nar . Ninguém avisou. Ela descobriu ao pedir a chave a Dara e Dara apontar o rapaz com o queixo.
+---
+inn . Não me tiraram nada. Só puseram uma pessoa entre mim e a porta.
+inn . Um rapaz de dezoito anos que não faz a segunda pergunta.
+nar . À noite ela copiou do punho da manga para o caderno as nove datas da parede, antes que suassem.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Ala norte, sala do fim: mesa com dreno, duas cadeiras, prateleira etiquetada.
+  | Parede do fundo: marcas de altura em pares, nove pares, com data.
+  | Em cada par, uma coluna interrompe. A outra segue por seis anos ou mais.
+  | O último par é recente e as duas colunas seguem.
+nar . Ela leu a última linha três vezes e não escreveu nada abaixo dela.
+---
+inn . Nove pares. Nove gerações. Os retratos do corredor.
+inn . Uma para de crescer e a outra continua.
+---
+inn . Isso é a única coisa que eu sei, e não sei o que ela significa.
+nar . Antes de deitar, foi até a porta do quarto das gêmeas e ficou um momento no corredor.
+nar . A menina dorme do lado da parede. A irmã, do lado da janela.
+inn . Posição habitual. Serve para notar mudança.
+---
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . Apagou a vela. Às três, ainda sabia de que lado da parede a menina dormia.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Segundo inverno em Velha Nidhaus.', line2:'A casa n\u00e3o a puniu. Anotou.', chapter:'capitulo5' },
+@ fade_out

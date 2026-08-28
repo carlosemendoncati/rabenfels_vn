@@ -1,0 +1,163 @@
+# res11 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar res11
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 11', name:'A ENTRADA 214', chapter:'res11', if:R },
+@ fade_out
+### CENA res11_vela "Quatro da manhã"  bg=bg_library_night bgm=bgm_camara
+@ fade_in
+@ spr antoniette guarded center
+nar . Ela levou a entrada 214 para a biblioteca às quatro, para conferir contra as entradas 38, 91 e 160.
+nar . As quatro descrevem o mesmo procedimento, com dezesseis anos entre a primeira e a última.
+---
+inn . A duração estimada da 160 errou por vinte e seis minutos.
+inn . Esta não vai errar por vinte e seis.
+---
+nar . Ela acendeu a segunda vela e a primeira apagou.
+nar . Não havia corrente de ar na biblioteca. Ela conferiu as janelas em março e anotou.
+---
+@@@ { t:'sfx', id:'sfx_candle', if:R },
+nar . A segunda vela continuou acesa.
+---
+VOZ . Você escreve muito depressa para quem escreve à mão.
+---
+@ spr antoniette shaken center
+nar . A voz vinha da altura errada. Vinha da altura de alguém sentado, e não havia cadeira daquele lado.
+---
+ANTONIETTE . Khar’Vel.
+---
+VOZ . Esse não é o meu nome. Mas você inventou bem. Serve.
+---
+nar . Antoniette puxou o caderno para perto e virou para uma folha limpa.
+---
+VOZ . Você vai anotar.
+ANTONIETTE . Vou.
+---
+VOZ . Então sente. Fica melhor sentada.
+nar . Ela sentou e puxou o caderno para o centro da mesa.
+### CENA res11_conferencia "A conferência"  bg=bg_library_night bgm=-
+VOZ . Cinco anos. Ela lê mais rápido. Corrige adulto sem constranger ninguém.
+---
+VOZ {A} . E confere fonte. Nunca acredita em uma só. Isso foi você.
+VOZ {B} . E a forma toda. Postura, protocolo, a etiqueta inteira. Isso foi você.
+VOZ {C} . E o mundo inteiro pela biblioteca. Ela sabe o nome de portos onde nunca esteve. Isso foi você.
+---
+nar . Antoniette anotou a frase inteira, com aspas, e a hora na margem.
+---
+VOZ . Ela te chama de quê?
+ANTONIETTE . Senhorita.
+VOZ . Na frente dos outros. E quando não tem ninguém.
+ANTONIETTE . Senhorita. Nos dois.
+---
+nar . A irmã dizia Toni desde o primeiro mês. Klara nunca disse, uma vez sequer, em cinco anos.
+---
+VOZ . Quantas vezes ela procurou você sem precisar de nada?
+---
+nar . Antoniette abriu o índice do caderno, porque ela tinha índice, e procurou a entrada.
+---
+ANTONIETTE . Quatro. Está registrado. Três em ano dois e uma em ano três.
+---
+VOZ . Quatro.
+---
+nar . A vela não oscilou.
+---
+VOZ . Em cinco anos.
+---
+nar . Antoniette esperou o resto da frase e anotou a ausência do resto da frase.
+---
+VOZ . Ela já falou de mim com você?
+nar . Antoniette procurou na memória e depois no índice, e não achou nas duas.
+ANTONIETTE . Nenhuma vez em cinco anos.
+---
+VOZ . Eu sei.
+---
+nar . A resposta veio depois de uma pausa. Todo o resto tinha vindo sem pausa.
+### CENA res11_idade "Dentro da margem"  bg=bg_library_night bgm=-
+VOZ . Você escreveu duzentas e catorze entradas sobre ela.
+---
+VOZ . Eu li todas. Levou uma hora.
+---
+nar . Antoniette anotou "leu o caderno" e depois riscou, porque o caderno estava na mão dela.
+---
+VOZ . A idade está errada na 214. Ela já tinha doze.
+---
+nar . Antoniette abriu na 214 ali mesmo, com a vela em cima do papel, e conferiu.
+---
+nar . Estava errada.
+---
+@ spr antoniette neutral center
+inn . Um erro em duzentas e catorze entradas.
+---
+inn . Está dentro da margem.
+---
+nar . Ela corrigiu o número com a mesma pena, pôs a rubrica ao lado da emenda como manda o manual, e seguiu para o assunto seguinte.
+---
+VOZ . Você não perguntou como eu sei o mês.
+---
+ANTONIETTE . Não interessa ao registro.
+---
+nar . A resposta estava correta.
+### CENA res11_porta "A porta"  bg=bg_library_night bgm=-
+ANTONIETTE . O que você quer.
+VOZ . Que você pare.
+---
+ANTONIETTE . Parar o quê?
+---
+nar . A pergunta foi sincera. Ela passou o caderno em revista procurando o que havia para parar.
+---
+VOZ . Nada. Eu vim conferir, e conferi.
+---
+nar . A porta da biblioteca ficou fechada a noite inteira.
+---
+VOZ . Ela dorme mal em agosto. Nunca procurou você por causa disso.
+---
+nar . Antoniette anotou aquilo e pôs um ponto de interrogação na margem, porque não sabia em que coluna aquilo entrava.
+---
+CARMINE . Carmine.
+---
+nar . Antoniette tinha passado cinco anos batizando aquilo por conta própria.
+---
+nar . Ela escreveu o nome no alto da folha, em letra de forma, e sublinhou duas vezes.
+---
+CARMINE . Boa noite, escriba.
+---
+@@@ { t:'sfx', id:'sfx_candle', if:R },
+nar . A vela apagou e acendeu de novo.
+nar . Antoniette ficou olhando para a cadeira que não existia daquele lado da mesa.
+---
+inn . Ela não me deu prazo.
+---
+inn . Nas outras casas há prazo. Está nos registros da Ordem, em três casos.
+---
+nar . Ela anotou a ausência do prazo e não conseguiu escrever o que ela significava.
+@ spr_hide antoniette
+### CENA res11_fecho "Sete e dez"  bg=bg_antoniette_room bgm=-
+nar . A entrada 214 foi fechada às sete e dez.
+---
+nar . A duração estimada errou por nove minutos, contra vinte e seis da entrada 160.
+---
+inn . É a melhor margem das quatro.
+---
+nar . Ela pôs a data, a hora e a rubrica, e fechou o caderno com as duas mãos.
+---
+nar . Depois desceu para o café, porque às sete e meia ela descia para o café.
+---
+@ spr liara bright right
+nar . Liara já estava na copa e falou de Eldoria por onze minutos.
+nar . A cadeira do outro lado dela estava vazia, e Liara não olhou para a cadeira uma vez sequer.
+@ spr_hide liara
+---
+nar . Klara desceu às oito e vinte, com os lábios sem cor e as mãos firmes na mesa, e comeu.
+---
+nar . Antoniette anotou a hora da descida e o estado, e a anotação está na entrada 215.
+---
+nar . E Antoniette, que tinha cinco anos de registro e uma memória treinada para durações, não conseguiu dizer, depois, se a menina tinha olhado para ela ao entrar.
+---
+nar . Ela deixou o campo em branco. É o único campo em branco das duzentas e quinze entradas.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Dez de agosto, sete e dez.', line2:'Nove minutos de margem.', chapter:'res11', if:R },
+@ fade_out

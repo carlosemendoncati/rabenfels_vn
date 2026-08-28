@@ -1,0 +1,79 @@
+# cob10 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar cob10
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 10', name:'A PORTA', chapter:'cob10', if:R },
+@ fade_out
+### CENA cob10_agosto "Terceiro dia"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . Vieram no dia três. A margem do caderno guardava quatro datas anteriores; nenhuma era tão cedo.
+nar . A tinta do número três secou com a pena ainda suspensa.
+---
+@ spr dara guarded center
+nar . Dara encheu a caneca e não sentou do outro lado da mesa, o que ela fazia havia cinco anos.
+DARA . A copa fecha às seis esta semana.
+ANTONIETTE . Às seis?
+DARA . Ordem da senhora.
+---
+nar . Dara levou a caneca para a pia sem beber, e a pia ficava atrás de Antoniette.
+nar . Ela deu a volta pelo lado comprido da mesa para chegar lá.
+@ spr_hide dara
+---
+inn . Ela conta a prataria toda noite e nunca deu a volta na mesa em cinco anos.
+---
+inn . A cozinha fecha primeiro. Depois fecham o resto.
+### CENA cob10_serafina "Nove da noite"  bg=bg_main_hall bgm=-
+nar . Serafina mandou chamá-la às nove da noite do dia oito.
+nar . Em cinco anos, Serafina nunca tinha mandado chamá-la depois do jantar.
+@ spr serafina grave right
+---
+SERAFINA . A carruagem sai amanhã às seis. Já está arranjada.
+---
+ANTONIETTE . Eu não pedi carruagem.
+SERAFINA . Não pediu.
+---
+nar . Antoniette esperou a acusação. Contou até dez esperando a acusação.
+---
+SERAFINA . A senhorita trabalhou bem aqui. Vou escrever isso a quem pedir.
+---
+ANTONIETTE . O contrato vai até dezembro.
+SERAFINA . Vai. Os dois meses de aviso estão pagos, e o resto também.
+---
+nar . Ela disse o valor exato. Estava certo, e incluía o mês que ainda não tinha sido trabalhado.
+---
+ANTONIETTE . A senhora quer me dizer alguma coisa?
+---
+nar . Serafina deixou passar uma respiração antes de responder.
+SERAFINA . Quero desejar boa viagem.
+---
+nar . A voz não tinha ironia. Antoniette procurou e não encontrou.
+@ spr_hide serafina
+---
+nar . Não houve acusação. Não houve a palavra Ordem. Não houve nada que ela pudesse contestar.
+### CENA cob10_malas "O forro do baú"  bg=bg_antoniette_room bgm=bgm_archive
+@ spr antoniette shaken center
+nar . Ela arrumou as duas malas e o baú de ferramentas na ordem de sempre.
+nar . O caderno sem identificação foi no forro, onde tinha ficado quatro anos.
+---
+inn . Faltavam nove horas.
+---
+nar . Depois sentou na beira da cama e refez o caminho de trás para a frente, item por item.
+---
+@@@ { t:'percurso', id:'cob10_inventario', chapter:'cob10', campo:'cob_saida', conta:'cob_apurou', sets:{ cob_conferiu:true }, naoConta:['cob_vista'], padrao:'carmine', if:R },
+### CENA cob10_terceira "A terceira contagem"  bg=bg_black bgm=-
+@ fade_in
+nar . A vela bateu no piso primeiro. O vidro não quebrou.
+---
+nar . O caderno caiu aberto na página duzentos e quarenta e um.
+nar . Carmine pôs o pé sobre a mão que ainda segurava a capa.
+---
+nar . O primeiro estalo veio do indicador. Os dedos soltaram no segundo.
+---
+nar . A porta do pátio estava a quatro passos.
+nar . Antoniette alcançou a primeira tábua. Carmine puxou pelo tornozelo antes da segunda. O joelho bateu na soleira. Depois o rosto. Na segunda tentativa de puxar ar, não saiu som.
+@ fade_out
+@@@ { t:'end_chap', line1:'A carruagem saiu \u00e0s seis.', line2:'Antoniette n\u00e3o chegou ao p\u00e1tio.', chapter:'cob10', if:R },
+@ fade_out

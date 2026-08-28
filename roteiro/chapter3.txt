@@ -1,0 +1,295 @@
+# chapter3 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter3
+
+ANTONIETTE . Não é uma coisa que eu possa resolver.
+nar . Klara considerou a frase pelo tempo de uma respiração.
+KLARA . Tudo bem.
+nar . Voltou para o livro e virou a página no ritmo de antes.
+---
+inn . Ela não insistiu. Não fez cara feia. Não pediu de outro jeito.
+inn . Aceitou sem protestar. Nem perguntou quando aquilo mudaria.
+@ spr_hide klara
+---
+nar . Antoniette esperou no corredor mais um pouco, sem motivo declarado.
+inn . Ela não vai pedir de novo.
+nar . E não pediu.
+ANTONIETTE . Asa clara. Do tamanho da sua mão aberta.
+nar . Klara fechou o livro no dedo e olhou para cima.
+ANTONIETTE . A asa tem veias vermelhas, de um vermelho que não desbota com a luz. Voam baixo até as nove e depois sobem.
+ANTONIETTE . Não fazem barulho. Perto do poço dá para ouvir, mas é preciso estar perto.
+---
+KLARA . Que barulho?
+ANTONIETTE . Papel fino. Bem devagar.
+nar . Klara repetiu a última parte em voz baixa e contou nos dedos.
+---
+@ spr_hide klara
+inn . Eu dei a ela um registro no lugar da coisa.
+inn . Guardou o registro porque era o único pedaço que podia levar.
+ANTONIETTE . Elas ficam até o sol baixar. Depois das sete a luz não incomoda ninguém.
+---
+nar . Klara não respondeu na hora. Marcou a página com o dedo, fechou o livro e só então olhou.
+KLARA . Sete e meia é melhor.
+ANTONIETTE . Sete e meia, então.
+@ spr_hide klara
+---
+inn . Ela já tinha pensado no horário.
+inn . Sabia a que horas o sol baixa, e nunca precisou saber disso para nada.
+---
+nar . Antoniette desceu para o pátio. O ponteiro avançou duas marcas antes de ela sair.
+@@@ { t:'chap', num:'CAP\u00cdTULO 3', name:'AS DUAS KLARA', chapter:'capitulo3' },
+@ fade_out
+### CENA c3_copa "Antes do sol"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . Em agosto a copa acorda mais cedo. Às cinco e meia o fogo já estava alto e o ar cheirava a fumaça e a pão da véspera.
+nar . Antoniette desceu de avental, com o inventário debaixo do braço, como descia havia quatro meses.
+@ spr dara neutral center
+nar . Dara encheu a caneca antes de ela sentar.
+DARA . Hoje elas vêm.
+ANTONIETTE . Quem?
+nar . A cozinheira apontou o queixo para a janela e continuou mexendo a panela.
+---
+nar . Do lado de fora ainda estava escuro. Contra o vidro havia uma coisa parada, de asa clara, do tamanho de uma mão aberta.
+nar . A asa tinha veias vermelhas, e o vermelho não era de sangue nem de tinta. Era mais limpo que os dois.
+---
+ANTONIETTE . Elas têm nome?
+@ spr dara guarded center
+DARA . A gente da aldeia chama de as de agosto.
+ANTONIETTE . E aqui dentro?
+---
+DARA . Aqui dentro não se chama de nada.
+nar . Dara raspou a panela até não haver mais nada preso. Passou a colher outras três vezes.
+DARA . Uns dizem que é do rio. Que sobe do brejo quando a água baixa.
+DARA . Outros dizem que vem da floresta ao norte, e que sempre veio.
+ANTONIETTE . E a senhora, qual acha?
+---
+DARA . Eu acho que dura três semanas e passa.
+inn . Ela me deu duas versões e não escolheu nenhuma.
+inn . Quem não escolhe já ouviu as duas serem desmentidas.
+ANTONIETTE . Alguém mata?
+nar . Dara parou o braço.
+@ spr_hide dara
+---
+DARA . Ninguém mata.
+### CENA c3_patio "O pátio"  bg=bg_nidhaus_gate bgm=bgm_grey_march
+nar . O sol subiu por trás do morro às seis e vinte e o pátio inteiro mudou de cor.
+@@@ { t:'sfx', id:'sfx_wind' },
+nar . Elas estavam em todo lugar. Nas pedras, na corrente da porta nordeste, no varal, na crina dos cavalos.
+---
+nar . A luz passava pela asa e saía do outro lado. As veias vermelhas ficavam acesas por dentro.
+nar . Antoniette parou no meio do pátio. O café esfriou na caneca antes de ela voltar a andar.
+inn . É bonito.
+---
+inn . Anotar que é bonito serve para depois.
+@ spr fenn neutral left
+nar . Fenn atravessou o pátio com dois baldes e não desviou de nenhuma.
+nar . Duas subiram do chão quando ele passou e voltaram a pousar no mesmo lugar.
+ANTONIETTE . Elas não fogem.
+FENN . Não.
+ANTONIETTE . Fogem de gente na aldeia?
+---
+FENN . Nunca reparei.
+nar . Ele pousou os baldes e passou o polegar pelas juntas, uma a uma.
+FENN . Meu filho gostava. Quando era pequeno, corria atrás.
+ANTONIETTE . E agora?
+FENN . Agora tem catorze anos e quer ir embora daqui.
+---
+FENN . É o que dá tempo de conversa.
+@ spr_hide fenn
+nar . Levantou os baldes e seguiu para a cocheira, onde falou com o cavalo durante um bom tempo.
+inn . Ele me deu um dado sobre a família dele sem que eu pedisse.
+---
+inn . Homem treinado não faz isso por acaso. Ou ele quer alguma coisa, ou está cansado.
+inn . As duas dão no mesmo, com tempo.
+### CENA c3_registros "Os registros"  bg=bg_library bgm=bgm_archive
+nar . Ela subiu ao segundo andar antes das nove e puxou os volumes de registro por década.
+inn . Um fenômeno anual que dura três semanas aparece em algum lugar. Conta de pano, queixa de lavradeira, nota de despesa.
+inn . Basta achar a primeira menção e eu tenho a data.
+@@@ { t:'sfx', id:'sfx_page_turn' },
+nar . Trabalhou por agosto de cada ano, um por um, do mais recente para trás.
+---
+nar . Cinquenta.
+nar . Cento e vinte.
+nar . Trezentos.
+---
+nar . Agostos de trezentos anos. Nascimentos, mortes, colheita, telhado, imposto, o preço do sal.
+nar . Nenhuma linha sobre uma borboleta.
+---
+inn . Uma casa que registra o preço do sal não esqueceu de registrar isso.
+nar . Ela voltou aos volumes e procurou o contrário: não a menção, a lacuna.
+nar . Levou quarenta minutos para achar o padrão, e o padrão era simples.
+---
+nar . Nas três semanas de agosto os registros ficavam mais curtos. Todo ano. Em todos os punhos, ao longo de nove gerações.
+inn . Eles não param de escrever. Escrevem menos.
+---
+### CARTAO caderno "— Caderno Operacional — Entrada 23 —"
+  | Fenômeno anual, três semanas, agosto. Reconhecido pela população local.
+  | Denominação da aldeia: "as de agosto". Denominação da casa: nenhuma.
+  | Trezentos anos de registro doméstico sem uma única menção.
+  | Nas semanas do fenômeno, o volume de escrita cai. Consistente em nove gerações.
+inn . A ausência é o dado.
+nar . Ela devolveu os volumes pela numeração. Conferiu a sequência duas vezes.
+nar . A ronda das quatro e vinte era dela desde o segundo mês.
+nar . Atravessar o corredor de serviço e conferir o que a lista mandava conferir.
+---
+@@@ { t:'percurso', id:'c3_ronda', chapter:'capitulo3', campo:'c3_saida', conta:'c3_conferiu', padrao:'ronda' },
+nar . Ela assinou a quarta entrada do dia e devolveu a pena ao tinteiro da bancada.
+---
+### CENA c3_janela "A janela"  bg=bg_corridor bgm=-
+nar . No corredor leste a última porta estava entreaberta, como estava quase sempre.
+nar . Vinha cheiro de pão e uma corrente de ar mais fria que a do resto da casa.
+---
+@ spr liara neutral right
+@ spr klara neutral center
+nar . Liara estava de joelhos no peitoril, com o rosto quase no vidro.
+nar . A outra estava sentada de costas para a janela, lendo.
+LIARA . Tem uma bem aqui! Tem três! Tem uma no vaso!
+KLARA . Eu ouvi.
+LIARA . Você nem olhou.
+KLARA . Você falou o número.
+nar . Liara desceu do peitoril e voltou com as mãos em concha, vazias.
+LIARA . Eu ia pegar uma pra você.
+KLARA . E aí?
+---
+LIARA . A senhora Elke disse que não pode.
+KLARA . Por quê?
+LIARA . Ela não falou. Ela só disse que não pode.
+nar . Klara ficou um tempo com o dedo parado na linha.
+KLARA . Então descreve.
+LIARA . É bonita.
+KLARA . Isso não é descrever.
+LIARA . É branca. Com vermelho.
+---
+KLARA . Vermelho onde?
+LIARA . Sei lá. No meio.
+nar . Liara voltou para a janela e o assunto acabou para ela ali.
+nar . Klara olhou para a página e não virou.
+@ spr_hide liara
+---
+inn . Ela pediu de dois jeitos diferentes e não conseguiu nenhum dos dois.
+inn . E não reclamou de nenhum dos dois.
+---
+nar . Antoniette começou a andar e o assoalho entregou onde ela estava.
+### CENA c3_conversa "A conversa"  bg=bg_corridor bgm=-
+@ spr klara neutral center
+nar . Klara virou a cabeça na direção da porta e desta vez não voltou para o livro.
+---
+KLARA . A senhorita já viu?
+nar . Antoniette parou na soleira. Não entrou.
+inn . Preceptora entra. Catalogadora contratada não entra no quarto das filhas da casa.
+inn . E ela perguntou primeiro.
+---
+ANTONIETTE . Vi. De manhã, no pátio.
+KLARA . Quantas?
+ANTONIETTE . Não contei.
+---
+nar . Klara baixou os olhos para o livro. O dedo permaneceu na mesma linha.
+KLARA . Eu não posso sair de dia.
+ANTONIETTE . Eu sei.
+KLARA . A senhorita sabe por quê?
+---
+inn . Ela não está perguntando se eu sei o motivo.
+inn . Está perguntando se alguém já me contou.
+---
+ANTONIETTE . Me disseram que é o sol.
+KLARA . É o sol.
+nar . A resposta saiu pronta, sem alteração de voz.
+---
+nar . Depois fechou o livro no dedo, o que não tinha feito nenhuma vez até ali.
+KLARA . A senhorita pode olhar por mim?
+@@@ { t:'cho', id:'cap3_borboleta', code:'C-III', prompt:'O PEDIDO', opts:[ { id:'B', tx:'Descrever com precis\u00e3o. Dar a ela o registro exato do que existe l\u00e1 fora.', flags:{ klara_asked:'B', kept_apart:false }, routes:{ answer: 2, hope: 1 }, then: C3_BORBOLETA_B }, { id:'A', tx:'Recusar. Ela n\u00e3o \u00e9 preceptora, e uma catalogadora contratada n\u00e3o tem esse assunto.', flags:{ klara_asked:'A', kept_apart:true }, routes:{ loss: 2 }, then: C3_BORBOLETA_A }, { id:'C', tx:'Lev\u00e1-la ao p\u00e1tio depois das sete, quando o sol j\u00e1 tiver baixado.', flags:{ klara_asked:'C', kept_apart:false }, routes:{ hope: 2, loss: 1 }, then: C3_BORBOLETA_C } ]},
+nar . Ela desceu a escada de serviço, que era mais curta e menos usada.
+---
+inn . Em quatro meses, nenhuma das duas tinha dirigido uma pergunta a mim.
+inn . E fui eu que respondi. Não a preceptora, não a governanta.
+---
+inn . Isso vai ter de entrar no relatório de alguma forma.
+### CENA c3_entardecer "Sete e meia"  bg=bg_nidhaus_gate bgm=bgm_nidhaus
+nar . Às sete e meia o pátio ficou de um laranja que não durou dez minutos.
+nar . As borboletas subiram das pedras todas ao mesmo tempo, sem que nada as espantasse.
+nar . Klara desceu com um xale que não precisava e parou na altura da fonte.
+nar . Não correu atrás de nenhuma. Ficou de pé, no mesmo lugar, com as mãos ao lado do corpo.
+---
+nar . Uma pousou no ombro dela e ficou ali o tempo inteiro.
+nar . Klara não mexeu o ombro.
+---
+KLARA . Obrigada.
+nar . Subiu antes das oito, porque às oito a cozinha fecha e a casa repara em quem está fora.
+nar . Da janela do quarto leste dava para ver o pátio inteiro.
+nar . Na janela do lado oposto havia uma sombra parada, no escuro, sem vela acesa.
+---
+inn . Ela está olhando o pátio de um lugar onde não bate sol.
+inn . Com a descrição que eu dei.
+nar . A janela do quarto das gêmeas ficou fechada até o sol sumir.
+nar . Depois abriu, e não havia mais nada para ver.
+---
+inn . Ela esperou terminar para abrir.
+@@@ { t:'sfx', id:'sfx_footsteps' },
+nar . No pátio, Ren varria as pedras com uma vassoura de palha, devagar, desviando de cada uma.
+ANTONIETTE . Ren. Por que desviar?
+@ spr ren neutral right
+REN . Foi o que me mandaram.
+ANTONIETTE . Quem mandou?
+---
+REN . Ninguém, senhorita. É o jeito que se faz.
+@ spr_hide ren
+inn . Ele tem cinco meses de casa e já sabe o jeito que se faz.
+---
+inn . Alguém ensinou, e ensinou sem dizer por quê.
+### CENA c3_serafina "A conta dos volumes"  bg=bg_main_hall bgm=bgm_nidhaus
+@ spr serafina neutral right
+nar . Serafina a encontrou no salão, o que em quatro meses tinha acontecido duas vezes, as duas por escolha dela.
+SERAFINA . A senhorita avançou bem esta semana.
+ANTONIETTE . O lado oeste está fechado. Começo o segundo andar na segunda.
+@ spr serafina direct right
+SERAFINA . O segundo andar já foi mexido.
+---
+nar . Ela disse isso sem ênfase nenhuma, no meio de uma frase sobre outra coisa.
+SERAFINA . Trinta e um volumes de registro fora da ordem e recolocados na ordem certa. Bom trabalho.
+ANTONIETTE . Trinta e um.
+SERAFINA . Trinta e um.
+inn . Eu tirei trinta e um.
+inn . Contei porque conto tudo. Ela contou porque me contou.
+---
+@ spr serafina smirk right
+SERAFINA . A senhorita procurava alguma coisa em agosto.
+ANTONIETTE . Procurava uma referência a uma praga sazonal. Para a nota de conservação das encadernações.
+---
+nar . A resposta estava pronta havia três horas. Saiu no tempo certo, com o peso certo.
+SERAFINA . E encontrou?
+ANTONIETTE . Nada. Vou registrar como ausência de ocorrência.
+@ spr serafina neutral right
+SERAFINA . Registre.
+nar . Ela subiu a escada sem se despedir, o que era o costume da casa.
+@ spr_hide serafina
+---
+inn . Ela não perguntou por que eu procurava. Perguntou se eu encontrei.
+---
+inn . Quem pergunta isso já sabe que não há o que encontrar.
+### CENA c3_fim "Fim de agosto"  bg=bg_antoniette_room bgm=-
+nar . Duraram dezenove dias.
+nar . No vigésimo havia menos. No vigésimo primeiro, nenhuma.
+---
+nar . Não havia asa no chão, nem no peitoril, nem na corrente da porta nordeste.
+inn . Bicho que morre deixa corpo.
+nar . Ela procurou no pátio por vinte minutos e anotou o resultado.
+### CARTAO caderno "— Caderno Operacional — Entrada 31 —"
+  | Fenômeno encerrado no 21º dia. Duração: dezenove dias de ocorrência plena.
+  | Nenhum espécime morto localizado em pátio, peitoril, corrente ou cocheira.
+  | A criadagem retomou a limpeza normal do pátio na manhã seguinte.
+  | Sem instrução verbal registrada em nenhum momento do período.
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . Apagou a vela e permaneceu junto à janela até os olhos se ajustarem.
+---
+inn . Setembro. Depois outubro.
+nar . Ela abriu o calendário de campo e contou os meses até o próximo agosto.
+---
+inn . Onze.
+nar . Fechou o calendário sem escrever o número.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Primeiro agosto em Velha Nidhaus.', line2:'Faltam dois.', chapter:'capitulo3' },
+@ fade_out

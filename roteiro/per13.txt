@@ -1,0 +1,241 @@
+# per13 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar per13
+
+@@@ { t:'chap', num:'CAP\u00cdTULO 13', name:'O QUE ELA ANOTOU', chapter:'per13', if:R },
+@ fade_out
+### CENA per13_paginas "Quatro páginas"  bg=bg_archive_closeup bgm=bgm_archive
+@ fade_in
+@ spr antoniette away center
+nar . Ela escreveu até as três e meia sem parar para reler.
+nar . Duzentas e noventa e uma páginas numeradas, cinco anos, tudo o que servia.
+---
+inn . Se alguém usar isto, vai usar contra a casa.
+inn . E vai ler tudo. Inclusive o que eu fiz.
+---
+@@@ { t:'sfx', id:'sfx_page_turn', if:R },
+nar . A página de outubro do primeiro ano. O que ela viu no pátio e não mandou para a Ordem.
+nar . A página de outubro do primeiro ano. O que ela mandou para a Ordem, e o que a Ordem arquivou sem responder.
+inn . Três.
+---
+nar . A página da câmara. Ela desceu, viu, e subiu com uma criança de nove anos cobrindo a ausência dela no andar de cima.
+nar . Na margem, o que ela respondeu a Klara depois: nada. Deixou fechar sozinho.
+nar . Na margem, o que ela respondeu a Klara depois: uma versão limpa, feita para a menina não ter de carregar aquilo.
+nar . Na margem, o que ela respondeu a Klara depois: a verdade, e um pedido para não repetir.
+inn . Duas.
+---
+nar . A página de agosto do terceiro ano.
+nar . O relatório inteiro, com o que ela viu subir. Lervel recebeu tudo e respondeu em nove semanas mandando continuar observando.
+nar . O relatório com o episódio dado como de natureza indeterminada, sem testemunha direta. Ela foi a testemunha direta.
+nar . A página em que agosto não existe. Lervel recebeu o mês sem o mês dentro.
+inn . Uma.
+---
+nar . A página de Fenn.
+nar . Ela leu três vezes antes de arrancar. Na terceira, dobrou o canto.
+nar . Um homem foi útil a ela e ela negaria a fonte se perguntassem. Isso não cabia em coluna nenhuma.
+nar . Ela comprou o nome para levar a Lervel, e o nome era de um homem vivo. Isso não cabia em coluna nenhuma.
+nar . Ela recusou o nome e mandou o rapaz embora no mesmo dia. Ficou sem a prova e nunca soube se o menino chegou.
+---
+inn . Nenhuma.
+---
+nar . Quatro folhas na mão esquerda. Duzentas e oitenta e sete no maço.
+inn . A numeração vai continuar terminando em duzentos e noventa e um.
+inn . Quem contar vai ver.
+---
+@ spr antoniette guarded center
+inn . Bom. Que veja.
+---
+nar . Ela desceu ao escritório do barão com as quatro páginas e a chave que copiou no segundo ano.
+nar . O livro-caixa da casa tinha quatro folhas em branco no fim, como todo livro-caixa tem.
+nar . Ela pôs as quatro páginas no lugar delas e fechou a fivela.
+---
+nar . A janela do quarto de Aldric dava para aquele corredor. Estava fechada, e a noite continuava quente.
+---
+nar . Subiu. Faltava uma hora e quarenta para o amanhecer.
+### CENA per13_porta "Quatro e dez"  bg=bg_antoniette_room bgm=-
+nar . Klara bateu na porta do quarto do fundo às quatro e dez.
+nar . Ninguém tinha impedido a menina de andar pela casa naquela noite.
+---
+@ spr klara blank right
+@ spr antoniette guarded left
+KLARA . Eu não sei por que eu parei.
+---
+ANTONIETTE . Eu sei.
+---
+nar . Ela não sabia.
+---
+KLARA . A senhorita vai embora?
+ANTONIETTE . Vou.
+---
+KLARA . Quando?
+---
+nar . Antoniette tinha a resposta, e a resposta era hoje.
+---
+ANTONIETTE . Ainda não está marcado.
+---
+nar . Foi a primeira mentira que ela contou àquela menina em cinco anos.
+nar . Contou porque a verdade não servia para nada, e era a única coisa que ainda dava para dar a ela.
+--- {A}
+KLARA {A} . A senhorita conferiu?
+ANTONIETTE {A} . Conferi.
+--- {A}
+KLARA {A} . Em dois lugares?
+--- {A}
+ANTONIETTE {A} . Em dois lugares.
+--- {A}
+nar {A} . Duas.
+--- {B}
+KLARA {B} . Então eu não agradeço agora.
+ANTONIETTE {B} . Não precisa agradecer.
+--- {B}
+KLARA {B} . Precisa. Depois não vale.
+--- {B}
+nar {B} . Ela tinha dito a mesma coisa na carroça, seis horas antes, sobre outra pessoa.
+--- {C}
+KLARA {C} . A senhorita leva o livro do norte?
+ANTONIETTE {C} . Levo.
+--- {C}
+KLARA {C} . Marca a página da cidade em cima da água.
+--- {C}
+nar {C} . O livro estava na estante da biblioteca e ia continuar lá.
+---
+nar . Klara ficou na porta mais tempo do que uma resposta exige.
+---
+KLARA . Boa noite, senhorita.
+ANTONIETTE . Boa noite, Klara.
+---
+nar . Foi a última coisa que as duas disseram uma à outra.
+nar . As duas disseram do jeito que se diz todo dia.
+@ spr_hide klara
+@ spr_hide antoniette
+---
+@ fade_out
+### CENA per13_ultima "A última entrada"  bg=bg_antoniette_room bgm=-
+@ spr antoniette away center
+nar . Ela molhou a pena e não escreveu.
+nar . A caligrafia continuou firme quando finalmente saiu. O espaçamento não.
+---
+### CARTAO arquivo
+  | “Para quem encontrar isto.”
+  | “Não sei seu nome. Tanto faz.”
+---
+inn . Se eu deixar uma frase que só me alivia, Matheo vai ter de atravessar ela.
+nar . Ela escreveu a idade, a velocidade de leitura e o jeito de corrigir os outros em voz baixa.
+---
+nar . Parou.
+---
+inn . Isso não é informação operacional.
+---
+@ spr antoniette soft center
+inn . Deixa.
+---
+nar . Escreveu também que ela troca o saco de mão com a mão que já está carregando, para poupar a outra.
+nar . Isso também não servia para nada. Ficou.
+---
+nar . Depois escreveu as três linhas que custaram mais do que as duzentas e oitenta e sete páginas juntas.
+### CARTAO arquivo
+  | “Tentei tirá-la daqui.”
+  | “Fui metódica. Fui devagar.”
+  | “Foi o devagar que custou.”
+---
+nar . E a linha das quatro páginas, para quem contasse.
+### CARTAO arquivo
+  | “Tirei quatro páginas. Se você chegar até elas, vai entender por quê.”
+  | “Se não chegar, melhor.”
+---
+@ spr antoniette shaken center
+nar . Assinou com as iniciais, pôs o lugar e o mês, e não pôs o dia.
+---
+nar . Então virou duas folhas em branco e escreveu o nome dele no alto de uma página limpa.
+---
+### CARTAO arquivo
+  | “Matheo — se você estiver lendo isto, preciso de uma resposta que não posso pedir de outro jeito.”
+  | “Você sabia?”
+---
+nar . Deixou o resto da página em branco.
+### CENA per13_coluna "A última página"  bg=bg_archive_closeup bgm=-
+nar . Faltavam cinquenta minutos e ela já tinha fechado o documento.
+---
+nar . Ela abriu outra vez, no fim, e escreveu mais uma página.
+---
+### CARTAO arquivo "— página duzentos e oitenta e sete —"
+  | Maio, ano cinco. Solicitação de F., cocheiro-chefe: 3 moedas.
+  | Recusada. Avaliação: desnecessário.
+  | 
+  | Nove de agosto, 23h25. Porta da copa trancada.
+  | Desvio pelo pátio: 11 minutos.
+  | 
+  | Nove de agosto, 23h52. Ponto de encontro vazio.
+  | Espera do contratado, estimada: 10 minutos.
+  | 
+  | Diferença: 1 minuto.
+---
+inn . Um minuto.
+---
+nar . Ela conferiu a subtração e a subtração estava certa.
+---
+nar . Depois escreveu a última linha. Não havia outra passagem do Arquivo com a palavra erro.
+---
+### CARTAO arquivo
+  | “O erro é do Compilador e a data dele é maio.”
+---
+@ spr antoniette away center
+nar . Ela limpou a pena, tampou o tinteiro e alinhou o mata-borrão com a beira da mesa.
+nar . Fazia isso todas as noites havia cinco anos.
+@ spr_hide antoniette
+### CENA per13_noventa "Noventa dias"  bg=bg_nidhaus_gate bgm=bgm_prologue
+@ spr antoniette neutral center
+nar . O céu estava clareando na direção do portão quando ela desceu com o embrulho.
+---
+nar . Couro encerado, sem selo, cordel em quatro voltas e um nó cego.
+nar . Pesava mais do que devia para o tamanho. Ela reparou nisso e achou bom.
+---
+nar . Ela entregou o pacote com as duas mãos.
+ANTONIETTE . Isto não vai agora. Guarda aí.
+ANTONIETTE . Se passar noventa dias sem notícia minha, você leva.
+---
+MENSAGEIRO . Noventa é muito tempo.
+ANTONIETTE . É o que dá para eu garantir.
+---
+nar . Ela contou as moedas do adiantamento na palma dele, uma a uma, e conferiu duas vezes.
+---
+nar . Eram três.
+---
+nar . Ela pagou as três sem hesitar, e não reparou.
+---
+@@@ { t:'sfx', id:'sfx_footsteps', if:R },
+nar . O cavalo saiu andando e ela não esperou recibo.
+---
+nar . Ela ficou no portão até a luz alcançar o ferrolho de cima.
+---
+nar . Depois voltou para dentro, porque às sete ela abria a biblioteca.
+@ spr_hide antoniette
+---
+nar . Ren chegou às sete e vinte e encontrou a porta aberta e a sala vazia.
+nar . Esperou uma hora antes de perguntar a alguém, porque não era da conta dele perguntar.
+---
+nar . A casa registrou a baixa no livro de pessoal no dia seguinte, na letra do escriturário.
+### CARTAO ficha "— Velha Nidhaus · livro de pessoal —"
+  | VAEL, Antoniette. Catalogadora contratada.
+  | Admissão: abril, ano um. Baixa: agosto, ano cinco.
+  | 
+  | Motivo de saúde.
+nar . Três palavras, na mesma letra de trinta e sete anos antes.
+nar . Matheo tinha lido aquela linha uma semana antes de assinar a autorização dela.
+---
+nar . A partir daquela quarta-feira, o mensageiro esperou.
+---
+nar . Noventa dias.
+---
+nar . Ele entregou no nonagésimo terceiro. Levou três dias a mais porque a estrada de Alsbeck alaga em novembro, e ele não achou que três dias fizessem diferença.
+---
+nar . Três dias, e ele não achou que fizessem diferença.
+---
+nar . Ele estava certo, e é a mesma conta.
+@ fade_out
+@@@ { t:'bgm', id:null, if:R },
+@@@ { t:'end_chap', line1:'Noventa e tr\u00eas dias depois.', line2:'A \u00faltima p\u00e1gina \u00e9 uma coluna.', chapter:'per13', if:R },
+@ fade_out

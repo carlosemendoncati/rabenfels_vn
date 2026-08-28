@@ -1,0 +1,241 @@
+# chapter7 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter7
+
+nar . Ela escreveu o episódio inteiro. Duração, aparência, o que a menina fez depois.
+nar . Escreveu como escreveria a queda de uma parede.
+---
+nar . Depois releu, e a frase que mais a incomodou foi a mais precisa.
+inn . "O sujeito K. permaneceu consciente durante todo o intervalo."
+---
+nar . Ela lacrou o envelope.
+nar . A resposta de Lervel chegou em onze dias.
+### CARTAO lervel "— Ordem dos Olhos Cinzentos — resposta —"
+  | Confirmação de valor excepcional. Prazo revisto: dois anos.
+  | Instrução mantida: observar, registrar, não intervir.
+  | Recomenda-se reduzir contato pessoal com o sujeito.
+inn . Reduzir contato pessoal com o sujeito.
+---
+inn . Eles nunca souberam que havia contato pessoal.
+inn . Souberam agora, pela precisão do que eu escrevi.
+nar . Ela escreveu quatro linhas sobre encadernação e duas sobre a umidade do lado norte.
+nar . Nada de agosto.
+---
+nar . Depois abriu o caderno sem identificação e escreveu por uma hora e vinte.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Vi. Dez de agosto, entre as sete e vinte e as sete e vinte e seis.
+  | Não sei o nome do que eu vi e não vou dar um nome provisório.
+  | A menina esteve consciente o tempo inteiro.
+  | Se isto for tudo o que eu conseguir provar, não serve para nada.
+nar . Guardou o caderno debaixo do forro e ficou sentada com as mãos na mesa.
+---
+inn . Eu vim aqui para relatar isto. É a única coisa que a Ordem queria.
+inn . E eu acabei de decidir que eles não vão ter.
+---
+inn . Não sei o que eu sou a partir de hoje.
+nar . Ela escreveu que houve um episódio de natureza indeterminada, sem testemunha direta.
+---
+inn . Sem testemunha direta.
+nar . Releu as três palavras e não trocou nenhuma.
+---
+nar . A resposta de Lervel chegou em quinze dias e pedia detalhamento.
+nar . Ela respondeu que não havia detalhamento a fornecer.
+---
+inn . Foi a primeira coisa inteiramente falsa que eu mandei para Lervel em cinco anos de serviço.
+inn . E não custou nada. Levou dois minutos.
+---
+inn . É isso que assusta.
+@@@ { t:'chap', num:'CAP\u00cdTULO 7', name:'AGOSTO', chapter:'capitulo7' },
+@ fade_out
+### CENA c7_agosto "Agosto de novo"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . Na primeira manhã de agosto havia duas no vidro da copa antes das cinco e meia.
+nar . O calor de agosto entra pela nuca primeiro. Às seis a pedra do pátio já devolvia morno pelas solas.
+nar . Dara não comentou. Antoniette também não.
+---
+inn . Terceiro agosto.
+nar . Ela abriu o caderno operacional na entrada do ano anterior e conferiu a data de início.
+nar . Batia com dois dias de diferença.
+---
+inn . Dezenove dias no primeiro ano. Vinte no segundo.
+inn . Se este seguir o padrão, terminam no dia vinte.
+nar . Do outro lado do pátio, Liara atravessou correndo com as mãos em concha e nada dentro delas.
+nar . Parou no meio, abriu as mãos para o nada e recomeçou.
+---
+inn . Ela tenta pegar uma todo agosto e nunca pega.
+inn . E fica estranha em setembro, todo setembro, e passa em outubro.
+---
+nar . Antoniette escreveu isso pela terceira vez, na terceira página, com a mesma letra.
+### CENA c7_balada "A cantiga"  bg=bg_corridor bgm=-
+nar . No degrau do corredor leste, Liara trançava o cabelo da irmã, sentada atrás dela.
+@ spr klara neutral center
+@ spr liara neutral right
+nar . Cruzava três mechas, errava, desmanchava e recomeçava. Nenhuma das duas tinha pressa.
+---
+nar . E cantava baixo, no ritmo das mãos.
+### CARTAO balada "— cantiga da Marca —"
+  | Cantai, cantai, as filhas do pacto,
+  | uma nasce casulo, uma nasce intacta,
+  | cantai, cantai, o ciclo que não para,
+  | a que dorme na casca, a que sai pela clara...
+---
+KLARA . Onde você aprendeu isso?
+LIARA . Com a Elke. Ela canta lavando.
+KLARA . Você sabe o que quer dizer?
+---
+LIARA . É cantiga. Não quer dizer.
+nar . E continuou trançando.
+@ spr_hide liara
+@ spr_hide klara
+nar . Antoniette estava no fim do corredor com dois volumes e não passou.
+---
+inn . Eu anotei essa letra em abril do primeiro ano, na estrada, de uma criança sentada num poço.
+inn . Anotei como curiosidade local.
+### CENA c7_patio "Sete e vinte"  bg=bg_nidhaus_gate bgm=bgm_agosto
+nar . No dia dez, às sete e vinte, havia uma faixa laranja rente aos muros e azul claro por cima.
+nar . As duas desceram sem pedir licença, porque havia dois anos que ninguém pedia.
+---
+@ spr liara neutral right
+LIARA . Se eu ficar bem quieta uma pousa. A Elke disse.
+ANTONIETTE . Você já ficou quieta alguma vez?
+nar . A menina achou aquilo o auge do humor e riu por tempo demais.
+---
+@ spr klara neutral center
+nar . Klara estava perto da fonte, parada, com as mãos ao lado do corpo, do jeito dela.
+nar . Duas pousaram no ombro dela quase ao mesmo tempo.
+---
+nar . Depois quatro.
+---
+nar . Depois mais.
+inn . Elas não fazem isso com Liara.
+nar . Antoniette pousou o caderno na borda da fonte e não escreveu nada.
+### CENA c7_afloramento "Seis minutos"  bg=bg_nidhaus_gate bgm=-
+nar . Klara disse alguma coisa que ninguém ouviu e sentou no chão do pátio, devagar, com as duas mãos no calçamento.
+---
+nar . As borboletas não levantaram voo.
+nar . Ficaram onde estavam, e vieram mais.
+---
+nar . O ar do pátio esquentou. Antoniette sentiu na pele do braço e olhou para cima antes de entender que não vinha de cima.
+---
+inn . Vem dela.
+nar . Antoniette deu três passos e parou, porque Liara estava entre ela e a irmã e Liara não tinha se mexido.
+@ spr_hide liara
+nar . A menina do mapa olhava a irmã com a cara de quem espera alguma coisa acabar.
+---
+inn . Ela não está assustada.
+inn . Ela já viu.
+nar . O que aconteceu com o rosto de Klara Antoniette não conseguiu escrever depois, e tentou quatro vezes.
+nar . O que ela conseguiu escrever foi a duração.
+---
+nar . Sete e vinte.
+---
+nar . Sete e vinte e três.
+---
+nar . Sete e vinte e seis.
+---
+nar . O calor caiu de uma vez, como janela fechando.
+nar . As borboletas levantaram todas juntas e subiram, e o pátio ficou vazio delas em menos de dez segundos.
+---
+nar . Klara continuava sentada, com as mãos no calçamento, respirando pela boca.
+nar . Consciente o tempo inteiro. Antoniette teve certeza disso e desejou não ter.
+### CENA c7_depois "O que ela faz"  bg=bg_nidhaus_gate bgm=-
+nar . Antoniette chegou perto e ajoelhou na altura dela, e não tocou.
+nar . A pedra do pátio queimava através do tecido do joelho. Ela ficou lá mesmo assim.
+---
+KLARA {A} . Quanto tempo?
+ANTONIETTE {A} . Seis minutos.
+nar {A} . A menina assentiu e moveu os lábios uma vez, refazendo a conta.
+KLARA {A} . Da última vez foi menos.
+--- {A}
+inn {A} . Da última vez.
+inn {A} . Ela está medindo. Está medindo há quanto tempo?
+--- {A}
+inn {A} . Eu ensinei a ela a medir.
+nar {B} . Klara levou as duas mãos ao cabelo, achou a trança desfeita e refez o que dava para refazer.
+nar {B} . Depois puxou a manga, alisou a frente do vestido e só então levantou o rosto.
+KLARA {B} . Desculpa.
+--- {B}
+ANTONIETTE {B} . Pelo quê?
+KLARA {B} . Pela senhorita ter visto.
+--- {B}
+inn {B} . Ela pediu desculpa por eu ter presenciado.
+inn {B} . Eu ensinei isso a ela.
+nar {C} . Klara esfregou o joelho até o tecido aquecer. Depois falou.
+KLARA {C} . Isso impede?
+ANTONIETTE {C} . Impede o quê?
+--- {C}
+KLARA {C} . De ir.
+--- {C}
+nar {C} . Antoniette abriu a boca e não tinha resposta, o que não acontecia com ela desde os dezessete anos.
+inn {C} . Ela não perguntou o que era.
+inn {C} . Perguntou se atrapalha o plano.
+---
+nar . Klara levantou sozinha, recusou o braço e subiu pela escada de serviço.
+@ spr_hide klara
+nar . Andando.
+### CENA c7_casa "O que a casa faz"  bg=bg_main_hall bgm=bgm_nidhaus
+nar . No jantar daquela noite, Serafina terminou de servir a sopa antes de perguntar pela catalogação do lado norte.
+@ spr serafina neutral right
+ANTONIETTE . Terceira estante. Devo fechar o lado até novembro.
+SERAFINA . Bom.
+---
+nar . Aldric não estava à mesa, o que também era normal.
+nar . Ninguém perguntou às meninas como tinha sido o dia.
+@ spr_hide serafina
+---
+inn . Aconteceu no pátio, às sete e vinte, com a casa inteira acordada.
+inn . Nenhuma pergunta, nenhum médico, nenhuma mudança de horário.
+---
+inn . Se fosse a primeira vez alguém teria feito alguma coisa.
+inn . Ninguém fez nada porque isto está no prazo.
+nar . Ela terminou o prato inteiro e não sentiu gosto de nada.
+---
+nar . Subiu e ficou junto da janela até o pão da noite endurecer na mão.
+nar . Depois pousou o pão na mesa de canto e não comeu.
+### CENA c7_relatorio "O relatório de agosto"  bg=bg_antoniette_room bgm=-
+nar . O relatório de agosto vencia no dia vinte e dois.
+nar . Ela sentou às nove e ficou até depois da meia-noite com a folha em branco.
+---
+inn . Eu vim aqui para isto.
+inn . Cinco anos de estimativa, quarenta páginas de dossiê, uma cobertura construída em três meses.
+inn . Tudo para poder escrever a frase que eu tenho agora.
+---
+nar . Ela molhou a pena três vezes e deixou secar as três.
+@@@ { t:'cho', id:'cap7_relatorio', code:'C-VII', prompt:'O RELAT\u00d3RIO DE AGOSTO', opts:[ { id:'A', tx:'Escrever o epis\u00f3dio inteiro. Foi para isso que ela veio.', flags:{ lied_to_order:'A', saw_surfacing:true }, routes:{ answer: 3 }, then: C7_RELATORIO_A }, { id:'C', tx:'N\u00e3o relatar. Agosto inteiro fica fora do que Lervel vai receber.', flags:{ lied_to_order:'C', saw_surfacing:true }, routes:{ hope: 3, loss: 1 }, then: C7_RELATORIO_C }, { id:'B', tx:'Epis\u00f3dio de natureza indeterminada, sem testemunha direta.', flags:{ lied_to_order:'B', saw_surfacing:true }, routes:{ loss: 2, answer: 1 }, then: C7_RELATORIO_B } ]},
+### CENA c7_depois_de_agosto "Depois de agosto"  bg=bg_library bgm=-
+nar . Terminaram no dia vinte, como ela tinha calculado.
+nar . Ela conferiu o cálculo e acertou, e a coisa não lhe deu satisfação nenhuma.
+---
+nar . Em setembro ela catalogou seiscentos e dez volumes.
+nar . A média dos vinte e nove meses anteriores era de cento e oitenta por mês.
+---
+inn . Terminando a biblioteca, eu não tenho mais motivo para estar nesta casa.
+inn . Eu passei dois anos e meio evitando esse dia.
+---
+inn . E agora estou correndo para ele.
+nar . Ela parou de descer à copa às seis. Passou a descer às cinco e meia, antes de Dara sentar.
+nar . Levava a caneca para cima e esquecia metade nela.
+---
+@ spr klara neutral center
+nar . A menina reparou antes de qualquer adulto da casa.
+KLARA . A senhorita não está comendo.
+ANTONIETTE . Estou.
+---
+KLARA . Está bem.
+@ spr_hide klara
+nar . E não insistiu, porque ela nunca insistia.
+---
+inn . Ela usou comigo a frase que eu uso nas fichas dela.
+nar . À noite Antoniette abriu o caderno operacional e escreveu a única entrada do mês.
+### CARTAO caderno "— Caderno Operacional — Entrada 71 —"
+  | Prazo próprio revisto. A biblioteca fecha em fevereiro do ano 5.
+  | Depois de fevereiro não há motivo administrativo para minha permanência.
+  | Portanto tenho até fevereiro do ano 5.
+  | Não sei ainda para quê.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Terceiro agosto em Velha Nidhaus.', line2:'Ela parou de ser quem chegou.', chapter:'capitulo7' },
+@ fade_out

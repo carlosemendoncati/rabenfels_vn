@@ -1,0 +1,244 @@
+# prologue - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar prologue
+
+### CENA p1_pacote "O pacote"  bg=bg_prologue_room bgm=bgm_prologue
+@ fade_in
+@ spr matheo neutral center
+@@@ { t:'sfx', id:'sfx_package' },
+nar . O mensageiro entregou o pacote com as duas mãos e não esperou recibo.
+nar . Matheo Drell não esperava visita. Por princípio, nunca esperava.
+inn . Quem trabalha com informação aprende cedo. Visita não marcada estraga o resto do dia.
+nar . Couro encerado, cordel escuro, sem selo.
+nar . Pesava mais do que devia para o tamanho.
+inn . Couro encerado. Chuva na estrada arruina papel.
+inn . Ela pensou na chuva.
+nar . O cordel estava dado em quatro voltas e um nó cego, do jeito que se amarra o que não deve abrir sozinho na estrada.
+---
+nar . O endereço estava escrito em letra miúda e controlada.
+nar . Ele reconheceu a letra antes de ler o nome.
+inn . Noventa e três dias.
+nar . Ela tinha estabelecido noventa. Sem notícia em noventa dias, o ponto morto dispara.
+nar . Ele passou os últimos três tentando fazer com que três dias significassem alguma coisa.
+---
+inn . Não significavam.
+nar . Levou o pacote para a mesa e acendeu a segunda vela.
+nar . O couro tinha cheiro de cavalo e de cera velha. Estava frio de estrada e demorou a esquentar sob a mão dele.
+inn . Relatório de campo. Leia como relatório de campo.
+### CENA p2_paginas "As páginas contadas"  bg=bg_archive_closeup bgm=bgm_archive
+@ spr matheo read center
+@@@ { t:'sfx', id:'sfx_page_turn' },
+nar . Ele contou as páginas antes de ler a primeira. Fazia isso com qualquer documento novo.
+---
+nar . Duzentas.
+nar . Duzentas e cinquenta.
+nar . Duzentas e oitenta e sete.
+---
+nar . A numeração dela terminava em duzentos e noventa e um.
+inn . Faltam quatro.
+---
+inn . Duzentos e oitenta e oito. Duzentos e oitenta e nove. Duzentos e noventa. Duzentos e noventa e um.
+inn . Quatro números. Ele os diria em voz alta a vida inteira sem saber o que estava dizendo.
+---
+nar . Ele passou o polegar pela dobra interna. O corte era reto e antigo, feito com lâmina e com tempo.
+inn . Ou ela tirou, ou tiraram dela.
+nar . Ele anotou o número num canto do mata-borrão e não voltou ao assunto naquela noite.
+---
+nar . Foi a última coisa profissional que ele fez.
+nar . Letra densa. Títulos formais. Rodapés numerados até o fim.
+inn . Ela numerou até o que não precisava.
+nar . No canto da capa, em tinta mais nova que o resto:
+### CARTAO arquivo
+  | — ARQUIVO RABENFELS —
+  | Fragmentos da Linhagem, da Marca e do Pacto
+inn . Leia tudo.
+inn . Em oito anos ela nunca me mandou fazer nada.
+---
+inn . E mandou isso sabendo que faltavam quatro.
+### CENA p3_kharvel "Khar’Vel"  bg=bg_archive_closeup bgm=-
+### CARTAO arquivo
+  | "Khar’Vel não é um deus. Deuses recebem orações e as ignoram. Ela recebe oferendas e as consome."
+  | "Khar’Vel não é um demônio. Demônios corrompem de fora. Ela cresce de dentro."
+  | "Morre e renasce sem parar. Nunca no próprio corpo. Em outros."
+inn . Khar’Vel.
+inn . Vinte anos procurando uma referência verificável para essa palavra.
+inn . Ela achou em quatro.
+---
+nar . Ele leu as três linhas outra vez, agora prestando atenção no formato.
+inn . Ela definiu a coisa três vezes dizendo o que a coisa não é.
+inn . Arquivista faz isso quando o catálogo não tem a categoria.
+---
+inn . Ela não achou onde guardar aquilo.
+@@@ { t:'sfx', id:'sfx_page_turn' },
+nar . Ele desceu ao rodapé. Ela citava a origem de cada linha, com data e arquivo.
+nar . Ele conhecia duas das fontes. Tinha catalogado uma delas com as próprias mãos, quinze anos antes.
+---
+inn . Está tudo conferível. Ela sabia que eu ia conferir.
+### CARTAO arquivo
+  | "Todo agosto, nas terras próximas à Marca, aparecem borboletas de asa clara com veias vermelhas."
+  | "Duram três semanas. As aldeias não as matam e não falam delas."
+  | "Em trezentos anos de registros, a família nunca escreveu uma linha sobre o fenômeno."
+inn . Ela anotou o silêncio deles como se fosse um dado.
+---
+### CARTAO arquivo
+  | "O sujeito K. relata, desde os seis anos, dois estados recorrentes:"
+  | "fome fora de hora e o que ela chama de um vazio."
+  | "Vêm juntos, duram de uma a três horas, e passam sozinhos."
+  | "Ela descreve como se descreve dor de cabeça. Não atribui a nada."
+nar . Matheo leu duas vezes e não encontrou a linha seguinte.
+inn . Ela larga o assunto aqui.
+---
+inn . Ela nunca larga assunto nenhum.
+---
+nar . Ela largou porque não havia mais nada. A menina não atribuía a nada porque não havia nada a que atribuir, do lado dela.
+nar . Do outro lado havia, e contava.
+---
+nar . Na dobra da folha seguinte havia uma asa seca, prensada pelo peso das páginas.
+nar . Clara, com uma veia vermelha atravessando.
+nar . Ele soprou de leve. A asa não se moveu. Estava colada ao papel havia meses.
+---
+nar . Ele passou adiante sem escrever nada a respeito.
+---
+nar . A asa ficaria ali por mais sete anos, e a veia vermelha não desbotaria.
+nar . Ele voltaria a abrir nessa dobra sem contar as páginas, uma vez, numa tarde de maio.
+### CENA p4_compilador "O Compilador"  bg=bg_archive_closeup bgm=-
+nar . As notas de rodapé eram assinadas por um Compilador.
+nar . Terceira pessoa do começo ao fim. Nunca "eu". Nunca o nome dela.
+inn . Duzentas e oitenta e sete páginas escrevendo sobre si mesma como se fosse outra pessoa.
+---
+inn . É o que a Ordem ensina. Ela aprendeu comigo.
+nar . A maior parte das notas era método puro. De onde veio o dado, quem contou, o que não foi possível confirmar.
+### CARTAO compilador "— nota do Compilador —"
+  | 17. Sobre o andar fechado, duas versões circulam entre a criadagem.
+  | Uma fala em umidade. A outra em obras que nunca começaram.
+  | Fonte única em ambos os casos. O Compilador registra as duas e não escolhe.
+inn . Ela registrava até o que sabia que era mentira.
+inn . Boa técnica. Eu ensinei essa.
+---
+nar . A voz se manteve por cento e quarenta páginas.
+@@@ { t:'sfx', id:'sfx_page_turn' },
+nar . Escorregou na cento e quarenta e um.
+### CARTAO compilador "— nota do Compilador —"
+  | 41. O sujeito K. tem oito anos na data desta entrada.
+  | O Compilador registra a idade porque a idade entra no cálculo do ciclo.
+  | Não por outro motivo.
+nar . Ele leu a última linha duas vezes.
+inn . Ninguém escreve "não por outro motivo" quando não há outro motivo.
+---
+nar . A numeração seguia adiante. Ela não voltou para corrigir.
+### CENA p5_casulo "A câmara do casulo"  bg=bg_archive_closeup bgm=-
+### CARTAO arquivo
+  | "Os registros mais antigos da propriedade chamam o lugar de a câmara do casulo."
+  | "A família adotou outros nomes depois. Ala de estudos. Ala norte. O andar fechado."
+  | "A câmara do casulo é a única denominação honesta que esta casa já produziu."
+nar . Ele leu a frase de novo.
+inn . A câmara do casulo.
+---
+inn . Ele sabia como funciona um casulo. A lagarta se desfaz por dentro e o que sai da casca é feito do que ela era.
+---
+inn . Aqui a casca fica com a menina dentro.
+inn . O que sai, sai de outro corpo. Inteiro. Sem ter pago nada.
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . A vela da esquerda apagou. Ele continuou com a que restou.
+nar . A cera esfriou depressa. Ele só percebeu porque a mão que segurava a folha começou a doer no nó.
+### CENA p6_gemeas "As gêmeas"  bg=bg_archive_closeup bgm=bgm_archive
+### CARTAO arquivo
+  | "Nasceram gêmeas, como nasce toda geração desta casa. O ritual garante o par."
+  | "Liara nasceu humana. Klara nasceu vampira. A diferença era visível na primeira hora."
+  | "Os guardiões examinaram Klara mesmo assim. Procuravam um calor específico no sangue."
+  | "O exame não servia para descobrir qual das duas. Isso já se sabia."
+  | "Servia para confirmar que a entidade tinha pegado."
+  | "Registro da casa, mesma data: a escolhida foi identificada. O ciclo continua."
+@@@ { t:'bgm', id:null },
+---
+inn . Um laudo.
+inn . Eles conferiram uma criança de horas como quem confere uma remessa.
+---
+inn . Ela tinha oito anos quando Antoniette chegou.
+inn . Oito.
+---
+inn . E Antoniette ficou cinco.
+nar . Ele não terminou a conta.
+### CENA p7_experimentos "O treinamento"  bg=bg_archive_closeup bgm=-
+@@@ { t:'sfx', id:'sfx_page_turn' },
+### CARTAO arquivo
+  | "A casa chama de treinamento. Rotina de família."
+  | "As marcas nas dobras dos braços contam outra coisa a quem lê o traço."
+  | "Abriram Klara para medir. Quanto de entidade, quanto de menina."
+  | "A mãe anotava os números. O pai entrou uma vez e nunca mais."
+nar . Ele baixou a folha e olhou para a parede.
+inn . Uma vez. O suficiente.
+inn . Saber o bastante para não precisar saber o resto.
+---
+@ spr matheo neutral center
+nar . A autorização de campo tinha levado quarenta minutos.
+nar . Ele não releu o dossiê de Nidhaus antes de assinar. Já tinha lido uma vez.
+---
+inn . Uma vez. O suficiente.
+nar . Recolocou a folha sobre a mesa e continuou lendo.
+### CENA p8_escriba "A escriba de Lervel"  bg=bg_archive_closeup bgm=bgm_archive
+### CARTAO arquivo
+  | "Nos registros de pessoal da casa encontrei alguém que passou por Nidhaus antes de mim."
+  | "Trinta e sete anos atrás. Consta como a escriba de Lervel."
+  | "Seis meses depois: partiu por motivo de saúde."
+  | "Não existe registro do destino dela. Nem aqui, nem lá."
+nar . Nem lá.
+inn . Lá é o meu arquivo.
+---
+nar . Ele tinha aberto aquela ficha uma semana antes de assinar a autorização.
+nar . Lembrava do papel. Lembrava da letra do escriturário que escreveu a última linha.
+inn . Motivo de saúde.
+---
+inn . Eu li aquilo e assinei mesmo assim.
+nar . Virou a página com a mão firme.
+### CENA p9_pergunta "A pergunta"  bg=bg_archive_closeup bgm=-
+nar . A entrada seguinte estava separada do resto por dois dedos de papel em branco.
+### CARTAO arquivo
+  | "Matheo — se você estiver lendo isto, preciso de uma resposta que não posso pedir de outro jeito."
+  | "Você sabia?"
+@@@ { t:'bgm', id:null },
+---
+ANTONIETTE . Você sabia?
+---
+MATHEO . Sabia.
+---
+nar . Ele ouviu a própria voz na sala vazia e não achou estranho.
+@@@ { t:'sfx', id:'sfx_page_turn' },
+nar . Virou a página procurando a linha seguinte.
+nar . A pergunta ocupava a página inteira e o resto era papel limpo.
+---
+nar . Ela deixou o espaço da resposta e foi embora antes de poder recebê-la.
+### CENA p10_ultima "A última entrada"  bg=bg_prologue_room bgm=-
+@ spr matheo hollow center
+nar . As últimas páginas eram diferentes.
+nar . A caligrafia continuava firme. O espaçamento não.
+nar . Ele conhecia aquela escrita havia oito anos.
+---
+@@@ { t:'last', key:'ultima', lns:[ 'Para quem encontrar isto.', '', 'N\u00e3o sei seu nome. N\u00e3o sei se voc\u00ea \u00e9 da Ordem ou se chegou', 'aqui por outro caminho. Tanto faz.', '', 'Existe uma menina em Velha Nidhaus chamada Klara Rabenfels.', '', 'Doze anos. L\u00ea mais r\u00e1pido do que qualquer pessoa que eu conheci.', 'Corrige os outros em voz baixa, para n\u00e3o constranger ningu\u00e9m.', 'Ri de coisas que ningu\u00e9m mais achou gra\u00e7a, e ri depois, quando', 'j\u00e1 passou, quando acha que n\u00e3o tem ningu\u00e9m olhando.', '', 'Foi escolhida antes de nascer para morrer de um jeito que a', 'fam\u00edlia dela chama de tradi\u00e7\u00e3o.', '', 'Tentei tir\u00e1-la daqui.', 'Fui met\u00f3dica. Fui devagar.', 'Foi o devagar que custou.', '', 'Est\u00e1 tudo nas p\u00e1ginas anteriores. Datas, plantas, hor\u00e1rios de', 'guarda, o que funciona e o que n\u00e3o funciona. Cinco anos de', 'trabalho. Use.', '', 'Tirei quatro p\u00e1ginas. Se voc\u00ea chegar at\u00e9 elas, vai entender', 'por qu\u00ea. Se n\u00e3o chegar, melhor.', '', 'V\u00e1 mais r\u00e1pido do que eu fui.', '', 'O conhecimento n\u00e3o foi suficiente.', 'Mas \u00e9 o que fica.', '', '\u2014 A.V.', 'Velha Nidhaus, agosto.' ]},
+nar . Ele ficou com a última página na mão.
+---
+nar . Estendeu a mão para a pena.
+nar . A mão chegou até a pena e parou ali.
+---
+inn . Ele pensou em escrever para Vantrell, e em escrever para o tribunal da Marca, e em escrever para a irmã dela em Alsbeck que não sabia de nada e ia ter de saber por alguém, e pensou que qualquer uma dessas cartas levaria doze dias para chegar e que doze dias eram quatro vezes o tempo que ele tinha desperdiçado tentando fazer três dias significarem alguma coisa, e ainda estava com a pena na mão quando percebeu que não havia mais ninguém para quem escrever.
+---
+@@@ { t:'sfx', id:'sfx_wind' },
+nar . O vento contra o vidro parou.
+nar . A cera parou de estalar.
+nar . Sobrou a própria respiração.
+---
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . A segunda vela apagou.
+---
+nar . Ele não se moveu.
+@ spr_hide matheo
+@ fade_out
+@@@ { t:'bgm', id:null },
+nar . Cinco anos antes daquela noite, uma mulher de vinte anos abriu a janela de uma carruagem e deixou aberta.
+nar . Ela achou bonito e anotou que tinha achado, porque impressão de chegada muda em três semanas e ninguém lembra qual era.
+---
+@@@ { t:'title', main:'ARQUIVO RABENFELS', sub:'"O conhecimento n\u00e3o foi suficiente. Mas \u00e9 o que fica."', time:'Cinco anos antes.' },
+@ fade_out

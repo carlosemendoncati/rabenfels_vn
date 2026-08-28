@@ -1,0 +1,279 @@
+# chapter2 - roteiro em texto
+#
+# Edite as falas a vontade. Nao mexa nas linhas que comecam
+# com @@@ nem no id das cenas.
+#
+# Depois: python tools/roteiro_texto.py --importar chapter2
+
+nar . Ela anotou a lacuna no relatório operacional, entre a contagem de volumes e o estado das encadernações.
+inn . Item nove. Irregularidade administrativa. Sem prioridade.
+nar . Releu o item nove três vezes e não mudou uma palavra.
+---
+inn . Um arquivista competente registra o que falta e segue catalogando o que existe.
+nar . Ela seguiu catalogando o que existia.
+nar . Ela abriu o inventário de pessoal e procurou o mesmo intervalo.
+nar . Os contratos de serviço estavam completos. Nenhuma lacuna.
+inn . Então não foi enchente, nem incêndio, nem mudança de administração.
+inn . Faltam os livros de conta de dois anos e não falta mais nada.
+---
+nar . Escreveu os dois anos em um papel avulso e guardou no bolso do avental.
+inn . Preciso saber o que a casa comprava nesses dois anos.
+nar . Ela copiou a página inteira à mão. Colunas, datas, o intervalo em branco.
+nar . Copiar leva quarenta minutos. Anotar leva dois.
+inn . Uma anotação é a minha leitura da página. A cópia é a página.
+nar . Tirou o caderno sem identificação de baixo do forro do baú.
+nar . Tirou do baú de ferramentas um caderno em branco. Não escreveu data nem cabeçalho.
+### CARTAO sem_identificacao "— caderno sem identificação —"
+  | Livros de conta: intervalo de dois anos ausente.
+  | Numeração dos volumes: contínua.
+  | Quem retirou os livros não quis que a falta aparecesse.
+inn . Isto também não vai para Lervel.
+nar . Guardou o caderno e a cópia no mesmo lugar.
+@@@ { t:'chap', num:'CAP\u00cdTULO 2', name:'O INVENT\u00c1RIO', chapter:'capitulo2' },
+@ fade_out
+### CENA c2_copa "A copa"  bg=bg_kitchen bgm=bgm_nidhaus
+@ fade_in
+nar . A copa acordava antes da casa. Às cinco e meia já havia fogo e pão.
+nar . Era o único cômodo quente de Velha Nidhaus, e cheirava a fermento, a cinza e a gordura de porco fria.
+nar . Antoniette desceu às seis, na terceira manhã, com o inventário parcial debaixo do braço.
+inn . Comer com os servos economiza duas semanas de observação.
+@ spr dara neutral center
+nar . A cozinheira encheu uma caneca sem perguntar se ela queria. O barro estava quente demais para segurar pela lateral.
+DARA . Senhorita Vael. A copa é dos empregados.
+ANTONIETTE . Eu sou empregada. Contrato de nove meses, pago por volume catalogado.
+---
+nar . Dara olhou para ela por três segundos inteiros.
+@ spr dara guarded center
+DARA . Dara. Cozinho aqui há dezenove anos.
+nar . Sentou do outro lado da mesa, o que não era obrigada a fazer.
+DARA . A senhorita vai querer saber os horários. Café às seis, almoço ao meio-dia, ceia às oito.
+DARA . Depois das oito a cozinha fecha e eu vou para o meu quarto.
+ANTONIETTE . E se alguém tiver fome às dez?
+DARA . Ninguém tem.
+inn . Ela respondeu rápido demais para ser uma observação.
+inn . Foi uma regra.
+---
+ANTONIETTE . Ninguém tem fome, ou ninguém pede?
+---
+nar . Dara pôs a caneca dela na mesa e demorou a soltar a alça.
+DARA . A senhorita pergunta bonito.
+nar . E não respondeu nem uma coisa nem outra.
+---
+inn . Eu não entendi essa resposta.
+inn . Anotar assim mesmo. Sem interpretar.
+---
+nar . Antoniette abriu o inventário parcial e pousou ao lado da caneca.
+ANTONIETTE . A biblioteca tem quatro mil e duzentos volumes. Vou levar mais tempo do que o contrato previa.
+DARA . A biblioteca fica no lado sul.
+ANTONIETTE . Fica.
+DARA . Bom.
+nar . Dara puxou de baixo do banco uma lata e conferiu o que tinha dentro sem tirar a tampa toda.
+DARA . Se a senhorita for a Marca Cinzenta antes de mim, traz cravo. Aqui não vendem.
+ANTONIETTE . Cravo.
+DARA . Dezenove anos pedindo. Já virou passatempo.
+@ spr_hide dara
+nar . Levantou e voltou para o fogo antes que a conversa pudesse continuar.
+inn . Eu não perguntei nada sobre o lado norte.
+### CENA c2_biblioteca "A catalogação"  bg=bg_library bgm=bgm_nidhaus
+nar . O rapaz já estava lá quando ela chegou, empilhando volumes por altura.
+nar . A biblioteca cheirava a couro e a cola velha, e não cheirava a poeira. Alguém limpava aquilo.
+@ spr ren neutral right
+REN . A senhora Rabenfels disse que eu ajudo a senhorita. Sou Ren.
+ANTONIETTE . Há quanto tempo você trabalha aqui?
+REN . Cinco semanas.
+inn . Cinco semanas. Contratado pouco antes de mim.
+inn . Guardar isso. Não perguntar por quê.
+ANTONIETTE . Empilhar por altura é bom para a estante. Não serve para catálogo.
+REN . Serve para quê, então?
+ANTONIETTE . Autor, assunto, data, estado da encadernação. Nessa ordem. Um volume por ficha.
+nar . Ele repetiu a ordem em voz baixa duas vezes e não errou mais.
+---
+nar . Trabalharam três horas. Ren falava enquanto trabalhava, do jeito de quem nunca precisou aprender a ficar quieto.
+REN . Minha mãe queria que eu fosse para a cidade. Aqui paga melhor.
+REN . Junto três anos e compro uma parelha. Aí eu faço frete e não dependo de casa nenhuma.
+nar . Disse aquilo do jeito de quem já disse muitas vezes e ainda acredita.
+REN . A senhora Rabenfels pagou seis meses adiantado. Isso é normal?
+ANTONIETTE . Não.
+REN . Ah.
+nar . Ele riu e voltou para a pilha.
+inn . Ele não fez a segunda pergunta.
+inn . Dezessete anos. A casa contratou dois estranhos em seis semanas e ele acha que o incomum é o adiantamento.
+@ spr_hide ren
+### CARTAO caderno "— Caderno Operacional — Entrada 4 —"
+  | Assistente designado: Ren, 17 anos, contratado 5 semanas antes da minha chegada.
+  | Sem vínculo com a região. Sem parentes na casa. Sem curiosidade.
+  | A escolha de um assistente sem raiz local não é acidente.
+### CENA c2_livros_conta "Os livros de conta"  bg=bg_library bgm=bgm_archive
+nar . A quarta prateleira do lado leste guardava a administração da casa. Compras, salários, reparos.
+nar . Setenta e um volumes idênticos, encadernados no mesmo couro, numerados na lombada.
+@@@ { t:'sfx', id:'sfx_page_turn' },
+nar . Antoniette abriu o primeiro e reconheceu o formato. A Ordem usava um parecido.
+inn . Colunas de gasto, coluna de origem, assinatura mensal do administrador.
+nar . Catalogou dezenove volumes antes de parar.
+---
+nar . Voltou ao volume onze e abriu no fim.
+nar . O volume onze fechava em março. O volume doze abria dois anos depois, em abril.
+inn . Dois anos sem registro de compra, salário ou reparo.
+inn . A casa não parou de comer nesses dois anos.
+nar . Conferiu as lombadas. Onze, doze, treze. A numeração não pulava.
+---
+inn . Se dois volumes tivessem sido perdidos, a numeração pularia.
+inn . A numeração é contínua porque foi refeita depois.
+nar . Ela passou o polegar na lombada do doze. O couro estava um tom mais claro que o dos vizinhos, e liso onde os outros tinham grão.
+inn . Reencadernado.
+---
+inn . Reencadernar dois volumes custa mais do que perder dois volumes.
+inn . Não consigo pensar em nenhum motivo para gastar dinheiro assim.
+nar . O polegar dela continuou sobre o couro claro até Ren falar.
+@ spr ren neutral right
+REN . Achou alguma coisa?
+nar . Antoniette fechou o volume antes de responder.
+ANTONIETTE . Encadernação irregular. Acontece em coleção antiga.
+REN . Anoto na ficha?
+ANTONIETTE . Anota.
+@ spr_hide ren
+inn . A primeira mentira em três dias. Anotada mentalmente, com a data.
+### CENA c2_patio "O pátio"  bg=bg_nidhaus_gate bgm=-
+@@@ { t:'sfx', id:'sfx_wind' },
+nar . Ela cruzou o pátio às seis, quando os empregados atravessam para a cozinha.
+nar . A pedra devolvia o frio pelas solas. Cheirava a cavalo do lado da cocheira e a mais nada do outro lado.
+nar . Contou onze passagens em vinte minutos.
+---
+nar . Onze pessoas passaram diante da porta nordeste. Nenhuma virou a cabeça.
+inn . Não é evitar. Evitar exige saber que se está evitando.
+inn . Eles simplesmente não olham. É como respirar.
+@ spr fenn neutral left
+nar . Fenn apareceu com uma lanterna apagada na mão, cedo demais para acender.
+FENN . Senhorita Vael. O pátio esfria rápido depois das seis.
+ANTONIETTE . Estou vendo a fachada. A ala nordeste tem argamassa nova em cima de pedra velha.
+---
+FENN . Tem.
+ANTONIETTE . Reforma recente?
+FENN . Não que eu tenha visto.
+inn . Ele respondeu à pergunta que eu fiz e só a ela.
+inn . Fenn respondeu até "não que eu tenha visto". O resto ficou com ele.
+nar . Fenn acendeu a lanterna. Ainda havia luz suficiente para não precisar.
+FENN . A ceia é às oito. Depois disso a copa fecha.
+ANTONIETTE . A senhora Dara já me disse.
+FENN . Então já sabe.
+---
+ANTONIETTE . Todo mundo aqui me diz a mesma coisa.
+FENN . Casa grande. Sobra parede e falta assunto.
+nar . Foi a coisa mais parecida com uma piada que ela ouviu em três dias, e ele não sorriu ao dizer.
+@ spr_hide fenn
+nar . Ele atravessou o pátio pelo lado sul, que é o caminho mais longo.
+### CENA c2_nordeste "A seção nordeste"  bg=bg_library_night bgm=bgm_archive
+nar . Às onze a casa fica quieta de um jeito que não é silêncio. É ausência de gente.
+@@@ { t:'sfx', id:'sfx_footsteps' },
+nar . Antoniette subiu ao segundo andar com uma vela e o caderno operacional.
+inn . Ele disse para trazer a ele antes de catalogar. Não disse para não subir.
+nar . As estantes do canto nordeste estavam viradas para dentro. Entre elas cabia uma pessoa de lado.
+nar . Havia um banquinho encostado na estante do meio.
+nar . Na véspera não havia banquinho nenhum naquele canto.
+---
+inn . Eu perguntei a ele o que eu deveria estar procurando.
+inn . Ele mandou trazer o banquinho.
+---
+inn . Nada do que eu achar aqui vai ser descoberta minha.
+nar . A poeira do chão estava intacta até a marca do próprio sapato dela.
+inn . Ninguém subiu aqui desde que eu subi na semana passada.
+---
+inn . Ele deu a permissão e não veio conferir se eu usei.
+inn . Ou confia demais, ou o que está aqui não preocupa ninguém.
+inn . As duas hipóteses são ruins de jeitos diferentes.
+nar . Livros de registro. O mesmo couro dos livros de conta do andar de baixo.
+@@@ { t:'sfx', id:'sfx_page_turn' },
+---
+nar . Os volumes daquela estante guardavam os registros da própria família.
+nar . Nascimentos, mortes, casamentos, transferências de propriedade. Duzentos anos.
+inn . Isto deveria estar no cartório de Marca Cinzenta. Não em uma estante virada para a parede.
+nar . Ela procurou o intervalo dos dois anos que faltavam lá embaixo.
+---
+nar . Estava lá. Completo. Duas páginas por mês, letra firme.
+---
+nar . Ela leu o intervalo duas vezes procurando a razão de alguém guardar isto e queimar aquilo.
+nar . Não achou razão nenhuma.
+---
+nar . No fim da segunda leitura já estava só lendo os nomes de gente que nasceu e morreu ali antes de ela existir.
+---
+inn . Isso não é trabalho. Voltar ao trabalho.
+inn . Os registros de família dos dois anos existem.
+inn . Os livros de conta dos mesmos dois anos foram retirados e a numeração foi refeita.
+---
+inn . Alguém escolheu o que apagar. Escolheu o dinheiro.
+nar . Ela leu os dois anos de registro de família inteiros. Levou quarenta minutos.
+nar . Nada fora do comum. Três nascimentos, duas mortes, um casamento.
+inn . Nada fora do comum é uma informação.
+inn . Um documento que não explica a ausência do outro está fazendo isso de propósito.
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . A vela chegou ao fim e o cheiro de pavio apagado ficou no corredor atrás dela.
+nar . Desceu no escuro, que já conhecia.
+inn . Ele me deu permissão para subir aqui.
+---
+inn . Ou ele não sabe o que tem aqui, ou ele quer que eu saiba.
+inn . Aldric Rabenfels sabe o que tem em cada estante desta casa.
+### CENA c2_devolucao "O livro devolvido"  bg=bg_library bgm=bgm_nidhaus
+nar . Ela catalogava a terceira prateleira do lado oeste quando percebeu.
+nar . Um volume de anatomia comparada, catalogado por ela na véspera, estava fora da ordem.
+inn . Fora da ordem por uma posição. Trocado com o vizinho.
+---
+@@@ { t:'sfx', id:'sfx_page_turn' },
+nar . Abriu. Havia um marcador de papel dobrado entre as páginas cento e doze e cento e treze.
+nar . Sistema circulatório. Diagrama de irrigação de órgão.
+@ spr ren neutral right
+REN . Fui eu que arrumei essa prateleira. Devo ter trocado.
+ANTONIETTE . Você leu este volume?
+REN . Não sei ler direito, senhorita. Sei as letras.
+---
+ANTONIETTE . Obrigada, Ren.
+@ spr_hide ren
+nar . O marcador era um pedaço de papel de carta cortado com régua.
+inn . Quem cortou tinha pressa e mesmo assim usou régua.
+nar . Ela devolveu o volume à posição correta e continuou catalogando.
+---
+nar . Na manhã seguinte o volume estava de novo trocado com o vizinho, e o marcador na mesma página.
+inn . Quem arruma erra uma vez. Isto tem hora marcada.
+inn . Alguém lê nesta biblioteca de madrugada e devolve o livro quase no lugar certo.
+---
+inn . Quase.
+### CENA c2_relatorio "O segundo relatório"  bg=bg_antoniette_room bgm=-
+nar . O segundo relatório para Matheo vencia naquela noite.
+nar . Ela tinha o inventário parcial, a lacuna dos dois anos e um marcador de papel na mesa.
+@@@ { t:'cho', id:'cap2_lacuna', prompt:'A LACUNA', opts:[ { id:'C', tx:'Copiar a p\u00e1gina inteira \u00e0 m\u00e3o. O que a Ordem receber \u00e9 outro assunto.', flags:{ ledger_report:'C', ledger_crossref:false, ledger_copied:true, archive_seed:true }, routes:{ answer: 1, hope: 1 }, then: C2_ESCOLHA_C }, { id:'B', tx:'Cruzar com o invent\u00e1rio de pessoal e datar o intervalo.', flags:{ ledger_report:'B', ledger_crossref:true, ledger_copied:false }, routes:{ answer: 2 }, then: C2_ESCOLHA_B }, { id:'A', tx:'Registrar como irregularidade administrativa e seguir o contrato.', flags:{ ledger_report:'A', ledger_crossref:false, ledger_copied:false }, routes:{ loss: 1 }, then: C2_ESCOLHA_A } ]},
+### CENA c2_madrugada "Madrugada"  bg=bg_antoniette_room bgm=-
+nar . Uma e meia. O relatório lacrado na beira da mesa.
+nar . Da janela via-se o pátio, a porta nordeste e a corrente sem cadeado.
+---
+nar . Havia luz na ala de estudos.
+inn . Terceira noite seguida. Sempre a mesma janela, sempre depois da uma.
+nar . A luz se apagou às duas e dez.
+nar . Onze minutos depois, alguém atravessou o pátio até a porta da biblioteca.
+inn . Passos curtos. Peso de criança.
+---
+inn . Ninguém acompanhando.
+---
+inn . A copa fecha às oito.
+---
+inn . Então ela não está descendo para comer.
+nar . Foi a única conclusão que ela tirou naquela noite, e estava errada.
+nar . Antoniette ficou na janela até o pátio esvaziar.
+nar . Depois abriu o caderno operacional e escreveu uma linha.
+### CARTAO caderno "— Caderno Operacional — Entrada 9 —"
+  | Duas crianças de oito anos nesta casa.
+  | Uma delas sai sozinha às duas e vinte da manhã e ninguém vai atrás.
+  | Isso significa que é permitido.
+---
+nar . Depois releu o relatório lacrado na beira da mesa.
+nar . Não tinha uma linha falsa dentro dele.
+---
+inn . E não tem a entrada nove.
+inn . Em oito anos de serviço eu nunca mandei um relatório sabendo o que tinha ficado de fora.
+---
+nar . Deixou os dois na mesa, alinhou as lombadas e não abriu nenhum.
+inn . Dois meses.
+@@@ { t:'sfx', id:'sfx_candle' },
+nar . Apagou a vela.
+@ fade_out
+@@@ { t:'bgm', id:null },
+@@@ { t:'end_chap', line1:'Segundo m\u00eas em Velha Nidhaus.', line2:'A casa come\u00e7ou a responder.', chapter:'capitulo2' },
+@ fade_out
