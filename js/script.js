@@ -20,9 +20,119 @@ var RBF = (typeof RBF !== 'undefined') ? RBF : {};
 RBF.Script = (function () {
   'use strict';
 
+
+  /* ---- numeros que uma personagem enuncia -------------------------------
+
+     Carmine conta as falas da Klara na estrada e diz o total em voz
+     alta. O numero ja ficou para tras tres vezes - "trinta e uma"
+     quando a caminhada era uma linha de narracao, 65/62/64 quando virou
+     cena, 96/93/95 quando a infancia entrou - e cada vez ficou errado
+     em silencio, na boca da unica personagem da obra que nunca erra um
+     registro.
+
+     Nao ha por que um humano manter isso. O beat declara o que quer
+     contar e o numero sai do proprio roteiro, na hora da montagem:
+
+       { t:'dial', ch:'carmine',
+         frases:{ de:'PER11', ch:'klara', ate:'per11_floresta', ramo:'A' },
+         if:{ rota:'perda', taught:'A' } }
+
+     `de`    capitulo de onde contar (nome da variavel em RBF)
+     `ch`    de quem sao as falas
+     `ate`   id da cena onde a contagem para; ausente conta o capitulo
+     `ramo`  valor de `taught` daquele ramo, porque cada partida ve um so
+     `tx`    opcional: molde com %N%. O padrao e '%N% frases.'
+
+     Se a caminhada crescer amanha, o numero cresce junto e ninguem
+     precisa saber que ele existe.                                       */
+
+  var contado = null;
+
+  /* Conta as falas de `ch` ate a cena `ate`, com o ramo de `taught`
+     fixado. Mesma comparacao estrita do engine: `passes()` compara campo
+     a campo por igualdade, e um beat sem `if` sempre entra. */
+  function contaFalas(spec) {
+    var lista = RBF[spec.de];
+    if (!lista || !lista.length) { return 0; }
+
+    var estado = { rota: 'perda' };
+    if (spec.ramo) { estado.taught = spec.ramo; }
+
+    var n = 0;
+    for (var i = 0; i < lista.length; i++) {
+      var b = lista[i];
+      if (spec.ate && b.t === 'scene' && b.id === spec.ate) { break; }
+      if (b.t !== 'dial' || b.ch !== spec.ch) { continue; }
+
+      var passa = true;
+      for (var k in (b['if'] || {})) {
+        if (b['if'][k] !== estado[k]) { passa = false; break; }
+      }
+      if (passa) { n += 1; }
+    }
+    return n;
+  }
+
+  /* Numero por extenso, no feminino, ate 999. Feminino porque o que se
+     conta aqui e frase; se algum dia se contar passo, isto ganha um
+     genero e nao um segundo dicionario. */
+  var UNI = ['', 'uma', 'duas', 'tr\u00eas', 'quatro', 'cinco', 'seis',
+             'sete', 'oito', 'nove', 'dez', 'onze', 'doze', 'treze',
+             'catorze', 'quinze', 'dezesseis', 'dezessete', 'dezoito',
+             'dezenove'];
+  var DEZ = ['', '', 'vinte', 'trinta', 'quarenta', 'cinquenta',
+             'sessenta', 'setenta', 'oitenta', 'noventa'];
+  var CEM = ['', 'cento', 'duzentas', 'trezentas', 'quatrocentas',
+             'quinhentas', 'seiscentas', 'setecentas', 'oitocentas',
+             'novecentas'];
+
+  function porExtenso(n) {
+    if (n < 0 || n > 999) { return String(n); }
+    if (n === 100) { return 'cem'; }
+    if (n < 20) { return UNI[n] || 'zero'; }
+
+    var partes = [];
+    var c = Math.floor(n / 100);
+    var resto = n % 100;
+    if (c) { partes.push(CEM[c]); }
+
+    if (resto) {
+      if (resto < 20) {
+        partes.push(UNI[resto]);
+      } else {
+        var d = Math.floor(resto / 10), u = resto % 10;
+        partes.push(u ? DEZ[d] + ' e ' + UNI[u] : DEZ[d]);
+      }
+    }
+    return partes.join(' e ');
+  }
+
+  /* Percorre o roteiro uma vez e troca `frases` por `tx`. Roda uma vez
+     por sessao: base() e chamada muitas vezes, inclusive num laco de
+     forca bruta sobre todas as combinacoes de escolha. */
+  function resolveNumeros() {
+    if (contado) { return; }
+    contado = true;
+
+    for (var i = 0; i < RBF.CHAPTERS.length; i++) {
+      var part = RBF[RBF.CHAPTERS[i].data];
+      if (!part) { continue; }
+      for (var j = 0; j < part.length; j++) {
+        var b = part[j];
+        if (!b || !b.frases) { continue; }
+        var molde = b.tx || '%N% frases.';
+        var n = contaFalas(b.frases);
+        var txt = porExtenso(n);
+        b.tx = molde.replace('%N%', txt.charAt(0).toUpperCase() + txt.slice(1));
+        b.frasesN = n;
+      }
+    }
+  }
+
   /* ---- roteiro base ----------------------------------------------------- */
 
   function base() {
+    resolveNumeros();
     var out = [];
     for (var i = 0; i < RBF.CHAPTERS.length; i++) {
       var part = RBF[RBF.CHAPTERS[i].data];
@@ -122,7 +232,11 @@ RBF.Script = (function () {
     chapterTitle: chapterTitle,
     chapterStart: chapterStart,
     choices:      choices,
-    sceneLabel:   sceneLabel
+    sceneLabel:   sceneLabel,
+
+    /* Usado por tools/validate.js para conferir numeros que o roteiro
+       enuncia por extenso. Exposto para que exista um conversor so. */
+    porExtenso:   porExtenso
   };
 })();
 

@@ -200,7 +200,12 @@ corredor: {
       recusa: 'A copa fecha \u00e0s seis esta semana.',
       para: 'corredor', px: 1800, py: 254 },
     { x: 1878, y: 220, w: 60, h: 88, fase: 1, para: 'copa',
-      px: 200, py: 460, dir: 'direita' }
+      px: 200, py: 460, dir: 'direita' },
+
+    /* Capitulo 3. A ronda acaba na porta da esquerda, e ela entra
+       pela direita: atravessar o corredor E o trecho. As saidas
+       acima nao existem nesta cena, pelo mesmo criterio dos pontos. */
+    { x: 30, y: 220, w: 60, h: 88, fase: 0, cenas: ['c3'], encerra: 'ronda' }
   ],
 
   gente: [
@@ -293,7 +298,68 @@ corredor: {
       marca: 'cob_relogio',
       tx: ['O rel\u00f3gio de servi\u00e7o marca onze e quarenta.',
            'O dela marca duas e dez.'],
-      depois: ['Onze e quarenta.'] }
+      depois: ['Onze e quarenta.'] },
+
+    /* ======================================================================
+       O CAPITULO 3 - o mesmo corredor, quatro meses antes
+
+       Os mesmos objetos que a Cobertura confere no Capitulo 10. Aqui
+       nao ha um errado. E a unica funcao deste trecho: o jogador anda
+       por este corredor uma vez com tudo em ordem, para que a segunda
+       vez tenha com o que ser comparada.
+
+       Nenhuma linha aponta para a frente. Nada aqui e presagio.
+       ====================================================================== */
+    { id: 'c3_gancho', x: 780, y: 210, alto: 112, raio: 84, uma: true,
+      fase: 0, cenas: ['c3'], marca: 'c3_gancho',
+      tx: ['O gancho das chaves de servi\u00e7o, na bancada do corredor.',
+           'Nove chaves. Ela conferiu contra a lista da semana passada e batia.'],
+      depois: ['Nove.'] },
+
+    { id: 'c3_relogio', x: 1280, y: 225, alto: 134, raio: 84, uma: true,
+      fase: 0, cenas: ['c3'], marca: 'c3_relogio',
+      tx: ['O rel\u00f3gio de servi\u00e7o marca quatro e vinte.',
+           'Ela conferiu no dela. Os dois estavam certos.'],
+      depois: ['Quatro e vinte.'] },
+
+    { id: 'c3_quadro', x: 300, y: 150, alto: 120, uma: true,
+      fase: 0, cenas: ['c3'], marca: 'c3_quadro',
+      tx: ['Uma moldura vazia, pendurada num prego.',
+           'Tem p\u00f3 no aro e p\u00f3 no prego. Est\u00e1 assim desde que ela chegou.'],
+      depois: ['A moldura vazia.'] },
+
+    { id: 'c3_porta_gemeas', x: 1540, y: 150, alto: 120, uma: true,
+      fase: 0, cenas: ['c3'], marca: 'c3_porta',
+      tx: ['A porta do quarto das g\u00eameas, no fim do corredor.',
+           'Passa luz por baixo dela. Passa desde que ela chegou.'],
+      depois: ['Passa luz.'] },
+
+    /* Fenn no horario dele, fazendo a coisa dele. O Capitulo 10 usa a
+       mesma cortesia, no mesmo lugar do corredor, com ele parado e sem
+       chave nenhuma na mao. */
+    { id: 'c3_fenn', x: 1545, y: 250, alto: 160, raio: 96, uma: true,
+      fase: 0, cenas: ['c3'], ch: 'fenn', marca: 'c3_fenn',
+      tx: ['Fenn est\u00e1 recolhendo as chaves da tarde.',
+           'Boa tarde, senhorita.',
+           'Ele disse boa tarde e continuou recolhendo.'],
+      depois: ['Ele terminou o gancho e desceu.'] },
+
+    { id: 'c3_dara', x: 700, y: 330, alto: 150, raio: 110, uma: true,
+      fase: 0, cenas: ['c3'], ch: 'dara', marca: 'c3_dara',
+      tx: ['Dara vai para a copa com a caneca vazia.',
+           'A copa abre at\u00e9 as seis.',
+           'A senhorita quer?',
+           'Antoniette disse que n\u00e3o e Dara n\u00e3o insistiu.'],
+      depois: ['Ela desceu para a copa.'] },
+
+    /* A bancada nao e conferida no Capitulo 10. E conferida aqui porque
+       o inventario que ela veio fazer e este, e nao o outro. */
+    { id: 'c3_bancada', x: 780, y: 300, alto: 96, raio: 84, uma: true,
+      fase: 0, cenas: ['c3'], marca: 'c3_bancada',
+      tx: ['A bancada do corredor, com o livro de servi\u00e7o aberto.',
+           'Quatro entradas hoje, tr\u00eas assinadas.',
+           'A quarta era a dela, e ela assinou.'],
+      depois: ['Assinado.'] }
   ]
 },
 
@@ -686,6 +752,28 @@ cob10_inventario: {
     caderno:       { nome: 'O caderno sem identifica\u00e7\u00e3o', icone: 'livro_lacrado' },
     chave_servico: { nome: 'Chave do escrit\u00f3rio',          icone: 'chave' }
   }
+},
+
+/* --------------------------------------------------------------------------
+   A RONDA DAS QUATRO E VINTE - Capitulo 3
+
+   O mesmo corredor da Cobertura, quatro meses antes, com tudo em ordem.
+   Nao ha item, nao ha refugio e nao ha o que fugir: e uma tarde de
+   trabalho comum, e a casa ainda tem gente dentro.
+
+   `cena: 'c3'` troca os pontos e as saidas sem tocar na planta, na
+   mobilia nem em Fenn e Dara, que a fase 0 ja poe la.
+
+   Nenhuma marca daqui e lida pelo roteiro. O trecho existe para que o
+   jogador tenha andado por este corredor uma vez, com tudo certo, antes
+   de andar por ele de novo no Capitulo 10.
+   -------------------------------------------------------------------------- */
+c3_ronda: {
+  cena: 'c3',
+  entrada: 'corredor',
+  jogador: 'antoniette',
+  x: 1800, y: 300, dir: 'esquerda',
+  itens: {}
 }
 
 };

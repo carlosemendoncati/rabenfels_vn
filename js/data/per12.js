@@ -255,13 +255,23 @@ RBF.PER12 = [
 { t:'dial', ch:'carmine', tx:'Ela falou com voc\u00ea na estrada.', if:R },
 { t:'dial', ch:'antoniette', tx:'Falou.', if:R },
 { t:'pause', if:R },
-/* O numero e contado, e nao estimado: sao as frases da Klara na
-   caminhada de per11, por ramo de `taught`, porque cada partida ve um
-   ramo so. Recontado em 25/08 depois de a cena da infancia entrar:
-   comum 89, A 96, B 93, C 95. Recontar se a caminhada mudar. */
-{ t:'dial', ch:'carmine', tx:'Noventa e seis frases.', if:{ rota:'perda', taught:'A' } },
-{ t:'dial', ch:'carmine', tx:'Noventa e tr\u00eas frases.', if:{ rota:'perda', taught:'B' } },
-{ t:'dial', ch:'carmine', tx:'Noventa e cinco frases.', if:{ rota:'perda', taught:'C' } },
+/* O numero nao esta escrito aqui, e de proposito.
+
+   Ele ja ficou para tras tres vezes - \"trinta e uma\" quando a
+   caminhada era uma linha de narracao, 65/62/64 quando virou cena,
+   96/93/95 quando a infancia entrou. Toda vez ficou errado em
+   silencio, na boca da unica personagem da obra que nunca erra um
+   registro.
+
+   Agora o beat declara o que contar e `resolveNumeros()`, em
+   js/script.js, conta no proprio roteiro na hora da montagem. Sao
+   as falas da Klara ate a cena `per11_floresta`, com o ramo de
+   `taught` fixado, porque cada partida ve um ramo so.
+
+   Nao ha nada a manter. Se a caminhada crescer, o numero cresce. */
+{ t:'dial', ch:'carmine', frases:{ de:'PER11', ch:'klara', ate:'per11_floresta', ramo:'A' }, if:{ rota:'perda', taught:'A' } },
+{ t:'dial', ch:'carmine', frases:{ de:'PER11', ch:'klara', ate:'per11_floresta', ramo:'B' }, if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'carmine', frases:{ de:'PER11', ch:'klara', ate:'per11_floresta', ramo:'C' }, if:{ rota:'perda', taught:'C' } },
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette n\u00e3o tinha contado.', if:R },
 { t:'pause', if:R },

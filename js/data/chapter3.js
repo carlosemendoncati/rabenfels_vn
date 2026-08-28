@@ -241,6 +241,24 @@ RBF.CHAPTER3 = [
 { t:'nar', tx:'Ela devolveu os volumes pela numera\u00e7\u00e3o. Conferiu a sequ\u00eancia duas vezes.' },
 
 /* ======================================================================
+   C3b - A RONDA DAS QUATRO E VINTE  (trecho jogado)
+
+   O ANTES. Nove chaves no gancho, dois relogios certos, luz por
+   baixo da porta das gemeas, Fenn recolhendo no horario dele e Dara
+   descendo para a copa. Nada errado, e nada apontando para a frente.
+
+   O DEPOIS e o mesmo corredor no Capitulo 10, com os mesmos
+   objetos. Nenhum dos dois trechos comenta o outro.
+   ====================================================================== */
+{ t:'nar', tx:'A ronda das quatro e vinte era dela desde o segundo m\u00eas.' },
+{ t:'nar', tx:'Atravessar o corredor de servi\u00e7o e conferir o que a lista mandava conferir.' },
+{ t:'pause' },
+{ t:'percurso', id:'c3_ronda', chapter:'capitulo3',
+  campo:'c3_saida', conta:'c3_conferiu', padrao:'ronda' },
+{ t:'nar', tx:'Ela assinou a quarta entrada do dia e devolveu a pena ao tinteiro da bancada.' },
+{ t:'pause' },
+
+/* ======================================================================
    C4 - A JANELA - FIM DA MANHA
    Klara quer e tenta - primeiro pela irma, como no Capitulo 1.
    Antoniette ouve de fora. (Peters)

@@ -250,7 +250,10 @@
   transform: translateX(-50%) translateY(10px);
 
   display: flex;
-  align-items: flex-end;
+  /* Centro, e nao rodape. Com `flex-end` a linha de texto encostava no
+     fio de ouro da placa, porque o retrato tem 92px e o corpo tem a
+     altura de uma linha. */
+  align-items: center;
   gap: calc(var(--rbf-ui) * 14px);
 
   width: min(94%, calc(var(--rbf-ui) * 760px));
@@ -266,6 +269,12 @@
   pointer-events: none;
   transition: opacity .28s ease, transform .28s ease,
               border-color var(--rbf-medium) var(--rbf-ease-settle);
+}
+
+.rf-perc__fala.is-on {
+  opacity: 1;
+  transform: translateX(-50%);
+  pointer-events: auto;
 }
 
 /*
@@ -286,7 +295,7 @@
   border-image: var(--rbf-art-ui-dialogue-plate-leather) 44 62 44 62 fill stretch;
   border-image-width: calc(var(--rbf-ui) * 22px) calc(var(--rbf-ui) * 30px);
   border-image-outset: 0;
-  padding: calc(var(--rbf-ui) * 20px) calc(var(--rbf-ui) * 30px);
+  padding: calc(var(--rbf-ui) * 30px) calc(var(--rbf-ui) * 34px);
 }
 
 /*
@@ -318,7 +327,17 @@
 
 .rf-perc__face.is-on { display: block; }
 
-.rf-perc__corpo { min-width: 0; }
+/* `min-width: 0` deixa o texto quebrar dentro do flex. O piso de altura
+   mantem a placa do mesmo tamanho para fala de uma e de duas linhas -
+   sem ele a caixa pulava de altura a cada fala. */
+.rf-perc__corpo {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(var(--rbf-ui) * 60px);
+}
 
 .rf-perc__nome {
   display: block;

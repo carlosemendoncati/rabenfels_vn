@@ -177,6 +177,36 @@ RBF.EPILOGUE = [
 { t:'nar', tx:'O tribunal n\u00e3o pediu as quatro p\u00e1ginas. N\u00e3o chegou a precisar delas.', if:{ rota:'cobertura' } },
 
 { t:'spr', ch:'matheo', ex:'hollow', pos:'center' },
+
+/* ----------------------------------------------------------------
+   A FILA
+
+   Sem condicao: as quatro leituras passam por aqui. Matheo nao e um
+   escriba qualquer que recebeu um pacote - foi ele que colocou
+   Antoniette dentro do oficio, catorze anos antes, por causa de um
+   carimbo que so ela viu.
+
+   Ela conta esta mesma cena na estrada, no Capitulo 11, e nao diz o
+   nome dele: \"Ele e da Ordem. Eu nao falo de gente da Ordem com
+   quem nao e.\" Quem fecha a conta e ele, aqui, com ela morta.
+
+   O texto nao comenta. Enumera, que e como este homem pensa.
+   ---------------------------------------------------------------- */
+{ t:'pause' },
+{ t:'nar', tx:'Ele tinha conhecido a autora do relato numa fila de cart\u00f3rio, em Alsbeck, quando ela tinha dezessete anos.' },
+{ t:'nar', tx:'Ela reparou que o escritur\u00e1rio da frente estava com o carimbo errado. Ningu\u00e9m mais na fila reparou, e ele estava na fila havia meia hora.' },
+{ t:'pause' },
+{ t:'nar', tx:'Perguntou o nome dela e n\u00e3o disse o dele.' },
+{ t:'nar', tx:'Escreveu o endere\u00e7o da Academia num papel de balc\u00e3o e pagou a inscri\u00e7\u00e3o do exame, que a Ordem manda pagar e ningu\u00e9m paga.' },
+{ t:'pause' },
+{ t:'nar', tx:'N\u00e3o a ensinou. Apontou uma porta e voltou para Lervel, e n\u00e3o acompanhou o resultado.' },
+{ t:'pause' },
+{ t:'inn', tx:'Ela entrou por mim.' },
+{ t:'pause' },
+{ t:'nar', tx:'Oito anos entre o papel de balc\u00e3o e o parecer.' },
+{ t:'nar', tx:'Ele escreveu os dois.' },
+{ t:'pause' },
+
 { t:'nar', tx:'Depois do parecer ele continuou trabalhando. Era o que havia para fazer com o dia.' },
 
 /* ======================================================================
@@ -233,7 +263,7 @@ RBF.EPILOGUE = [
 /* --- a segunda linha, e nela a digital de Antoniette --- */
 { t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
     'RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.',
-    'Curso: registro e verifica\u00e7\u00e3o de fontes.'
+    'Curso: Registro Comparado e Reconstru\u00e7\u00e3o Documental.'
 ], if:{ taught:'A' } },
 { t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
     'RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.',
@@ -248,7 +278,8 @@ RBF.EPILOGUE = [
 { t:'nar', tx:'Ele leu o curso duas vezes.', if:{ taught:'A' } },
 { t:'inn', tx:'\u00c9 o meu.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Ele tinha ensinado aquela disciplina uma vez na vida, a uma escritur\u00e1ria de vinte e dois anos, em Lervel, num inverno.', if:{ taught:'A' } },
+{ t:'nar', tx:'Ele deu aquela cadeira por nove anos. Largou quando entrou para a Ordem.', if:{ taught:'A' } },
+{ t:'nar', tx:'A mat\u00e9ria ficou. Ele nunca soube quem passou por ela.', if:{ taught:'A' } },
 
 /* ======================================================================
    O QUE ELE FAZ EM VEZ DE PASSAR ADIANTE
@@ -259,9 +290,10 @@ RBF.EPILOGUE = [
    ====================================================================== */
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'Ele n\u00e3o passou adiante. Pediu o hist\u00f3rico da disciplina, que \u00e9 p\u00fablico e ningu\u00e9m pede.', if:{ taught:'A' } },
+{ t:'nar', tx:'Quem respondeu foi o professor Halvern, que ocupa a cadeira agora.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 hist\u00f3rico da disciplina \u2014', lns:[
-    'Registro e verifica\u00e7\u00e3o de fontes. Trinta e um anos.',
+    'Registro Comparado e Reconstru\u00e7\u00e3o Documental. Trinta e um anos.',
     'Aprova\u00e7\u00f5es com men\u00e7\u00e3o: duas.'
 ], if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
@@ -269,6 +301,18 @@ RBF.EPILOGUE = [
 { t:'nar', tx:'A outra tinha dezoito anos e morava em Velha Nidhaus.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'inn', tx:'Duas em trinta e um anos, e as duas saem da mesma casa.', if:{ taught:'A' } },
+
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Junto do hist\u00f3rico veio uma folha que ele n\u00e3o tinha pedido.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'arc', key:'cadastro', label:'\u2014 anexo, de pr\u00f3prio punho \u2014', lns:[
+    'Escrevi \u00e0 senhorita Rabenfels h\u00e1 oito anos e nunca tive resposta.',
+    'Se o senhor tiver o endere\u00e7o dela, eu agrade\u00e7o. H. Halvern.'
+], if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'inn', tx:'Ele tem o endere\u00e7o.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'nar', tx:'Respondeu no mesmo dia, em quatro linhas. Uma delas era a data da morte.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'Da estrada de Lervel at\u00e9 Eldoria s\u00e3o quatro dias de carruagem. Ele levou onze para decidir e quatro para ir.', if:{ taught:'A' } },
@@ -304,7 +348,7 @@ RBF.EPILOGUE = [
 { t:'dial', ch:'klara', tx:'Disse. Ele \u00e9 fonte \u00fanica.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Matheo tinha escrito aquela express\u00e3o num quadro em Lervel, num inverno, para uma turma de tr\u00eas.', if:{ taught:'A' } },
+{ t:'nar', tx:'\u201cFonte \u00fanica\u201d est\u00e1 na p\u00e1gina nove do manual da cadeira. Foi ele que escreveu o manual.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'dial', ch:'matheo', tx:'E o que a senhorita faz com a marca?', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
@@ -313,9 +357,10 @@ RBF.EPILOGUE = [
 { t:'dial', ch:'klara', tx:'Riscar ensina a esconder o erro.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Aquela frase n\u00e3o estava no quadro de Lervel. Foi de uma aluna que a inventou depois, sozinha, e ele nunca chegou a saber.', if:{ taught:'A' } },
+{ t:'nar', tx:'Essa n\u00e3o era dele.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'inn', tx:'Ela n\u00e3o aprendeu isso aqui.', if:{ taught:'A' } },
+{ t:'nar', tx:'Ele conferiu o manual naquela noite, na estalagem, p\u00e1gina por p\u00e1gina. N\u00e3o estava.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 
 { t:'dial', ch:'matheo', tx:'Quem ensinou isso \u00e0 senhorita?', if:{ taught:'A' } },
@@ -329,6 +374,17 @@ RBF.EPILOGUE = [
 { t:'dial', ch:'klara', tx:'N\u00e3o.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'Ela fechou o caderno com as duas m\u00e3os e n\u00e3o perguntou quem ele era.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+
+/* A moca da fila tambem nao perguntou. Ele reparou nas duas pela
+   mesma coisa, com catorze anos de intervalo, e as duas vezes
+   confundiu reparar com nao ter consequencia.
+
+   A fila esta contada na cena de abertura, sem condicao. Aqui e
+   eco, e eco e o que faz a segunda linha doer. */
+{ t:'inn', tx:'A outra tamb\u00e9m n\u00e3o perguntou.', if:{ taught:'A' } },
+{ t:'pause', if:{ taught:'A' } },
+{ t:'inn', tx:'As duas entraram por mim.', if:{ taught:'A' } },
 { t:'nar', tx:'Perguntar seria informa\u00e7\u00e3o, e ela tinha sido criada numa casa que l\u00ea tudo o que entra e sai.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },

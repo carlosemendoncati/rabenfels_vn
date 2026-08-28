@@ -33,7 +33,7 @@ RBF.CONFIG = {
       Incrementar apenas quando o formato de save mudar de forma
       incompativel. Saves de versao diferente sao recusados com aviso.
   */
-  gameVersion:       '0.14.0',
+  gameVersion:       '0.15.0',
 
   /*
     Subiu para 2 na revisao 0.5.0. O formato do save nao mudou, mas o
@@ -55,8 +55,14 @@ RBF.CONFIG = {
     especifico por rota e acrescentou a leitura falsa de "autoria
     falecida" em Resposta. Como o roteiro e um vetor unico, esses beats
     deslocam saves das rotas seguintes mesmo quando sao condicionais.
+
+    Subiu para 6 em 0.15.0. A cena da Academia entrou na caminhada da
+    Perda e o Capitulo 11 passou de 427 para 1082 beats. O Epilogo mudou
+    de conteudo, e o Capitulo 3 ganhou o trecho jogado da ronda - que e
+    no tronco comum, entao desloca indice para todas as quatro leituras.
+    Nenhum save antigo abre na frase certa.
   */
-  saveSchemaVersion: 5,
+  saveSchemaVersion: 6,
 
   paths: {
     backgrounds:  'assets/backgrounds/',

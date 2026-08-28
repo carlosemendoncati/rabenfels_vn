@@ -377,14 +377,54 @@ async function main() {
   check(temAlvo, 'o bau responde a interacao');
 
   await page.waitForTimeout(900);
+  /* Pixel, e nao nome de classe. A versao anterior lia
+     `classList.contains('is-on')` e passou por toda a producao com a
+     caixa invisivel: o JS punha a classe e o CSS nao tinha a regra que
+     responde, entao ela ficava em `opacity: 0`. Um check que so podia
+     passar. Agora le o que o frame capturado mostra. */
   const falaVis = await page.evaluate(() => {
     const el = document.querySelector('.rf-perc__fala');
-    const t = document.querySelector('.rf-perc__txt');
-    return { on: el.classList.contains('is-on'), txt: (t.textContent || '').length };
+    const t  = document.querySelector('.rf-perc__txt');
+    const cs = getComputedStyle(el);
+    const r  = el.getBoundingClientRect();
+    return {
+      classe:  el.classList.contains('is-on'),
+      opacidade: parseFloat(cs.opacity),
+      display: cs.display,
+      visib:   cs.visibility,
+      larg:    Math.round(r.width),
+      alt:     Math.round(r.height),
+      naTela:  r.bottom > 0 && r.top < innerHeight
+                 && r.right > 0 && r.left < innerWidth,
+      txt:     (t.textContent || '').length
+    };
   });
-  check(falaVis.on, 'o painel de fala aparece');
+  check(falaVis.classe, 'o painel de fala recebe a classe is-on');
+  check(falaVis.opacidade > 0.9 && falaVis.display !== 'none'
+          && falaVis.visib !== 'hidden',
+        'o painel de fala esta mesmo visivel',
+        'opacidade=' + falaVis.opacidade + ' display=' + falaVis.display
+          + ' visibility=' + falaVis.visib);
+  check(falaVis.larg > 200 && falaVis.alt > 40 && falaVis.naTela,
+        'o painel de fala ocupa area dentro da tela',
+        falaVis.larg + 'x' + falaVis.alt + ' naTela=' + falaVis.naTela);
   check(falaVis.txt > 0, 'o texto entra na maquina de escrever',
         falaVis.txt + ' caracteres');
+
+  /* O retrato foi pedido junto com a caixa e nunca tinha sido medido. */
+  const face = await page.evaluate(() => {
+    const el = document.querySelector('.rf-perc__face');
+    const cs = getComputedStyle(el);
+    const r  = el.getBoundingClientRect();
+    return { disp: cs.display, bg: cs.backgroundImage,
+             larg: Math.round(r.width), alt: Math.round(r.height) };
+  });
+  check(face.disp !== 'none' && face.larg > 20 && face.alt > 20,
+        'o retrato aparece na faixa de fala',
+        face.disp + ' ' + face.larg + 'x' + face.alt);
+  check(/url\(/.test(face.bg) && !/none/.test(face.bg),
+        'o retrato tem imagem, e nao moldura vazia',
+        String(face.bg).slice(0, 90));
 
   await page.screenshot({ path: path.join(OUT, '03_fala.png') });
 
@@ -576,6 +616,15 @@ async function main() {
           const fa = p[a].fase, fb = p[b].fase;
           const coexistem = (fa === undefined || fb === undefined || fa === fb);
           if (!coexistem) { continue; }
+
+          /* Mesmo argumento numa segunda dimensao: dois pontos no mesmo
+             lugar em CENAS diferentes sao o mesmo objeto em capitulos
+             diferentes. O relogio do Capitulo 3 e o relogio da Cobertura
+             ocupam o mesmo pixel de proposito, e as duas cenas nunca
+             acontecem juntas. Ponto sem `cenas` pertence a 'cob'. */
+          const ca = p[a].cenas || ['cob'];
+          const cb = p[b].cenas || ['cob'];
+          if (!ca.some(x => cb.indexOf(x) >= 0)) { continue; }
 
           const dx = p[a].x - p[b].x, dy = p[a].y - p[b].y;
           const d = Math.sqrt(dx * dx + dy * dy);
@@ -942,6 +991,138 @@ async function main() {
 
   await page.waitForTimeout(600);
   await page.screenshot({ path: path.join(OUT, '07_volta_a_vn.png') });
+
+
+  /* ---- o trecho do Capitulo 3 -------------------------------------------
+
+     O ANTES. Mesmo mapa, mesma mobilia, mesma gente - e outro texto. O
+     que se confere aqui e a separacao por cena: se um ponto da Cobertura
+     vazar para o Capitulo 3, o jogador le no corredor de agosto uma
+     frase sobre a mala que ela ainda nem pensou em fazer.               */
+
+  /* Pagina nova. A aba vinha do fim do percurso da Cobertura, com o
+     estado em `playing` e o epoch do engine ja avancado; startChapter
+     dali nao saia do lugar e o laco gastava os 700 avancos parado. */
+  await page.goto(URL);
+  await page.waitForTimeout(1000);
+  await page.evaluate(() => {
+    RBF.Settings.set('typewriter', false);
+    RBF.Settings.set('contentWarning', false);
+    RBF.CONFIG.text.pauseMs = 1;
+    RBF.CONFIG.timing.fadeMs = 1;
+    RBF.CONFIG.timing.cardMs = 1;
+    RBF.Menu.openArchive();
+  });
+  await page.waitForTimeout(600);
+  await page.evaluate(() => {
+    document.getElementById('main-menu')
+            .classList.remove('show', 'is-revealing', 'is-returning');
+    RBF.Engine.startChapter('capitulo3');
+  });
+  await page.waitForTimeout(400);
+
+  const chegou3 = await page.evaluate(async () => {
+    for (let i = 0; i < 700; i++) {
+      if (RBF.Rpg.ativo()) { return i; }
+      const d = RBF.Engine._debug;
+      if (d.isChoice()) {
+        const b = d.buttons();
+        if (b.length) { b[0].click(); }
+      } else {
+        d.input();
+      }
+      await new Promise(r => setTimeout(r, 5));
+    }
+    return -1;
+  });
+  check(chegou3 >= 0, 'c3: o roteiro chega ao trecho jogado',
+        'nao chegou em 700 avancos');
+
+  await page.waitForTimeout(1600);
+  check(await page.evaluate(() => RBF.Rpg.ativo()), 'c3: o percurso assumiu a tela');
+
+  const c3 = await page.evaluate(() => {
+    const j = RBF.Rpg._debug.estado();
+    const s = RBF.COB_MAPAS[j.sala];
+    /* O que o motor mostra AGORA, e nao o que o mapa declara. */
+    const vis = RBF.Rpg._debug.pontosVisiveis
+      ? RBF.Rpg._debug.pontosVisiveis()
+      : null;
+    return { sala: j.sala, cena: j.cena, fase: j.fase,
+             declarados: s.pontos.length, visiveis: vis && vis.map(p => p.id) };
+  });
+  check(c3.sala === 'corredor', 'c3: comeca no corredor', c3.sala);
+  check(c3.cena === 'c3', 'c3: o estado carrega a cena', String(c3.cena));
+  check(c3.fase === 0, 'c3: fase 0, a casa ainda administrativa', String(c3.fase));
+
+  if (c3.visiveis) {
+    const vazou = c3.visiveis.filter(id => id.indexOf('c3_') !== 0);
+    check(vazou.length === 0, 'c3: nenhum ponto da Cobertura vaza',
+          vazou.join(' '));
+    check(c3.visiveis.length === 7, 'c3: os sete pontos do capitulo estao la',
+          c3.visiveis.join(' '));
+  }
+
+  const saidas3 = await page.evaluate(() => {
+    const s = RBF.COB_MAPAS.corredor;
+    return RBF.Rpg._debug.saidasVisiveis
+      ? RBF.Rpg._debug.saidasVisiveis().map(x => x.encerra || x.para)
+      : null;
+  });
+  if (saidas3) {
+    check(saidas3.length === 1 && saidas3[0] === 'ronda',
+          'c3: a unica saida e a que encerra a ronda', saidas3.join(' '));
+  }
+
+  /* Fenn e Dara sao da casa, e nao do trecho: tem de continuar la.
+     Vem do motor, e nao do mapa - o mapa so diria o que eu escrevi. */
+  const gente3 = await page.evaluate(() =>
+    (RBF.Rpg._debug.genteVisivel() || []).map(g => g.ch));
+  check(gente3.indexOf('fenn') >= 0 && gente3.indexOf('dara') >= 0,
+        'c3: Fenn e Dara continuam no corredor', gente3.join(' '));
+  check(gente3.indexOf('vulto') < 0,
+        'c3: o vulto nao aparece, porque e da fase 1', gente3.join(' '));
+
+  await page.screenshot({ path: path.join(OUT, '13_c3_ronda.png') });
+
+  /* Conferir um ponto, e ler o texto do Capitulo 3 e nao o da Cobertura. */
+  const fala3 = await page.evaluate(async () => {
+    const j = RBF.Rpg._debug.estado();
+    j.p.x = 1280; j.p.y = 300; j.p.dir = 'cima';
+    RBF.Rpg._debug.usa();
+    await new Promise(r => setTimeout(r, 700));
+    const f = RBF.Rpg._debug.estado().fala;
+    return f ? String(f.escrito || '') : '';
+  });
+  check(/quatro e vinte/i.test(fala3),
+        'c3: o relogio marca quatro e vinte, e nao onze e quarenta',
+        fala3.slice(0, 80));
+
+  await page.screenshot({ path: path.join(OUT, '14_c3_fala.png') });
+
+  /* Sair pela porta da esquerda encerra e devolve o roteiro. */
+  const volta3 = await page.evaluate(async () => {
+    const j = RBF.Rpg._debug.estado();
+    j.fala = null;
+    j.p.x = 120; j.p.y = 264; j.p.dir = 'esquerda';
+    RBF.Rpg._debug.usa();
+    for (let i = 0; i < 60 && RBF.Rpg.ativo(); i++) {
+      await new Promise(r => setTimeout(r, 60));
+    }
+    return { ativo: RBF.Rpg.ativo(), estado: RBF.State.get(),
+             saida: RBF.STATE.flags.c3_saida,
+             conferiu: RBF.STATE.flags.c3_conferiu,
+             relogio: RBF.STATE.flags.c3_relogio,
+             gancho:  RBF.STATE.flags.c3_gancho };
+  });
+  check(!volta3.ativo, 'c3: a porta da esquerda encerra a ronda');
+  check(volta3.saida === 'ronda', 'c3: a saida chega ao roteiro',
+        String(volta3.saida));
+  check(typeof volta3.conferiu === 'number', 'c3: a contagem entra como numero',
+        String(volta3.conferiu));
+  check(volta3.relogio === true, 'c3: marca feita entra como true');
+  check(volta3.gancho === false, 'c3: marca NAO feita entra como false',
+        'valor=' + String(volta3.gancho));
 
   /* ---- erros de runtime ------------------------------------------------- */
 

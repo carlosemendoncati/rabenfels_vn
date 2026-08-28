@@ -118,6 +118,10 @@ function boot() {
 }
 
 function tick(ms) {
+  /* NAO trocar por setImmediate. `fastForward` deixa a temporizacao do
+     engine em 1ms e o engine agenda o proximo passo nesses timers; ceder
+     o loop sem deixar 1ms real passar faz o percurso empacar no teto de
+     passos. Ja foi tentado, deu 53 falhas. */
   return new Promise(r => setTimeout(r, ms || 0));
 }
 
@@ -1352,6 +1356,17 @@ function endingsReachableCheck() {
   const total = Math.pow(3, escolhas.length);
   const limite = 200000;
 
+  /* Todos os beats 'flag' do roteiro, na ordem em que a partida os
+     encontra - a mesma ordem de profundidade que a varredura antiga
+     usava, com o `then` de cada opcao visitado no lugar da escolha. */
+  const beatsFlag = [];
+  (function colhe(bs) {
+    for (const b of bs) {
+      if (b.t === 'flag' && b.set) { beatsFlag.push(b); }
+      if (b.t === 'cho') { for (const o of b.opts) { if (o.then) { colhe(o.then); } } }
+    }
+  })(RBF.Script.base());
+
   for (let n = 0; n < Math.min(total, limite); n++) {
     const rotas = {};
     const flags = {};
@@ -1366,17 +1381,14 @@ function endingsReachableCheck() {
     }
     /* Beats 'flag' condicionais tambem gravam. Sem isto a forca bruta nao
        enxerga o gatilho da Cobertura Queimada, que nasce da combinacao de
-       duas escolhas e nao de uma opcao sozinha. */
-    (function varre(bs) {
-      for (const b of bs) {
-        if (b.t === 'flag' && b.set) {
-          let vale = true;
-          for (const k in (b.if || {})) { if (flags[k] !== b.if[k]) { vale = false; } }
-          if (vale) { for (const k in b.set) { flags[k] = b.set[k]; } }
-        }
-        if (b.t === 'cho') { for (const o of b.opts) { if (o.then) { varre(o.then); } } }
-      }
-    })(RBF.Script.base());
+       duas escolhas e nao de uma opcao sozinha. A lista vem pronta de
+       fora do laco: quem varia por combinacao e a decisao de aplicar
+       cada beat, nao quais beats existem. */
+    for (const b of beatsFlag) {
+      let vale = true;
+      for (const k in (b.if || {})) { if (flags[k] !== b.if[k]) { vale = false; } }
+      if (vale) { for (const k in b.set) { flags[k] = b.set[k]; } }
+    }
     const esc = resolve(rotas, flags);
     if (esc) { alcancados.add(esc.id); alcancadosFim.add(esc.ending); }
   }
@@ -1683,6 +1695,163 @@ function layoutRegressionChecks() {
    As tres regras ficam aqui com o motivo junto.
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   ORFAOS DE OPACIDADE
+
+   Elemento com regra-base em `opacity: 0` existe para ser levantado
+   depois, por uma classe de estado ou por animacao. Se nada o levanta,
+   ele e invisivel para sempre.
+
+   Esta checagem existe porque foi o que aconteceu com `.rf-perc__fala`,
+   a caixa de dialogo do percurso: `js/rpg.js` ligava `is-on` nela e a
+   regra `.rf-perc__fala.is-on` nunca tinha sido escrita. O percurso
+   inteiro rodou sem mostrar uma fala, e a placa de couro do ANTES e o
+   fio rubro do DEPOIS nunca chegaram a tela.
+
+   Nao foi pego antes porque o teste que olhava para ela conferia
+   `classList.contains('is-on')` - o nome da classe, e nao o pixel.
+
+   So seletor simples entra: uma classe ou um id, sem combinador e sem
+   pseudo-elemento. Regra com modificador de estado (`#vn.tem-percurso
+   #game-bar`) esconde de proposito e nao e orfa.
+   -------------------------------------------------------------------------- */
+function opacidadeOrfaChecks() {
+  section('ORFAOS DE OPACIDADE');
+
+  const SIMPLES = /^(?:\.[A-Za-z][\w-]*|#[A-Za-z][\w-]*)$/;
+  const arquivos = ['css/rpg.css', 'css/style.css', 'css/ui.css'];
+
+  for (const rel of arquivos) {
+    const css = fs.readFileSync(path.join(ROOT, rel), 'utf8')
+                  .replace(/\/\*[\s\S]*?\*\//g, '');
+    const regras = [];
+    const re = /([^{}]+)\{([^{}]*)\}/g;
+    let m;
+    while ((m = re.exec(css)) !== null) {
+      const sels  = m[1].split(',').map(x => x.trim()).filter(Boolean);
+      const corpo = m[2];
+      const op = /(^|[;\s])opacity\s*:\s*([\d.]+)/.exec(corpo);
+      regras.push({
+        sels,
+        op: op ? parseFloat(op[2]) : null,
+        anim: /(^|[;\s])animation\s*:/.test(corpo)
+      });
+    }
+
+    const orfas = [];
+    for (const r of regras) {
+      if (r.op !== 0) { continue; }
+      for (const sel of r.sels) {
+        if (!SIMPLES.test(sel)) { continue; }
+        const levantado = regras.some(a =>
+          (a.op > 0 || a.anim) && a.sels.some(x => x.includes(sel)));
+        if (!levantado) { orfas.push(sel); }
+      }
+    }
+    check(orfas.length === 0,
+          rel + ': nada fica parado em opacity 0 sem quem levante',
+          orfas.join(' '));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   NUMEROS QUE O ROTEIRO ENUNCIA
+
+   Duas familias, e as duas ja erraram.
+
+   1. DERIVADOS DO PROPRIO ROTEIRO. Carmine conta as falas da Klara na
+      estrada e diz o total. Esse numero ficou para tras tres vezes -
+      "trinta e uma", 65/62/64, 96/93/95 - e cada vez errou em silencio.
+      Agora o beat declara `frases:{...}` e js/script.js conta na
+      montagem. A checagem aqui e que a resolucao aconteceu: beat com
+      `frases` tem de sair com `tx` preenchido.
+
+   2. SERIE NUMERADA A MAO. O Caderno Operacional tem entradas
+      numeradas - 1, 4, 9, 23, 31, 44, 71, 214 - e o numero da ultima e
+      dito por extenso em CINCO lugares, em quatro arquivos, mais o
+      titulo de um capitulo. Trocar a ultima entrada e deixar as cinco
+      grafias para tras e um acidente de uma linha.
+
+      Aqui a serie e lida do roteiro, a maior vira palavra pelo mesmo
+      conversor que o jogo usa, e toda grafia de "<numero> entradas" tem
+      de bater com ela.
+   -------------------------------------------------------------------------- */
+function numerosEnunciadosChecks(win) {
+  section('NUMEROS QUE O ROTEIRO ENUNCIA');
+
+  const RBF = win.RBF;
+  const script = RBF.Script.base();
+
+  /* --- 1. os derivados resolveram --------------------------------------- */
+  const decl = script.filter(b => b && b.frases);
+  check(decl.length > 0, 'ha beat que declara contagem automatica',
+        String(decl.length));
+  for (const b of decl) {
+    check(typeof b.tx === 'string' && b.tx.length > 0,
+          'contagem resolvida em texto: ramo ' + (b.frases.ramo || '-'),
+          String(b.tx));
+    check(typeof b.frasesN === 'number' && b.frasesN > 0,
+          'contagem devolveu numero: ramo ' + (b.frases.ramo || '-'),
+          String(b.frasesN));
+  }
+  /* Ramos diferentes tem de dar numeros diferentes, senao a condicao por
+     `taught` nao esta sendo aplicada e os tres dizem a mesma coisa. */
+  const ns = decl.map(b => b.frasesN);
+  check(new Set(ns).size === ns.length,
+        'cada ramo conta o seu proprio numero', ns.join(' '));
+
+  /* --- 2. a serie do caderno bate com o que a voz diz -------------------
+
+     Por POSICAO, e nao contra um maximo global: o caderno cresce
+     durante a obra. Em res10 o total e 214; duas cenas depois ela
+     escreve a entrada 215 e o texto passa a dizer 215. As duas estao
+     certas onde estao. O que nao pode e uma grafia ficar para tras
+     quando a serie crescer.                                           */
+  /* Literal, e nao new RegExp a partir de string: dentro de aspas
+     simples o JavaScript le '\b' como backspace, e o teste nunca
+     casava. */
+  const NUMERAL = /^(uma|duas|tr\u00eas|quatro|cinco|seis|sete|oito|nove|dez|onze|doze|treze|catorze|quinze|dezesseis|dezessete|dezoito|dezenove|vinte|trinta|quarenta|cinquenta|sessenta|setenta|oitenta|noventa|cem|cento|duzentas|trezentas|quatrocentas|quinhentas|seiscentas|setecentas|oitocentas|novecentas)\b/;
+
+  let maior = 0;
+  let vistas = 0;
+  const erradas = [];
+
+  for (const b of script) {
+    if (!b) { continue; }
+    /* O numero da entrada aparece no rotulo, no corpo do cartao e na
+       narracao. Ler so o rotulo achava a entrada 71 e reprovava as
+       quatro grafias verdadeiras. */
+    const texto = [b.label || '', b.tx || '',
+                   (b.lns || []).join(' ')].join(' ');
+
+    let m;
+    const reEnt = /Entrada\s+(\d+)/gi;
+    while ((m = reEnt.exec(texto)) !== null) {
+      maior = Math.max(maior, parseInt(m[1], 10));
+    }
+
+    const reDito = /([a-z\u00e0-\u00ff]+(?:\s+e\s+[a-z\u00e0-\u00ff]+)*)\s+entradas/gi;
+    while ((m = reDito.exec(texto)) !== null) {
+      const dito = m[1].toLowerCase().trim();
+      /* "das entradas", "poucas entradas" nao sao contagem. */
+      if (!NUMERAL.test(dito)) { continue; }
+      vistas += 1;
+      if (maior > 0 && dito !== RBF.Script.porExtenso(maior)) {
+        erradas.push(dito + ' (a serie ia em ' + maior + ')');
+      }
+    }
+  }
+
+  check(maior > 0, 'a serie do Caderno Operacional foi encontrada',
+        'maior entrada: ' + maior);
+  check(vistas > 0, 'ha total do caderno dito por extenso no roteiro',
+        String(vistas) + ' grafia(s)');
+  check(erradas.length === 0,
+        'todo total dito por extenso bate com a serie naquele ponto',
+        erradas.join(' / '));
+
+}
+
 function hudRegressionChecks() {
   section('HUD E CROMO DE INTERFACE');
 
@@ -1879,25 +2048,34 @@ async function quatroPaginasChecks() {
    ========================================================================== */
 
 (async function main() {
-  staticChecks();
-  responsiveChecks();
-  layoutRegressionChecks();
-  hudRegressionChecks();
+  const CRONO = process.argv.indexOf('--tempo') >= 0;
+  let t0 = Date.now();
+  const marca = (nome) => {
+    if (CRONO) { console.log('  [' + ((Date.now() - t0) / 1000).toFixed(1) + 's] ' + nome); }
+    t0 = Date.now();
+  };
 
-  const win = boot();
-  manifestChecks(win);
+  staticChecks();            marca('staticChecks');
+  responsiveChecks();        marca('responsiveChecks');
+  layoutRegressionChecks();  marca('layoutRegressionChecks');
+  hudRegressionChecks();     marca('hudRegressionChecks');
+  opacidadeOrfaChecks();     marca('opacidadeOrfaChecks');
 
-  await typewriterCheck();
-  await playthroughChecks();
-  await sceneClearsSpritesCheck();
-  endingsReachableCheck();
-  await saveLoadChecks();
-  await uiChecks();
-  await systemsChecks();
-  spriteChecks();
-  await dialogueChecks();
-  await storageFailureCheck();
-  await quatroPaginasChecks();
+  const win = boot();        marca('boot');
+  manifestChecks(win);       marca('manifestChecks');
+  numerosEnunciadosChecks(win); marca('numerosEnunciadosChecks');
+
+  await typewriterCheck();          marca('typewriterCheck');
+  await playthroughChecks();        marca('playthroughChecks');
+  await sceneClearsSpritesCheck();  marca('sceneClearsSpritesCheck');
+  endingsReachableCheck();          marca('endingsReachableCheck');
+  await saveLoadChecks();           marca('saveLoadChecks');
+  await uiChecks();                 marca('uiChecks');
+  await systemsChecks();            marca('systemsChecks');
+  spriteChecks();                   marca('spriteChecks');
+  await dialogueChecks();           marca('dialogueChecks');
+  await storageFailureCheck();      marca('storageFailureCheck');
+  await quatroPaginasChecks();      marca('quatroPaginasChecks');
 
   section('TOTAL');
   console.log('  checagens: ' + checks + ' | falhas: ' + failures.length);

@@ -510,8 +510,19 @@ def script_checks():
         check(t in BEAT_TYPES, 'tipo de beat conhecido em %s' % cid, str(t))
 
         if t in TEXT_BEATS:
-            check(bool((beat.get('tx') or '').strip()),
-                  'beat de texto nao vazio em ' + cid, t)
+            # Beat que declara contagem automatica nasce sem `tx`: o
+            # numero vem do proprio roteiro, em js/script.js, na hora da
+            # montagem. Aqui confere-se a declaracao; o texto resolvido
+            # e conferido por tools/validate.js, que monta o jogo.
+            spec = beat.get('frases')
+            if spec:
+                check(isinstance(spec, dict) and bool(spec.get('de'))
+                      and bool(spec.get('ch')),
+                      'contagem automatica declara origem em ' + cid,
+                      str(spec))
+            else:
+                check(bool((beat.get('tx') or '').strip()),
+                      'beat de texto nao vazio em ' + cid, t)
         if t == 'dial':
             check(beat.get('ch') in CONFIG['CHARACTERS'],
                   'falante existe no manifesto', str(beat.get('ch')))

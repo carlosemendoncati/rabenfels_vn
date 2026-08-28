@@ -1,5 +1,426 @@
 # Changelog
 
+## 0.15.0 — A Academia, e o Epílogo que estava contando outra história
+
+O autor escreveu a cena da Academia à mão e ela entrou em `per11` no
+lugar da minha versão curta do mesmo momento. A minha tinha oito beats:
+
+> — A senhorita pode ser professora.
+> — Pode ser.
+> — Eu seria a aluna.
+> — Você seria a aluna.
+> — E a Liara também.
+>
+> *Antoniette não corrigiu essa parte.*
+
+Estava certo de tom e vazio de conteúdo: a Academia era um símbolo, não
+um lugar. Na cena do autor ela é um lugar comum da vida de Antoniette —
+tem nome de matéria ruim, tem professor que escreveu e não teve resposta,
+tem sala que pega sol. **É a primeira vez na obra que Antoniette
+considera um futuro que exige mais do que amanhã.**
+
+`per11` foi de **427 para 1067 beats** e virou o maior capítulo da obra —
+maior que o Prólogo e o Capítulo 1 somados. 83% dos beats de fala são
+diálogo, contra 26% do Capítulo 1. O comprimento médio de frase caiu para
+**25,3 caracteres**, o mais curto de qualquer capítulo. As duas estão
+andando e conversando, e é assim que se fala andando.
+
+### O Epílogo estava contando outra história
+
+A cena do autor fixou a biografia acadêmica dela, e o Epílogo tinha uma
+versão incompatível que eu mesmo tinha escrito:
+
+| | `per11`, do autor | `epilogue.js`, meu (errado) |
+|---|---|---|
+| Matheo e a cadeira | professor da Academia, saiu antes de ela entrar | ensinou uma vez na vida, em Lervel |
+| como ela aprendeu | *"A matéria ficou."* | ele ensinou a ela pessoalmente |
+| nome da matéria | Registro Comparado e Reconstrução Documental | "registro e verificação de fontes" |
+| turma | Academia de Eldoria | turma de três, num inverno |
+
+A versão do autor venceu, e não só por ser dele: ela é melhor. **Matheo
+não precisa ter sido professor dela para o Epílogo doer** — dói mais sem
+isso. A matéria dele sobreviveu a ele, formou sozinha uma aluna que ele
+nunca viu, e essa aluna morreu por um parecer que ele assinou sem ler até
+o fim.
+
+> *Ele deu aquela cadeira por nove anos. Largou quando entrou para a
+> Ordem.*
+>
+> *A matéria ficou. Ele nunca soube quem passou por ela.*
+
+### Halvern responde, e pergunta o que não devia
+
+O professor Halvern já existia: na caminhada, Antoniette conta que ele
+escreveu para ela há dois anos dizendo que a cadeira estava com seis
+alunos, e que ela não respondeu.
+
+Seis anos depois, quando Matheo pede o histórico da disciplina, quem
+responde é ele. E manda junto uma folha que ninguém pediu:
+
+> **— anexo, de próprio punho —**
+> *Escrevi à senhorita Rabenfels há oito anos e nunca tive resposta.*
+> *Se o senhor tiver o endereço dela, eu agradeço. H. Halvern.*
+>
+> *(Ele tem o endereço.)*
+>
+> *Respondeu no mesmo dia, em quatro linhas. Uma delas era a data da
+> morte.*
+
+Halvern não sabe que ela morreu. Ninguém avisou o único homem que quis
+chamá-la de volta. **A cena não comenta.**
+
+### A frase que não é do Matheo
+
+O autor deixou uma regra explícita no cabeçalho da cena:
+
+> *"O 'método' da mãe e o Método Matheo NÃO são a mesma coisa. Antoniette
+> usa a mesma palavra para ambos porque é assim que ela organiza o
+> mundo."*
+
+O Epílogo estava desrespeitando isso. Klara diz duas frases na aula, e
+antes as duas soavam herdadas do mesmo lugar. Agora Matheo confere as
+duas contra o próprio manual, que é o único gesto que aquele homem sabe
+fazer:
+
+| a frase | de quem é | como ele descobre |
+|---|---|---|
+| *"Ele é fonte única."* | dele | está na página quatro do manual — ele escreveu o manual |
+| *"Riscar ensina a esconder o erro."* | de Maren, mãe de Antoniette | conferiu o manual naquela noite, página por página. Não estava |
+
+A cadeia inteira existe no roteiro e nunca é enunciada: **Maren →
+Antoniette → Klara → Matheo**, e só o jogador vê os quatro elos. Matheo
+chega ao terceiro e para.
+
+> — Quem ensinou isso à senhorita?
+>
+> *Klara levou tempo. Não o tempo de quem não lembra.*
+>
+> — Uma pessoa da casa.
+> — Ela ainda está lá?
+> — Não.
+
+### Matheo e Antoniette estavam ligados, e a ligação já estava escrita
+
+> *"o role do matheo era uma sugestão. eles tem de ter uma conexão, mesmo
+> que seja leve ou importante — amigo de infância ou outra coisa — pois os
+> dois tem que estar conectados, senão não faz sentido ele ser só um
+> personagem aleatório."*
+
+A ligação não precisou ser inventada. Estava na caminhada, sem nome:
+
+> — Um homem me perguntou uma coisa numa fila.
+> — Que coisa?
+> — Se eu sabia por que a fila estava parada.
+> — E a senhorita sabia?
+> — Sabia. O escriturário da frente estava com o carimbo errado e ninguém
+>   tinha reparado.
+> — E aí?
+> — E aí ele me ofereceu emprego.
+>
+> *Ela tinha dezessete anos e achou que era muito.*
+
+**Aquele homem é Matheo.** E não contradiz nada do que estava fixado: *"Não
+quando eu estudei"* continua verdade — ele não a ensinou, ele a colocou
+dentro. *"A matéria ficou"* continua verdade, e agora também descreve o que
+ele fez: largou a cadeira, entrou para a Ordem, e cinco anos depois apontou
+a própria cadeira abandonada para uma moça numa fila.
+
+A fila é no cartório da praça de Alsbeck — onde o pai dela trabalhava, o
+que ela mesma diz vinte falas antes.
+
+**Ela não diz o nome dele.** Klara pergunta e leva um não de protocolo:
+
+> — Como ele chamava?
+>
+> *Antoniette continuou andando.*
+>
+> — A senhorita não lembra o nome dele?
+> — Lembro.
+> — Então?
+> — Ele é da Ordem. Eu não falo de gente da Ordem com quem não é.
+> — A senhorita falou da sua mãe.
+> — Minha mãe não era da Ordem.
+
+Quem fecha a conta é ele, no Epílogo, com ela morta há anos. **Sem
+condição de rota nem de ramo** — as quatro leituras passam por isso:
+
+> *Perguntou o nome dela e não disse o dele.*
+>
+> *Escreveu o endereço da Academia num papel de balcão e pagou a inscrição
+> do exame, que a Ordem manda pagar e ninguém paga.*
+>
+> *Não a ensinou. Apontou uma porta e voltou para Lervel, e não acompanhou
+> o resultado.*
+>
+> **(Ela entrou por mim.)**
+>
+> *Oito anos entre o papel de balcão e o parecer.*
+> *Ele escreveu os dois.*
+
+E no ramo `taught:'A'`, seis anos depois, olhando uma menina de dezoito
+anos fechar um caderno sem perguntar quem ele é:
+
+> *(A outra também não perguntou.)*
+>
+> **(As duas entraram por mim.)**
+
+A versão longa saiu da cena da Academia e virou eco. Eco é o que faz a
+segunda linha doer.
+
+### A Carmine conta sozinha
+
+> *"você pode colocar um comando que faz a Carmine sempre contar as falas
+> da Klara — melhor que fazer manualmente sempre"*
+
+Certo, e o histórico prova: o número já ficou para trás **três vezes** —
+*"trinta e uma"*, depois 65·62·64, depois 96·93·95. Toda vez errou em
+silêncio, na boca da única personagem da obra que nunca erra um registro.
+
+O beat parou de trazer o número. Declara o que contar:
+
+```js
+{ t:'dial', ch:'carmine',
+  frases:{ de:'PER11', ch:'klara', ate:'per11_floresta', ramo:'A' },
+  if:{ rota:'perda', taught:'A' } },
+```
+
+`resolveNumeros()`, em [script.js](js/script.js), conta no próprio roteiro
+na hora da montagem, com a mesma comparação estrita do engine, e escreve o
+número por extenso no feminino.
+
+**Provou-se sozinho na mesma sessão:** acrescentei quatro falas da Klara à
+caminhada (a pergunta sobre o nome do homem da fila) e o número subiu de
+289·287·288 para **293·291·292** sem eu tocar em `per12.js`.
+
+### O outro número, que não é derivado
+
+O Caderno Operacional tem entradas numeradas à mão — 1, 4, 9, 23, 31, 44,
+71, 214, 215, 251 — e o total é dito por extenso em **quatro lugares, em
+três arquivos**, mais o título de um capítulo. Esse número não vem do
+tamanho do roteiro: é diegético, ela escreve a maioria fora de cena. Não dá
+para derivar, mas dá para conferir.
+
+`validate.js` agora percorre o roteiro **em ordem**, acompanha a maior
+entrada já escrita naquele ponto, e exige que toda grafia de
+*"&lt;número&gt; entradas"* bata com ela. Por posição, e não contra um
+máximo global — o caderno cresce durante a obra: em `res10` o total é 214 e
+duas cenas depois ela escreve a entrada 215 e o texto passa a dizer 215. As
+duas estão certas onde estão.
+
+O conversor por extenso é o mesmo do jogo, exposto por
+`RBF.Script.porExtenso`. Dois conversores seriam conferir minha tabela
+contra uma cópia da minha tabela.
+
+### O Capítulo 3 ganhou um trecho jogado — o "antes" da casa
+
+Pedido junto com o bug de áudio, meses atrás, e nunca feito: *"podemos
+fazer uma parte no capítulo 2 ou 3 dela andando com alguns diálogos aqui e
+ali... a ideia é ter o antes e o depois nesse final ruim."*
+
+Entra entre a biblioteca e a janela, que é o caminho que ela faz de
+verdade: devolve os volumes, atravessa o corredor de serviço fazendo a
+ronda das quatro e vinte, e chega ao corredor leste, onde `c3_janela`
+começa.
+
+**É o mesmo corredor do Capítulo 10, com os mesmos objetos.** Nesta tarde
+nenhum deles está errado:
+
+| o objeto | Cap. 3 — a ronda | Cap. 10 — a Cobertura |
+|---|---|---|
+| gancho de chaves | nove chaves; bateu com a lista | falta a da copa e a da adega |
+| relógio de serviço | quatro e vinte; os dois certos | onze e quarenta; o dela, duas e dez |
+| moldura | vazia, com pó no aro e no prego | limpa — e depois **não** vazia |
+| porta das gêmeas | passa luz por baixo | não passa, e passava semana passada |
+| Fenn | recolhendo as chaves da tarde | de pé, às onze e quarenta, sem chave |
+| Dara | descendo para a copa, caneca vazia | subindo, com a caneca cheia e fria |
+
+Nenhum dos dois trechos comenta o outro. Nenhuma linha da ronda aponta para
+a frente. **Corredor que o jogador nunca andou antes não vira nada.**
+
+E não há flag: a ronda não move rota, não abre galeria e não muda fala
+nenhuma. Ela existe para que a segunda vez tenha com o que ser comparada.
+
+#### O mecanismo: cena, e não mapa duplicado
+
+Duplicar o corredor seria duplicar a planta, a mobília, a colisão e as
+luzes para trocar sete falas. O que muda entre os dois trechos é o texto e
+a conectividade, e não a casa:
+
+| | por cena? | porquê |
+|---|---|---|
+| `moveis`, `gente` | **não** | a casa é a mesma; Fenn e Dara já estão lá na fase 0 |
+| `pontos`, `saidas` | **sim** | o que ela pensa ao conferir, e para onde a porta leva desta vez |
+
+Ponto sem `cenas` declaradas pertence à Cobertura, que foi a primeira — **nenhum
+ponto já escrito precisou ser tocado.** O segmento declara `cena: 'c3'` e as
+sete saídas do corredor somem sozinhas.
+
+Uma regressão que isso quase causou: a checagem *"nenhum par de pontos
+disputa a mesma mão"* passou a acusar sete falsos pares, porque o relógio do
+Capítulo 3 e o da Cobertura ocupam o mesmo pixel **de propósito**. Ela já
+sabia que dois pontos no mesmo lugar em fases diferentes são o mesmo objeto
+antes e depois da virada; aprendeu o mesmo argumento para cenas.
+
+`cobertura_shots.js` entra pelo Capítulo 3 de verdade e confere que nenhum
+ponto da Cobertura vaza, que os sete do capítulo estão lá, que o relógio diz
+*"quatro e vinte"* e não *"onze e quarenta"*, que Fenn e Dara continuam em
+cena e que o vulto não aparece. As perguntas vão ao **motor**, por
+`pontosVisiveis()`, `saidasVisiveis()` e `genteVisivel()` — perguntar ao mapa
+seria conferir minha regra contra uma cópia da minha regra.
+
+### `roteiro_texto.py` estava corrompendo o Capítulo 3
+
+Achado ao provar a ida e volta depois de inserir o beat — e **anterior a
+qualquer coisa desta versão.**
+
+Cartão do Arquivo seguido de beat opaco saía **trocado de lugar**. O `@@@`
+era tratado no topo do laço, antes de o cartão aberto ser fechado: o opaco
+entrava na fila primeiro e o cartão só era fechado no próximo texto normal.
+No Capítulo 3, o cartão da Entrada 31 e a vela logo depois dele.
+
+**A contagem de beats batia** — nada sumia, dois beats mudavam de ordem — e
+foi por isso que passou. Quem editasse `roteiro/chapter3.txt` e importasse
+trocaria uma vela de lugar com um cartão do caderno.
+
+Sobreviveu porque `--provar` só aceitava um capítulo por vez e eu só provava
+aquele em que estava mexendo. Agora aceita `todos`, nos três modos:
+
+```bash
+python tools/roteiro_texto.py --provar todos
+```
+
+**Vinte e dois capítulos, ida e volta sem perda.** É a primeira vez que isso
+foi verificado para o roteiro inteiro.
+
+### A caixa de diálogo do percurso nunca apareceu
+
+O "antes e depois" da caixa de fala — a placa de couro da VN enquanto a
+casa ainda é administrativa, o fio rubro depois que ela deixa de ser —
+estava escrito em `css/rpg.css` desde que foi pedido. **E nunca chegou à
+tela.**
+
+`js/rpg.js` liga e desliga a classe `is-on` em `.rf-perc__fala` (linhas
+1361 e 1383). A regra que responde a essa classe nunca foi escrita. A
+caixa ficava no estado de repouso — `opacity: 0`, `translateY(10px)` —
+para sempre. O percurso inteiro rodava sem mostrar uma fala: nem placa,
+nem retrato, nem texto.
+
+Quatro palavras de CSS resolvem. O que interessa é por que ninguém viu.
+
+**O teste que olhava para ela não podia falhar:**
+
+```js
+check(el.classList.contains('is-on'), 'o painel de fala aparece');
+```
+
+O nome da classe, e não o pixel. A classe estava certíssima. É o mesmo
+defeito do teste de áudio que contava elementos `<audio>` no DOM e
+passava com os três bugs reintroduzidos — e é a segunda vez que ele
+aparece neste projeto.
+
+O check agora lê opacidade calculada, `display`, `visibility` e
+retângulo, **no frame que vira a imagem.** Provado dos dois lados:
+removendo a regra de CSS ele falha, devolvendo a regra ele passa.
+
+### O retrato, que também não aparecia
+
+Pedido na mesma frase — *"faltou utilizar os portraits e caixas de
+diálogos do jogo padrão"* — e nunca medido por ninguém.
+
+O check novo falhou na primeira corrida e passou na segunda. Isso não é
+teste instável, é o defeito aparecendo: `img()` devolve `null` enquanto
+a imagem não terminou de carregar, e `pintaFala()` só roda **enquanto a
+máquina de escrever está digitando.** Numa carga fria a face não fica
+pronta a tempo, a caixa abre sem retrato, e ninguém repinta depois que o
+texto fecha. Na segunda corrida a imagem estava em cache. Corrida de
+cache — e na máquina do jogador a primeira carga é sempre fria.
+
+Dois consertos, porque um só não basta:
+
+- `preCarrega()` passou a pedir os cinco retratos junto com mapa, móvel
+  e personagem. Reduz a janela.
+- `pintaFala()` tenta de novo enquanto houver fala aberta e a face não
+  tiver chegado. Fecha a janela. Para sozinho quando a fala fecha.
+
+### A faixa de fala, vista pela primeira vez
+
+Com a caixa e o retrato na tela, dois problemas de layout ficaram
+visíveis — nenhum deles calibrado antes, porque não havia o que
+calibrar:
+
+- `align-items: flex-end` encostava a linha de texto no fio de ouro da
+  placa: o retrato tem 92px e o corpo tem a altura de uma linha. Virou
+  alinhamento por centro, com piso de altura no corpo, para que fala de
+  uma linha não encolha a caixa pela metade.
+- O quadro do retrato pisava nos losangos da placa de couro, que avançam
+  para dentro do campo além da faixa que `border-image-width` declara.
+  Só a variante de couro ganhou folga vertical — o piso sem arte e a
+  fase 1 não têm ornato.
+
+### Checagem nova: órfãos de opacidade
+
+Uma regra-base em `opacity: 0` é uma promessa — o elemento existe para
+ser levantado depois, por classe de estado ou por animação. Se nada o
+levanta, ele é invisível para sempre e o CSS está pela metade.
+
+`node tools/validate.js` agora varre `rpg.css`, `style.css` e `ui.css`
+atrás dessa promessa quebrada. Só seletor simples entra — uma classe ou
+um id, sem combinador e sem pseudo-elemento — porque regra com
+modificador de estado (`#vn.tem-percurso #game-bar`) esconde de
+propósito e não é órfã.
+
+Calibrada contra o CSS real: sem o refino, 25 falsos positivos
+(keyframes, pseudo-elementos, modificadores de estado). Com ele, **zero
+falsos positivos e a `.rf-perc__fala` pega.**
+
+### Ferramentas
+
+- **`tools/validate.js --tempo`** — cronômetro por seção. Foi ele que
+  mostrou onde os cinco minutos estão: `playthroughChecks` 139s,
+  `systemsChecks` 90s, `quatroPaginasChecks` 57s. Os três jogam o roteiro
+  inteiro, beat a beat.
+- **Varredura de flags hoistada.** A força bruta de rotas montava
+  `RBF.Script.base()` dentro do laço de 3^N combinações. Passou a montar
+  uma vez, fora do laço. Mesmas 844 checagens, mesmo resultado.
+- **`tick(0)` continua em `setTimeout`, e agora está escrito por quê.**
+  Troquei por `setImmediate` para tirar o piso de 1ms do Node: **53
+  falhas.** `fastForward` deixa a temporização do engine em 1ms e o
+  engine agenda o próximo passo nesses timers; ceder o loop sem deixar
+  1ms real passar faz os três percursos empacarem no teto de 8000 passos
+  sem sair do Prólogo. O piso não é desperdício, é a espera de que o
+  engine precisa. Está comentado no lugar, para ninguém tentar de novo.
+- **`roteiro_texto.py` parou de contar errado.** A linha de gravação
+  dizia *"1066 beats"* onde a comparação profunda achava 1067 iguais —
+  número errado justo onde se procura perda de conteúdo. `novos` são
+  pedaços de fonte, e bloco opaco e escolha saem inteiros num item só.
+  Agora diz "blocos", que é o que ela conta.
+
+### Saves antigos são recusados
+
+`saveSchemaVersion` subiu para **6**. O roteiro é um vetor único e o save
+guarda índice: com 640 beats novos no meio da Perda, qualquer save dentro
+dela ou depois reabriria em outra frase.
+
+### Validação
+
+| | resultado |
+|---|---|
+| `node tools/validate.js` | **858 checagens, 0 falhas** |
+| `python tools/validate.py` | **13.042 checagens, 0 falhas** |
+| `node tools/smoke_chrome.js` | **58 checagens, 0 falhas** · `SMOKE-OK` |
+| `node tools/cobertura_shots.js` | **90 de 90** |
+| `roteiro_texto.py --provar todos` | **22 capítulos**, ida e volta sem perda |
+
+Antipadrões de IA: negação-contraste 0, "não apenas/mas" 0,
+profundidade-não-merecida 0, gerundismo 0.
+
+**Não conferido:** layout renderizado da VN fora do percurso
+(`node tools/shots.js --open`). A caixa de diálogo do percurso foi
+conferida com olho humano nas imagens de `tools/_shots/cobertura/` e
+aparece — foi assim que o defeito acima saiu.
+
+---
+
 ## 0.12.1 — A Perda ganha o que ela devia ter
 
 A rota que deveria ser a mais emocionante da obra era a que menos deixava

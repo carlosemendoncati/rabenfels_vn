@@ -147,8 +147,8 @@ RBF.Rpg = (function () {
     if (!s) { return; }
     imgMapa(s.mapa);
     var i;
-    var mv = daFase(s.moveis), gt = daFase(s.gente), sd = daFase(s.saidas);
-    var pt = daFase(s.pontos);
+    var mv = daFase(s.moveis), gt = daFase(s.gente), sd = saidasDe(s);
+    var pt = pontosDe(s);
     for (i = 0; i < mv.length; i++) {
       imgProp(mv[i].tipo);
       if (mv[i].tipoDepois) { imgProp(mv[i].tipoDepois); }
@@ -161,6 +161,13 @@ RBF.Rpg = (function () {
       var d = sala(sd[i].para);
       if (d) { imgMapa(d.mapa); }
     }
+
+    /* Os retratos da faixa de fala. `pintaFala()` so repinta enquanto a
+       maquina de escrever digita; se a face nao estiver pronta ate o
+       texto fechar, a caixa fica sem retrato pelo resto daquela fala.
+       Sao cinco arquivos pequenos e o pedido acontece uma vez. */
+    var faces = C().faces || {};
+    for (var k in faces) { imgFace(k); }
   }
 
   /* ---- medidas ------------------------------------------------------------ */
@@ -674,7 +681,7 @@ RBF.Rpg = (function () {
        proxima, no corredor, esta a mais de quinhentos pixels. */
     var folga = 12;
 
-    var lista = daFase(s.saidas);
+    var lista = saidasDe(s);
     for (var i = 0; i < lista.length; i++) {
       var sa = lista[i];
       if (!cruza(c, { x: sa.x - folga, y: sa.y - folga,
@@ -741,7 +748,7 @@ RBF.Rpg = (function () {
 
     var f = frente(jogo.p, 34);
     var melhor = null, md = 1e9;
-    var lista = daFase(s.pontos);
+    var lista = pontosDe(s);
 
     for (var i = 0; i < lista.length; i++) {
       var pt = lista[i];
@@ -1378,6 +1385,13 @@ RBF.Rpg = (function () {
       cara.classList.add('is-on');
     } else {
       cara.classList.remove('is-on');
+      /* A face pode nao ter chegado ainda. `pintaFala()` so roda
+         enquanto a maquina de escrever digita, entao sem esta volta a
+         caixa ficaria sem retrato ate o fim da fala mesmo depois de a
+         imagem carregar. Para sozinho quando a fala fecha. */
+      if (typeof setTimeout === 'function') {
+        setTimeout(function () { if (jogo && jogo.fala === f) { pintaFala(); } }, 120);
+      }
     }
 
     fala.classList.add('is-on');
@@ -1521,6 +1535,21 @@ RBF.Rpg = (function () {
      Com 0, vale so enquanto a fase for 0 - e o jeito de fazer uma porta
      ABRIR no primeiro ato e TRANCAR no segundo sem escrever a sala duas
      vezes. */
+  /* Um mesmo mapa serve a mais de um trecho jogado. Ponto sem `cenas`
+     declaradas pertence a Cobertura, que foi o primeiro e por isso e o
+     padrao - assim nenhum ponto ja escrito precisou ser marcado. */
+  function naCena(p) {
+    if (!p || !p.cenas) { return cenaAtual() === 'cob'; }
+    for (var i = 0; i < p.cenas.length; i++) {
+      if (p.cenas[i] === cenaAtual()) { return true; }
+    }
+    return false;
+  }
+
+  function cenaAtual() {
+    return (jogo && jogo.cena) || (segmento && segmento.cena) || 'cob';
+  }
+
   function naFase(p) {
     if (p && p.someComMarca && jogo && jogo.marcas[p.someComMarca]) {
       return false;
@@ -1536,6 +1565,32 @@ RBF.Rpg = (function () {
     var out = [];
     for (var i = 0; i < lista.length; i++) {
       if (naFase(lista[i])) { out.push(lista[i]); }
+    }
+    return out;
+  }
+
+  /* Os pontos de conferir, filtrados tambem por cena. Mobilia, gente e
+     saidas nao passam por aqui: a casa e a mesma nos dois trechos, e o
+     que muda e o que ela pensa ao conferir cada coisa. */
+  function pontosDe(s) {
+    var lista = daFase(s.pontos);
+    var out = [];
+    for (var i = 0; i < lista.length; i++) {
+      if (naCena(lista[i])) { out.push(lista[i]); }
+    }
+    return out;
+  }
+
+  /* As saidas do trecho, filtradas por cena pelo mesmo criterio dos
+     pontos. Para onde uma porta leva e decisao do trecho, e nao da
+     casa: as sete saidas do corredor foram escritas para a Cobertura
+     percorrer a casa inteira, e o trecho do Capitulo 3 acontece no
+     corredor e so. */
+  function saidasDe(s) {
+    var lista = daFase(s.saidas);
+    var out = [];
+    for (var i = 0; i < lista.length; i++) {
+      if (naCena(lista[i])) { out.push(lista[i]); }
     }
     return out;
   }
@@ -1567,6 +1622,7 @@ RBF.Rpg = (function () {
       abertas:   {},
       visitadas: {},
       atores:    {},
+      cena:      seg.cena || 'cob',
       fase:      0,
       ruido:     0,
       tempo:     0,
@@ -1838,6 +1894,23 @@ RBF.Rpg = (function () {
       andaPara:   andaPara,
       passoJogador: passoJogador,
       vaiPara:    vaiPara,
+      /* O que o motor mostra na sala atual, depois de fase e cena.
+         O harness precisa do resultado do filtro, e nao do mapa cru. */
+      pontosVisiveis: function () {
+        var s = jogo && sala(jogo.sala);
+        return s ? pontosDe(s) : [];
+      },
+      saidasVisiveis: function () {
+        var s = jogo && sala(jogo.sala);
+        return s ? saidasDe(s) : [];
+      },
+      /* `gente` nao passa pelo filtro de cena de proposito: a casa e a
+         mesma nos dois trechos. Isto existe para o teste poder conferir
+         isso pelo motor, e nao repetindo a regra. */
+      genteVisivel: function () {
+        var s = jogo && sala(jogo.sala);
+        return s ? daFase(s.gente) : [];
+      },
       livre:      function (id, x, y) {
         var s = sala(id);
         return !!(s && jogo && livre(s, x, y, charDef(jogo.p.ch)));
