@@ -357,6 +357,160 @@ calibrar:
   Só a variante de couro ganhou folga vertical — o piso sem arte e a
   fase 1 não têm ornato.
 
+### Planta ao vivo — editar posição e escala no navegador
+
+> *"porta fora de escala. tem alguma forma de eu editar isso ao vivo em um
+> ambiente de teste pra dps vc aplicar no jogo? a maior parte das coisas tão
+> tudo fora de lugar"*
+
+O diagnóstico primeiro: **móvel não tinha escala.** O tamanho em cena era o
+tamanho cru do PNG, e não havia como corrigir sem reexportar a arte.
+`porta_fechada.png` tem 119px de altura e uma pessoa tem 150 (`fh`) — a
+porta fechada é mais baixa que quem está parado na frente dela. O
+`relogio_servico`, 140px, também.
+
+`escala` entra em três lugares e nos três pelo mesmo número, senão a caixa
+de colisão descola do desenho: o `drawImage`, a `caixaMovel` e a ordem de
+profundidade. Sai do manifesto e a instância do mapa pode sobrescrever — a
+mesma porta pode ser maior no salão do que no corredor de serviço. Ausente
+vale 1, e **todo móvel que já estava certo continua idêntico.**
+
+#### O ciclo
+
+```bash
+python -m http.server 8000
+#   http://localhost:8000/tools/planta.html
+#   ajustar, "Copiar JSON", salvar em tools/planta_alteracoes.json
+python tools/planta_aplica.py --seco    # mostra o que faria
+python tools/planta_aplica.py           # grava, com backup
+```
+
+`tools/planta.html` carrega o manifesto e os mapas **de verdade** e desenha
+com a mesma regra do motor: móvel ancorado no rodapé pela largura ao meio,
+personagem recortado da folha por `fw`/`fh`, linha por direção. Arrastar
+move; setas dão 1px e shift+setas 10px; `[` e `]` mudam a escala em 5%.
+
+Duas decisões que fazem diferença na hora de medir:
+
+- **A luz nasce desligada.** O percurso deixa a sala a 10% de brilho, que é
+  o certo para jogar e impossível para medir. Há um botão *"escuro real"*
+  para conferir como fica.
+- **Uma figura de referência fica no canto**, com duas linhas verdes no pé e
+  na cabeça. Escala se julga contra uma pessoa, e não contra o próprio
+  móvel. O painel diz, para o selecionado: *"uma pessoa tem 150px — este
+  objeto tem 0.79× a altura dela."*
+
+Também mostra as caixas de colisão, o piso, as saídas com destino e os
+pontos com raio de alcance, e respeita os seletores de **cena** e **fase** —
+dá para ver o corredor do Capítulo 3 e o do Capítulo 10 lado a lado, no
+mesmo mapa.
+
+#### O editor não escreve no jogo
+
+Ele roda num navegador, sobre uma cópia em memória, e cospe um JSON. Quem
+toca no repositório é `tools/planta_aplica.py`, que faz uma coisa só e dá
+para ler inteiro. Ele separa as duas naturezas de mudança:
+
+| | onde grava | alcance |
+|---|---|---|
+| `props` | `js/config.js` | toda ocorrência daquele móvel |
+| `salas` | `js/data/cob_mapas.js` | só aquela instância |
+
+E antes de mexer em qualquer objeto, confere que o objeto naquela posição
+ainda é o mesmo. O índice vem de uma edição que aconteceu antes,
+possivelmente em outra sessão; se alguém inseriu um móvel no meio do array
+desde então, o programa **para** em vez de mover a coisa errada em silêncio.
+Backup em `_backup/pre_planta_<timestamp>/` antes de gravar.
+
+### HUD ao vivo, e dois defeitos que a sua captura mostrou
+
+> *"faça um de hud de diálogos e outras coisas para eu corrigir"*
+
+A captura sem retrato mostrou a primeira palavra **em cima do
+ornamento**. Medido na própria arte: em `ui_dialogue_plate_leather`
+(2172×403) o ornamento vai até 101px da borda. A fatia de `border-image`
+é 62, desenhada com 30·ui — então 39px de ornamento caem na região do
+meio, que estica. Na largura real da caixa:
+
+```
+30·ui + 39 × (largura − 60·ui) / 2048  ≈  50px   (em ui 1.15)
+```
+
+O padding era 34·ui, ou seja ~39px. **O texto começava 11px dentro do
+ornamento.** Com retrato ninguém via, porque o retrato empurrava a linha
+para a direita; sem retrato — toda narração — a palavra caía no losango.
+Vertical não tinha o problema: o ornamento de cima vai a 20px de 403,
+dentro da fatia de 44. Passou para 58·ui na horizontal.
+
+O segundo é meu, de ontem: `pintaFala()` reagenda a si mesmo quando a
+face não chegou, para cobrir carga fria. Mas **Fenn e Dara não têm
+retrato declarado** — só antoniette, klara, klara_casulo, vulto e carmine
+— então para eles `imgFace` devolve null sempre, e a fala inteira ficava
+repintando a cada 120ms sem chance de mudar de estado. A nova tentativa
+passou a valer só quando há retrato declarado e ele ainda não carregou,
+que era o caso que ela existia para cobrir.
+
+#### `tools/hud.html`
+
+Carrega `tokens.css`, `style.css`, `ui.css` e `rpg.css` **de verdade** e
+monta a marcação do `index.html`. Não há cópia de estilo no arquivo — o
+que aparece é o que o jogo desenha. Sliders para folga, largura, altura
+do rodapé, lado do retrato, altura mínima e corpo do texto; botões de
+estado para com/sem retrato, com/sem nome, fase 1 e placa de couro; e uma
+barra de larguras de tela.
+
+Uma armadilha que ele caiu e que vale registrar: `css/style.css` põe
+`body { align-items: center }` para o jogo ficar no meio da tela. A
+bancada carrega aquele arquivo de propósito, herdou a centralização, e o
+palco nascia com altura zero — preto. A bancada agora diz o que quer do
+`body` por extenso em vez de contar com o padrão.
+
+E o corpo do texto da VN **não** vira `calc` em `.textcontent`:
+`--rbf-text-size` é `--rbf-text-base × --rbf-text-scale`, a base muda por
+faixa de tela e a escala é o único número que os Ajustes tocam. O
+controle edita o token, que é onde ele mora.
+
+`tools/hud_aplica.py` acha a regra e troca só a propriedade citada. Ele
+**recusa** cor, duração, easing, opacidade e sombra: esses vivem em
+`tokens.css` por regra do projeto e um editor de medida não decide sobre
+eles. E só edita regra de **primeiro nível** — `.rf-perc__fala` existe na
+base e dentro de `@media (max-height: 460px)`, e a primeira versão foi
+mexer na do telefone deitado, deixando a base intacta.
+
+### Planta: giro, camadas, paleta de assets e saídas editáveis
+
+> *"faltou colocar uma opção de layers e outra que tenha todos os assets;
+> também preciso que coloque algo para girar, mover e remover entradas e
+> saídas"*
+
+- **Giro.** Móvel ganhou `giro` em graus, no manifesto ou por instância.
+  Gira em torno da âncora — rodapé, meio da largura —, que é o mesmo
+  ponto que ordena profundidade. A colisão continua alinhada aos eixos,
+  agora medida pela envolvente do retângulo girado: exata em 0, 90, 180 e
+  270, folgada em ângulo quebrado. Preferi isso a reescrever a colisão
+  para polígono, que mudaria o comportamento de tudo o que já está
+  ajustado. Teclas `,` e `.`, de 5 em 5 graus.
+- **Camadas.** Os chips passaram a se chamar o que são, e mostram móveis,
+  pontos, saídas, gente, piso, caixas de colisão, régua de referência e
+  o escuro real.
+- **Paleta de assets.** Todos os móveis e todas as pessoas que o
+  manifesto declara disponíveis, com filtro por nome. Clicar acrescenta
+  na sala. Serve para dois trabalhos: acrescentar, e ver de uma vez o que
+  existe sem abrir a pasta.
+- **Saídas.** Criar, mover, redimensionar (`+`/`-`, com `alt` para a
+  altura), escolher destino num select das salas — ou nenhum, e ela
+  encerra o trecho — e remover. `Delete` remove qualquer objeto.
+
+Criados e removidos saem em ramos próprios do JSON, porque mexem no
+**tamanho** do array. O aplicador faz nesta ordem, e não é negociável:
+
+1. trocar campo — enquanto os índices ainda valem
+2. remover — de trás para a frente, para não deslocar o resto
+3. inserir — no fim da lista, sem deslocar ninguém
+
+Ciclo testado inteiro: escala 1,75 na porta, um móvel removido e uma
+saída criada; os arquivos continuaram carregando; revertido pelo backup.
+
 ### Checagem nova: órfãos de opacidade
 
 Uma regra-base em `opacity: 0` é uma promessa — o elemento existe para

@@ -649,7 +649,7 @@ RBF.BGM = {
     volume: 0.30
   },
 
-  /* A unica faixa quente da obra. Nao pode ter press\u00e1gio nenhum: quem
+  /* A unica faixa quente da obra. Nao pode ter presságio nenhum: quem
      escuta nao pode ser avisado. O peso vem de o jogador saber o que
      vem depois. */
   bgm_amizade: {
@@ -855,7 +855,7 @@ RBF.CHAPTERS = [
     id:    'prologo',
     code:  'PRL',
     data:  'PROLOGUE',
-    label: 'Pr\u00f3logo',
+    label: 'Prólogo',
     title: 'O Arquivo',
     selectable: true
   },
@@ -864,7 +864,7 @@ RBF.CHAPTERS = [
     id:    'capitulo1',
     code:  'C-I',
     data:  'CHAPTER1',
-    label: 'Cap\u00edtulo 1',
+    label: 'Capítulo 1',
     title: 'A Chegada',
     selectable: true
   },
@@ -873,8 +873,8 @@ RBF.CHAPTERS = [
     id:    'capitulo2',
     code:  'C-II',
     data:  'CHAPTER2',
-    label: 'Cap\u00edtulo 2',
-    title: 'O Invent\u00e1rio',
+    label: 'Capítulo 2',
+    title: 'O Inventário',
     selectable: true
   },
 
@@ -882,7 +882,7 @@ RBF.CHAPTERS = [
     id:    'capitulo3',
     code:  'C-III',
     data:  'CHAPTER3',
-    label: 'Cap\u00edtulo 3',
+    label: 'Capítulo 3',
     title: 'As Duas Klara',
     selectable: true
   },
@@ -891,7 +891,7 @@ RBF.CHAPTERS = [
     id:    'capitulo4',
     code:  'C-IV',
     data:  'CHAPTER4',
-    label: 'Cap\u00edtulo 4',
+    label: 'Capítulo 4',
     title: 'Os Rituais de Outubro',
     selectable: true
   },
@@ -900,8 +900,8 @@ RBF.CHAPTERS = [
     id:    'capitulo5',
     code:  'C-V',
     data:  'CHAPTER5',
-    label: 'Cap\u00edtulo 5',
-    title: 'A C\u00e2mara',
+    label: 'Capítulo 5',
+    title: 'A Câmara',
     selectable: true
   },
 
@@ -909,7 +909,7 @@ RBF.CHAPTERS = [
     id:    'capitulo6',
     code:  'C-VI',
     data:  'CHAPTER6',
-    label: 'Cap\u00edtulo 6',
+    label: 'Capítulo 6',
     title: 'Uma Amizade',
     selectable: true
   },
@@ -918,7 +918,7 @@ RBF.CHAPTERS = [
     id:    'capitulo7',
     code:  'C-VII',
     data:  'CHAPTER7',
-    label: 'Cap\u00edtulo 7',
+    label: 'Capítulo 7',
     title: 'Agosto',
     selectable: true
   },
@@ -927,8 +927,8 @@ RBF.CHAPTERS = [
     id:    'capitulo8',
     code:  'C-VIII',
     data:  'CHAPTER8',
-    label: 'Cap\u00edtulo 8',
-    title: 'O Que Ela N\u00e3o Deveria Saber',
+    label: 'Capítulo 8',
+    title: 'O Que Ela Não Deveria Saber',
     selectable: true
   },
 
@@ -936,8 +936,8 @@ RBF.CHAPTERS = [
     id:    'capitulo9',
     code:  'C-IX',
     data:  'CHAPTER9',
-    label: 'Cap\u00edtulo 9',
-    title: 'A Decis\u00e3o',
+    label: 'Capítulo 9',
+    title: 'A Decisão',
     selectable: true
   },
 
@@ -964,7 +964,7 @@ RBF.CHAPTERS = [
     code:  'C-X',
     data:  'ESP10',
     rota:  'esperanca',
-    label: 'Cap\u00edtulo 10',
+    label: 'Capítulo 10',
     title: 'A Fuga',
     selectable: true
   },
@@ -973,7 +973,7 @@ RBF.CHAPTERS = [
     code:  'C-XI',
     data:  'ESP11',
     rota:  'esperanca',
-    label: 'Cap\u00edtulo 11',
+    label: 'Capítulo 11',
     title: 'Noventa Dias',
     selectable: true
   },
@@ -984,7 +984,7 @@ RBF.CHAPTERS = [
     code:  'C-X',
     data:  'RES10',
     rota:  'resposta',
-    label: 'Cap\u00edtulo 10',
+    label: 'Capítulo 10',
     title: 'O Registro',
     selectable: true
   },
@@ -993,7 +993,7 @@ RBF.CHAPTERS = [
     code:  'C-XI',
     data:  'RES11',
     rota:  'resposta',
-    label: 'Cap\u00edtulo 11',
+    label: 'Capítulo 11',
     title: 'A Entrada 214',
     selectable: true
   },
@@ -1002,7 +1002,7 @@ RBF.CHAPTERS = [
     code:  'C-XII',
     data:  'RES12',
     rota:  'resposta',
-    label: 'Cap\u00edtulo 12',
+    label: 'Capítulo 12',
     title: 'O Corredor',
     selectable: true
   },
@@ -1013,7 +1013,7 @@ RBF.CHAPTERS = [
     code:  'C-X',
     data:  'PER10',
     rota:  'perda',
-    label: 'Cap\u00edtulo 10',
+    label: 'Capítulo 10',
     title: 'A Conta',
     selectable: true
   },
@@ -1022,8 +1022,8 @@ RBF.CHAPTERS = [
     code:  'C-XI',
     data:  'PER11',
     rota:  'perda',
-    label: 'Cap\u00edtulo 11',
-    title: 'As Tr\u00eas Moedas',
+    label: 'Capítulo 11',
+    title: 'As Três Moedas',
     selectable: true
   },
   {
@@ -1031,7 +1031,7 @@ RBF.CHAPTERS = [
     code:  'C-XII',
     data:  'PER12',
     rota:  'perda',
-    label: 'Cap\u00edtulo 12',
+    label: 'Capítulo 12',
     title: 'A Volta',
     selectable: true
   },
@@ -1040,7 +1040,7 @@ RBF.CHAPTERS = [
     code:  'C-XIII',
     data:  'PER13',
     rota:  'perda',
-    label: 'Cap\u00edtulo 13',
+    label: 'Capítulo 13',
     title: 'O Que Ela Anotou',
     selectable: true
   },
@@ -1051,7 +1051,7 @@ RBF.CHAPTERS = [
     code:  'C-X',
     data:  'COB10',
     rota:  'cobertura',
-    label: 'Cap\u00edtulo 10',
+    label: 'Capítulo 10',
     title: 'A Porta',
     selectable: true
   },
@@ -1060,7 +1060,7 @@ RBF.CHAPTERS = [
     code:  'C-XI',
     data:  'COB11',
     rota:  'cobertura',
-    label: 'Cap\u00edtulo 11',
+    label: 'Capítulo 11',
     title: 'A Baixa',
     selectable: true
   },
@@ -1069,7 +1069,7 @@ RBF.CHAPTERS = [
     id:    'epilogo',
     code:  'EPL',
     data:  'EPILOGUE',
-    label: 'Ep\u00edlogo',
+    label: 'Epílogo',
     title: 'O Que Ficou',
     selectable: true
   }
@@ -1162,28 +1162,28 @@ RBF.SETTINGS_DEFAULT = {
 /* Barra de controle dentro da caixa de dialogo.
    'id' e resolvido em js/engine.js. */
 RBF.DIALOGUE_CONTROLS = [
-  { id: 'history',  label: 'Hist\u00f3rico', icon: 'rf-ic-history',  title: 'Hist\u00f3rico (H)' },
-  { id: 'auto',     label: 'Auto',            icon: 'rf-ic-auto',     title: 'Avan\u00e7o autom\u00e1tico (A)' },
-  { id: 'skip',     label: 'Skip',            icon: 'rf-ic-skip',     title: 'Avan\u00e7ar r\u00e1pido (Ctrl)' },
-  { id: 'save',     label: 'Save',            icon: 'rf-ic-save',     title: 'Salvar (F5 grava r\u00e1pido)' },
-  { id: 'load',     label: 'Load',            icon: 'rf-ic-load',     title: 'Carregar (F9 abre o r\u00e1pido)' },
+  { id: 'history',  label: 'Histórico', icon: 'rf-ic-history',  title: 'Histórico (H)' },
+  { id: 'auto',     label: 'Auto',            icon: 'rf-ic-auto',     title: 'Avanço automático (A)' },
+  { id: 'skip',     label: 'Skip',            icon: 'rf-ic-skip',     title: 'Avançar rápido (Ctrl)' },
+  { id: 'save',     label: 'Save',            icon: 'rf-ic-save',     title: 'Salvar (F5 grava rápido)' },
+  { id: 'load',     label: 'Load',            icon: 'rf-ic-load',     title: 'Carregar (F9 abre o rápido)' },
   { id: 'settings', label: 'Ajustes',         icon: 'rf-ic-settings', title: 'Ajustes' },
   { id: 'hide',     label: 'Ocultar',         icon: 'rf-ic-hide',     title: 'Esconder interface' }
 ];
 
 RBF.UI_TEXT = {
-  archiveLabel: '\u2014 Arquivo Rabenfels \u2014',
-  lastLabel:    '\u2014 \u00daltima Entrada \u2014',
-  hintClick:    'CLIQUE OU ESPA\u00c7O',
+  archiveLabel: '— Arquivo Rabenfels —',
+  lastLabel:    '— Última Entrada —',
+  hintClick:    'CLIQUE OU ESPAÇO',
   hintChoice:   'escolha: clique ou 1 / 2 / 3',
   /* {ultimo} e trocado pelo rotulo do ultimo capitulo registrado. */
-  hintEnd:      'Fim do {ultimo} \u2014 o Arquivo continua',
+  hintEnd:      'Fim do {ultimo} — o Arquivo continua',
 
-  narrator:     'narra\u00e7\u00e3o',
+  narrator:     'narração',
   inner:        'pensamento',
-  emptySlot:    'espa\u00e7o vazio',
+  emptySlot:    'espaço vazio',
   autosaveName: 'Autosave',
-  quicksaveName:'Save r\u00e1pido'
+  quicksaveName:'Save rápido'
 };
 
 /* -------------------------------------------------------------------------
@@ -1196,11 +1196,11 @@ RBF.UI_TEXT = {
 RBF.ARCHIVE = {
   access:   'ACESSO RESTRITO',
   dossier:  'RBF-001 / 46 FICHAS',
-  volume:   'VOLUME XVII \u00b7 TESTEMUNHOS SELADOS',
+  volume:   'VOLUME XVII · TESTEMUNHOS SELADOS',
   eyebrow:  'CODEX INTERDICTUS',
   latin:    'ARCHIVUM STIRPIS RABENFELS',
   title:    ['ARQUIVO', 'RABENFELS'],
-  subtitle: 'os que abriram n\u00e3o voltaram a fechar',
+  subtitle: 'os que abriram não voltaram a fechar',
   noteLabel:'NOTA DE MARGEM',
 
   /* ---- cartao de estado do arquivo ------------------------------------
@@ -1235,8 +1235,8 @@ RBF.ARCHIVE = {
      So faz sentido para quem chegou nas quatro paginas.               */
   sealed: {
     access:   'ARQUIVO ENCERRADO',
-    volume:   'VOLUME XVII \u00b7 291 P\u00c1GINAS',
-    subtitle: 'o conhecimento n\u00e3o foi suficiente'
+    volume:   'VOLUME XVII · 291 PÁGINAS',
+    subtitle: 'o conhecimento não foi suficiente'
   }
 };
 
@@ -1251,12 +1251,12 @@ RBF.ARCHIVE = {
 RBF.INTRO = {
   enabled:        true,
   label:          'CLIQUE PARA ABRIR O ARQUIVO',
-  hint:           'clique, toque, Enter ou Espa\u00e7o',
+  hint:           'clique, toque, Enter ou Espaço',
 
   /* Substitui 'hint' depois que a obra foi terminada. O prazo de noventa
      dias e o mecanismo que abre o Prologo e fecha o Capitulo 11; aqui ele
      vira a regra do proprio portao. Quem nao terminou nunca ve. */
-  sealedHint:     'noventa dias \u00b7 o prazo recome\u00e7a a cada leitura',
+  sealedHint:     'noventa dias · o prazo recomeça a cada leitura',
   revealMs:       1800,   /* duracao da sequencia completa      */
   returnRevealMs: 260,    /* volta ao menu na mesma sessao      */
 
@@ -1281,7 +1281,7 @@ RBF.MENU_AUDIO = {
 
    Cada entrada e uma ficha do codice. 'action' e resolvido em js/menu.js.
    'note' e a nota de margem exibida ao passar o foco.
-   'needs' controla quando a entrada fica dispon\u00edvel:
+   'needs' controla quando a entrada fica disponível:
      'save'     exige pelo menos um save valido
      'chapters' exige mais de um capitulo alcancado
      'gallery'  exige pelo menos um item de galeria liberado
@@ -1303,7 +1303,7 @@ RBF.MENU_RECORDS = [
     code:    'REG-02',
     action:  'continue',
     needs:   'save',
-    note:    'A p\u00e1gina onde a leitura parou continua marcada.'
+    note:    'A página onde a leitura parou continua marcada.'
   },
   {
     id:      'load',
@@ -1315,12 +1315,12 @@ RBF.MENU_RECORDS = [
   },
   {
     id:      'chapters',
-    label:   'Cap\u00edtulos',
+    label:   'Capítulos',
     chapter: 'VOLUMES LIBERADOS',
     code:    'REG-04',
     action:  'chapters',
     needs:   'chapters',
-    note:    'Apenas os volumes que voc\u00ea j\u00e1 alcan\u00e7ou.'
+    note:    'Apenas os volumes que você já alcançou.'
   },
   {
     id:      'gallery',
@@ -1328,7 +1328,7 @@ RBF.MENU_RECORDS = [
     chapter: 'MATERIAL RECUPERADO',
     code:    'REG-05',
     action:  'gallery',
-    note:    'O que foi recuperado do arquivo at\u00e9 agora.'
+    note:    'O que foi recuperado do arquivo até agora.'
   },
   /* UM registro para os dois extras pos-jogo, com abas por dentro.
 
@@ -1354,11 +1354,11 @@ RBF.MENU_RECORDS = [
     chapter: 'CONTROLE DE LEITURA',
     code:    'REG-07',
     action:  'options',
-    note:    'Texto, \u00e1udio, movimento e conte\u00fado sens\u00edvel.'
+    note:    'Texto, áudio, movimento e conteúdo sensível.'
   },
   {
     id:      'credits',
-    label:   'Cr\u00e9ditos',
+    label:   'Créditos',
     chapter: 'REGISTRO DE AUTORIA',
     code:    'REG-08',
     action:  'credits',
@@ -1367,10 +1367,10 @@ RBF.MENU_RECORDS = [
   {
     id:      'close',
     label:   'Fechar o Arquivo',
-    chapter: 'ENCERRAR SESS\u00c3O',
+    chapter: 'ENCERRAR SESSÃO',
     code:    'REG-09',
     action:  'close',
-    note:    'Algumas coisas podem permanecer com voc\u00ea.'
+    note:    'Algumas coisas podem permanecer com você.'
   }
 ];
 
@@ -1384,17 +1384,17 @@ RBF.MENU_RECORDS = [
 RBF.WARNING = {
   label: 'AVISO',
   title: 'LEIA ANTES DE ABRIR O ARQUIVO',
-  body:  'Este registro cont\u00e9m viol\u00eancia, morte e experimenta\u00e7\u00e3o com ' +
-         'menores, al\u00e9m de horror psicol\u00f3gico prolongado. Nada disso \u00e9 ' +
-         'apresentado como espet\u00e1culo, mas tamb\u00e9m n\u00e3o \u00e9 suavizado.',
+  body:  'Este registro contém violência, morte e experimentação com ' +
+         'menores, além de horror psicológico prolongado. Nada disso é ' +
+         'apresentado como espetáculo, mas também não é suavizado.',
   tags:  [
     'Morte',
-    'Horror psicol\u00f3gico',
+    'Horror psicológico',
     'Abuso institucional',
-    'Experimenta\u00e7\u00e3o m\u00e9dica',
+    'Experimentação médica',
     'Dano envolvendo menor'
   ],
-  footer: 'O aviso pode ser desligado em Ajustes \u00b7 Conte\u00fado.',
+  footer: 'O aviso pode ser desligado em Ajustes · Conteúdo.',
   accept: 'Compreendo',
   back:   'Voltar'
 };
@@ -1402,7 +1402,7 @@ RBF.WARNING = {
 /* -------------------------------------------------------------------------
    14. ROTAS
 
-   O documento mestre define tres eixos de escolha: investiga\u00e7\u00e3o,
+   O documento mestre define tres eixos de escolha: investigação,
    relacionamento e moral. As rotas abaixo sao a leitura desses eixos, e
    os valores vem exclusivamente das escolhas reais que o jogador fez.
    Nenhuma rota tem valor decorativo: o delta esta declarado em cada
@@ -1414,13 +1414,13 @@ RBF.WARNING = {
 RBF.ROUTES = [
   {
     id:    'hope',
-    label: 'Esperan\u00e7a',
+    label: 'Esperança',
     icon:  'rf-icon-hope',
     max:   20,
     note:  'Uma possibilidade foi preservada.',
     /* Proximidade. O documento mestre: momentos de ternura tornam o
        final mais devastador para quem os viveu. */
-    hint:  'proximidade com quem est\u00e1 nesta casa'
+    hint:  'proximidade com quem está nesta casa'
   },
   {
     id:    'loss',
@@ -1429,14 +1429,14 @@ RBF.ROUTES = [
     max:   20,
     note:  'O arquivo registrou mais uma perda.',
     /* Custo moral: o que ela escolhe nao dizer, nao fazer, nao salvar. */
-    hint:  'o custo do que ela decide n\u00e3o fazer'
+    hint:  'o custo do que ela decide não fazer'
   },
   {
     id:    'answer',
     label: 'Resposta',
     icon:  'rf-icon-answer',
     max:   20,
-    note:  'Voc\u00ea chegou mais perto de uma resposta.',
+    note:  'Você chegou mais perto de uma resposta.',
     /* Investigacao: o que ela descobre e em que ordem. */
     hint:  'o que ela descobre e em que ordem'
   }
@@ -1498,31 +1498,31 @@ RBF.ROTAS = [
   {
     id:     'perda',
     label:  'A Perda',
-    nome:   'A D\u00edvida',
+    nome:   'A Dívida',
     ending: 'divida',
     when:   { min: { loss: 11 } },
     chapters: ['per10', 'per11', 'per12', 'per13'],
-    nota:   'A soma do que ela decidiu n\u00e3o fazer. \u00c9 a rota mais longa, e a \u00fanica em que a conta fecha.'
+    nota:   'A soma do que ela decidiu não fazer. É a rota mais longa, e a única em que a conta fecha.'
   },
 
   {
     id:     'resposta',
     label:  'A Resposta',
-    nome:   'O Livro-Raz\u00e3o',
+    nome:   'O Livro-Razão',
     ending: 'registro',
     when:   { min: { answer: 12 } },
     chapters: ['res10', 'res11', 'res12'],
-    nota:   'Ela entende tudo e n\u00e3o desce nenhuma noite. O documento sai completo, e sair completo \u00e9 o pre\u00e7o.'
+    nota:   'Ela entende tudo e não desce nenhuma noite. O documento sai completo, e sair completo é o preço.'
   },
 
   {
     id:     'esperanca',
-    label:  'A Esperan\u00e7a',
+    label:  'A Esperança',
     nome:   'O Arquivo',
     ending: 'arquivo',
     /* sem 'when': e o caminho padrao */
     chapters: ['esp10', 'esp11'],
-    nota:   'Ela tenta. Chega mais longe do que qualquer pessoa em cinco s\u00e9culos, e volta a p\u00e9.'
+    nota:   'Ela tenta. Chega mais longe do que qualquer pessoa em cinco séculos, e volta a pé.'
   }
 ];
 
@@ -1552,23 +1552,23 @@ RBF.ENDINGS = [
   {
     id:    'divida',
     rota:  'perda',
-    label: 'A D\u00edvida',
+    label: 'A Dívida',
     morre: true,
-    note:  'A soma do que ela decidiu n\u00e3o fazer. Ela MORRE, e a \u00faltima p\u00e1gina \u00e9 uma coluna de valores que fecha.'
+    note:  'A soma do que ela decidiu não fazer. Ela MORRE, e a última página é uma coluna de valores que fecha.'
   },
   {
     id:    'registro',
     rota:  'resposta',
-    label: 'O Livro-Raz\u00e3o',
+    label: 'O Livro-Razão',
     morre: false,
-    note:  'Entendeu tudo e n\u00e3o pagou nada. Ela VIVE, o Arquivo sai completo e frio, e ningu\u00e9m nele tem nome.'
+    note:  'Entendeu tudo e não pagou nada. Ela VIVE, o Arquivo sai completo e frio, e ninguém nele tem nome.'
   },
   {
     id:    'arquivo',
     rota:  'esperanca',
     label: 'O Arquivo',
     morre: true,
-    note:  'Chega mais longe do que qualquer outra rota, e volta a p\u00e9. Ela MORRE no prazo que Carmine deu.'
+    note:  'Chega mais longe do que qualquer outra rota, e volta a pé. Ela MORRE no prazo que Carmine deu.'
   }
 ];
 
@@ -1576,21 +1576,21 @@ RBF.CREDITS = [
   {
     title: 'Arquivo Rabenfels',
     lines: [
-      'Visual Novel de horror psicol\u00f3gico e trag\u00e9dia',
-      'Vers\u00e3o ' + RBF.CONFIG.gameVersion
+      'Visual Novel de horror psicológico e tragédia',
+      'Versão ' + RBF.CONFIG.gameVersion
     ]
   },
 
   {
-    title: 'Universo, roteiro e dire\u00e7\u00e3o',
+    title: 'Universo, roteiro e direção',
     lines: [
-      'Constru\u00e7\u00e3o do universo Rabenfels, lore, personagens,',
-      'mec\u00e2nica sobrenatural e a Balada das Filhas Rabenfels.'
+      'Construção do universo Rabenfels, lore, personagens,',
+      'mecânica sobrenatural e a Balada das Filhas Rabenfels.'
     ]
   },
 
   {
-    title: '\u00c1udio',
+    title: 'Áudio',
     lines: [
       'Tema do menu: "The Archive Pulls Me Near".',
       'Efeitos sonoros e sons de interface sintetizados para o projeto',
@@ -1602,21 +1602,21 @@ RBF.CREDITS = [
   {
     title: 'Interface',
     lines: [
-      'Identidade visual, cursor e composi\u00e7\u00e3o do arquivo',
-      'a partir do prot\u00f3tipo aprovado do projeto.'
+      'Identidade visual, cursor e composição do arquivo',
+      'a partir do protótipo aprovado do projeto.'
     ]
   },
 
   {
     title: 'Tecnologia',
     lines: [
-      'JavaScript sem framework, sem build, sem depend\u00eancia externa.',
+      'JavaScript sem framework, sem build, sem dependência externa.',
       'Executa direto do arquivo, sem servidor.'
     ]
   },
 
   {
-    title: 'Refer\u00eancias de estilo',
+    title: 'Referências de estilo',
     lines: [
       'The House in Fata Morgana, Umineko no Naku Koro ni,',
       'Saya no Uta, Higurashi no Naku Koro ni.'
@@ -1875,7 +1875,7 @@ RBF.COBERTURA = {
     rastro_02:       { file: 'rastro_02.png',       available: true, base: 0.00 },
     rastro_03:       { file: 'rastro_03.png',       available: true, base: 0.00 },
     rastro_04:       { file: 'rastro_04.png',       available: true, base: 0.00 },
-    prataria_empilhada: { file: 'prataria_empilhada.png', available: true, base: 0.00 },
+    prataria_empilhada: { escala: 1, file: 'prataria_empilhada.png', available: true, base: 0.00 },
     retrato_governanta_virado: {
       file: 'retrato_governanta_virado.png', available: true, base: 0.00
     },

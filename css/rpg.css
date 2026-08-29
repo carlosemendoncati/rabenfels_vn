@@ -295,7 +295,11 @@
   border-image: var(--rbf-art-ui-dialogue-plate-leather) 44 62 44 62 fill stretch;
   border-image-width: calc(var(--rbf-ui) * 22px) calc(var(--rbf-ui) * 30px);
   border-image-outset: 0;
-  padding: calc(var(--rbf-ui) * 30px) calc(var(--rbf-ui) * 34px);
+  /* 58, e nao 34: medido na arte. O ornamento chega a ~50px na largura
+     real da caixa, e com 34 a primeira palavra de toda narracao caia
+     em cima do losango. Vertical fica em 30 porque o ornamento de
+     cima nao passa da fatia. */
+  padding: calc(var(--rbf-ui) * 30px) calc(var(--rbf-ui) * 58px);
 }
 
 /*

@@ -63,51 +63,51 @@ var RBF = (typeof RBF !== 'undefined') ? RBF : {};
 
 var C9_PROMESSA_C = [
   { t:'dial', ch:'antoniette', tx:'Agosto. Antes do dia dez.' },
-  { t:'nar', tx:'Klara n\u00e3o perguntou como. N\u00e3o perguntou por que agosto.' },
+  { t:'nar', tx:'Klara não perguntou como. Não perguntou por que agosto.' },
   { t:'pause' },
-  { t:'dial', ch:'klara', tx:'Est\u00e1 bem.' },
-  { t:'nar', tx:'E foi guardar a data em algum lugar de onde ela n\u00e3o ia sair.' },
+  { t:'dial', ch:'klara', tx:'Está bem.' },
+  { t:'nar', tx:'E foi guardar a data em algum lugar de onde ela não ia sair.' },
   { t:'spr_hide', ch:'klara' },
   { t:'pause' },
-  { t:'inn', tx:'Eu dei a ela um n\u00famero.' },
-  { t:'inn', tx:'Ela n\u00e3o repetiu a data. N\u00e3o precisava.' },
+  { t:'inn', tx:'Eu dei a ela um número.' },
+  { t:'inn', tx:'Ela não repetiu a data. Não precisava.' },
   { t:'pause' },
-  { t:'inn', tx:'De hoje at\u00e9 agosto s\u00e3o cento e setenta e dois dias.' },
+  { t:'inn', tx:'De hoje até agosto são cento e setenta e dois dias.' },
   { t:'nar', tx:'Ela contou os dias antes de contar o que ia precisar.' }
 ];
 
 var C9_PROMESSA_B = [
-  { t:'dial', ch:'antoniette', tx:'Eu vou tirar voc\u00ea daqui.' },
+  { t:'dial', ch:'antoniette', tx:'Eu vou tirar você daqui.' },
   { t:'nar', tx:'Disse assim, inteiro, olhando no olho, sem qualificar nada.' },
   { t:'pause' },
-  { t:'nar', tx:'Klara recebeu a frase de p\u00e9, com a postura que tinha aprendido, e demorou a responder.' },
+  { t:'nar', tx:'Klara recebeu a frase de pé, com a postura que tinha aprendido, e demorou a responder.' },
   { t:'dial', ch:'klara', tx:'Obrigada.' },
   { t:'spr_hide', ch:'klara' },
   { t:'pause' },
-  { t:'inn', tx:'Ela agradeceu antes de perguntar qualquer coisa. N\u00e3o perguntou.' },
+  { t:'inn', tx:'Ela agradeceu antes de perguntar qualquer coisa. Não perguntou.' },
   { t:'pause' },
-  { t:'inn', tx:'Eu n\u00e3o sei se consigo. Sei que era a \u00fanica coisa que dava para dizer.' },
+  { t:'inn', tx:'Eu não sei se consigo. Sei que era a única coisa que dava para dizer.' },
   { t:'inn', tx:'Se eu dissesse "talvez", ela apagaria a palavra e guardaria o resto.' }
 ];
 
 var C9_PROMESSA_A = [
-  { t:'nar', tx:'Antoniette abriu o caderno operacional numa p\u00e1gina em branco e virou para o lado da menina.' },
+  { t:'nar', tx:'Antoniette abriu o caderno operacional numa página em branco e virou para o lado da menina.' },
   { t:'dial', ch:'antoniette', tx:'Senta. Vamos escrever o que falta.' },
   { t:'pause' },
-  { t:'nar', tx:'Levaram quarenta minutos. Klara conferiu tr\u00eas itens e achou um erro no hor\u00e1rio da guarda.' },
-  { t:'dial', ch:'klara', tx:'A troca \u00e9 \u00e0s onze e meia. A senhorita p\u00f4s onze.' },
+  { t:'nar', tx:'Levaram quarenta minutos. Klara conferiu três itens e achou um erro no horário da guarda.' },
+  { t:'dial', ch:'klara', tx:'A troca é às onze e meia. A senhorita pôs onze.' },
   { t:'dial', ch:'antoniette', tx:'Onze e meia. Corrigido.' },
   { t:'spr_hide', ch:'klara' },
   { t:'pause' },
-  { t:'inn', tx:'Eu n\u00e3o prometi nada. Eu mostrei o trabalho.' },
+  { t:'inn', tx:'Eu não prometi nada. Eu mostrei o trabalho.' },
   { t:'pause' },
   { t:'inn', tx:'E ela achou um erro meu na segunda leitura, o que significa que confere.' },
-  { t:'inn', tx:'Confere porque n\u00e3o confia. Eu ensinei a n\u00e3o confiar.' }
+  { t:'inn', tx:'Confere porque não confia. Eu ensinei a não confiar.' }
 ];
 
 RBF.CHAPTER9 = [
 
-{ t:'chap', num:'CAP\u00cdTULO 9', name:'A DECIS\u00c3O', chapter:'capitulo9' },
+{ t:'chap', num:'CAPÍTULO 9', name:'A DECISÃO', chapter:'capitulo9' },
 { t:'fade_out' },
 
 /* ======================================================================
@@ -118,9 +118,9 @@ RBF.CHAPTER9 = [
   bg:'bg_library', bgm:'bgm_nidhaus' },
 { t:'fade_in' },
 
-{ t:'nar', tx:'Ela catalogou o \u00faltimo volume numa ter\u00e7a de fevereiro, \u00e0s tr\u00eas da tarde.' },
-{ t:'nar', tx:'A biblioteca em fevereiro \u00e9 fria de um jeito que entra pelos p\u00e9s. Os dedos dela estavam duros de segurar pena.' },
-{ t:'nar', tx:'Era um tratado de drenagem agr\u00edcola, em mau estado, sem valor nenhum.' },
+{ t:'nar', tx:'Ela catalogou o último volume numa terça de fevereiro, às três da tarde.' },
+{ t:'nar', tx:'A biblioteca em fevereiro é fria de um jeito que entra pelos pés. Os dedos dela estavam duros de segurar pena.' },
+{ t:'nar', tx:'Era um tratado de drenagem agrícola, em mau estado, sem valor nenhum.' },
 { t:'pause' },
 
 { t:'nar', tx:'Escreveu a ficha, alinhou com a borda da mesa e ficou olhando a pilha vazia.' },
@@ -128,10 +128,10 @@ RBF.CHAPTER9 = [
 { t:'pause' },
 { t:'inn', tx:'Contrato de nove meses. Quarenta e seis meses.' },
 
-{ t:'nar', tx:'Ela levou a \u00faltima ficha ao fich\u00e1rio. Os dedos ficaram na aba at\u00e9 a junta perder cor.' },
+{ t:'nar', tx:'Ela levou a última ficha ao fichário. Os dedos ficaram na aba até a junta perder cor.' },
 { t:'pause' },
 { t:'inn', tx:'A partir de agora eu sou uma mulher que mora nesta casa sem motivo.' },
-{ t:'inn', tx:'Toda casa acaba perguntando por qu\u00ea.' },
+{ t:'inn', tx:'Toda casa acaba perguntando por quê.' },
 
 /* ======================================================================
    C2 - ALDRIC
@@ -142,26 +142,26 @@ RBF.CHAPTER9 = [
   bg:'bg_library', bgm:null },
 
 { t:'sfx', id:'sfx_footsteps' },
-{ t:'nar', tx:'Aldric apareceu na porta no fim daquela mesma tarde, o que n\u00e3o acontecia desde o primeiro ano.' },
+{ t:'nar', tx:'Aldric apareceu na porta no fim daquela mesma tarde, o que não acontecia desde o primeiro ano.' },
 { t:'spr', ch:'aldric', ex:'cold', pos:'left' },
 { t:'dial', ch:'aldric', tx:'Terminou.' },
 { t:'dial', ch:'antoniette', tx:'Terminei.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Ele subiu ao segundo andar, tirou um volume da estante e leu de p\u00e9, apoiado, como sempre.' },
-{ t:'dial', ch:'aldric', tx:'Minha mulher vai oferecer \u00e0 senhorita a cataloga\u00e7\u00e3o do arquivo de contas.' },
-{ t:'dial', ch:'antoniette', tx:'Eu n\u00e3o sabia disso.' },
-{ t:'dial', ch:'aldric', tx:'Vai ser amanh\u00e3 ou depois. Ela leva dois dias para propor uma coisa que j\u00e1 decidiu.' },
+{ t:'nar', tx:'Ele subiu ao segundo andar, tirou um volume da estante e leu de pé, apoiado, como sempre.' },
+{ t:'dial', ch:'aldric', tx:'Minha mulher vai oferecer à senhorita a catalogação do arquivo de contas.' },
+{ t:'dial', ch:'antoniette', tx:'Eu não sabia disso.' },
+{ t:'dial', ch:'aldric', tx:'Vai ser amanhã ou depois. Ela leva dois dias para propor uma coisa que já decidiu.' },
 { t:'pause' },
 
-{ t:'inn', tx:'Ele est\u00e1 me contando o que a mulher dele vai fazer.' },
-{ t:'inn', tx:'Isso n\u00e3o \u00e9 fofoca. \u00c9 prazo.' },
+{ t:'inn', tx:'Ele está me contando o que a mulher dele vai fazer.' },
+{ t:'inn', tx:'Isso não é fofoca. É prazo.' },
 
 { t:'spr', ch:'aldric', ex:'side', pos:'left' },
-{ t:'nar', tx:'Ele virou uma p\u00e1gina sem levantar os olhos.' },
-{ t:'dial', ch:'aldric', tx:'Se a senhorita aceitar, fica mais tr\u00eas anos.' },
+{ t:'nar', tx:'Ele virou uma página sem levantar os olhos.' },
+{ t:'dial', ch:'aldric', tx:'Se a senhorita aceitar, fica mais três anos.' },
 { t:'pause' },
-{ t:'dial', ch:'aldric', tx:'Trabalho de arquivo n\u00e3o acaba. \u00c9 o que ele tem de bom e de ruim.' },
+{ t:'dial', ch:'aldric', tx:'Trabalho de arquivo não acaba. É o que ele tem de bom e de ruim.' },
 
 { t:'nar', tx:'Antoniette esperou, porque ele estava indo a algum lugar e ela sabia disso havia cinco anos.' },
 { t:'pause' },
@@ -170,23 +170,23 @@ RBF.CHAPTER9 = [
 { t:'dial', ch:'aldric', tx:'Eu tinha vinte e seis anos quando entendi como esta casa funciona.' },
 { t:'dial', ch:'aldric', tx:'Levei uma tarde.' },
 { t:'pause' },
-{ t:'dial', ch:'aldric', tx:'Depois disso eu tive trinta anos para fazer alguma coisa a respeito, e n\u00e3o fiz.' },
+{ t:'dial', ch:'aldric', tx:'Depois disso eu tive trinta anos para fazer alguma coisa a respeito, e não fiz.' },
 
 { t:'nar', tx:'Ele fechou o volume, encaixou-o entre os vizinhos e alinhou a lombada com o polegar.' },
-{ t:'dial', ch:'aldric', tx:'N\u00e3o \u00e9 remorso. Remorso \u00e9 para quem hesitou.' },
+{ t:'dial', ch:'aldric', tx:'Não é remorso. Remorso é para quem hesitou.' },
 { t:'pause' },
-{ t:'dial', ch:'aldric', tx:'Eu n\u00e3o hesitei. Eu fiz a conta uma vez e nunca mais refiz.' },
+{ t:'dial', ch:'aldric', tx:'Eu não hesitei. Eu fiz a conta uma vez e nunca mais refiz.' },
 
-{ t:'nar', tx:'Desceu a escada e parou no meio, de costas, como j\u00e1 tinha parado uma vez em abril do primeiro ano.' },
-{ t:'dial', ch:'aldric', tx:'A senhorita ainda est\u00e1 na parte em que refazer a conta \u00e9 poss\u00edvel.' },
+{ t:'nar', tx:'Desceu a escada e parou no meio, de costas, como já tinha parado uma vez em abril do primeiro ano.' },
+{ t:'dial', ch:'aldric', tx:'A senhorita ainda está na parte em que refazer a conta é possível.' },
 { t:'spr_hide', ch:'aldric' },
 { t:'sfx', id:'sfx_door' },
 { t:'pause' },
 
-{ t:'inn', tx:'Ele n\u00e3o me disse para ir embora.' },
+{ t:'inn', tx:'Ele não me disse para ir embora.' },
 { t:'inn', tx:'Disse que a janela existe. Disse que sabe a que horas ela fecha.' },
 { t:'pause' },
-{ t:'inn', tx:'E n\u00e3o disse o nome dela uma vez sequer.' },
+{ t:'inn', tx:'E não disse o nome dela uma vez sequer.' },
 
 /* ======================================================================
    C3 - O QUE LIARA GANHOU
@@ -195,27 +195,27 @@ RBF.CHAPTER9 = [
 { t:'scene', id:'c9_liara', chapter:'capitulo9', title:'O que Liara ganhou',
   bg:'bg_corridor', bgm:null },
 
-{ t:'nar', tx:'Liara ganhou a discuss\u00e3o em mar\u00e7o, depois de quatro meses pedindo todo dia.' },
+{ t:'nar', tx:'Liara ganhou a discussão em março, depois de quatro meses pedindo todo dia.' },
 { t:'spr', ch:'liara', ex:'bright', pos:'right' },
 { t:'dial', ch:'liara', tx:'Papai disse sim!' },
 { t:'dial', ch:'liara', tx:'Quando eu fizer dezoito. As duas juntas, na mesma turma.' },
 { t:'pause' },
 
 { t:'dial', ch:'antoniette', tx:'As duas?' },
-{ t:'dial', ch:'liara', tx:'Eu falei que n\u00e3o ia sem ela. A\u00ed ele deixou.' },
+{ t:'dial', ch:'liara', tx:'Eu falei que não ia sem ela. Aí ele deixou.' },
 
 { t:'nar', tx:'Contou sorrindo, com o papel da Academia apertado contra o peito.' },
 { t:'spr_hide', ch:'liara' },
-{ t:'nar', tx:'E saiu correndo contar para mais algu\u00e9m.' },
+{ t:'nar', tx:'E saiu correndo contar para mais alguém.' },
 { t:'pause' },
 
 { t:'inn', tx:'Aldric e Serafina passaram doze anos sem deixar aquela menina sair do vale.' },
-{ t:'inn', tx:'E cederam para uma crian\u00e7a de doze anos que pediu todo dia durante quatro meses.' },
-{ t:'inn', tx:'Cederam uma coisa que s\u00f3 acontece daqui a seis anos. Dizer sim para isso hoje n\u00e3o custa nada.' },
+{ t:'inn', tx:'E cederam para uma criança de doze anos que pediu todo dia durante quatro meses.' },
+{ t:'inn', tx:'Cederam uma coisa que só acontece daqui a seis anos. Dizer sim para isso hoje não custa nada.' },
 { t:'pause' },
-{ t:'inn', tx:'Gente que administra um pacto de trezentos anos n\u00e3o cede por cansa\u00e7o.' },
-{ t:'nar', tx:'Ela anotou a data no caderno operacional e p\u00f4s um ponto de interroga\u00e7\u00e3o ao lado.' },
-{ t:'nar', tx:'Foi a \u00fanica vez em cinco anos que ela usou um ponto de interroga\u00e7\u00e3o num registro.' },
+{ t:'inn', tx:'Gente que administra um pacto de trezentos anos não cede por cansaço.' },
+{ t:'nar', tx:'Ela anotou a data no caderno operacional e pôs um ponto de interrogação ao lado.' },
+{ t:'nar', tx:'Foi a única vez em cinco anos que ela usou um ponto de interrogação num registro.' },
 
 /* ======================================================================
    C4 - O PEDIDO
@@ -224,7 +224,7 @@ RBF.CHAPTER9 = [
 { t:'scene', id:'c9_pedido', chapter:'capitulo9', title:'O que ela pede',
   bg:'bg_antoniette_room', bgm:null },
 
-{ t:'nar', tx:'Klara bateu na porta do quarto leste \u00e0s nove. Tr\u00eas toques iguais. Em cinco anos, nunca fora ali \u00e0quela hora.' },
+{ t:'nar', tx:'Klara bateu na porta do quarto leste às nove. Três toques iguais. Em cinco anos, nunca fora ali àquela hora.' },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'nar', tx:'Entrou, fechou a porta e ficou de costas para ela.' },
 { t:'pause' },
@@ -235,32 +235,32 @@ RBF.CHAPTER9 = [
 { t:'nar', tx:'E fevereiro tinha acabado onze dias antes.' },
 
 /* --- ramo A: o metodo ------------------------------------------------ */
-{ t:'nar', tx:'Ela p\u00f4s sobre a mesa duas folhas dobradas e as abriu com as duas m\u00e3os.', if:{ taught:'A' } },
-{ t:'dial', ch:'klara', tx:'Guarda do port\u00e3o, por dia da semana. Hora da carro\u00e7a do sal. Quando o Fenn dorme.', if:{ taught:'A' } },
-{ t:'nar', tx:'A letra era pequena e reta, e as colunas estavam alinhadas com r\u00e9gua.', if:{ taught:'A' } },
+{ t:'nar', tx:'Ela pôs sobre a mesa duas folhas dobradas e as abriu com as duas mãos.', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Guarda do portão, por dia da semana. Hora da carroça do sal. Quando o Fenn dorme.', if:{ taught:'A' } },
+{ t:'nar', tx:'A letra era pequena e reta, e as colunas estavam alinhadas com régua.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'dial', ch:'klara', tx:'Eu n\u00e3o quero ser levada. Quero ver o plano.', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Eu não quero ser levada. Quero ver o plano.', if:{ taught:'A' } },
 { t:'dial', ch:'klara', tx:'Se tiver erro eu acho.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'inn', tx:'Ela n\u00e3o veio pedir socorro. Veio pedir para conferir.', if:{ taught:'A' } },
+{ t:'inn', tx:'Ela não veio pedir socorro. Veio pedir para conferir.', if:{ taught:'A' } },
 
 /* --- ramo B: a forma ------------------------------------------------- */
 { t:'nar', tx:'Ela se virou, e tinha se arrumado para aquela conversa.', if:{ taught:'B' } },
-{ t:'dial', ch:'klara', tx:'Eu queria pedir do jeito certo, e n\u00e3o tem jeito certo. A senhorita disse.', if:{ taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Eu queria pedir do jeito certo, e não tem jeito certo. A senhorita disse.', if:{ taught:'B' } },
 { t:'pause', if:{ taught:'B' } },
-{ t:'dial', ch:'klara', tx:'Ent\u00e3o eu pe\u00e7o assim: eu queria ouvir a senhorita dizer.', if:{ taught:'B' } },
-{ t:'dial', ch:'antoniette', tx:'Dizer o qu\u00ea?', if:{ taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Então eu peço assim: eu queria ouvir a senhorita dizer.', if:{ taught:'B' } },
+{ t:'dial', ch:'antoniette', tx:'Dizer o quê?', if:{ taught:'B' } },
 { t:'dial', ch:'klara', tx:'Em voz alta. Inteiro. Sem "se der".', if:{ taught:'B' } },
 { t:'pause', if:{ taught:'B' } },
 { t:'inn', tx:'Ela sabe que promessa dita em voz alta prende quem diz.', if:{ taught:'B' } },
 { t:'inn', tx:'Eu ensinei isso a ela numa sala de jantar, sobre uma visita.', if:{ taught:'B' } },
 
 /* --- ramo C: o mundo ------------------------------------------------- */
-{ t:'nar', tx:'Ela p\u00f4s sobre a mesa um saco de pano, e dentro havia p\u00e3o duro, meia vela e o anel da av\u00f3.', if:{ taught:'C' } },
-{ t:'dial', ch:'klara', tx:'Est\u00e1 pronto desde outubro.', if:{ taught:'C' } },
+{ t:'nar', tx:'Ela pôs sobre a mesa um saco de pano, e dentro havia pão duro, meia vela e o anel da avó.', if:{ taught:'C' } },
+{ t:'dial', ch:'klara', tx:'Está pronto desde outubro.', if:{ taught:'C' } },
 { t:'pause', if:{ taught:'C' } },
-{ t:'dial', ch:'klara', tx:'Eu s\u00f3 preciso do dia.', if:{ taught:'C' } },
-{ t:'nar', tx:'Antoniette olhou o p\u00e3o duro e reconheceu o m\u00eas pela cor.', if:{ taught:'C' } },
+{ t:'dial', ch:'klara', tx:'Eu só preciso do dia.', if:{ taught:'C' } },
+{ t:'nar', tx:'Antoniette olhou o pão duro e reconheceu o mês pela cor.', if:{ taught:'C' } },
 { t:'pause', if:{ taught:'C' } },
 { t:'inn', tx:'Cinco meses com um saco pronto debaixo da cama.', if:{ taught:'C' } },
 { t:'inn', tx:'Esperando eu.', if:{ taught:'C' } },
@@ -270,10 +270,10 @@ RBF.CHAPTER9 = [
    ESCOLHA. Ordem de exibicao C B A - a de 'hope' na posicao 1.
    ====================================================================== */
 { t:'pause' },
-{ t:'nar', tx:'Antoniette ficou de p\u00e9 junto da janela e n\u00e3o olhou para a menina enquanto pensava.' },
-{ t:'inn', tx:'A marca da parede est\u00e1 a menos de um palmo.' },
-{ t:'inn', tx:'O ciclo mede altura. Est\u00e1 tudo na folha que ela mesma me trouxe.' },
-{ t:'inn', tx:'Se eu errar, ela n\u00e3o tem uma segunda vez.' },
+{ t:'nar', tx:'Antoniette ficou de pé junto da janela e não olhou para a menina enquanto pensava.' },
+{ t:'inn', tx:'A marca da parede está a menos de um palmo.' },
+{ t:'inn', tx:'O ciclo mede altura. Está tudo na folha que ela mesma me trouxe.' },
+{ t:'inn', tx:'Se eu errar, ela não tem uma segunda vez.' },
 
 { t:'cho', id:'cap9_promessa', code:'C-IX', prompt:'A PROMESSA', opts:[
   { id:'C',
@@ -287,7 +287,7 @@ RBF.CHAPTER9 = [
     routes:{ hope: 2, loss: 2 },
     then: C9_PROMESSA_B },
   { id:'A',
-    tx:'N\u00e3o prometer. Abrir o caderno e mostrar o trabalho.',
+    tx:'Não prometer. Abrir o caderno e mostrar o trabalho.',
     flags:{ promised:'A', plan_shape:'plano' },
     routes:{ answer: 3, hope: 1 },
     then: C9_PROMESSA_A }
@@ -301,27 +301,27 @@ RBF.CHAPTER9 = [
 { t:'scene', id:'c9_ponto_morto', chapter:'capitulo9', title:'Noventa dias',
   bg:'bg_antoniette_room', bgm:'bgm_archive' },
 
-{ t:'nar', tx:'Ela escreveu a Matheo em abril. Foi a carta mais curta de toda a correspond\u00eancia.' },
+{ t:'nar', tx:'Ela escreveu a Matheo em abril. Foi a carta mais curta de toda a correspondência.' },
 
-{ t:'arc', key:'matheo', label:'\u2014 correspond\u00eancia de campo \u2014', lns:[
-    'M. \u2014 solicito ponto morto em noventa dias, a contar desta data,',
-    'renov\u00e1vel a cada relat\u00f3rio.',
-    'Sem not\u00edcia em noventa dias, o pacote sai por conta pr\u00f3pria.',
-    'N\u00e3o pe\u00e7a explica\u00e7\u00e3o por carta. Eu n\u00e3o daria uma boa.',
+{ t:'arc', key:'matheo', label:'— correspondência de campo —', lns:[
+    'M. — solicito ponto morto em noventa dias, a contar desta data,',
+    'renovável a cada relatório.',
+    'Sem notícia em noventa dias, o pacote sai por conta própria.',
+    'Não peça explicação por carta. Eu não daria uma boa.',
     'A.'
 ]},
 
 { t:'nar', tx:'A resposta veio em doze dias e tinha uma linha.' },
 
-{ t:'arc', key:'matheo', label:'\u2014 correspond\u00eancia de campo \u2014', lns:[
-    'Concedido. Noventa dias. \u2014 M.'
+{ t:'arc', key:'matheo', label:'— correspondência de campo —', lns:[
+    'Concedido. Noventa dias. — M.'
 ]},
 
 { t:'pause' },
-{ t:'inn', tx:'Ele n\u00e3o perguntou.' },
-{ t:'inn', tx:'Dois anos antes, uma pergunta dessas teria recebido tr\u00eas p\u00e1ginas.' },
+{ t:'inn', tx:'Ele não perguntou.' },
+{ t:'inn', tx:'Dois anos antes, uma pergunta dessas teria recebido três páginas.' },
 { t:'pause' },
-{ t:'inn', tx:'Ou ele confia, ou j\u00e1 entendeu, ou n\u00e3o quer ter escrito a pergunta.' },
+{ t:'inn', tx:'Ou ele confia, ou já entendeu, ou não quer ter escrito a pergunta.' },
 { t:'nar', tx:'Ela guardou as duas cartas juntas, dobradas na mesma dobra.' },
 
 /* ======================================================================
@@ -331,32 +331,32 @@ RBF.CHAPTER9 = [
 { t:'scene', id:'c9_plano', chapter:'capitulo9', title:'O que ela tem',
   bg:'bg_antoniette_room', bgm:null },
 
-{ t:'nar', tx:'De abril a julho ela montou a coisa em papel, e o papel ficou embaixo do forro do ba\u00fa.' },
-{ t:'nar', tx:'Escreveu tanto naqueles tr\u00eas meses que a dobra do dedo m\u00e9dio ficou com um calo que n\u00e3o saiu mais.' },
+{ t:'nar', tx:'De abril a julho ela montou a coisa em papel, e o papel ficou embaixo do forro do baú.' },
+{ t:'nar', tx:'Escreveu tanto naqueles três meses que a dobra do dedo médio ficou com um calo que não saiu mais.' },
 
-{ t:'nar', tx:'Fenn continuava com a chave e com o filho na cocheira. Ela n\u00e3o pediu nada a ele.', if:{ third_paid:'A' } },
-{ t:'inn', tx:'Pedir seria cobrar o obrigado, e o obrigado dele j\u00e1 foi caro demais.', if:{ third_paid:'A' } },
+{ t:'nar', tx:'Fenn continuava com a chave e com o filho na cocheira. Ela não pediu nada a ele.', if:{ third_paid:'A' } },
+{ t:'inn', tx:'Pedir seria cobrar o obrigado, e o obrigado dele já foi caro demais.', if:{ third_paid:'A' } },
 
-{ t:'nar', tx:'Fenn estava na cocheira em tempo integral e n\u00e3o entrava mais na casa. N\u00e3o havia o que pedir.', if:{ third_paid:'B' } },
-{ t:'inn', tx:'Eu gastei a \u00fanica pessoa que sabia os hor\u00e1rios de dentro.', if:{ third_paid:'B' } },
+{ t:'nar', tx:'Fenn estava na cocheira em tempo integral e não entrava mais na casa. Não havia o que pedir.', if:{ third_paid:'B' } },
+{ t:'inn', tx:'Eu gastei a única pessoa que sabia os horários de dentro.', if:{ third_paid:'B' } },
 
-{ t:'nar', tx:'Fenn apareceu sozinho numa noite de junho e disse o hor\u00e1rio da guarda sem que ela perguntasse.', if:{ third_paid:'C' } },
-{ t:'nar', tx:'Disse, virou as costas e n\u00e3o voltou ao assunto em julho inteiro.', if:{ third_paid:'C' } },
-{ t:'inn', tx:'Ele n\u00e3o me deve nada. Foi ele que decidiu que devia.', if:{ third_paid:'C' } },
+{ t:'nar', tx:'Fenn apareceu sozinho numa noite de junho e disse o horário da guarda sem que ela perguntasse.', if:{ third_paid:'C' } },
+{ t:'nar', tx:'Disse, virou as costas e não voltou ao assunto em julho inteiro.', if:{ third_paid:'C' } },
+{ t:'inn', tx:'Ele não me deve nada. Foi ele que decidiu que devia.', if:{ third_paid:'C' } },
 
 { t:'pause' },
 
-{ t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
-    'Tr\u00eas dias de carruagem at\u00e9 Lervel. A Ordem n\u00e3o pode receber. Descartado.',
+{ t:'arc', key:'sem_identificacao', label:'— caderno sem identificação —', lns:[
+    'Três dias de carruagem até Lervel. A Ordem não pode receber. Descartado.',
     'Marca Cinzenta: quatro aldeias, todas contratadas pela casa. Descartado.',
-    'Rio: quatro dias a p\u00e9 at\u00e9 barco naveg\u00e1vel, com uma crian\u00e7a. Poss\u00edvel.',
-    'Melhor janela: agosto, madrugada, enquanto a casa espera o fen\u00f4meno.',
+    'Rio: quatro dias a pé até barco navegável, com uma criança. Possível.',
+    'Melhor janela: agosto, madrugada, enquanto a casa espera o fenômeno.',
     'Probabilidade honesta: baixa.'
 ]},
 
-{ t:'nar', tx:'Ela releu a \u00faltima linha e a manteve.' },
+{ t:'nar', tx:'Ela releu a última linha e a manteve.' },
 { t:'pause' },
-{ t:'inn', tx:'Eu escrevi baixa porque \u00e9 baixa.' },
+{ t:'inn', tx:'Eu escrevi baixa porque é baixa.' },
 { t:'inn', tx:'Se eu escrever outra coisa, eu estou preparando a desculpa em vez do plano.' },
 
 /* ======================================================================
@@ -397,32 +397,32 @@ RBF.CHAPTER9 = [
 
 { t:'ending' },
 
-{ t:'nar', tx:'No fim de julho come\u00e7aram os preparativos de agosto.' },
-{ t:'nar', tx:'Ningu\u00e9m disse a palavra. Trocaram o hor\u00e1rio da copa e fecharam duas janelas do lado leste.' },
+{ t:'nar', tx:'No fim de julho começaram os preparativos de agosto.' },
+{ t:'nar', tx:'Ninguém disse a palavra. Trocaram o horário da copa e fecharam duas janelas do lado leste.' },
 { t:'pause' },
 
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'spr', ch:'liara', ex:'neutral', pos:'right' },
 { t:'nar', tx:'As duas meninas estavam no degrau do corredor, contando quantos dias faltavam para a maioridade de Liara.' },
 { t:'dial', ch:'liara', tx:'Mil novecentos e quarenta e oito.' },
-{ t:'dial', ch:'klara', tx:'Mil novecentos e quarenta e nove. Voc\u00ea contou hoje duas vezes.' },
-{ t:'dial', ch:'liara', tx:'Contei n\u00e3o.' },
+{ t:'dial', ch:'klara', tx:'Mil novecentos e quarenta e nove. Você contou hoje duas vezes.' },
+{ t:'dial', ch:'liara', tx:'Contei não.' },
 { t:'dial', ch:'klara', tx:'Contou.' },
 { t:'pause' },
-{ t:'nar', tx:'Liara refez a conta nos dedos, aceitou o mil novecentos e quarenta e nove e recome\u00e7ou a falar de outra coisa.' },
+{ t:'nar', tx:'Liara refez a conta nos dedos, aceitou o mil novecentos e quarenta e nove e recomeçou a falar de outra coisa.' },
 { t:'spr_hide', ch:'liara' },
 { t:'spr_hide', ch:'klara' },
 
 { t:'pause' },
-{ t:'inn', tx:'Uma est\u00e1 contando os dias at\u00e9 a Academia.' },
-{ t:'inn', tx:'A outra est\u00e1 contando os dias at\u00e9 agosto.' },
+{ t:'inn', tx:'Uma está contando os dias até a Academia.' },
+{ t:'inn', tx:'A outra está contando os dias até agosto.' },
 { t:'pause' },
-{ t:'inn', tx:'E as duas acham que est\u00e3o contando a mesma coisa.' },
+{ t:'inn', tx:'E as duas acham que estão contando a mesma coisa.' },
 
-{ t:'nar', tx:'Antoniette voltou ao quarto e tirou o papel de baixo do forro pela \u00faltima vez para conferir.' },
-{ t:'nar', tx:'Estava tudo l\u00e1. Datas, hor\u00e1rios, o que funciona e o que n\u00e3o funciona.' },
+{ t:'nar', tx:'Antoniette voltou ao quarto e tirou o papel de baixo do forro pela última vez para conferir.' },
+{ t:'nar', tx:'Estava tudo lá. Datas, horários, o que funciona e o que não funciona.' },
 { t:'pause' },
-{ t:'nar', tx:'Ela dobrou o papel e o guardou no bolso interno, onde ele ia ficar at\u00e9 o dia.' },
+{ t:'nar', tx:'Ela dobrou o papel e o guardou no bolso interno, onde ele ia ficar até o dia.' },
 
 { t:'fade_out' },
 { t:'bgm', id:null },

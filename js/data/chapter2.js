@@ -37,47 +37,47 @@ var RBF = (typeof RBF !== 'undefined') ? RBF : {};
    -------------------------------------------------------------------------- */
 
 var C2_ESCOLHA_A = [
-  { t:'nar', tx:'Ela anotou a lacuna no relat\u00f3rio operacional, entre a contagem de volumes e o estado das encaderna\u00e7\u00f5es.' },
+  { t:'nar', tx:'Ela anotou a lacuna no relatório operacional, entre a contagem de volumes e o estado das encadernações.' },
   { t:'inn', tx:'Item nove. Irregularidade administrativa. Sem prioridade.' },
-  { t:'nar', tx:'Releu o item nove tr\u00eas vezes e n\u00e3o mudou uma palavra.' },
+  { t:'nar', tx:'Releu o item nove três vezes e não mudou uma palavra.' },
   { t:'pause' },
   { t:'inn', tx:'Um arquivista competente registra o que falta e segue catalogando o que existe.' },
   { t:'nar', tx:'Ela seguiu catalogando o que existia.' }
 ];
 
 var C2_ESCOLHA_B = [
-  { t:'nar', tx:'Ela abriu o invent\u00e1rio de pessoal e procurou o mesmo intervalo.' },
-  { t:'nar', tx:'Os contratos de servi\u00e7o estavam completos. Nenhuma lacuna.' },
-  { t:'inn', tx:'Ent\u00e3o n\u00e3o foi enchente, nem inc\u00eandio, nem mudan\u00e7a de administra\u00e7\u00e3o.' },
-  { t:'inn', tx:'Faltam os livros de conta de dois anos e n\u00e3o falta mais nada.' },
+  { t:'nar', tx:'Ela abriu o inventário de pessoal e procurou o mesmo intervalo.' },
+  { t:'nar', tx:'Os contratos de serviço estavam completos. Nenhuma lacuna.' },
+  { t:'inn', tx:'Então não foi enchente, nem incêndio, nem mudança de administração.' },
+  { t:'inn', tx:'Faltam os livros de conta de dois anos e não falta mais nada.' },
   { t:'pause' },
   { t:'nar', tx:'Escreveu os dois anos em um papel avulso e guardou no bolso do avental.' },
   { t:'inn', tx:'Preciso saber o que a casa comprava nesses dois anos.' }
 ];
 
 var C2_ESCOLHA_C = [
-  { t:'nar', tx:'Ela copiou a p\u00e1gina inteira \u00e0 m\u00e3o. Colunas, datas, o intervalo em branco.' },
+  { t:'nar', tx:'Ela copiou a página inteira à mão. Colunas, datas, o intervalo em branco.' },
   { t:'nar', tx:'Copiar leva quarenta minutos. Anotar leva dois.' },
-  { t:'inn', tx:'Uma anota\u00e7\u00e3o \u00e9 a minha leitura da p\u00e1gina. A c\u00f3pia \u00e9 a p\u00e1gina.' },
+  { t:'inn', tx:'Uma anotação é a minha leitura da página. A cópia é a página.' },
 
-  { t:'nar', tx:'Tirou o caderno sem identifica\u00e7\u00e3o de baixo do forro do ba\u00fa.',
+  { t:'nar', tx:'Tirou o caderno sem identificação de baixo do forro do baú.',
     if:{ archive_seed:true } },
-  { t:'nar', tx:'Tirou do ba\u00fa de ferramentas um caderno em branco. N\u00e3o escreveu data nem cabe\u00e7alho.',
+  { t:'nar', tx:'Tirou do baú de ferramentas um caderno em branco. Não escreveu data nem cabeçalho.',
     if:{ archive_seed:false } },
 
-  { t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
+  { t:'arc', key:'sem_identificacao', label:'— caderno sem identificação —', lns:[
       'Livros de conta: intervalo de dois anos ausente.',
-      'Numera\u00e7\u00e3o dos volumes: cont\u00ednua.',
-      'Quem retirou os livros n\u00e3o quis que a falta aparecesse.'
+      'Numeração dos volumes: contínua.',
+      'Quem retirou os livros não quis que a falta aparecesse.'
   ]},
-  { t:'inn', tx:'Isto tamb\u00e9m n\u00e3o vai para Lervel.' },
-  { t:'nar', tx:'Guardou o caderno e a c\u00f3pia no mesmo lugar.' }
+  { t:'inn', tx:'Isto também não vai para Lervel.' },
+  { t:'nar', tx:'Guardou o caderno e a cópia no mesmo lugar.' }
 ];
 
 RBF.CHAPTER2 = [
 
 /* --- cartao de capitulo ---------------------------------------------- */
-{ t:'chap', num:'CAP\u00cdTULO 2', name:'O INVENT\u00c1RIO', chapter:'capitulo2' },
+{ t:'chap', num:'CAPÍTULO 2', name:'O INVENTÁRIO', chapter:'capitulo2' },
 { t:'fade_out' },
 
 /* ======================================================================
@@ -89,94 +89,94 @@ RBF.CHAPTER2 = [
   bg:'bg_kitchen', bgm:'bgm_nidhaus' },
 { t:'fade_in' },
 
-{ t:'nar', tx:'A copa acordava antes da casa. \u00c0s cinco e meia j\u00e1 havia fogo e p\u00e3o.' },
-{ t:'nar', tx:'Era o \u00fanico c\u00f4modo quente de Velha Nidhaus, e cheirava a fermento, a cinza e a gordura de porco fria.' },
-{ t:'nar', tx:'Antoniette desceu \u00e0s seis, na terceira manh\u00e3, com o invent\u00e1rio parcial debaixo do bra\u00e7o.' },
-{ t:'inn', tx:'Comer com os servos economiza duas semanas de observa\u00e7\u00e3o.' },
+{ t:'nar', tx:'A copa acordava antes da casa. Às cinco e meia já havia fogo e pão.' },
+{ t:'nar', tx:'Era o único cômodo quente de Velha Nidhaus, e cheirava a fermento, a cinza e a gordura de porco fria.' },
+{ t:'nar', tx:'Antoniette desceu às seis, na terceira manhã, com o inventário parcial debaixo do braço.' },
+{ t:'inn', tx:'Comer com os servos economiza duas semanas de observação.' },
 
 { t:'spr', ch:'dara', ex:'neutral', pos:'center' },
 { t:'nar', tx:'A cozinheira encheu uma caneca sem perguntar se ela queria. O barro estava quente demais para segurar pela lateral.' },
-{ t:'dial', ch:'dara', tx:'Senhorita Vael. A copa \u00e9 dos empregados.' },
+{ t:'dial', ch:'dara', tx:'Senhorita Vael. A copa é dos empregados.' },
 { t:'dial', ch:'antoniette', tx:'Eu sou empregada. Contrato de nove meses, pago por volume catalogado.' },
 { t:'pause' },
-{ t:'nar', tx:'Dara olhou para ela por tr\u00eas segundos inteiros.' },
+{ t:'nar', tx:'Dara olhou para ela por três segundos inteiros.' },
 { t:'spr', ch:'dara', ex:'guarded', pos:'center' },
-{ t:'dial', ch:'dara', tx:'Dara. Cozinho aqui h\u00e1 dezenove anos.' },
+{ t:'dial', ch:'dara', tx:'Dara. Cozinho aqui há dezenove anos.' },
 
-{ t:'nar', tx:'Sentou do outro lado da mesa, o que n\u00e3o era obrigada a fazer.' },
-{ t:'dial', ch:'dara', tx:'A senhorita vai querer saber os hor\u00e1rios. Caf\u00e9 \u00e0s seis, almo\u00e7o ao meio-dia, ceia \u00e0s oito.' },
+{ t:'nar', tx:'Sentou do outro lado da mesa, o que não era obrigada a fazer.' },
+{ t:'dial', ch:'dara', tx:'A senhorita vai querer saber os horários. Café às seis, almoço ao meio-dia, ceia às oito.' },
 { t:'dial', ch:'dara', tx:'Depois das oito a cozinha fecha e eu vou para o meu quarto.' },
-{ t:'dial', ch:'antoniette', tx:'E se algu\u00e9m tiver fome \u00e0s dez?' },
-{ t:'dial', ch:'dara', tx:'Ningu\u00e9m tem.' },
+{ t:'dial', ch:'antoniette', tx:'E se alguém tiver fome às dez?' },
+{ t:'dial', ch:'dara', tx:'Ninguém tem.' },
 
-{ t:'inn', tx:'Ela respondeu r\u00e1pido demais para ser uma observa\u00e7\u00e3o.' },
+{ t:'inn', tx:'Ela respondeu rápido demais para ser uma observação.' },
 { t:'inn', tx:'Foi uma regra.' },
 { t:'pause' },
-{ t:'dial', ch:'antoniette', tx:'Ningu\u00e9m tem fome, ou ningu\u00e9m pede?' },
+{ t:'dial', ch:'antoniette', tx:'Ninguém tem fome, ou ninguém pede?' },
 { t:'pause' },
-{ t:'nar', tx:'Dara p\u00f4s a caneca dela na mesa e demorou a soltar a al\u00e7a.' },
+{ t:'nar', tx:'Dara pôs a caneca dela na mesa e demorou a soltar a alça.' },
 { t:'dial', ch:'dara', tx:'A senhorita pergunta bonito.' },
-{ t:'nar', tx:'E n\u00e3o respondeu nem uma coisa nem outra.' },
+{ t:'nar', tx:'E não respondeu nem uma coisa nem outra.' },
 { t:'pause' },
-{ t:'inn', tx:'Eu n\u00e3o entendi essa resposta.' },
+{ t:'inn', tx:'Eu não entendi essa resposta.' },
 { t:'inn', tx:'Anotar assim mesmo. Sem interpretar.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Antoniette abriu o invent\u00e1rio parcial e pousou ao lado da caneca.' },
+{ t:'nar', tx:'Antoniette abriu o inventário parcial e pousou ao lado da caneca.' },
 { t:'dial', ch:'antoniette', tx:'A biblioteca tem quatro mil e duzentos volumes. Vou levar mais tempo do que o contrato previa.' },
 { t:'dial', ch:'dara', tx:'A biblioteca fica no lado sul.' },
 { t:'dial', ch:'antoniette', tx:'Fica.' },
 { t:'dial', ch:'dara', tx:'Bom.' },
 
 { t:'nar', tx:'Dara puxou de baixo do banco uma lata e conferiu o que tinha dentro sem tirar a tampa toda.' },
-{ t:'dial', ch:'dara', tx:'Se a senhorita for a Marca Cinzenta antes de mim, traz cravo. Aqui n\u00e3o vendem.' },
+{ t:'dial', ch:'dara', tx:'Se a senhorita for a Marca Cinzenta antes de mim, traz cravo. Aqui não vendem.' },
 { t:'dial', ch:'antoniette', tx:'Cravo.' },
-{ t:'dial', ch:'dara', tx:'Dezenove anos pedindo. J\u00e1 virou passatempo.' },
+{ t:'dial', ch:'dara', tx:'Dezenove anos pedindo. Já virou passatempo.' },
 { t:'spr_hide', ch:'dara' },
 { t:'nar', tx:'Levantou e voltou para o fogo antes que a conversa pudesse continuar.' },
-{ t:'inn', tx:'Eu n\u00e3o perguntei nada sobre o lado norte.' },
+{ t:'inn', tx:'Eu não perguntei nada sobre o lado norte.' },
 
 /* ======================================================================
    CENA 2 - A BIBLIOTECA - MANHA
    Proposito: Ren, o metodo de catalogacao, o contraponto normal.
    Saida: ele nao sabe de nada e isso e informacao.
    ====================================================================== */
-{ t:'scene', id:'c2_biblioteca', chapter:'capitulo2', title:'A cataloga\u00e7\u00e3o',
+{ t:'scene', id:'c2_biblioteca', chapter:'capitulo2', title:'A catalogação',
   bg:'bg_library', bgm:'bgm_nidhaus' },
 
-{ t:'nar', tx:'O rapaz j\u00e1 estava l\u00e1 quando ela chegou, empilhando volumes por altura.' },
-{ t:'nar', tx:'A biblioteca cheirava a couro e a cola velha, e n\u00e3o cheirava a poeira. Algu\u00e9m limpava aquilo.' },
+{ t:'nar', tx:'O rapaz já estava lá quando ela chegou, empilhando volumes por altura.' },
+{ t:'nar', tx:'A biblioteca cheirava a couro e a cola velha, e não cheirava a poeira. Alguém limpava aquilo.' },
 { t:'spr', ch:'ren', ex:'neutral', pos:'right' },
 { t:'dial', ch:'ren', tx:'A senhora Rabenfels disse que eu ajudo a senhorita. Sou Ren.' },
-{ t:'dial', ch:'antoniette', tx:'H\u00e1 quanto tempo voc\u00ea trabalha aqui?' },
+{ t:'dial', ch:'antoniette', tx:'Há quanto tempo você trabalha aqui?' },
 { t:'dial', ch:'ren', tx:'Cinco semanas.' },
 
 { t:'inn', tx:'Cinco semanas. Contratado pouco antes de mim.' },
-{ t:'inn', tx:'Guardar isso. N\u00e3o perguntar por qu\u00ea.' },
+{ t:'inn', tx:'Guardar isso. Não perguntar por quê.' },
 
-{ t:'dial', ch:'antoniette', tx:'Empilhar por altura \u00e9 bom para a estante. N\u00e3o serve para cat\u00e1logo.' },
-{ t:'dial', ch:'ren', tx:'Serve para qu\u00ea, ent\u00e3o?' },
-{ t:'dial', ch:'antoniette', tx:'Autor, assunto, data, estado da encaderna\u00e7\u00e3o. Nessa ordem. Um volume por ficha.' },
-{ t:'nar', tx:'Ele repetiu a ordem em voz baixa duas vezes e n\u00e3o errou mais.' },
+{ t:'dial', ch:'antoniette', tx:'Empilhar por altura é bom para a estante. Não serve para catálogo.' },
+{ t:'dial', ch:'ren', tx:'Serve para quê, então?' },
+{ t:'dial', ch:'antoniette', tx:'Autor, assunto, data, estado da encadernação. Nessa ordem. Um volume por ficha.' },
+{ t:'nar', tx:'Ele repetiu a ordem em voz baixa duas vezes e não errou mais.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Trabalharam tr\u00eas horas. Ren falava enquanto trabalhava, do jeito de quem nunca precisou aprender a ficar quieto.' },
-{ t:'dial', ch:'ren', tx:'Minha m\u00e3e queria que eu fosse para a cidade. Aqui paga melhor.' },
-{ t:'dial', ch:'ren', tx:'Junto tr\u00eas anos e compro uma parelha. A\u00ed eu fa\u00e7o frete e n\u00e3o dependo de casa nenhuma.' },
-{ t:'nar', tx:'Disse aquilo do jeito de quem j\u00e1 disse muitas vezes e ainda acredita.' },
-{ t:'dial', ch:'ren', tx:'A senhora Rabenfels pagou seis meses adiantado. Isso \u00e9 normal?' },
-{ t:'dial', ch:'antoniette', tx:'N\u00e3o.' },
+{ t:'nar', tx:'Trabalharam três horas. Ren falava enquanto trabalhava, do jeito de quem nunca precisou aprender a ficar quieto.' },
+{ t:'dial', ch:'ren', tx:'Minha mãe queria que eu fosse para a cidade. Aqui paga melhor.' },
+{ t:'dial', ch:'ren', tx:'Junto três anos e compro uma parelha. Aí eu faço frete e não dependo de casa nenhuma.' },
+{ t:'nar', tx:'Disse aquilo do jeito de quem já disse muitas vezes e ainda acredita.' },
+{ t:'dial', ch:'ren', tx:'A senhora Rabenfels pagou seis meses adiantado. Isso é normal?' },
+{ t:'dial', ch:'antoniette', tx:'Não.' },
 { t:'dial', ch:'ren', tx:'Ah.' },
 { t:'nar', tx:'Ele riu e voltou para a pilha.' },
 
-{ t:'inn', tx:'Ele n\u00e3o fez a segunda pergunta.' },
-{ t:'inn', tx:'Dezessete anos. A casa contratou dois estranhos em seis semanas e ele acha que o incomum \u00e9 o adiantamento.' },
+{ t:'inn', tx:'Ele não fez a segunda pergunta.' },
+{ t:'inn', tx:'Dezessete anos. A casa contratou dois estranhos em seis semanas e ele acha que o incomum é o adiantamento.' },
 { t:'spr_hide', ch:'ren' },
 
-{ t:'arc', key:'caderno', label:'\u2014 Caderno Operacional \u2014 Entrada 4 \u2014', lns:[
+{ t:'arc', key:'caderno', label:'— Caderno Operacional — Entrada 4 —', lns:[
     'Assistente designado: Ren, 17 anos, contratado 5 semanas antes da minha chegada.',
-    'Sem v\u00ednculo com a regi\u00e3o. Sem parentes na casa. Sem curiosidade.',
-    'A escolha de um assistente sem raiz local n\u00e3o \u00e9 acidente.'
+    'Sem vínculo com a região. Sem parentes na casa. Sem curiosidade.',
+    'A escolha de um assistente sem raiz local não é acidente.'
 ]},
 
 /* ======================================================================
@@ -187,8 +187,8 @@ RBF.CHAPTER2 = [
 { t:'scene', id:'c2_livros_conta', chapter:'capitulo2', title:'Os livros de conta',
   bg:'bg_library', bgm:'bgm_archive' },
 
-{ t:'nar', tx:'A quarta prateleira do lado leste guardava a administra\u00e7\u00e3o da casa. Compras, sal\u00e1rios, reparos.' },
-{ t:'nar', tx:'Setenta e um volumes id\u00eanticos, encadernados no mesmo couro, numerados na lombada.' },
+{ t:'nar', tx:'A quarta prateleira do lado leste guardava a administração da casa. Compras, salários, reparos.' },
+{ t:'nar', tx:'Setenta e um volumes idênticos, encadernados no mesmo couro, numerados na lombada.' },
 { t:'sfx', id:'sfx_page_turn' },
 { t:'nar', tx:'Antoniette abriu o primeiro e reconheceu o formato. A Ordem usava um parecido.' },
 { t:'inn', tx:'Colunas de gasto, coluna de origem, assinatura mensal do administrador.' },
@@ -196,87 +196,87 @@ RBF.CHAPTER2 = [
 { t:'nar', tx:'Catalogou dezenove volumes antes de parar.' },
 { t:'pause' },
 { t:'nar', tx:'Voltou ao volume onze e abriu no fim.' },
-{ t:'nar', tx:'O volume onze fechava em mar\u00e7o. O volume doze abria dois anos depois, em abril.' },
+{ t:'nar', tx:'O volume onze fechava em março. O volume doze abria dois anos depois, em abril.' },
 
-{ t:'inn', tx:'Dois anos sem registro de compra, sal\u00e1rio ou reparo.' },
-{ t:'inn', tx:'A casa n\u00e3o parou de comer nesses dois anos.' },
+{ t:'inn', tx:'Dois anos sem registro de compra, salário ou reparo.' },
+{ t:'inn', tx:'A casa não parou de comer nesses dois anos.' },
 
-{ t:'nar', tx:'Conferiu as lombadas. Onze, doze, treze. A numera\u00e7\u00e3o n\u00e3o pulava.' },
+{ t:'nar', tx:'Conferiu as lombadas. Onze, doze, treze. A numeração não pulava.' },
 { t:'pause' },
-{ t:'inn', tx:'Se dois volumes tivessem sido perdidos, a numera\u00e7\u00e3o pularia.' },
-{ t:'inn', tx:'A numera\u00e7\u00e3o \u00e9 cont\u00ednua porque foi refeita depois.' },
+{ t:'inn', tx:'Se dois volumes tivessem sido perdidos, a numeração pularia.' },
+{ t:'inn', tx:'A numeração é contínua porque foi refeita depois.' },
 
-{ t:'nar', tx:'Ela passou o polegar na lombada do doze. O couro estava um tom mais claro que o dos vizinhos, e liso onde os outros tinham gr\u00e3o.' },
+{ t:'nar', tx:'Ela passou o polegar na lombada do doze. O couro estava um tom mais claro que o dos vizinhos, e liso onde os outros tinham grão.' },
 { t:'inn', tx:'Reencadernado.' },
 { t:'pause' },
 { t:'inn', tx:'Reencadernar dois volumes custa mais do que perder dois volumes.' },
-{ t:'inn', tx:'N\u00e3o consigo pensar em nenhum motivo para gastar dinheiro assim.' },
-{ t:'nar', tx:'O polegar dela continuou sobre o couro claro at\u00e9 Ren falar.' },
+{ t:'inn', tx:'Não consigo pensar em nenhum motivo para gastar dinheiro assim.' },
+{ t:'nar', tx:'O polegar dela continuou sobre o couro claro até Ren falar.' },
 
 { t:'spr', ch:'ren', ex:'neutral', pos:'right' },
 { t:'dial', ch:'ren', tx:'Achou alguma coisa?' },
 { t:'nar', tx:'Antoniette fechou o volume antes de responder.' },
-{ t:'dial', ch:'antoniette', tx:'Encaderna\u00e7\u00e3o irregular. Acontece em cole\u00e7\u00e3o antiga.' },
+{ t:'dial', ch:'antoniette', tx:'Encadernação irregular. Acontece em coleção antiga.' },
 { t:'dial', ch:'ren', tx:'Anoto na ficha?' },
 { t:'dial', ch:'antoniette', tx:'Anota.' },
 { t:'spr_hide', ch:'ren' },
 
-{ t:'inn', tx:'A primeira mentira em tr\u00eas dias. Anotada mentalmente, com a data.' },
+{ t:'inn', tx:'A primeira mentira em três dias. Anotada mentalmente, com a data.' },
 
 /* ======================================================================
    CENA 4 - O PATIO - ENTARDECER
    Proposito: a regra da casa, dita sem ser dita. Fenn de novo.
    Saida: ninguem olha para a ala de estudos, e ninguem sabe que nao olha.
    ====================================================================== */
-{ t:'scene', id:'c2_patio', chapter:'capitulo2', title:'O p\u00e1tio',
+{ t:'scene', id:'c2_patio', chapter:'capitulo2', title:'O pátio',
   bg:'bg_nidhaus_gate', bgm:null },
 
 { t:'sfx', id:'sfx_wind' },
-{ t:'nar', tx:'Ela cruzou o p\u00e1tio \u00e0s seis, quando os empregados atravessam para a cozinha.' },
+{ t:'nar', tx:'Ela cruzou o pátio às seis, quando os empregados atravessam para a cozinha.' },
 { t:'nar', tx:'A pedra devolvia o frio pelas solas. Cheirava a cavalo do lado da cocheira e a mais nada do outro lado.' },
 { t:'nar', tx:'Contou onze passagens em vinte minutos.' },
 { t:'pause' },
-{ t:'nar', tx:'Onze pessoas passaram diante da porta nordeste. Nenhuma virou a cabe\u00e7a.' },
+{ t:'nar', tx:'Onze pessoas passaram diante da porta nordeste. Nenhuma virou a cabeça.' },
 
-{ t:'inn', tx:'N\u00e3o \u00e9 evitar. Evitar exige saber que se est\u00e1 evitando.' },
-{ t:'inn', tx:'Eles simplesmente n\u00e3o olham. \u00c9 como respirar.' },
+{ t:'inn', tx:'Não é evitar. Evitar exige saber que se está evitando.' },
+{ t:'inn', tx:'Eles simplesmente não olham. É como respirar.' },
 
 { t:'spr', ch:'fenn', ex:'neutral', pos:'left' },
-{ t:'nar', tx:'Fenn apareceu com uma lanterna apagada na m\u00e3o, cedo demais para acender.' },
-{ t:'dial', ch:'fenn', tx:'Senhorita Vael. O p\u00e1tio esfria r\u00e1pido depois das seis.' },
+{ t:'nar', tx:'Fenn apareceu com uma lanterna apagada na mão, cedo demais para acender.' },
+{ t:'dial', ch:'fenn', tx:'Senhorita Vael. O pátio esfria rápido depois das seis.' },
 { t:'dial', ch:'antoniette', tx:'Estou vendo a fachada. A ala nordeste tem argamassa nova em cima de pedra velha.' },
 { t:'pause' },
 { t:'dial', ch:'fenn', tx:'Tem.' },
 { t:'dial', ch:'antoniette', tx:'Reforma recente?' },
-{ t:'dial', ch:'fenn', tx:'N\u00e3o que eu tenha visto.' },
+{ t:'dial', ch:'fenn', tx:'Não que eu tenha visto.' },
 
-{ t:'inn', tx:'Ele respondeu \u00e0 pergunta que eu fiz e s\u00f3 a ela.' },
-{ t:'inn', tx:'Fenn respondeu at\u00e9 "n\u00e3o que eu tenha visto". O resto ficou com ele.' },
+{ t:'inn', tx:'Ele respondeu à pergunta que eu fiz e só a ela.' },
+{ t:'inn', tx:'Fenn respondeu até "não que eu tenha visto". O resto ficou com ele.' },
 
-{ t:'nar', tx:'Fenn acendeu a lanterna. Ainda havia luz suficiente para n\u00e3o precisar.' },
-{ t:'dial', ch:'fenn', tx:'A ceia \u00e9 \u00e0s oito. Depois disso a copa fecha.' },
-{ t:'dial', ch:'antoniette', tx:'A senhora Dara j\u00e1 me disse.' },
-{ t:'dial', ch:'fenn', tx:'Ent\u00e3o j\u00e1 sabe.' },
+{ t:'nar', tx:'Fenn acendeu a lanterna. Ainda havia luz suficiente para não precisar.' },
+{ t:'dial', ch:'fenn', tx:'A ceia é às oito. Depois disso a copa fecha.' },
+{ t:'dial', ch:'antoniette', tx:'A senhora Dara já me disse.' },
+{ t:'dial', ch:'fenn', tx:'Então já sabe.' },
 { t:'pause' },
 { t:'dial', ch:'antoniette', tx:'Todo mundo aqui me diz a mesma coisa.' },
 { t:'dial', ch:'fenn', tx:'Casa grande. Sobra parede e falta assunto.' },
-{ t:'nar', tx:'Foi a coisa mais parecida com uma piada que ela ouviu em tr\u00eas dias, e ele n\u00e3o sorriu ao dizer.' },
+{ t:'nar', tx:'Foi a coisa mais parecida com uma piada que ela ouviu em três dias, e ele não sorriu ao dizer.' },
 { t:'spr_hide', ch:'fenn' },
 
-{ t:'nar', tx:'Ele atravessou o p\u00e1tio pelo lado sul, que \u00e9 o caminho mais longo.' },
+{ t:'nar', tx:'Ele atravessou o pátio pelo lado sul, que é o caminho mais longo.' },
 
 /* ======================================================================
    CENA 5 - A SECAO NORDESTE - NOITE
    Proposito: ela sobe. Encontra a lacuna documentada, nao explicada.
    Saida: a permissao de Aldric era um convite e ela sabe disso.
    ====================================================================== */
-{ t:'scene', id:'c2_nordeste', chapter:'capitulo2', title:'A se\u00e7\u00e3o nordeste',
+{ t:'scene', id:'c2_nordeste', chapter:'capitulo2', title:'A seção nordeste',
   bg:'bg_library_night', bgm:'bgm_archive' },
 
-{ t:'nar', tx:'\u00c0s onze a casa fica quieta de um jeito que n\u00e3o \u00e9 sil\u00eancio. \u00c9 aus\u00eancia de gente.' },
+{ t:'nar', tx:'Às onze a casa fica quieta de um jeito que não é silêncio. É ausência de gente.' },
 { t:'sfx', id:'sfx_footsteps' },
 { t:'nar', tx:'Antoniette subiu ao segundo andar com uma vela e o caderno operacional.' },
-{ t:'inn', tx:'Ele disse para trazer a ele antes de catalogar. N\u00e3o disse para n\u00e3o subir.' },
+{ t:'inn', tx:'Ele disse para trazer a ele antes de catalogar. Não disse para não subir.' },
 
 { t:'nar', tx:'As estantes do canto nordeste estavam viradas para dentro. Entre elas cabia uma pessoa de lado.' },
 
@@ -286,56 +286,56 @@ RBF.CHAPTER2 = [
    Os dois ramos levam o "e se" ate um fim desagradavel diferente.
    ---------------------------------------------------------------------- */
 { t:'nar', tx:'Havia um banquinho encostado na estante do meio.', if:{ aldric_pressed:true } },
-{ t:'nar', tx:'Na v\u00e9spera n\u00e3o havia banquinho nenhum naquele canto.', if:{ aldric_pressed:true } },
+{ t:'nar', tx:'Na véspera não havia banquinho nenhum naquele canto.', if:{ aldric_pressed:true } },
 { t:'pause', if:{ aldric_pressed:true } },
 { t:'inn', tx:'Eu perguntei a ele o que eu deveria estar procurando.', if:{ aldric_pressed:true } },
 { t:'inn', tx:'Ele mandou trazer o banquinho.', if:{ aldric_pressed:true } },
 { t:'pause', if:{ aldric_pressed:true } },
 { t:'inn', tx:'Nada do que eu achar aqui vai ser descoberta minha.', if:{ aldric_pressed:true } },
 
-{ t:'nar', tx:'A poeira do ch\u00e3o estava intacta at\u00e9 a marca do pr\u00f3prio sapato dela.', if:{ aldric_pressed:false } },
-{ t:'inn', tx:'Ningu\u00e9m subiu aqui desde que eu subi na semana passada.', if:{ aldric_pressed:false } },
+{ t:'nar', tx:'A poeira do chão estava intacta até a marca do próprio sapato dela.', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'Ninguém subiu aqui desde que eu subi na semana passada.', if:{ aldric_pressed:false } },
 { t:'pause', if:{ aldric_pressed:false } },
-{ t:'inn', tx:'Ele deu a permiss\u00e3o e n\u00e3o veio conferir se eu usei.', if:{ aldric_pressed:false } },
-{ t:'inn', tx:'Ou confia demais, ou o que est\u00e1 aqui n\u00e3o preocupa ningu\u00e9m.', if:{ aldric_pressed:false } },
-{ t:'inn', tx:'As duas hip\u00f3teses s\u00e3o ruins de jeitos diferentes.', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'Ele deu a permissão e não veio conferir se eu usei.', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'Ou confia demais, ou o que está aqui não preocupa ninguém.', if:{ aldric_pressed:false } },
+{ t:'inn', tx:'As duas hipóteses são ruins de jeitos diferentes.', if:{ aldric_pressed:false } },
 
 { t:'nar', tx:'Livros de registro. O mesmo couro dos livros de conta do andar de baixo.' },
 { t:'sfx', id:'sfx_page_turn' },
 { t:'pause' },
 
-{ t:'nar', tx:'Os volumes daquela estante guardavam os registros da pr\u00f3pria fam\u00edlia.' },
-{ t:'nar', tx:'Nascimentos, mortes, casamentos, transfer\u00eancias de propriedade. Duzentos anos.' },
-{ t:'inn', tx:'Isto deveria estar no cart\u00f3rio de Marca Cinzenta. N\u00e3o em uma estante virada para a parede.' },
+{ t:'nar', tx:'Os volumes daquela estante guardavam os registros da própria família.' },
+{ t:'nar', tx:'Nascimentos, mortes, casamentos, transferências de propriedade. Duzentos anos.' },
+{ t:'inn', tx:'Isto deveria estar no cartório de Marca Cinzenta. Não em uma estante virada para a parede.' },
 
-{ t:'nar', tx:'Ela procurou o intervalo dos dois anos que faltavam l\u00e1 embaixo.' },
+{ t:'nar', tx:'Ela procurou o intervalo dos dois anos que faltavam lá embaixo.' },
 { t:'pause' },
-{ t:'nar', tx:'Estava l\u00e1. Completo. Duas p\u00e1ginas por m\u00eas, letra firme.' },
+{ t:'nar', tx:'Estava lá. Completo. Duas páginas por mês, letra firme.' },
 { t:'pause' },
-{ t:'nar', tx:'Ela leu o intervalo duas vezes procurando a raz\u00e3o de algu\u00e9m guardar isto e queimar aquilo.' },
-{ t:'nar', tx:'N\u00e3o achou raz\u00e3o nenhuma.' },
+{ t:'nar', tx:'Ela leu o intervalo duas vezes procurando a razão de alguém guardar isto e queimar aquilo.' },
+{ t:'nar', tx:'Não achou razão nenhuma.' },
 { t:'pause' },
-{ t:'nar', tx:'No fim da segunda leitura j\u00e1 estava s\u00f3 lendo os nomes de gente que nasceu e morreu ali antes de ela existir.' },
+{ t:'nar', tx:'No fim da segunda leitura já estava só lendo os nomes de gente que nasceu e morreu ali antes de ela existir.' },
 { t:'pause' },
-{ t:'inn', tx:'Isso n\u00e3o \u00e9 trabalho. Voltar ao trabalho.' },
+{ t:'inn', tx:'Isso não é trabalho. Voltar ao trabalho.' },
 
-{ t:'inn', tx:'Os registros de fam\u00edlia dos dois anos existem.' },
-{ t:'inn', tx:'Os livros de conta dos mesmos dois anos foram retirados e a numera\u00e7\u00e3o foi refeita.' },
+{ t:'inn', tx:'Os registros de família dos dois anos existem.' },
+{ t:'inn', tx:'Os livros de conta dos mesmos dois anos foram retirados e a numeração foi refeita.' },
 { t:'pause' },
-{ t:'inn', tx:'Algu\u00e9m escolheu o que apagar. Escolheu o dinheiro.' },
+{ t:'inn', tx:'Alguém escolheu o que apagar. Escolheu o dinheiro.' },
 
-{ t:'nar', tx:'Ela leu os dois anos de registro de fam\u00edlia inteiros. Levou quarenta minutos.' },
-{ t:'nar', tx:'Nada fora do comum. Tr\u00eas nascimentos, duas mortes, um casamento.' },
-{ t:'inn', tx:'Nada fora do comum \u00e9 uma informa\u00e7\u00e3o.' },
-{ t:'inn', tx:'Um documento que n\u00e3o explica a aus\u00eancia do outro est\u00e1 fazendo isso de prop\u00f3sito.' },
+{ t:'nar', tx:'Ela leu os dois anos de registro de família inteiros. Levou quarenta minutos.' },
+{ t:'nar', tx:'Nada fora do comum. Três nascimentos, duas mortes, um casamento.' },
+{ t:'inn', tx:'Nada fora do comum é uma informação.' },
+{ t:'inn', tx:'Um documento que não explica a ausência do outro está fazendo isso de propósito.' },
 
 { t:'sfx', id:'sfx_candle' },
-{ t:'nar', tx:'A vela chegou ao fim e o cheiro de pavio apagado ficou no corredor atr\u00e1s dela.' },
-{ t:'nar', tx:'Desceu no escuro, que j\u00e1 conhecia.' },
+{ t:'nar', tx:'A vela chegou ao fim e o cheiro de pavio apagado ficou no corredor atrás dela.' },
+{ t:'nar', tx:'Desceu no escuro, que já conhecia.' },
 
-{ t:'inn', tx:'Ele me deu permiss\u00e3o para subir aqui.' },
+{ t:'inn', tx:'Ele me deu permissão para subir aqui.' },
 { t:'pause' },
-{ t:'inn', tx:'Ou ele n\u00e3o sabe o que tem aqui, ou ele quer que eu saiba.' },
+{ t:'inn', tx:'Ou ele não sabe o que tem aqui, ou ele quer que eu saiba.' },
 { t:'inn', tx:'Aldric Rabenfels sabe o que tem em cada estante desta casa.' },
 
 /* ======================================================================
@@ -347,31 +347,31 @@ RBF.CHAPTER2 = [
   bg:'bg_library', bgm:'bgm_nidhaus' },
 
 { t:'nar', tx:'Ela catalogava a terceira prateleira do lado oeste quando percebeu.' },
-{ t:'nar', tx:'Um volume de anatomia comparada, catalogado por ela na v\u00e9spera, estava fora da ordem.' },
-{ t:'inn', tx:'Fora da ordem por uma posi\u00e7\u00e3o. Trocado com o vizinho.' },
+{ t:'nar', tx:'Um volume de anatomia comparada, catalogado por ela na véspera, estava fora da ordem.' },
+{ t:'inn', tx:'Fora da ordem por uma posição. Trocado com o vizinho.' },
 { t:'pause' },
 
 { t:'sfx', id:'sfx_page_turn' },
-{ t:'nar', tx:'Abriu. Havia um marcador de papel dobrado entre as p\u00e1ginas cento e doze e cento e treze.' },
-{ t:'nar', tx:'Sistema circulat\u00f3rio. Diagrama de irriga\u00e7\u00e3o de \u00f3rg\u00e3o.' },
+{ t:'nar', tx:'Abriu. Havia um marcador de papel dobrado entre as páginas cento e doze e cento e treze.' },
+{ t:'nar', tx:'Sistema circulatório. Diagrama de irrigação de órgão.' },
 
 { t:'spr', ch:'ren', ex:'neutral', pos:'right' },
 { t:'dial', ch:'ren', tx:'Fui eu que arrumei essa prateleira. Devo ter trocado.' },
-{ t:'dial', ch:'antoniette', tx:'Voc\u00ea leu este volume?' },
-{ t:'dial', ch:'ren', tx:'N\u00e3o sei ler direito, senhorita. Sei as letras.' },
+{ t:'dial', ch:'antoniette', tx:'Você leu este volume?' },
+{ t:'dial', ch:'ren', tx:'Não sei ler direito, senhorita. Sei as letras.' },
 { t:'pause' },
 { t:'dial', ch:'antoniette', tx:'Obrigada, Ren.' },
 { t:'spr_hide', ch:'ren' },
 
-{ t:'nar', tx:'O marcador era um peda\u00e7o de papel de carta cortado com r\u00e9gua.' },
-{ t:'inn', tx:'Quem cortou tinha pressa e mesmo assim usou r\u00e9gua.' },
+{ t:'nar', tx:'O marcador era um pedaço de papel de carta cortado com régua.' },
+{ t:'inn', tx:'Quem cortou tinha pressa e mesmo assim usou régua.' },
 
-{ t:'nar', tx:'Ela devolveu o volume \u00e0 posi\u00e7\u00e3o correta e continuou catalogando.' },
+{ t:'nar', tx:'Ela devolveu o volume à posição correta e continuou catalogando.' },
 { t:'pause' },
-{ t:'nar', tx:'Na manh\u00e3 seguinte o volume estava de novo trocado com o vizinho, e o marcador na mesma p\u00e1gina.' },
+{ t:'nar', tx:'Na manhã seguinte o volume estava de novo trocado com o vizinho, e o marcador na mesma página.' },
 
 { t:'inn', tx:'Quem arruma erra uma vez. Isto tem hora marcada.' },
-{ t:'inn', tx:'Algu\u00e9m l\u00ea nesta biblioteca de madrugada e devolve o livro quase no lugar certo.' },
+{ t:'inn', tx:'Alguém lê nesta biblioteca de madrugada e devolve o livro quase no lugar certo.' },
 { t:'pause' },
 { t:'inn', tx:'Quase.' },
 
@@ -381,20 +381,20 @@ RBF.CHAPTER2 = [
    B: investigacao cruzada
    C: copia integral para o arquivo pessoal
    ====================================================================== */
-{ t:'scene', id:'c2_relatorio', chapter:'capitulo2', title:'O segundo relat\u00f3rio',
+{ t:'scene', id:'c2_relatorio', chapter:'capitulo2', title:'O segundo relatório',
   bg:'bg_antoniette_room', bgm:null },
 
-{ t:'nar', tx:'O segundo relat\u00f3rio para Matheo vencia naquela noite.' },
-{ t:'nar', tx:'Ela tinha o invent\u00e1rio parcial, a lacuna dos dois anos e um marcador de papel na mesa.' },
+{ t:'nar', tx:'O segundo relatório para Matheo vencia naquela noite.' },
+{ t:'nar', tx:'Ela tinha o inventário parcial, a lacuna dos dois anos e um marcador de papel na mesa.' },
 
 { t:'cho', id:'cap2_lacuna', prompt:'A LACUNA', opts:[
   { id:'C',
-    tx:'Copiar a p\u00e1gina inteira \u00e0 m\u00e3o. O que a Ordem receber \u00e9 outro assunto.',
+    tx:'Copiar a página inteira à mão. O que a Ordem receber é outro assunto.',
     flags:{ ledger_report:'C', ledger_crossref:false, ledger_copied:true, archive_seed:true },
     routes:{ answer: 1, hope: 1 },
     then: C2_ESCOLHA_C },
   { id:'B',
-    tx:'Cruzar com o invent\u00e1rio de pessoal e datar o intervalo.',
+    tx:'Cruzar com o inventário de pessoal e datar o intervalo.',
     flags:{ ledger_report:'B', ledger_crossref:true, ledger_copied:false },
     routes:{ answer: 2 },
     then: C2_ESCOLHA_B },
@@ -411,31 +411,31 @@ RBF.CHAPTER2 = [
 { t:'scene', id:'c2_madrugada', chapter:'capitulo2', title:'Madrugada',
   bg:'bg_antoniette_room' },
 
-{ t:'nar', tx:'Uma e meia. O relat\u00f3rio lacrado na beira da mesa.' },
-{ t:'nar', tx:'Da janela via-se o p\u00e1tio, a porta nordeste e a corrente sem cadeado.' },
+{ t:'nar', tx:'Uma e meia. O relatório lacrado na beira da mesa.' },
+{ t:'nar', tx:'Da janela via-se o pátio, a porta nordeste e a corrente sem cadeado.' },
 { t:'pause' },
 
 { t:'nar', tx:'Havia luz na ala de estudos.' },
 { t:'inn', tx:'Terceira noite seguida. Sempre a mesma janela, sempre depois da uma.' },
 
-{ t:'nar', tx:'A luz se apagou \u00e0s duas e dez.' },
-{ t:'nar', tx:'Onze minutos depois, algu\u00e9m atravessou o p\u00e1tio at\u00e9 a porta da biblioteca.' },
-{ t:'inn', tx:'Passos curtos. Peso de crian\u00e7a.' },
+{ t:'nar', tx:'A luz se apagou às duas e dez.' },
+{ t:'nar', tx:'Onze minutos depois, alguém atravessou o pátio até a porta da biblioteca.' },
+{ t:'inn', tx:'Passos curtos. Peso de criança.' },
 { t:'pause' },
-{ t:'inn', tx:'Ningu\u00e9m acompanhando.' },
+{ t:'inn', tx:'Ninguém acompanhando.' },
 { t:'pause' },
-{ t:'inn', tx:'A copa fecha \u00e0s oito.' },
+{ t:'inn', tx:'A copa fecha às oito.' },
 { t:'pause' },
-{ t:'inn', tx:'Ent\u00e3o ela n\u00e3o est\u00e1 descendo para comer.' },
-{ t:'nar', tx:'Foi a \u00fanica conclus\u00e3o que ela tirou naquela noite, e estava errada.' },
+{ t:'inn', tx:'Então ela não está descendo para comer.' },
+{ t:'nar', tx:'Foi a única conclusão que ela tirou naquela noite, e estava errada.' },
 
-{ t:'nar', tx:'Antoniette ficou na janela at\u00e9 o p\u00e1tio esvaziar.' },
+{ t:'nar', tx:'Antoniette ficou na janela até o pátio esvaziar.' },
 { t:'nar', tx:'Depois abriu o caderno operacional e escreveu uma linha.' },
 
-{ t:'arc', key:'caderno', label:'\u2014 Caderno Operacional \u2014 Entrada 9 \u2014', lns:[
-    'Duas crian\u00e7as de oito anos nesta casa.',
-    'Uma delas sai sozinha \u00e0s duas e vinte da manh\u00e3 e ningu\u00e9m vai atr\u00e1s.',
-    'Isso significa que \u00e9 permitido.'
+{ t:'arc', key:'caderno', label:'— Caderno Operacional — Entrada 9 —', lns:[
+    'Duas crianças de oito anos nesta casa.',
+    'Uma delas sai sozinha às duas e vinte da manhã e ninguém vai atrás.',
+    'Isso significa que é permitido.'
 ]},
 
 /* ----------------------------------------------------------------------
@@ -444,13 +444,13 @@ RBF.CHAPTER2 = [
    O preco tem de ficar visivel no fim do capitulo, e nao inferido.
    ---------------------------------------------------------------------- */
 { t:'pause' },
-{ t:'nar', tx:'Depois releu o relat\u00f3rio lacrado na beira da mesa.' },
-{ t:'nar', tx:'N\u00e3o tinha uma linha falsa dentro dele.' },
+{ t:'nar', tx:'Depois releu o relatório lacrado na beira da mesa.' },
+{ t:'nar', tx:'Não tinha uma linha falsa dentro dele.' },
 { t:'pause' },
-{ t:'inn', tx:'E n\u00e3o tem a entrada nove.' },
-{ t:'inn', tx:'Em oito anos de servi\u00e7o eu nunca mandei um relat\u00f3rio sabendo o que tinha ficado de fora.' },
+{ t:'inn', tx:'E não tem a entrada nove.' },
+{ t:'inn', tx:'Em oito anos de serviço eu nunca mandei um relatório sabendo o que tinha ficado de fora.' },
 { t:'pause' },
-{ t:'nar', tx:'Deixou os dois na mesa, alinhou as lombadas e n\u00e3o abriu nenhum.' },
+{ t:'nar', tx:'Deixou os dois na mesa, alinhou as lombadas e não abriu nenhum.' },
 { t:'inn', tx:'Dois meses.' },
 
 { t:'sfx', id:'sfx_candle' },
@@ -458,7 +458,7 @@ RBF.CHAPTER2 = [
 
 { t:'fade_out' },
 { t:'bgm', id:null },
-{ t:'end_chap', line1:'Segundo m\u00eas em Velha Nidhaus.', line2:'A casa come\u00e7ou a responder.',
+{ t:'end_chap', line1:'Segundo mês em Velha Nidhaus.', line2:'A casa começou a responder.',
   chapter:'capitulo2' },
 { t:'fade_out' }
 

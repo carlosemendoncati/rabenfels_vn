@@ -78,64 +78,64 @@ var C6_METODO = [
   { t:'nar', tx:'Ela cortou papel do tamanho da palma e ensinou a ordem: autor, assunto, data, estado.' },
   { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
   { t:'dial', ch:'klara', tx:'Por que nessa ordem?' },
-  { t:'dial', ch:'antoniette', tx:'Porque a pr\u00f3xima pessoa vai procurar por autor.' },
-  { t:'dial', ch:'klara', tx:'E se n\u00e3o for?' },
+  { t:'dial', ch:'antoniette', tx:'Porque a próxima pessoa vai procurar por autor.' },
+  { t:'dial', ch:'klara', tx:'E se não for?' },
   { t:'pause' },
-  { t:'dial', ch:'antoniette', tx:'A\u00ed ela reclama, e a gente muda a ordem.' },
-  { t:'nar', tx:'A menina achou isso engra\u00e7ado, o que Antoniette n\u00e3o esperava.' },
+  { t:'dial', ch:'antoniette', tx:'Aí ela reclama, e a gente muda a ordem.' },
+  { t:'nar', tx:'A menina achou isso engraçado, o que Antoniette não esperava.' },
 
-  { t:'nar', tx:'Em tr\u00eas semanas ela fazia quarenta fichas por manh\u00e3, com letra melhor que a de Ren.' },
-  { t:'nar', tx:'Em dois meses parou de perguntar a ordem e come\u00e7ou a perguntar as exce\u00e7\u00f5es.' },
+  { t:'nar', tx:'Em três semanas ela fazia quarenta fichas por manhã, com letra melhor que a de Ren.' },
+  { t:'nar', tx:'Em dois meses parou de perguntar a ordem e começou a perguntar as exceções.' },
   { t:'pause' },
-  { t:'inn', tx:'Ningu\u00e9m nesta casa nunca pediu a ela para pensar em voz alta.' },
+  { t:'inn', tx:'Ninguém nesta casa nunca pediu a ela para pensar em voz alta.' },
   { t:'inn', tx:'Ela estava com fome disso.' },
 { t:'nar', tx:'Antoniette cortou mais papel do que precisava para aquela tarde, e guardou o resto na gaveta.' },
 
-  { t:'scene', id:'c6a_fonte', chapter:'capitulo6', title:'Fonte \u00fanica' },
-  { t:'nar', tx:'No ver\u00e3o do segundo ano, Antoniette ensinou a \u00fanica regra que importa.' },
-{ t:'nar', tx:'Fazia calor de rachar e as duas trabalhavam com as mangas dobradas. O papel colava na palma da m\u00e3o.' },
-  { t:'dial', ch:'antoniette', tx:'Uma pessoa disse. Isso n\u00e3o \u00e9 um fato. \u00c9 uma pessoa.' },
+  { t:'scene', id:'c6a_fonte', chapter:'capitulo6', title:'Fonte única' },
+  { t:'nar', tx:'No verão do segundo ano, Antoniette ensinou a única regra que importa.' },
+{ t:'nar', tx:'Fazia calor de rachar e as duas trabalhavam com as mangas dobradas. O papel colava na palma da mão.' },
+  { t:'dial', ch:'antoniette', tx:'Uma pessoa disse. Isso não é um fato. É uma pessoa.' },
   { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
   { t:'dial', ch:'klara', tx:'E se duas dizem?' },
-  { t:'dial', ch:'antoniette', tx:'A\u00ed voc\u00ea pergunta se as duas ouviram da mesma.' },
+  { t:'dial', ch:'antoniette', tx:'Aí você pergunta se as duas ouviram da mesma.' },
   { t:'pause' },
-  { t:'nar', tx:'Klara levou cinco respira\u00e7\u00f5es. Na quarta, franziu a testa.' },
-  { t:'dial', ch:'klara', tx:'Quase tudo \u00e9 uma pessoa, ent\u00e3o.' },
+  { t:'nar', tx:'Klara levou cinco respirações. Na quarta, franziu a testa.' },
+  { t:'dial', ch:'klara', tx:'Quase tudo é uma pessoa, então.' },
   { t:'dial', ch:'antoniette', tx:'Quase tudo.' },
 
   { t:'nar', tx:'A partir dali a menina passou a perguntar de onde as coisas vinham.' },
   { t:'nar', tx:'Perguntou a Dara de onde vinha a regra das oito horas.' },
   { t:'nar', tx:'Perguntou a Ren quem tinha mandado desviar das borboletas.' },
   { t:'pause' },
-  { t:'nar', tx:'Perguntou \u00e0 m\u00e3e por que a feira de maio n\u00e3o servia para ela.' },
-  { t:'inn', tx:'Eu n\u00e3o previ isso.' },
-  { t:'inn', tx:'E n\u00e3o sei como n\u00e3o previ.' },
+  { t:'nar', tx:'Perguntou à mãe por que a feira de maio não servia para ela.' },
+  { t:'inn', tx:'Eu não previ isso.' },
+  { t:'inn', tx:'E não sei como não previ.' },
 
   { t:'scene', id:'c6a_caderno', chapter:'capitulo6', title:'O caderno dela',
     bg:'bg_corridor', bgm:null },
-  { t:'nar', tx:'Em fevereiro do terceiro ano, Antoniette achou um caderno debaixo do colch\u00e3o da menina.' },
-{ t:'nar', tx:'O quarto delas era o mais frio da casa e cheirava a l\u00e3 guardada.' },
-  { t:'nar', tx:'Uma quina aparecia quando a colcha era puxada. Era o esconderijo de uma crian\u00e7a.' },
+  { t:'nar', tx:'Em fevereiro do terceiro ano, Antoniette achou um caderno debaixo do colchão da menina.' },
+{ t:'nar', tx:'O quarto delas era o mais frio da casa e cheirava a lã guardada.' },
+  { t:'nar', tx:'Uma quina aparecia quando a colcha era puxada. Era o esconderijo de uma criança.' },
   { t:'pause' },
 
-  { t:'arc', key:'caderno_klara', label:'\u2014 caderno de K. \u2014', lns:[
-      'Feira de maio: mam\u00e3e diz sol. Elke diz sol. Elke ouviu da mam\u00e3e.',
-      'Outubro: quatro dias. Ano passado quatro dias. Antes disso n\u00e3o sei.',
+  { t:'arc', key:'caderno_klara', label:'— caderno de K. —', lns:[
+      'Feira de maio: mamãe diz sol. Elke diz sol. Elke ouviu da mamãe.',
+      'Outubro: quatro dias. Ano passado quatro dias. Antes disso não sei.',
       'Perguntar ao Fenn quantos outubros. Fenn conta certo.',
-      'A senhorita V. n\u00e3o pergunta de outubro. Por qu\u00ea?'
+      'A senhorita V. não pergunta de outubro. Por quê?'
   ]},
 
-  { t:'nar', tx:'Antoniette recolocou o caderno na marca rasa do colch\u00e3o e alisou a colcha.' },
+  { t:'nar', tx:'Antoniette recolocou o caderno na marca rasa do colchão e alisou a colcha.' },
   { t:'pause' },
-  { t:'inn', tx:'\u00daltima linha.' },
+  { t:'inn', tx:'Última linha.' },
   { t:'inn', tx:'Ela aplicou em mim.' },
   { t:'pause' },
-  { t:'inn', tx:'Eu ensinei a uma crian\u00e7a de dez anos a reparar em quem n\u00e3o pergunta.' },
+  { t:'inn', tx:'Eu ensinei a uma criança de dez anos a reparar em quem não pergunta.' },
   { t:'inn', tx:'E eu sou a pessoa desta casa que menos pergunta.' },
 
-  { t:'nar', tx:'Naquela noite ela escreveu no caderno sem identifica\u00e7\u00e3o uma linha s\u00f3.' },
-  { t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
-      'Fiz uma colega de uma crian\u00e7a de dez anos.'
+  { t:'nar', tx:'Naquela noite ela escreveu no caderno sem identificação uma linha só.' },
+  { t:'arc', key:'sem_identificacao', label:'— caderno sem identificação —', lns:[
+      'Fiz uma colega de uma criança de dez anos.'
   ]}
 ];
 
@@ -157,57 +157,57 @@ var C6_FORMA = [
   { t:'dial', ch:'klara', tx:'O que eu falo?' },
   { t:'dial', ch:'antoniette', tx:'Nada, se puder. Quem fala primeiro entrega o assunto.' },
   { t:'dial', ch:'klara', tx:'E se perguntarem?' },
-  { t:'dial', ch:'antoniette', tx:'Responde a pergunta feita. S\u00f3 ela. E devolve o olhar pelo tempo exato.' },
+  { t:'dial', ch:'antoniette', tx:'Responde a pergunta feita. Só ela. E devolve o olhar pelo tempo exato.' },
   { t:'pause' },
-  { t:'dial', ch:'klara', tx:'Quanto \u00e9 o tempo exato?' },
-  { t:'nar', tx:'Antoniette procurou uma medida que coubesse em n\u00famero.' },
-  { t:'dial', ch:'antoniette', tx:'At\u00e9 voc\u00ea querer desviar. A\u00ed \u00e9 uma respira\u00e7\u00e3o a mais.' },
+  { t:'dial', ch:'klara', tx:'Quanto é o tempo exato?' },
+  { t:'nar', tx:'Antoniette procurou uma medida que coubesse em número.' },
+  { t:'dial', ch:'antoniette', tx:'Até você querer desviar. Aí é uma respiração a mais.' },
 
   { t:'scene', id:'c6b_jantar', chapter:'capitulo6', title:'O jantar' },
-  { t:'nar', tx:'A mulher do administrador perguntou \u00e0s meninas se elas gostavam de estudar.' },
+  { t:'nar', tx:'A mulher do administrador perguntou às meninas se elas gostavam de estudar.' },
   { t:'spr', ch:'liara', ex:'neutral', pos:'right' },
-  { t:'dial', ch:'liara', tx:'Eu gosto de montaria! E de mapa. E de contar hist\u00f3ria.' },
+  { t:'dial', ch:'liara', tx:'Eu gosto de montaria! E de mapa. E de contar história.' },
   { t:'pause' },
   { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
   { t:'dial', ch:'klara', tx:'Gosto, senhora.' },
-  { t:'nar', tx:'E devolveu o olhar por uma respira\u00e7\u00e3o a mais, e a mulher mudou de assunto.' },
+  { t:'nar', tx:'E devolveu o olhar por uma respiração a mais, e a mulher mudou de assunto.' },
   { t:'pause' },
   { t:'inn', tx:'Ela fez na primeira tentativa.' },
 
   { t:'nar', tx:'Nos dezoito meses seguintes a menina aprendeu a entrar numa sala e medir quem manda.' },
-  { t:'nar', tx:'Aprendeu que a pessoa que serve o ch\u00e1 \u00e9 a que ouve tudo.' },
-  { t:'nar', tx:'Aprendeu a agradecer antes de recusar, que \u00e9 o que faz a recusa passar.' },
+  { t:'nar', tx:'Aprendeu que a pessoa que serve o chá é a que ouve tudo.' },
+  { t:'nar', tx:'Aprendeu a agradecer antes de recusar, que é o que faz a recusa passar.' },
   { t:'pause' },
   { t:'inn', tx:'Eu estou ensinando a ela o que a Ordem me ensinou.' },
-  { t:'inn', tx:'A diferen\u00e7a \u00e9 que eu uso isso para trabalhar numa casa que n\u00e3o \u00e9 minha.' },
+  { t:'inn', tx:'A diferença é que eu uso isso para trabalhar numa casa que não é minha.' },
 
-  { t:'scene', id:'c6b_aprovacao', chapter:'capitulo6', title:'A aprova\u00e7\u00e3o',
+  { t:'scene', id:'c6b_aprovacao', chapter:'capitulo6', title:'A aprovação',
     bg:'bg_main_hall' },
-  { t:'nar', tx:'Em mar\u00e7o do terceiro ano, Serafina a parou no corredor da galeria.' },
+  { t:'nar', tx:'Em março do terceiro ano, Serafina a parou no corredor da galeria.' },
   { t:'spr', ch:'serafina', ex:'direct', pos:'right' },
-  { t:'dial', ch:'serafina', tx:'A menina melhorou muito \u00e0 mesa.' },
-  { t:'dial', ch:'antoniette', tx:'Ela aprende r\u00e1pido.' },
+  { t:'dial', ch:'serafina', tx:'A menina melhorou muito à mesa.' },
+  { t:'dial', ch:'antoniette', tx:'Ela aprende rápido.' },
   { t:'pause' },
   { t:'spr', ch:'serafina', ex:'smirk', pos:'right' },
-  { t:'dial', ch:'serafina', tx:'Ela aprendeu com algu\u00e9m.' },
+  { t:'dial', ch:'serafina', tx:'Ela aprendeu com alguém.' },
 
-  { t:'nar', tx:'Antoniette n\u00e3o respondeu, porque n\u00e3o havia resposta que servisse.' },
-  { t:'dial', ch:'serafina', tx:'Isso vai ser \u00fatil para ela.' },
+  { t:'nar', tx:'Antoniette não respondeu, porque não havia resposta que servisse.' },
+  { t:'dial', ch:'serafina', tx:'Isso vai ser útil para ela.' },
   { t:'pause' },
   { t:'dial', ch:'serafina', tx:'Obrigada.' },
   { t:'spr_hide', ch:'serafina' },
-  { t:'nar', tx:'Serafina recolheu a saia e subiu sem olhar para tr\u00e1s.' },
+  { t:'nar', tx:'Serafina recolheu a saia e subiu sem olhar para trás.' },
 
   { t:'pause' },
   { t:'inn', tx:'Ela me agradeceu.' },
-  { t:'inn', tx:'"Isso vai ser \u00fatil para ela."' },
+  { t:'inn', tx:'"Isso vai ser útil para ela."' },
   { t:'pause' },
-  { t:'inn', tx:'\u00datil para qu\u00ea.' },
-  { t:'nar', tx:'Ela ficou diante da moldura vazia at\u00e9 ouvir a porta de Serafina fechar no andar de cima.' },
+  { t:'inn', tx:'Útil para quê.' },
+  { t:'nar', tx:'Ela ficou diante da moldura vazia até ouvir a porta de Serafina fechar no andar de cima.' },
 
-  { t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
-      'A senhora da casa agradeceu o que eu estou ensinando \u00e0 menina.',
-      'Ela n\u00e3o agradeceria se aquilo atrapalhasse o cronograma.'
+  { t:'arc', key:'sem_identificacao', label:'— caderno sem identificação —', lns:[
+      'A senhora da casa agradeceu o que eu estou ensinando à menina.',
+      'Ela não agradeceria se aquilo atrapalhasse o cronograma.'
   ]}
 ];
 
@@ -223,73 +223,73 @@ var C6_MUNDO = [
 
   { t:'nar', tx:'Ela tirou da estante nordeste um volume de couro cansado e o pousou na mesa sem dizer nada.' },
   { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
-  { t:'dial', ch:'klara', tx:'\u00c9 sobre o qu\u00ea?' },
+  { t:'dial', ch:'klara', tx:'É sobre o quê?' },
   { t:'dial', ch:'antoniette', tx:'Abre.' },
   { t:'pause' },
 
-  { t:'nar', tx:'Gravuras de drag\u00e3o, em prancha dobrada, com escala humana ao lado para compara\u00e7\u00e3o.' },
-  { t:'nar', tx:'O texto era em tr\u00eas l\u00ednguas e nenhuma delas era a da casa.' },
+  { t:'nar', tx:'Gravuras de dragão, em prancha dobrada, com escala humana ao lado para comparação.' },
+  { t:'nar', tx:'O texto era em três línguas e nenhuma delas era a da casa.' },
   { t:'dial', ch:'klara', tx:'Por que este?' },
   { t:'pause' },
-  { t:'nar', tx:'Antoniette voltou para a pr\u00f3pria pilha e n\u00e3o respondeu.' },
-  { t:'inn', tx:'Porque tem gravura grande e eu n\u00e3o sei explicar melhor do que isso.' },
+  { t:'nar', tx:'Antoniette voltou para a própria pilha e não respondeu.' },
+  { t:'inn', tx:'Porque tem gravura grande e eu não sei explicar melhor do que isso.' },
 
-  { t:'nar', tx:'A menina levou quatro meses para atravessar o volume, com dicion\u00e1rio.' },
-  { t:'nar', tx:'Terminou e voltou ao come\u00e7o.' },
+  { t:'nar', tx:'A menina levou quatro meses para atravessar o volume, com dicionário.' },
+  { t:'nar', tx:'Terminou e voltou ao começo.' },
   { t:'pause' },
-  { t:'dial', ch:'klara', tx:'Eles n\u00e3o atacam quem n\u00e3o os desafia.' },
-  { t:'dial', ch:'antoniette', tx:'\u00c9 o que o livro diz.' },
-  { t:'dial', ch:'klara', tx:'E eles cumprem a palavra. Est\u00e1 aqui. Duas vezes.' },
+  { t:'dial', ch:'klara', tx:'Eles não atacam quem não os desafia.' },
+  { t:'dial', ch:'antoniette', tx:'É o que o livro diz.' },
+  { t:'dial', ch:'klara', tx:'E eles cumprem a palavra. Está aqui. Duas vezes.' },
   { t:'pause' },
   { t:'nar', tx:'Ela apontou a linha com o dedo, e o dedo ficou ali um tempo.' },
 
   { t:'scene', id:'c6c_fora', chapter:'capitulo6', title:'O que existe fora',
     bg:'bg_library', bgm:null },
-  { t:'nar', tx:'Depois do volume vieram os outros. Rotas de com\u00e9rcio, pra\u00e7as de cidade, a planta de uma universidade.' },
+  { t:'nar', tx:'Depois do volume vieram os outros. Rotas de comércio, praças de cidade, a planta de uma universidade.' },
   { t:'nar', tx:'Antoniette catalogava e ia empurrando os que servissem para o lado da mesa onde a menina sentava.' },
   { t:'pause' },
   { t:'nar', tx:'Nunca disse por que aqueles. A menina nunca perguntou de novo.' },
 
   { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
-  { t:'dial', ch:'klara', tx:'Lervel \u00e9 longe?' },
-  { t:'dial', ch:'antoniette', tx:'Tr\u00eas dias de carruagem, se o tempo ajudar.' },
+  { t:'dial', ch:'klara', tx:'Lervel é longe?' },
+  { t:'dial', ch:'antoniette', tx:'Três dias de carruagem, se o tempo ajudar.' },
   { t:'pause' },
-  { t:'dial', ch:'klara', tx:'Tr\u00eas dias \u00e9 pouco.' },
+  { t:'dial', ch:'klara', tx:'Três dias é pouco.' },
   { t:'nar', tx:'Antoniette parou de escrever.' },
   { t:'pause' },
-  { t:'dial', ch:'klara', tx:'A senhorita veio em tr\u00eas dias.' },
+  { t:'dial', ch:'klara', tx:'A senhorita veio em três dias.' },
   { t:'dial', ch:'antoniette', tx:'Vim.' },
-  { t:'dial', ch:'klara', tx:'Ent\u00e3o d\u00e1.' },
+  { t:'dial', ch:'klara', tx:'Então dá.' },
 
   { t:'scene', id:'c6c_conta', chapter:'capitulo6', title:'A conta dela',
     bg:'bg_corridor' },
-  { t:'nar', tx:'Em abril do terceiro ano, Liara contou de gra\u00e7a, no meio de outra conversa.' },
+  { t:'nar', tx:'Em abril do terceiro ano, Liara contou de graça, no meio de outra conversa.' },
   { t:'spr', ch:'liara', ex:'neutral', pos:'right' },
-  { t:'dial', ch:'liara', tx:'A Klara est\u00e1 guardando p\u00e3o.' },
-  { t:'dial', ch:'antoniette', tx:'Guardando por qu\u00ea?' },
-  { t:'dial', ch:'liara', tx:'Ela n\u00e3o fala. Guarda no arm\u00e1rio, embrulhado.' },
+  { t:'dial', ch:'liara', tx:'A Klara está guardando pão.' },
+  { t:'dial', ch:'antoniette', tx:'Guardando por quê?' },
+  { t:'dial', ch:'liara', tx:'Ela não fala. Guarda no armário, embrulhado.' },
   { t:'pause' },
   { t:'dial', ch:'liara', tx:'Fica duro e ela joga fora e guarda outro.' },
   { t:'spr_hide', ch:'liara' },
 
   { t:'pause' },
-  { t:'inn', tx:'Ela est\u00e1 treinando o que se leva.' },
+  { t:'inn', tx:'Ela está treinando o que se leva.' },
   { t:'inn', tx:'Dez anos.' },
   { t:'pause' },
-  { t:'inn', tx:'E n\u00e3o pediu ajuda a ningu\u00e9m, porque n\u00e3o sabe que se pode pedir.' },
+  { t:'inn', tx:'E não pediu ajuda a ninguém, porque não sabe que se pode pedir.' },
 
-  { t:'nar', tx:'Antoniette n\u00e3o falou nada sobre o p\u00e3o, naquela semana nem nas seguintes.' },
+  { t:'nar', tx:'Antoniette não falou nada sobre o pão, naquela semana nem nas seguintes.' },
 
-  { t:'arc', key:'sem_identificacao', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
-      'Ela sabe que existe um fora, e sabe a dist\u00e2ncia em dias.',
+  { t:'arc', key:'sem_identificacao', label:'— caderno sem identificação —', lns:[
+      'Ela sabe que existe um fora, e sabe a distância em dias.',
       'Aprendeu as duas coisas comigo.',
-      'Guardar p\u00e3o \u00e9 o come\u00e7o de um plano feito por quem nunca viu um plano.'
+      'Guardar pão é o começo de um plano feito por quem nunca viu um plano.'
   ]}
 ];
 
 RBF.CHAPTER6 = [
 
-{ t:'chap', num:'CAP\u00cdTULO 6', name:'UMA AMIZADE', chapter:'capitulo6' },
+{ t:'chap', num:'CAPÍTULO 6', name:'UMA AMIZADE', chapter:'capitulo6' },
 { t:'fade_out' },
 
 /* ======================================================================
@@ -300,62 +300,62 @@ RBF.CHAPTER6 = [
   bg:'bg_antoniette_room', bgm:'bgm_nidhaus' },
 { t:'fade_in' },
 
-{ t:'nar', tx:'Em mar\u00e7o do segundo ano, o caderno operacional passou nove dias sem entrada nova.' },
+{ t:'nar', tx:'Em março do segundo ano, o caderno operacional passou nove dias sem entrada nova.' },
 { t:'nar', tx:'Foi o intervalo mais longo desde a chegada. O anterior tinha sido de dois.' },
 { t:'pause' },
 
 { t:'nar', tx:'Ela reparou no nono dia, ao abrir para anotar outra coisa.' },
 { t:'inn', tx:'Nove.' },
-{ t:'nar', tx:'Escreveu o n\u00famero na margem e olhou para ele.' },
+{ t:'nar', tx:'Escreveu o número na margem e olhou para ele.' },
 { t:'pause' },
 
 { t:'inn', tx:'A ala norte tem uma pessoa na frente da chave.' },
-{ t:'inn', tx:'For\u00e7ar de novo em menos de um ano me tira daqui.' },
+{ t:'inn', tx:'Forçar de novo em menos de um ano me tira daqui.' },
 { t:'pause' },
-{ t:'inn', tx:'Isso \u00e9 verdade e \u00e9 o que eu vou escrever no relat\u00f3rio.' },
+{ t:'inn', tx:'Isso é verdade e é o que eu vou escrever no relatório.' },
 { t:'nar', tx:'Copiou as duas frases sem tirar uma palavra e fechou o caderno.' },
 
 /* Le a escolha do Capitulo 5. */
-{ t:'nar', tx:'Klara aparecia na biblioteca de manh\u00e3 e ficava at\u00e9 o almo\u00e7o, sem pedir licen\u00e7a.',
+{ t:'nar', tx:'Klara aparecia na biblioteca de manhã e ficava até o almoço, sem pedir licença.',
   if:{ told_klara:'C' } },
 { t:'nar', tx:'Klara voltou a aparecer na biblioteca depois dos nove dias, e nenhuma das duas comentou os nove dias.',
   if:{ told_klara:'A' } },
-{ t:'nar', tx:'Klara aparecia na biblioteca de manh\u00e3 e nunca mais mencionou a ala norte.',
+{ t:'nar', tx:'Klara aparecia na biblioteca de manhã e nunca mais mencionou a ala norte.',
   if:{ told_klara:'B' } },
 
 { t:'nar', tx:'Sentava do outro lado da mesa, com um livro dela, e passava horas sem falar.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela n\u00e3o pede nada. S\u00f3 ocupa a cadeira.' },
-{ t:'inn', tx:'E eu trabalho melhor com ela ali, o que \u00e9 um dado que eu n\u00e3o vou registrar.' },
+{ t:'inn', tx:'Ela não pede nada. Só ocupa a cadeira.' },
+{ t:'inn', tx:'E eu trabalho melhor com ela ali, o que é um dado que eu não vou registrar.' },
 
 /* ======================================================================
    C2 - O PADRAO
    Dezoito meses comecam a se formar. Saida: ponte.
    ====================================================================== */
-{ t:'scene', id:'c6_padrao', chapter:'capitulo6', title:'O padr\u00e3o',
+{ t:'scene', id:'c6_padrao', chapter:'capitulo6', title:'O padrão',
   bg:'bg_library', bgm:'bgm_amizade' },
 
-{ t:'nar', tx:'Em maio j\u00e1 era rotina. As duas de manh\u00e3, na biblioteca, cada uma no seu lado da mesa.' },
-{ t:'nar', tx:'Klara respirava pela boca quando lia r\u00e1pido. Era o \u00fanico barulho da sala durante horas.' },
+{ t:'nar', tx:'Em maio já era rotina. As duas de manhã, na biblioteca, cada uma no seu lado da mesa.' },
+{ t:'nar', tx:'Klara respirava pela boca quando lia rápido. Era o único barulho da sala durante horas.' },
 { t:'nar', tx:'Liara aparecia por volta das onze, falava dezessete minutos e ia embora.' },
 { t:'pause' },
-{ t:'nar', tx:'Antoniette come\u00e7ou a contar os dezessete minutos e depois parou de contar.' },
+{ t:'nar', tx:'Antoniette começou a contar os dezessete minutos e depois parou de contar.' },
 
-{ t:'nar', tx:'Em julho a menina trouxe a pr\u00f3pria cadeira do quarto, porque a da biblioteca era alta.' },
-{ t:'nar', tx:'Ningu\u00e9m na casa comentou a cadeira. A cadeira ficou.' },
+{ t:'nar', tx:'Em julho a menina trouxe a própria cadeira do quarto, porque a da biblioteca era alta.' },
+{ t:'nar', tx:'Ninguém na casa comentou a cadeira. A cadeira ficou.' },
 { t:'pause' },
 
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'dial', ch:'klara', tx:'A senhorita fica quanto tempo ainda?' },
-{ t:'dial', ch:'antoniette', tx:'O contrato era de nove meses. J\u00e1 passou de um ano.' },
-{ t:'dial', ch:'klara', tx:'N\u00e3o foi isso que eu perguntei.' },
+{ t:'dial', ch:'antoniette', tx:'O contrato era de nove meses. Já passou de um ano.' },
+{ t:'dial', ch:'klara', tx:'Não foi isso que eu perguntei.' },
 { t:'pause' },
 { t:'nar', tx:'Antoniette olhou para a pilha de volumes por catalogar, que era grande e ia continuar grande.' },
 { t:'dial', ch:'antoniette', tx:'Enquanto tiver trabalho.' },
 { t:'spr_hide', ch:'klara' },
 { t:'nar', tx:'A menina aceitou a resposta e voltou para o livro.' },
 { t:'pause' },
-{ t:'inn', tx:'Eu acabei de prometer uma coisa que eu n\u00e3o controlo.' },
+{ t:'inn', tx:'Eu acabei de prometer uma coisa que eu não controlo.' },
 { t:'inn', tx:'E ela ouviu como promessa.' },
 { t:'nar', tx:'No dia seguinte havia duas canecas na mesa antes de Klara chegar, e nenhuma das duas comentou.' },
 
@@ -368,23 +368,23 @@ RBF.CHAPTER6 = [
 { t:'scene', id:'c6_escolha', chapter:'capitulo6', title:'O que ensinar',
   bg:'bg_library', bgm:null },
 
-{ t:'nar', tx:'No fim de maio a menina perguntou uma coisa que Antoniette levou tr\u00eas dias para responder.' },
+{ t:'nar', tx:'No fim de maio a menina perguntou uma coisa que Antoniette levou três dias para responder.' },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'dial', ch:'klara', tx:'A senhorita pode me ensinar alguma coisa?' },
 { t:'dial', ch:'antoniette', tx:'A senhora Elke ensina.' },
 { t:'dial', ch:'klara', tx:'A senhora Elke ensina o que eu preciso saber.' },
 { t:'pause' },
-{ t:'dial', ch:'klara', tx:'N\u00e3o \u00e9 a mesma coisa.' },
+{ t:'dial', ch:'klara', tx:'Não é a mesma coisa.' },
 { t:'spr_hide', ch:'klara' },
 
-{ t:'nar', tx:'Ela levou tr\u00eas dias porque tr\u00eas dias foi o tempo de admitir que ia dizer sim.' },
+{ t:'nar', tx:'Ela levou três dias porque três dias foi o tempo de admitir que ia dizer sim.' },
 { t:'pause' },
-{ t:'inn', tx:'Uma preceptora n\u00e3o faz isso. Uma catalogadora contratada muito menos.' },
+{ t:'inn', tx:'Uma preceptora não faz isso. Uma catalogadora contratada muito menos.' },
 { t:'inn', tx:'E o que eu escolher ensinar vai ficar.' },
 
 { t:'cho', id:'cap6_ensino', code:'C-VI', prompt:'O QUE ENSINAR', opts:[
   { id:'B',
-    tx:'A forma. Etiqueta, protocolo, como atravessar uma sala que est\u00e1 medindo voc\u00ea.',
+    tx:'A forma. Etiqueta, protocolo, como atravessar uma sala que está medindo você.',
     flags:{ taught:'B' },
     routes:{ hope: 2, loss: 2 },
     then: C6_FORMA },
@@ -394,7 +394,7 @@ RBF.CHAPTER6 = [
     routes:{ hope: 3, loss: 1 },
     then: C6_MUNDO },
   { id:'A',
-    tx:'O m\u00e9todo. Catalogar, conferir, e nunca acreditar em fonte \u00fanica.',
+    tx:'O método. Catalogar, conferir, e nunca acreditar em fonte única.',
     flags:{ taught:'A' },
     routes:{ hope: 2, answer: 2 },
     then: C6_METODO }
@@ -408,45 +408,45 @@ RBF.CHAPTER6 = [
   bg:'bg_corridor', bgm:'bgm_amizade' },
 
 { t:'nar', tx:'Em julho do terceiro ano Antoniette completou vinte e sete meses em Velha Nidhaus.' },
-{ t:'nar', tx:'O contrato era de nove. Ningu\u00e9m tinha mencionado o contrato havia mais de um ano.' },
+{ t:'nar', tx:'O contrato era de nove. Ninguém tinha mencionado o contrato havia mais de um ano.' },
 { t:'pause' },
 
-{ t:'nar', tx:'A biblioteca estava catalogada at\u00e9 a terceira estante do lado norte. Faltava um quinto do total.' },
+{ t:'nar', tx:'A biblioteca estava catalogada até a terceira estante do lado norte. Faltava um quinto do total.' },
 { t:'inn', tx:'Trabalhando neste ritmo, sobra um ano.' },
 { t:'pause' },
 { t:'inn', tx:'Eu podia ter feito em dezoito meses.' },
 { t:'nar', tx:'A frase a acompanhava havia semanas. Era a primeira vez no papel.' },
 
-{ t:'nar', tx:'\u00c0 tarde, as duas meninas estavam sentadas no degrau do corredor leste, uma encostada na outra.' },
+{ t:'nar', tx:'À tarde, as duas meninas estavam sentadas no degrau do corredor leste, uma encostada na outra.' },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center' },
 { t:'spr', ch:'liara', ex:'neutral', pos:'right' },
 
 { t:'dial', ch:'liara', tx:'Faz de novo.' },
-{ t:'dial', ch:'klara', tx:'Voc\u00ea j\u00e1 sabe o final.' },
+{ t:'dial', ch:'klara', tx:'Você já sabe o final.' },
 { t:'dial', ch:'liara', tx:'Faz assim mesmo.' },
 { t:'pause' },
 
-{ t:'nar', tx:'E ela fez de novo \u2014 a lista de confer\u00eancia, item por item, na ordem que Antoniette ensinou.', if:{ taught:'A' } },
-{ t:'nar', tx:'Liara errava de prop\u00f3sito s\u00f3 para a irm\u00e3 corrigir.', if:{ taught:'A' } },
+{ t:'nar', tx:'E ela fez de novo — a lista de conferência, item por item, na ordem que Antoniette ensinou.', if:{ taught:'A' } },
+{ t:'nar', tx:'Liara errava de propósito só para a irmã corrigir.', if:{ taught:'A' } },
 
-{ t:'nar', tx:'E ela fez de novo \u2014 a mesura, o cumprimento, a frase de recusa que passa.', if:{ taught:'B' } },
-{ t:'nar', tx:'Liara ria alto no meio e estragava, e as duas recome\u00e7avam.', if:{ taught:'B' } },
+{ t:'nar', tx:'E ela fez de novo — a mesura, o cumprimento, a frase de recusa que passa.', if:{ taught:'B' } },
+{ t:'nar', tx:'Liara ria alto no meio e estragava, e as duas recomeçavam.', if:{ taught:'B' } },
 
-{ t:'nar', tx:'E ela fez de novo \u2014 o drag\u00e3o de asa curta do norte, a envergadura, o que ele come.', if:{ taught:'C' } },
+{ t:'nar', tx:'E ela fez de novo — o dragão de asa curta do norte, a envergadura, o que ele come.', if:{ taught:'C' } },
 { t:'nar', tx:'Liara perguntava se ele era maior que a casa, todas as vezes.', if:{ taught:'C' } },
 
 { t:'spr_hide', ch:'klara' },
 { t:'spr_hide', ch:'liara' },
 { t:'pause' },
 
-{ t:'nar', tx:'Antoniette ficou no fim do corredor at\u00e9 elas se cansarem, e n\u00e3o anotou nada.' },
+{ t:'nar', tx:'Antoniette ficou no fim do corredor até elas se cansarem, e não anotou nada.' },
 { t:'pause' },
 { t:'inn', tx:'Vinte e sete meses.' },
-{ t:'inn', tx:'Em agosto come\u00e7a o terceiro ciclo que eu registro.' },
+{ t:'inn', tx:'Em agosto começa o terceiro ciclo que eu registro.' },
 
 { t:'fade_out' },
 { t:'bgm', id:null },
-{ t:'end_chap', line1:'Dezoito meses em Velha Nidhaus.', line2:'Foi o \u00fanico tempo bom, e ela gastou inteiro.',
+{ t:'end_chap', line1:'Dezoito meses em Velha Nidhaus.', line2:'Foi o único tempo bom, e ela gastou inteiro.',
   chapter:'capitulo6' },
 { t:'fade_out' }
 
