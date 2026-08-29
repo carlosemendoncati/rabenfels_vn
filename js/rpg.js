@@ -289,12 +289,67 @@ RBF.Rpg = (function () {
   /* O movel bloqueia so a faixa de baixo, na proporcao declarada no
      manifesto: uma estante barra inteira, uma escrivaninha nao barra a
      tampa. Sem imagem, o motor usa a medida declarada no mapa. */
+  /* O fator de escala do movel: do manifesto, e a instancia do mapa pode
+     sobrescrever. Ausente vale 1. Usado no desenho, na colisao e na
+     ordem de profundidade - os tres tem de ler o mesmo numero, senao a
+     caixa que barra passagem descola da imagem. */
+  function escalaMovel(m) {
+    var def = propDef(tipoMovel(m));
+    var e = (m && m.escala !== undefined) ? m.escala
+          : (def && def.escala !== undefined) ? def.escala : 1;
+    e = Number(e);
+    return (isFinite(e) && e > 0) ? e : 1;
+  }
+
+  /* Camada de desenho. Inteiro, padrao zero, ordena ANTES do `y`.
+
+     Existe porque a ordem por `y` nao resolve objeto sobre objeto: um
+     prato na mesa tem o pe no mesmo lugar da mesa e sairia por baixo
+     dela. Empurrar o `y` do prato para baixo resolveria o desenho e
+     estragaria a posicao.
+
+     Vale para movel e para gente. Dentro da mesma camada o `y` continua
+     mandando, entao nada do que ja esta ajustado muda. */
+  function camadaDe(o) {
+    var c = o && o.camada;
+    if (c === undefined && o && o.tipo) {
+      var def = propDef(o.tipo);
+      if (def && def.camada !== undefined) { c = def.camada; }
+    }
+    c = Number(c);
+    return isFinite(c) ? c : 0;
+  }
+
+  /* Giro do movel, em graus. Do manifesto, sobrescrito pela instancia. */
+  function giroMovel(m) {
+    var def = propDef(tipoMovel(m));
+    var g = (m && m.giro !== undefined) ? m.giro
+          : (def && def.giro !== undefined) ? def.giro : 0;
+    g = Number(g);
+    return isFinite(g) ? g : 0;
+  }
+
   function caixaMovel(m) {
     var tipo = tipoMovel(m);
     var def = propDef(tipo);
     var im  = imgProp(tipo);
-    var w = (im && im.naturalWidth)  ? im.naturalWidth  : (m.w || 96);
-    var h = (im && im.naturalHeight) ? im.naturalHeight : (m.h || 96);
+    var esc = escalaMovel(m);
+    var w = ((im && im.naturalWidth)  ? im.naturalWidth  : (m.w || 96)) * esc;
+    var h = ((im && im.naturalHeight) ? im.naturalHeight : (m.h || 96)) * esc;
+
+    /* Com giro, a caixa e a envolvente alinhada aos eixos do retangulo
+       girado. Exata em 0, 90, 180 e 270; folgada em angulo quebrado. A
+       alternativa seria colisao por poligono, que mudaria o
+       comportamento de tudo o que ja esta ajustado. */
+    var g = giroMovel(m);
+    if (g % 360 !== 0) {
+      var rad = g * Math.PI / 180;
+      var cs = Math.abs(Math.cos(rad)), sn = Math.abs(Math.sin(rad));
+      var lw = w * cs + h * sn;
+      var lh = w * sn + h * cs;
+      w = lw; h = lh;
+    }
+
     var base = def ? def.base : 1;
     if (m.base !== undefined) { base = m.base; }
     var hb = Math.max(8, h * base);
@@ -1004,17 +1059,24 @@ RBF.Rpg = (function () {
 
     var mv = daFase(s.moveis);
     for (i = 0; i < mv.length; i++) {
-      fila.push({ y: mv[i].y, tipo: 'movel', dado: mv[i] });
+      fila.push({ y: mv[i].y, c: camadaDe(mv[i]), tipo: 'movel', dado: mv[i] });
     }
     var gt = daFase(s.gente);
     for (i = 0; i < gt.length; i++) {
       if (jogo.desfecho && gt[i].ch === jogo.desfecho.oculta) { continue; }
       var v = estadoGente(s.id, indiceDe(s.gente, gt[i]), gt[i]);
-      fila.push({ y: v.y, tipo: 'ator', dado: { ch: gt[i].ch, st: v, def: gt[i] } });
+      fila.push({ y: v.y, c: camadaDe(gt[i]), tipo: 'ator',
+                  dado: { ch: gt[i].ch, st: v, def: gt[i] } });
     }
-    fila.push({ y: jogo.p.y, tipo: 'ator', dado: { ch: jogo.p.ch, st: jogo.p, def: null } });
+    fila.push({ y: jogo.p.y, c: 0, tipo: 'ator',
+                dado: { ch: jogo.p.ch, st: jogo.p, def: null } });
 
-    fila.sort(function (a, b) { return a.y - b.y; });
+    /* Camada primeiro, `y` depois. Camada zero e o padrao, entao esta
+       ordenacao e identica a anterior enquanto ninguem declarar camada. */
+    fila.sort(function (a, b) {
+      if (a.c !== b.c) { return a.c - b.c; }
+      return a.y - b.y;
+    });
 
     for (i = 0; i < fila.length; i++) {
       if (fila[i].tipo === 'movel') { desenhaMovel(c, fila[i].dado, cam); }
@@ -1150,9 +1212,25 @@ RBF.Rpg = (function () {
   function desenhaMovel(c, m, cam) {
     var im = imgProp(tipoMovel(m));
     if (im) {
+      var esc = escalaMovel(m);
+      var lw = im.naturalWidth * esc, lh = im.naturalHeight * esc;
+      var gir = giroMovel(m);
+      if (gir % 360 !== 0) {
+        /* Gira em torno da ancora: rodape, meio da largura. E o mesmo
+           ponto que ordena profundidade e que a caixa usa, senao a arte
+           sai de cima do proprio pe. */
+        c.save();
+        c.translate(Math.round(m.x - cam.x), Math.round(m.y - cam.y));
+        c.rotate(gir * Math.PI / 180);
+        c.drawImage(im, Math.round(-lw / 2), Math.round(-lh),
+                    Math.round(lw), Math.round(lh));
+        c.restore();
+        return;
+      }
       c.drawImage(im,
-        Math.round(m.x - im.naturalWidth / 2 - cam.x),
-        Math.round(m.y - im.naturalHeight - cam.y));
+        Math.round(m.x - lw / 2 - cam.x),
+        Math.round(m.y - lh - cam.y),
+        Math.round(lw), Math.round(lh));
       return;
     }
     var w = m.w || 96, h = m.h || 96;
@@ -1385,11 +1463,16 @@ RBF.Rpg = (function () {
       cara.classList.add('is-on');
     } else {
       cara.classList.remove('is-on');
-      /* A face pode nao ter chegado ainda. `pintaFala()` so roda
-         enquanto a maquina de escrever digita, entao sem esta volta a
-         caixa ficaria sem retrato ate o fim da fala mesmo depois de a
-         imagem carregar. Para sozinho quando a fala fecha. */
-      if (typeof setTimeout === 'function') {
+      /* A face pode nao ter chegado ainda. `pintaFala()` so roda enquanto
+         a maquina de escrever digita, entao sem esta volta a caixa
+         ficaria sem retrato ate o fim da fala mesmo depois de a imagem
+         carregar.
+
+         So quando o retrato existe no manifesto. Fenn e Dara nao tem
+         retrato declarado, e para eles `imgFace` devolve null sempre:
+         sem esta condicao a fala inteira repintava a cada 120ms sem
+         chance de mudar de estado. */
+      if (typeof setTimeout === 'function' && faceDef(f.ch || 'antoniette')) {
         setTimeout(function () { if (jogo && jogo.fala === f) { pintaFala(); } }, 120);
       }
     }

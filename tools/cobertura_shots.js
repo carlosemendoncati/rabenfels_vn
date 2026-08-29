@@ -1048,8 +1048,13 @@ async function main() {
     const vis = RBF.Rpg._debug.pontosVisiveis
       ? RBF.Rpg._debug.pontosVisiveis()
       : null;
+    /* Quantos pontos a cena c3 declara na fase 0, lido do mapa. */
+    const decl = (s.pontos || []).filter(p =>
+      (p.cenas || []).indexOf('c3') >= 0 &&
+      (p.fase === undefined || p.fase === null || p.fase === j.fase));
     return { sala: j.sala, cena: j.cena, fase: j.fase,
-             declarados: s.pontos.length, visiveis: vis && vis.map(p => p.id) };
+             declarados: s.pontos.length, declarados_c3: decl.length,
+             visiveis: vis && vis.map(p => p.id) };
   });
   check(c3.sala === 'corredor', 'c3: comeca no corredor', c3.sala);
   check(c3.cena === 'c3', 'c3: o estado carrega a cena', String(c3.cena));
@@ -1059,8 +1064,14 @@ async function main() {
     const vazou = c3.visiveis.filter(id => id.indexOf('c3_') !== 0);
     check(vazou.length === 0, 'c3: nenhum ponto da Cobertura vaza',
           vazou.join(' '));
-    check(c3.visiveis.length === 7, 'c3: os sete pontos do capitulo estao la',
-          c3.visiveis.join(' '));
+    /* Contra o que a cena DECLARA, e nao contra um numero que eu escrevi
+       no dia em que li o mapa. Quantos pontos o Capitulo 3 tem e decisao
+       de quem edita a planta. */
+    check(c3.visiveis.length === c3.declarados_c3,
+          'c3: todo ponto declarado para a cena aparece',
+          c3.visiveis.length + ' de ' + c3.declarados_c3);
+    check(c3.visiveis.length > 0, 'c3: a cena tem ponto para conferir',
+          String(c3.visiveis.length));
   }
 
   const saidas3 = await page.evaluate(() => {
@@ -1086,17 +1097,23 @@ async function main() {
   await page.screenshot({ path: path.join(OUT, '13_c3_ronda.png') });
 
   /* Conferir um ponto, e ler o texto do Capitulo 3 e nao o da Cobertura. */
+  /* A personagem vai ate onde o ponto ESTA, e nao ate uma coordenada
+     que eu anotei um dia. O editor de planta existe para mover isso. */
   const fala3 = await page.evaluate(async () => {
     const j = RBF.Rpg._debug.estado();
-    j.p.x = 1280; j.p.y = 300; j.p.dir = 'cima';
+    const p = (RBF.Rpg._debug.pontosVisiveis() || [])
+      .filter(x => x.id === 'c3_relogio')[0];
+    if (!p) { return '(ponto c3_relogio nao existe)'; }
+    j.p.x = p.x; j.p.y = p.y + 60; j.p.dir = 'cima';
+    j.fala = null;
     RBF.Rpg._debug.usa();
     await new Promise(r => setTimeout(r, 700));
     const f = RBF.Rpg._debug.estado().fala;
-    return f ? String(f.escrito || '') : '';
+    return f ? String(f.escrito || '') : '(nada respondeu)';
   });
   check(/quatro e vinte/i.test(fala3),
         'c3: o relogio marca quatro e vinte, e nao onze e quarenta',
-        fala3.slice(0, 80));
+        fala3.slice(0, 90));
 
   await page.screenshot({ path: path.join(OUT, '14_c3_fala.png') });
 

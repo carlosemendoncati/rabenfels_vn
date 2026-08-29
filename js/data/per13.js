@@ -38,65 +38,65 @@ var R = { rota: 'perda' };
 
 RBF.PER13 = [
 
-{ t:'chap', num:'CAP\u00cdTULO 13', name:'O QUE ELA ANOTOU', chapter:'per13', if:R },
+{ t:'chap', num:'CAPÍTULO 13', name:'O QUE ELA ANOTOU', chapter:'per13', if:R },
 { t:'fade_out', if:R },
 
 /* ======================================================================
    C1 - AS QUATRO PAGINAS
    Le hid_from_order, told_klara, lied_to_order, third_paid.
    ====================================================================== */
-{ t:'scene', id:'per13_paginas', chapter:'per13', title:'Quatro p\u00e1ginas',
+{ t:'scene', id:'per13_paginas', chapter:'per13', title:'Quatro páginas',
   bg:'bg_archive_closeup', bgm:'bgm_archive', if:R },
 { t:'fade_in', if:R },
 { t:'spr', ch:'antoniette', ex:'away', pos:'center', if:R },
 
-{ t:'nar', tx:'Ela escreveu at\u00e9 as tr\u00eas e meia sem parar para reler.', if:R },
-{ t:'nar', tx:'Duzentas e noventa e uma p\u00e1ginas numeradas, cinco anos, tudo o que servia.', if:R },
+{ t:'nar', tx:'Ela escreveu até as três e meia sem parar para reler.', if:R },
+{ t:'nar', tx:'Duzentas e noventa e uma páginas numeradas, cinco anos, tudo o que servia.', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'Se algu\u00e9m usar isto, vai usar contra a casa.', if:R },
+{ t:'inn', tx:'Se alguém usar isto, vai usar contra a casa.', if:R },
 { t:'inn', tx:'E vai ler tudo. Inclusive o que eu fiz.', if:R },
 { t:'pause', if:R },
 
 { t:'sfx', id:'sfx_page_turn', if:R },
-{ t:'nar', tx:'A p\u00e1gina de outubro do primeiro ano. O que ela viu no p\u00e1tio e n\u00e3o mandou para a Ordem.', if:{ rota:'perda', hid_from_order:true } },
-{ t:'nar', tx:'A p\u00e1gina de outubro do primeiro ano. O que ela mandou para a Ordem, e o que a Ordem arquivou sem responder.', if:{ rota:'perda', hid_from_order:false } },
-{ t:'inn', tx:'Tr\u00eas.', if:R },
+{ t:'nar', tx:'A página de outubro do primeiro ano. O que ela viu no pátio e não mandou para a Ordem.', if:{ rota:'perda', hid_from_order:true } },
+{ t:'nar', tx:'A página de outubro do primeiro ano. O que ela mandou para a Ordem, e o que a Ordem arquivou sem responder.', if:{ rota:'perda', hid_from_order:false } },
+{ t:'inn', tx:'Três.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'A p\u00e1gina da c\u00e2mara. Ela desceu, viu, e subiu com uma crian\u00e7a de nove anos cobrindo a aus\u00eancia dela no andar de cima.', if:R },
+{ t:'nar', tx:'A página da câmara. Ela desceu, viu, e subiu com uma criança de nove anos cobrindo a ausência dela no andar de cima.', if:R },
 { t:'nar', tx:'Na margem, o que ela respondeu a Klara depois: nada. Deixou fechar sozinho.', if:{ rota:'perda', told_klara:'A' } },
-{ t:'nar', tx:'Na margem, o que ela respondeu a Klara depois: uma vers\u00e3o limpa, feita para a menina n\u00e3o ter de carregar aquilo.', if:{ rota:'perda', told_klara:'B' } },
-{ t:'nar', tx:'Na margem, o que ela respondeu a Klara depois: a verdade, e um pedido para n\u00e3o repetir.', if:{ rota:'perda', told_klara:'C' } },
+{ t:'nar', tx:'Na margem, o que ela respondeu a Klara depois: uma versão limpa, feita para a menina não ter de carregar aquilo.', if:{ rota:'perda', told_klara:'B' } },
+{ t:'nar', tx:'Na margem, o que ela respondeu a Klara depois: a verdade, e um pedido para não repetir.', if:{ rota:'perda', told_klara:'C' } },
 { t:'inn', tx:'Duas.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'A p\u00e1gina de agosto do terceiro ano.', if:R },
-{ t:'nar', tx:'O relat\u00f3rio inteiro, com o que ela viu subir. Lervel recebeu tudo e respondeu em nove semanas mandando continuar observando.', if:{ rota:'perda', lied_to_order:'A' } },
-{ t:'nar', tx:'O relat\u00f3rio com o epis\u00f3dio dado como de natureza indeterminada, sem testemunha direta. Ela foi a testemunha direta.', if:{ rota:'perda', lied_to_order:'B' } },
-{ t:'nar', tx:'A p\u00e1gina em que agosto n\u00e3o existe. Lervel recebeu o m\u00eas sem o m\u00eas dentro.', if:{ rota:'perda', lied_to_order:'C' } },
+{ t:'nar', tx:'A página de agosto do terceiro ano.', if:R },
+{ t:'nar', tx:'O relatório inteiro, com o que ela viu subir. Lervel recebeu tudo e respondeu em nove semanas mandando continuar observando.', if:{ rota:'perda', lied_to_order:'A' } },
+{ t:'nar', tx:'O relatório com o episódio dado como de natureza indeterminada, sem testemunha direta. Ela foi a testemunha direta.', if:{ rota:'perda', lied_to_order:'B' } },
+{ t:'nar', tx:'A página em que agosto não existe. Lervel recebeu o mês sem o mês dentro.', if:{ rota:'perda', lied_to_order:'C' } },
 { t:'inn', tx:'Uma.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'A p\u00e1gina de Fenn.', if:R },
-{ t:'nar', tx:'Ela leu tr\u00eas vezes antes de arrancar. Na terceira, dobrou o canto.', if:R },
-{ t:'nar', tx:'Um homem foi \u00fatil a ela e ela negaria a fonte se perguntassem. Isso n\u00e3o cabia em coluna nenhuma.', if:{ rota:'perda', third_paid:'A' } },
-{ t:'nar', tx:'Ela comprou o nome para levar a Lervel, e o nome era de um homem vivo. Isso n\u00e3o cabia em coluna nenhuma.', if:{ rota:'perda', third_paid:'B' } },
+{ t:'nar', tx:'A página de Fenn.', if:R },
+{ t:'nar', tx:'Ela leu três vezes antes de arrancar. Na terceira, dobrou o canto.', if:R },
+{ t:'nar', tx:'Um homem foi útil a ela e ela negaria a fonte se perguntassem. Isso não cabia em coluna nenhuma.', if:{ rota:'perda', third_paid:'A' } },
+{ t:'nar', tx:'Ela comprou o nome para levar a Lervel, e o nome era de um homem vivo. Isso não cabia em coluna nenhuma.', if:{ rota:'perda', third_paid:'B' } },
 { t:'nar', tx:'Ela recusou o nome e mandou o rapaz embora no mesmo dia. Ficou sem a prova e nunca soube se o menino chegou.', if:{ rota:'perda', third_paid:'C' } },
 { t:'pause', if:R },
 { t:'inn', tx:'Nenhuma.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Quatro folhas na m\u00e3o esquerda. Duzentas e oitenta e sete no ma\u00e7o.', if:R },
-{ t:'inn', tx:'A numera\u00e7\u00e3o vai continuar terminando em duzentos e noventa e um.', if:R },
+{ t:'nar', tx:'Quatro folhas na mão esquerda. Duzentas e oitenta e sete no maço.', if:R },
+{ t:'inn', tx:'A numeração vai continuar terminando em duzentos e noventa e um.', if:R },
 { t:'inn', tx:'Quem contar vai ver.', if:R },
 { t:'pause', if:R },
 { t:'spr', ch:'antoniette', ex:'guarded', pos:'center', if:R },
 { t:'inn', tx:'Bom. Que veja.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Ela desceu ao escrit\u00f3rio do bar\u00e3o com as quatro p\u00e1ginas e a chave que copiou no segundo ano.', if:R },
+{ t:'nar', tx:'Ela desceu ao escritório do barão com as quatro páginas e a chave que copiou no segundo ano.', if:R },
 { t:'nar', tx:'O livro-caixa da casa tinha quatro folhas em branco no fim, como todo livro-caixa tem.', if:R },
-{ t:'nar', tx:'Ela p\u00f4s as quatro p\u00e1ginas no lugar delas e fechou a fivela.', if:R },
+{ t:'nar', tx:'Ela pôs as quatro páginas no lugar delas e fechou a fivela.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'A janela do quarto de Aldric dava para aquele corredor. Estava fechada, e a noite continuava quente.', if:R },
 { t:'pause', if:R },
@@ -123,17 +123,17 @@ RBF.PER13 = [
 { t:'scene', id:'per13_porta', chapter:'per13', title:'Quatro e dez',
   bg:'bg_antoniette_room', bgm:null, if:R },
 
-{ t:'nar', tx:'Klara bateu na porta do quarto do fundo \u00e0s quatro e dez.', if:R },
-{ t:'nar', tx:'Ningu\u00e9m tinha impedido a menina de andar pela casa naquela noite.', if:R },
+{ t:'nar', tx:'Klara bateu na porta do quarto do fundo às quatro e dez.', if:R },
+{ t:'nar', tx:'Ninguém tinha impedido a menina de andar pela casa naquela noite.', if:R },
 { t:'pause', if:R },
 { t:'spr', ch:'klara', ex:'blank', pos:'right', if:R },
 { t:'spr', ch:'antoniette', ex:'guarded', pos:'left', if:R },
 
-{ t:'dial', ch:'klara', tx:'Eu n\u00e3o sei por que eu parei.', if:R },
+{ t:'dial', ch:'klara', tx:'Eu não sei por que eu parei.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'Eu sei.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela n\u00e3o sabia.', if:R },
+{ t:'nar', tx:'Ela não sabia.', if:R },
 
 { t:'pause', if:R },
 { t:'dial', ch:'klara', tx:'A senhorita vai embora?', if:R },
@@ -143,10 +143,10 @@ RBF.PER13 = [
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette tinha a resposta, e a resposta era hoje.', if:R },
 { t:'pause', if:R },
-{ t:'dial', ch:'antoniette', tx:'Ainda n\u00e3o est\u00e1 marcado.', if:R },
+{ t:'dial', ch:'antoniette', tx:'Ainda não está marcado.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Foi a primeira mentira que ela contou \u00e0quela menina em cinco anos.', if:R },
-{ t:'nar', tx:'Contou porque a verdade n\u00e3o servia para nada, e era a \u00fanica coisa que ainda dava para dar a ela.', if:R },
+{ t:'nar', tx:'Foi a primeira mentira que ela contou àquela menina em cinco anos.', if:R },
+{ t:'nar', tx:'Contou porque a verdade não servia para nada, e era a única coisa que ainda dava para dar a ela.', if:R },
 
 /* A - o metodo volta contra ela. A menina confere. */
 { t:'pause', if:{ rota:'perda', taught:'A' } },
@@ -161,21 +161,21 @@ RBF.PER13 = [
 
 /* B - a forma. Ela cobra a si mesma o agradecimento que nao deu. */
 { t:'pause', if:{ rota:'perda', taught:'B' } },
-{ t:'dial', ch:'klara', tx:'Ent\u00e3o eu n\u00e3o agrade\u00e7o agora.', if:{ rota:'perda', taught:'B' } },
-{ t:'dial', ch:'antoniette', tx:'N\u00e3o precisa agradecer.', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Então eu não agradeço agora.', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'antoniette', tx:'Não precisa agradecer.', if:{ rota:'perda', taught:'B' } },
 { t:'pause', if:{ rota:'perda', taught:'B' } },
-{ t:'dial', ch:'klara', tx:'Precisa. Depois n\u00e3o vale.', if:{ rota:'perda', taught:'B' } },
+{ t:'dial', ch:'klara', tx:'Precisa. Depois não vale.', if:{ rota:'perda', taught:'B' } },
 { t:'pause', if:{ rota:'perda', taught:'B' } },
-{ t:'nar', tx:'Ela tinha dito a mesma coisa na carro\u00e7a, seis horas antes, sobre outra pessoa.', if:{ rota:'perda', taught:'B' } },
+{ t:'nar', tx:'Ela tinha dito a mesma coisa na carroça, seis horas antes, sobre outra pessoa.', if:{ rota:'perda', taught:'B' } },
 
 /* C - o mundo. Ela pede que a pagina fique marcada. */
 { t:'pause', if:{ rota:'perda', taught:'C' } },
 { t:'dial', ch:'klara', tx:'A senhorita leva o livro do norte?', if:{ rota:'perda', taught:'C' } },
 { t:'dial', ch:'antoniette', tx:'Levo.', if:{ rota:'perda', taught:'C' } },
 { t:'pause', if:{ rota:'perda', taught:'C' } },
-{ t:'dial', ch:'klara', tx:'Marca a p\u00e1gina da cidade em cima da \u00e1gua.', if:{ rota:'perda', taught:'C' } },
+{ t:'dial', ch:'klara', tx:'Marca a página da cidade em cima da água.', if:{ rota:'perda', taught:'C' } },
 { t:'pause', if:{ rota:'perda', taught:'C' } },
-{ t:'nar', tx:'O livro estava na estante da biblioteca e ia continuar l\u00e1.', if:{ rota:'perda', taught:'C' } },
+{ t:'nar', tx:'O livro estava na estante da biblioteca e ia continuar lá.', if:{ rota:'perda', taught:'C' } },
 
 { t:'pause', if:R },
 { t:'nar', tx:'Klara ficou na porta mais tempo do que uma resposta exige.', if:R },
@@ -183,109 +183,109 @@ RBF.PER13 = [
 { t:'dial', ch:'klara', tx:'Boa noite, senhorita.', if:R },
 { t:'dial', ch:'antoniette', tx:'Boa noite, Klara.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Foi a \u00faltima coisa que as duas disseram uma \u00e0 outra.', if:R },
+{ t:'nar', tx:'Foi a última coisa que as duas disseram uma à outra.', if:R },
 { t:'nar', tx:'As duas disseram do jeito que se diz todo dia.', if:R },
 { t:'spr_hide', ch:'klara', if:R },
 { t:'spr_hide', ch:'antoniette', if:R },
 { t:'pause', if:R },
 { t:'fade_out', if:R },
 
-{ t:'scene', id:'per13_ultima', chapter:'per13', title:'A \u00faltima entrada',
+{ t:'scene', id:'per13_ultima', chapter:'per13', title:'A última entrada',
   bg:'bg_antoniette_room', bgm:null, if:R },
 { t:'spr', ch:'antoniette', ex:'away', pos:'center', if:R },
 
-{ t:'nar', tx:'Ela molhou a pena e n\u00e3o escreveu.', if:R },
-{ t:'nar', tx:'A caligrafia continuou firme quando finalmente saiu. O espa\u00e7amento n\u00e3o.', if:R },
+{ t:'nar', tx:'Ela molhou a pena e não escreveu.', if:R },
+{ t:'nar', tx:'A caligrafia continuou firme quando finalmente saiu. O espaçamento não.', if:R },
 { t:'pause', if:R },
 
 { t:'arc', key:'arquivo', lns:[
-    '\u201cPara quem encontrar isto.\u201d',
-    '\u201cN\u00e3o sei seu nome. Tanto faz.\u201d'
+    '“Para quem encontrar isto.”',
+    '“Não sei seu nome. Tanto faz.”'
 ], if:R },
 { t:'pause', if:R },
 
-{ t:'inn', tx:'Se eu deixar uma frase que s\u00f3 me alivia, Matheo vai ter de atravessar ela.', if:R },
+{ t:'inn', tx:'Se eu deixar uma frase que só me alivia, Matheo vai ter de atravessar ela.', if:R },
 { t:'nar', tx:'Ela escreveu a idade, a velocidade de leitura e o jeito de corrigir os outros em voz baixa.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Parou.', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'Isso n\u00e3o \u00e9 informa\u00e7\u00e3o operacional.', if:R },
+{ t:'inn', tx:'Isso não é informação operacional.', if:R },
 { t:'pause', if:R },
 { t:'spr', ch:'antoniette', ex:'soft', pos:'center', if:R },
 { t:'inn', tx:'Deixa.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Escreveu tamb\u00e9m que ela troca o saco de m\u00e3o com a m\u00e3o que j\u00e1 est\u00e1 carregando, para poupar a outra.', if:R },
-{ t:'nar', tx:'Isso tamb\u00e9m n\u00e3o servia para nada. Ficou.', if:R },
+{ t:'nar', tx:'Escreveu também que ela troca o saco de mão com a mão que já está carregando, para poupar a outra.', if:R },
+{ t:'nar', tx:'Isso também não servia para nada. Ficou.', if:R },
 
 { t:'pause', if:R },
-{ t:'nar', tx:'Depois escreveu as tr\u00eas linhas que custaram mais do que as duzentas e oitenta e sete p\u00e1ginas juntas.', if:R },
+{ t:'nar', tx:'Depois escreveu as três linhas que custaram mais do que as duzentas e oitenta e sete páginas juntas.', if:R },
 { t:'arc', key:'arquivo', lns:[
-    '\u201cTentei tir\u00e1-la daqui.\u201d',
-    '\u201cFui met\u00f3dica. Fui devagar.\u201d',
-    '\u201cFoi o devagar que custou.\u201d'
+    '“Tentei tirá-la daqui.”',
+    '“Fui metódica. Fui devagar.”',
+    '“Foi o devagar que custou.”'
 ], if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'E a linha das quatro p\u00e1ginas, para quem contasse.', if:R },
+{ t:'nar', tx:'E a linha das quatro páginas, para quem contasse.', if:R },
 { t:'arc', key:'arquivo', lns:[
-    '\u201cTirei quatro p\u00e1ginas. Se voc\u00ea chegar at\u00e9 elas, vai entender por qu\u00ea.\u201d',
-    '\u201cSe n\u00e3o chegar, melhor.\u201d'
+    '“Tirei quatro páginas. Se você chegar até elas, vai entender por quê.”',
+    '“Se não chegar, melhor.”'
 ], if:R },
 { t:'pause', if:R },
 
 { t:'spr', ch:'antoniette', ex:'shaken', pos:'center', if:R },
-{ t:'nar', tx:'Assinou com as iniciais, p\u00f4s o lugar e o m\u00eas, e n\u00e3o p\u00f4s o dia.', if:R },
+{ t:'nar', tx:'Assinou com as iniciais, pôs o lugar e o mês, e não pôs o dia.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Ent\u00e3o virou duas folhas em branco e escreveu o nome dele no alto de uma p\u00e1gina limpa.', if:R },
+{ t:'nar', tx:'Então virou duas folhas em branco e escreveu o nome dele no alto de uma página limpa.', if:R },
 { t:'pause', if:R },
 { t:'arc', key:'arquivo', lns:[
-    '\u201cMatheo \u2014 se voc\u00ea estiver lendo isto, preciso de uma resposta que n\u00e3o posso pedir de outro jeito.\u201d',
-    '\u201cVoc\u00ea sabia?\u201d'
+    '“Matheo — se você estiver lendo isto, preciso de uma resposta que não posso pedir de outro jeito.”',
+    '“Você sabia?”'
 ], if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Deixou o resto da p\u00e1gina em branco.', if:R },
+{ t:'nar', tx:'Deixou o resto da página em branco.', if:R },
 
 /* ======================================================================
    C3 - A COLUNA
    A ultima coisa que ela escreve na vida e um total. Saida: soco.
    ====================================================================== */
-{ t:'scene', id:'per13_coluna', chapter:'per13', title:'A \u00faltima p\u00e1gina',
+{ t:'scene', id:'per13_coluna', chapter:'per13', title:'A última página',
   bg:'bg_archive_closeup', bgm:null, if:R },
 
-{ t:'nar', tx:'Faltavam cinquenta minutos e ela j\u00e1 tinha fechado o documento.', if:R },
+{ t:'nar', tx:'Faltavam cinquenta minutos e ela já tinha fechado o documento.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela abriu outra vez, no fim, e escreveu mais uma p\u00e1gina.', if:R },
+{ t:'nar', tx:'Ela abriu outra vez, no fim, e escreveu mais uma página.', if:R },
 { t:'pause', if:R },
 
-{ t:'arc', key:'arquivo', label:'\u2014 p\u00e1gina duzentos e oitenta e sete \u2014', lns:[
-    'Maio, ano cinco. Solicita\u00e7\u00e3o de F., cocheiro-chefe: 3 moedas.',
-    'Recusada. Avalia\u00e7\u00e3o: desnecess\u00e1rio.',
+{ t:'arc', key:'arquivo', label:'— página duzentos e oitenta e sete —', lns:[
+    'Maio, ano cinco. Solicitação de F., cocheiro-chefe: 3 moedas.',
+    'Recusada. Avaliação: desnecessário.',
     '',
     'Nove de agosto, 23h25. Porta da copa trancada.',
-    'Desvio pelo p\u00e1tio: 11 minutos.',
+    'Desvio pelo pátio: 11 minutos.',
     '',
     'Nove de agosto, 23h52. Ponto de encontro vazio.',
     'Espera do contratado, estimada: 10 minutos.',
     '',
-    'Diferen\u00e7a: 1 minuto.'
+    'Diferença: 1 minuto.'
 ], if:R },
 { t:'pause', if:R },
 
 { t:'inn', tx:'Um minuto.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela conferiu a subtra\u00e7\u00e3o e a subtra\u00e7\u00e3o estava certa.', if:R },
+{ t:'nar', tx:'Ela conferiu a subtração e a subtração estava certa.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Depois escreveu a \u00faltima linha. N\u00e3o havia outra passagem do Arquivo com a palavra erro.', if:R },
+{ t:'nar', tx:'Depois escreveu a última linha. Não havia outra passagem do Arquivo com a palavra erro.', if:R },
 { t:'pause', if:R },
 
 { t:'arc', key:'arquivo', lns:[
-    '\u201cO erro \u00e9 do Compilador e a data dele \u00e9 maio.\u201d'
+    '“O erro é do Compilador e a data dele é maio.”'
 ], if:R },
 { t:'pause', if:R },
 
 { t:'spr', ch:'antoniette', ex:'away', pos:'center', if:R },
-{ t:'nar', tx:'Ela limpou a pena, tampou o tinteiro e alinhou o mata-borr\u00e3o com a beira da mesa.', if:R },
+{ t:'nar', tx:'Ela limpou a pena, tampou o tinteiro e alinhou o mata-borrão com a beira da mesa.', if:R },
 { t:'nar', tx:'Fazia isso todas as noites havia cinco anos.', if:R },
 { t:'spr_hide', ch:'antoniette', if:R },
 
@@ -296,63 +296,63 @@ RBF.PER13 = [
   bg:'bg_nidhaus_gate', bgm:'bgm_prologue', if:R },
 { t:'spr', ch:'antoniette', ex:'neutral', pos:'center', if:R },
 
-{ t:'nar', tx:'O c\u00e9u estava clareando na dire\u00e7\u00e3o do port\u00e3o quando ela desceu com o embrulho.', if:R },
+{ t:'nar', tx:'O céu estava clareando na direção do portão quando ela desceu com o embrulho.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Couro encerado, sem selo, cordel em quatro voltas e um n\u00f3 cego.', if:R },
+{ t:'nar', tx:'Couro encerado, sem selo, cordel em quatro voltas e um nó cego.', if:R },
 { t:'nar', tx:'Pesava mais do que devia para o tamanho. Ela reparou nisso e achou bom.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Ela entregou o pacote com as duas m\u00e3os.', if:R },
-{ t:'dial', ch:'antoniette', tx:'Isto n\u00e3o vai agora. Guarda a\u00ed.', if:R },
-{ t:'dial', ch:'antoniette', tx:'Se passar noventa dias sem not\u00edcia minha, voc\u00ea leva.', if:R },
+{ t:'nar', tx:'Ela entregou o pacote com as duas mãos.', if:R },
+{ t:'dial', ch:'antoniette', tx:'Isto não vai agora. Guarda aí.', if:R },
+{ t:'dial', ch:'antoniette', tx:'Se passar noventa dias sem notícia minha, você leva.', if:R },
 { t:'pause', if:R },
-{ t:'dial', ch:'mensageiro', tx:'Noventa \u00e9 muito tempo.', if:R },
-{ t:'dial', ch:'antoniette', tx:'\u00c9 o que d\u00e1 para eu garantir.', if:R },
+{ t:'dial', ch:'mensageiro', tx:'Noventa é muito tempo.', if:R },
+{ t:'dial', ch:'antoniette', tx:'É o que dá para eu garantir.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Ela contou as moedas do adiantamento na palma dele, uma a uma, e conferiu duas vezes.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Eram tr\u00eas.', if:R },
+{ t:'nar', tx:'Eram três.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela pagou as tr\u00eas sem hesitar, e n\u00e3o reparou.', if:R },
+{ t:'nar', tx:'Ela pagou as três sem hesitar, e não reparou.', if:R },
 { t:'pause', if:R },
 
 { t:'sfx', id:'sfx_footsteps', if:R },
-{ t:'nar', tx:'O cavalo saiu andando e ela n\u00e3o esperou recibo.', if:R },
+{ t:'nar', tx:'O cavalo saiu andando e ela não esperou recibo.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela ficou no port\u00e3o at\u00e9 a luz alcan\u00e7ar o ferrolho de cima.', if:R },
+{ t:'nar', tx:'Ela ficou no portão até a luz alcançar o ferrolho de cima.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Depois voltou para dentro, porque \u00e0s sete ela abria a biblioteca.', if:R },
+{ t:'nar', tx:'Depois voltou para dentro, porque às sete ela abria a biblioteca.', if:R },
 { t:'spr_hide', ch:'antoniette', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Ren chegou \u00e0s sete e vinte e encontrou a porta aberta e a sala vazia.', if:R },
-{ t:'nar', tx:'Esperou uma hora antes de perguntar a algu\u00e9m, porque n\u00e3o era da conta dele perguntar.', if:R },
+{ t:'nar', tx:'Ren chegou às sete e vinte e encontrou a porta aberta e a sala vazia.', if:R },
+{ t:'nar', tx:'Esperou uma hora antes de perguntar a alguém, porque não era da conta dele perguntar.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'A casa registrou a baixa no livro de pessoal no dia seguinte, na letra do escritur\u00e1rio.', if:R },
+{ t:'nar', tx:'A casa registrou a baixa no livro de pessoal no dia seguinte, na letra do escriturário.', if:R },
 
-{ t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
+{ t:'arc', key:'ficha', label:'— Velha Nidhaus · livro de pessoal —', lns:[
     'VAEL, Antoniette. Catalogadora contratada.',
-    'Admiss\u00e3o: abril, ano um. Baixa: agosto, ano cinco.',
+    'Admissão: abril, ano um. Baixa: agosto, ano cinco.',
     '',
-    'Motivo de sa\u00fade.'
+    'Motivo de saúde.'
 ], if:R },
-{ t:'nar', tx:'Tr\u00eas palavras, na mesma letra de trinta e sete anos antes.', if:R },
-{ t:'nar', tx:'Matheo tinha lido aquela linha uma semana antes de assinar a autoriza\u00e7\u00e3o dela.', if:R },
+{ t:'nar', tx:'Três palavras, na mesma letra de trinta e sete anos antes.', if:R },
+{ t:'nar', tx:'Matheo tinha lido aquela linha uma semana antes de assinar a autorização dela.', if:R },
 
 { t:'pause', if:R },
 { t:'nar', tx:'A partir daquela quarta-feira, o mensageiro esperou.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Noventa dias.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ele entregou no nonag\u00e9simo terceiro. Levou tr\u00eas dias a mais porque a estrada de Alsbeck alaga em novembro, e ele n\u00e3o achou que tr\u00eas dias fizessem diferen\u00e7a.', if:R },
+{ t:'nar', tx:'Ele entregou no nonagésimo terceiro. Levou três dias a mais porque a estrada de Alsbeck alaga em novembro, e ele não achou que três dias fizessem diferença.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Tr\u00eas dias, e ele n\u00e3o achou que fizessem diferen\u00e7a.', if:R },
+{ t:'nar', tx:'Três dias, e ele não achou que fizessem diferença.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ele estava certo, e \u00e9 a mesma conta.', if:R },
+{ t:'nar', tx:'Ele estava certo, e é a mesma conta.', if:R },
 
 { t:'fade_out', if:R },
 { t:'bgm', id:null, if:R },
-{ t:'end_chap', line1:'Noventa e tr\u00eas dias depois.', line2:'A \u00faltima p\u00e1gina \u00e9 uma coluna.',
+{ t:'end_chap', line1:'Noventa e três dias depois.', line2:'A última página é uma coluna.',
   chapter:'per13', if:R },
 { t:'fade_out', if:R }
 

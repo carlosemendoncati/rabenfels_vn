@@ -52,7 +52,7 @@ var R = { rota: 'resposta' };
 
 RBF.RES10 = [
 
-{ t:'chap', num:'CAP\u00cdTULO 10', name:'O REGISTRO', chapter:'res10', if:R },
+{ t:'chap', num:'CAPÍTULO 10', name:'O REGISTRO', chapter:'res10', if:R },
 { t:'fade_out', if:R },
 
 /* ======================================================================
@@ -63,10 +63,10 @@ RBF.RES10 = [
   bg:'bg_kitchen', bgm:'bgm_nidhaus', if:R },
 { t:'fade_in', if:R },
 
-{ t:'nar', tx:'A primeira linha da tabela do quinto agosto recebeu a data tr\u00eas. Era dois dias antes da faixa anterior.', if:R },
+{ t:'nar', tx:'A primeira linha da tabela do quinto agosto recebeu a data três. Era dois dias antes da faixa anterior.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette abriu o caderno na tabela de agosto e acrescentou uma coluna.', if:R },
-{ t:'nar', tx:'A tabela tinha quatro linhas e passou a ter cinco, e a quinta era a primeira que n\u00e3o batia.', if:R },
+{ t:'nar', tx:'A tabela tinha quatro linhas e passou a ter cinco, e a quinta era a primeira que não batia.', if:R },
 { t:'pause', if:R },
 
 { t:'inn', tx:'Dois dias antes.', if:R },
@@ -74,16 +74,16 @@ RBF.RES10 = [
 { t:'pause', if:R },
 { t:'inn', tx:'Ou a casa antecipou, ou eu estava medindo a coisa errada.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela escreveu as duas hip\u00f3teses e n\u00e3o escolheu entre elas, porque fonte \u00fanica n\u00e3o decide nada.', if:R },
+{ t:'nar', tx:'Ela escreveu as duas hipóteses e não escolheu entre elas, porque fonte única não decide nada.', if:R },
 
 { t:'spr', ch:'dara', ex:'guarded', pos:'center', if:R },
-{ t:'dial', ch:'dara', tx:'A copa fecha \u00e0s seis esta semana.', if:R },
+{ t:'dial', ch:'dara', tx:'A copa fecha às seis esta semana.', if:R },
 { t:'dial', ch:'antoniette', tx:'Desde quando?', if:R },
 { t:'dial', ch:'dara', tx:'Desde esta semana.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'E nos outros agostos?', if:R },
 { t:'nar', tx:'Dara parou com a caneca no meio do caminho.', if:R },
-{ t:'dial', ch:'dara', tx:'Nos outros agostos ningu\u00e9m perguntou.', if:R },
+{ t:'dial', ch:'dara', tx:'Nos outros agostos ninguém perguntou.', if:R },
 { t:'spr_hide', ch:'dara', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Antoniette anotou a resposta inteira, com a pausa, porque a pausa era o dado.', if:R },
@@ -92,28 +92,28 @@ RBF.RES10 = [
    C2 - O ULTIMO DIA
    Ela ve a despedida e a registra. Saida: soco.
    ====================================================================== */
-{ t:'scene', id:'res10_ultimo_dia', chapter:'res10', title:'O \u00faltimo dia',
+{ t:'scene', id:'res10_ultimo_dia', chapter:'res10', title:'O último dia',
   bg:'bg_corridor', bgm:null, if:R },
 
-{ t:'nar', tx:'No dia nove, \u00e0 tarde, as duas estavam no degrau do corredor leste.', if:R },
+{ t:'nar', tx:'No dia nove, à tarde, as duas estavam no degrau do corredor leste.', if:R },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center', if:R },
 { t:'spr', ch:'liara', ex:'bright', pos:'right', if:R },
 
 { t:'dial', ch:'liara', tx:'Mil novecentos e trinta e dois.', if:R },
 { t:'dial', ch:'klara', tx:'Mil novecentos e trinta e dois.', if:R },
-{ t:'nar', tx:'Liara olhou para a irm\u00e3, porque a irm\u00e3 nunca concordava com a conta de primeira.', if:R },
+{ t:'nar', tx:'Liara olhou para a irmã, porque a irmã nunca concordava com a conta de primeira.', if:R },
 { t:'pause', if:R },
-{ t:'dial', ch:'liara', tx:'Voc\u00ea conferiu?', if:R },
+{ t:'dial', ch:'liara', tx:'Você conferiu?', if:R },
 { t:'dial', ch:'klara', tx:'Confirmei.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Depois Klara pediu para Liara tran\u00e7ar o cabelo dela, o que ela nunca pedia.', if:R },
-{ t:'nar', tx:'Liara tran\u00e7ou mal, desmanchou e recome\u00e7ou tr\u00eas vezes, e a irm\u00e3 deixou.', if:R },
+{ t:'nar', tx:'Depois Klara pediu para Liara trançar o cabelo dela, o que ela nunca pedia.', if:R },
+{ t:'nar', tx:'Liara trançou mal, desmanchou e recomeçou três vezes, e a irmã deixou.', if:R },
 { t:'spr_hide', ch:'liara', if:R },
 { t:'spr_hide', ch:'klara', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Antoniette anotou a hora, a dura\u00e7\u00e3o e o pedido.', if:R },
+{ t:'nar', tx:'Antoniette anotou a hora, a duração e o pedido.', if:R },
 { t:'pause', if:R },
 { t:'inn', tx:'Comportamento de despedida. Consistente com as entradas 38, 91 e 160.', if:R },
 { t:'pause', if:R },
@@ -121,7 +121,7 @@ RBF.RES10 = [
 { t:'pause', if:R },
 { t:'inn', tx:'Consistente com as entradas.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Sublinhou a palavra consistente e n\u00e3o soube dizer por qu\u00ea, e n\u00e3o anotou isso.', if:R },
+{ t:'nar', tx:'Sublinhou a palavra consistente e não soube dizer por quê, e não anotou isso.', if:R },
 
 /* ======================================================================
    C3 - A DECISAO DE NAO DESCER
@@ -131,35 +131,35 @@ RBF.RES10 = [
   bg:'bg_antoniette_room', bgm:'bgm_archive', if:R },
 { t:'spr', ch:'antoniette', ex:'guarded', pos:'center', if:R },
 
-{ t:'nar', tx:'A troca da guarda do port\u00e3o era \u00e0s onze e meia. Ela sabia disso havia quatro meses.', if:R },
+{ t:'nar', tx:'A troca da guarda do portão era às onze e meia. Ela sabia disso havia quatro meses.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'\u00c0s onze e vinte ela tirou o papel do bolso interno e leu inteiro mais uma vez, \u00e0 vela.', if:R },
-{ t:'nar', tx:'Estava tudo certo. Datas, hor\u00e1rios, o que funciona e o que n\u00e3o funciona.', if:R },
-{ t:'pause', if:R },
-
-{ t:'nar', tx:'No rodap\u00e9, com a letra dela, de junho: probabilidade honesta, baixa.', if:R },
-{ t:'pause', if:R },
-{ t:'inn', tx:'Baixa n\u00e3o \u00e9 nula.', if:R },
-{ t:'pause', if:R },
-{ t:'inn', tx:'Baixa \u00e9 o que eu escrevi quando n\u00e3o tinha nada em jogo.', if:R },
+{ t:'nar', tx:'Às onze e vinte ela tirou o papel do bolso interno e leu inteiro mais uma vez, à vela.', if:R },
+{ t:'nar', tx:'Estava tudo certo. Datas, horários, o que funciona e o que não funciona.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Ela p\u00f4s a m\u00e3o na ma\u00e7aneta \u00e0s onze e vinte e cinco.', if:R },
+{ t:'nar', tx:'No rodapé, com a letra dela, de junho: probabilidade honesta, baixa.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ficou ali o tempo de a guarda trocar. Ouviu os dois pares de botas no cal\u00e7amento.', if:R },
+{ t:'inn', tx:'Baixa não é nula.', if:R },
+{ t:'pause', if:R },
+{ t:'inn', tx:'Baixa é o que eu escrevi quando não tinha nada em jogo.', if:R },
+{ t:'pause', if:R },
+
+{ t:'nar', tx:'Ela pôs a mão na maçaneta às onze e vinte e cinco.', if:R },
+{ t:'pause', if:R },
+{ t:'nar', tx:'Ficou ali o tempo de a guarda trocar. Ouviu os dois pares de botas no calçamento.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'Depois voltou para a escrivaninha, acendeu a vela nova e abriu o caderno.', if:R },
 { t:'pause', if:R },
 
 { t:'spr', ch:'antoniette', ex:'away', pos:'center', if:R },
-{ t:'inn', tx:'Se eu descer e falhar, n\u00e3o sobra registro e n\u00e3o sobra ningu\u00e9m para escrever o registro.', if:R },
+{ t:'inn', tx:'Se eu descer e falhar, não sobra registro e não sobra ninguém para escrever o registro.', if:R },
 { t:'inn', tx:'Se eu ficar, sobra o documento.', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'O documento serve a algu\u00e9m depois.', if:R },
+{ t:'inn', tx:'O documento serve a alguém depois.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Escreveu a conclus\u00e3o duas vezes, uma embaixo da outra. As duas ficaram iguais.', if:R },
+{ t:'nar', tx:'Escreveu a conclusão duas vezes, uma embaixo da outra. As duas ficaram iguais.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'O racioc\u00ednio estava correto. O custo tinha nome e ficou fora da folha.', if:R },
+{ t:'nar', tx:'O raciocínio estava correto. O custo tinha nome e ficou fora da folha.', if:R },
 
 /* ======================================================================
    C4 - A ENTRADA 214
@@ -174,54 +174,54 @@ RBF.RES10 = [
 
 /* A idade esta ERRADA de proposito. Klara ja tem doze.
    Carmine corrige no capitulo seguinte. NAO CONSERTAR. */
-{ t:'arc', key:'caderno', label:'\u2014 caderno sem identifica\u00e7\u00e3o \u2014', lns:[
+{ t:'arc', key:'caderno', label:'— caderno sem identificação —', lns:[
     'Entrada 214. Sujeito feminino, onze anos, segunda linha.',
-    'In\u00edcio do processo \u00e0s tr\u00eas e dez.',
-    'Dura\u00e7\u00e3o estimada quatro horas, conforme as entradas 38, 91 e 160.'
+    'Início do processo às três e dez.',
+    'Duração estimada quatro horas, conforme as entradas 38, 91 e 160.'
 ], if:R },
 { t:'pause', if:R },
 
-{ t:'inn', tx:'As tr\u00eas anteriores foram escritas depois, de mem\u00f3ria.', if:R },
-{ t:'inn', tx:'Esta n\u00e3o.', if:R },
+{ t:'inn', tx:'As três anteriores foram escritas depois, de memória.', if:R },
+{ t:'inn', tx:'Esta não.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela trocou a vela \u00e0s duas e meia e continuou.', if:R },
-{ t:'nar', tx:'A entrada 214 ocupou tr\u00eas p\u00e1ginas, que \u00e9 a m\u00e9dia das entradas longas.', if:R },
+{ t:'nar', tx:'Ela trocou a vela às duas e meia e continuou.', if:R },
+{ t:'nar', tx:'A entrada 214 ocupou três páginas, que é a média das entradas longas.', if:R },
 { t:'pause', if:R },
-{ t:'inn', tx:'Est\u00e1 saindo melhor que a 160.', if:R },
+{ t:'inn', tx:'Está saindo melhor que a 160.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'A satisfa\u00e7\u00e3o era verdadeira e ela n\u00e3o a escondeu de si mesma. Escondeu do papel, que \u00e9 outra coisa.', if:R },
+{ t:'nar', tx:'A satisfação era verdadeira e ela não a escondeu de si mesma. Escondeu do papel, que é outra coisa.', if:R },
 
 { t:'pause', if:R },
 { t:'nar', tx:'Em nenhuma das duzentas e catorze entradas aparece a palavra Klara.', if:R },
 { t:'nar', tx:'O documento usa sujeito, e usa segunda linha, e usa a escolhida quando cita a casa.', if:R },
-{ t:'nar', tx:'\u00c9 a nomenclatura correta para material de foro. Est\u00e1 no manual, p\u00e1gina quatro.', if:R },
+{ t:'nar', tx:'É a nomenclatura correta para material de foro. Está no manual, página quatro.', if:R },
 
 /* ======================================================================
    C5 - A FARPA
    Ela anota o ar esquentando. NAO EXPLICAR.
    ====================================================================== */
-{ t:'scene', id:'res10_farpa', chapter:'res10', title:'Tr\u00eas e dez',
+{ t:'scene', id:'res10_farpa', chapter:'res10', title:'Três e dez',
   bg:'bg_black', bgm:null, if:R },
 
 { t:'nar', tx:'Faltavam quatro horas para o fim do processo.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Ela ouviu a porta do quarto das g\u00eameas \u00e0s tr\u00eas e dez e anotou a hora.', if:R },
+{ t:'nar', tx:'Ela ouviu a porta do quarto das gêmeas às três e dez e anotou a hora.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Passos curtos no assoalho, indo at\u00e9 o alto da escada. E parando l\u00e1.', if:R },
+{ t:'nar', tx:'Passos curtos no assoalho, indo até o alto da escada. E parando lá.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Antoniette n\u00e3o levantou. A pena continuou onde estava.', if:R },
+{ t:'nar', tx:'Antoniette não levantou. A pena continuou onde estava.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'O ar do escrit\u00f3rio esquentou. Ela anotou isso tamb\u00e9m.', if:R },
+{ t:'nar', tx:'O ar do escritório esquentou. Ela anotou isso também.', if:R },
 
 { t:'pause', if:R },
-{ t:'nar', tx:'O rel\u00f3gio continuou sobre a mesa. Ela n\u00e3o olhou para ele enquanto o ar ficava quente.', if:R },
+{ t:'nar', tx:'O relógio continuou sobre a mesa. Ela não olhou para ele enquanto o ar ficava quente.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Ela deixou o campo da dura\u00e7\u00e3o em branco e voltou a ele de manh\u00e3.', if:R },
+{ t:'nar', tx:'Ela deixou o campo da duração em branco e voltou a ele de manhã.', if:R },
 
 { t:'fade_out', if:R },
 { t:'bgm', id:null, if:R },
-{ t:'end_chap', line1:'Agosto do quinto ano.', line2:'Ela n\u00e3o desceu.',
+{ t:'end_chap', line1:'Agosto do quinto ano.', line2:'Ela não desceu.',
   chapter:'res10', if:R },
 { t:'fade_out', if:R }
 

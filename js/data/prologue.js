@@ -71,67 +71,67 @@ RBF.PROLOGUE = [
 { t:'spr', ch:'matheo', ex:'neutral', pos:'center' },
 
 { t:'sfx', id:'sfx_package' },
-{ t:'nar', tx:'O mensageiro entregou o pacote com as duas m\u00e3os e n\u00e3o esperou recibo.' },
-{ t:'nar', tx:'Matheo Drell n\u00e3o esperava visita. Por princ\u00edpio, nunca esperava.' },
-{ t:'inn', tx:'Quem trabalha com informa\u00e7\u00e3o aprende cedo. Visita n\u00e3o marcada estraga o resto do dia.' },
+{ t:'nar', tx:'O mensageiro entregou o pacote com as duas mãos e não esperou recibo.' },
+{ t:'nar', tx:'Matheo Drell não esperava visita. Por princípio, nunca esperava.' },
+{ t:'inn', tx:'Quem trabalha com informação aprende cedo. Visita não marcada estraga o resto do dia.' },
 
 { t:'nar', tx:'Couro encerado, cordel escuro, sem selo.' },
 { t:'nar', tx:'Pesava mais do que devia para o tamanho.' },
 { t:'inn', tx:'Couro encerado. Chuva na estrada arruina papel.', if:{ relendo:true } },
 { t:'inn', tx:'Ela pensou na chuva.', if:{ relendo:true } },
-{ t:'nar', tx:'O cordel estava dado em quatro voltas e um n\u00f3 cego, do jeito que se amarra o que n\u00e3o deve abrir sozinho na estrada.' },
+{ t:'nar', tx:'O cordel estava dado em quatro voltas e um nó cego, do jeito que se amarra o que não deve abrir sozinho na estrada.' },
 { t:'pause' },
 
-{ t:'nar', tx:'O endere\u00e7o estava escrito em letra mi\u00fada e controlada.' },
+{ t:'nar', tx:'O endereço estava escrito em letra miúda e controlada.' },
 { t:'nar', tx:'Ele reconheceu a letra antes de ler o nome.' },
 
-{ t:'inn', tx:'Noventa e tr\u00eas dias.' },
-{ t:'nar', tx:'Ela tinha estabelecido noventa. Sem not\u00edcia em noventa dias, o ponto morto dispara.' },
-{ t:'nar', tx:'Ele passou os \u00faltimos tr\u00eas tentando fazer com que tr\u00eas dias significassem alguma coisa.' },
+{ t:'inn', tx:'Noventa e três dias.' },
+{ t:'nar', tx:'Ela tinha estabelecido noventa. Sem notícia em noventa dias, o ponto morto dispara.' },
+{ t:'nar', tx:'Ele passou os últimos três tentando fazer com que três dias significassem alguma coisa.' },
 { t:'pause' },
-{ t:'inn', tx:'N\u00e3o significavam.' },
+{ t:'inn', tx:'Não significavam.' },
 
 { t:'nar', tx:'Levou o pacote para a mesa e acendeu a segunda vela.' },
-{ t:'nar', tx:'O couro tinha cheiro de cavalo e de cera velha. Estava frio de estrada e demorou a esquentar sob a m\u00e3o dele.' },
-{ t:'inn', tx:'Relat\u00f3rio de campo. Leia como relat\u00f3rio de campo.' },
+{ t:'nar', tx:'O couro tinha cheiro de cavalo e de cera velha. Estava frio de estrada e demorou a esquentar sob a mão dele.' },
+{ t:'inn', tx:'Relatório de campo. Leia como relatório de campo.' },
 
 /* ======================================================================
    P2 - AS PAGINAS CONTADAS
    O metodo dele, mostrado uma vez, para que a perda tenha medida.
    Aqui entra o beat de uma palavra e a numeracao que nao fecha.
    ====================================================================== */
-{ t:'scene', id:'p2_paginas', chapter:'prologo', title:'As p\u00e1ginas contadas',
+{ t:'scene', id:'p2_paginas', chapter:'prologo', title:'As páginas contadas',
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
 { t:'spr', ch:'matheo', ex:'read', pos:'center' },
 
 { t:'sfx', id:'sfx_page_turn' },
-{ t:'nar', tx:'Ele contou as p\u00e1ginas antes de ler a primeira. Fazia isso com qualquer documento novo.' },
+{ t:'nar', tx:'Ele contou as páginas antes de ler a primeira. Fazia isso com qualquer documento novo.' },
 { t:'pause' },
 { t:'nar', tx:'Duzentas.' },
 { t:'nar', tx:'Duzentas e cinquenta.' },
 { t:'nar', tx:'Duzentas e oitenta e sete.' },
 { t:'pause' },
 
-{ t:'nar', tx:'A numera\u00e7\u00e3o dela terminava em duzentos e noventa e um.' },
+{ t:'nar', tx:'A numeração dela terminava em duzentos e noventa e um.' },
 { t:'inn', tx:'Faltam quatro.' },
 { t:'pause', if:{ relendo:true } },
 { t:'inn', tx:'Duzentos e oitenta e oito. Duzentos e oitenta e nove. Duzentos e noventa. Duzentos e noventa e um.', if:{ relendo:true } },
-{ t:'inn', tx:'Quatro n\u00fameros. Ele os diria em voz alta a vida inteira sem saber o que estava dizendo.', if:{ relendo:true } },
+{ t:'inn', tx:'Quatro números. Ele os diria em voz alta a vida inteira sem saber o que estava dizendo.', if:{ relendo:true } },
 { t:'pause' },
-{ t:'nar', tx:'Ele passou o polegar pela dobra interna. O corte era reto e antigo, feito com l\u00e2mina e com tempo.' },
+{ t:'nar', tx:'Ele passou o polegar pela dobra interna. O corte era reto e antigo, feito com lâmina e com tempo.' },
 { t:'inn', tx:'Ou ela tirou, ou tiraram dela.' },
-{ t:'nar', tx:'Ele anotou o n\u00famero num canto do mata-borr\u00e3o e n\u00e3o voltou ao assunto naquela noite.' },
+{ t:'nar', tx:'Ele anotou o número num canto do mata-borrão e não voltou ao assunto naquela noite.' },
 { t:'pause' },
-{ t:'nar', tx:'Foi a \u00faltima coisa profissional que ele fez.' },
+{ t:'nar', tx:'Foi a última coisa profissional que ele fez.' },
 
-{ t:'nar', tx:'Letra densa. T\u00edtulos formais. Rodap\u00e9s numerados at\u00e9 o fim.' },
-{ t:'inn', tx:'Ela numerou at\u00e9 o que n\u00e3o precisava.' },
+{ t:'nar', tx:'Letra densa. Títulos formais. Rodapés numerados até o fim.' },
+{ t:'inn', tx:'Ela numerou até o que não precisava.' },
 { t:'nar', tx:'No canto da capa, em tinta mais nova que o resto:' },
 
 { t:'arc', key:'arquivo', lns:[
-    '\u2014 ARQUIVO RABENFELS \u2014',
+    '— ARQUIVO RABENFELS —',
     'Fragmentos da Linhagem, da Marca e do Pacto',
-    '[ \u00e0 m\u00e3o ] "Para Matheo. Leia tudo. \u2014 A.V."'
+    '[ à mão ] "Para Matheo. Leia tudo. — A.V."'
 ]},
 
 { t:'inn', tx:'Leia tudo.' },
@@ -144,41 +144,41 @@ RBF.PROLOGUE = [
    As linhas do cartao sao canonicas e nao se alteram.
    O que Matheo repara e a FORMA delas.
    ====================================================================== */
-{ t:'scene', id:'p3_kharvel', keepSprites:true, chapter:'prologo', title:'Khar\u2019Vel',
+{ t:'scene', id:'p3_kharvel', keepSprites:true, chapter:'prologo', title:'Khar’Vel',
   bg:'bg_archive_closeup' },
 
 { t:'arc', key:'arquivo', lns:[
-    '"Khar\u2019Vel n\u00e3o \u00e9 um deus. Deuses recebem ora\u00e7\u00f5es e as ignoram. Ela recebe oferendas e as consome."',
-    '"Khar\u2019Vel n\u00e3o \u00e9 um dem\u00f4nio. Dem\u00f4nios corrompem de fora. Ela cresce de dentro."',
-    '"Morre e renasce sem parar. Nunca no pr\u00f3prio corpo. Em outros."'
+    '"Khar’Vel não é um deus. Deuses recebem orações e as ignoram. Ela recebe oferendas e as consome."',
+    '"Khar’Vel não é um demônio. Demônios corrompem de fora. Ela cresce de dentro."',
+    '"Morre e renasce sem parar. Nunca no próprio corpo. Em outros."'
 ]},
 
-{ t:'inn', tx:'Khar\u2019Vel.' },
-{ t:'inn', tx:'Vinte anos procurando uma refer\u00eancia verific\u00e1vel para essa palavra.' },
+{ t:'inn', tx:'Khar’Vel.' },
+{ t:'inn', tx:'Vinte anos procurando uma referência verificável para essa palavra.' },
 { t:'inn', tx:'Ela achou em quatro.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Ele leu as tr\u00eas linhas outra vez, agora prestando aten\u00e7\u00e3o no formato.' },
-{ t:'inn', tx:'Ela definiu a coisa tr\u00eas vezes dizendo o que a coisa n\u00e3o \u00e9.' },
-{ t:'inn', tx:'Arquivista faz isso quando o cat\u00e1logo n\u00e3o tem a categoria.' },
+{ t:'nar', tx:'Ele leu as três linhas outra vez, agora prestando atenção no formato.' },
+{ t:'inn', tx:'Ela definiu a coisa três vezes dizendo o que a coisa não é.' },
+{ t:'inn', tx:'Arquivista faz isso quando o catálogo não tem a categoria.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela n\u00e3o achou onde guardar aquilo.' },
+{ t:'inn', tx:'Ela não achou onde guardar aquilo.' },
 
 { t:'sfx', id:'sfx_page_turn' },
-{ t:'nar', tx:'Ele desceu ao rodap\u00e9. Ela citava a origem de cada linha, com data e arquivo.' },
-{ t:'nar', tx:'Ele conhecia duas das fontes. Tinha catalogado uma delas com as pr\u00f3prias m\u00e3os, quinze anos antes.' },
+{ t:'nar', tx:'Ele desceu ao rodapé. Ela citava a origem de cada linha, com data e arquivo.' },
+{ t:'nar', tx:'Ele conhecia duas das fontes. Tinha catalogado uma delas com as próprias mãos, quinze anos antes.' },
 { t:'pause' },
-{ t:'inn', tx:'Est\u00e1 tudo confer\u00edvel. Ela sabia que eu ia conferir.' },
+{ t:'inn', tx:'Está tudo conferível. Ela sabia que eu ia conferir.' },
 
 /* As borboletas entram aqui, uma vez, e deixam vestigio fisico.
    O Epilogo retoma. */
 { t:'arc', key:'arquivo', lns:[
-    '"Todo agosto, nas terras pr\u00f3ximas \u00e0 Marca, aparecem borboletas de asa clara com veias vermelhas."',
-    '"Duram tr\u00eas semanas. As aldeias n\u00e3o as matam e n\u00e3o falam delas."',
-    '"Em trezentos anos de registros, a fam\u00edlia nunca escreveu uma linha sobre o fen\u00f4meno."'
+    '"Todo agosto, nas terras próximas à Marca, aparecem borboletas de asa clara com veias vermelhas."',
+    '"Duram três semanas. As aldeias não as matam e não falam delas."',
+    '"Em trezentos anos de registros, a família nunca escreveu uma linha sobre o fenômeno."'
 ]},
 
-{ t:'inn', tx:'Ela anotou o sil\u00eancio deles como se fosse um dado.' },
+{ t:'inn', tx:'Ela anotou o silêncio deles como se fosse um dado.' },
 { t:'pause' },
 
 /* A fome e o vazio. Antoniette registrou o sintoma sem nunca entender
@@ -187,25 +187,25 @@ RBF.PROLOGUE = [
 { t:'arc', key:'arquivo', lns:[
     '"O sujeito K. relata, desde os seis anos, dois estados recorrentes:"',
     '"fome fora de hora e o que ela chama de um vazio."',
-    '"V\u00eam juntos, duram de uma a tr\u00eas horas, e passam sozinhos."',
-    '"Ela descreve como se descreve dor de cabe\u00e7a. N\u00e3o atribui a nada."'
+    '"Vêm juntos, duram de uma a três horas, e passam sozinhos."',
+    '"Ela descreve como se descreve dor de cabeça. Não atribui a nada."'
 ]},
-{ t:'nar', tx:'Matheo leu duas vezes e n\u00e3o encontrou a linha seguinte.' },
+{ t:'nar', tx:'Matheo leu duas vezes e não encontrou a linha seguinte.' },
 { t:'inn', tx:'Ela larga o assunto aqui.' },
 { t:'pause' },
 { t:'inn', tx:'Ela nunca larga assunto nenhum.' },
 { t:'pause', if:{ relendo:true } },
-{ t:'nar', tx:'Ela largou porque n\u00e3o havia mais nada. A menina n\u00e3o atribu\u00eda a nada porque n\u00e3o havia nada a que atribuir, do lado dela.', if:{ relendo:true } },
+{ t:'nar', tx:'Ela largou porque não havia mais nada. A menina não atribuía a nada porque não havia nada a que atribuir, do lado dela.', if:{ relendo:true } },
 { t:'nar', tx:'Do outro lado havia, e contava.', if:{ relendo:true } },
 { t:'pause' },
-{ t:'nar', tx:'Na dobra da folha seguinte havia uma asa seca, prensada pelo peso das p\u00e1ginas.' },
+{ t:'nar', tx:'Na dobra da folha seguinte havia uma asa seca, prensada pelo peso das páginas.' },
 { t:'nar', tx:'Clara, com uma veia vermelha atravessando.' },
-{ t:'nar', tx:'Ele soprou de leve. A asa n\u00e3o se moveu. Estava colada ao papel havia meses.' },
+{ t:'nar', tx:'Ele soprou de leve. A asa não se moveu. Estava colada ao papel havia meses.' },
 { t:'pause' },
 { t:'nar', tx:'Ele passou adiante sem escrever nada a respeito.' },
 { t:'pause', if:{ relendo:true } },
-{ t:'nar', tx:'A asa ficaria ali por mais sete anos, e a veia vermelha n\u00e3o desbotaria.', if:{ relendo:true } },
-{ t:'nar', tx:'Ele voltaria a abrir nessa dobra sem contar as p\u00e1ginas, uma vez, numa tarde de maio.', if:{ relendo:true } },
+{ t:'nar', tx:'A asa ficaria ali por mais sete anos, e a veia vermelha não desbotaria.', if:{ relendo:true } },
+{ t:'nar', tx:'Ele voltaria a abrir nessa dobra sem contar as páginas, uma vez, numa tarde de maio.', if:{ relendo:true } },
 
 /* ======================================================================
    P4 - O COMPILADOR
@@ -215,77 +215,77 @@ RBF.PROLOGUE = [
 { t:'scene', id:'p4_compilador', keepSprites:true, chapter:'prologo', title:'O Compilador',
   bg:'bg_archive_closeup' },
 
-{ t:'nar', tx:'As notas de rodap\u00e9 eram assinadas por um Compilador.' },
-{ t:'nar', tx:'Terceira pessoa do come\u00e7o ao fim. Nunca "eu". Nunca o nome dela.' },
-{ t:'inn', tx:'Duzentas e oitenta e sete p\u00e1ginas escrevendo sobre si mesma como se fosse outra pessoa.' },
+{ t:'nar', tx:'As notas de rodapé eram assinadas por um Compilador.' },
+{ t:'nar', tx:'Terceira pessoa do começo ao fim. Nunca "eu". Nunca o nome dela.' },
+{ t:'inn', tx:'Duzentas e oitenta e sete páginas escrevendo sobre si mesma como se fosse outra pessoa.' },
 { t:'pause' },
-{ t:'inn', tx:'\u00c9 o que a Ordem ensina. Ela aprendeu comigo.' },
+{ t:'inn', tx:'É o que a Ordem ensina. Ela aprendeu comigo.' },
 
-{ t:'nar', tx:'A maior parte das notas era m\u00e9todo puro. De onde veio o dado, quem contou, o que n\u00e3o foi poss\u00edvel confirmar.' },
+{ t:'nar', tx:'A maior parte das notas era método puro. De onde veio o dado, quem contou, o que não foi possível confirmar.' },
 
-{ t:'arc', key:'compilador', label:'\u2014 nota do Compilador \u2014', lns:[
-    '17. Sobre o andar fechado, duas vers\u00f5es circulam entre a criadagem.',
-    'Uma fala em umidade. A outra em obras que nunca come\u00e7aram.',
-    'Fonte \u00fanica em ambos os casos. O Compilador registra as duas e n\u00e3o escolhe.'
+{ t:'arc', key:'compilador', label:'— nota do Compilador —', lns:[
+    '17. Sobre o andar fechado, duas versões circulam entre a criadagem.',
+    'Uma fala em umidade. A outra em obras que nunca começaram.',
+    'Fonte única em ambos os casos. O Compilador registra as duas e não escolhe.'
 ]},
 
-{ t:'inn', tx:'Ela registrava at\u00e9 o que sabia que era mentira.' },
-{ t:'inn', tx:'Boa t\u00e9cnica. Eu ensinei essa.' },
+{ t:'inn', tx:'Ela registrava até o que sabia que era mentira.' },
+{ t:'inn', tx:'Boa técnica. Eu ensinei essa.' },
 { t:'pause' },
 
-{ t:'nar', tx:'A voz se manteve por cento e quarenta p\u00e1ginas.' },
+{ t:'nar', tx:'A voz se manteve por cento e quarenta páginas.' },
 { t:'sfx', id:'sfx_page_turn' },
 { t:'nar', tx:'Escorregou na cento e quarenta e um.' },
 
-{ t:'arc', key:'compilador', label:'\u2014 nota do Compilador \u2014', lns:[
+{ t:'arc', key:'compilador', label:'— nota do Compilador —', lns:[
     '41. O sujeito K. tem oito anos na data desta entrada.',
-    'O Compilador registra a idade porque a idade entra no c\u00e1lculo do ciclo.',
-    'N\u00e3o por outro motivo.'
+    'O Compilador registra a idade porque a idade entra no cálculo do ciclo.',
+    'Não por outro motivo.'
 ]},
 
-{ t:'nar', tx:'Ele leu a \u00faltima linha duas vezes.' },
-{ t:'inn', tx:'Ningu\u00e9m escreve "n\u00e3o por outro motivo" quando n\u00e3o h\u00e1 outro motivo.' },
+{ t:'nar', tx:'Ele leu a última linha duas vezes.' },
+{ t:'inn', tx:'Ninguém escreve "não por outro motivo" quando não há outro motivo.' },
 { t:'pause' },
-{ t:'nar', tx:'A numera\u00e7\u00e3o seguia adiante. Ela n\u00e3o voltou para corrigir.' },
+{ t:'nar', tx:'A numeração seguia adiante. Ela não voltou para corrigir.' },
 
 /* ======================================================================
    P5 - A CAMARA DO CASULO
    Substituicao, nao transformacao. Sensorial: temperatura.
    ====================================================================== */
-{ t:'scene', id:'p5_casulo', keepSprites:true, chapter:'prologo', title:'A c\u00e2mara do casulo',
+{ t:'scene', id:'p5_casulo', keepSprites:true, chapter:'prologo', title:'A câmara do casulo',
   bg:'bg_archive_closeup' },
 
 { t:'arc', key:'arquivo', lns:[
-    '"Os registros mais antigos da propriedade chamam o lugar de a c\u00e2mara do casulo."',
-    '"A fam\u00edlia adotou outros nomes depois. Ala de estudos. Ala norte. O andar fechado."',
-    '"A c\u00e2mara do casulo \u00e9 a \u00fanica denomina\u00e7\u00e3o honesta que esta casa j\u00e1 produziu."'
+    '"Os registros mais antigos da propriedade chamam o lugar de a câmara do casulo."',
+    '"A família adotou outros nomes depois. Ala de estudos. Ala norte. O andar fechado."',
+    '"A câmara do casulo é a única denominação honesta que esta casa já produziu."'
 ]},
 
 { t:'nar', tx:'Ele leu a frase de novo.' },
-{ t:'inn', tx:'A c\u00e2mara do casulo.' },
+{ t:'inn', tx:'A câmara do casulo.' },
 { t:'pause' },
 
-{ t:'inn', tx:'Ele sabia como funciona um casulo. A lagarta se desfaz por dentro e o que sai da casca \u00e9 feito do que ela era.' },
+{ t:'inn', tx:'Ele sabia como funciona um casulo. A lagarta se desfaz por dentro e o que sai da casca é feito do que ela era.' },
 { t:'pause' },
 { t:'inn', tx:'Aqui a casca fica com a menina dentro.' },
 { t:'inn', tx:'O que sai, sai de outro corpo. Inteiro. Sem ter pago nada.' },
 
 { t:'sfx', id:'sfx_candle' },
 { t:'nar', tx:'A vela da esquerda apagou. Ele continuou com a que restou.' },
-{ t:'nar', tx:'A cera esfriou depressa. Ele s\u00f3 percebeu porque a m\u00e3o que segurava a folha come\u00e7ou a doer no n\u00f3.' },
+{ t:'nar', tx:'A cera esfriou depressa. Ele só percebeu porque a mão que segurava a folha começou a doer no nó.' },
 
 /* ======================================================================
    P6 - AS GEMEAS
    Klara vampira, Liara humana. O exame confirma.
    ====================================================================== */
-{ t:'scene', id:'p6_gemeas', keepSprites:true, chapter:'prologo', title:'As g\u00eameas',
+{ t:'scene', id:'p6_gemeas', keepSprites:true, chapter:'prologo', title:'As gêmeas',
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
 
 { t:'arc', key:'arquivo', lns:[
-    '"Nasceram g\u00eameas, como nasce toda gera\u00e7\u00e3o desta casa. O ritual garante o par."',
-    '"Liara nasceu humana. Klara nasceu vampira. A diferen\u00e7a era vis\u00edvel na primeira hora."',
-    '"Os guardi\u00f5es examinaram Klara mesmo assim. Procuravam um calor espec\u00edfico no sangue."',
-    '"O exame n\u00e3o servia para descobrir qual das duas. Isso j\u00e1 se sabia."',
+    '"Nasceram gêmeas, como nasce toda geração desta casa. O ritual garante o par."',
+    '"Liara nasceu humana. Klara nasceu vampira. A diferença era visível na primeira hora."',
+    '"Os guardiões examinaram Klara mesmo assim. Procuravam um calor específico no sangue."',
+    '"O exame não servia para descobrir qual das duas. Isso já se sabia."',
     '"Servia para confirmar que a entidade tinha pegado."',
     '"Registro da casa, mesma data: a escolhida foi identificada. O ciclo continua."'
 ]},
@@ -293,14 +293,14 @@ RBF.PROLOGUE = [
 { t:'bgm', id:null },
 { t:'pause' },
 { t:'inn', tx:'Um laudo.' },
-{ t:'inn', tx:'Eles conferiram uma crian\u00e7a de horas como quem confere uma remessa.' },
+{ t:'inn', tx:'Eles conferiram uma criança de horas como quem confere uma remessa.' },
 { t:'pause' },
 
 { t:'inn', tx:'Ela tinha oito anos quando Antoniette chegou.' },
 { t:'inn', tx:'Oito.' },
 { t:'pause' },
 { t:'inn', tx:'E Antoniette ficou cinco.' },
-{ t:'nar', tx:'Ele n\u00e3o terminou a conta.' },
+{ t:'nar', tx:'Ele não terminou a conta.' },
 
 /* ======================================================================
    P7 - O TREINAMENTO
@@ -311,20 +311,20 @@ RBF.PROLOGUE = [
 { t:'sfx', id:'sfx_page_turn' },
 
 { t:'arc', key:'arquivo', lns:[
-    '"A casa chama de treinamento. Rotina de fam\u00edlia."',
-    '"As marcas nas dobras dos bra\u00e7os contam outra coisa a quem l\u00ea o tra\u00e7o."',
+    '"A casa chama de treinamento. Rotina de família."',
+    '"As marcas nas dobras dos braços contam outra coisa a quem lê o traço."',
     '"Abriram Klara para medir. Quanto de entidade, quanto de menina."',
-    '"A m\u00e3e anotava os n\u00fameros. O pai entrou uma vez e nunca mais."'
+    '"A mãe anotava os números. O pai entrou uma vez e nunca mais."'
 ]},
 
 { t:'nar', tx:'Ele baixou a folha e olhou para a parede.' },
 { t:'inn', tx:'Uma vez. O suficiente.' },
-{ t:'inn', tx:'Saber o bastante para n\u00e3o precisar saber o resto.' },
+{ t:'inn', tx:'Saber o bastante para não precisar saber o resto.' },
 { t:'pause' },
 
 { t:'spr', ch:'matheo', ex:'neutral', pos:'center' },
-{ t:'nar', tx:'A autoriza\u00e7\u00e3o de campo tinha levado quarenta minutos.' },
-{ t:'nar', tx:'Ele n\u00e3o releu o dossi\u00ea de Nidhaus antes de assinar. J\u00e1 tinha lido uma vez.' },
+{ t:'nar', tx:'A autorização de campo tinha levado quarenta minutos.' },
+{ t:'nar', tx:'Ele não releu o dossiê de Nidhaus antes de assinar. Já tinha lido uma vez.' },
 { t:'pause' },
 { t:'inn', tx:'Uma vez. O suficiente.' },
 { t:'nar', tx:'Recolocou a folha sobre a mesa e continuou lendo.' },
@@ -338,22 +338,22 @@ RBF.PROLOGUE = [
   bg:'bg_archive_closeup', bgm:'bgm_archive' },
 
 { t:'arc', key:'arquivo', lns:[
-    '"Nos registros de pessoal da casa encontrei algu\u00e9m que passou por Nidhaus antes de mim."',
-    '"Trinta e sete anos atr\u00e1s. Consta como a escriba de Lervel."',
-    '"Seis meses depois: partiu por motivo de sa\u00fade."',
-    '"N\u00e3o existe registro do destino dela. Nem aqui, nem l\u00e1."'
+    '"Nos registros de pessoal da casa encontrei alguém que passou por Nidhaus antes de mim."',
+    '"Trinta e sete anos atrás. Consta como a escriba de Lervel."',
+    '"Seis meses depois: partiu por motivo de saúde."',
+    '"Não existe registro do destino dela. Nem aqui, nem lá."'
 ]},
 
-{ t:'nar', tx:'Nem l\u00e1.' },
-{ t:'inn', tx:'L\u00e1 \u00e9 o meu arquivo.' },
+{ t:'nar', tx:'Nem lá.' },
+{ t:'inn', tx:'Lá é o meu arquivo.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Ele tinha aberto aquela ficha uma semana antes de assinar a autoriza\u00e7\u00e3o.' },
-{ t:'nar', tx:'Lembrava do papel. Lembrava da letra do escritur\u00e1rio que escreveu a \u00faltima linha.' },
-{ t:'inn', tx:'Motivo de sa\u00fade.' },
+{ t:'nar', tx:'Ele tinha aberto aquela ficha uma semana antes de assinar a autorização.' },
+{ t:'nar', tx:'Lembrava do papel. Lembrava da letra do escriturário que escreveu a última linha.' },
+{ t:'inn', tx:'Motivo de saúde.' },
 { t:'pause' },
 { t:'inn', tx:'Eu li aquilo e assinei mesmo assim.' },
-{ t:'nar', tx:'Virou a p\u00e1gina com a m\u00e3o firme.' },
+{ t:'nar', tx:'Virou a página com a mão firme.' },
 
 /* ======================================================================
    P9 - A PERGUNTA
@@ -365,94 +365,94 @@ RBF.PROLOGUE = [
 { t:'nar', tx:'A entrada seguinte estava separada do resto por dois dedos de papel em branco.' },
 
 { t:'arc', key:'arquivo', lns:[
-    '"Matheo \u2014 se voc\u00ea estiver lendo isto, preciso de uma resposta que n\u00e3o posso pedir de outro jeito."',
-    '"Voc\u00ea sabia?"'
+    '"Matheo — se você estiver lendo isto, preciso de uma resposta que não posso pedir de outro jeito."',
+    '"Você sabia?"'
 ]},
 
 { t:'bgm', id:null },
 { t:'pause' },
 
-{ t:'dial', ch:'antoniette', tx:'Voc\u00ea sabia?' },
+{ t:'dial', ch:'antoniette', tx:'Você sabia?' },
 { t:'pause' },
 { t:'dial', ch:'matheo', tx:'Sabia.' },
 { t:'pause' },
-{ t:'nar', tx:'Ele ouviu a pr\u00f3pria voz na sala vazia e n\u00e3o achou estranho.' },
+{ t:'nar', tx:'Ele ouviu a própria voz na sala vazia e não achou estranho.' },
 
 { t:'sfx', id:'sfx_page_turn' },
-{ t:'nar', tx:'Virou a p\u00e1gina procurando a linha seguinte.' },
-{ t:'nar', tx:'A pergunta ocupava a p\u00e1gina inteira e o resto era papel limpo.' },
+{ t:'nar', tx:'Virou a página procurando a linha seguinte.' },
+{ t:'nar', tx:'A pergunta ocupava a página inteira e o resto era papel limpo.' },
 { t:'pause' },
-{ t:'nar', tx:'Ela deixou o espa\u00e7o da resposta e foi embora antes de poder receb\u00ea-la.' },
+{ t:'nar', tx:'Ela deixou o espaço da resposta e foi embora antes de poder recebê-la.' },
 /* ======================================================================
    P10 - A ULTIMA ENTRADA
    A mascara cai. O colapso e de silencio.
    Aqui entra a unica frase longa e desnorteada do capitulo.
    ====================================================================== */
-{ t:'scene', id:'p10_ultima', chapter:'prologo', title:'A \u00faltima entrada',
+{ t:'scene', id:'p10_ultima', chapter:'prologo', title:'A última entrada',
   bg:'bg_prologue_room' },
 { t:'spr', ch:'matheo', ex:'hollow', pos:'center' },
 
-{ t:'nar', tx:'As \u00faltimas p\u00e1ginas eram diferentes.' },
-{ t:'nar', tx:'A caligrafia continuava firme. O espa\u00e7amento n\u00e3o.' },
+{ t:'nar', tx:'As últimas páginas eram diferentes.' },
+{ t:'nar', tx:'A caligrafia continuava firme. O espaçamento não.' },
 { t:'nar', tx:'Ele conhecia aquela escrita havia oito anos.' },
 { t:'pause' },
 
 { t:'last', key:'ultima', lns:[
     'Para quem encontrar isto.',
     '',
-    'N\u00e3o sei seu nome. N\u00e3o sei se voc\u00ea \u00e9 da Ordem ou se chegou',
+    'Não sei seu nome. Não sei se você é da Ordem ou se chegou',
     'aqui por outro caminho. Tanto faz.',
     '',
     'Existe uma menina em Velha Nidhaus chamada Klara Rabenfels.',
     '',
-    'Doze anos. L\u00ea mais r\u00e1pido do que qualquer pessoa que eu conheci.',
-    'Corrige os outros em voz baixa, para n\u00e3o constranger ningu\u00e9m.',
-    'Ri de coisas que ningu\u00e9m mais achou gra\u00e7a, e ri depois, quando',
-    'j\u00e1 passou, quando acha que n\u00e3o tem ningu\u00e9m olhando.',
+    'Doze anos. Lê mais rápido do que qualquer pessoa que eu conheci.',
+    'Corrige os outros em voz baixa, para não constranger ninguém.',
+    'Ri de coisas que ninguém mais achou graça, e ri depois, quando',
+    'já passou, quando acha que não tem ninguém olhando.',
     '',
     'Foi escolhida antes de nascer para morrer de um jeito que a',
-    'fam\u00edlia dela chama de tradi\u00e7\u00e3o.',
+    'família dela chama de tradição.',
     '',
-    'Tentei tir\u00e1-la daqui.',
-    'Fui met\u00f3dica. Fui devagar.',
+    'Tentei tirá-la daqui.',
+    'Fui metódica. Fui devagar.',
     'Foi o devagar que custou.',
     '',
-    'Est\u00e1 tudo nas p\u00e1ginas anteriores. Datas, plantas, hor\u00e1rios de',
-    'guarda, o que funciona e o que n\u00e3o funciona. Cinco anos de',
+    'Está tudo nas páginas anteriores. Datas, plantas, horários de',
+    'guarda, o que funciona e o que não funciona. Cinco anos de',
     'trabalho. Use.',
     '',
-    'Tirei quatro p\u00e1ginas. Se voc\u00ea chegar at\u00e9 elas, vai entender',
-    'por qu\u00ea. Se n\u00e3o chegar, melhor.',
+    'Tirei quatro páginas. Se você chegar até elas, vai entender',
+    'por quê. Se não chegar, melhor.',
     '',
-    'V\u00e1 mais r\u00e1pido do que eu fui.',
+    'Vá mais rápido do que eu fui.',
     '',
-    'O conhecimento n\u00e3o foi suficiente.',
-    'Mas \u00e9 o que fica.',
+    'O conhecimento não foi suficiente.',
+    'Mas é o que fica.',
     '',
-    '\u2014 A.V.',
+    '— A.V.',
     'Velha Nidhaus, agosto.'
 ]},
 
-{ t:'nar', tx:'Ele ficou com a \u00faltima p\u00e1gina na m\u00e3o.' },
+{ t:'nar', tx:'Ele ficou com a última página na mão.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Estendeu a m\u00e3o para a pena.' },
-{ t:'nar', tx:'A m\u00e3o chegou at\u00e9 a pena e parou ali.' },
+{ t:'nar', tx:'Estendeu a mão para a pena.' },
+{ t:'nar', tx:'A mão chegou até a pena e parou ali.' },
 { t:'pause' },
 
 /* A frase longa, uma so, depois de todo o capitulo em frase curta. */
-{ t:'inn', tx:'Ele pensou em escrever para Vantrell, e em escrever para o tribunal da Marca, e em escrever para a irm\u00e3 dela em Alsbeck que n\u00e3o sabia de nada e ia ter de saber por algu\u00e9m, e pensou que qualquer uma dessas cartas levaria doze dias para chegar e que doze dias eram quatro vezes o tempo que ele tinha desperdi\u00e7ado tentando fazer tr\u00eas dias significarem alguma coisa, e ainda estava com a pena na m\u00e3o quando percebeu que n\u00e3o havia mais ningu\u00e9m para quem escrever.' },
+{ t:'inn', tx:'Ele pensou em escrever para Vantrell, e em escrever para o tribunal da Marca, e em escrever para a irmã dela em Alsbeck que não sabia de nada e ia ter de saber por alguém, e pensou que qualquer uma dessas cartas levaria doze dias para chegar e que doze dias eram quatro vezes o tempo que ele tinha desperdiçado tentando fazer três dias significarem alguma coisa, e ainda estava com a pena na mão quando percebeu que não havia mais ninguém para quem escrever.' },
 { t:'pause' },
 
 { t:'sfx', id:'sfx_wind' },
 { t:'nar', tx:'O vento contra o vidro parou.' },
 { t:'nar', tx:'A cera parou de estalar.' },
-{ t:'nar', tx:'Sobrou a pr\u00f3pria respira\u00e7\u00e3o.' },
+{ t:'nar', tx:'Sobrou a própria respiração.' },
 { t:'pause' },
 { t:'sfx', id:'sfx_candle' },
 { t:'nar', tx:'A segunda vela apagou.' },
 { t:'pause' },
-{ t:'nar', tx:'Ele n\u00e3o se moveu.' },
+{ t:'nar', tx:'Ele não se moveu.' },
 { t:'spr_hide', ch:'matheo' },
 
 /* ======================================================================
@@ -461,11 +461,11 @@ RBF.PROLOGUE = [
 { t:'fade_out' },
 { t:'bgm', id:null },
 { t:'nar', tx:'Cinco anos antes daquela noite, uma mulher de vinte anos abriu a janela de uma carruagem e deixou aberta.', if:{ relendo:true } },
-{ t:'nar', tx:'Ela achou bonito e anotou que tinha achado, porque impress\u00e3o de chegada muda em tr\u00eas semanas e ningu\u00e9m lembra qual era.', if:{ relendo:true } },
+{ t:'nar', tx:'Ela achou bonito e anotou que tinha achado, porque impressão de chegada muda em três semanas e ninguém lembra qual era.', if:{ relendo:true } },
 { t:'pause', if:{ relendo:true } },
 { t:'title',
   main:'ARQUIVO RABENFELS',
-  sub:'"O conhecimento n\u00e3o foi suficiente. Mas \u00e9 o que fica."',
+  sub:'"O conhecimento não foi suficiente. Mas é o que fica."',
   time:'Cinco anos antes.' },
 { t:'fade_out' }
 

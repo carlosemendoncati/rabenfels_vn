@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Rabenfels - planta ao vivo</title>
+<!--
+  ==========================================================================
+  ARQUIVO RABENFELS - tools/planta.html
+
+  Editor de planta do percurso, ao vivo.
+
+  Carrega o manifesto e os mapas DE VERDADE (js/config.js e
+  js/data/cob_mapas.js) e desenha a sala com a mesma regra do motor:
+  movel ancorado no rodape, pela largura pelo meio, escalado por
+  `escala`; personagem recortado da folha por `fw`/`fh`, linha por
+  direcao.
+
+  Nao e o jogo. E uma bancada: sem luz, sem camera, sem colisao. A luz
+  do percurso deixa a sala a 10% de brilho, que e o certo para jogar e
+  impossivel para medir - por isso aqui ela nasce desligada, com botao
+  para conferir como fica no escuro.
+
+  O que sai daqui e um JSON de alteracoes, aplicado por
+  tools/planta_aplica.py. Este arquivo NAO escreve no jogo.
+
+    python -m http.server 8000        (ou qualquer servidor)
+    http://localhost:8000/tools/planta.html
+
+  Serve por http porque file:// impede ler o canvas e carregar as
+  folhas em algumas maquinas. O jogo continua abrindo por file://.
+  ==========================================================================
+-->
+<style>
+  :root {
+    --fundo:   #14100f;
+    --painel:  #1c1715;
+    --linha:   #2e2622;
+    --tinta:   #d8cdc2;
+    --fraco:   #8a7c70;
+    --ouro:    #c8a878;
+    --rubro:   #8c2733;
+    --verde:   #6f8c5a;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: flex; font: 13px/1.5 system-ui, sans-serif;
+    background: var(--fundo); color: var(--tinta);
+  }
+
+  /* ---- palco ---- */
+  #palco { flex: 1 1 auto; position: relative; overflow: hidden; }
+  #cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #dica {
+    position: absolute; left: 12px; bottom: 10px; z-index: 3;
+    font-size: 11px; color: var(--fraco); pointer-events: none;
+    text-shadow: 0 1px 4px #000;
+  }
+
+  /* ---- painel ---- */
+  #lado {
+    flex: 0 0 320px; overflow-y: auto; padding: 14px;
+    background: var(--painel); border-left: 1px solid var(--linha);
+  }
+  h1 { margin: 0 0 12px; font-size: 14px; letter-spacing: .14em;
+       text-transform: uppercase; color: var(--ouro); font-weight: 600; }
+  h2 { margin: 18px 0 6px; font-size: 11px; letter-spacing: .12em;
+       text-transform: uppercase; color: var(--fraco); font-weight: 600; }
+  label { display: block; margin: 6px 0 2px; font-size: 11px; color: var(--fraco); }
+  select, input[type=text], input[type=number] {
+    width: 100%; padding: 5px 7px; font: inherit;
+    color: var(--tinta); background: #241d1a;
+    border: 1px solid var(--linha); border-radius: 2px;
+  }
+  input[type=range] { width: 100%; }
+  button {
+    padding: 6px 10px; font: inherit; cursor: pointer;
+    color: var(--tinta); background: #2a2320;
+    border: 1px solid var(--linha); border-radius: 2px;
+  }
+  button:hover { border-color: var(--ouro); }
+  button.forte { background: var(--ouro); color: #17120f; border-color: var(--ouro); }
+  .linha { display: flex; gap: 6px; align-items: center; }
+  .linha > * { flex: 1 1 auto; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .chip {
+    padding: 3px 7px; font-size: 11px; cursor: pointer;
+    border: 1px solid var(--linha); border-radius: 2px; background: #241d1a;
+  }
+  .chip.on { border-color: var(--ouro); color: var(--ouro); }
+  #lista { max-height: 260px; overflow-y: auto; margin-top: 6px;
+           border: 1px solid var(--linha); border-radius: 2px; }
+  .item { padding: 4px 8px; font-size: 12px; cursor: pointer;
+          border-bottom: 1px solid #241d1a; }
+  .item:hover { background: #241d1a; }
+  .item.sel { background: #2f2622; color: var(--ouro); }
+  .item .tag { float: right; font-size: 10px; color: var(--fraco); }
+  #saida { width: 100%; height: 150px; font: 11px/1.4 ui-monospace, monospace;
+           color: var(--tinta); background: #100c0b;
+           border: 1px solid var(--linha); border-radius: 2px; padding: 6px;
+           white-space: pre; }
+  .aviso { margin-top: 8px; font-size: 11px; color: var(--fraco); }
+  .mud { color: var(--verde); }
+</style>
+</head>
+<body>
+
+<div id="palco">
+  <canvas id="cv"></canvas>
+  <div id="dica">
+    arrastar move &middot; setas 1px &middot; shift+setas 10px &middot;
+    <b>[ ]</b> escala &middot; <b>, .</b> giro &middot; <b>&lt; &gt;</b> camada &middot;
+    <b>+ -</b> tamanho da sa&iacute;da (alt: altura) &middot;
+    <b>Del</b> remove &middot; roda: zoom &middot; espa&ccedil;o+arrastar: pan
+  </div>
+</div>
+
+<div id="lado">
+  <h1>Planta ao vivo</h1>
+
+  <label for="sala">Sala</label>
+  <select id="sala"></select>
+
+  <div class="linha" style="margin-top:8px">
+    <div>
+      <label for="cena">Cena</label>
+      <select id="cena">
+        <option value="cob">cob (Cap. 10)</option>
+        <option value="c3">c3 (Cap. 3)</option>
+      </select>
+    </div>
+    <div>
+      <label for="fase">Fase</label>
+      <select id="fase">
+        <option value="0">0 &mdash; antes</option>
+        <option value="1">1 &mdash; depois</option>
+      </select>
+    </div>
+  </div>
+
+  <h2>Camadas</h2>
+  <div class="chips" id="camadas"></div>
+
+  <h2>Acrescentar</h2>
+  <label for="filtro">Assets do manifesto</label>
+  <input type="text" id="filtro" placeholder="filtrar por nome...">
+  <div class="chips" id="paleta" style="max-height:150px;overflow-y:auto"></div>
+  <div class="linha" style="margin-top:6px">
+    <button id="novaSaida">+ saida</button>
+    <button id="novoPonto">+ ponto</button>
+  </div>
+
+  <h2>Objetos da sala</h2>
+  <div id="lista"></div>
+
+  <h2>Selecionado</h2>
+  <div id="campos"></div>
+
+  <h2>Altera&ccedil;&otilde;es</h2>
+  <div class="linha">
+    <button id="copiar" class="forte">Copiar JSON</button>
+    <button id="zerar">Descartar</button>
+  </div>
+  <textarea id="saida" readonly spellcheck="false"></textarea>
+  <div class="aviso">
+    Salve como <code>tools/planta_alteracoes.json</code> e rode
+    <code>python tools/planta_aplica.py</code>.
+  </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/data/cob_mapas.js"></script>
+<script>
+'use strict';
+(function () {
+
+  var C = RBF.COBERTURA;
+  var MAPAS = RBF.COB_MAPAS;
+  var LADOS = { baixo: 0, esquerda: 1, direita: 2, cima: 3 };
+
+  /* ---- estado da bancada ------------------------------------------------ */
+
+  var vista = { sala: Object.keys(MAPAS)[0], cena: 'cob', fase: 0,
+                zoom: 1, px: 0, py: 0, luz: false };
+  var camadas = { moveis: true, pontos: true, saidas: true, gente: true,
+                  piso: true, caixas: true, regua: true };
+  var sel = null;              /* { grupo, i } */
+  var marcando = null;         /* { sala, grupo, i } enquanto marca chegada */
+  var mud = {};                /* alteracoes de campo, por sala e grupo */
+  var mudProps = {};           /* escala e giro no manifesto */
+  var novos = {};              /* objetos criados: sala -> grupo -> [] */
+  var mortos = {};             /* removidos: sala -> grupo -> {i:true} */
+
+  var cv = document.getElementById('cv');
+  var ctx = cv.getContext('2d');
+  var imgs = {};
+
+  /* ---- assets ------------------------------------------------------------ */
+
+  function img(url) {
+    if (imgs[url] !== undefined) { return imgs[url] || null; }
+    var el = new Image();
+    imgs[url] = null;
+    el.onload = function () { imgs[url] = el; desenha(); };
+    el.onerror = function () { imgs[url] = false; };
+    el.src = url;
+    return null;
+  }
+  function base(p) { return '../' + p; }
+  function imgMapa(id)  { var d = C.maps[id];   return d && d.available ? img(base(RBF.CONFIG.paths.cobMaps)  + d.file) : null; }
+  function imgProp(id)  { var d = C.props[id];  return d && d.available ? img(base(RBF.CONFIG.paths.cobProps) + d.file) : null; }
+  function imgChar(id)  { var d = C.chars[id];  return d && d.available ? img(base(RBF.CONFIG.paths.cobChars) + d.file) : null; }
+
+  /* ---- leitura da sala, com as alteracoes por cima ----------------------- */
+
+  function sala() { return MAPAS[vista.sala]; }
+
+  function naFase(o) {
+    if (!o || o.fase === undefined || o.fase === null) { return true; }
+    if (o.fase === 0) { return vista.fase === 0; }
+    return vista.fase >= o.fase;
+  }
+  /* Mesma regra do motor: `pontos` e `saidas` sao por cena, `moveis` e
+     `gente` sao da casa. Sem `cenas` pertence a 'cob'. */
+  function naCena(o, grupo) {
+    if (grupo !== 'pontos' && grupo !== 'saidas') { return true; }
+    var cs = o.cenas || ['cob'];
+    return cs.indexOf(vista.cena) >= 0;
+  }
+
+  function morto(grupo, i) {
+    return !!(mortos[vista.sala] && mortos[vista.sala][grupo]
+              && mortos[vista.sala][grupo][i]);
+  }
+
+  function criados(grupo) {
+    return (novos[vista.sala] && novos[vista.sala][grupo]) || [];
+  }
+
+  /* Os objetos que a sala mostra agora: os do arquivo, menos os
+     removidos, mais os criados nesta sessao. O criado recebe indice
+     negativo - -1, -2, ... - para nunca colidir com o indice de arquivo
+     e para o resto do codigo nao precisar saber a diferenca. */
+  function lista(grupo) {
+    var s = sala();
+    var arr = s[grupo] || [];
+    var out = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (morto(grupo, i)) { continue; }
+      if (naFase(arr[i]) && naCena(arr[i], grupo)) { out.push({ o: arr[i], i: i }); }
+    }
+    var nv = criados(grupo);
+    for (var k = 0; k < nv.length; k++) {
+      if (naFase(nv[k]) && naCena(nv[k], grupo)) { out.push({ o: nv[k], i: -(k + 1) }); }
+    }
+    return out;
+  }
+
+  /* O objeto por indice, seja do arquivo ou criado agora. */
+  function obj(grupo, i) {
+    if (i < 0) { return criados(grupo)[-i - 1]; }
+    return sala()[grupo][i];
+  }
+
+  /* O valor corrente de um campo: o alterado, se houver; senao o do mapa. */
+  function val(grupo, i, campo) {
+    var m = mud[vista.sala] && mud[vista.sala][grupo] && mud[vista.sala][grupo][i];
+    if (m && m[campo] !== undefined) { return m[campo]; }
+    var o = obj(grupo, i);
+    if (!o) { return undefined; }
+    if (grupo === 'moveis' && campo === 'escala') { return escalaDe(o); }
+    if (grupo === 'moveis' && campo === 'giro')   { return giroDe(o); }
+    return o[campo];
+  }
+  function poe(grupo, i, campo, v) {
+    /* Objeto criado nesta sessao guarda a mudanca em si mesmo: ele sai
+       inteiro no ramo `novos`, e o aplicador nao teria indice -1 para
+       achar se a mudanca fosse para `mud`. */
+    if (i < 0) {
+      var alvo = obj(grupo, i);
+      if (alvo) { alvo[campo] = v; }
+      pintaSaida();
+      return;
+    }
+    mud[vista.sala] = mud[vista.sala] || {};
+    mud[vista.sala][grupo] = mud[vista.sala][grupo] || {};
+    mud[vista.sala][grupo][i] = mud[vista.sala][grupo][i] || {};
+    mud[vista.sala][grupo][i][campo] = v;
+    pintaSaida();
+  }
+
+  function giroDe(m) {
+    if (m.giro !== undefined) { return m.giro; }
+    var d = C.props[m.tipo];
+    if (mudProps[m.tipo] && mudProps[m.tipo].giro !== undefined) {
+      return mudProps[m.tipo].giro;
+    }
+    return (d && d.giro !== undefined) ? d.giro : 0;
+  }
+
+  function escalaDe(m) {
+    if (m.escala !== undefined) { return m.escala; }
+    var d = C.props[m.tipo];
+    if (mudProps[m.tipo] && mudProps[m.tipo].escala !== undefined) {
+      return mudProps[m.tipo].escala;
+    }
+    return (d && d.escala !== undefined) ? d.escala : 1;
+  }
+
+  /* ---- desenho ----------------------------------------------------------- */
+
+  function ajusta() {
+    var r = cv.parentNode.getBoundingClientRect();
+    cv.width = Math.round(r.width);
+    cv.height = Math.round(r.height);
+  }
+
+  function tela(x, y) {
+    return { x: (x - vista.px) * vista.zoom, y: (y - vista.py) * vista.zoom };
+  }
+  function mundo(x, y) {
+    return { x: x / vista.zoom + vista.px, y: y / vista.zoom + vista.py };
+  }
+
+  var enquadrada = {};   /* sala -> ja foi medida com a arte carregada */
+
+  function desenha() {
+    var s = sala();
+
+    /* A arte chega depois do primeiro quadro. Enquadrar por cronometro e
+       adivinhar: numa sala grande a medida ainda sai do fallback e a
+       sala aparece cortada. Enquadra no quadro em que a imagem existe. */
+    if (!enquadrada[vista.sala]) {
+      var pronto = imgMapa(s.mapa);
+      if (pronto && pronto.naturalWidth) {
+        enquadrada[vista.sala] = true;
+        enquadra();
+        return;
+      }
+    }
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = '#0a0807';
+    ctx.fillRect(0, 0, cv.width, cv.height);
+
+    ctx.save();
+    ctx.scale(vista.zoom, vista.zoom);
+    ctx.translate(-vista.px, -vista.py);
+    ctx.imageSmoothingEnabled = false;
+
+    var mapa = imgMapa(s.mapa);
+    if (mapa) { ctx.drawImage(mapa, 0, 0); }
+    else {
+      ctx.fillStyle = '#241d1a';
+      ctx.fillRect(0, 0, s.w || 1280, s.h || 720);
+    }
+
+    if (vista.luz) {
+      ctx.fillStyle = 'rgba(0,0,0,.86)';
+      ctx.fillRect(0, 0, (mapa ? mapa.naturalWidth : 1280),
+                         (mapa ? mapa.naturalHeight : 720));
+    }
+
+    /* Tudo o que fica no chao, na ordem de profundidade do motor. */
+    var pecas = [];
+    if (camadas.moveis) {
+      lista('moveis').forEach(function (e) { pecas.push({ t: 'movel', e: e }); });
+    }
+    if (camadas.gente) {
+      lista('gente').forEach(function (e) { pecas.push({ t: 'gente', e: e }); });
+    }
+    /* Camada primeiro, `y` depois - a mesma regra do motor. Se esta
+       ordem divergir da de js/rpg.js, a bancada passa a mentir. */
+    function grupoDe(p) { return p.t === 'movel' ? 'moveis' : 'gente'; }
+    function camadaDe(p) { return Number(val(grupoDe(p), p.e.i, 'camada')) || 0; }
+    pecas.sort(function (a, b) {
+      var ca = camadaDe(a), cb = camadaDe(b);
+      if (ca !== cb) { return ca - cb; }
+      return val(grupoDe(a), a.e.i, 'y') - val(grupoDe(b), b.e.i, 'y');
+    });
+    pecas.forEach(function (p) {
+      if (p.t === 'movel') { pintaMovel(p.e); } else { pintaGente(p.e); }
+    });
+
+    if (camadas.piso)   { pintaPiso(s); }
+    if (camadas.caixas) { pintaCaixas(); }
+    if (camadas.saidas) { lista('saidas').forEach(pintaSaida1); }
+    if (camadas.pontos) { lista('pontos').forEach(pintaPonto); }
+    if (camadas.saidas) { pintaChegadas(); }
+    if (camadas.regua)  { pintaRegua(s); }
+
+    pintaSelecao();
+    ctx.restore();
+  }
+
+  function pintaMovel(e) {
+    var m = e.o;
+    var im = imgProp(m.tipo);
+    var x = val('moveis', e.i, 'x'), y = val('moveis', e.i, 'y');
+    var esc = val('moveis', e.i, 'escala');
+    if (im) {
+      var w = im.naturalWidth * esc, h = im.naturalHeight * esc;
+      var g = val('moveis', e.i, 'giro') || 0;
+      if (g % 360 !== 0) {
+        /* Mesma ancora do motor: rodape, meio da largura. */
+        ctx.save();
+        ctx.translate(Math.round(x), Math.round(y));
+        ctx.rotate(g * Math.PI / 180);
+        ctx.drawImage(im, Math.round(-w / 2), Math.round(-h),
+                      Math.round(w), Math.round(h));
+        ctx.restore();
+      } else {
+        ctx.drawImage(im, Math.round(x - w / 2), Math.round(y - h),
+                      Math.round(w), Math.round(h));
+      }
+    } else {
+      ctx.fillStyle = 'rgba(58,46,42,.95)';
+      ctx.fillRect(x - 48, y - 96, 96, 96);
+    }
+  }
+
+  function pintaGente(e) {
+    var g = e.o;
+    var d = C.chars[g.ch];
+    var im = imgChar(g.ch);
+    var x = val('gente', e.i, 'x'), y = val('gente', e.i, 'y');
+    var fw = d ? d.fw : 48, fh = d ? d.fh : 72;
+    if (im) {
+      var lin = LADOS[g.dir] === undefined ? 0 : LADOS[g.dir];
+      ctx.drawImage(im, 1 * fw, lin * fh, fw, fh,
+                    Math.round(x - fw / 2), Math.round(y - fh), fw, fh);
+    } else {
+      ctx.fillStyle = (d && d.cor) || '#4a3038';
+      ctx.fillRect(x - fw / 4, y - fh, fw / 2, fh);
+    }
+  }
+
+  function pintaPiso(s) {
+    if (!s.piso) { return; }
+    ctx.strokeStyle = 'rgba(111,140,90,.9)';
+    ctx.lineWidth = 2 / vista.zoom;
+    ctx.strokeRect(s.piso[0], s.piso[1],
+                   s.piso[2] - s.piso[0], s.piso[3] - s.piso[1]);
+  }
+
+  function pintaCaixas() {
+    lista('moveis').forEach(function (e) {
+      var m = e.o;
+      var im = imgProp(m.tipo);
+      if (!im) { return; }
+      var esc = val('moveis', e.i, 'escala');
+      var x = val('moveis', e.i, 'x'), y = val('moveis', e.i, 'y');
+      var d = C.props[m.tipo];
+      var b = (m.base !== undefined) ? m.base : (d ? d.base : 1);
+      if (b === undefined) { b = 1; }
+      var w = im.naturalWidth * esc, h = im.naturalHeight * esc;
+      /* Envolvente do retangulo girado, igual ao motor. */
+      var g = val('moveis', e.i, 'giro') || 0;
+      if (g % 360 !== 0) {
+        var rad = g * Math.PI / 180;
+        var cs = Math.abs(Math.cos(rad)), sn = Math.abs(Math.sin(rad));
+        var lw = w * cs + h * sn, lh = w * sn + h * cs;
+        w = lw; h = lh;
+      }
+      var hb = Math.max(8, h * b);
+      ctx.strokeStyle = m.atravessa ? 'rgba(140,39,51,.5)' : 'rgba(200,168,120,.75)';
+      ctx.lineWidth = 1 / vista.zoom;
+      ctx.strokeRect(x - w / 2, y - hb, w, hb);
+    });
+  }
+
+  function pintaSaida1(e) {
+    var o = e.o;
+    var x = val('saidas', e.i, 'x'), y = val('saidas', e.i, 'y');
+    ctx.strokeStyle = o.encerra ? 'rgba(200,168,120,.95)' : 'rgba(90,140,190,.85)';
+    ctx.lineWidth = 2 / vista.zoom;
+    ctx.strokeRect(x, y, o.w, o.h);
+    rotulo(x + o.w / 2, y - 4, o.encerra ? ('fim: ' + o.encerra) : ('-> ' + o.para));
+  }
+
+  function pintaPonto(e) {
+    var o = e.o;
+    var x = val('pontos', e.i, 'x'), y = val('pontos', e.i, 'y');
+    var r = o.raio || 56;
+    ctx.strokeStyle = 'rgba(200,168,120,.55)';
+    ctx.lineWidth = 1 / vista.zoom;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = 'rgba(200,168,120,.9)';
+    ctx.beginPath(); ctx.arc(x, y, 4 / vista.zoom, 0, Math.PI * 2); ctx.fill();
+    rotulo(x, y - r - 4, o.id);
+  }
+
+  /* Toda chegada que aponta para a sala aberta agora, venha de onde
+     vier. E o que responde "de onde se entra aqui" sem abrir sala por
+     sala - e o que mostra, na hora, uma chegada dentro da parede. */
+  function pintaChegadas() {
+    Object.keys(MAPAS).forEach(function (idOrigem) {
+      var sd = MAPAS[idOrigem].saidas || [];
+      for (var k = 0; k < sd.length; k++) {
+        var o = sd[k];
+        if (o.para !== vista.sala) { continue; }
+        var m = mud[idOrigem] && mud[idOrigem].saidas && mud[idOrigem].saidas[k];
+        var px = (m && m.px !== undefined) ? m.px : o.px;
+        var py = (m && m.py !== undefined) ? m.py : o.py;
+        if (px === undefined || py === undefined) { continue; }
+        ctx.strokeStyle = 'rgba(90,140,190,.9)';
+        ctx.lineWidth = 2 / vista.zoom;
+        ctx.beginPath();
+        ctx.moveTo(px - 14 / vista.zoom, py);
+        ctx.lineTo(px + 14 / vista.zoom, py);
+        ctx.moveTo(px, py - 14 / vista.zoom);
+        ctx.lineTo(px, py + 14 / vista.zoom);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(px, py, 9 / vista.zoom, 0, Math.PI * 2);
+        ctx.stroke();
+        rotulo(px, py - 16 / vista.zoom, 'entra de ' + idOrigem);
+      }
+    });
+  }
+
+  /* Uma figura de referencia. Escala se julga contra uma pessoa, e nao
+     contra o proprio movel. */
+  function pintaRegua(s) {
+    var d = C.chars.antoniette;
+    var im = imgChar('antoniette');
+    var p = s.piso || [40, 40, 400, 400];
+    var x = p[0] + 60, y = p[3] - 20;
+    if (im && d) {
+      ctx.globalAlpha = 0.85;
+      ctx.drawImage(im, 1 * d.fw, 0, d.fw, d.fh,
+                    Math.round(x - d.fw / 2), Math.round(y - d.fh), d.fw, d.fh);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = 'rgba(111,140,90,.8)';
+      ctx.lineWidth = 1 / vista.zoom;
+      ctx.beginPath();
+      ctx.moveTo(x - d.fw, y); ctx.lineTo(x + d.fw, y);
+      ctx.moveTo(x - d.fw, y - d.fh); ctx.lineTo(x + d.fw, y - d.fh);
+      ctx.stroke();
+      rotulo(x, y - d.fh - 6, 'referência: ' + d.fh + 'px');
+    }
+  }
+
+  function rotulo(x, y, txt) {
+    if (!txt) { return; }
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    var t = tela(x, y);
+    ctx.font = '11px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(0,0,0,.75)';
+    var w = ctx.measureText(txt).width + 8;
+    ctx.fillRect(t.x - w / 2, t.y - 13, w, 14);
+    ctx.fillStyle = '#d8cdc2';
+    ctx.fillText(txt, t.x, t.y - 3);
+    ctx.restore();
+  }
+
+  function pintaSelecao() {
+    if (!sel) { return; }
+    var x = val(sel.grupo, sel.i, 'x'), y = val(sel.grupo, sel.i, 'y');
+    ctx.strokeStyle = 'rgba(200,168,120,1)';
+    ctx.lineWidth = 2 / vista.zoom;
+    ctx.setLineDash([6 / vista.zoom, 4 / vista.zoom]);
+    ctx.beginPath(); ctx.arc(x, y, 22 / vista.zoom, 0, Math.PI * 2); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(x - 30 / vista.zoom, y); ctx.lineTo(x + 30 / vista.zoom, y);
+    ctx.moveTo(x, y - 30 / vista.zoom); ctx.lineTo(x, y + 30 / vista.zoom);
+    ctx.stroke();
+  }
+
+  /* ---- acerto (hit) ------------------------------------------------------ */
+
+  function acha(mx, my) {
+    var ordem = ['pontos', 'saidas', 'gente', 'moveis'];
+    for (var k = 0; k < ordem.length; k++) {
+      var grupo = ordem[k];
+      if (!camadas[grupo]) { continue; }
+      var itens = lista(grupo);
+      for (var i = itens.length - 1; i >= 0; i--) {
+        var e = itens[i];
+        var x = val(grupo, e.i, 'x'), y = val(grupo, e.i, 'y');
+        if (grupo === 'saidas') {
+          if (mx >= x && mx <= x + e.o.w && my >= y && my <= y + e.o.h) {
+            return { grupo: grupo, i: e.i };
+          }
+          continue;
+        }
+        if (grupo === 'moveis') {
+          var im = imgProp(e.o.tipo);
+          var esc = val('moveis', e.i, 'escala');
+          var w = (im ? im.naturalWidth : 96) * esc;
+          var h = (im ? im.naturalHeight : 96) * esc;
+          if (mx >= x - w / 2 && mx <= x + w / 2 && my >= y - h && my <= y) {
+            return { grupo: grupo, i: e.i };
+          }
+          continue;
+        }
+        var d = Math.hypot(mx - x, my - y);
+        if (d < (grupo === 'gente' ? 46 : 26)) { return { grupo: grupo, i: e.i }; }
+      }
+    }
+    return null;
+  }
+
+  /* ---- interacao --------------------------------------------------------- */
+
+  var arrastando = false, panindo = false, espaco = false, ult = null;
+
+  cv.addEventListener('mousedown', function (ev) {
+    var r = cv.getBoundingClientRect();
+    var p = mundo(ev.clientX - r.left, ev.clientY - r.top);
+    ult = { x: ev.clientX, y: ev.clientY };
+
+    /* Marcando chegada: este clique nao seleciona nada, ele grava. */
+    if (marcando) {
+      var alvo = marcando;
+      marcando = null;
+      cv.style.cursor = '';
+      var chave = alvo.sala;
+      mud[chave] = mud[chave] || {};
+      mud[chave].saidas = mud[chave].saidas || {};
+      mud[chave].saidas[alvo.i] = mud[chave].saidas[alvo.i] || {};
+      mud[chave].saidas[alvo.i].px = Math.round(p.x);
+      mud[chave].saidas[alvo.i].py = Math.round(p.y);
+      pintaSaida(); pintaCampos(); desenha();
+      return;
+    }
+
+    if (espaco || ev.button === 1) { panindo = true; return; }
+    sel = acha(p.x, p.y);
+    arrastando = !!sel;
+    pintaLista(); pintaCampos(); desenha();
+  });
+
+  window.addEventListener('mousemove', function (ev) {
+    if (!ult) { return; }
+    var dx = (ev.clientX - ult.x) / vista.zoom;
+    var dy = (ev.clientY - ult.y) / vista.zoom;
+    if (panindo) {
+      vista.px -= dx; vista.py -= dy;
+      ult = { x: ev.clientX, y: ev.clientY };
+      desenha(); return;
+    }
+    if (!arrastando || !sel) { return; }
+    poe(sel.grupo, sel.i, 'x', Math.round(val(sel.grupo, sel.i, 'x') + dx));
+    poe(sel.grupo, sel.i, 'y', Math.round(val(sel.grupo, sel.i, 'y') + dy));
+    ult = { x: ev.clientX, y: ev.clientY };
+    pintaCampos(); desenha();
+  });
+
+  window.addEventListener('mouseup', function () {
+    arrastando = false; panindo = false; ult = null;
+  });
+
+  cv.addEventListener('wheel', function (ev) {
+    ev.preventDefault();
+    var r = cv.getBoundingClientRect();
+    var antes = mundo(ev.clientX - r.left, ev.clientY - r.top);
+    vista.zoom *= (ev.deltaY < 0 ? 1.12 : 1 / 1.12);
+    vista.zoom = Math.min(4, Math.max(0.12, vista.zoom));
+    var depois = mundo(ev.clientX - r.left, ev.clientY - r.top);
+    vista.px += antes.x - depois.x;
+    vista.py += antes.y - depois.y;
+    desenha();
+  }, { passive: false });
+
+  window.addEventListener('keydown', function (ev) {
+    if (ev.target.tagName === 'INPUT' || ev.target.tagName === 'SELECT') { return; }
+    if (ev.key === 'Escape' && marcando) {
+      marcando = null;
+      cv.style.cursor = '';
+      pintaCampos();
+      return;
+    }
+    if (ev.code === 'Space') { espaco = true; ev.preventDefault(); return; }
+    if (!sel) { return; }
+    var passo = ev.shiftKey ? 10 : 1;
+    var eixo = null, d = 0;
+    if (ev.key === 'ArrowLeft')  { eixo = 'x'; d = -passo; }
+    if (ev.key === 'ArrowRight') { eixo = 'x'; d =  passo; }
+    if (ev.key === 'ArrowUp')    { eixo = 'y'; d = -passo; }
+    if (ev.key === 'ArrowDown')  { eixo = 'y'; d =  passo; }
+    if (eixo) {
+      ev.preventDefault();
+      poe(sel.grupo, sel.i, eixo, val(sel.grupo, sel.i, eixo) + d);
+      pintaCampos(); desenha(); return;
+    }
+    if (sel.grupo === 'moveis' && (ev.key === '[' || ev.key === ']')) {
+      ev.preventDefault();
+      var e = val('moveis', sel.i, 'escala');
+      e = Math.round((e + (ev.key === ']' ? 0.05 : -0.05)) * 100) / 100;
+      poe('moveis', sel.i, 'escala', Math.max(0.1, e));
+      pintaCampos(); desenha();
+      return;
+    }
+    if ((sel.grupo === 'moveis' || sel.grupo === 'gente') &&
+        (ev.key === '<' || ev.key === '>')) {
+      ev.preventDefault();
+      var cam = (val(sel.grupo, sel.i, 'camada') || 0) + (ev.key === '>' ? 1 : -1);
+      poe(sel.grupo, sel.i, 'camada', cam);
+      pintaCampos(); desenha();
+      return;
+    }
+    if (sel.grupo === 'moveis' && (ev.key === ',' || ev.key === '.')) {
+      ev.preventDefault();
+      var g = (val('moveis', sel.i, 'giro') || 0) + (ev.key === '.' ? 5 : -5);
+      poe('moveis', sel.i, 'giro', ((g % 360) + 360) % 360);
+      pintaCampos(); desenha();
+      return;
+    }
+    /* Saida se redimensiona pelo teclado: nao ha alca, e o retangulo
+       precisa caber no vao pintado na arte. */
+    if (sel.grupo === 'saidas' && (ev.key === '+' || ev.key === '-' ||
+        ev.key === '=' || ev.key === '_')) {
+      ev.preventDefault();
+      var d = (ev.key === '+' || ev.key === '=') ? 4 : -4;
+      var campo = ev.altKey ? 'h' : 'w';
+      poe('saidas', sel.i, campo, Math.max(8, (val('saidas', sel.i, campo) || 60) + d));
+      pintaCampos(); desenha();
+      return;
+    }
+    if (ev.key === 'Delete' || ev.key === 'Backspace') {
+      ev.preventDefault();
+      remove(sel.grupo, sel.i);
+    }
+  });
+  window.addEventListener('keyup', function (ev) {
+    if (ev.code === 'Space') { espaco = false; }
+  });
+
+  /* ---- criar e remover --------------------------------------------------- */
+
+  function remove(grupo, i) {
+    if (i < 0) {
+      /* Criado nesta sessao: some sem deixar registro. */
+      criados(grupo).splice(-i - 1, 1);
+    } else {
+      mortos[vista.sala] = mortos[vista.sala] || {};
+      mortos[vista.sala][grupo] = mortos[vista.sala][grupo] || {};
+      mortos[vista.sala][grupo][i] = true;
+    }
+    sel = null;
+    pintaSaida(); pintaCampos(); desenha();
+  }
+
+  /* Nasce no meio do que esta em cena, para o primeiro arrasto ser
+     curto. Sem `fase` nem `cenas`: quem cria decide depois, no painel. */
+  function centro() {
+    var s = sala();
+    var p = s.piso || [0, 0, 800, 600];
+    return { x: Math.round((p[0] + p[2]) / 2),
+             y: Math.round((p[1] + p[3]) / 2) };
+  }
+
+  function cria(grupo, molde) {
+    var c = centro();
+    var o = { x: c.x, y: c.y };
+    for (var k in molde) { o[k] = molde[k]; }
+    novos[vista.sala] = novos[vista.sala] || {};
+    novos[vista.sala][grupo] = novos[vista.sala][grupo] || [];
+    novos[vista.sala][grupo].push(o);
+    sel = { grupo: grupo, i: -novos[vista.sala][grupo].length };
+    pintaSaida(); pintaLista(); pintaCampos(); desenha();
+  }
+
+  /* ---- painel ------------------------------------------------------------ */
+
+  /* A paleta: tudo o que o manifesto declara como disponivel. Serve
+     para dois trabalhos - acrescentar na sala, e ver de uma vez o que
+     existe sem abrir a pasta de assets. */
+  function pintaPaleta() {
+    var el = document.getElementById('paleta');
+    var f = (document.getElementById('filtro').value || '').toLowerCase();
+    el.innerHTML = '';
+    function bloco(rot, mapa, grupo, molde) {
+      var chaves = Object.keys(mapa).filter(function (k) {
+        return mapa[k].available !== false && k.toLowerCase().indexOf(f) >= 0;
+      });
+      if (!chaves.length) { return; }
+      var t = document.createElement('div');
+      t.style.cssText = 'width:100%;font-size:10px;color:#8a7c70;margin:4px 0 2px';
+      t.textContent = rot + ' (' + chaves.length + ')';
+      el.appendChild(t);
+      chaves.forEach(function (k) {
+        var b = document.createElement('span');
+        b.className = 'chip';
+        b.textContent = k;
+        b.title = 'acrescentar ' + k + ' nesta sala';
+        b.onclick = function () { cria(grupo, molde(k)); };
+        el.appendChild(b);
+      });
+    }
+    bloco('moveis', C.props, 'moveis', function (k) { return { tipo: k }; });
+    bloco('pessoas', C.chars, 'gente', function (k) {
+      return { ch: k, dir: 'baixo', parado: true };
+    });
+  }
+
+  function pintaCamadas() {
+    var el = document.getElementById('camadas');
+    el.innerHTML = '';
+    Object.keys(camadas).forEach(function (k) {
+      var b = document.createElement('span');
+      b.className = 'chip' + (camadas[k] ? ' on' : '');
+      b.textContent = k;
+      b.onclick = function () { camadas[k] = !camadas[k]; pintaCamadas(); desenha(); };
+      el.appendChild(b);
+    });
+    var l = document.createElement('span');
+    l.className = 'chip' + (vista.luz ? ' on' : '');
+    l.textContent = 'escuro real';
+    l.onclick = function () { vista.luz = !vista.luz; pintaCamadas(); desenha(); };
+    el.appendChild(l);
+  }
+
+  function pintaLista() {
+    var el = document.getElementById('lista');
+    el.innerHTML = '';
+    ['moveis', 'gente', 'pontos', 'saidas'].forEach(function (grupo) {
+      lista(grupo).forEach(function (e) {
+        var d = document.createElement('div');
+        var nome = e.o.id || e.o.tipo || e.o.ch ||
+                   (e.o.encerra ? 'fim:' + e.o.encerra : '-> ' + e.o.para);
+        d.className = 'item' + (sel && sel.grupo === grupo && sel.i === e.i ? ' sel' : '');
+        var alterado = mud[vista.sala] && mud[vista.sala][grupo] && mud[vista.sala][grupo][e.i];
+        d.innerHTML = '<span' + (alterado ? ' class="mud"' : '') + '>' + nome +
+                      '</span><span class="tag">' + grupo + '</span>';
+        d.onclick = function () {
+          sel = { grupo: grupo, i: e.i };
+          pintaLista(); pintaCampos(); desenha();
+        };
+        el.appendChild(d);
+      });
+    });
+  }
+
+  function campo(rot, valor, aoMudar, passo) {
+    var wrap = document.createElement('div');
+    var l = document.createElement('label');
+    l.textContent = rot;
+    var inp = document.createElement('input');
+    inp.type = 'number';
+    inp.step = passo || 1;
+    inp.value = valor;
+    inp.oninput = function () {
+      var v = parseFloat(inp.value);
+      if (isFinite(v)) { aoMudar(v); desenha(); }
+    };
+    wrap.appendChild(l); wrap.appendChild(inp);
+    return wrap;
+  }
+
+  function pintaCampos() {
+    var el = document.getElementById('campos');
+    el.innerHTML = '';
+    if (!sel) {
+      el.innerHTML = '<div class="aviso">Clique num objeto do palco ou da lista.</div>';
+      return;
+    }
+    /* Por obj(), e nao pelo array cru: indice negativo e objeto criado
+       nesta sessao, e `sala()[grupo][-1]` devolve undefined. A linha
+       seguinte lancava e derrubava a interacao inteira. */
+    var o = obj(sel.grupo, sel.i);
+    if (!o) {
+      sel = null;
+      el.innerHTML = '<div class="aviso">Objeto sumiu. Selecione outro.</div>';
+      return;
+    }
+    var t = document.createElement('div');
+    t.style.cssText = 'font-size:12px;color:#c8a878;margin-bottom:4px';
+    t.textContent = sel.grupo + '[' + sel.i + ']  ' +
+                    (o.id || o.tipo || o.ch || o.para || o.encerra || '');
+    el.appendChild(t);
+
+    el.appendChild(campo('x', val(sel.grupo, sel.i, 'x'),
+      function (v) { poe(sel.grupo, sel.i, 'x', v); }));
+    el.appendChild(campo('y', val(sel.grupo, sel.i, 'y'),
+      function (v) { poe(sel.grupo, sel.i, 'y', v); }));
+
+    if (sel.grupo === 'moveis') {
+      var im = imgProp(o.tipo);
+      var esc = val('moveis', sel.i, 'escala');
+      el.appendChild(campo('escala (x' + esc + ')', esc,
+        function (v) { poe('moveis', sel.i, 'escala', v); }, 0.05));
+
+      if (im) {
+        var info = document.createElement('div');
+        info.className = 'aviso';
+        var h = Math.round(im.naturalHeight * esc);
+        var pessoa = C.chars.antoniette.fh;
+        info.innerHTML = 'arte: ' + im.naturalWidth + '&times;' + im.naturalHeight +
+          ' &middot; em cena: ' + Math.round(im.naturalWidth * esc) + '&times;' + h +
+          '<br>uma pessoa tem ' + pessoa + 'px &mdash; este objeto tem ' +
+          (h / pessoa).toFixed(2) + '&times; a altura dela';
+        el.appendChild(info);
+      }
+
+      el.appendChild(campo('giro (graus)', val('moveis', sel.i, 'giro') || 0,
+        function (v) { poe('moveis', sel.i, 'giro', ((v % 360) + 360) % 360); }, 5));
+
+      var b = document.createElement('button');
+      b.style.marginTop = '8px';
+      b.textContent = 'Aplicar escala e giro a todo "' + o.tipo + '"';
+      b.onclick = function () {
+        mudProps[o.tipo] = { escala: val('moveis', sel.i, 'escala'),
+                             giro: val('moveis', sel.i, 'giro') || 0 };
+        var m = mud[vista.sala] && mud[vista.sala].moveis
+                && mud[vista.sala].moveis[sel.i];
+        if (m) { delete m.escala; delete m.giro; }
+        pintaSaida(); pintaCampos(); desenha();
+      };
+      el.appendChild(b);
+    }
+
+    /* Camada vale para movel e para gente: os dois entram na mesma fila
+       de profundidade no motor. */
+    if (sel.grupo === 'moveis' || sel.grupo === 'gente') {
+      el.appendChild(campo('camada (0 = normal)',
+        val(sel.grupo, sel.i, 'camada') || 0,
+        function (v) { poe(sel.grupo, sel.i, 'camada', Math.round(v)); }, 1));
+      var ac = document.createElement('div');
+      ac.className = 'aviso';
+      ac.innerHTML = 'Ordena antes do <code>y</code>. Prato sobre a mesa: ' +
+                     'mesa 0, prato 1. Teclas <code>&lt;</code> e <code>&gt;</code>.';
+      el.appendChild(ac);
+    }
+
+    if (sel.grupo === 'saidas') {
+      el.appendChild(campo('largura', val('saidas', sel.i, 'w') || 60,
+        function (v) { poe('saidas', sel.i, 'w', Math.max(8, v)); }, 2));
+      el.appendChild(campo('altura', val('saidas', sel.i, 'h') || 88,
+        function (v) { poe('saidas', sel.i, 'h', Math.max(8, v)); }, 2));
+
+      var d = document.createElement('div');
+      d.innerHTML = '<label>destino</label>';
+      var sd = document.createElement('select');
+      var vazio = document.createElement('option');
+      vazio.value = '';
+      vazio.textContent = '(encerra o trecho)';
+      sd.appendChild(vazio);
+      Object.keys(MAPAS).forEach(function (k) {
+        var op = document.createElement('option');
+        op.value = k;
+        op.textContent = k;
+        sd.appendChild(op);
+      });
+      sd.value = val('saidas', sel.i, 'para') || '';
+      sd.onchange = function () {
+        poe('saidas', sel.i, 'para', sd.value || null);
+        pintaLista(); desenha();
+      };
+      d.appendChild(sd);
+      el.appendChild(d);
+
+      /* A chegada: onde a pessoa aparece na sala de destino. Sem isto
+         a saida leva para o lugar certo e larga a pessoa no numero
+         velho, que costuma ser dentro de uma parede. */
+      var destino = val('saidas', sel.i, 'para');
+      var ch = document.createElement('div');
+      ch.style.marginTop = '8px';
+      var px = val('saidas', sel.i, 'px'), py = val('saidas', sel.i, 'py');
+      ch.innerHTML = '<label>chegada em ' + (destino || '(nenhuma)') + '</label>' +
+        '<div class="aviso" style="margin:0 0 4px">' +
+        (destino ? (px === undefined ? 'nao marcada' : 'x ' + px + ', y ' + py)
+                 : 'esta saida encerra o trecho') + '</div>';
+      if (destino) {
+        var bt = document.createElement('button');
+        bt.style.width = '100%';
+        bt.textContent = 'Marcar chegada em ' + destino;
+        bt.onclick = function () {
+          marcando = { sala: vista.sala, grupo: 'saidas', i: sel.i };
+          vista.sala = destino;
+          document.getElementById('sala').value = destino;
+          enquadrada[destino] = false;
+          cv.style.cursor = 'crosshair';
+          enquadra();
+        };
+        ch.appendChild(bt);
+
+        var dr = document.createElement('div');
+        dr.innerHTML = '<label>virada ao chegar</label>';
+        var sd2 = document.createElement('select');
+        ['baixo', 'cima', 'esquerda', 'direita'].forEach(function (d) {
+          var op = document.createElement('option');
+          op.value = d; op.textContent = d;
+          sd2.appendChild(op);
+        });
+        sd2.value = val('saidas', sel.i, 'dir') || 'baixo';
+        sd2.onchange = function () { poe('saidas', sel.i, 'dir', sd2.value); };
+        dr.appendChild(sd2);
+        ch.appendChild(dr);
+      }
+      el.appendChild(ch);
+
+      var av = document.createElement('div');
+      av.className = 'aviso';
+      av.innerHTML = '<code>+</code> e <code>-</code> mudam a largura; ' +
+                     'com <code>alt</code>, a altura.';
+      el.appendChild(av);
+    }
+
+    if (sel.grupo === 'pontos' && o.raio !== undefined) {
+      el.appendChild(campo('raio de alcance', val('pontos', sel.i, 'raio') || 56,
+        function (v) { poe('pontos', sel.i, 'raio', Math.max(12, v)); }, 4));
+    }
+
+    var rm = document.createElement('button');
+    rm.style.cssText = 'margin-top:10px;width:100%;border-color:#8c2733';
+    rm.textContent = 'Remover  (Delete)';
+    rm.onclick = function () { remove(sel.grupo, sel.i); };
+    el.appendChild(rm);
+  }
+
+  function limpo(fonte) {
+    /* Tira ramos vazios, para o JSON so trazer o que mudou de fato. */
+    var out = {};
+    Object.keys(fonte).forEach(function (sala) {
+      var g = {};
+      Object.keys(fonte[sala]).forEach(function (grupo) {
+        var itens = {};
+        Object.keys(fonte[sala][grupo]).forEach(function (i) {
+          /* Cinto e suspensorio: indice negativo e objeto criado, e ele
+             sai pelo ramo `novos`. Se um chegar aqui e porque algo
+             escapou de poe(), e o aplicador nao saberia o que fazer. */
+          if (Number(i) < 0) { return; }
+          var campos = fonte[sala][grupo][i];
+          if (Object.keys(campos).length) { itens[i] = campos; }
+        });
+        if (Object.keys(itens).length) { g[grupo] = itens; }
+      });
+      if (Object.keys(g).length) { out[sala] = g; }
+    });
+    return out;
+  }
+
+  function pacote() {
+    var p = { props: mudProps, salas: limpo(mud) };
+    /* Novos e removidos saem em ramos proprios: o aplicador precisa
+       inserir e tirar do array, e nao so trocar campo. */
+    var nv = {}, rm = {};
+    Object.keys(novos).forEach(function (sala) {
+      var g = {};
+      Object.keys(novos[sala]).forEach(function (grupo) {
+        if (novos[sala][grupo].length) { g[grupo] = novos[sala][grupo]; }
+      });
+      if (Object.keys(g).length) { nv[sala] = g; }
+    });
+    Object.keys(mortos).forEach(function (sala) {
+      var g = {};
+      Object.keys(mortos[sala]).forEach(function (grupo) {
+        var is = Object.keys(mortos[sala][grupo]).map(Number)
+                   .sort(function (a, b) { return a - b; });
+        if (is.length) { g[grupo] = is; }
+      });
+      if (Object.keys(g).length) { rm[sala] = g; }
+    });
+    if (Object.keys(nv).length) { p.novos = nv; }
+    if (Object.keys(rm).length) { p.removidos = rm; }
+    return p;
+  }
+
+  function pintaSaida() {
+    document.getElementById('saida').value = JSON.stringify(pacote(), null, 2);
+    pintaLista();
+  }
+
+  document.getElementById('copiar').onclick = function () {
+    var ta = document.getElementById('saida');
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    this.textContent = 'Copiado';
+    var b = this;
+    setTimeout(function () { b.textContent = 'Copiar JSON'; }, 1200);
+  };
+  document.getElementById('filtro').oninput = pintaPaleta;
+  document.getElementById('novaSaida').onclick = function () {
+    cria('saidas', { w: 60, h: 88, para: null, encerra: 'saiu' });
+  };
+  document.getElementById('novoPonto').onclick = function () {
+    cria('pontos', { id: 'novo_' + Date.now().toString(36).slice(-4),
+                     raio: 84, alto: 110, uma: true, tx: ['(escrever)'] });
+  };
+  document.getElementById('zerar').onclick = function () {
+    if (!confirm('Descartar todas as alterações?')) { return; }
+    mud = {}; mudProps = {}; novos = {}; mortos = {}; sel = null;
+    pintaSaida(); pintaLista(); pintaCampos(); desenha();
+  };
+
+  /* ---- boot -------------------------------------------------------------- */
+
+  var selSala = document.getElementById('sala');
+  Object.keys(MAPAS).forEach(function (k) {
+    var o = document.createElement('option');
+    o.value = k; o.textContent = k + '  (' + MAPAS[k].nome + ')';
+    selSala.appendChild(o);
+  });
+  selSala.onchange = function () {
+    vista.sala = this.value; sel = null;
+    enquadrada[vista.sala] = false;
+    enquadra();
+  };
+  document.getElementById('cena').onchange = function () {
+    vista.cena = this.value; sel = null; pintaLista(); pintaCampos(); desenha();
+  };
+  document.getElementById('fase').onchange = function () {
+    vista.fase = parseInt(this.value, 10); sel = null; pintaLista(); pintaCampos(); desenha();
+  };
+
+  function enquadra() {
+    var s = sala();
+    var im = imgMapa(s.mapa);
+    var w = im ? im.naturalWidth : (s.w || 1280);
+    var h = im ? im.naturalHeight : (s.h || 720);
+    vista.zoom = Math.min(cv.width / w, cv.height / h) * 0.92;
+    vista.px = (w - cv.width / vista.zoom) / 2;
+    vista.py = (h - cv.height / vista.zoom) / 2;
+    pintaLista(); pintaCampos(); desenha();
+  }
+
+  window.addEventListener('resize', function () {
+    ajusta();
+    enquadrada = {};       /* a janela mudou: reenquadra a sala atual */
+    desenha();
+  });
+  ajusta();
+  pintaCamadas();
+  pintaPaleta();
+  pintaSaida();
+  enquadra();
+
+})();
+</script>
+</body>
+</html>

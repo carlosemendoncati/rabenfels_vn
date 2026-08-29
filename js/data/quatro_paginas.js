@@ -72,60 +72,60 @@ RBF.QUATRO_PAGINAS = {
 
     arquivo: {
       titulo: 'O Arquivo',
-      o_que: 'Cinco anos inteiros, no ritmo que o m\u00e9todo pedia. Tentou na noite de nove de agosto e chegou at\u00e9 a floresta \u2014 mais longe do que qualquer pessoa chegou em cinco s\u00e9culos.',
-      custou: 'Klara parou no meio da trilha e voltou a p\u00e9, e n\u00e3o soube dizer por qu\u00ea. Antoniette foi atr\u00e1s. Ningu\u00e9m na casa soube que as duas tinham sa\u00eddo.',
-      ela_sentiu: 'Al\u00edvio, e n\u00e3o \u00e9 engano de leitura. As quatro horas depois da floresta foram as \u00fanicas em cinco anos em que ela n\u00e3o teve de decidir mais nada. O trabalho estava fechado e a parte dela tinha acabado. Ficou no port\u00e3o at\u00e9 o sol subir de todo e n\u00e3o pensou em nada em particular.',
-      klara: 'Sobreviveu. Seis anos depois entrou na Academia de Eldoria com a irm\u00e3, mesma turma, levando junto tudo o que Antoniette ensinou \u2014 inclusive o que a fez valer mais.',
+      o_que: 'Cinco anos inteiros, no ritmo que o método pedia. Tentou na noite de nove de agosto e chegou até a floresta — mais longe do que qualquer pessoa chegou em cinco séculos.',
+      custou: 'Klara parou no meio da trilha e voltou a pé, e não soube dizer por quê. Antoniette foi atrás. Ninguém na casa soube que as duas tinham saído.',
+      ela_sentiu: 'Alívio, e não é engano de leitura. As quatro horas depois da floresta foram as únicas em cinco anos em que ela não teve de decidir mais nada. O trabalho estava fechado e a parte dela tinha acabado. Ficou no portão até o sol subir de todo e não pensou em nada em particular.',
+      klara: 'Sobreviveu. Seis anos depois entrou na Academia de Eldoria com a irmã, mesma turma, levando junto tudo o que Antoniette ensinou — inclusive o que a fez valer mais.',
       nao_soube: 'Que a menina viveu. E por que ela mesma morreu.'
     },
 
     registro: {
-      titulo: 'O Livro-Raz\u00e3o',
-      o_que: 'Entendeu o cronograma inteiro e n\u00e3o desceu nenhuma noite. P\u00f4s a m\u00e3o na ma\u00e7aneta \u00e0s onze e vinte e cinco, ouviu a guarda trocar, e voltou para a escrivaninha.',
-      custou: 'Nada que apare\u00e7a em coluna, e \u00e9 isso que a leitura \u00e9. A porta da biblioteca ficou fechada a noite inteira e ningu\u00e9m veio bater nela.',
-      ela_sentiu: 'Satisfa\u00e7\u00e3o com a margem. A dura\u00e7\u00e3o estimada da entrada 214 errou por nove minutos, contra vinte e seis da entrada 160, e ela registrou a melhora. \u00c9 o sentimento de cima e \u00e9 sincero, e \u00e9 por isso que esta \u00e9 a leitura mais dif\u00edcil de ler duas vezes.',
+      titulo: 'O Livro-Razão',
+      o_que: 'Entendeu o cronograma inteiro e não desceu nenhuma noite. Pôs a mão na maçaneta às onze e vinte e cinco, ouviu a guarda trocar, e voltou para a escrivaninha.',
+      custou: 'Nada que apareça em coluna, e é isso que a leitura é. A porta da biblioteca ficou fechada a noite inteira e ninguém veio bater nela.',
+      ela_sentiu: 'Satisfação com a margem. A duração estimada da entrada 214 errou por nove minutos, contra vinte e seis da entrada 160, e ela registrou a melhora. É o sentimento de cima e é sincero, e é por isso que esta é a leitura mais difícil de ler duas vezes.',
       klara: 'Sobreviveu. Em nenhuma das duzentas e catorze entradas aparece a palavra Klara, e Carmine precisou corrigir a idade da menina no caderno de quem passou cinco anos ao lado dela.',
-      nao_soube: 'Que o documento serviria. O tribunal julgou improcedente por aus\u00eancia de terceiro lesado, a Ordem arquivou o material como exemplar, e a apostila de forma\u00e7\u00e3o de escribas leva o nome dela no \u00edndice, entre duas circulares.'
+      nao_soube: 'Que o documento serviria. O tribunal julgou improcedente por ausência de terceiro lesado, a Ordem arquivou o material como exemplar, e a apostila de formação de escribas leva o nome dela no índice, entre duas circulares.'
     },
 
     divida: {
-      titulo: 'A D\u00edvida',
+      titulo: 'A Dívida',
       o_que: 'Cinco anos economizando o que dava para economizar. Tentou na noite de nove de agosto e chegou a onze minutos da ponte.',
-      custou: 'A porta da copa estava trancada porque tr\u00eas moedas pedidas em maio pareceram caras, e a avalia\u00e7\u00e3o estava correta: tr\u00eas moedas \u00e9 caro por uma tranca. A volta pelo p\u00e1tio custou onze minutos. O cocheiro tinha esperado dez.',
-      ela_sentiu: 'A conta. Ela armou os tr\u00eas valores em coluna antes do amanhecer, com data ao lado de cada um, somou de tr\u00e1s para frente para conferir, e escreveu a \u00fanica linha do documento inteiro em que ela julga alguma coisa.',
-      klara: 'Parou onze minutos antes da ponte e n\u00e3o soube dizer por qu\u00ea. Voltou a p\u00e9, devolveu a mala e pediu desculpa. Sobreviveu, e seis anos depois entrou na Academia com a irm\u00e3.',
-      nao_soube: 'Que os onze minutos n\u00e3o eram o motivo. Carmine disse isso na biblioteca, em voz alta, e a frase foi para a margem com um ponto de interroga\u00e7\u00e3o. A conta continua fechando na p\u00e1gina duzentos e oitenta e sete, e continua errada.'
+      custou: 'A porta da copa estava trancada porque três moedas pedidas em maio pareceram caras, e a avaliação estava correta: três moedas é caro por uma tranca. A volta pelo pátio custou onze minutos. O cocheiro tinha esperado dez.',
+      ela_sentiu: 'A conta. Ela armou os três valores em coluna antes do amanhecer, com data ao lado de cada um, somou de trás para frente para conferir, e escreveu a única linha do documento inteiro em que ela julga alguma coisa.',
+      klara: 'Parou onze minutos antes da ponte e não soube dizer por quê. Voltou a pé, devolveu a mala e pediu desculpa. Sobreviveu, e seis anos depois entrou na Academia com a irmã.',
+      nao_soube: 'Que os onze minutos não eram o motivo. Carmine disse isso na biblioteca, em voz alta, e a frase foi para a margem com um ponto de interrogação. A conta continua fechando na página duzentos e oitenta e sete, e continua errada.'
     },
 
     cover_burned: {
       titulo: 'A Cobertura Queimada',
-      o_que: 'Fez tudo o que a Ordem manda: relatou agosto na \u00edntegra, com testemunha direta, e remeteu a Lervel o nome da antecessora com identifica\u00e7\u00e3o da fonte, porque prova sem proced\u00eancia n\u00e3o vale em mat\u00e9ria de foro.',
-      custou: 'A casa l\u00ea tudo o que entra e sai, e sempre leu. Serafina encerrou o contrato com os dois meses de aviso pagos. Carmine esperou entre Antoniette e a porta do p\u00e1tio e a matou antes da carruagem.',
-      ela_sentiu: 'Vergonha profissional, e \u00e9 o \u00fanico final em que esse \u00e9 o sentimento de cima. N\u00e3o foi descoberta por descuido nem por azar: foi descoberta por compet\u00eancia. Levou quarenta minutos procurando a linha que a entregou, achou, e a linha estava correta.',
-      klara: 'Ficou. O Arquivo saiu incompleto no nonag\u00e9simo terceiro dia. Antoniette n\u00e3o saiu da casa.',
-      nao_soube: 'Que o caderno cairia aberto na p\u00e1gina duzentos e quarenta e um. Que chegaria a Matheo depois dela.'
+      o_que: 'Fez tudo o que a Ordem manda: relatou agosto na íntegra, com testemunha direta, e remeteu a Lervel o nome da antecessora com identificação da fonte, porque prova sem procedência não vale em matéria de foro.',
+      custou: 'A casa lê tudo o que entra e sai, e sempre leu. Serafina encerrou o contrato com os dois meses de aviso pagos. Carmine esperou entre Antoniette e a porta do pátio e a matou antes da carruagem.',
+      ela_sentiu: 'Vergonha profissional, e é o único final em que esse é o sentimento de cima. Não foi descoberta por descuido nem por azar: foi descoberta por competência. Levou quarenta minutos procurando a linha que a entregou, achou, e a linha estava correta.',
+      klara: 'Ficou. O Arquivo saiu incompleto no nonagésimo terceiro dia. Antoniette não saiu da casa.',
+      nao_soube: 'Que o caderno cairia aberto na página duzentos e quarenta e um. Que chegaria a Matheo depois dela.'
     }
 
   },
 
   /* Esperanca e Perda: as folhas foram retiradas. */
   cabecalho: [
-    'Retiradas do corpo do Arquivo em 10 de agosto, entre as tr\u00eas e trinta e as quatro e dez.',
+    'Retiradas do corpo do Arquivo em 10 de agosto, entre as três e trinta e as quatro e dez.',
     'Repostas no livro-caixa da casa, no lugar das quatro folhas em branco do fim.',
-    'Numera\u00e7\u00e3o original mantida.'
+    'Numeração original mantida.'
   ],
 
   /* Resposta: o Livro-Razao chega inteiro a Lervel. */
   cabecalho_registro: [
-    'P\u00e1ginas 288 a 291 do Arquivo entregue em Lervel em dezembro do ano cinco.',
-    'Nenhuma folha retirada. Numera\u00e7\u00e3o original fechada em 291.',
-    'Transcri\u00e7\u00e3o do exemplar de consulta do arquivo central.'
+    'Páginas 288 a 291 do Arquivo entregue em Lervel em dezembro do ano cinco.',
+    'Nenhuma folha retirada. Numeração original fechada em 291.',
+    'Transcrição do exemplar de consulta do arquivo central.'
   ],
 
   /* Cobertura: o trabalho para na pagina 241. */
   cabecalho_cobertura: [
-    'Reconstru\u00e7\u00e3o das entradas previstas para as p\u00e1ginas 288 a 291.',
-    'O Arquivo remetido a Lervel termina na p\u00e1gina 241.',
+    'Reconstrução das entradas previstas para as páginas 288 a 291.',
+    'O Arquivo remetido a Lervel termina na página 241.',
     'Estas quatro entradas nunca chegaram ao corpo principal.'
   ],
 
@@ -137,7 +137,7 @@ RBF.QUATRO_PAGINAS = {
   cabecalho_vigil: [
     'Retiradas do caderno de trabalho em 10 de agosto, entre as quatro e vinte e as quatro e cinquenta.',
     'Repostas no livro-caixa da casa, no lugar das quatro folhas em branco do fim.',
-    'Nenhuma das quatro chegou a passar por correspond\u00eancia.'
+    'Nenhuma das quatro chegou a passar por correspondência.'
   ],
 
   paginas: [
@@ -148,38 +148,38 @@ RBF.QUATRO_PAGINAS = {
      -------------------------------------------------------------------- */
   {
     num: '288',
-    titulo: 'Outubro, ano um \u2014 o p\u00e1tio',
+    titulo: 'Outubro, ano um — o pátio',
     flag: 'hid_from_order',
     vars: {
       'true': {
         lns: [
           'Em 19 de outubro o Compilador presenciou, da porta nordeste, procedimento',
-          'que a casa denomina treinamento. Dura\u00e7\u00e3o aproximada de quarenta minutos.',
-          'Tr\u00eas adultos presentes al\u00e9m dos guardi\u00f5es. Uma crian\u00e7a.',
+          'que a casa denomina treinamento. Duração aproximada de quarenta minutos.',
+          'Três adultos presentes além dos guardiões. Uma criança.',
           '',
-          'O relat\u00f3rio remetido a Lervel no fecho daquele m\u00eas registrou invent\u00e1rio',
-          'de volumes e estado de encaderna\u00e7\u00e3o. N\u00e3o registrou o p\u00e1tio.',
+          'O relatório remetido a Lervel no fecho daquele mês registrou inventário',
+          'de volumes e estado de encadernação. Não registrou o pátio.',
           '',
-          'A omiss\u00e3o foi deliberada e \u00e9 de responsabilidade exclusiva do Compilador.'
+          'A omissão foi deliberada e é de responsabilidade exclusiva do Compilador.'
         ],
-        margem: 'Nota: a decis\u00e3o foi tomada para preservar a cobertura por mais um ciclo. ' +
-                'A cobertura durou quatro anos depois disso, o que confirma o c\u00e1lculo e ' +
-                'n\u00e3o confirma mais nada.',
-        mao: 'Ningu\u00e9m em Lervel soube de outubro porque eu decidi que n\u00e3o soubessem.'
+        margem: 'Nota: a decisão foi tomada para preservar a cobertura por mais um ciclo. ' +
+                'A cobertura durou quatro anos depois disso, o que confirma o cálculo e ' +
+                'não confirma mais nada.',
+        mao: 'Ninguém em Lervel soube de outubro porque eu decidi que não soubessem.'
       },
       'false': {
         lns: [
           'Em 19 de outubro o Compilador presenciou, da porta nordeste, procedimento',
-          'que a casa denomina treinamento. O relat\u00f3rio do m\u00eas foi remetido \u00edntegro,',
-          'com termo, calend\u00e1rio e descri\u00e7\u00e3o do que foi ouvido atrav\u00e9s da porta.',
+          'que a casa denomina treinamento. O relatório do mês foi remetido íntegro,',
+          'com termo, calendário e descrição do que foi ouvido através da porta.',
           '',
-          'Lervel acusou recebimento em nove dias. A resposta instru\u00eda o Compilador',
-          'a manter a posi\u00e7\u00e3o e continuar observando.',
+          'Lervel acusou recebimento em nove dias. A resposta instruía o Compilador',
+          'a manter a posição e continuar observando.',
           '',
-          'A instru\u00e7\u00e3o foi cumprida por quatro anos.'
+          'A instrução foi cumprida por quatro anos.'
         ],
         margem: 'Nota: o procedimento correto foi executado na primeira oportunidade e ' +
-                'produziu a instru\u00e7\u00e3o de n\u00e3o fazer nada. Isto tamb\u00e9m \u00e9 um dado.',
+                'produziu a instrução de não fazer nada. Isto também é um dado.',
         mao: 'Eu fiz tudo certo em outubro do primeiro ano e me mandaram continuar olhando.'
       }
     }
@@ -191,51 +191,51 @@ RBF.QUATRO_PAGINAS = {
      -------------------------------------------------------------------- */
   {
     num: '289',
-    titulo: 'Fevereiro, ano dois \u2014 a ala norte',
+    titulo: 'Fevereiro, ano dois — a ala norte',
     flag: 'told_klara',
     vars: {
       'A': {
         lns: [
-          'O Compilador desceu \u00e0 c\u00e2mara em 11 de fevereiro e permaneceu quatro minutos.',
-          'A aus\u00eancia no andar de cima foi coberta por um menor de nove anos, que',
-          'declarou aos adultos da casa uma localiza\u00e7\u00e3o falsa do Compilador.',
+          'O Compilador desceu à câmara em 11 de fevereiro e permaneceu quatro minutos.',
+          'A ausência no andar de cima foi coberta por um menor de nove anos, que',
+          'declarou aos adultos da casa uma localização falsa do Compilador.',
           '',
-          'O menor n\u00e3o foi instru\u00eddo a fazer isso e agiu por conta pr\u00f3pria.',
+          'O menor não foi instruído a fazer isso e agiu por conta própria.',
           '',
-          'O assunto n\u00e3o foi retomado com o menor em nenhum momento posterior.'
+          'O assunto não foi retomado com o menor em nenhum momento posterior.'
         ],
-        margem: 'Nota: n\u00e3o retomar foi avaliado como a op\u00e7\u00e3o de menor exposi\u00e7\u00e3o para ' +
+        margem: 'Nota: não retomar foi avaliado como a opção de menor exposição para ' +
                 'as duas partes.',
         mao: 'Ela esperou quatro anos que eu tocasse no assunto e eu deixei fechar sozinho.'
       },
       'B': {
         lns: [
-          'O Compilador desceu \u00e0 c\u00e2mara em 11 de fevereiro e permaneceu quatro minutos.',
-          'A aus\u00eancia no andar de cima foi coberta por um menor de nove anos, que',
-          'declarou aos adultos da casa uma localiza\u00e7\u00e3o falsa do Compilador.',
+          'O Compilador desceu à câmara em 11 de fevereiro e permaneceu quatro minutos.',
+          'A ausência no andar de cima foi coberta por um menor de nove anos, que',
+          'declarou aos adultos da casa uma localização falsa do Compilador.',
           '',
-          'Questionado depois pelo pr\u00f3prio menor, o Compilador forneceu vers\u00e3o',
+          'Questionado depois pelo próprio menor, o Compilador forneceu versão',
           'incompleta dos fatos, calibrada para reduzir o que o menor teria de',
           'sustentar caso fosse interrogado pela casa.'
         ],
-        margem: 'Nota: a vers\u00e3o fornecida era falsa em dois pontos e verific\u00e1vel em ' +
+        margem: 'Nota: a versão fornecida era falsa em dois pontos e verificável em ' +
                 'nenhum. O menor aceitou sem contestar, o que indica que percebeu.',
         mao: 'Menti para ela achando que estava carregando o peso, e ela deixou eu achar.'
       },
       'C': {
         lns: [
-          'O Compilador desceu \u00e0 c\u00e2mara em 11 de fevereiro e permaneceu quatro minutos.',
-          'A aus\u00eancia no andar de cima foi coberta por um menor de nove anos, que',
-          'declarou aos adultos da casa uma localiza\u00e7\u00e3o falsa do Compilador.',
+          'O Compilador desceu à câmara em 11 de fevereiro e permaneceu quatro minutos.',
+          'A ausência no andar de cima foi coberta por um menor de nove anos, que',
+          'declarou aos adultos da casa uma localização falsa do Compilador.',
           '',
           'O Compilador confirmou os fatos ao menor e solicitou que a conduta',
-          'n\u00e3o se repetisse. A solicita\u00e7\u00e3o foi recebida sem resposta verbal.',
+          'não se repetisse. A solicitação foi recebida sem resposta verbal.',
           '',
-          'A conduta n\u00e3o se repetiu. A frequ\u00eancia dos encontros aumentou.'
+          'A conduta não se repetiu. A frequência dos encontros aumentou.'
         ],
-        margem: 'Nota: pedir que n\u00e3o se repetisse foi entendido pelo menor como reconhecimento ' +
-                'de v\u00ednculo. N\u00e3o era a inten\u00e7\u00e3o declarada.',
-        mao: 'Eu pedi para ela n\u00e3o fazer de novo e ela ouviu outra coisa, e a outra coisa era verdade.'
+        margem: 'Nota: pedir que não se repetisse foi entendido pelo menor como reconhecimento ' +
+                'de vínculo. Não era a intenção declarada.',
+        mao: 'Eu pedi para ela não fazer de novo e ela ouviu outra coisa, e a outra coisa era verdade.'
       }
     }
   },
@@ -246,50 +246,50 @@ RBF.QUATRO_PAGINAS = {
      -------------------------------------------------------------------- */
   {
     num: '290',
-    titulo: 'Agosto, ano tr\u00eas \u2014 o relat\u00f3rio',
+    titulo: 'Agosto, ano três — o relatório',
     flag: 'lied_to_order',
     vars: {
       'A': {
         lns: [
-          'O epis\u00f3dio de 7 de agosto foi relatado a Lervel na \u00edntegra, com hora,',
-          'local, testemunhas e descri\u00e7\u00e3o do que o Compilador viu aflorar no p\u00e1tio.',
+          'O episódio de 7 de agosto foi relatado a Lervel na íntegra, com hora,',
+          'local, testemunhas e descrição do que o Compilador viu aflorar no pátio.',
           '',
-          'A resposta chegou em nove semanas e instru\u00eda a manter a observa\u00e7\u00e3o.',
+          'A resposta chegou em nove semanas e instruía a manter a observação.',
           '',
           'A partir desta data o Compilador passou a considerar que a Ordem',
-          'recebeu informa\u00e7\u00e3o suficiente para agir e optou por n\u00e3o agir.'
+          'recebeu informação suficiente para agir e optou por não agir.'
         ],
-        margem: 'Nota: a hip\u00f3tese de incompet\u00eancia foi descartada. Lervel \u00e9 competente. ' +
-                'Resta a hip\u00f3tese que o Compilador n\u00e3o est\u00e1 em posi\u00e7\u00e3o de investigar.',
-        mao: 'Eu contei tudo e eles arquivaram, e eu continuei mandando relat\u00f3rio por dois anos.'
+        margem: 'Nota: a hipótese de incompetência foi descartada. Lervel é competente. ' +
+                'Resta a hipótese que o Compilador não está em posição de investigar.',
+        mao: 'Eu contei tudo e eles arquivaram, e eu continuei mandando relatório por dois anos.'
       },
       'B': {
         lns: [
-          'O epis\u00f3dio de 7 de agosto foi relatado a Lervel como ocorr\u00eancia de',
+          'O episódio de 7 de agosto foi relatado a Lervel como ocorrência de',
           'natureza indeterminada, sem testemunha direta.',
           '',
           'Havia testemunha direta. Era o Compilador.',
           '',
           'Lervel pediu detalhamento em quinze dias. O detalhamento remetido',
-          'manteve a caracteriza\u00e7\u00e3o original.'
+          'manteve a caracterização original.'
         ],
-        margem: 'Nota: a caracteriza\u00e7\u00e3o foi escolhida para evitar remo\u00e7\u00e3o do Compilador do ' +
-                'posto antes da conclus\u00e3o do trabalho. O trabalho n\u00e3o foi conclu\u00eddo.',
-        mao: 'Foi a primeira coisa inteiramente falsa que eu mandei para Lervel, e n\u00e3o foi a \u00faltima.'
+        margem: 'Nota: a caracterização foi escolhida para evitar remoção do Compilador do ' +
+                'posto antes da conclusão do trabalho. O trabalho não foi concluído.',
+        mao: 'Foi a primeira coisa inteiramente falsa que eu mandei para Lervel, e não foi a última.'
       },
       'C': {
         lns: [
-          'O epis\u00f3dio de 7 de agosto n\u00e3o consta do relat\u00f3rio remetido a Lervel',
-          'naquele m\u00eas nem em nenhum dos meses seguintes.',
+          'O episódio de 7 de agosto não consta do relatório remetido a Lervel',
+          'naquele mês nem em nenhum dos meses seguintes.',
           '',
-          'Agosto do ano tr\u00eas foi remetido sem agosto dentro.',
+          'Agosto do ano três foi remetido sem agosto dentro.',
           '',
-          'A supress\u00e3o \u00e9 de responsabilidade exclusiva do Compilador e n\u00e3o foi',
+          'A supressão é de responsabilidade exclusiva do Compilador e não foi',
           'comunicada a nenhuma outra parte.'
         ],
-        margem: 'Nota: o Compilador registra a supress\u00e3o aqui porque n\u00e3o a registrou em ' +
-                'lugar nenhum \u00e0 \u00e9poca, e um relato que esconde o pr\u00f3prio buraco n\u00e3o serve.',
-        mao: 'Eu apaguei um m\u00eas inteiro e continuei assinando os relat\u00f3rios do mesmo jeito.'
+        margem: 'Nota: o Compilador registra a supressão aqui porque não a registrou em ' +
+                'lugar nenhum à época, e um relato que esconde o próprio buraco não serve.',
+        mao: 'Eu apaguei um mês inteiro e continuei assinando os relatórios do mesmo jeito.'
       }
     }
   },
@@ -301,7 +301,7 @@ RBF.QUATRO_PAGINAS = {
      -------------------------------------------------------------------- */
   {
     num: '291',
-    titulo: 'Outubro, ano quatro \u2014 F.',
+    titulo: 'Outubro, ano quatro — F.',
     flag: 'third_paid',
     vars: {
       'A': {
@@ -309,15 +309,15 @@ RBF.QUATRO_PAGINAS = {
           'Em 22 de outubro o Compilador adquiriu de F., empregado da casa,',
           'o nome da escriba que ocupou este posto trinta e sete anos antes.',
           '',
-          'Pagamento em moeda, sem recibo, quitando d\u00edvida particular de F.',
+          'Pagamento em moeda, sem recibo, quitando dívida particular de F.',
           'com terceiro da aldeia.',
           '',
           'O Compilador declarou a F. que negaria a fonte caso interrogado.',
-          'F. concordou com a condi\u00e7\u00e3o e n\u00e3o pediu garantia.'
+          'F. concordou com a condição e não pediu garantia.'
         ],
-        margem: 'Nota: F. tem um filho de dezessete anos e a d\u00edvida era do filho. ' +
-                'Isto n\u00e3o altera a natureza da transa\u00e7\u00e3o. Consta porque \u00e9 verdade.',
-        mao: 'Ele n\u00e3o pediu garantia nenhuma. Vinte e nove anos nesta casa e ele acreditou em mim ' +
+        margem: 'Nota: F. tem um filho de dezessete anos e a dívida era do filho. ' +
+                'Isto não altera a natureza da transação. Consta porque é verdade.',
+        mao: 'Ele não pediu garantia nenhuma. Vinte e nove anos nesta casa e ele acreditou em mim ' +
              'porque eu perguntei do jeito certo, e o jeito certo foi ele que me ensinou.'
       },
       'B': {
@@ -325,15 +325,15 @@ RBF.QUATRO_PAGINAS = {
           'Em 22 de outubro o Compilador adquiriu de F., empregado da casa,',
           'o nome da escriba que ocupou este posto trinta e sete anos antes.',
           '',
-          'Pagamento em moeda, sem recibo, quitando d\u00edvida particular de F.',
+          'Pagamento em moeda, sem recibo, quitando dívida particular de F.',
           '',
-          'O nome foi remetido a Lervel como elemento de prova, com identifica\u00e7\u00e3o',
-          'da fonte, porque prova sem proveni\u00eancia n\u00e3o \u00e9 aceita em mat\u00e9ria de foro.'
+          'O nome foi remetido a Lervel como elemento de prova, com identificação',
+          'da fonte, porque prova sem proveniência não é aceita em matéria de foro.'
         ],
-        margem: 'Nota: identificar a fonte era o \u00fanico modo de a prova valer. ' +
-                'F. permanece empregado da casa e a casa l\u00ea tudo o que entra e sai.',
+        margem: 'Nota: identificar a fonte era o único modo de a prova valer. ' +
+                'F. permanece empregado da casa e a casa lê tudo o que entra e sai.',
         mao: 'Eu escrevi o nome dele num papel que ia atravessar esta casa, e escolhi ' +
-             'isso sabendo, e chamei de decis\u00e3o t\u00e9cnica no caderno da mesma noite.'
+             'isso sabendo, e chamei de decisão técnica no caderno da mesma noite.'
       },
       'C': {
         lns: [
@@ -341,15 +341,15 @@ RBF.QUATRO_PAGINAS = {
           'da escriba que ocupou este posto trinta e sete anos antes.',
           '',
           'O Compilador recusou o nome. Pagou a moeda mesmo assim, quitando',
-          'd\u00edvida particular de F., e instruiu que o filho de F. deixasse a',
+          'dívida particular de F., e instruiu que o filho de F. deixasse a',
           'propriedade no mesmo dia.',
           '',
-          'O rapaz partiu na carro\u00e7a do sal \u00e0s onze e dez. N\u00e3o houve confirma\u00e7\u00e3o',
+          'O rapaz partiu na carroça do sal às onze e dez. Não houve confirmação',
           'posterior de chegada.'
         ],
-        margem: 'Nota: sem o nome, a antecessora permanece n\u00e3o identificada e o caso ' +
+        margem: 'Nota: sem o nome, a antecessora permanece não identificada e o caso ' +
                 'permanece sem elemento externo. A recusa foi consciente disso.',
-        mao: 'Eu abri m\u00e3o da \u00fanica prova que eu tinha para tirar um rapaz daqui e nunca ' +
+        mao: 'Eu abri mão da única prova que eu tinha para tirar um rapaz daqui e nunca ' +
              'soube se ele chegou em lugar nenhum.'
       }
     }
@@ -360,38 +360,38 @@ RBF.QUATRO_PAGINAS = {
   /* Esperanca e Perda: fecho escrito antes de esconder as folhas. */
   fecho: [
     'Estas quatro entradas foram retiradas do corpo principal porque, lidas em conjunto,',
-    'estabelecem terceiro lesado e tornam a mat\u00e9ria acion\u00e1vel fora do foro dom\u00e9stico',
+    'estabelecem terceiro lesado e tornam a matéria acionável fora do foro doméstico',
     'da casa.',
     '',
-    'Acion\u00e1vel significa busca. Busca significa entrar aqui.',
+    'Acionável significa busca. Busca significa entrar aqui.',
     '',
-    'Quem entrar aqui vai perguntar qual das duas meninas \u00e9, e a casa vai responder,',
-    'porque a casa responde a autoridade. E ent\u00e3o o cronograma se antecipa.',
+    'Quem entrar aqui vai perguntar qual das duas meninas é, e a casa vai responder,',
+    'porque a casa responde a autoridade. E então o cronograma se antecipa.',
     '',
-    'O Compilador optou por um documento que n\u00e3o serve a um documento que serve',
+    'O Compilador optou por um documento que não serve a um documento que serve',
     'contra ela.',
     '',
-    '\u2014 A.V.'
+    '— A.V.'
   ],
 
   /* Resposta: o texto inteiro chega ao tribunal, mas nao leva nomes. */
   fecho_registro: [
     'Estas quatro entradas permaneceram no corpo principal.',
     'Registram data, ato e terceiro. Os terceiros aparecem como sujeito, fonte',
-    'ou fun\u00e7\u00e3o. Nenhuma identifica\u00e7\u00e3o nominal foi mantida onde n\u00e3o era',
-    'necess\u00e1ria \u00e0 confer\u00eancia t\u00e9cnica.',
+    'ou função. Nenhuma identificação nominal foi mantida onde não era',
+    'necessária à conferência técnica.',
     '',
-    'O documento est\u00e1 completo.',
+    'O documento está completo.',
     '',
-    '\u2014 A.V.'
+    '— A.V.'
   ],
 
   /* Cobertura: nao houve pagina final nem decisao de retirar. */
   fecho_cobertura: [
-    'O contrato foi encerrado antes da compila\u00e7\u00e3o destas entradas.',
-    'N\u00e3o houve retirada. N\u00e3o houve fecho.',
+    'O contrato foi encerrado antes da compilação destas entradas.',
+    'Não houve retirada. Não houve fecho.',
     '',
-    'A numera\u00e7\u00e3o entregue termina em 241.'
+    'A numeração entregue termina em 241.'
   ]
 
 };
