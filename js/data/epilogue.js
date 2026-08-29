@@ -104,7 +104,7 @@ var RBF = (typeof RBF !== 'undefined') ? RBF : {};
 
 RBF.EPILOGUE = [
 
-{ t:'chap', num:'EP\u00cdLOGO', name:'O QUE FICOU', chapter:'epilogo' },
+{ t:'chap', num:'EPÍLOGO', name:'O QUE FICOU', chapter:'epilogo' },
 { t:'fade_out' },
 
 /* ======================================================================
@@ -118,63 +118,63 @@ RBF.EPILOGUE = [
 { t:'spr', ch:'matheo', ex:'neutral', pos:'center' },
 
 /* Esperanca: 287 paginas. */
-{ t:'nar', tx:'Em mar\u00e7o do segundo ano o tribunal da Marca pediu as quatro p\u00e1ginas que faltavam.', if:{ rota:'esperanca' } },
-{ t:'nar', tx:'Ele explicou que n\u00e3o as tinha. Explicou por escrito, tr\u00eas vezes, em tr\u00eas formatos diferentes.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Em março do segundo ano o tribunal da Marca pediu as quatro páginas que faltavam.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ele explicou que não as tinha. Explicou por escrito, três vezes, em três formatos diferentes.', if:{ rota:'esperanca' } },
 { t:'pause', if:{ rota:'esperanca' } },
 { t:'nar', tx:'O parecer veio em duas linhas. Ele decorou as duas sem querer.', if:{ rota:'esperanca' } },
-{ t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u2014', lns:[
-    '"Relato singular, de autoria falecida, sem terceiro lesado identific\u00e1vel."',
-    '"Sem elemento externo, a mat\u00e9ria pertence ao foro dom\u00e9stico da casa."'
+{ t:'arc', key:'lervel', label:'— tribunal da Marca —', lns:[
+    '"Relato singular, de autoria falecida, sem terceiro lesado identificável."',
+    '"Sem elemento externo, a matéria pertence ao foro doméstico da casa."'
 ], if:{ rota:'esperanca' } },
 { t:'pause', if:{ rota:'esperanca' } },
 { t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'esperanca' } },
-{ t:'nar', tx:'As quatro p\u00e1ginas davam nome aos terceiros. Ele n\u00e3o sabia o que havia nelas.', if:{ rota:'esperanca' } },
-{ t:'inn', tx:'Ela escreveu que, se eu chegasse at\u00e9 elas, entenderia.', if:{ rota:'esperanca' } },
-{ t:'inn', tx:'Eu n\u00e3o cheguei.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'As quatro páginas davam nome aos terceiros. Ele não sabia o que havia nelas.', if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Ela escreveu que, se eu chegasse até elas, entenderia.', if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Eu não cheguei.', if:{ rota:'esperanca' } },
 { t:'nar', tx:'Ele recorreu duas vezes. A segunda foi indeferida no ano quatro.', if:{ rota:'esperanca' } },
 
 /* Perda: as mesmas quatro folhas, e uma ultima pagina que fecha a conta. */
-{ t:'nar', tx:'Em mar\u00e7o do segundo ano o tribunal da Marca pediu as quatro p\u00e1ginas que faltavam.', if:{ rota:'perda' } },
-{ t:'nar', tx:'Ele explicou que n\u00e3o as tinha. Explicou por escrito, tr\u00eas vezes, em tr\u00eas formatos diferentes.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Em março do segundo ano o tribunal da Marca pediu as quatro páginas que faltavam.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Ele explicou que não as tinha. Explicou por escrito, três vezes, em três formatos diferentes.', if:{ rota:'perda' } },
 { t:'pause', if:{ rota:'perda' } },
 { t:'nar', tx:'O parecer veio em duas linhas. Ele decorou as duas sem querer.', if:{ rota:'perda' } },
-{ t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u2014', lns:[
-    '"Relato singular, de autoria falecida, sem terceiro lesado identific\u00e1vel."',
-    '"Sem elemento externo, a mat\u00e9ria pertence ao foro dom\u00e9stico da casa."'
+{ t:'arc', key:'lervel', label:'— tribunal da Marca —', lns:[
+    '"Relato singular, de autoria falecida, sem terceiro lesado identificável."',
+    '"Sem elemento externo, a matéria pertence ao foro doméstico da casa."'
 ], if:{ rota:'perda' } },
 { t:'pause', if:{ rota:'perda' } },
 { t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'perda' } },
-{ t:'nar', tx:'As quatro p\u00e1ginas davam nome aos terceiros. Ele n\u00e3o sabia o que havia nelas.', if:{ rota:'perda' } },
-{ t:'inn', tx:'Ela escreveu que, se eu chegasse at\u00e9 elas, entenderia.', if:{ rota:'perda' } },
-{ t:'inn', tx:'Eu n\u00e3o cheguei.', if:{ rota:'perda' } },
+{ t:'nar', tx:'As quatro páginas davam nome aos terceiros. Ele não sabia o que havia nelas.', if:{ rota:'perda' } },
+{ t:'inn', tx:'Ela escreveu que, se eu chegasse até elas, entenderia.', if:{ rota:'perda' } },
+{ t:'inn', tx:'Eu não cheguei.', if:{ rota:'perda' } },
 { t:'nar', tx:'Ele recorreu duas vezes. A segunda foi indeferida no ano quatro.', if:{ rota:'perda' } },
 
 /* Resposta: 291 paginas. A ausencia esta dentro do texto. */
 { t:'nar', tx:'O material entrou no tribunal em quatro meses e saiu em nove.', if:{ rota:'resposta' } },
-{ t:'nar', tx:'Tinha duzentas e noventa e uma p\u00e1ginas. A numera\u00e7\u00e3o fechava.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Tinha duzentas e noventa e uma páginas. A numeração fechava.', if:{ rota:'resposta' } },
 { t:'pause', if:{ rota:'resposta' } },
-{ t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u00b7 decis\u00e3o \u2014', lns:[
-    '"Relato singular, de autoria falecida, completo e de proced\u00eancia verificada."',
-    '"Julga-se improcedente por aus\u00eancia de terceiro lesado."'
+{ t:'arc', key:'lervel', label:'— tribunal da Marca · decisão —', lns:[
+    '"Relato singular, de autoria falecida, completo e de procedência verificada."',
+    '"Julga-se improcedente por ausência de terceiro lesado."'
 ], if:{ rota:'resposta' } },
 { t:'pause', if:{ rota:'resposta' } },
 { t:'inn', tx:'Autoria falecida.', if:{ rota:'resposta' } },
 { t:'nar', tx:'A autora trabalhava dois andares abaixo. O parecer ficou como veio.', if:{ rota:'resposta' } },
 { t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'resposta' } },
-{ t:'nar', tx:'Todos estavam nas p\u00e1ginas. Sujeito. Fonte. Empregado. Nenhum nome.', if:{ rota:'resposta' } },
-{ t:'nar', tx:'Matheo n\u00e3o recorreu. O enquadramento estava correto.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Todos estavam nas páginas. Sujeito. Fonte. Empregado. Nenhum nome.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Matheo não recorreu. O enquadramento estava correto.', if:{ rota:'resposta' } },
 
 /* Cobertura: o trabalho termina antes de fechar. */
-{ t:'nar', tx:'O material chegou com duzentas e quarenta e uma p\u00e1ginas.', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'Faltavam plantas, hor\u00e1rios e tudo o que viria depois de julho. A numera\u00e7\u00e3o fechava mesmo assim.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'O material chegou com duzentas e quarenta e uma páginas.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Faltavam plantas, horários e tudo o que viria depois de julho. A numeração fechava mesmo assim.', if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
-{ t:'arc', key:'lervel', label:'\u2014 tribunal da Marca \u2014', lns:[
-    '"Relato singular, de autoria falecida, sem terceiro lesado identific\u00e1vel."',
-    '"Material insuficiente para instru\u00e7\u00e3o."'
+{ t:'arc', key:'lervel', label:'— tribunal da Marca —', lns:[
+    '"Relato singular, de autoria falecida, sem terceiro lesado identificável."',
+    '"Material insuficiente para instrução."'
 ], if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
 { t:'inn', tx:'Sem terceiro lesado.', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'O tribunal n\u00e3o pediu as quatro p\u00e1ginas. N\u00e3o chegou a precisar delas.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'O tribunal não pediu as quatro páginas. Não chegou a precisar delas.', if:{ rota:'cobertura' } },
 
 { t:'spr', ch:'matheo', ex:'hollow', pos:'center' },
 
@@ -193,17 +193,17 @@ RBF.EPILOGUE = [
    O texto nao comenta. Enumera, que e como este homem pensa.
    ---------------------------------------------------------------- */
 { t:'pause' },
-{ t:'nar', tx:'Ele tinha conhecido a autora do relato numa fila de cart\u00f3rio, em Alsbeck, quando ela tinha dezessete anos.' },
-{ t:'nar', tx:'Ela reparou que o escritur\u00e1rio da frente estava com o carimbo errado. Ningu\u00e9m mais na fila reparou, e ele estava na fila havia meia hora.' },
+{ t:'nar', tx:'Ele tinha conhecido a autora do relato numa fila de cartório, em Alsbeck, quando ela tinha dezessete anos.' },
+{ t:'nar', tx:'Ela reparou que o escriturário da frente estava com o carimbo errado. Ninguém mais na fila reparou, e ele estava na fila havia meia hora.' },
 { t:'pause' },
-{ t:'nar', tx:'Perguntou o nome dela e n\u00e3o disse o dele.' },
-{ t:'nar', tx:'Escreveu o endere\u00e7o da Academia num papel de balc\u00e3o e pagou a inscri\u00e7\u00e3o do exame, que a Ordem manda pagar e ningu\u00e9m paga.' },
+{ t:'nar', tx:'Perguntou o nome dela e não disse o dele.' },
+{ t:'nar', tx:'Escreveu o endereço da Academia num papel de balcão e pagou a inscrição do exame, que a Ordem manda pagar e ninguém paga.' },
 { t:'pause' },
-{ t:'nar', tx:'N\u00e3o a ensinou. Apontou uma porta e voltou para Lervel, e n\u00e3o acompanhou o resultado.' },
+{ t:'nar', tx:'Não a ensinou. Apontou uma porta e voltou para Lervel, e não acompanhou o resultado.' },
 { t:'pause' },
 { t:'inn', tx:'Ela entrou por mim.' },
 { t:'pause' },
-{ t:'nar', tx:'Oito anos entre o papel de balc\u00e3o e o parecer.' },
+{ t:'nar', tx:'Oito anos entre o papel de balcão e o parecer.' },
 { t:'nar', tx:'Ele escreveu os dois.' },
 { t:'pause' },
 
@@ -217,20 +217,20 @@ RBF.EPILOGUE = [
   bg:'bg_prologue_room' },
 { t:'spr', ch:'matheo', ex:'read', pos:'center' },
 
-{ t:'nar', tx:'No m\u00eas em que o material de Nidhaus entrou no arquivo central, ele fez uma coisa pequena e administrativa.' },
+{ t:'nar', tx:'No mês em que o material de Nidhaus entrou no arquivo central, ele fez uma coisa pequena e administrativa.' },
 { t:'nar', tx:'Deixou o sobrenome em alerta permanente no cadastro geral da Ordem.' },
 { t:'pause' },
-{ t:'inn', tx:'Uma fam\u00edlia que n\u00e3o registra nada em tr\u00eas s\u00e9culos.' },
+{ t:'inn', tx:'Uma família que não registra nada em três séculos.' },
 { t:'inn', tx:'Se aparecer em papel algum dia, eu quero saber no mesmo dia.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Depois esqueceu. O alerta ficou no cadastro, sem prazo de expira\u00e7\u00e3o.' },
+{ t:'nar', tx:'Depois esqueceu. O alerta ficou no cadastro, sem prazo de expiração.' },
 { t:'pause' },
 { t:'sfx', id:'sfx_package' },
-{ t:'nar', tx:'O alerta disparou numa ter\u00e7a de maio, seis anos depois, \u00e0s quatro e vinte da tarde.' },
-{ t:'nar', tx:'Veio numa folha de aviso comum, do mesmo ma\u00e7o que a Ordem usa para mudan\u00e7a de endere\u00e7o.' },
+{ t:'nar', tx:'O alerta disparou numa terça de maio, seis anos depois, às quatro e vinte da tarde.' },
+{ t:'nar', tx:'Veio numa folha de aviso comum, do mesmo maço que a Ordem usa para mudança de endereço.' },
 { t:'pause' },
-{ t:'nar', tx:'Ele leu o sobrenome de p\u00e9, ainda com o casaco.' },
+{ t:'nar', tx:'Ele leu o sobrenome de pé, ainda com o casaco.' },
 
 /* ======================================================================
    E3 - O CADASTRO
@@ -241,7 +241,7 @@ RBF.EPILOGUE = [
 { t:'scene', id:'ep_cadastro', chapter:'epilogo', title:'O cadastro',
   bg:'bg_archive_closeup' },
 
-{ t:'nar', tx:'Era uma c\u00f3pia de registro de matr\u00edcula da Academia de Eldoria, ano letivo corrente.' },
+{ t:'nar', tx:'Era uma cópia de registro de matrícula da Academia de Eldoria, ano letivo corrente.' },
 { t:'sfx', id:'sfx_page_turn' },
 { t:'pause' },
 
@@ -251,35 +251,35 @@ RBF.EPILOGUE = [
 { t:'nar', tx:'Duas linhas, mesmo sobrenome, mesma casa de origem, mesma turma.' },
 { t:'pause' },
 
-{ t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
+{ t:'arc', key:'cadastro', label:'— Academia de Eldoria · matrícula —', lns:[
     'RABENFELS, Liara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.',
-    'Curso: mana aplicada. Ingresso por exame, primeira coloca\u00e7\u00e3o.'
+    'Curso: mana aplicada. Ingresso por exame, primeira colocação.'
 ]},
 { t:'pause' },
 
-{ t:'nar', tx:'Ele parou na express\u00e3o "primeira coloca\u00e7\u00e3o". A unha do polegar marcou a margem.' },
+{ t:'nar', tx:'Ele parou na expressão "primeira colocação". A unha do polegar marcou a margem.' },
 { t:'pause' },
 
 /* --- a segunda linha, e nela a digital de Antoniette --- */
-{ t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
+{ t:'arc', key:'cadastro', label:'— Academia de Eldoria · matrícula —', lns:[
     'RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.',
-    'Curso: Registro Comparado e Reconstru\u00e7\u00e3o Documental.'
+    'Curso: Registro Comparado e Reconstrução Documental.'
 ], if:{ taught:'A' } },
-{ t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
+{ t:'arc', key:'cadastro', label:'— Academia de Eldoria · matrícula —', lns:[
     'RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.',
     'Curso: protocolo e direito das casas maiores.'
 ], if:{ taught:'B' } },
-{ t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
+{ t:'arc', key:'cadastro', label:'— Academia de Eldoria · matrícula —', lns:[
     'RABENFELS, Klara. Dezoito anos. Velha Nidhaus, Marca Cinzenta.',
-    'Curso: geografia e l\u00ednguas do norte.'
+    'Curso: geografia e línguas do norte.'
 ], if:{ taught:'C' } },
 
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'Ele leu o curso duas vezes.', if:{ taught:'A' } },
-{ t:'inn', tx:'\u00c9 o meu.', if:{ taught:'A' } },
+{ t:'inn', tx:'É o meu.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'Ele deu aquela cadeira por nove anos. Largou quando entrou para a Ordem.', if:{ taught:'A' } },
-{ t:'nar', tx:'A mat\u00e9ria ficou. Ele nunca soube quem passou por ela.', if:{ taught:'A' } },
+{ t:'nar', tx:'A matéria ficou. Ele nunca soube quem passou por ela.', if:{ taught:'A' } },
 
 /* ======================================================================
    O QUE ELE FAZ EM VEZ DE PASSAR ADIANTE
@@ -289,33 +289,33 @@ RBF.EPILOGUE = [
    sabe fazer bem.
    ====================================================================== */
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Ele n\u00e3o passou adiante. Pediu o hist\u00f3rico da disciplina, que \u00e9 p\u00fablico e ningu\u00e9m pede.', if:{ taught:'A' } },
+{ t:'nar', tx:'Ele não passou adiante. Pediu o histórico da disciplina, que é público e ninguém pede.', if:{ taught:'A' } },
 { t:'nar', tx:'Quem respondeu foi o professor Halvern, que ocupa a cadeira agora.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 hist\u00f3rico da disciplina \u2014', lns:[
-    'Registro Comparado e Reconstru\u00e7\u00e3o Documental. Trinta e um anos.',
-    'Aprova\u00e7\u00f5es com men\u00e7\u00e3o: duas.'
+{ t:'arc', key:'cadastro', label:'— Academia de Eldoria · histórico da disciplina —', lns:[
+    'Registro Comparado e Reconstrução Documental. Trinta e um anos.',
+    'Aprovações com menção: duas.'
 ], if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Uma das duas estava morta havia seis anos, por parecer que ele mesmo assinara sem ler at\u00e9 o fim.', if:{ taught:'A' } },
+{ t:'nar', tx:'Uma das duas estava morta havia seis anos, por parecer que ele mesmo assinara sem ler até o fim.', if:{ taught:'A' } },
 { t:'nar', tx:'A outra tinha dezoito anos e morava em Velha Nidhaus.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'inn', tx:'Duas em trinta e um anos, e as duas saem da mesma casa.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Junto do hist\u00f3rico veio uma folha que ele n\u00e3o tinha pedido.', if:{ taught:'A' } },
+{ t:'nar', tx:'Junto do histórico veio uma folha que ele não tinha pedido.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'arc', key:'cadastro', label:'\u2014 anexo, de pr\u00f3prio punho \u2014', lns:[
-    'Escrevi \u00e0 senhorita Rabenfels h\u00e1 oito anos e nunca tive resposta.',
-    'Se o senhor tiver o endere\u00e7o dela, eu agrade\u00e7o. H. Halvern.'
+{ t:'arc', key:'cadastro', label:'— anexo, de próprio punho —', lns:[
+    'Escrevi à senhorita Rabenfels há oito anos e nunca tive resposta.',
+    'Se o senhor tiver o endereço dela, eu agradeço. H. Halvern.'
 ], if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'inn', tx:'Ele tem o endere\u00e7o.', if:{ taught:'A' } },
+{ t:'inn', tx:'Ele tem o endereço.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'Respondeu no mesmo dia, em quatro linhas. Uma delas era a data da morte.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Da estrada de Lervel at\u00e9 Eldoria s\u00e3o quatro dias de carruagem. Ele levou onze para decidir e quatro para ir.', if:{ taught:'A' } },
+{ t:'nar', tx:'Da estrada de Lervel até Eldoria são quatro dias de carruagem. Ele levou onze para decidir e quatro para ir.', if:{ taught:'A' } },
 
 /* ======================================================================
    A AULA
@@ -327,28 +327,28 @@ RBF.EPILOGUE = [
   bg:'bg_library', bgm:'bgm_archive', if:{ taught:'A' } },
 { t:'fade_in', if:{ taught:'A' } },
 
-{ t:'nar', tx:'A sala tinha dezenove lugares e catorze ocupados. Ele ficou de p\u00e9 no fundo, como visitante da Ordem tem direito de ficar.', if:{ taught:'A' } },
+{ t:'nar', tx:'A sala tinha dezenove lugares e catorze ocupados. Ele ficou de pé no fundo, como visitante da Ordem tem direito de ficar.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'spr', ch:'klara', ex:'neutral', pos:'center', if:{ taught:'A' } },
-{ t:'nar', tx:'Reconheceu a aluna pela postura antes de reconhecer pelo cabelo: sentada reta, as duas m\u00e3os na mesa, uma de cada lado do caderno.', if:{ taught:'A' } },
+{ t:'nar', tx:'Reconheceu a aluna pela postura antes de reconhecer pelo cabelo: sentada reta, as duas mãos na mesa, uma de cada lado do caderno.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'O exerc\u00edcio do dia era um invent\u00e1rio de casa grande com tr\u00eas erros plantados. Ela achou os tr\u00eas e marcou um quarto.', if:{ taught:'A' } },
+{ t:'nar', tx:'O exercício do dia era um inventário de casa grande com três erros plantados. Ela achou os três e marcou um quarto.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'O quarto n\u00e3o era erro. O professor disse isso, e ela n\u00e3o apagou a marca.', if:{ taught:'A' } },
+{ t:'nar', tx:'O quarto não era erro. O professor disse isso, e ela não apagou a marca.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
 { t:'nar', tx:'No fim da aula ele perguntou uma coisa, do jeito que examinador pergunta, e sem se apresentar.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'spr', ch:'matheo', ex:'neutral', pos:'left', if:{ taught:'A' } },
-{ t:'dial', ch:'matheo', tx:'Por que a senhorita n\u00e3o apagou?', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'Por que a senhorita não apagou?', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'dial', ch:'klara', tx:'Porque eu marquei.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'dial', ch:'matheo', tx:'O professor disse que est\u00e1 certo.', if:{ taught:'A' } },
-{ t:'dial', ch:'klara', tx:'Disse. Ele \u00e9 fonte \u00fanica.', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'O professor disse que está certo.', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Disse. Ele é fonte única.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'\u201cFonte \u00fanica\u201d est\u00e1 na p\u00e1gina nove do manual da cadeira. Foi ele que escreveu o manual.', if:{ taught:'A' } },
+{ t:'nar', tx:'“Fonte única” está na página nove do manual da cadeira. Foi ele que escreveu o manual.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'dial', ch:'matheo', tx:'E o que a senhorita faz com a marca?', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
@@ -357,23 +357,23 @@ RBF.EPILOGUE = [
 { t:'dial', ch:'klara', tx:'Riscar ensina a esconder o erro.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Essa n\u00e3o era dele.', if:{ taught:'A' } },
+{ t:'nar', tx:'Essa não era dele.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'inn', tx:'Ela n\u00e3o aprendeu isso aqui.', if:{ taught:'A' } },
-{ t:'nar', tx:'Ele conferiu o manual naquela noite, na estalagem, p\u00e1gina por p\u00e1gina. N\u00e3o estava.', if:{ taught:'A' } },
+{ t:'inn', tx:'Ela não aprendeu isso aqui.', if:{ taught:'A' } },
+{ t:'nar', tx:'Ele conferiu o manual naquela noite, na estalagem, página por página. Não estava.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 
-{ t:'dial', ch:'matheo', tx:'Quem ensinou isso \u00e0 senhorita?', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'Quem ensinou isso à senhorita?', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Klara levou tempo. N\u00e3o o tempo de quem n\u00e3o lembra.', if:{ taught:'A' } },
+{ t:'nar', tx:'Klara levou tempo. Não o tempo de quem não lembra.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'dial', ch:'klara', tx:'Uma pessoa da casa.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'dial', ch:'matheo', tx:'Ela ainda est\u00e1 l\u00e1?', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'Ela ainda está lá?', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'dial', ch:'klara', tx:'N\u00e3o.', if:{ taught:'A' } },
+{ t:'dial', ch:'klara', tx:'Não.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Ela fechou o caderno com as duas m\u00e3os e n\u00e3o perguntou quem ele era.', if:{ taught:'A' } },
+{ t:'nar', tx:'Ela fechou o caderno com as duas mãos e não perguntou quem ele era.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 
 /* A moca da fila tambem nao perguntou. Ele reparou nas duas pela
@@ -382,22 +382,22 @@ RBF.EPILOGUE = [
 
    A fila esta contada na cena de abertura, sem condicao. Aqui e
    eco, e eco e o que faz a segunda linha doer. */
-{ t:'inn', tx:'A outra tamb\u00e9m n\u00e3o perguntou.', if:{ taught:'A' } },
+{ t:'inn', tx:'A outra também não perguntou.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'inn', tx:'As duas entraram por mim.', if:{ taught:'A' } },
-{ t:'nar', tx:'Perguntar seria informa\u00e7\u00e3o, e ela tinha sido criada numa casa que l\u00ea tudo o que entra e sai.', if:{ taught:'A' } },
+{ t:'nar', tx:'Perguntar seria informação, e ela tinha sido criada numa casa que lê tudo o que entra e sai.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Matheo tinha o nome dela na pasta e o parecer no bolso. Levou a m\u00e3o ao bolso e parou ali.', if:{ taught:'A' } },
+{ t:'nar', tx:'Matheo tinha o nome dela na pasta e o parecer no bolso. Levou a mão ao bolso e parou ali.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'inn', tx:'Se eu disser o nome, eu digo a esta casa que o nome importa.', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
-{ t:'dial', ch:'matheo', tx:'Bom exerc\u00edcio, senhorita.', if:{ taught:'A' } },
+{ t:'dial', ch:'matheo', tx:'Bom exercício, senhorita.', if:{ taught:'A' } },
 { t:'spr_hide', ch:'matheo', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'A' } },
-{ t:'nar', tx:'Na porta ele olhou para tr\u00e1s uma vez.', if:{ taught:'A' } },
-{ t:'nar', tx:'Klara tinha reaberto o caderno e estava escrevendo alguma coisa ao lado da marca que n\u00e3o apagou.', if:{ taught:'A' } },
+{ t:'nar', tx:'Na porta ele olhou para trás uma vez.', if:{ taught:'A' } },
+{ t:'nar', tx:'Klara tinha reaberto o caderno e estava escrevendo alguma coisa ao lado da marca que não apagou.', if:{ taught:'A' } },
 { t:'spr_hide', ch:'klara', if:{ taught:'A' } },
 { t:'pause', if:{ taught:'A' } },
 { t:'fade_out', if:{ taught:'A' } },
@@ -405,20 +405,20 @@ RBF.EPILOGUE = [
 { t:'scene', id:'ep_cadastro_2', chapter:'epilogo', title:'O cadastro',
   bg:'bg_prologue_room', bgm:'bgm_epilogo', if:{ taught:'A' } },
 { t:'fade_in', if:{ taught:'A' } },
-{ t:'nar', tx:'Voltou a Lervel em quatro dias e n\u00e3o escreveu relat\u00f3rio da viagem.', if:{ taught:'A' } },
-{ t:'nar', tx:'Foi a \u00fanica vez em dezenove anos de servi\u00e7o que ele deixou de escrever um.', if:{ taught:'A' } },
+{ t:'nar', tx:'Voltou a Lervel em quatro dias e não escreveu relatório da viagem.', if:{ taught:'A' } },
+{ t:'nar', tx:'Foi a única vez em dezenove anos de serviço que ele deixou de escrever um.', if:{ taught:'A' } },
 
 { t:'pause', if:{ taught:'B' } },
-{ t:'nar', tx:'Curso de gente que vai administrar casa grande. Ele anotou como escolha de fam\u00edlia e passou adiante.', if:{ taught:'B' } },
+{ t:'nar', tx:'Curso de gente que vai administrar casa grande. Ele anotou como escolha de família e passou adiante.', if:{ taught:'B' } },
 
 { t:'pause', if:{ taught:'C' } },
-{ t:'nar', tx:'Curso de gente que pretende sair. Ele reparou nisso e n\u00e3o soube o que fazer com o reparo.', if:{ taught:'C' } },
+{ t:'nar', tx:'Curso de gente que pretende sair. Ele reparou nisso e não soube o que fazer com o reparo.', if:{ taught:'C' } },
 
 { t:'pause' },
-{ t:'nar', tx:'No rodap\u00e9, a folha trazia a observa\u00e7\u00e3o de praxe sobre o regime interno.' },
-{ t:'arc', key:'cadastro', label:'\u2014 Academia de Eldoria \u00b7 matr\u00edcula \u2014', lns:[
-    'Resid\u00eancia obrigat\u00f3ria em recinto da Academia durante o ciclo integral.',
-    'A Academia responde pelo desenvolvimento do aluno at\u00e9 a titula\u00e7\u00e3o.'
+{ t:'nar', tx:'No rodapé, a folha trazia a observação de praxe sobre o regime interno.' },
+{ t:'arc', key:'cadastro', label:'— Academia de Eldoria · matrícula —', lns:[
+    'Residência obrigatória em recinto da Academia durante o ciclo integral.',
+    'A Academia responde pelo desenvolvimento do aluno até a titulação.'
 ]},
 { t:'pause' },
 { t:'nar', tx:'Ele leu a linha inteira sem entender que estava lendo um cronograma.' },
@@ -434,52 +434,52 @@ RBF.EPILOGUE = [
 { t:'nar', tx:'Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.', if:{ rota:'esperanca' } },
 { t:'nar', tx:'Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.', if:{ rota:'perda' } },
 { t:'nar', tx:'Ele tirou o Arquivo da terceira gaveta, onde ficava desde o indeferimento.', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'Ele pediu ao arquivo central a c\u00f3pia de consulta do Livro-Raz\u00e3o. A ficha de empr\u00e9stimo veio presa \u00e0 contracapa.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Ele pediu ao arquivo central a cópia de consulta do Livro-Razão. A ficha de empréstimo veio presa à contracapa.', if:{ rota:'resposta' } },
 { t:'nar', tx:'O couro tinha perdido o cheiro de cavalo. Continuava pesando mais do que devia.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Procurou a entrada das borboletas para conferir uma data e abriu direto na dobra certa, sem contar p\u00e1ginas.' },
+{ t:'nar', tx:'Procurou a entrada das borboletas para conferir uma data e abriu direto na dobra certa, sem contar páginas.' },
 { t:'pause' },
-{ t:'nar', tx:'A asa continuava l\u00e1. Clara, com uma veia vermelha atravessando.' },
-{ t:'nar', tx:'Sete anos colada ao papel e a veia n\u00e3o tinha desbotado.' },
+{ t:'nar', tx:'A asa continuava lá. Clara, com uma veia vermelha atravessando.' },
+{ t:'nar', tx:'Sete anos colada ao papel e a veia não tinha desbotado.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Ele p\u00f4s o dedo ao lado dela, sem tocar.' },
+{ t:'nar', tx:'Ele pôs o dedo ao lado dela, sem tocar.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela prensou isto de prop\u00f3sito.' },
+{ t:'inn', tx:'Ela prensou isto de propósito.' },
 { t:'pause' },
-{ t:'inn', tx:'Ela n\u00e3o prensava nada de prop\u00f3sito. Ela transcrevia.' },
+{ t:'inn', tx:'Ela não prensava nada de propósito. Ela transcrevia.' },
 { t:'pause' },
-{ t:'nar', tx:'A luz atravessou a p\u00e1gina at\u00e9 tocar a asa. Ele continuava com o dedo ao lado dela.' },
+{ t:'nar', tx:'A luz atravessou a página até tocar a asa. Ele continuava com o dedo ao lado dela.' },
 
 { t:'pause' },
-{ t:'nar', tx:'Depois voltou \u00e0 folha de aviso e escreveu a resposta que a Ordem esperava.' },
+{ t:'nar', tx:'Depois voltou à folha de aviso e escreveu a resposta que a Ordem esperava.' },
 
 /* --- o que ele anota, lido de 'promised' --- */
-{ t:'arc', key:'lervel', label:'\u2014 M. Drell \u00b7 resposta ao alerta \u2014', lns:[
-    'Nada a apurar. Ingresso regular em institui\u00e7\u00e3o de ensino.',
+{ t:'arc', key:'lervel', label:'— M. Drell · resposta ao alerta —', lns:[
+    'Nada a apurar. Ingresso regular em instituição de ensino.',
     'Manter o alerta ativo.'
 ], if:{ promised:'A' } },
-{ t:'arc', key:'lervel', label:'\u2014 M. Drell \u00b7 resposta ao alerta \u2014', lns:[
-    'Nada a apurar. Ingresso regular em institui\u00e7\u00e3o de ensino.',
-    'Solicito visita de rotina \u00e0 Academia dentro do prazo ordin\u00e1rio.'
+{ t:'arc', key:'lervel', label:'— M. Drell · resposta ao alerta —', lns:[
+    'Nada a apurar. Ingresso regular em instituição de ensino.',
+    'Solicito visita de rotina à Academia dentro do prazo ordinário.'
 ], if:{ promised:'B' } },
-{ t:'arc', key:'lervel', label:'\u2014 M. Drell \u00b7 resposta ao alerta \u2014', lns:[
-    'Nada a apurar. Ingresso regular em institui\u00e7\u00e3o de ensino.',
-    'Solicito informa\u00e7\u00e3o sobre o calend\u00e1rio de agosto da institui\u00e7\u00e3o.'
+{ t:'arc', key:'lervel', label:'— M. Drell · resposta ao alerta —', lns:[
+    'Nada a apurar. Ingresso regular em instituição de ensino.',
+    'Solicito informação sobre o calendário de agosto da instituição.'
 ], if:{ promised:'C' } },
 
 { t:'pause' },
-{ t:'nar', tx:'Assinou, datou, p\u00f4s na bandeja de sa\u00edda.' },
+{ t:'nar', tx:'Assinou, datou, pôs na bandeja de saída.' },
 { t:'pause' },
 
-{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o n\u00f3.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o nó.', if:{ rota:'esperanca' } },
 { t:'nar', tx:'Guardou na terceira gaveta.', if:{ rota:'esperanca' } },
-{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o n\u00f3.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o nó.', if:{ rota:'perda' } },
 { t:'nar', tx:'Guardou na terceira gaveta.', if:{ rota:'perda' } },
-{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o n\u00f3.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Fechou o Arquivo. Conferiu as quatro voltas do cordel e refez o nó.', if:{ rota:'cobertura' } },
 { t:'nar', tx:'Guardou na terceira gaveta.', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'Fechou o Livro-Raz\u00e3o, assinou a devolu\u00e7\u00e3o e deixou o volume na bandeja do arquivo central.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Fechou o Livro-Razão, assinou a devolução e deixou o volume na bandeja do arquivo central.', if:{ rota:'resposta' } },
 { t:'pause' },
 { t:'nar', tx:'Levantou.' },
 { t:'pause' },
@@ -507,56 +507,56 @@ RBF.EPILOGUE = [
 
 /* --- ESPERANCA: ela morre, e chegou mais longe que qualquer uma ------ */
 { t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.', if:{ rota:'esperanca' } },
-{ t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
+{ t:'arc', key:'ficha', label:'— Velha Nidhaus · livro de pessoal —', lns:[
     'VAEL, Antoniette. Baixa: agosto, ano cinco.',
     '',
-    'Motivo de sa\u00fade.'
+    'Motivo de saúde.'
 ], if:{ rota:'esperanca' } },
-{ t:'inn', tx:'Eu j\u00e1 li esta linha.', if:{ rota:'esperanca' } },
+{ t:'inn', tx:'Eu já li esta linha.', if:{ rota:'esperanca' } },
 { t:'inn', tx:'Numa outra ficha, com outro nome, uma semana antes de assinar a dela.', if:{ rota:'esperanca' } },
-{ t:'nar', tx:'Ele p\u00f4s as duas folhas lado a lado. A caligrafia era a mesma, com trinta e sete anos de diferen\u00e7a.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ele pôs as duas folhas lado a lado. A caligrafia era a mesma, com trinta e sete anos de diferença.', if:{ rota:'esperanca' } },
 { t:'nar', tx:'Depois virou as duas para baixo, uma em cima da outra.', if:{ rota:'esperanca' } },
 { t:'pause', if:{ rota:'esperanca' } },
-{ t:'nar', tx:'Ela chegou at\u00e9 a floresta. \u00c9 mais longe do que qualquer outra pessoa chegou em cinco s\u00e9culos, e ningu\u00e9m nunca vai saber disso.', if:{ rota:'esperanca' } },
+{ t:'nar', tx:'Ela chegou até a floresta. É mais longe do que qualquer outra pessoa chegou em cinco séculos, e ninguém nunca vai saber disso.', if:{ rota:'esperanca' } },
 
 /* --- RESPOSTA: ela vive, e o documento serviu para arquivar ---------- */
-{ t:'nar', tx:'Ele nunca pediu a ficha de pessoal dela, porque n\u00e3o havia baixa nenhuma para pedir.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Ele nunca pediu a ficha de pessoal dela, porque não havia baixa nenhuma para pedir.', if:{ rota:'resposta' } },
 { t:'pause', if:{ rota:'resposta' } },
-{ t:'nar', tx:'O material dela entrou no tribunal em quatro meses e saiu em nove, julgado improcedente por aus\u00eancia de terceiro lesado.', if:{ rota:'resposta' } },
-{ t:'nar', tx:'N\u00e3o faltou prova. Faltou parte.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'O material dela entrou no tribunal em quatro meses e saiu em nove, julgado improcedente por ausência de terceiro lesado.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Não faltou prova. Faltou parte.', if:{ rota:'resposta' } },
 { t:'pause', if:{ rota:'resposta' } },
-{ t:'nar', tx:'Matheo leu a decis\u00e3o no ano seis e concordou com o enquadramento, porque o enquadramento estava correto.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'Matheo leu a decisão no ano seis e concordou com o enquadramento, porque o enquadramento estava correto.', if:{ rota:'resposta' } },
 { t:'pause', if:{ rota:'resposta' } },
-{ t:'nar', tx:'A folha de aviso da Academia chegou seis anos depois disso, e ele a leu como boa not\u00edcia.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'A folha de aviso da Academia chegou seis anos depois disso, e ele a leu como boa notícia.', if:{ rota:'resposta' } },
 { t:'inn', tx:'Duas linhas. As duas entraram.', if:{ rota:'resposta' } },
 { t:'pause', if:{ rota:'resposta' } },
-{ t:'nar', tx:'A sala de Antoniette ficava dois andares abaixo daquele gabinete, e ela leu a mesma folha na segunda-feira seguinte, por dever de of\u00edcio.', if:{ rota:'resposta' } },
+{ t:'nar', tx:'A sala de Antoniette ficava dois andares abaixo daquele gabinete, e ela leu a mesma folha na segunda-feira seguinte, por dever de ofício.', if:{ rota:'resposta' } },
 { t:'nar', tx:'Anotou a data de ingresso na entrada 251 e fechou o caderno.', if:{ rota:'resposta' } },
 
 /* --- PERDA: ela morre, e a soma fecha ------------------------------- */
 { t:'nar', tx:'A ficha de pessoal dela chegou de Velha Nidhaus em nove dias, certificada.', if:{ rota:'perda' } },
-{ t:'arc', key:'ficha', label:'\u2014 Velha Nidhaus \u00b7 livro de pessoal \u2014', lns:[
+{ t:'arc', key:'ficha', label:'— Velha Nidhaus · livro de pessoal —', lns:[
     'VAEL, Antoniette. Baixa: agosto, ano cinco.',
     '',
-    'Motivo de sa\u00fade.'
+    'Motivo de saúde.'
 ], if:{ rota:'perda' } },
 { t:'pause', if:{ rota:'perda' } },
-{ t:'nar', tx:'A \u00faltima p\u00e1gina do Arquivo \u00e9 uma coluna de tr\u00eas valores, com data ao lado de cada um.', if:{ rota:'perda' } },
-{ t:'nar', tx:'Matheo conferiu a subtra\u00e7\u00e3o, porque ele confere toda subtra\u00e7\u00e3o. Fechava.', if:{ rota:'perda' } },
+{ t:'nar', tx:'A última página do Arquivo é uma coluna de três valores, com data ao lado de cada um.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Matheo conferiu a subtração, porque ele confere toda subtração. Fechava.', if:{ rota:'perda' } },
 { t:'pause', if:{ rota:'perda' } },
-{ t:'nar', tx:'Embaixo do total havia uma linha em que ela julgava a si mesma, e era a \u00fanica do documento inteiro.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Embaixo do total havia uma linha em que ela julgava a si mesma, e era a única do documento inteiro.', if:{ rota:'perda' } },
 { t:'pause', if:{ rota:'perda' } },
-{ t:'nar', tx:'Ele ficou com a folha na m\u00e3o sem saber o que se faz com uma conta que fecha.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Ele ficou com a folha na mão sem saber o que se faz com uma conta que fecha.', if:{ rota:'perda' } },
 { t:'pause', if:{ rota:'perda' } },
-{ t:'nar', tx:'Seis anos depois, o cadastro trouxe duas linhas, e ele n\u00e3o voltou \u00e0 p\u00e1gina duzentos e oitenta e sete para conferir de novo.', if:{ rota:'perda' } },
+{ t:'nar', tx:'Seis anos depois, o cadastro trouxe duas linhas, e ele não voltou à página duzentos e oitenta e sete para conferir de novo.', if:{ rota:'perda' } },
 
 /* --- COBERTURA: Carmine a mata antes da porta ------------------------ */
-{ t:'nar', tx:'Duzentas e quarenta e uma p\u00e1ginas. Ele contou, como conta tudo, e a numera\u00e7\u00e3o fechava.', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'Faltava metade das plantas e todos os hor\u00e1rios de guarda depois de julho, e nada disso estava marcado como falta.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Duzentas e quarenta e uma páginas. Ele contou, como conta tudo, e a numeração fechava.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'Faltava metade das plantas e todos os horários de guarda depois de julho, e nada disso estava marcado como falta.', if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'O tribunal indeferiu em quatro meses, e n\u00e3o precisou nem das quatro p\u00e1ginas.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'O tribunal indeferiu em quatro meses, e não precisou nem das quatro páginas.', if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
-{ t:'nar', tx:'A p\u00e1gina duzentos e quarenta e um terminava com a data escrita na margem do livro de sa\u00edda.', if:{ rota:'cobertura' } },
+{ t:'nar', tx:'A página duzentos e quarenta e um terminava com a data escrita na margem do livro de saída.', if:{ rota:'cobertura' } },
 { t:'inn', tx:'Ela achou a linha antes de morrer.', if:{ rota:'cobertura' } },
 { t:'pause', if:{ rota:'cobertura' } },
 { t:'nar', tx:'A ficha de pessoal e o caderno davam a mesma data.', if:{ rota:'cobertura' } },
@@ -567,32 +567,32 @@ RBF.EPILOGUE = [
   bg:'bg_black', bgm:null },
 
 { t:'pause' },
-{ t:'arc', key:'balada', label:'\u2014 cantiga da Marca \u2014', lns:[
+{ t:'arc', key:'balada', label:'— cantiga da Marca —', lns:[
     'Cantai, cantai, as filhas do pacto,',
     'uma nasce casulo, uma nasce intacta,',
-    'cantai, cantai, o ciclo que n\u00e3o para,',
+    'cantai, cantai, o ciclo que não para,',
     'a que dorme na casca, a que sai pela clara,',
     '',
-    'cantai, cantai, e n\u00e3o perguntai nada,',
-    'que as duas v\u00e3o juntas pela mesma estrada,',
+    'cantai, cantai, e não perguntai nada,',
+    'que as duas vão juntas pela mesma estrada,',
     'uma leva a outra e nenhuma repara,',
-    'cantai, cantai, o ciclo que n\u00e3o para.'
+    'cantai, cantai, o ciclo que não para.'
 ]},
 { t:'pause' },
 
 { t:'fade_out' },
 { t:'bgm', id:null },
-{ t:'end_chap', line1:'Seis anos depois de Velha Nidhaus.', line2:'Duas matr\u00edculas, mesma turma.',
+{ t:'end_chap', line1:'Seis anos depois de Velha Nidhaus.', line2:'Duas matrículas, mesma turma.',
   chapter:'epilogo', completes:true },
 
 { t:'title', main:'ARQUIVO RABENFELS',
-  sub:'"V\u00e1 mais r\u00e1pido do que eu fui."',
+  sub:'"Vá mais rápido do que eu fui."',
   time:'Fim.', if:{ rota:'esperanca' } },
 { t:'title', main:'ARQUIVO RABENFELS',
-  sub:'"As duas foram sobre m\u00e9todo."',
+  sub:'"As duas foram sobre método."',
   time:'Fim.', if:{ rota:'resposta' } },
 { t:'title', main:'ARQUIVO RABENFELS',
-  sub:'"O erro \u00e9 do Compilador e a data dele \u00e9 maio."',
+  sub:'"O erro é do Compilador e a data dele é maio."',
   time:'Fim.', if:{ rota:'perda' } },
 { t:'title', main:'ARQUIVO RABENFELS',
   sub:'"A linha estava correta."',

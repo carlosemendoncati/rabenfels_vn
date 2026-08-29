@@ -49,7 +49,7 @@ var R = { rota: 'cobertura' };
 
 RBF.COB10 = [
 
-{ t:'chap', num:'CAP\u00cdTULO 10', name:'A PORTA', chapter:'cob10', if:R },
+{ t:'chap', num:'CAPÍTULO 10', name:'A PORTA', chapter:'cob10', if:R },
 { t:'fade_out', if:R },
 
 /* ======================================================================
@@ -60,18 +60,18 @@ RBF.COB10 = [
   bg:'bg_kitchen', bgm:'bgm_nidhaus', if:R },
 { t:'fade_in', if:R },
 
-{ t:'nar', tx:'Vieram no dia tr\u00eas. A margem do caderno guardava quatro datas anteriores; nenhuma era t\u00e3o cedo.', if:R },
-{ t:'nar', tx:'A tinta do n\u00famero tr\u00eas secou com a pena ainda suspensa.', if:R },
+{ t:'nar', tx:'Vieram no dia três. A margem do caderno guardava quatro datas anteriores; nenhuma era tão cedo.', if:R },
+{ t:'nar', tx:'A tinta do número três secou com a pena ainda suspensa.', if:R },
 { t:'pause', if:R },
 
 { t:'spr', ch:'dara', ex:'guarded', pos:'center', if:R },
-{ t:'nar', tx:'Dara encheu a caneca e n\u00e3o sentou do outro lado da mesa, o que ela fazia havia cinco anos.', if:R },
-{ t:'dial', ch:'dara', tx:'A copa fecha \u00e0s seis esta semana.', if:R },
-{ t:'dial', ch:'antoniette', tx:'\u00c0s seis?', if:R },
+{ t:'nar', tx:'Dara encheu a caneca e não sentou do outro lado da mesa, o que ela fazia havia cinco anos.', if:R },
+{ t:'dial', ch:'dara', tx:'A copa fecha às seis esta semana.', if:R },
+{ t:'dial', ch:'antoniette', tx:'Às seis?', if:R },
 { t:'dial', ch:'dara', tx:'Ordem da senhora.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Dara levou a caneca para a pia sem beber, e a pia ficava atr\u00e1s de Antoniette.', if:R },
-{ t:'nar', tx:'Ela deu a volta pelo lado comprido da mesa para chegar l\u00e1.', if:R },
+{ t:'nar', tx:'Dara levou a caneca para a pia sem beber, e a pia ficava atrás de Antoniette.', if:R },
+{ t:'nar', tx:'Ela deu a volta pelo lado comprido da mesa para chegar lá.', if:R },
 { t:'spr_hide', ch:'dara', if:R },
 { t:'pause', if:R },
 
@@ -87,55 +87,55 @@ RBF.COB10 = [
 { t:'scene', id:'cob10_serafina', chapter:'cob10', title:'Nove da noite',
   bg:'bg_main_hall', bgm:null, if:R },
 
-{ t:'nar', tx:'Serafina mandou cham\u00e1-la \u00e0s nove da noite do dia oito.', if:R },
-{ t:'nar', tx:'Em cinco anos, Serafina nunca tinha mandado cham\u00e1-la depois do jantar.', if:R },
+{ t:'nar', tx:'Serafina mandou chamá-la às nove da noite do dia oito.', if:R },
+{ t:'nar', tx:'Em cinco anos, Serafina nunca tinha mandado chamá-la depois do jantar.', if:R },
 { t:'spr', ch:'serafina', ex:'grave', pos:'right', if:R },
 { t:'pause', if:R },
 
-{ t:'dial', ch:'serafina', tx:'A carruagem sai amanh\u00e3 \u00e0s seis. J\u00e1 est\u00e1 arranjada.', if:R },
+{ t:'dial', ch:'serafina', tx:'A carruagem sai amanhã às seis. Já está arranjada.', if:R },
 { t:'pause', if:R },
-{ t:'dial', ch:'antoniette', tx:'Eu n\u00e3o pedi carruagem.', if:R },
-{ t:'dial', ch:'serafina', tx:'N\u00e3o pediu.', if:R },
+{ t:'dial', ch:'antoniette', tx:'Eu não pedi carruagem.', if:R },
+{ t:'dial', ch:'serafina', tx:'Não pediu.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Antoniette esperou a acusa\u00e7\u00e3o. Contou at\u00e9 dez esperando a acusa\u00e7\u00e3o.', if:R },
+{ t:'nar', tx:'Antoniette esperou a acusação. Contou até dez esperando a acusação.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'serafina', tx:'A senhorita trabalhou bem aqui. Vou escrever isso a quem pedir.', if:R },
 { t:'pause', if:R },
-{ t:'dial', ch:'antoniette', tx:'O contrato vai at\u00e9 dezembro.', if:R },
-{ t:'dial', ch:'serafina', tx:'Vai. Os dois meses de aviso est\u00e3o pagos, e o resto tamb\u00e9m.', if:R },
+{ t:'dial', ch:'antoniette', tx:'O contrato vai até dezembro.', if:R },
+{ t:'dial', ch:'serafina', tx:'Vai. Os dois meses de aviso estão pagos, e o resto também.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Ela disse o valor exato. Estava certo, e inclu\u00eda o m\u00eas que ainda n\u00e3o tinha sido trabalhado.', if:R },
+{ t:'nar', tx:'Ela disse o valor exato. Estava certo, e incluía o mês que ainda não tinha sido trabalhado.', if:R },
 { t:'pause', if:R },
 { t:'dial', ch:'antoniette', tx:'A senhora quer me dizer alguma coisa?', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'Serafina deixou passar uma respira\u00e7\u00e3o antes de responder.', if:R },
+{ t:'nar', tx:'Serafina deixou passar uma respiração antes de responder.', if:R },
 { t:'dial', ch:'serafina', tx:'Quero desejar boa viagem.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'A voz n\u00e3o tinha ironia. Antoniette procurou e n\u00e3o encontrou.', if:R },
+{ t:'nar', tx:'A voz não tinha ironia. Antoniette procurou e não encontrou.', if:R },
 { t:'spr_hide', ch:'serafina', if:R },
 
 { t:'pause', if:R },
-{ t:'nar', tx:'N\u00e3o houve acusa\u00e7\u00e3o. N\u00e3o houve a palavra Ordem. N\u00e3o houve nada que ela pudesse contestar.', if:R },
+{ t:'nar', tx:'Não houve acusação. Não houve a palavra Ordem. Não houve nada que ela pudesse contestar.', if:R },
 
 /* ======================================================================
    C3 - AS MALAS
    Ela sabe qual linha a entregou, e a linha e uma linha correta.
    Saida: soco.
    ====================================================================== */
-{ t:'scene', id:'cob10_malas', chapter:'cob10', title:'O forro do ba\u00fa',
+{ t:'scene', id:'cob10_malas', chapter:'cob10', title:'O forro do baú',
   bg:'bg_antoniette_room', bgm:'bgm_archive', if:R },
 { t:'spr', ch:'antoniette', ex:'shaken', pos:'center', if:R },
 
-{ t:'nar', tx:'Ela arrumou as duas malas e o ba\u00fa de ferramentas na ordem de sempre.', if:R },
-{ t:'nar', tx:'O caderno sem identifica\u00e7\u00e3o foi no forro, onde tinha ficado quatro anos.', if:R },
+{ t:'nar', tx:'Ela arrumou as duas malas e o baú de ferramentas na ordem de sempre.', if:R },
+{ t:'nar', tx:'O caderno sem identificação foi no forro, onde tinha ficado quatro anos.', if:R },
 { t:'pause', if:R },
 
 { t:'inn', tx:'Faltavam nove horas.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'Depois sentou na beira da cama e refez o caminho de tr\u00e1s para a frente, item por item.', if:R },
+{ t:'nar', tx:'Depois sentou na beira da cama e refez o caminho de trás para a frente, item por item.', if:R },
 { t:'pause', if:R },
 
 /*
@@ -165,19 +165,19 @@ RBF.COB10 = [
   bg:'bg_black', bgm:null, if:R },
 { t:'fade_in', if:R },
 
-{ t:'nar', tx:'A vela bateu no piso primeiro. O vidro n\u00e3o quebrou.', if:R },
+{ t:'nar', tx:'A vela bateu no piso primeiro. O vidro não quebrou.', if:R },
 { t:'pause', if:R },
-{ t:'nar', tx:'O caderno caiu aberto na p\u00e1gina duzentos e quarenta e um.', if:R },
-{ t:'nar', tx:'Carmine p\u00f4s o p\u00e9 sobre a m\u00e3o que ainda segurava a capa.', if:R },
+{ t:'nar', tx:'O caderno caiu aberto na página duzentos e quarenta e um.', if:R },
+{ t:'nar', tx:'Carmine pôs o pé sobre a mão que ainda segurava a capa.', if:R },
 { t:'pause', if:R },
 { t:'nar', tx:'O primeiro estalo veio do indicador. Os dedos soltaram no segundo.', if:R },
 { t:'pause', if:R },
 
-{ t:'nar', tx:'A porta do p\u00e1tio estava a quatro passos.', if:R },
-{ t:'nar', tx:'Antoniette alcan\u00e7ou a primeira t\u00e1bua. Carmine puxou pelo tornozelo antes da segunda. O joelho bateu na soleira. Depois o rosto. Na segunda tentativa de puxar ar, n\u00e3o saiu som.', if:R },
+{ t:'nar', tx:'A porta do pátio estava a quatro passos.', if:R },
+{ t:'nar', tx:'Antoniette alcançou a primeira tábua. Carmine puxou pelo tornozelo antes da segunda. O joelho bateu na soleira. Depois o rosto. Na segunda tentativa de puxar ar, não saiu som.', if:R },
 
 { t:'fade_out', if:R },
-{ t:'end_chap', line1:'A carruagem saiu \u00e0s seis.', line2:'Antoniette n\u00e3o chegou ao p\u00e1tio.',
+{ t:'end_chap', line1:'A carruagem saiu às seis.', line2:'Antoniette não chegou ao pátio.',
   chapter:'cob10', if:R },
 { t:'fade_out', if:R }
 
